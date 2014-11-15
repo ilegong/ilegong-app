@@ -48,35 +48,45 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     })
 
-    .state('tab.friends', {
-      url: '/friends',
+    .state('tab.categories', {
+      url: '/categories',
       views: {
-        'tab-friends': {
-          templateUrl: 'templates/tab-friends.html',
-          controller: 'FriendsCtrl'
-        }
-      }
-    })
-    .state('tab.friend-detail', {
-      url: '/friend/:friendId',
-      views: {
-        'tab-friends': {
-          templateUrl: 'templates/friend-detail.html',
-          controller: 'FriendDetailCtrl'
+        'tab-categories': {
+          templateUrl: 'templates/tab-categories.html',
+          controller: 'CategoriesCtrl'
         }
       }
     })
 
-    .state('tab.account', {
-      url: '/account',
+    .state('tab.sharings', {
+      url: '/sharings',
       views: {
-        'tab-account': {
-          templateUrl: 'templates/tab-account.html',
-          controller: 'AccountCtrl'
+        'tab-sharings': {
+          templateUrl: 'templates/tab-sharings.html',
+          controller: 'SharingsCtrl'
+        }
+      }
+    })
+
+    .state('tab.tryings', {
+      url: '/tryings',
+      views: {
+        'tab-tryings': {
+          templateUrl: 'templates/tab-tryings.html',
+          controller: 'TryingsCtrl'
+        }
+      }
+    })
+
+    .state('tab.my', {
+      url: '/my',
+      views: {
+        'tab-my': {
+          templateUrl: 'templates/tab-my.html',
+          controller: 'MyCtrl'
         }
       }
     });
-
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/dash');
 
