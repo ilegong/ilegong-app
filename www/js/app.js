@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -38,12 +38,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
     // Each tab has its own nav history stack:
 
-    .state('tab.dash', {
-      url: '/dash',
+    .state('tab.home', {
+      url: '/home',
       views: {
-        'tab-dash': {
-          templateUrl: 'templates/tab-dash.html',
-          controller: 'DashCtrl'
+        'tab-home': {
+          templateUrl: 'home/templates/main.html',
+          controller: 'HomeCtrl'
         }
       }
     })
@@ -52,7 +52,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/categories',
       views: {
         'tab-categories': {
-          templateUrl: 'templates/tab-categories.html',
+          templateUrl: 'categories/templates/main.html',
           controller: 'CategoriesCtrl'
         }
       }
@@ -62,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/sharings',
       views: {
         'tab-sharings': {
-          templateUrl: 'templates/tab-sharings.html',
+          templateUrl: 'sharings/templates/main.html',
           controller: 'SharingsCtrl'
         }
       }
@@ -72,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/tryings',
       views: {
         'tab-tryings': {
-          templateUrl: 'templates/tab-tryings.html',
+          templateUrl: 'tryings/templates/main.html',
           controller: 'TryingsCtrl'
         }
       }
@@ -82,13 +82,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       url: '/my',
       views: {
         'tab-my': {
-          templateUrl: 'templates/tab-my.html',
+          templateUrl: 'my/templates/main.html',
           controller: 'MyCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/home');
 
 });
 
