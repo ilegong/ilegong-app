@@ -17,7 +17,7 @@ var sassPath = {
   sass: ['scss/**/*.scss']
 };
 var distPath = 'www/js';
-var srcPath = 'www/angular';
+var srcPath = 'angular';
 var libPath = 'bower_components';
 
 gulp.task('default', ['sass', 'dev']);
