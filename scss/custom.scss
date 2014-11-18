@@ -1,10 +1,51 @@
 $pyshuo_icon: '/img/mobilev1/pyshuo_icon.png';
 
-.op-icon{
+.tab-item .icon {
   background: url($pyshuo_icon) 0 0 no-repeat;
-  width: 1.9167em;
-  height: 1.5em;
-  background-size: 25em 25em;
-  display: inline-block;
-  vertical-align: text-bottom;
+  width: 0.83855625em;
+  background-size: 10.9375em 10.9375em;
+}
+
+.tab-item .icon.icon-home {
+  background-position: 0 -0.7513125em;
+}
+
+.tab-item-active .icon.icon-home {
+  background-position: 0 0.2em;
+}
+
+.tab-item .icon.icon-categories {
+  background-position: -0.9113125em -0.7513125em;
+}
+
+.tab-item-active .icon.icon-categories {
+  background-position: -0.9113125em 0.2em;
+}
+
+.tab-item .icon.icon-sharings {
+  background-position: -1.8230625em -0.7513125em;
+}
+
+.tab-item-active .icon.icon-sharings {
+  background-position: -1.8230625em 0.2em;
+}
+
+.tab-item .icon.icon-tryings {
+  background-position: -2.734375em -0.7513125em;
+}
+
+.tab-item-active .icon.icon-tryings {
+  background-position: -2.734375em 0.2em;
+}
+
+.tab-item .icon.icon-my {
+  background-position: -3.6456875em -0.7513125em;
+}
+
+.tab-item-active .icon.icon-my {
+  background-position: -3.6456875em 0.2em;
+}
+
+.tab-item-active {
+  color: #29ac0e;
 }
