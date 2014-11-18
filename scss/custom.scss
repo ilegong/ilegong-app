@@ -1,0 +1,10 @@
+$pyshuo_icon: '/img/mobilev1/pyshuo_icon.png';
+
+.op-icon{
+  background: url($pyshuo_icon) 0 0 no-repeat;
+  width: 1.9167em;
+  height: 1.5em;
+  background-size: 25em 25em;
+  display: inline-block;
+  vertical-align: text-bottom;
+}

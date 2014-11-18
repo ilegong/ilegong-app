@@ -33,7 +33,7 @@ angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryin
     .state('tab', {
       url: "/tab",
       abstract: true,
-      templateUrl: "templates/tabs.html"
+      templateUrl: "tabs.html"
     })
 
     // Each tab has its own nav history stack:
