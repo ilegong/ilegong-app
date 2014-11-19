@@ -1,9 +1,16 @@
 <ion-view title="分享圈">
   <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friend/{{friend.id}}">
-        {{friend.name}}
-      </ion-item>
-    </ion-list>
+    <div class='row'>
+      <div class='list'>
+        <div class="item" ng-repeat="sharing in sharings">
+          <div class="photoArea">
+            <a href="{{sharing.link}}"><img src="{{sharing.img}}" alt="" width="182px"></a>  
+          </div>
+          <p class="describe" style="text-align:center;">
+            <a href="{{sharing.link}}">{{sharing.product}}—{{sharing.name}}--{{sharings.length}}</a> 
+          </p>
+        </div>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
