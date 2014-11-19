@@ -1,9 +1,14 @@
 <ion-view title="分类">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friend/{{friend.id}}">
-        {{friend.name}}
-      </ion-item>
-    </ion-list>
+  <ion-content class='categories'>
+    <div class='list'>
+      <a href="{{category.link}}" class="row category item item-icon-right" ng-repeat="category in categories">
+        <i class="icon ion-ios7-arrow-right"></i>
+        <span class='col col-20'><img class="radius10" src="{{category.imgSrc}}"></span>
+        <div class="col col-67">
+            <span class="title">{{category.title}}</span>
+            <span class="explain">{{category.explain}}</span>
+        </div>
+      </a>
+    </div>
   </ion-content>
 </ion-view>

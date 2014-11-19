@@ -1,9 +1,14 @@
 <ion-view title="试吃团">
-  <ion-content>
-    <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/friend/{{friend.id}}">
-        {{friend.name}}
-      </ion-item>
-    </ion-list>
+  <ion-content class='padding'>      
+    <h2>试吃团三期</h2>
+    <div class="row" ng-repeat="trying in tryings">
+      <div class="col col-33">
+        <img src="{{trying.imgSrc}}" width="100%" alt="">                            
+      </div>
+      <div class="col col-67">
+        <p><a href="{{trying.link}}">{{trying.title}}</a></p>
+        <p>{{trying.summary}}</p>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
