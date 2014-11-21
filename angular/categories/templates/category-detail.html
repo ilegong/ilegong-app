@@ -1,0 +1,22 @@
+<ion-view title="枣、干果">
+  <ion-content class='padding category'>
+    <div class='list'>
+      <div class='card' ng-repeat='product in products'>
+        <div class="item item-image">
+          <img title="{{product.title}}" src="{{product.imgSrc}}">
+        </div>
+        <div class='item item-avatar'>
+          <img src="{{product.owner_imgSrc}}" alt="">         
+          <h2>{{product.title}}</h2>
+          <p>{{product.owner}}</p>
+        </div>
+        <div class='item item-body'>
+            <span class="item-price">
+             <strong>{{product.price}}</strong>
+            </span>
+            <span class="item-price-original">{{product.price_old}}</span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

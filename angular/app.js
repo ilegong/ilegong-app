@@ -24,6 +24,7 @@ function configStates($stateProvider, $urlRouterProvider) {
     .state('tab', state("/tab", "tabs.html", null, {abstract: true}))
     .state('tab.home', {url: '/home', views: {'tab-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl'}}})
     .state('tab.categories', {url: '/categories',views: {'tab-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
+    .state('tab.category-detail', {url: '/categories/:id',views: {'tab-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
     .state('tab.sharings', {url: '/sharings', views: {'tab-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl'}}})
     .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl'}}})
     .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}});

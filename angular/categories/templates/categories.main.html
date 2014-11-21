@@ -1,7 +1,7 @@
 <ion-view title="分类">
   <ion-content class='categories'>
     <div class='list'>
-      <a href="{{category.link}}" class="row category item item-icon-right" ng-repeat="category in categories">
+      <a ui-sref="tab.category-detail({id: category.id})" class="row category item item-icon-right" ng-repeat="category in categories">
         <i class="icon ion-ios7-arrow-right"></i>
         <span class='col col-20'><img class="radius10" src="{{category.imgSrc}}"></span>
         <div class="col col-67">

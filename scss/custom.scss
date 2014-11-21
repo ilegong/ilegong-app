@@ -83,3 +83,19 @@ a{
     }
   }
 }
+
+.category{
+  .item-body{
+    .item-price{
+      font-size: 1.25em;
+      color: #ffa200;
+      display: inline;
+    }
+    .item-price-original{
+      font-size: 1em;
+      color: #999999;
+      display: inline;
+      text-decoration: line-through;
+    }  
+  } 
+}

@@ -14,12 +14,12 @@ var Trying = function(id, title, summary, link, imgSrc){
   this.imgSrc = imgSrc;
 };
 
-var Category = function(id, title, explain, link, imgSrc){
+var Category = function(id, title, explain, imgSrc, userSrc){
   this.id = id;
   this.title = title;
   this.explain = explain;
-  this.link = link;
   this.imgSrc = imgSrc;
+  this.userSrc = userSrc;
 };
 
 var Product = function(id,title,price,price_old,owner,imgSrc,owner_imgSrc,linkUrl,hasRedPacket,ownerUrl){
@@ -56,6 +56,4 @@ var SlideBoxItem = function(imgUrl,linkUrl)
 var UserInfo = function(userName)
 {
   this.userName = userName;
-
-
 };
