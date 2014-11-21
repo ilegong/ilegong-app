@@ -21,3 +21,41 @@ var Category = function(id, title, explain, link, imgSrc){
   this.link = link;
   this.imgSrc = imgSrc;
 };
+
+var Product = function(id,title,price,price_old,owner,imgSrc,owner_imgSrc,linkUrl,hasRedPacket,ownerUrl){
+  this.id = id;
+  this.title = title;
+  this.price = price;
+  this.price_old = price_old;
+  this.owner = owner;
+  this.imgSrc = imgSrc;
+  this.owner_imgSrc = owner_imgSrc;
+  this.linkUrl = linkUrl;
+  this.hasRedPacket = hasRedPacket;
+  this.ownerUrl = ownerUrl;
+};
+
+var Type = function(typeName,typeUrl)
+{
+  this.name = typeName;
+  this.url = typeUrl;
+};
+
+var TypeAndProducts = function(type,products)
+{
+  this.type = type;
+  this.products = products; 
+};
+
+var SlideBoxItem = function(imgUrl,linkUrl)
+{
+  this.imgUrl = imgUrl;
+  this.linkUrl = linkUrl;
+};
+
+var UserInfo = function(userName)
+{
+  this.userName = userName;
+
+
+};

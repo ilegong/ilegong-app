@@ -5,7 +5,9 @@
   .controller('MyCtrl', MyCtrl)
 
   /* @ngInject */
-  function MyCtrl(){
+  function MyCtrl($scope){
+  	$scope.UserInfo = new UserInfo('Lilei');
+
   }
 
 })(window, window.angular);
