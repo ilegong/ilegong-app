@@ -1,1 +1,29 @@
-123
+<div>
+<div class="list">
+	<div class="item" ng-repeat="ite in item[pid].evaluate">
+		<div class="row">
+			<div class="col">
+				{{ite.name}}
+			</div>
+			<div class="col" >
+				<span style="background-color:{{getRankColor(ite.rank)}};
+				display: inline;padding: .2em .6em .3em;font-size: 75%;font-weight: bold;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;border-radius: .25em;">
+					{{getRankText(ite.rank)}}
+				</span>
+				<span>
+					{{ite.content}}
+				</span>
+				<p/>
+				
+				<div style="color: #d0d0d0;font-size: 12px;margin-top: 10px;text-align:right;">
+					{{ite.time}}
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+</div>

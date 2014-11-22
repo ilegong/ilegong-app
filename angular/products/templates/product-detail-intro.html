@@ -1,1 +1,18 @@
-<div>456</div>
+
+<div>
+
+	<div ng-repeat="ite in item[pid].detail">
+
+		<div ng-show="ite.type=='title'" style="margin-top:10px;margin-bottom:10px;{{ite.style}}">
+			<span style="max-width: 100%; margin: 10px 0px; padding: 4px 10px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; color: rgb(255, 255, 255); font-size: 18px; word-wrap: break-word !important; background-color: rgb(71, 193, 168);">
+				{{ite.content}}
+			</span>
+		</div>
+		<div ng-show="ite.type=='content'" style="{{ite.style}}">
+			{{ite.content}}
+		</div>
+		<div ng-show="ite.type=='image'" style="{{ite.style}}">
+			<img src="{{ite.content}}" style="width:100%;"/>
+		</div>
+	</div>
+</div>

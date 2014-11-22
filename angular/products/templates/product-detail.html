@@ -61,22 +61,24 @@
         </button>
       </a>
     </div>
-    <div>
+    <div style="display:block;">
       <a style="color:red;" href="/brands/20140127/10">查看商家更多商品</a>
     </div>
-    <div style="height:50px;"/>
-
-</ion-content>
-    <div class="tabs-calm">
-      <div class="tabs">
-        <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.intro({id:id})">
+    <p/>
+  <div>
+        <a class="button button-stable tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.intro" style="width:50%;margin-left:10px;">
           产品介绍
         </a>
-        <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.evaluate({id:id})">
+        <a class="button button-stable tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.evaluate" style="width:50%;">
           口碑评价
         </a>
-      </div>
-    </div>
+  </div>
+ <div ui-view style="margin-top:10px;" >
 
+    </div>
+</ion-content>
+
+
+  
  
 </ion-view>
