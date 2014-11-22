@@ -3,10 +3,10 @@
       <div class='list'>
         <div class="item" ng-repeat="sharing in sharings">
           <div class="photoArea">
-            <a href="{{sharing.link}}"><img src="{{sharing.img}}" alt="" width="182px"></a>  
+            <a ui-sref="tab.sharing-detail.intro({id: sharing.id})"><img src="{{sharing.img}}" alt="" width="182px"></a>  
           </div>
           <p class="describe" style="text-align:center;">
-            <a href="{{sharing.link}}">{{sharing.product}}—{{sharing.name}}--{{sharings.length}}</a> 
+            <a ui-sref="tab.sharing-detail({id: sharing.id})">{{sharing.product}}—{{sharing.name}}--{{sharings.length}}</a>
           </p>
         </div>
       </div>

@@ -4,6 +4,10 @@ a{
   text-decoration: none;
   color: #2fa4e7;
 }
+.pull-right{
+  float: right; 
+}
+
 .tab-item .icon {
   background: url($pyshuo_icon) 0 0 no-repeat;
   width: 0.83855625em;
@@ -98,4 +102,9 @@ a{
       text-decoration: line-through;
     }  
   } 
+}
+
+.pane-secondary{
+  margin-top: 50px;
+  padding-top: 15px;
 }
