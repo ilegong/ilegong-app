@@ -53,7 +53,16 @@ var SlideBoxItem = function(imgUrl,linkUrl)
   this.linkUrl = linkUrl;
 };
 
+var ProductDetail = function(id,imgUrl,title,hasRedPacket,postDetail,price,postStyle,count,size,infomation)
+{
+
+
+};
+
 var UserInfo = function(userName)
 {
   this.userName = userName;
+
 };
+
+

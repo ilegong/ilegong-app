@@ -1,0 +1,82 @@
+<ion-view title="商品详情">
+
+  <ion-content >
+
+    <div>
+      <img src="{{item[pid].imgUrl}}" style="width:100%;"/>
+    </div>
+    <div>
+      <span>
+        <span style="font-size:1.5em;">
+          {{item[pid].title}}
+        </span>
+        <span ng-show="{{item[pid].hasRedPacket}}" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 0.633em;background: red;">
+          有红包
+        </span>
+      </span>
+    </div>
+    <p/>
+    <div>
+      <span >
+        {{item[pid].postDetail}}
+      </span>
+    </div>
+    <p/>
+    <div>
+      <span style="color: #c71673;font-size: 24px;">
+        {{item[pid].price | currency:"￥"}}
+      </span>
+      <span style="text-decoration: line-through;color: #888;" ng-show="{{item[pid].oldPrice != 0}}">
+        {{item[pid].oldPrice | currency:"￥"}}
+      </span>
+      <span style="float:right;">
+        {{item[pid].postStyle}}
+      </span>
+    </div>
+    <p/>
+    <div>
+      <span>
+        <button style="width:25px;height:25px;" ng-click="buttonReduceClick()">
+          -
+        </button>
+      </span>
+      <input size="3" style="width:10%;" ng-model="item[pid].count"></input>
+      <span>
+      <button style="width:25px;height:25px;" ng-click="buttonAddClick()">
+        +
+      </button>
+      </span>
+    </div>
+    <div>
+      <p/>
+      <p/>
+      <a href="http://www.baidu.com">
+        <button class="button button-energized" style="height=30px;">
+          添加到购物车
+        </button>
+      </a>
+      <a href="http://www.baidu.com">
+        <button class="button button-assertive" style="height=30px;">
+          立即购买
+        </button>
+      </a>
+    </div>
+    <div>
+      <a style="color:red;" href="/brands/20140127/10">查看商家更多商品</a>
+    </div>
+    <div style="height:50px;"/>
+
+</ion-content>
+    <div class="tabs-calm">
+      <div class="tabs">
+        <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.intro({id:id})">
+          产品介绍
+        </a>
+        <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="tab.product-detail.evaluate({id:id})">
+          口碑评价
+        </a>
+      </div>
+    </div>
+
+ 
+</ion-view>

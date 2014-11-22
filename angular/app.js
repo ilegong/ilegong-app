@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates'])
+angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates',"ilegong.products"])
 .run(initApp)
 .config(configStates);
 
@@ -26,12 +26,19 @@ function configStates($stateProvider, $urlRouterProvider) {
     .state('tab.categories', {url: '/categories',views: {'tab-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
     .state('tab.category-detail', {url: '/categories/:id',views: {'tab-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
     .state('tab.sharings', {url: '/sharings', views: {'tab-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl'}}})
+
     .state('tab.sharing-detail', {url: '/sharings/:id', views: {'tab-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl'}}})
     .state('tab.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
     .state('tab.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
     .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'trying.main.html',controller: 'TryingsCtrl'}}})
     .state('tab.trying-detail', {url: '/tryings/:id',views: {'tab-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl'}}})
-    .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}});
+    .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}})
+
+    .state('tab.product-detail', {url: '/products/:id', views: {'tab-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
+    .state('tab.product-detail.intro',{url:'/product-detail-intro',templateUrl:'product-detail-intro.html'})
+    .state('tab.product-detail.evaluate',{url:'/product-detail-evaluate',templateUrl:'product-detail-evaluate.html'});
+    
+
   $urlRouterProvider.otherwise('/tab/home');
   }
 
