@@ -30,7 +30,7 @@ function configStates($stateProvider, $urlRouterProvider) {
     .state('tab.sharing-detail', {url: '/sharings/:id', views: {'tab-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl'}}})
     .state('tab.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
     .state('tab.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
-    .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'trying.main.html',controller: 'TryingsCtrl'}}})
+    .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl'}}})
     .state('tab.trying-detail', {url: '/tryings/:id',views: {'tab-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl'}}})
     .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}})
 
