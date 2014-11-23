@@ -15,12 +15,13 @@
         evaluate:[{name:'name1',rank:'A',content:'good',time:'2014-10-11 sdf'}]},
       {id:2,title:'西域美侬椒盐碧根果250g',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/873270830e5_1119.jpg',hasRedPacket:true,postDetail:'包邮',price:24.99,oldPrice:64.5,postStyle:'快递：包邮',count:1,
         detail:[{type:'title',style:'',content:'价格/规格'},{type:'content',style:'color:red;',content:'价格：24.99\r\n规格：250g/袋\r\n口味：椒盐口味\r\n品种：碧根果\r\n保质期：265天\r\n生产日期：2014-10-10 至 2014-10-24\r\n邮费：包邮'},{type:'title',style:'',content:'商品详情'},{type:'image',style:'',content:'https://mmbiz.qlogo.cn/mmbiz/UuGM2hE8WNHACm8AfcHLnXYFIVU7uFCbbaGCCeU6a1kIltowGGewyZXvNvbXajINwyhTzjBRfWsibSGEGic8mjRw/0'},{type:'image',style:'',content:'https://mmbiz.qlogo.cn/mmbiz/UuGM2hE8WNHACm8AfcHLnXYFIVU7uFCbJB7v7xUCMqva0aw033ZVOYiaEibXbMyuic1yhquN2zLPbDYiaD8Z7h2pZA/0'},{type:'content',style:'',content:'大家好，我叫李春望，08年的我当时还是一名打工族，朝九晚五，过着和大家一样的生活。改变我人生的也就是那年的一次旅行，因为倍感城市生活节奏带来的空虚感，6月份我来了一场说走就走的旅行。当时的目的地就是新疆，半个月的旅行可以说让我对生活有了新的价值取向。回来后我做的第一件事就是辞职，这在当时就业压力大的情况下，是一件不可想象事。'}],
-        evaluate:[{name:'name1',rank:'A',content:'good',time:'2014-10-11 sdf'},{name:'name2',rank:'B',content:'normal',time:'2014-10-11 sd2f'},{name:'name3',rank:'C',content:'bad',time:'2014-10-11 sdfaa'}]}
+        evaluate:[{name:'name1',rank:'A',content:[{type:'content',content:'good'},{type:'image',content:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/873270830e5_1119.jpg'}],time:'2014-10-11 sdf'},{name:'name2',rank:'B',content:[{type:'content',content:'normal'}],time:'2014-10-11 sd2f'},{name:'name3',rank:'C',content:[{type:'content',content:'bad'}],time:'2014-10-11 sdfaa'}]}
     ]
 
     $scope.buttonReduceClick = function()
     {
-      $scope.item[$scope.pid].count -=1;
+      if($scope.item[$scope.pid].count > 1)
+        $scope.item[$scope.pid].count-=1;
     };
     $scope.buttonAddClick = function()
     {
@@ -40,7 +41,7 @@
       if(rank=='A')
         return 'green';
       if(rank=='B')
-        return 'blue';
+        return 'gray';
       if(rank=='C')
         return 'red';
     }

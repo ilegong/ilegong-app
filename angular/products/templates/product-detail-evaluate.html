@@ -1,29 +1,88 @@
 <div>
-<div class="list">
-	<div class="item" ng-repeat="ite in item[pid].evaluate">
-		<div class="row">
-			<div class="col">
-				{{ite.name}}
-			</div>
-			<div class="col" >
-				<span style="background-color:{{getRankColor(ite.rank)}};
-				display: inline;padding: .2em .6em .3em;font-size: 75%;font-weight: bold;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;border-radius: .25em;">
-					{{getRankText(ite.rank)}}
-				</span>
-				<span>
-					{{ite.content}}
-				</span>
-				<p/>
-				
-				<div style="color: #d0d0d0;font-size: 12px;margin-top: 10px;text-align:right;">
-					{{ite.time}}
+	<div class="list">
+		<div class="item" ng-repeat="ite in item[pid].evaluate">
+			<div class="row">
+				<div class="col">
+					{{ite.name}}
 				</div>
-			</div>
+				<div class="col" >
+					<span style="background-color:{{getRankColor(ite.rank)}};
+					display: inline;padding: .2em .6em .3em;font-size: 75%;font-weight: bold;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;border-radius: .25em;">
+						{{getRankText(ite.rank)}}
+					</span>
+					<span ng-repeat="cIte in ite.content">
+						<span ng-show="cIte.type=='content'">
+							{{cIte.content}}
+						</span>
+						<div ng-show="cIte.type=='image'" style="padding-top:10px;">
+							
+							<img src="{{cIte.content}}" style="width:100%;"/>
+							
+						</div>
 
+					</span>
+					<p/>
+					
+					<div style="color: #d0d0d0;font-size: 12px;margin-top: 10px;text-align:right;">
+						{{ite.time}}
+					</div>
+				</div>
+
+			</div>
 		</div>
 	</div>
-</div>
+	<div class="list" style="background-color:lightgray;">
+		<div class="list">
+			<div class="row">
+				<div class="col">
+				  <label class="item item-radio">
+				    <input type="radio" name="group">
+				    <div class="item-content">
+				      好评
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+				  </label>
+				</div>
+				<div class="col">
+				    <label class="item item-radio">
+				    <input type="radio" name="group">
+				    <div class="item-content">
+				      中评
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+				  </label>
+				</div>
+				<div class="col">
+				    <label class="item item-radio">
+				    <input type="radio" name="group">
+				    <div class="item-content">
+				      差评
+				    </div>
+				    <i class="radio-icon ion-checkmark"></i>
+				    </label>
+				</div>
 
+			</div>
+				<div>
+			
+			      <span class="input-label">请输入评价：</span>
+			      <textarea style="height:50px;"></textarea>
+			    <div>
+			    	<p/>
+			    <div>
 
-
+			    <button class="button button-static">
+			    	添加图片
+			    </button>
+			    <div>
+			    	ImageArea
+			    </div>
+			    <div align="right">
+			    	<button class="button button-static" >
+			    		提交评论
+			    	</button>
+			    </div>
+			</div>
+		</div>
+	</div>
 </div>
