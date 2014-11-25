@@ -3,13 +3,12 @@
 
   angular.module('ilegong.my', [])
   .controller('MyCtrl', MyCtrl)
-
   .controller('MyListCtrl',MyListCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
   .controller('MyCartsCtrl',MyCartsCtrl)
   .controller('MyOrderInfoCtrl',MyOrderInfoCtrl)
-
-  .controller('MyAccountCtrl', MyAccountCtrl)
+  .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
+  .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
   .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
@@ -18,7 +17,10 @@
   	$scope.UserInfo = new UserInfo('Lilei');
   }
   /* @ngInject */
-  function MyAccountCtrl($scope){
+  function MyAccountLoginCtrl($scope){
+  }
+  /* @ngInject */
+  function MyAccountRegisterCtrl($scope){
   }
   /* @ngInject */
   function MyIlegongCtrl($scope){
