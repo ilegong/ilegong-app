@@ -1,9 +1,9 @@
-var Sharing = function(id, product, name, link, img){
+var Sharing = function(id, product, name, link, imgSrc){
   this.id = id;
   this.product = product;
   this.name = name;
   this.link = link;
-  this.img = img;
+  this.imgSrc = imgSrc;
 };
 
 var Trying = function(id, title, summary, link, imgSrc){
