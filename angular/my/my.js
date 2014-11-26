@@ -3,14 +3,24 @@
 
   angular.module('ilegong.my', [])
   .controller('MyCtrl', MyCtrl)
+
   .controller('MyListCtrl',MyListCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
   .controller('MyCartsCtrl',MyCartsCtrl)
   .controller('MyOrderInfoCtrl',MyOrderInfoCtrl)
+
+  .controller('MyAccountCtrl', MyAccountCtrl)
+  .controller('MyIlegongCtrl', MyIlegongCtrl)
+
   /* @ngInject */
   function MyCtrl($scope){
   	$scope.UserInfo = new UserInfo('Lilei');
-
+  }
+  /* @ngInject */
+  function MyAccountCtrl($scope){
+  }
+  /* @ngInject */
+  function MyIlegongCtrl($scope){
   }
 
   function MyListCtrl($scope){

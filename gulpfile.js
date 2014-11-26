@@ -98,10 +98,10 @@ gulp.task('dev:templates', function () {
       base: function (templateFile) {
         return path.basename(templateFile.path);
       },
-      filename: 'ilegong.tmpl'
+      filename: 'ilegong.tmpl.js'
     }))
     // .pipe(minifyHtml())
-    .pipe(rename({ extname: '.min.tmpl' }))
+    .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(templatePath.dist));
 });
 
