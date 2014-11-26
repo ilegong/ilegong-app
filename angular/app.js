@@ -33,10 +33,15 @@ function configStates($stateProvider, $urlRouterProvider) {
     .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'trying.main.html',controller: 'TryingsCtrl'}}})
     .state('tab.trying-detail', {url: '/tryings/:id',views: {'tab-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl'}}})
     .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}})
+    .state('tab.my-list',{url:'/my-list',views:{'tab-my':{templateUrl:'my-list.html',controller:'MyListCtrl'}}})
+    .state('tab.my-detail',{url:'/my-detail',views:{'tab-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl'}}})
+    .state('tab.my-carts',{url:'/my-carts',views:{'tab-my':{templateUrl:'my-carts.html',controller:'MyCartsCtrl'}}})
+    .state('tab.my-order-info',{url:'/my-order-info',views:{'tab-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl'}}})
 
     .state('tab.product-detail', {url: '/products/:id', views: {'tab-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
     .state('tab.product-detail.intro',{url:'/product-detail-intro',templateUrl:'product-detail-intro.html'})
     .state('tab.product-detail.evaluate',{url:'/product-detail-evaluate',templateUrl:'product-detail-evaluate.html'});
+
     
 
   $urlRouterProvider.otherwise('/tab/home');

@@ -21,11 +21,11 @@
     $scope.buttonReduceClick = function()
     {
       if($scope.item[$scope.pid].count > 1)
-        $scope.item[$scope.pid].count-=1;
+        $scope.item[$scope.pid].count=Number($scope.item[$scope.pid].count)-1;
     };
     $scope.buttonAddClick = function()
     {
-      $scope.item[$scope.pid].count +=1;
+      $scope.item[$scope.pid].count=Number($scope.item[$scope.pid].count)+1;
     };
     $scope.getRankText = function(rank)
     {

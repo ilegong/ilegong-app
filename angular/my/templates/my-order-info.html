@@ -1,0 +1,91 @@
+<ion-view title="结算">
+  <ion-content >
+    <h2>
+      收货人信息
+    </h2>
+    常用地址
+    <p/>
+    <div class="list">
+          <label class="item item-radio" ng-repeat="address in order.userInfo.addresses"> 
+            <input type="radio" name="group"/>
+            <div class="item-content">
+              {{address.name}}({{address.telephone}})
+            </div>
+            <div > 
+              {{address.region_1 + address.region_2 + address.region_3}}
+            </div>
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label class="item item-radio">
+           <input type="radio" name="group"/>
+            <div class="item-content">
+              使用新地址
+            </div>
+
+            <i class="radio-icon ion-checkmark"></i>
+            </label>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col col-25" >
+            收货人
+          </div>
+          <div class="col">
+            <input style="text"/>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col col-25" >
+            地区
+          </div>
+          <div class="col">
+            
+              <div >
+                <select id="selectRegion_1" ng-options="m in regionSelectItems">
+                  <option selected>
+                    请选择
+                  </option>
+    
+                </select>
+              </div>
+              <div >
+                <select id="selectRegion_2">
+                  <option selected >请选择</option>
+                </select>
+              </div>
+              <div >
+                <select id="selectRegion_3">
+                  <option selected >请选择</option>
+                </select>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25" >
+            详细地址
+          </div>
+          <div class="col">
+            sdf
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col col-25" >
+            手机
+          </div>
+          <div class="col">
+            sdf
+          </div>
+
+        </div>
+      </div>
+      <div class="list">
+
+
+
+
+
+</div>
+ </ion-content>
+</ion-view>

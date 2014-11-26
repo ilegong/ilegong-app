@@ -1,7 +1,7 @@
 <ion-view title="热卖">
   	<ion-content  class="padding">
   	
-  		<a href="/#/tab/products/12/product-detail-intro"><div>product detail page LINK</div></a>
+  		<a ui-sref="tab.product-detail.intro({id:12})"><div>product detail page LINK</div></a>
   		<ion-slide-box on-slide-changed="slideHasChanged($index)">
   			<ion-slide ng-repeat="item in SlideBoxItems">
 
@@ -14,8 +14,29 @@
   			</ion-slide>
 		</ion-slide-box>
 
+		<div class="row" ng-repeat="item in items">
+			<div class="col">
+				<a href="{{item.cat.linkUrl}}">
+					<img style="width:100%;" src="{{item.cat.imgUrl}}"/>
+				</a>
+			</div>
+			<div class="col" ng-repeat="subitem in item.subItems">
+				<a href="{{subitem.linkUrl}}">
+				<div style="font-size: 0.833em;font-weight: normal;padding-bottom: 0.2em;{{subitem.titleStyle}}">
+					{{subitem.title}}
+				</div>
+				<div style="font-size: 0.667em;padding-bottom: 0.8em;color: #999999;margin: 0 0;">
+					{{subitem.name}}
+				</div>
+				<img style="width:100%;" src="{{subitem.imgUrl}}"/>
+				</a>
+			</div>
+		</div>
 
 
+
+
+<!--
 	  	<div style="font-family: 'Microsoft Yahei', 'Simsun';" class='list'>
 
 
@@ -140,7 +161,7 @@
 
 	    	</div>
 	    </div>
-
+-->
 
   	</ion-content>
 </ion-view>
