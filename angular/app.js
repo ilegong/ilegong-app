@@ -21,36 +21,36 @@ function initApp($ionicPlatform) {
 
 function configStates($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('tab', state("/tab", "tabs.html", null, {abstract: true}))
-    .state('tab.home', {url: '/home', views: {'tab-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl'}}})
+    .state('app', state("/app", "tabs.html", null, {abstract: true}))
+    .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl'}}})
 
-    .state('tab.categories', {url: '/categories',views: {'tab-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
-    .state('tab.category-detail', {url: '/categories/:id',views: {'tab-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
+    .state('app.categories', {url: '/categories',views: {'app-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
+    .state('app.category-detail', {url: '/categories/:id',views: {'app-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
 
-    .state('tab.sharings', {url: '/sharings', views: {'tab-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl'}}})
-    .state('tab.sharing-detail', {url: '/sharings/:id', views: {'tab-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl'}}})
-    .state('tab.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
-    .state('tab.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
+    .state('app.sharings', {url: '/sharings', views: {'app-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl'}}})
+    .state('app.sharing-detail', {url: '/sharings/:id', views: {'app-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl'}}})
+    .state('app.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
+    .state('app.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
     
-    .state('tab.tryings', {url: '/tryings',views: {'tab-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl'}}})
-    .state('tab.trying-detail', {url: '/tryings/:id',views: {'tab-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl'}}})
+    .state('app.tryings', {url: '/tryings',views: {'app-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl'}}})
+    .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl'}}})
 
-    .state('tab.my', {url: '/my', views: {'tab-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}})
-    .state('tab.my-list',{url:'/my-list',views:{'tab-my':{templateUrl:'my-list.html',controller:'MyListCtrl'}}})
-    .state('tab.my-detail',{url:'/my-detail',views:{'tab-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl'}}})
-    .state('tab.my-carts',{url:'/my-carts',views:{'tab-my':{templateUrl:'my-carts.html',controller:'MyCartsCtrl'}}})
-    .state('tab.my-order-info',{url:'/my-order-info',views:{'tab-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl'}}})
+    .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyCtrl'}}})
+    .state('app.my-account-login', {url: '/my/account-login', views: {'app-my': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl'}}})
+    .state('app.my-account-register', {url: '/my/account-register', views: {'app-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl'}}})
+    .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl'}}})
+    .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl'}}})
+    .state('app.my-list',{url:'/my-list',views:{'app-my':{templateUrl:'my-list.html',controller:'MyListCtrl'}}})
+    .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl'}}})
+    .state('app.my-carts',{url:'/my-carts',views:{'app-my':{templateUrl:'my-carts.html',controller:'MyCartsCtrl'}}})
+    .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl'}}})
 
-    .state('tab.my-ilegong', {url: '/my-ilegong', views: {'tab-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl'}}})
-    .state('tab.my-addresses-info',{url:'/my-addresses-info',views:{'tab-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl'}}})
-    .state('tab.my-account-login', {url: '/my/account-login', views: {'tab-my': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl'}}})
-    .state('tab.my-account-register', {url: '/my/account-register', views: {'tab-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl'}}})
 
-    .state('tab.product-detail', {url: '/products/:id', views: {'tab-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
-    .state('tab.product-detail.intro',{url:'/product-detail-intro',templateUrl:'product-detail-intro.html'})
-    .state('tab.product-detail.evaluate',{url:'/product-detail-evaluate',templateUrl:'product-detail-evaluate.html'});
+    .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
+    .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
+    .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'});
 
-  $urlRouterProvider.otherwise('/tab/home');
+  $urlRouterProvider.otherwise('/app/home');
   }
 
   function state(url, templateUrl, controller, options){

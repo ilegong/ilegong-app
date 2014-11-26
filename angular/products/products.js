@@ -5,7 +5,8 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($scope,$stateParams){
+  function ProductDetailCtrl($rootScope, $scope, $stateParams){
+    $rootScope.hideTabs = false;
     $scope.pid=1;
     $scope.id = $stateParams.id;
     $scope.item = 

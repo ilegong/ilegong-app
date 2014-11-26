@@ -13,17 +13,21 @@
 
   .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
   /* @ngInject */
-  function MyCtrl($scope){
+  function MyCtrl($rootScope, $scope){
   	$scope.UserInfo = new UserInfo('Lilei');
+    $rootScope.hideTabs = false;
   }
   /* @ngInject */
-  function MyAccountLoginCtrl($scope){
+  function MyAccountLoginCtrl($rootScope, $scope){
+    $rootScope.hideTabs = true;
   }
   /* @ngInject */
-  function MyAccountRegisterCtrl($scope){
+  function MyAccountRegisterCtrl($rootScope, $scope){
+    $rootScope.hideTabs = true;
   }
   /* @ngInject */
-  function MyIlegongCtrl($scope){
+  function MyIlegongCtrl($rootScope, $scope){
+    $rootScope.hideTabs = true;
   }
 
   function MyListCtrl($scope){
