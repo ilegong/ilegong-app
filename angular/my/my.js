@@ -61,20 +61,20 @@
   function MyOrderInfoCtrl($scope){
 
     $scope.regionSelectItems=[
-                              {title:'beijing',content:[
-                                {title:'beijing-1',content:[
-                                  {title:'beijing-1-1'},
-                                  {title:'beijing-1-2'}]},
-                                {title:"beijing-2",content:[
-                                  {title:'beijing-2-1'},
-                                  {title:'beijing-2-2'}]}]},
-                              {title:'shanghai',content:[
-                                {title:'shanghai-1',content:[
-                                  {title:'shanghai-1-1'},
-                                  {title:'shanghai-1-2'}]},
-                                {title:'shanghai-2',content:[
-                                  {title:'shanghai-2-1'},
-                                  {title:'shanghai-2-2'}]}]}];
+                              {title:'beijing',id:1,content:[
+                                {title:'beijing-1',i:11,content:[
+                                  {title:'beijing-1-1',id:111},
+                                  {title:'beijing-1-2',id:112}]},
+                                {title:"beijing-2",id:12,content:[
+                                  {title:'beijing-2-1',id:121},
+                                  {title:'beijing-2-2',id:122}]}]},
+                              {title:'shanghai',id:2,content:[
+                                {title:'shanghai-1',id:21,content:[
+                                  {title:'shanghai-1-1',id:211},
+                                  {title:'shanghai-1-2',id:212}]},
+                                {title:'shanghai-2',id:22,content:[
+                                  {title:'shanghai-2-1',id:221},
+                                  {title:'shanghai-2-2',id:222}]}]}];
 
 
     $scope.order={userInfo:{
@@ -102,17 +102,24 @@
                             price:11.2,
                             count:6,
                             message:""}
-                          ]
+                          ],
+                    privilege:20,
+                    freight:15
 
                 };
-      $scope.selectRegion_1_onchange=function()
-      {
-        var e = document.getElementById('selectRegion_2');
-        e.options.length=0;
-      };
-      $scope.selectRegion_1_onchange=function()
-      {
 
-      };
+      $scope.getTotallPrice=function()
+      {
+        var i=0;
+        var totall=0;
+        while(i < $scope.order.products.length)
+        {
+          var t = $scope.order.products[i];
+          totall += t.price * t.count;
+          i++;
+        }
+        return totall;
+      }
+
   }
 })(window, window.angular);
