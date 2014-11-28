@@ -42,6 +42,7 @@ function configStates($stateProvider, $urlRouterProvider) {
 
     .state('tab.my-account', {url: '/my-account', views: {'tab-my': {templateUrl: 'my-account.html',controller: 'MyAccountCtrl'}}})
     .state('tab.my-ilegong', {url: '/my-ilegong', views: {'tab-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl'}}})
+    .state('tab.my-addresses-info',{url:'/my-addresses-info',views:{'tab-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl'}}})
 
     .state('tab.product-detail', {url: '/products/:id', views: {'tab-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
     .state('tab.product-detail.intro',{url:'/product-detail-intro',templateUrl:'product-detail-intro.html'})

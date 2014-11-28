@@ -1,0 +1,108 @@
+<ion-view title="收货人信息">
+  	<ion-content  class="padding">
+  		<h4>
+  			常用地址
+  		</h4>
+  <div class="list">
+      <div  ng-repeat="address in addresses" >
+          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " style="background-color:{{values.getDefColor($index)}};">
+
+            <input type="radio" name="group" />
+          
+            <div class="item-content" style="background-color:{{values.getDefColor($index)}};">
+              {{address.name}}({{address.telephone}})
+            </div>
+            <div > 
+              {{address.region_1 + address.region_2 + address.region_3}}
+            </div>
+ 
+  
+            <i class="radio-icon ion-checkmark"></i>
+          </label>
+          <label ng-click="values.accessEditVisible=true;values.setEditAddress($index);">
+	            <button class="button button-static" >
+	            	编辑
+	            </button>
+        	</label>
+        	<label ng-click="values.deleteAddressItem($index);values.accessEditVisible=false;">
+        		<button class="button button-static">
+        			删除
+        		</button>
+        	</label>
+        	<label ng-click="values.setDef($index);">
+        		<button class="button button-static">
+        			设置为默认
+        		</button>
+        	</label>
+        </div>
+          <label class="item item-radio" ng-click="accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
+           <input type="radio" name="group"/>
+            <div class="item-content">
+    
+              使用新地址
+            </div>
+
+            <i class="radio-icon ion-checkmark"></i>
+            </label>
+      </div>
+      <div ng-show="values.accessEditVisible">
+      	<div class="row">
+          <div class="col col-25" >
+            收货人
+          </div>
+          <div class="col">
+            <input style="text" ng-model="values.editAddress.name"/>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col col-25" >
+            地区
+          </div>
+          <div class="col">
+            
+              <div >
+                <select id="selectRegion_1" ng-model="values.editAddress.region_1_model" ng-options="m.title for m in regionSelectItems" ng-change="values.editAddress.region_2_model='';values.editAddress.region_3_model='';">
+                  <option value="">-- 请选择 --</option>
+    
+                </select>
+              </div>
+        
+              
+              <div >
+                <select id="selectRegion_2" ng-model="values.editAddress.region_2_model" ng-options=" m.title for m in values.editAddress.region_1_model.content" ng-change="values.editAddress.region_3_model='';">
+                  <option value="">-- 请选择 --</option>
+                </select>
+              </div>
+              <div >
+                <select id="selectRegion_3" ng-model="values.editAddress.region_3_model" ng-options=" m.title for m in values.editAddress.region_2_model.content" ng-change="">
+                  <option value="">-- 请选择 --</option>
+                </select>
+              </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25">
+            详细地址
+          </div>
+          <div class="col">
+            <input style="text" ng-model="values.editAddress.address"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-25" >
+            手机
+          </div>
+          <div class="col">
+            <input style="text" ng-model="values.editAddress.telephone"/>
+          </div>  
+        </div>
+        <div class="row">
+          <button class="button button-assertive">
+            保存收货人信息
+ 
+          </button>
+        </div>
+      </div>
+  	</ion-content>
+</ion-view>

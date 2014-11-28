@@ -5,7 +5,7 @@
   .controller('HomeCtrl', HomeCtrl)
 
   /* @ngInject */
-  function HomeCtrl($scope){
+  function HomeCtrl($scope,$http  ){
     active();
 
     
@@ -36,6 +36,8 @@
 			])
 	]
 
+
+
   $scope.items = [{cat:{title:'枣、干果',style:'',imgUrl:'http://www.tongshijia.com/img/class/classn5.png',linkUrl:"http://baidu.com"},
                     subItems:[
                       {title:'椒盐碧根果250g',titleStyle:'color:#9ab300;',name:'西域美农-李春望',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/b7fdeee1f2f_1118.jpg',linkUrl:"http://baidu.com"},
@@ -48,9 +50,13 @@
                     subItems:[
                       {title:'开心果牛轧糖',titleStyle:'color:#ae950e;',name:'营养师-王扬',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/0684c2cc96b_1107.jpg',linkUrl:"http://baidu.com"},
                       {title:'印尼古法千层蛋糕',titleStyle:'color:#e74e01;',name:'材料学博士-刘丙学',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/371c77a62be_1120.jpg',linkUrl:"http://baidu.com"}]}]
+    
+
+
+
+
+
     function active(){
     }
-  }
-
-
+  } 
 })(window, window.angular);

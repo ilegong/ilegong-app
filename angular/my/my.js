@@ -12,6 +12,7 @@
   .controller('MyAccountCtrl', MyAccountCtrl)
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
+  .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
   /* @ngInject */
   function MyCtrl($scope){
   	$scope.UserInfo = new UserInfo('Lilei');
@@ -120,6 +121,127 @@
         }
         return totall;
       }
+        $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
 
   }
+  function MyAddressesInfoCtrl($scope)
+  {
+
+      $scope.regionSelectItems=[
+                              {title:'beijing',id:1,content:[
+                                {title:'beijing-1',i:11,content:[
+                                  {title:'beijing-1-1',id:111},
+                                  {title:'beijing-1-2',id:112}]},
+                                {title:"beijing-2",id:12,content:[
+                                  {title:'beijing-2-1',id:121},
+                                  {title:'beijing-2-2',id:122}]}]},
+                              {title:'shanghai',id:2,content:[
+                                {title:'shanghai-1',id:21,content:[
+                                  {title:'shanghai-1-1',id:211},
+                                  {title:'shanghai-1-2',id:212}]},
+                                {title:'shanghai-2',id:22,content:[
+                                  {title:'shanghai-2-1',id:221},
+                                  {title:'shanghai-2-2',id:222}]}]}];
+      $scope.accessEditVisible=false;
+      $scope.addresses=[
+                         {def:false,name:'name1',region_1:'beijing',region_2:'beijing-2',region_3:'beijing-2-1',address:'地址',telephone:'12345678911'},
+                         {def:true,name:'name2',region_1:'beijing',region_2:'beijing-2',region_3:'beijing-2-1',address:'地址',telephone:'12345678911'},
+                         {def:false,name:'name3',region_1:'shanghai',region_2:'shanghai-2',region_3:'shanghai-2-1',address:'地址',telephone:'12345678911'}
+                        ]
+      $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1};
+      $scope.values.editAddress={def:false,name:'namet',region_1_model:'shanghai',region_2_model:'shanghai-1',region_3_model:'shanghai-1-1',address:'addressT',telephone:'telT'};
+      $scope.values.setEditAddress=function(index)
+      {
+        if(index==-1)
+        {
+          $scope.values.editAddress={def:false,name:'',region_1_model:'',region_2_model:'',region_3_model:'',address:'',telephone:''};
+          return;
+        }
+        if(index>=0)
+        {
+          var t=$scope.addresses[index];
+
+          $scope.values.editAddress={def:t.def,name:t.name,region_1_model:null,region_2_model:null,region_3_model:null,address:t.address,telephone:t.telephone};
+           var r = $scope.values.getRegion_1_model(t.region_1);
+           
+          $scope.values.editAddress.region_1_model = r.content;
+          var r2 = $scope.values.getReion_2_model(r.id,t.region_2);
+                    
+          $scope.values.editAddress.region_2_model = r2.content;
+          var r3 = $scope.values.getRegion_3_model(r.id,r2.id,t.region_3);
+                   
+          $scope.values.editAddress.region_3_model = r3.content;
+
+          return;
+
+        }
+      }
+
+      $scope.values.getRegion_1_model=function(title)
+      {
+        var i=0;
+        while(i<$scope.regionSelectItems.length)
+        {
+          if($scope.regionSelectItems[i].title == title)
+          {
+            return {id:i,content:$scope.regionSelectItems[i]};
+          }
+          i++;
+        }
+        return null;
+      }
+      $scope.values.getReion_2_model=function(index_1,title)
+      {
+        var t = $scope.regionSelectItems[index_1];
+        var i = 0;
+
+        while(i<t.content.length)
+        {
+          if(t.content[i].title==title)
+          {
+            return {id:i,content:t.content[i]};
+          }
+          i++;
+        }
+
+        return null;
+      }
+      $scope.values.getRegion_3_model=function(index_1,index_2,title)
+      {
+        var t = $scope.regionSelectItems[index_1].content[index_2];
+        var i = 0;
+        while(i<t.content.length)
+        {
+          if(t.content[i].title==title)
+          {
+            return {id:i,content:t.content[i]};
+          }
+          i++;
+        }
+        return null;
+      }
+
+      $scope.values.deleteAddressItem=function(index)
+      {
+        $scope.addresses.splice(index,1);
+      }
+      $scope.values.getDefColor=function(index)
+      {
+        if($scope.addresses[index].def==true)
+        {
+          return '#eeeeee';
+        }
+        return 'white'; 
+      }
+      $scope.values.setDef=function(index)
+      {
+        var i =0;
+        while(i<$scope.addresses.length)
+        {
+          $scope.addresses[i].def= false;
+          i++;
+        }
+        $scope.addresses[index].def=true;
+      }
+  }   
 })(window, window.angular);

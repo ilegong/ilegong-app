@@ -6,9 +6,11 @@
     常用地址
     <p/>
     <div class="list">
-          <label class="item item-radio" ng-repeat="address in order.userInfo.addresses"> 
-            <input type="radio" name="group"/>
-            <div class="item-content">
+      <div ng-click="values.accessDivVisible=false;">
+          <label class="item item-radio"  ng-repeat="address in order.userInfo.addresses" ng-click="values.accessSelectedIndex=$index;" > 
+            <input type="radio" name="group" />
+    
+            <div class="item-content" >
               {{address.name}}({{address.telephone}})
             </div>
             <div > 
@@ -16,7 +18,8 @@
             </div>
             <i class="radio-icon ion-checkmark"></i>
           </label>
-          <label class="item item-radio">
+        </div>
+          <label class="item item-radio" ng-click="values.accessDivVisible=true">
            <input type="radio" name="group"/>
             <div class="item-content">
               使用新地址
@@ -25,7 +28,7 @@
             <i class="radio-icon ion-checkmark"></i>
             </label>
       </div>
-      <div>
+      <div ng-show="values.accessDivVisible">
         <div class="row">
           <div class="col col-25" >
             收货人
@@ -112,8 +115,10 @@
         </div>
         <div>
           <label class="item item-input">
-            <textarea placeholder="给分享人留言"></textarea>
+            <textarea ng-model="item.message" placeholder="给分享人留言"></textarea>
+
           </label>
+          <p/>
         </div>
       </div>
     </div>
