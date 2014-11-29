@@ -5,11 +5,10 @@
   .controller('HomeCtrl', HomeCtrl)
 
   /* @ngInject */
-  function HomeCtrl(($rootScope, $scope,$http  ){
+  function HomeCtrl($rootScope, $scope, $http){
     $rootScope.hideTabs = false;
     active();
 
-    
     $scope.SlideBoxItems = [
                             {imgUrl:'http://51daifan.sinaapp.com/img/banner/pyshuo_banner_fengli.jpg',linkUrl:'http://www.tongshijia.com/products/20140809/tai_wan_tu_feng_li_su.html'},
                             {imgUrl:'http://51daifan.sinaapp.com/img/banner/pyshuo_banner_follower.jpg',linkUrl:'http://www.tongshijia.com/products/20140903/qing_hai_hu_hua_fen.html'},

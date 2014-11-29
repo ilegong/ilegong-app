@@ -25,7 +25,7 @@ var fontsPath = {
 }
 var templatePath = {
   src: ['angular/**/*.html'], 
-  dist: 'www/templates'
+  dist: 'www/js'
 }
 var appJsPath = {
   src: ['angular/**/*.js'], 
@@ -98,7 +98,7 @@ gulp.task('dev:templates', function () {
       base: function (templateFile) {
         return path.basename(templateFile.path);
       },
-      filename: 'ilegong.tmpl.js'
+      filename: 'tmpl.js'
     }))
     // .pipe(minifyHtml())
     .pipe(rename({ extname: '.min.js' }))
