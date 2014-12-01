@@ -10,9 +10,9 @@
     active();
 
     $scope.SlideBoxItems = [
-                            {imgUrl:'http://51daifan.sinaapp.com/img/banner/pyshuo_banner_fengli.jpg',linkUrl:'http://www.tongshijia.com/products/20140809/tai_wan_tu_feng_li_su.html'},
-                            {imgUrl:'http://51daifan.sinaapp.com/img/banner/pyshuo_banner_follower.jpg',linkUrl:'http://www.tongshijia.com/products/20140903/qing_hai_hu_hua_fen.html'},
-                            {imgUrl:'http://51daifan.sinaapp.com/img/banner/pyshuo_banner_yanyan.jpg',linkUrl:'http://www.tongshijia.com/products/20140901/yan_yan_jia_de_mi.html'}
+                            new SlideBoxItem('http://51daifan.sinaapp.com/img/banner/pyshuo_banner_fengli.jpg','http://www.tongshijia.com/products/20140809/tai_wan_tu_feng_li_su.html'),
+                            new SlideBoxItem('http://51daifan.sinaapp.com/img/banner/pyshuo_banner_follower.jpg','http://www.tongshijia.com/products/20140903/qing_hai_hu_hua_fen.html'),
+                            new SlideBoxItem('http://51daifan.sinaapp.com/img/banner/pyshuo_banner_follower.jpg','http://www.tongshijia.com/products/20140903/qing_hai_hu_hua_fen.html')
                             ];
 
 
@@ -38,18 +38,18 @@
 
 
 
-  $scope.items = [{cat:{title:'枣、干果',style:'',imgUrl:'http://www.tongshijia.com/img/class/classn5.png',linkUrl:"http://baidu.com"},
-                    subItems:[
-                      {title:'椒盐碧根果250g',titleStyle:'color:#9ab300;',name:'西域美农-李春望',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/b7fdeee1f2f_1118.jpg',linkUrl:"http://baidu.com"},
-                      {title:'沧州新产金丝小枣',titleStyle:'color:#a00f12;',name:'检验员-宋德香',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:"http://baidu.com"}]},
-                  {cat:{title:'新鲜水果',style:'',imgUrl:'http://www.tongshijia.com/img/class/classn3.png',linkUrl:"http://baidu.com"},
-                    subItems:[
-                      {title:'河南河阴软籽石榴',titleStyle:'color:#b07406;',name:'郑州民政局-段赵明',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',linkUrl:"http://baidu.com"},
-                      {title:'山东精品红富士',titleStyle:'color:#772617;',name:'材料学博士-刘丙学',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/9036455c197_1125.jpg',linkUrl:"http://baidu.com"}]},
-                  {cat:{title:'蛋糕甜点',style:'',imgUrl:'http://www.tongshijia.com/img/class/classn8.png',linkUrl:"http://baidu.com"},
-                    subItems:[
-                      {title:'开心果牛轧糖',titleStyle:'color:#ae950e;',name:'营养师-王扬',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/0684c2cc96b_1107.jpg',linkUrl:"http://baidu.com"},
-                      {title:'印尼古法千层蛋糕',titleStyle:'color:#e74e01;',name:'材料学博士-刘丙学',nameStyle:'',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/371c77a62be_1120.jpg',linkUrl:"http://baidu.com"}]}]
+  $scope.items = [new ProductItem(new ProductCat('枣、干果','','http://www.tongshijia.com/img/class/classn5.png',"http://baidu.com"),
+                    [
+                      new ProductSubItem('椒盐碧根果250g','color:#9ab300;','西域美农-李春望','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/b7fdeee1f2f_1118.jpg','http://baidu.com'),
+                      new ProductSubItem('沧州新产金丝小枣','color:#a00f12;','检验员-宋德香','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg','http://baidu.com')]),
+                  new ProductItem(new ProductCat('新鲜水果','','http://www.tongshijia.com/img/class/classn3.png',"http://baidu.com"),
+                    [
+                      new ProductSubItem('河南河阴软籽石榴','color:#b07406;','郑州民政局-段赵明','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg','http://baidu.com'),
+                      new ProductSubItem('山东精品红富士','color:#772617;','材料学博士-刘丙学','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/9036455c197_1125.jpg','http://baidu.com')]),
+                  new ProductItem(new ProductCat('蛋糕甜点','','http://www.tongshijia.com/img/class/classn8.png',"http://baidu.com"),
+                    [
+                      new ProductSubItem('开心果牛轧糖','color:#ae950e;','营养师-王扬','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/0684c2cc96b_1107.jpg','http://baidu.com'),
+                      new ProductSubItem('印尼古法千层蛋糕','color:#e74e01;','材料学博士-刘丙学','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/371c77a62be_1120.jpg','http://baidu.com')])]
     
 
 
