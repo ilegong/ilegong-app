@@ -3,7 +3,10 @@
 (function(){
   angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates',"ilegong.products"])
   .run(initApp)
-  .config(configStates);
+  .config(configStates)
+  .config(extendLog)
+  .config(extendExceptionHandler)
+  .config(configCompileProvider)
 
   var state = state;
   var subState = subState;
@@ -54,10 +57,57 @@
       .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl'}}})
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
+
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'});
 
     $urlRouterProvider.otherwise('/app/home');
+  }
+
+  /* @ngInject */
+  function extendLog($provide){
+    $provide.decorator('$log', function($delegate, $injector){
+      var _log = $delegate.log;
+      var _warn = $delegate.warn;
+      var _info = $delegate.info;
+      var _debug = $delegate.debug;
+      var _error = $delegate.error;
+      var addMessage = function(message){
+        var $rootScope = $injector.get("$rootScope");
+        $rootScope.messages = $rootScope.messages || [];
+        $rootScope.messages.push(message);
+        return message;
+      }
+          
+      $delegate.log = function(msg){_log(addMessage(msg)); return this;};
+      $delegate.warn = function(msg){_warn(addMessage(msg)); return this;};
+      $delegate.info = function(msg){_info(addMessage(msg)); return this;};
+      $delegate.debug = function(msg){_debug(addMessage(msg)); return this;};
+      $delegate.error = function(msg){_error(addMessage(msg)); return this;};
+          
+      return $delegate;
+    });
+  }
+
+  /* @ngInject */
+  function extendExceptionHandler($provide) {
+    $provide.decorator('$exceptionHandler', function($delegate, $injector, $log){
+      return function (exception, cause) {
+        var $rootScope = $injector.get("$rootScope");
+        if(!_.isEmpty($rootScope.error)){
+          $rootScope.error({message:"Exception", reason:exception});
+        }
+        if(!_.isEmpty($log.error)){
+          $log.error(exception).error(cause);
+        }
+        $delegate(exception, cause);
+      };
+    });
+  }
+
+  /* @ngInject */
+  function configCompileProvider($compileProvider){
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s(https|file|blob|cdvfile|http):|data:image\//);
   }
 
   function state(url, templateUrl, controller, options){

@@ -37,14 +37,14 @@
   }
 
   function MyListCtrl($scope){
-  	       $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
+    $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
   }
   function MyDetailCtrl($scope){
-        $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
+    $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
   }
   function MyCartsCtrl($scope){
-      $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
-                    new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
+    $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
+                  new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
     $scope.buttonReduceClick = function(index)
     {
       if($scope.items[index].count > 1)
@@ -71,8 +71,6 @@
     };
   }
   function MyOrderInfoCtrl($scope){
-
-
     $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
                                         new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
                                         new AddressItem(true,'name2','beijing','beijing-2','beijing-2-1','地址','12345678911'),

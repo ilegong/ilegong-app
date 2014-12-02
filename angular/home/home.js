@@ -1,12 +1,14 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.home', [])
+  angular
+  .module('ilegong.home', ['app.services'])
   .controller('HomeCtrl', HomeCtrl)
-
+  
   /* @ngInject */
-  function HomeCtrl($rootScope, $scope, $http){
+  function HomeCtrl($rootScope, $scope, $http, Products){
     $rootScope.hideTabs = false;
+    var vm = this;
     active();
 
     $scope.SlideBoxItems = [
@@ -52,6 +54,11 @@
                       new ProductSubItem('印尼古法千层蛋糕','color:#e74e01;','材料学博士-刘丙学','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/371c77a62be_1120.jpg','http://baidu.com')])]
     
     function active(){
+      Products.list().then(function(data){
+        vm.slideBoxItems = [];
+        vm.brands = data.brands;
+        vm.tagsWithProducts = data.tagsWithProducts;
+      });
     }
-  } 
+  }
 })(window, window.angular);

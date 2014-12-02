@@ -130,3 +130,44 @@ a{
     }
   }
 }
+
+h3.items-tag{
+  margin: 0 0.833em 0.625em 0.833em;
+  a{
+    color: #29ac0e;
+  }
+}
+.card.card-product{
+  display: inline-block;
+  margin: 0 0.433em 1.75em 0.433em;
+  padding: 0 0.433em 1.75em 0.433em;
+  width: 49.0%;
+  box-shadow: 0 0 0;
+  img{
+    max-height: 100%;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100%;
+  }
+  .item{
+    padding: 0;
+    border: 0;
+  }
+  .item-text-wrap a{
+    font-size: 0.8em;
+    color: #333333;
+  }
+  .item-avatar{
+    padding-left: 2.4em;
+    padding-top: 0.2em;
+  }
+  .item-avatar > img:first-child{
+    position: absolute;
+    top: 0.2em;
+    left: 0.2em;
+    max-width: 2em;
+    max-height: 2em;
+    border-radius: 4px;
+  }
+}
+
