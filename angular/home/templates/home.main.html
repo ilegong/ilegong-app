@@ -1,167 +1,167 @@
 <ion-view title="热卖">
-  	<ion-content  class="padding">
+  <ion-content  class="padding">
 
-  		<a ui-sref="app.product-detail.intro({id:12})"><div>product detail page LINK</div></a>
-  		<ion-slide-box on-slide-changed="slideHasChanged($index)">
-  			<ion-slide ng-repeat="item in SlideBoxItems">
+    <a ui-sref="app.product-detail.intro({id:12})"><div>product detail page LINK</div></a>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide ng-repeat="item in SlideBoxItems">
 
-  				<a href="{{item.linkUrl}}">
-	  				<div >
-	  					
-	  					<img style="width:100%;height:100%;" src="{{item.imgUrl}}"></img>
-	  				</div>
-  				</a>
-  			</ion-slide>
-		</ion-slide-box>
+        <a href="{{item.linkUrl}}">
+          <div >
+            
+            <img style="width:100%;height:100%;" src="{{item.imgUrl}}"></img>
+          </div>
+        </a>
+      </ion-slide>
+  </ion-slide-box>
 
-		<div class="row" ng-repeat="item in items">
-			<div class="col">
-				<a href="{{item.cat.linkUrl}}">
-					<img style="width:100%;" src="{{item.cat.imgUrl}}"/>
-				</a>
-			</div>
-			<div class="col" ng-repeat="subitem in item.subItems">
-				<a href="{{subitem.linkUrl}}">
-				<div style="font-size: 0.833em;font-weight: normal;padding-bottom: 0.2em;{{subitem.titleStyle}}">
-					{{subitem.title}}
-				</div>
-				<div style="font-size: 0.667em;padding-bottom: 0.8em;color: #999999;margin: 0 0;">
-					{{subitem.name}}
-				</div>
-				<img style="width:100%;" src="{{subitem.imgUrl}}"/>
-				</a>
-			</div>
-		</div>
-
-
-
-
-<!--
-	  	<div style="font-family: 'Microsoft Yahei', 'Simsun';" class='list'>
-
-
-		  	<div  class="item item-divider" ng-repeat="product in ProductL1">
-			  	
-			  		<div>
-			  			<a  href="{{product.linkUrl}}">
-			  			<img style="width:100%;" class="radius10" src="{{product.imgSrc}}"/>
-			  			</a>
-			  		</div>
-			  		<div>
-			  			<a href="{{product.ownerUrl}}">
-			  				<img style="width:50px;height:50px;float:left;" class="radius10" src="{{product.owner_imgSrc}}"/>
-			  			</a>
-			  			<a  href="{{product.linkUrl}}">
-			  			<span style="font-size: 1.25em;color: #333333;display:block;">
-			  				{{product.title}}
-			  			</span>
-			  			</p>
-			  			
-			  			<span style="font-size: 1em;color: #999999;display:block;">
-			  				{{product.owner}}
-			  				<span  ng-show="product.hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.25em;background: red;" >
-			  					有红包
-			  				</span>
-			  			</span>
-			  			</p>
-			  			<div>
-			  				<span style="font-size: 1.25em;color: #ffa200;display: inline;">
-			  					{{product.price | currency:"￥"}}
-			  				</span>
-			  				<span ng-show="product.price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
-			  					{{product.price_old | currency:"￥"}}
-			  				</span>
-			  			</div>
-			  		</a>
-			  		</div>	
-		    </div>
-	  	</div>
+  <div class="row" ng-repeat="item in items">
+    <div class="col">
+      <a href="{{item.cat.linkUrl}}">
+        <img style="width:100%;" src="{{item.cat.imgUrl}}"/>
+      </a>
+    </div>
+    <div class="col" ng-repeat="subitem in item.subItems">
+      <a href="{{subitem.linkUrl}}">
+      <div style="font-size: 0.833em;font-weight: normal;padding-bottom: 0.2em;{{subitem.titleStyle}}">
+        {{subitem.title}}
+      </div>
+      <div style="font-size: 0.667em;padding-bottom: 0.8em;color: #999999;margin: 0 0;">
+        {{subitem.name}}
+      </div>
+      <img style="width:100%;" src="{{subitem.imgUrl}}"/>
+      </a>
+    </div>
+  </div>
 
 
 
-	  	<div  class="item item-divider" ng-repeat="tAp in TypeAndProducts">
-	    	<div>
-		    	<a href="{{tAp.type.url}}" style="font-size: 1.417em;color: #29ac0e;">
 
-		    		{{tAp.type.name}}
-		    	</a>
-	    	</div>
-	    	</p>
-	    	<div style="font-family: 'Microsoft Yahei', 'Simsun';" class="row" ng-repeat="product in tAp.products" ng-show="$index % 2 == 0">
-	    		<div class="col" ng-if="$index+0<tAp.products.length" >
-	    			<div>
-			  			<a  href="{{tAp.products[$index+0].linkUrl}}">
-			  			<img style="width:100%;" class="radius10" src="{{tAp.products[$index+0].imgSrc}}"/>
-			  			</a>
-		  			</div>
-			  		<div>
-			  			<a href="{{tAp.products[$index+0].ownerUrl}}">
-			  				<img style="width:50px;height:50px;float:left;" class="radius10" src="{{tAp.products[$index+0].owner_imgSrc}}"/>
-			  			</a>
-			  			<a  href="{{tAp.products[$index+0].linkUrl}}">
-				  			<span style="font-size: 1.0em;color: #333333;display:block;">
-				  				{{tAp.products[$index+0].title}}
-				  			</span>
-				  			</p>
-				  			
-				  			<span style="font-size: 1.0em;color: #999999;display:block;">
-				  				{{tAp.products[$index+0].owner}}
-				  				<span  ng-show="tAp.products[$index+0].hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.0em;background: red;" >
-				  					有红包
-				  				</span>
-				  			</span>
-
-				  			</p>
-				  			<div>
-				  				<span style="font-size: 1.25em;color: #ffa200;display: inline;">
-				  					{{tAp.products[$index+0].price | currency:"￥"}}
-				  				</span>
-				  				<span ng-show="tAp.products[$index+0].price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
-				  					{{tAp.products[$index+0].price_old | currency:"￥"}}
-				  				</span>
-				  			</div>
-			  			</a>
-			  		</div>
-	    		</div>
-				<div class="col"  ng-show="$index+1<tAp.products.length">
-	    			<div>
-			  			<a  href="{{tAp.products[$index+1].linkUrl}}">
-			  			<img style="width:100%;" class="radius10" src="{{tAp.products[$index+1].imgSrc}}"/>
-			  			</a>
-		  			</div>
-			  		<div>
-			  			<a href="{{tAp.products[$index+1].ownerUrl}}">
-			  				<img style="width:50px;height:50px;float:left;" class="radius10" src="{{tAp.products[$index+1].owner_imgSrc}}"/>
-			  			</a>
-			  			<a  href="{{tAp.products[$index+1].linkUrl}}">
-				  			<span style="font-size: 1.0em;color: #333333;display:block;">
-				  				{{tAp.products[$index+1].title}}
-				  			</span>
-				  			</p>
-				  			
-				  			<span style="font-size: 1.0em;color: #999999;display:block;">
-				  				{{tAp.products[$index+1].owner}}
-				  				<span  ng-show="tAp.products[$index+1].hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.0em;background: red;" >
-				  					有红包
-				  				</span>
-				  			</span>
-				  			</p>
-				  			<div>
-				  				<span style="font-size: 1.25em;color: #ffa200;display: inline;">
-				  					{{tAp.products[$index+1].price | currency:"￥"}}
-				  				</span>
-				  				<span ng-show="tAp.products[$index+1].price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
-				  					{{tAp.products[$index+1].price_old | currency:"￥"}}
-				  				</span>
-				  			</div>
-			  			</a>
-			  		</div>
-	    		</div>
+  <!--
+    <div style="font-family: 'Microsoft Yahei', 'Simsun';" class='list'>
 
 
-	    	</div>
-	    </div>
--->
+      <div  class="item item-divider" ng-repeat="product in ProductL1">
+        
+          <div>
+            <a  href="{{product.linkUrl}}">
+            <img style="width:100%;" class="radius10" src="{{product.imgSrc}}"/>
+            </a>
+          </div>
+          <div>
+            <a href="{{product.ownerUrl}}">
+              <img style="width:50px;height:50px;float:left;" class="radius10" src="{{product.owner_imgSrc}}"/>
+            </a>
+            <a  href="{{product.linkUrl}}">
+            <span style="font-size: 1.25em;color: #333333;display:block;">
+              {{product.title}}
+            </span>
+            </p>
+            
+            <span style="font-size: 1em;color: #999999;display:block;">
+              {{product.owner}}
+              <span  ng-show="product.hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.25em;background: red;" >
+                有红包
+              </span>
+            </span>
+            </p>
+            <div>
+              <span style="font-size: 1.25em;color: #ffa200;display: inline;">
+                {{product.price | currency:"￥"}}
+              </span>
+              <span ng-show="product.price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
+                {{product.price_old | currency:"￥"}}
+              </span>
+            </div>
+          </a>
+          </div>  
+      </div>
+    </div>
 
-  	</ion-content>
+
+
+    <div  class="item item-divider" ng-repeat="tAp in TypeAndProducts">
+      <div>
+        <a href="{{tAp.type.url}}" style="font-size: 1.417em;color: #29ac0e;">
+
+          {{tAp.type.name}}
+        </a>
+      </div>
+      </p>
+      <div style="font-family: 'Microsoft Yahei', 'Simsun';" class="row" ng-repeat="product in tAp.products" ng-show="$index % 2 == 0">
+        <div class="col" ng-if="$index+0<tAp.products.length" >
+          <div>
+            <a  href="{{tAp.products[$index+0].linkUrl}}">
+            <img style="width:100%;" class="radius10" src="{{tAp.products[$index+0].imgSrc}}"/>
+            </a>
+          </div>
+          <div>
+            <a href="{{tAp.products[$index+0].ownerUrl}}">
+              <img style="width:50px;height:50px;float:left;" class="radius10" src="{{tAp.products[$index+0].owner_imgSrc}}"/>
+            </a>
+            <a  href="{{tAp.products[$index+0].linkUrl}}">
+              <span style="font-size: 1.0em;color: #333333;display:block;">
+                {{tAp.products[$index+0].title}}
+              </span>
+              </p>
+              
+              <span style="font-size: 1.0em;color: #999999;display:block;">
+                {{tAp.products[$index+0].owner}}
+                <span  ng-show="tAp.products[$index+0].hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.0em;background: red;" >
+                  有红包
+                </span>
+              </span>
+
+              </p>
+              <div>
+                <span style="font-size: 1.25em;color: #ffa200;display: inline;">
+                  {{tAp.products[$index+0].price | currency:"￥"}}
+                </span>
+                <span ng-show="tAp.products[$index+0].price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
+                  {{tAp.products[$index+0].price_old | currency:"￥"}}
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      <div class="col"  ng-show="$index+1<tAp.products.length">
+          <div>
+            <a  href="{{tAp.products[$index+1].linkUrl}}">
+            <img style="width:100%;" class="radius10" src="{{tAp.products[$index+1].imgSrc}}"/>
+            </a>
+          </div>
+          <div>
+            <a href="{{tAp.products[$index+1].ownerUrl}}">
+              <img style="width:50px;height:50px;float:left;" class="radius10" src="{{tAp.products[$index+1].owner_imgSrc}}"/>
+            </a>
+            <a  href="{{tAp.products[$index+1].linkUrl}}">
+              <span style="font-size: 1.0em;color: #333333;display:block;">
+                {{tAp.products[$index+1].title}}
+              </span>
+              </p>
+              
+              <span style="font-size: 1.0em;color: #999999;display:block;">
+                {{tAp.products[$index+1].owner}}
+                <span  ng-show="tAp.products[$index+1].hasRedPacket" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 1.0em;background: red;" >
+                  有红包
+                </span>
+              </span>
+              </p>
+              <div>
+                <span style="font-size: 1.25em;color: #ffa200;display: inline;">
+                  {{tAp.products[$index+1].price | currency:"￥"}}
+                </span>
+                <span ng-show="tAp.products[$index+1].price_old != 0" style="font-size: 1em;color: #999999;display: inline;text-decoration: line-through;">
+                  {{tAp.products[$index+1].price_old | currency:"￥"}}
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  -->
+
+  </ion-content>
 </ion-view>

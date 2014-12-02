@@ -11,8 +11,11 @@
   .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
+
   .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
   .controller('MyCouponsCtrl',MyCouponsCtrl)
+  .controller('MyOffersCtrl',MyOffersCtrl)
+  .controller('MyOrdersCtrl',MyOrdersCtrl)
   /* @ngInject */
   function MyCtrl($rootScope, $scope){
   	$scope.UserInfo = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
@@ -67,23 +70,6 @@
   }
   function MyOrderInfoCtrl($scope){
 
-    $scope.regionSelectItems=[
-                              new RegionSelectItem('beijing',1,[
-                                new RegionSelectItem('beijing-1',11,[
-                                  new RegionSelectItem('beijing-1-1',111,null),
-                                  new RegionSelectItem('beijing-1-2',112,null)]),
-                                new RegionSelectItem("beijing-2",12,[
-                                  new RegionSelectItem('beijing-2-1',121,null),
-                                  new RegionSelectItem('beijing-2-2',122,null)])]),
-                              new RegionSelectItem('shanghai',2,[
-                                new RegionSelectItem('shanghai-1',21,[
-                                  new RegionSelectItem('shanghai-1-1',211,null),
-                                  new RegionSelectItem('shanghai-1-2',212,null)]),
-                                new RegionSelectItem('shanghai-2',22,[
-                                  new RegionSelectItem('shanghai-2-1',221,null),
-                                  new RegionSelectItem('shanghai-2-2',222,null)])])];
-
-
 
     $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
                                         new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
@@ -128,126 +114,69 @@
         $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
 
   }
-  function MyAddressesInfoCtrl($scope)
+  function MyAddressesInfoCtrl($scope,$rootScope)
   {
 
-      $scope.regionSelectItems=[
-                              new RegionSelectItem('beijing',1,[
-                                new RegionSelectItem('beijing-1',11,[
-                                  new RegionSelectItem('beijing-1-1',111,null),
-                                  new RegionSelectItem('beijing-1-2',112,null)]),
-                                new RegionSelectItem("beijing-2",12,[
-                                  new RegionSelectItem('beijing-2-1',121,null),
-                                  new RegionSelectItem('beijing-2-2',122,null)])]),
-                              new RegionSelectItem('shanghai',2,[
-                                new RegionSelectItem('shanghai-1',21,[
-                                  new RegionSelectItem('shanghai-1-1',211,null),
-                                  new RegionSelectItem('shanghai-1-2',212,null)]),
-                                new RegionSelectItem('shanghai-2',22,[
-                                  new RegionSelectItem('shanghai-2-1',221,null),
-                                  new RegionSelectItem('shanghai-2-2',222,null)])])];
-    
-      $scope.accessEditVisible=false;
-      $scope.addresses=[
-                                        new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
-                                        new AddressItem(true,'name2','beijing','beijing-2','beijing-2-1','地址','12345678911'),
-                                        new AddressItem(false,'name3','shanghai','shanghai-2','shanghai-2-1','地址','12345678911')
-                            ];
-      $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1};
-      $scope.values.editAddress=new AddressItem(false,'namet','shanghai','shanghai-1','shanghai-1-1','addressT','telT');
-      $scope.values.setEditAddress=function(index)
+ 
+    $scope.accessEditVisible=false;
+    $scope.addresses=[
+                                      new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
+                                      new AddressItem(true,'name2','beijing','beijing-2','beijing-2-1','地址','12345678911'),
+                                      new AddressItem(false,'name3','shanghai','shanghai-2','shanghai-2-1','地址','12345678911')
+                          ];
+    $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1};
+    $scope.values.editAddress=new AddressItem(false,'namet','shanghai','shanghai-1','shanghai-1-1','addressT','telT');
+    $scope.values.setEditAddress=function(index)
+    {
+      if(index==-1)
       {
-        if(index==-1)
-        {
-          $scope.values.editAddress=new AddressItem('','','','','','');
-          return;
-        }
-        if(index>=0)
-        {
-          var t=$scope.addresses[index];
-
-          $scope.values.editAddress=new AddressItem(t.def,t.name,null,null,null,t.address,t.telephone);
-           var r = $scope.values.getRegion_1_model(t.region_1);
-           
-          $scope.values.editAddress.region_1_model = r.content;
-          var r2 = $scope.values.getReion_2_model(r.id,t.region_2);
-                    
-          $scope.values.editAddress.region_2_model = r2.content;
-          var r3 = $scope.values.getRegion_3_model(r.id,r2.id,t.region_3);
-                   
-          $scope.values.editAddress.region_3_model = r3.content;
-
-          return;
-
-        }
+        $scope.values.editAddress=new AddressItem('','','','','','');
+        return;
       }
-
-      $scope.values.getRegion_1_model=function(title)
+      if(index>=0)
       {
-        var i=0;
-        while(i<$scope.regionSelectItems.length)
-        {
-          if($scope.regionSelectItems[i].title == title)
-          {
-            return {id:i,content:$scope.regionSelectItems[i]};
-          }
-          i++;
-        }
-        return null;
-      }
-      $scope.values.getReion_2_model=function(index_1,title)
-      {
-        var t = $scope.regionSelectItems[index_1];
-        var i = 0;
+        var t=$scope.addresses[index];
 
-        while(i<t.content.length)
-        {
-          if(t.content[i].title==title)
-          {
-            return {id:i,content:t.content[i]};
-          }
-          i++;
-        }
+        $scope.values.editAddress=new AddressItem(t.def,t.name,null,null,null,t.address,t.telephone);
+         var r = $rootScope.getRegion_1_model(t.region_1);
+         
+        $scope.values.editAddress.region_1_model = r.content;
+        var r2 = $rootScope.getReion_2_model(r.id,t.region_2);
+                  
+        $scope.values.editAddress.region_2_model = r2.content;
+        var r3 = $rootScope.getRegion_3_model(r.id,r2.id,t.region_3);
+                 
+        $scope.values.editAddress.region_3_model = r3.content;
 
-        return null;
-      }
-      $scope.values.getRegion_3_model=function(index_1,index_2,title)
-      {
-        var t = $scope.regionSelectItems[index_1].content[index_2];
-        var i = 0;
-        while(i<t.content.length)
-        {
-          if(t.content[i].title==title)
-          {
-            return {id:i,content:t.content[i]};
-          }
-          i++;
-        }
-        return null;
-      }
+        return;
 
-      $scope.values.deleteAddressItem=function(index)
-      {
-        $scope.addresses.splice(index,1);
       }
-      $scope.values.getDefColor=function(index)
+    }
+
+
+
+    $scope.values.deleteAddressItem=function(index)
+    {
+      $scope.addresses.splice(index,1);
+    }
+    $scope.values.getDefColor=function(index)
+    {
+      if($scope.addresses[index].def==true)
       {
-        if($scope.addresses[index].def==true)
-        {
-          return '#eeeeee';
-        }
-        return 'white'; 
+        return '#eeeeee';
       }
-      $scope.values.setDef=function(index)
+      return 'white'; 
+    }
+    $scope.values.setDef=function(index)
+    {
+      var i =0;
+      while(i<$scope.addresses.length)
       {
-        var i =0;
-        while(i<$scope.addresses.length)
-        {
-          $scope.addresses[i].def= false;
-          i++;
-        }
-        $scope.addresses[index].def=true;
+        $scope.addresses[i].def= false;
+        i++;
       }
+      $scope.addresses[index].def=true;
+    }
   }
   function MyCouponsCtrl($scope)
   {
@@ -294,5 +223,73 @@
     {
       return pState==1?true:false;
     }
+  }
+  function MyOffersCtrl($scope)
+  {
+    
+
+    $scope.offerState = [
+      {state:1,string:'未使用'},
+      {state:2,string:'已使用'},
+      {state:3,string:'已过期'}
+    ]
+    $scope.offers = [
+      {name:'n1',date:'d1',price:11.1,state:1,linkUrl:'http://baidu.com'},
+      {name:'n2',date:'d2',price:3.54,state:1,linkUrl:'http://baidu.com'},
+      {name:'n3',date:'d3',price:3,state:2,linkUrl:'http://baidu.com'},
+      {name:'n4',date:'d4',price:1.2,state:2,linkUrl:'http://baidu.com'},
+      {name:'n5',date:'d5',price:5.5,state:3,linkUrl:'http://baidu.com'},
+      {name:'n6',date:'d6',price:3.2,state:3,linkUrl:'http://baidu.com'}
+
+    ]
+    $scope.getOfferString = function(pState)
+    {
+      var i =0;
+      while(i<$scope.offerState.length)
+      {
+        if($scope.offerState[i].state == pState)
+          return $scope.offerState[i].string;
+        i++;
+      }
+      return '';
+    }
+  }
+  function MyOrdersCtrl($scope,$rootScope)
+  {
+
+
+    $scope.orders = [
+      {id:1,state:1,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:2,state:2,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:3,state:3,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:4,state:4,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:5,state:5,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:6,state:6,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]},
+        {id:7,state:6,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
+          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
+          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
+        ]}
+    ]
+
+    $scope.stateFilter = -1;
+
   }   
 })(window, window.angular);

@@ -19,14 +19,14 @@
             <i class="radio-icon ion-checkmark"></i>
           </label>
         </div>
-          <label class="item item-radio" ng-click="values.accessDivVisible=true">
-           <input type="radio" name="group"/>
-            <div class="item-content">
-              使用新地址
-            </div>
+        <label class="item item-radio" ng-click="values.accessDivVisible=true">
+          <input type="radio" name="group"/>
+          <div class="item-content">
+            使用新地址
+          </div>
 
-            <i class="radio-icon ion-checkmark"></i>
-            </label>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
       </div>
       <div ng-show="values.accessDivVisible">
         <div class="row">
@@ -44,25 +44,25 @@
           </div>
           <div class="col">
             
-              <div >
-                <select id="selectRegion_1" ng-model="region_1_model" ng-options="m.title for m in regionSelectItems" ng-change="region_2_model='';region_3_model='';">
-                  <option value="">-- 请选择 --</option>
-    
-                </select>
-              </div>
+            <div >
+              <select id="selectRegion_1" ng-model="region_1_model" ng-options="m.title for m in regionSelectItems" ng-change="region_2_model='';region_3_model='';">
+                <option value="">-- 请选择 --</option>
+  
+              </select>
+            </div>
         
-              
-              <div >
-                <select id="selectRegion_2" ng-model="region_2_model" ng-options="m.title for m in region_1_model.content" ng-change="region_3_model='';">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
-      
-              <div >
-                <select id="selectRegion_3" ng-model="region_3_model" ng-options="m.title for m in region_2_model.content" ng-change="">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
+            
+            <div >
+              <select id="selectRegion_2" ng-model="region_2_model" ng-options="m.title for m in region_1_model.content" ng-change="region_3_model='';">
+                <option value="">-- 请选择 --</option>
+              </select>
+            </div>
+    
+            <div >
+              <select id="selectRegion_3" ng-model="region_3_model" ng-options="m.title for m in region_2_model.content" ng-change="">
+                <option value="">-- 请选择 --</option>
+              </select>
+            </div>
   
           </div>
         </div>
@@ -122,28 +122,28 @@
         </div>
       </div>
     </div>
-        <div style="padding-top:20px;">
-          <label class="item item-input">
-            <textarea placeholder="使用优惠码" ng-model="order.promotionCode"></textarea>
-            <button class="button button-assertive">
-              应用
-            </button>
-          </label>
-        </div>
+    <div style="padding-top:20px;">
+      <label class="item item-input">
+        <textarea placeholder="使用优惠码" ng-model="order.promotionCode"></textarea>
+        <button class="button button-assertive">
+          应用
+        </button>
+      </label>
+    </div>
 
-        <div style="padding-top:20px;">
-          <div>
-            以优惠：{{order.privilege | currency:'￥'}}
-          </div>
-          <div>
-            运费：{{order.freight | currency:'￥'}}
-          </div>
-          <div style='color:red;'>
-            总价（含运费）：{{getTotallPrice() + order.freight - order.privilege | currency:'￥'}}
-          </div>
-          <button class="button button-assertive">
-            提交订单
-          </button>
-        </div>
- </ion-content>
+    <div style="padding-top:20px;">
+      <div>
+        以优惠：{{order.privilege | currency:'￥'}}
+      </div>
+      <div>
+        运费：{{order.freight | currency:'￥'}}
+      </div>
+      <div style='color:red;'>
+        总价（含运费）：{{getTotallPrice() + order.freight - order.privilege | currency:'￥'}}
+      </div>
+      <button class="button button-assertive">
+        提交订单
+      </button>
+    </div>
+  </ion-content>
 </ion-view>

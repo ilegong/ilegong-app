@@ -1,0 +1,22 @@
+<ion-view title="订单">
+  <div class="tabs-top tabs-striped">
+    <div class="tabs">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.my-orders.total" ng-click="stateFilter=-1">
+        全部
+      </a>
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.my-orders.unpaid" ng-click="stateFilter=getOrderState_UNPAID()">
+        待支付
+      </a>
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.my-orders.unsent" ng-click="stateFilter=getOrderState_PAID()">
+        待发货
+      </a>
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.my-orders.unreceived" ng-click="stateFilter=getOrderState_SENT()">
+        待收货
+      </a>
+    </div>
+  </div>
+
+  <ion-content>
+    <div ui-view  class='pane-secondary'></div>
+  </ion-content>
+</ion-view>

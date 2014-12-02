@@ -51,11 +51,6 @@
                       new ProductSubItem('开心果牛轧糖','color:#ae950e;','营养师-王扬','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/0684c2cc96b_1107.jpg','http://baidu.com'),
                       new ProductSubItem('印尼古法千层蛋糕','color:#e74e01;','材料学博士-刘丙学','','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/371c77a62be_1120.jpg','http://baidu.com')])]
     
-
-
-
-
-
     function active(){
     }
   } 

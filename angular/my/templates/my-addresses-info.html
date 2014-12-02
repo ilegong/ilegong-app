@@ -3,8 +3,8 @@
   		<h4>
   			常用地址
   		</h4>
-  <div class="list">
-      <div  ng-repeat="address in addresses" >
+      <div class="list">
+        <div  ng-repeat="address in addresses" >
           <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " style="background-color:{{values.getDefColor($index)}};">
 
             <input type="radio" name="group" />
@@ -35,15 +35,15 @@
         		</button>
         	</label>
         </div>
-          <label class="item item-radio" ng-click="accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
-           <input type="radio" name="group"/>
-            <div class="item-content">
-    
-              使用新地址
-            </div>
+        <label class="item item-radio" ng-click="accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
+          <input type="radio" name="group"/>
+          <div class="item-content">
 
-            <i class="radio-icon ion-checkmark"></i>
-            </label>
+            使用新地址
+          </div>
+
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
       </div>
       <div ng-show="values.accessEditVisible">
       	<div class="row">

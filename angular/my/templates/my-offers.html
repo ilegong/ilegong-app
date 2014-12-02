@@ -1,0 +1,28 @@
+<ion-view title="红包">
+  <ion-content >
+    <div class="list">
+      <div class="item" ng-repeat="item in offers">
+          <div class="row">
+            <div class="col col-25">
+              {{item.price | currency:'￥'}}
+            </div>
+            <div class="col-50">
+              <div>
+                {{item.name}}
+              </div>
+              <div>
+                {{item.date}}前有效
+              </div>
+            </div>
+            <div class="col">
+              <a style="button button-static" href="{{item.linkUrl}}">
+                {{getOfferString(item.state)}}
+              </a>
+            </div>
+          </div>
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>
