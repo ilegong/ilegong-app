@@ -12,6 +12,7 @@
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
   .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
+  .controller('MyCouponsCtrl',MyCouponsCtrl)
   /* @ngInject */
   function MyCtrl($rootScope, $scope){
   	$scope.UserInfo = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
@@ -247,5 +248,51 @@
         }
         $scope.addresses[index].def=true;
       }
+  }
+  function MyCouponsCtrl($scope)
+  {
+    $scope.couponsState = [
+      {state:1,string:'未使用',color:'#73a839'},
+      {state:2,string:'已使用',color:'#999'},
+      {state:3,string:'已过期',color:'#999'}
+    ]
+    $scope.coupons = [
+      {title:'铁棍山药2',name:'n1',state:1,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+      {title:'铁棍山药3',name:'n1',state:1,price:1.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+      {title:'铁棍山药4',name:'n1',state:2,price:1,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+      {title:'铁棍山药5',name:'n1',state:2,price:12.31,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+      {title:'铁棍山药6',name:'n1',state:3,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+      {title:'铁棍山药7',name:'n1',state:3,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
+    ]
+    $scope.getStateString = function(pState)
+    {
+      var i =0;
+      while(i<$scope.couponsState.length)
+      {
+        if($scope.couponsState[i].state==pState)
+          return $scope.couponsState[i].string;
+        i++;
+      }
+      return '';
+    }
+    $scope.getStateColor = function(pState)
+    {
+
+            var i =0;
+      while(i<$scope.couponsState.length)
+      {
+        if($scope.couponsState[i].state==pState)
+        {
+          
+          return $scope.couponsState[i].color;
+        }
+        i++;
+      }
+      return '';
+    }
+    $scope.isCouponAvailable = function(pState)
+    {
+      return pState==1?true:false;
+    }
   }   
 })(window, window.angular);
