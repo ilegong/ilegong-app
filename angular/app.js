@@ -51,6 +51,7 @@
       .state('app.my-orders.unpaid',{url:'/unpaid',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unsent',{url:'/unsent',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unreceived',{url:'/unreceived',templateUrl:'my-orders-total.html'})
+      .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl'}}})
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
@@ -178,6 +179,68 @@
       return 6;
     }
   //--order state
+
+  //offer state
+
+    $rootScope.offerState = [
+      new OfferState(1,'未使用'),
+      new OfferState(2,'已使用'),
+      new OfferState(3,'已过期')
+    ]
+    $rootScope.getOfferString = function(pState)
+    {
+      var i =0;
+      while(i<$rootScope.offerState.length)
+      {
+        if($rootScope.offerState[i].state == pState)
+          return $rootScope.offerState[i].string;
+        i++;
+      }
+      return '';
+    }
+    $rootScope.getOfferState_UNUSED = function()
+    {
+      return 1;
+    }
+  //--offer state
+  //coupon state
+    $rootScope.couponsState = [
+      new CouponState(1,'未使用','#73a839'),
+   
+      new CouponState(2,'已使用','#999'),
+      new CouponState(3,'已过期','#999')
+    ]
+    $rootScope.getStateString = function(pState)
+    {
+      var i =0;
+      while(i<$rootScope.couponsState.length)
+      {
+        if($rootScope.couponsState[i].state==pState)
+          return $rootScope.couponsState[i].string;
+        i++;
+      }
+      return '';
+    }
+    $rootScope.getStateColor = function(pState)
+    {
+
+            var i =0;
+      while(i<$rootScope.couponsState.length)
+      {
+        if($rootScope.couponsState[i].state==pState)
+        {
+          
+          return $rootScope.couponsState[i].color;
+        }
+        i++;
+      }
+      return '';
+    }
+    $rootScope.isCouponAvailable = function(pState)
+    {
+      return pState==1?true:false;
+    }
+  //--coupon state
   }
 })();
 

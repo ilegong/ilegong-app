@@ -163,3 +163,80 @@ var Order = function(pUserInfo,pProducts,pPromotionCode,pPrivilege,pFreight)
   this.privilege = pPrivilege;
   this.freight = pFreight;
 };
+
+var CouponState = function(pState,pString,pColor)
+{
+  this.state = pState;
+  this.string = pString;
+  this.color = pColor;
+};
+
+var Coupon = function(pTitle,pName,pState,pPrice,pDate_begin,pDate_end,pShopUrl)
+{
+  this.title = pTitle;
+  this.name = pName;
+  this.state = pState;
+  this.price = pPrice;
+  this.date_begin = pDate_begin;
+  this.date_end = pDate_end;
+  this.shopUrl = pShopUrl;
+};
+
+var OfferState = function(pState,pString)
+{
+  this.state = pState;
+  this.string = pString;
+};
+
+var Offer = function(pName,pDate,pPrice,pState,pLinkUrl)
+{
+  this.name = pName;
+  this.date = pDate;
+  this.price = pPrice;
+  this.state = pState;
+  this.linkUrl = pLinkUrl;
+  
+};
+
+var OrdersItem = function(pId,pState,pName,pNameUrl,pPrice,pProducts)
+{
+  this.id = pId;
+  this.state = pState;
+  this.name = pName;
+  this.price = pPrice;
+  this.products = pProducts;
+};
+
+var OrdersProductItem = function(pTitle,pImgUrl,pLinkUrl,pPrice,pCount)
+{
+  this.title = pTitle;
+  this.imgUrl = pImgUrl;
+  this.linkUrl = pLinkUrl;
+  this.price = pPrice;
+  this.count = pCount;
+};
+
+var OrderDetail = function(pId,pState,pDate_commit,pDate_paid,pName,pTelephone,pAddress,pPostCompany,pPostId,pContent,pProducts,pPostCost,pCouponCost)
+{
+  this.id = pId;
+  this.state = pState;
+  this.date_commit = pDate_commit;
+  this.date_paid = pDate_paid;
+  this.name = pName;
+  this.telephone = pTelephone;
+  this.address = pAddress;
+  this.postCompany = pPostCompany;
+  this.postId = pPostId;
+  this.content = pContent;
+  this.products = pProducts;
+  this.postCost = pPostCost;
+  this.couponCost = pCouponCost;
+};
+var OrderDetailProduct = function(pTitle,pImgUrl,pLinkUrl,pPrice,pCount)
+{
+  this.title = pTitle;
+  this.imgUrl = pImgUrl;
+  this.linkUrl = pLinkUrl;
+  this.price =pPrice;
+  this.count = pCount;
+};

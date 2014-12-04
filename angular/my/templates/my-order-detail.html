@@ -1,0 +1,100 @@
+<ion-view title="订单详情">
+  <ion-content >
+
+    <div style="padding-left:10px;padding-right:10px;">
+      <div ng-show="getOrderState_UNPAID() == order.state">
+        <a class="button button-assertive" href="http://baidu.com">
+          去支付宝支付
+        </a>
+      </div>
+      <div>
+        订单状态：{{getOrderString(order.state)}}
+      </div>
+      <div>
+        下单时间：{{order.date_commit}}
+      </div>
+      <div>
+        支付时间：{{order.date_paid}}
+      </div>
+      <div>
+        订单号：{{order.id}}
+      </div>
+      <div>
+        <span>
+        收货人：{{order.name}}
+        </span>
+        <span style="float:right;">
+          {{order.telephone}}
+        </span>
+      </div>
+      <div>
+        收货地址：{{order.address}}
+      </div>
+      <hr>
+      <div>
+        <h4>
+          物流信息
+        </h4>
+        <p/>
+        <div>
+          <span>
+            快递公司：{{order.postCompany}}
+          </span>
+          <span style="float:right;">
+            快递单号：{{order.postId}}
+          </span>
+        </div>
+      </div>
+      <hr>
+      <div class="list">
+        <div class="item" ng-repeat="item in order.products">
+          <div class="row">
+            <div class="col col-20">
+              <a href="{{item.linkUrl}}">
+                <img src="{{item.imgUrl}}" style="width:100%"/>
+              </a>
+            </div>
+            <div class="col col-50">
+              <a href="{{item.linkUrl}}">
+                {{item.title}}  
+              </a><div ng-show="getOrderState_RECEIVED() == order.state">
+              <a href="http://baidu.com" class="button button-assertive">
+              
+                
+                  去评论
+                
+             
+              </a> </div>
+            </div>
+            <div class="col">
+              {{item.price | currency:'￥'}} × {{item.count}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div>
+        订单备注：{{order.content}}
+      </div>
+      <div>
+        <div style="text-align:right;">
+          <div>
+            商品总价：{{getTotalPrice() | currency:'￥'}}
+          </div>
+          <div>
+            运费：{{order.postCost | currency:'￥'}}
+          </div>
+          <div>
+            总价：{{getTotalPrice() + order.postCost | currency:'￥'}}
+          </div>
+          <div>
+            优惠券：{{order.couponCost | currency:'￥'}}
+          </div>
+          <div>
+            实付（含运费）：{{getTotalPrice() + order.postCost - order.couponCost | currency:'￥'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -16,6 +16,8 @@
   .controller('MyCouponsCtrl',MyCouponsCtrl)
   .controller('MyOffersCtrl',MyOffersCtrl)
   .controller('MyOrdersCtrl',MyOrdersCtrl)
+
+  .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
   /* @ngInject */
   function MyCtrl($rootScope, $scope){
   	$scope.UserInfo = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
@@ -180,116 +182,90 @@
   }
   function MyCouponsCtrl($scope)
   {
-    $scope.couponsState = [
-      {state:1,string:'未使用',color:'#73a839'},
-      {state:2,string:'已使用',color:'#999'},
-      {state:3,string:'已过期',color:'#999'}
-    ]
-    $scope.coupons = [
-      {title:'铁棍山药2',name:'n1',state:1,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-      {title:'铁棍山药3',name:'n1',state:1,price:1.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-      {title:'铁棍山药4',name:'n1',state:2,price:1,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-      {title:'铁棍山药5',name:'n1',state:2,price:12.31,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-      {title:'铁棍山药6',name:'n1',state:3,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-      {title:'铁棍山药7',name:'n1',state:3,price:12.3,date_begin:'date1',date_end:'date2',shopUrl:'http://baidu.com'},
-    ]
-    $scope.getStateString = function(pState)
-    {
-      var i =0;
-      while(i<$scope.couponsState.length)
-      {
-        if($scope.couponsState[i].state==pState)
-          return $scope.couponsState[i].string;
-        i++;
-      }
-      return '';
-    }
-    $scope.getStateColor = function(pState)
-    {
 
-            var i =0;
-      while(i<$scope.couponsState.length)
-      {
-        if($scope.couponsState[i].state==pState)
-        {
-          
-          return $scope.couponsState[i].color;
-        }
-        i++;
-      }
-      return '';
-    }
-    $scope.isCouponAvailable = function(pState)
-    {
-      return pState==1?true:false;
-    }
+    $scope.coupons = [
+      new Coupon('铁棍山药2','n1',1,12.3,'date1','date2','http://baidu.com'),
+      new Coupon('铁棍山药3','n1',1,1.3,'date1','date2','http://baidu.com'),
+      new Coupon('铁棍山药4','n1',2,1,'date1','date2','http://baidu.com'),
+      new Coupon('铁棍山药5','n1',2,12.31,'date1','date2','http://baidu.com'),
+      new Coupon('铁棍山药6','n1',3,12.3,'date1','date2','http://baidu.com'),
+      new Coupon('铁棍山药7','n1',3,12.3,'date1','date2','http://baidu.com')
+    ]
+
   }
   function MyOffersCtrl($scope)
   {
     
 
-    $scope.offerState = [
-      {state:1,string:'未使用'},
-      {state:2,string:'已使用'},
-      {state:3,string:'已过期'}
-    ]
     $scope.offers = [
-      {name:'n1',date:'d1',price:11.1,state:1,linkUrl:'http://baidu.com'},
-      {name:'n2',date:'d2',price:3.54,state:1,linkUrl:'http://baidu.com'},
-      {name:'n3',date:'d3',price:3,state:2,linkUrl:'http://baidu.com'},
-      {name:'n4',date:'d4',price:1.2,state:2,linkUrl:'http://baidu.com'},
-      {name:'n5',date:'d5',price:5.5,state:3,linkUrl:'http://baidu.com'},
-      {name:'n6',date:'d6',price:3.2,state:3,linkUrl:'http://baidu.com'}
+      new Offer('n1','d1',11.1,1,'http://baidu.com'),
+      new Offer('n2','d2',3.54,1,'http://baidu.com'),
+      new Offer('n3','d3',3,2,'http://baidu.com'),
+      new Offer('n4','d4',1.2,2,'http://baidu.com'),
+      new Offer('n5','d5',5.5,3,'http://baidu.com'),
+      new Offer('n6','d6',3.2,3,'http://baidu.com')
 
     ]
-    $scope.getOfferString = function(pState)
-    {
-      var i =0;
-      while(i<$scope.offerState.length)
-      {
-        if($scope.offerState[i].state == pState)
-          return $scope.offerState[i].string;
-        i++;
-      }
-      return '';
-    }
+
   }
   function MyOrdersCtrl($scope,$rootScope)
   {
 
 
     $scope.orders = [
-      {id:1,state:1,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:2,state:2,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:3,state:3,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:4,state:4,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:5,state:5,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:6,state:6,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]},
-        {id:7,state:6,name:'n1',nameUrl:'http://baidu.com',price:30,products:[
-          {title:'t1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:15,count:1},
-          {title:'t2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/d821d549dae_1123.jpg',linkUrl:'http://baidu.com',price:7.5,count:2}
-        ]}
+      new OrdersItem(1,1,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(2,2,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(3,3,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(4,4,'n1','http://baidu.com',0,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(5,5,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(6,6,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ]),
+      new OrdersItem(7,6,'n1','http://baidu.com',30,[
+          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
+          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
+        ])
     ]
 
     $scope.stateFilter = -1;
+
+  }
+
+  function MyOrderDetailCtrl($scope,$rootScope)
+  {
+    $scope.order = new OrderDetail(1,2,'dateC','dateP','name','tel','addr','com',12,'content',
+      [
+        new OrderDetailProduct('n1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg','http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',12,3),
+        new OrderDetailProduct('n2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg','http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',3,4)
+      ]
+      ,13,15);
+    $scope.getTotalPrice = function()
+    {
+      var i = 0;
+      var sum = 0;
+      while(i<$scope.order.products.length)
+      {
+        sum += $scope.order.products[i].price * $scope.order.products[i].count;
+        i++;
+      }
+      return sum;
+    }
 
   }   
 })(window, window.angular);

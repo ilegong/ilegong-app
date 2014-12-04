@@ -15,8 +15,8 @@
               </div>
             </div>
             <div class="col">
-              <a style="button button-static" href="{{item.linkUrl}}">
-                {{getOfferString(item.state)}}
+              <a class="button {{getOfferState_UNUSED() == item.state?'button-assertive':'button-static'}}"  href="{{item.linkUrl}}">
+                {{getOfferState_UNUSED() == item.state?'去使用':getOfferString(item.state)}}
               </a>
             </div>
           </div>

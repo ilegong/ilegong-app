@@ -1,7 +1,7 @@
 <div>
 
   <div class="list">
-    <div class="item" ng-repeat="item in orders" ng-show="((item.state == stateFilter) || (stateFilter==-1))">
+    <div class="item" ng-repeat="item in orders " ng-show="((item.state == stateFilter) || (stateFilter==-1))">
   	  <div>
   	  	<span style="font-size:20px;color:blue;">
   	  		{{item.name}}
@@ -11,7 +11,7 @@
   	  	</span>
   	  </div>
   	  <div class="list">
-  	  	<div class="item" ng-repeat="pro in item.products">
+  	  	<div class="item" ng-repeat="pro in item.products ">
   	  		<div class="row">
   	  			<div class="col">
   	  				<img src="{{pro.imgUrl}}" style="width:100%;"/>
@@ -38,7 +38,7 @@
   	  <div>
 
   	  	<span style="float:right;padding-top:10px;">
-  	  		<a class="button button-calm">详细</a>
+  	  		<a class="button button-calm" ui-sref="app.my-order-detail">详细</a>
   	  		<a class="button button-assertive" ng-show="item.state==getOrderState_SENT()">确认收货</a>
   	  		<a class="button button-calm" ng-show="item.state==getOrderState_SENT()">查看物流</a>
   	  		<a class="button button-assertive" ng-show="item.state==getOrderState_CANCELED()">删除订单</a>
