@@ -1,20 +1,22 @@
-<ion-view title="枣、干果">
+<ion-view title="{{vm.sub_title}}">
   <ion-content class='padding category'>
     <div class='list'>
-      <div class='card' ng-repeat='product in products'>
-        <div class="item item-image">
-          <img title="{{product.title}}" src="{{product.imgSrc}}">
-        </div>
-        <div class='item item-avatar'>
-          <img src="{{product.owner_imgSrc}}" alt="">         
-          <h2>{{product.title}}</h2>
-          <p>{{product.owner}}</p>
-        </div>
-        <div class='item item-body'>
-            <span class="item-price">
-             <strong>{{product.price}}</strong>
-            </span>
-            <span class="item-price-original">{{product.price_old}}</span>
+      <div class="row" ng-repeat="product in vm.products" ng-if="$index % 2 == 0">
+        <div class='product card col col-50' ng-repeat="product in vm.products.slice($index, $index+2)" ng-init="brand=vm.brands[product.brand_id].Brand">
+          <div class="item item-image">
+            <img title="{{product.title}}" src="{{product.coverimg}}">
+          </div>
+          <div class='item product-name'>
+            {{product.name}}
+          </div>
+          <div class='item item-avatar'>
+            <img src="{{brand.coverimg}}" alt="">         
+            <div class='brand-name'>{{brand.name}}</div>
+            <div class='prices'>
+              <span class='price-current'>¥{{product.price}}</span>
+              <span class="price-original" ng-show="product.original_price">¥{{product.original_price}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

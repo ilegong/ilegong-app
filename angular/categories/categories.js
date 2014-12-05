@@ -14,7 +14,7 @@
     ]
   }
 
-  function CategoryDetailCtrl($rootScope, $scope, $stateParams){
+  function CategoryDetailCtrl($rootScope, $scope, $stateParams, Categories){
     $rootScope.hideTabs = true;
     var vm = this;
     vm.slug = $stateParams.slug;
@@ -23,7 +23,9 @@
 
     function active(){
       Categories.get(vm.slug).then(function(data){
-        vm.products = {};
+        vm.brands = data.brands;
+        vm.products = data.data_list;
+        vm.sub_title = data.sub_title;
       });
     }
   }
