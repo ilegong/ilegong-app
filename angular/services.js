@@ -36,7 +36,7 @@
     }
 
     function list(){
-      // return Base.get('/categories/mobileHome.json');
+       return Base.get('/api_orders/mine.json?token=1');
       var sample = {  
         "brands":{  
           "8":{  
