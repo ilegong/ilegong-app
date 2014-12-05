@@ -25,7 +25,7 @@
   function configStates($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('app', state("/app", "tabs.html", appCtrl, {abstract: true}))
-      .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl'}}})
+      .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
       .state('app.categories', {url: '/categories',views: {'app-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
       .state('app.category-detail', {url: '/categories/:id',views: {'app-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
@@ -107,7 +107,7 @@
 
   /* @ngInject */
   function configCompileProvider($compileProvider){
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s(https|file|blob|cdvfile|http):|data:image\//);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
   }
 
   function state(url, templateUrl, controller, options){

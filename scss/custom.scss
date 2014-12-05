@@ -171,3 +171,37 @@ h3.items-tag{
   }
 }
 
+.home{
+  .row{
+    height: 8em;
+    border-bottom: 1px #dddddd solid;
+    border-top: 1px #dddddd solid;
+    margin-bottom: 0.625em;
+    padding: 0em;
+    .brand{
+      img{
+        width: 100%;
+        background-color: #eeeeee;
+      }
+    }
+    .product-name{
+      font-size: 0.667em;
+      font-weight: normal;
+      padding-top: 0.833em;
+      padding-bottom: 0.2em;
+    }
+    .brand-name{
+      font-size: 0.667em;
+      padding-bottom: 0.2em;
+      color: #999999;
+      margin: 0 0;
+    }
+    .product-image{
+      width: 6em;
+      height: 4.5em;
+    }
+  }
+}
+.class_bg{
+  background-color: #eeeeee;
+}

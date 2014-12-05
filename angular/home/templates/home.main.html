@@ -1,7 +1,5 @@
 <ion-view title="热卖">
-  <ion-content  class="padding">
-
-    <a ui-sref="app.product-detail.intro({id:12})"><div>product detail page LINK</div></a>
+  <ion-content  class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="item in SlideBoxItems">
 
@@ -12,23 +10,22 @@
           </div>
         </a>
       </ion-slide>
-  </ion-slide-box>
+    </ion-slide-box>
 
-  <div class="row" ng-repeat="item in items">
-    <div class="col">
+  <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
+    <div class="col col-33 brand">
       <a href="{{item.cat.linkUrl}}">
-        <img style="width:100%;" src="{{item.cat.imgUrl}}"/>
+        <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"/>
       </a>
     </div>
-    <div class="col" ng-repeat="subitem in item.subItems">
-      <a href="{{subitem.linkUrl}}">
-      <div style="font-size: 0.833em;font-weight: normal;padding-bottom: 0.2em;{{subitem.titleStyle}}">
-        {{subitem.title}}
+    <div class="col col-33 product" ng-repeat="product in tagWithProducts.Products.slice(0, 2)">
+      <a href="{{subitem.linkUrl}}" class="product-name" style="{{product.titleStyle}}">
+        {{product.name}}
+      </a>
+      <div class="brand-name">
+        {{product.name}}
       </div>
-      <div style="font-size: 0.667em;padding-bottom: 0.8em;color: #999999;margin: 0 0;">
-        {{subitem.name}}
-      </div>
-      <img style="width:100%;" src="{{subitem.imgUrl}}"/>
+      <img class="product-image" src="{{product.coverimg}}"/>
       </a>
     </div>
   </div>
