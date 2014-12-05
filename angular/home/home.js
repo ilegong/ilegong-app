@@ -6,7 +6,7 @@
   .controller('HomeCtrl', HomeCtrl)
   
   /* @ngInject */
-  function HomeCtrl($rootScope, $scope, $http, Products){
+  function HomeCtrl($rootScope, $scope, $http, $log, Products){
     $rootScope.hideTabs = false;
     var vm = this;
     active();

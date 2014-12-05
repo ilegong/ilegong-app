@@ -14,7 +14,7 @@
   .service('OrderDetail',OrderDetail)
 
   /* @ngInject */
-  function Base($http, $q, software){
+  function Base($http, $q, $log, software){
     var self = this;
     return {
       get: get, 
@@ -22,12 +22,15 @@
     }
 
     function get(url){
-      // return $http.get(software.server.address + url);
-      console.log("get data for " + url);
-      var defer = $q.defer();
-      defer.resolve(data[url]);
-      console.log(data[url]);
-      return defer.promise;
+      return $http.get(software.server.address + url).then(
+        function(data){
+          $log.info("Get url " + url + " success:").log(data.data);
+          return data.data;
+        }, function(error){
+          $log.error('Get ' + url + " error:").log(error);
+          return error;
+        });
+      // return deferred(data[url]);
     }
 
     function deferred(data){

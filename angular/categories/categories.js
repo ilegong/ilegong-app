@@ -14,14 +14,13 @@
     ]
   }
 
-  function CategoryDetailCtrl($rootScope, $scope, $stateParams, Categories){
+  function CategoryDetailCtrl($rootScope, $scope, $stateParams, $log, Categories){
     $rootScope.hideTabs = true;
     var vm = this;
-    vm.slug = $stateParams.slug;
-
     active();
 
     function active(){
+      vm.slug = $stateParams.slug;
       Categories.get(vm.slug).then(function(data){
         vm.brands = data.brands;
         vm.products = data.data_list;
