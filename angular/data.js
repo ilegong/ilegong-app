@@ -4351,12 +4351,99 @@ var ordersJson = {
 
 
 
-var orderDetail = {id:1,state:2,date_commit:'dateC',date_paid:'dateP',name:'name',telephone:'tel',address:'addr',postCompany:'com',postId:12,content:'content',
-      products:[
-        {title:'n1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg',linkUrl:'http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',price:12,count:3},
-        {title:'n2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg',linkUrl:'http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',price:3,count:4}
-      ]
-      ,postCost:13,couponCost:15}
+var orderDetail = {
+  "order": {
+    "Order": {
+      "id": "4467", 
+      "name": "", 
+      "cate_id": "0", 
+      "creator": "146", 
+      "lastupdator": "897", 
+      "remoteurl": "", 
+      "status": "2", 
+      "published": "1", 
+      "deleted": false, 
+      "created": "2014-11-19 11:55:37", 
+      "updated": "2014-11-19 11:55:37", 
+      "consignee_id": "57", 
+      "consignee_name": "刘召仁", 
+      "consignee_area": "北京海淀西三旗街道", 
+      "consignee_address": "上奥世纪B座430", 
+      "consignee_mobilephone": "18910275329", 
+      "consignee_telephone": "", 
+      "consignee_email": "", 
+      "consignee_postcode": "", 
+      "invoice_id": null, 
+      "total_price": "28.99", 
+      "ship_type": "103", 
+      "ship_fee": "0.00", 
+      "remark": "", 
+      "brand_id": "37", 
+      "ship_code": "1900930011998", 
+      "total_all_price": "28.99", 
+      "pay_time": "2014-11-19 11:56:52", 
+      "applied_coupons": "", 
+      "coupon_total": "0", 
+      "applied_code": ""
+    }
+  }, 
+  "carts": [
+    {
+      "Cart": {
+        "id": "7582", 
+        "name": "新疆特级魅枣250g*2", 
+        "order_id": "4467", 
+        "creator": "146", 
+        "lastupdator": "0", 
+        "remoteurl": "", 
+        "status": "1", 
+        "published": false, 
+        "deleted": false, 
+        "created": "2014-11-19 11:44:13", 
+        "updated": "2014-11-19 11:55:27", 
+        "product_id": "148", 
+        "num": "1", 
+        "price": "28.99", 
+        "session_id": "1f51b7ef7d1d7b8c09e5fbc56432842c", 
+        "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/801f40778e5_1101.jpg", 
+        "used_coupons": "", 
+        "specId": "0", 
+        "modified": "2014-11-19 11:55:27"
+      }
+    }
+  ], 
+  "ship_type": {
+    "101": "申通", 
+    "102": "圆通", 
+    "103": "韵达", 
+    "104": "顺丰", 
+    "105": "EMS", 
+    "106": "邮政包裹", 
+    "107": "天天", 
+    "108": "汇通", 
+    "109": "中通", 
+    "110": "全一", 
+    "111": "宅急送", 
+    "112": "全峰", 
+    "113": "快捷", 
+    "115": "城际快递"
+  }, 
+  "expired_pids": [
+    "148"
+  ], 
+  "no_more_money": false, 
+  "products": [
+    {
+      "Product": {
+        "id": "148", 
+        "created": "2014-09-09 08:46:00", 
+        "slug": "xi_yu_mei_nong_xin_jiang_mei_zao", 
+        "published": true, 
+        "deleted": false
+      }
+    }
+  ]
+}
 var carts = [{title:'title1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:11.5,count:5,linkUrl:'http://baidu.com'},
                   {title:'title2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:6,count:7,linkUrl:'http://baidu.com'}]
 var data = {

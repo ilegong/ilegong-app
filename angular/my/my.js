@@ -246,7 +246,12 @@
       OrderDetail.list().then(function(data)
       {
         
-        vm.order = data;
+        vm.order = data.order;
+        vm.carts = data.carts;
+        vm.ship_type = data.ship_type;
+        vm.expired_pids = data.expired_pids;
+        vm.no_more_money = data.no_more_money;
+        vm.products = data.products;
       })
     }
   }   
