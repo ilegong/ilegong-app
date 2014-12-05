@@ -7,3 +7,4 @@ platforms/
 www/js/
 www/templates/
 www/css/
+*.log
