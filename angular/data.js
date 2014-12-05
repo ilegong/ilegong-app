@@ -3,7 +3,7 @@ var mobileHomeJson = {
     "8":{  
        "Brand":{  
           "id":"8",
-          "name":"\u6700\u65b0\u63a8\u8350",
+          "name":"郑州民政局-段赵明",
           "created":"2014-01-27 09:52:28",
           "slug":"",
           "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201401\/thumb_m\/2eb8846d77e_0127.jpg"
@@ -28,7 +28,7 @@ var mobileHomeJson = {
           "id":"302",
           "name":"\u5e73\u548c\u742f\u6eaa\u7ea2\u5fc3\u871c\u67da",
           "created":"2014-11-26 12:31:00",
-          "brand_id":"98",
+          "brand_id":"8",
           "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/a293b157a39_1126.jpg",
           "promote_name":"\u4ec5\u9650\u5317\u4eac\u5929\u6d25\u6cb3\u5317\u5730\u533a\uff0c\u665a\u4e94\u70b9\u524d\u4e0b\u5355\u7b2c\u4e8c\u5929\u5230\u8d27\u3002\u516c\u53f8\u5730\u5740\u4e70\u5bb6\u6211\u4eec\u5c06\u5728\u5de5\u4f5c\u65e5\u914d\u9001\uff0c\u907f\u514d\u653e\u7f6e\u65f6\u95f4\u8fc7\u957f\u3002",
           "comment_nums":"2",
@@ -40,7 +40,7 @@ var mobileHomeJson = {
           "id":"201",
           "name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b45\u65a4",
           "created":"2014-10-13 17:54:00",
-          "brand_id":"57",
+          "brand_id":"8",
           "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/03ca7900316_1104.jpg",
           "promote_name":"",
           "comment_nums":"34",
@@ -51,7 +51,12 @@ var mobileHomeJson = {
       ]
     }
   ], 
-  "sub_title":null
+  "sub_title":null, 
+  "bannerItems":[
+    {"img":"\/img\/banner\/banner_songzi.jpg","url":"\/products\/20141117\/dong_bei_hong_song_zi_1jin_zhuang.html"},
+    {"img":"\/img\/banner\/banner_dami.jpg","url":"\/products\/20141101\/wu_chang_dao_hua_xiang_ti_qian_yu_shou_500jin_zhi_xian_bei_jing.html"},
+    {"img":"\/img\/banner\/banner_huizao.jpg","url":"\/products\/20141117\/xin_jiang_hui_zao.html"},{"img":"\/img\/banner\/banner_shiliu.jpg","url":"\/products\/20141013\/he_nan_xing_yang_he_yin_ruan_zi_shi_liu_8liang.html"}
+  ]
 };
 
 var shuiguoganguoJson = {  
