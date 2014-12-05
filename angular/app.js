@@ -27,8 +27,7 @@
       .state('app', state("/app", "tabs.html", appCtrl, {abstract: true}))
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
-      .state('app.categories', {url: '/categories',views: {'app-categories': {templateUrl: 'categories.main.html',controller: 'CategoriesCtrl'}}})
-      .state('app.category-detail', {url: '/categories/:id',views: {'app-categories': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl'}}})
+      .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
 
       .state('app.sharings', {url: '/sharings', views: {'app-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl'}}})
       .state('app.sharing-detail', {url: '/sharings/:id', views: {'app-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl'}}})
@@ -54,7 +53,7 @@
       .state('app.my-orders.unpaid',{url:'/unpaid',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unsent',{url:'/unsent',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unreceived',{url:'/unreceived',templateUrl:'my-orders-total.html'})
-      .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl'}}})
+      .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
 

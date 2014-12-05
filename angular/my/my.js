@@ -42,7 +42,8 @@
   function MyDetailCtrl($scope){
     $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
   }
-  function MyCartsCtrl($scope){
+  function MyCartsCtrl($scope,$rootScope){
+    $rootScope.hideTabs = true;
     $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
                   new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
     $scope.buttonReduceClick = function(index)
@@ -116,7 +117,7 @@
   }
   function MyAddressesInfoCtrl($scope,$rootScope)
   {
-
+    $rootScope.hideTabs = true;
  
     $scope.accessEditVisible=false;
     $scope.addresses=[
@@ -180,7 +181,7 @@
   }
   function MyCouponsCtrl($scope)
   {
-
+    $rootScope.hideTabs = true;
     $scope.coupons = [
       new Coupon('铁棍山药2','n1',1,12.3,'date1','date2','http://baidu.com'),
       new Coupon('铁棍山药3','n1',1,1.3,'date1','date2','http://baidu.com'),
@@ -193,14 +194,9 @@
   }
   function MyOffersCtrl($scope,$rootScope,$http,Offers)
   {
-    
-
-
+    $rootScope.hideTabs = true;
     var vm = this;
     active();
-   
-
-
     function active()
     {
       Offers.list().then(function(data){
@@ -208,12 +204,10 @@
       });
 
     }
-
-                    
-
   }
   function MyOrdersCtrl($scope,$rootScope,$http,Orders)
   {
+    $rootScope.hideTabs = true;
     var vm = this;
     active();
    
@@ -232,25 +226,29 @@
 
   }
 
-  function MyOrderDetailCtrl($scope,$rootScope)
+  function MyOrderDetailCtrl($scope,$rootScope,$http,OrderDetail)
   {
-    $scope.order = new OrderDetail(1,2,'dateC','dateP','name','tel','addr','com',12,'content',
-      [
-        new OrderDetailProduct('n1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg','http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',12,3),
-        new OrderDetailProduct('n2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/d821d549dae_1123.jpg','http://www.tongshijia.com/products/20141123/jin_nian_xin_chan_cang_zhou_jin_si_xiao_zao.html',3,4)
-      ]
-      ,13,15);
+    var vm = this;
+    active();
+    
     $scope.getTotalPrice = function()
     {
       var i = 0;
       var sum = 0;
-      while(i<$scope.order.products.length)
+      while(i<vm.order.products.length)
       {
-        sum += $scope.order.products[i].price * $scope.order.products[i].count;
+        sum += vm.order.products[i].price * vm.order.products[i].count;
         i++;
       }
       return sum;
     }
-
+    function active()
+    {
+      OrderDetail.list().then(function(data)
+      {
+        
+        vm.order = data;
+      })
+    }
   }   
 })(window, window.angular);
