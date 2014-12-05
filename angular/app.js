@@ -191,7 +191,6 @@
           return $rootScope.orderStatus[key].value;
       }
       return '';
-
     }
     $rootScope.orderStatus = {
       'UNPAID':{state:0,value:'未支付'},
@@ -236,20 +235,16 @@
       for(var key in $rootScope.couponStatus)
       {
         if($rootScope.couponStatus[key].state==pState)
-          return $rootScope.couponsStatu[key].value;
-        
+          return $rootScope.couponStatus[key].value;
       }
       return '';
     }
     $rootScope.getCouponColor = function(pState)
     {
-
-            var i =0;
       for(var key in $rootScope.couponStatus)
       {
         if($rootScope.couponStatus[key].state==pState)
         {
-          
           return $rootScope.couponStatus[key].color;
         }
       }
