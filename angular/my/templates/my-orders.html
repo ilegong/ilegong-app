@@ -1,16 +1,16 @@
 <ion-view title="订单">
   <div class="tabs-top tabs-striped">
     <div class="tabs">
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ng-click="stateFilter=-1">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ng-click="vm.stateFilter=-1">
         全部
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="stateFilter=getOrderState_UNPAID()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=getOrderState_UNPAID()">
         待支付
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="stateFilter=getOrderState_PAID()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=getOrderState_PAID()">
         待发货
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"    ng-click="stateFilter=getOrderState_SENT()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"    ng-click="vm.stateFilter=getOrderState_SENT()">
         待收货
       </a>
     </div>

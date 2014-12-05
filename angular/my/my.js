@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.my', [])
+  angular.module('ilegong.my', ['app.services'])
   .controller('MyCtrl', MyCtrl)
   .controller('MyListCtrl',MyListCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
@@ -191,57 +191,44 @@
     ]
 
   }
-  function MyOffersCtrl($scope)
+  function MyOffersCtrl($scope,$rootScope,$http,Offers)
   {
     
 
-    $scope.offers = [
-      new Offer('n1','d1',11.1,1,'http://baidu.com'),
-      new Offer('n2','d2',3.54,1,'http://baidu.com'),
-      new Offer('n3','d3',3,2,'http://baidu.com'),
-      new Offer('n4','d4',1.2,2,'http://baidu.com'),
-      new Offer('n5','d5',5.5,3,'http://baidu.com'),
-      new Offer('n6','d6',3.2,3,'http://baidu.com')
 
-    ]
+    var vm = this;
+    active();
+   
+
+
+    function active()
+    {
+      Offers.list().then(function(data){
+        vm.offers = data.offers;
+      });
+
+    }
+
+                    
 
   }
-  function MyOrdersCtrl($scope,$rootScope)
+  function MyOrdersCtrl($scope,$rootScope,$http,Orders)
   {
+    var vm = this;
+    active();
+   
 
+    vm.stateFilter = -1;
+    function active()
+    {
+      Orders.list().then(function(data){
+        vm.orders = data.orders;
+        vm.brands = data.brands;
+        vm.order_carts = data.order_carts;
+        vm.ship_type = data.ship_type;
+      });
 
-    $scope.orders = [
-      new OrdersItem(1,1,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(2,2,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(3,3,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(4,4,'n1','http://baidu.com',0,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(5,5,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(6,6,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ]),
-      new OrdersItem(7,6,'n1','http://baidu.com',30,[
-          new OrdersProductItem('t1','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',15,1),
-          new OrdersProductItem('t2','http://51daifan-images.stor.sinaapp.com/files/201411/thumbs/d821d549dae1123.jpg','http://baidu.com',7.5,2)
-        ])
-    ]
-
-    $scope.stateFilter = -1;
+    }
 
   }
 

@@ -1,7 +1,7 @@
 <ion-view title="红包">
   <ion-content >
     <div class="list">
-      <div class="item" ng-repeat="item in offers">
+      <div class="item" ng-repeat="item in vm.offers">
           <div class="row">
             <div class="col col-25">
               {{item.price | currency:'￥'}}

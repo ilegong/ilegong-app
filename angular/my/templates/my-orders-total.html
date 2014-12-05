@@ -1,35 +1,34 @@
 <div>
 
   <div class="list">
-    <div class="item" ng-repeat="item in orders " ng-show="((item.state == stateFilter) || (stateFilter==-1))">
+    <div class="item" ng-repeat="item in vm.orders " ng-show="((item.Order.status == vm.stateFilter) || (vm.stateFilter==-1))">
   	  <div>
   	  	<span style="font-size:20px;color:blue;">
-  	  		{{item.name}}
+  	  		{{vm.brands[item.Order.brand_id].Brand.name}}
   	  	</span>
   	  	<span style="float:right;color:red;">
-  	  		{{getOrderString(item.state)}}
+
+  	  		{{getOrderString(item.Order.status)}}
   	  	</span>
   	  </div>
   	  <div class="list">
-  	  	<div class="item" ng-repeat="pro in item.products ">
+  	  	<div class="item" ng-repeat="pro in vm.order_carts[item.Order.id] ">
   	  		<div class="row">
   	  			<div class="col">
-  	  				<img src="{{pro.imgUrl}}" style="width:100%;"/>
+  	  				<img src="{{pro.Cart.coverimg}}" style="width:100%;"/>
   	  			</div>
-				    <div class="col" style="font-size:20px;text-align:center;">
-  	  				{{pro.title}}
+				    <div class="col" style="font-size:15px;text-align:center;">
+  	  				{{pro.Cart.name}}
+              <div>
+                {{pro.Cart.price | currency:'￥'}} × {{pro.Cart.num}}
+              </div>
   	  			</div>
-  	  			<div class="col">
-  	  				{{pro.price | currency:'￥'}} × {{pro.count}}
-  	  			</div>
-  	  			
-
   	  		</div>
   	  	</div>
   	  </div>
   	  <div >
   	  	<span>
-  	  		订单号：{{item.id}}
+  	  		订单号：{{item.Order.id}}
   	  	</span>
   	  	<span style="float:right;">
   	  		共{{item.products.length}}件商品 实付:{{item.price | currency:'￥'}}
@@ -39,11 +38,11 @@
 
   	  	<span style="float:right;padding-top:10px;">
   	  		<a class="button button-calm" ui-sref="app.my-order-detail">详细</a>
-  	  		<a class="button button-assertive" ng-show="item.state==getOrderState_SENT()">确认收货</a>
-  	  		<a class="button button-calm" ng-show="item.state==getOrderState_SENT()">查看物流</a>
-  	  		<a class="button button-assertive" ng-show="item.state==getOrderState_CANCELED()">删除订单</a>
-  	  		<a class="button  button-calm" ng-show="item.state==getOrderState_UNPAID()">取消订单</a>
-  	  		<a class="button button-assertive" ng-show="item.state==getOrderState_UNPAID()">去支付</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_SENT()">确认收货</a>
+  	  		<a class="button button-calm" ng-show="item.Order.status==getOrderState_SENT()">查看物流</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_CANCELED()">删除订单</a>
+  	  		<a class="button  button-calm" ng-show="item.Order.status==getOrderState_UNPAID()">取消订单</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_UNPAID()">去支付</a>
   	  	</span>
   	  </div>
   	</div>

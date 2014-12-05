@@ -48,8 +48,8 @@
       .state('app.my-carts',{url:'/my-carts',views:{'app-my':{templateUrl:'my-carts.html',controller:'MyCartsCtrl'}}})
       .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl'}}})
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl'}}})
-      .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl'}}})
-      .state('app.my-orders',{url:'/my-orders',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl'}}})
+      .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
+      .state('app.my-orders',{url:'/my-orders',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
       .state('app.my-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unpaid',{url:'/unpaid',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unsent',{url:'/unsent',templateUrl:'my-orders-total.html'})
@@ -185,48 +185,53 @@
 
   //orderState
     $rootScope.orderState = [
-      {state:1,string:'已确认有效'},
-      {state:2,string:'等待付款'},
-      {state:3,string:'已付款'},
-      {state:4,string:'已发货'},
-      {state:5,string:'已收货'},
-      {state:6,string:'已取消'}
-    ]
+      {state:0,string:'未支付'},
+      {state:1,string:'已支付'},
+      {state:2,string:'已发货'},
+      {state:3,string:'已收货'},
+      {state:4,string:'已退款'},
+      {state:9,string:'已完成'},
+      {state:10,string:'已取消'},
+      {state:11,string:'已确认有效'},
+      {state:12,string:'已投诉'}
+
+    ];
 
     $rootScope.getOrderString = function(pState)
     {
+
       var i =0;
-      while(i<$scope.orderState.length)
+      while(i<$rootScope.orderState.length)
       {
-        if($scope.orderState[i].state == pState)
-          return $scope.orderState[i].string;
+        if($rootScope.orderState[i].state == pState)
+          return $rootScope.orderState[i].string;
         i++;
       }
       return '';
     }
     $rootScope.getOrderState_VERIFIED = function()
     {
-      return 1;
+      return 11;
     }
     $rootScope.getOrderState_UNPAID = function()
     {
-      return 2;
+      return 0;
     }
     $rootScope.getOrderState_PAID = function()
     {
-      return 3;
+      return 1;
     }
     $rootScope.getOrderState_SENT = function()
     {
-      return 4;
+      return 2;
     }
     $rootScope.getOrderState_RECEIVED = function()
     {
-      return 5;
+      return 3;
     }
     $rootScope.getOrderState_CANCELED = function()
     {
-      return 6;
+      return 10;
     }
   //--order state
 

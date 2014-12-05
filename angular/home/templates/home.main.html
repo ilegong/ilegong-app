@@ -14,7 +14,7 @@
 
   <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
     <div class="col col-33 brand">
-      <a href="{{item.cat.linkUrl}}">
+      <a href="{{tagWithProducts.cat.linkUrl}}">
         <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"/>
       </a>
     </div>
