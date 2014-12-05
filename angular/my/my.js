@@ -179,7 +179,7 @@
       $scope.addresses[index].def=true;
     }
   }
-  function MyCouponsCtrl($scope)
+  function MyCouponsCtrl($scope,$rootScope)
   {
     $rootScope.hideTabs = true;
     $scope.coupons = [
@@ -205,13 +205,12 @@
 
     }
   }
-  function MyOrdersCtrl($scope,$rootScope,$http,Orders)
-  {
+  function MyOrdersCtrl($scope,$rootScope,$http,Orders){
+  
     $rootScope.hideTabs = true;
     var vm = this;
     active();
    
-
     vm.stateFilter = -1;
     function active()
     {

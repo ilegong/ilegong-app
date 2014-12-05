@@ -24,7 +24,7 @@
 
   function configStates($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('app', state("/app", "tabs.html", appCtrl, {abstract: true}))
+      .state('app', state("/app", "tabs.html", AppCtrl, {abstract: true}))
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
@@ -117,7 +117,7 @@
     return _.extend({url: url, views: {'menuContent' : menuContent}}, options || {})
   }
 
-  function appCtrl($scope,$rootScope)
+  function AppCtrl($scope,$rootScope)
   {
   //address region
     $rootScope.regionSelectItems=[
@@ -183,116 +183,81 @@
 
 
   //orderState
-    $rootScope.orderState = [
-      {state:0,string:'未支付'},
-      {state:1,string:'已支付'},
-      {state:2,string:'已发货'},
-      {state:3,string:'已收货'},
-      {state:4,string:'已退款'},
-      {state:9,string:'已完成'},
-      {state:10,string:'已取消'},
-      {state:11,string:'已确认有效'},
-      {state:12,string:'已投诉'}
-
-    ];
-
-    $rootScope.getOrderString = function(pState)
+    $rootScope.getOrderValue = function(pState)
     {
-
-      var i =0;
-      while(i<$rootScope.orderState.length)
+      for(var key in $rootScope.orderStatus)
       {
-        if($rootScope.orderState[i].state == pState)
-          return $rootScope.orderState[i].string;
-        i++;
+        if($rootScope.orderStatus[key].state == pState)
+          return $rootScope.orderStatus[key].value;
       }
       return '';
+
     }
-    $rootScope.getOrderState_VERIFIED = function()
-    {
-      return 11;
-    }
-    $rootScope.getOrderState_UNPAID = function()
-    {
-      return 0;
-    }
-    $rootScope.getOrderState_PAID = function()
-    {
-      return 1;
-    }
-    $rootScope.getOrderState_SENT = function()
-    {
-      return 2;
-    }
-    $rootScope.getOrderState_RECEIVED = function()
-    {
-      return 3;
-    }
-    $rootScope.getOrderState_CANCELED = function()
-    {
-      return 10;
+    $rootScope.orderStatus = {
+      'UNPAID':{state:0,value:'未支付'},
+      'PAID': {state:1,value:'已支付'},
+      'SENT':{state:2,value:'已发货'},
+      'RECEIVED':{state:3,value:'已收货'},
+      'REFUNDED':{state:4,value:'已退款'},
+      'SUCCESSED':{state:9,value:'已完成'},
+      'CANCELED':{state:10,value:'已取消'},
+      'VERIFIED':{state:11,value:'已确认有效'},
+      'COMPLAINED':{state:12,value:'已投诉'}
     }
   //--order state
 
   //offer state
 
-    $rootScope.offerState = [
-      new OfferState(1,'未使用'),
-      new OfferState(2,'已使用'),
-      new OfferState(3,'已过期')
-    ]
-    $rootScope.getOfferString = function(pState)
+    $rootScope.offerStatus = {
+      'UNUSED':{state:1,value:'未使用'},
+      'USED':{state:2,value:'已使用'},
+      'OVERDUE':{state:3,value:'已过期'}
+    }
+    $rootScope.getOfferValue = function(pState)
     {
-      var i =0;
-      while(i<$rootScope.offerState.length)
+
+      for(var key in $rootScope.offerStatus)
       {
-        if($rootScope.offerState[i].state == pState)
-          return $rootScope.offerState[i].string;
-        i++;
+        if($rootScope.offerStatus[key].state == pState)
+          return $rootScope.offerStatus[key].value;
       }
       return '';
-    }
-    $rootScope.getOfferState_UNUSED = function()
-    {
-      return 1;
     }
   //--offer state
   //coupon state
-    $rootScope.couponsState = [
-      new CouponState(1,'未使用','#73a839'),
-   
-      new CouponState(2,'已使用','#999'),
-      new CouponState(3,'已过期','#999')
-    ]
-    $rootScope.getStateString = function(pState)
+    $rootScope.couponStatus = {
+      'UNUSED':{state:1,value:'未使用',color:'#73a839'},
+      'USED':{state:2,value:'已使用',color:'#999'},
+      'OVERDUE':{state:3,value:'已过期',color:'#999'}
+    }
+    $rootScope.getCouponValue = function(pState)
     {
-      var i =0;
-      while(i<$rootScope.couponsState.length)
+
+      for(var key in $rootScope.couponStatus)
       {
-        if($rootScope.couponsState[i].state==pState)
-          return $rootScope.couponsState[i].string;
-        i++;
+        if($rootScope.couponStatus[key].state==pState)
+          return $rootScope.couponsStatu[key].value;
+        
       }
       return '';
     }
-    $rootScope.getStateColor = function(pState)
+    $rootScope.getCouponColor = function(pState)
     {
 
             var i =0;
-      while(i<$rootScope.couponsState.length)
+      for(var key in $rootScope.couponStatus)
       {
-        if($rootScope.couponsState[i].state==pState)
+        if($rootScope.couponStatus[key].state==pState)
         {
           
-          return $rootScope.couponsState[i].color;
+          return $rootScope.couponStatus[key].color;
         }
-        i++;
       }
       return '';
     }
     $rootScope.isCouponAvailable = function(pState)
     {
-      return pState==1?true:false;
+      return pState==$rootScope.couponStatus['UNUSED'].state?true:false;
     }
   //--coupon state
   }

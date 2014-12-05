@@ -4,13 +4,14 @@
       <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ng-click="vm.stateFilter=-1">
         全部
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=getOrderState_UNPAID()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=orderStatus['UNPAID'].state">
         待支付
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=getOrderState_PAID()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"  ng-click="vm.stateFilter=orderStatus['PAID'].state
+      ">
         待发货
       </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"    ng-click="vm.stateFilter=getOrderState_SENT()">
+      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}"    ng-click="vm.stateFilter=orderStatus['SENT'].state">
         待收货
       </a>
     </div>
