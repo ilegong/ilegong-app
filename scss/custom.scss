@@ -19,6 +19,11 @@ a{
   font-size: 14px;
 }
 
+.pane-secondary{
+  margin-top: 50px;
+  padding-top: 15px;
+}
+
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
   font-size: 14px;
   line-height: 14px;
@@ -52,11 +57,6 @@ a{
   }
 }
 
-.pane-secondary{
-  margin-top: 50px;
-  padding-top: 15px;
-}
-
 .tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
   color: #29ac0e;
   .icon.icon-home {
@@ -74,6 +74,10 @@ a{
   .icon.icon-my {
     background-position: -8.333em 0;
   }
+}
+
+.slider-slide, a img {
+  height: 12em;
 }
 
 .my{
