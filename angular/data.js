@@ -4376,7 +4376,7 @@ var orderDetail = {
       "invoice_id": null, 
       "total_price": "28.99", 
       "ship_type": "103", 
-      "ship_fee": "0.00", 
+      "ship_fee": "0.02", 
       "remark": "", 
       "brand_id": "37", 
       "ship_code": "1900930011998", 

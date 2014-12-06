@@ -56,25 +56,28 @@
             </div>
             <div class="col col-50">
               <a href="{{item.linkUrl}}">
-                {{item.title}}  
-              </a><div ng-show="orderStatus['RECEIVED'].state = order.Order.status">
-              <a href="http://baidu.com" class="button button-assertive">
+                {{item.Cart.name}}
+              </a>
+              <div ng-show="orderStatus['RECEIVED'].state = order.Order.status">
+                <a href="http://baidu.com" class="button button-assertive">
               
                 
                   去评论
                 
              
-              </a> </div>
+                </a>
+              </div>
+              <div>
+                {{item.Cart.price | currency:'￥'}} × {{item.Cart.num}}
+              </div>
             </div>
-            <div class="col">
-              {{item.price | currency:'￥'}} × {{item.count}}
-            </div>
+
 
           </div>
         </div>
       </div>
       <div>
-        订单备注：{{vm.order.content}}
+        订单备注：{{vm.order.Order.remark}}
       </div>
       <div>
         <div style="text-align:right;">
@@ -82,16 +85,16 @@
             商品总价：{{getTotalPrice() | currency:'￥'}}
           </div>
           <div>
-            运费：{{vm.order.postCost | currency:'￥'}}
+            运费：{{vm.order.Order.ship_fee | currency:'￥'}}
           </div>
           <div>
-            总价：{{getTotalPrice() + order.postCost | currency:'￥'}}
+            总价：{{vm.order.Order.total_price | currency:'￥'}}
           </div>
           <div>
-            优惠券：{{vm.order.couponCost | currency:'￥'}}
+            优惠券：{{vm.order.Order.coupon_total | currency:'￥'}}
           </div>
           <div>
-            实付（含运费）：{{getTotalPrice() + vm.order.postCost - vm.order.couponCost | currency:'￥'}}
+            实付（含运费）：{{vm.order.Order.total_all_price | currency:'￥'}}
           </div>
         </div>
       </div>

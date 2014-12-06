@@ -38,11 +38,11 @@
 
   	  	<span style="float:right;padding-top:10px;">
   	  		<a class="button button-calm" ui-sref="app.my-order-detail">详细</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_SENT()">确认收货</a>
-  	  		<a class="button button-calm" ng-show="item.Order.status==getOrderState_SENT()">查看物流</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_CANCELED()">删除订单</a>
-  	  		<a class="button  button-calm" ng-show="item.Order.status==getOrderState_UNPAID()">取消订单</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==getOrderState_UNPAID()">去支付</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['SENT'].state">确认收货</a>
+  	  		<a class="button button-calm" ng-show="item.Order.status==orderStatus['SENT'].state">查看物流</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['CANCELED'].state">删除订单</a>
+  	  		<a class="button  button-calm" ng-show="item.Order.status==orderStatus['UNPAID'].state">取消订单</a>
+  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['UNPAID'].state">去支付</a>
   	  	</span>
   	  </div>
   	</div>

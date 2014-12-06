@@ -232,13 +232,13 @@
     
     $scope.getTotalPrice = function()
     {
-      var i = 0;
       var sum = 0;
-      while(i<vm.order.products.length)
+      
+      for(var key in vm.carts)
       {
-        sum += vm.order.products[i].price * vm.order.products[i].count;
-        i++;
+        sum+=Number(vm.carts[key].Cart.price);
       }
+      
       return sum;
     }
     function active()
