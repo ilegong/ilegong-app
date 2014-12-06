@@ -6,14 +6,14 @@
 
   /* @ngInject */
   function ProductDetailCtrl($rootScope, $scope, $stateParams){
-    $rootScope.hideTabs = false;
+    $rootScope.hideTabs = true;
     var vm = this;
     active();
 
     function active(){
       var id = $stateParams.id;
-      
     }
+    
     $scope.pid=1;
     $scope.id = $stateParams.id;
     $scope.item = 
