@@ -1,5 +1,10 @@
-$pyshuo_icon: '/img/mobilev1/pyshuo_icon.png';
+$pyshuo_icon: 'http://51daifan.sinaapp.com/img/mobilev1/pyshuo_icon.png?xx';
 
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Microsoft Yahei', 'Simsun';
+}
 a{
   text-decoration: none;
   color: #2fa4e7;
@@ -10,19 +15,19 @@ a{
 .fr, .pull-right{
   float: right; 
 }
-
-.card .item{
+.card .item {
   font-size: 14px;
 }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
   font-size: 14px;
   line-height: 14px;
+  padding-top: 0.2143em;
   .icon{
     background: url($pyshuo_icon) 0 0 no-repeat;
     font-size: 14px;
     width: 1.9167em;
-    height: 1.5em;
+    height: 1.8em;
     background-size: 25em 25em;
     display: inline-block;
     vertical-align: text-bottom;
@@ -47,6 +52,11 @@ a{
   }
 }
 
+.pane-secondary{
+  margin-top: 50px;
+  padding-top: 15px;
+}
+
 .tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
   color: #29ac0e;
   .icon.icon-home {
@@ -64,57 +74,6 @@ a{
   .icon.icon-my {
     background-position: -8.333em 0;
   }
-}
-
-.radius10 {
-  -moz-border-radius: 0.417em;
-  -webkit-border-radius: 0.417em;
-  border-radius: 0.417em;
-}
-
-.categories {
-  .list .item {
-    img{
-      height: 3.25em;
-    }
-    span{
-      display: block;
-    }
-    .title{
-      color: #29ac0e;
-      text-decoration: none;
-      font-size: 1.417em;
-      line-height: 1.667em;
-
-    }
-    .explain {
-      color: #999999;
-      text-decoration: none;
-      font-size: 1em;
-      line-height: 1.2em;
-    }
-  }
-}
-
-.category{
-  .item-body{
-    .item-price{
-      font-size: 1.25em;
-      color: #ffa200;
-      display: inline;
-    }
-    .item-price-original{
-      font-size: 1em;
-      color: #999999;
-      display: inline;
-      text-decoration: line-through;
-    }  
-  } 
-}
-
-.pane-secondary{
-  margin-top: 50px;
-  padding-top: 15px;
 }
 
 .my{
@@ -136,53 +95,6 @@ a{
   }
 }
 
-h3.items-tag{
-  margin: 0 0.833em 0.625em 0.833em;
-  a{
-    color: #29ac0e;
-  }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Microsoft Yahei', 'Simsun';
-}
-
-.card.card-product{
-  display: inline-block;
-  margin: 0 0.433em 1.75em 0.433em;
-  padding: 0 0.433em 1.75em 0.433em;
-  width: 49.0%;
-  box-shadow: 0 0 0;
-  img{
-    max-height: 100%;
-    margin-bottom: 0;
-    padding: 0;
-    width: 100%;
-  }
-  .item{
-    padding: 0;
-    border: 0;
-  }
-  .item-text-wrap a{
-    font-size: 0.8em;
-    color: #333333;
-  }
-  .item-avatar{
-    padding-left: 2.4em;
-    padding-top: 0.2em;
-  }
-  .item-avatar > img:first-child{
-    position: absolute;
-    top: 0.2em;
-    left: 0.2em;
-    max-width: 2em;
-    max-height: 2em;
-    border-radius: 4px;
-  }
-}
-
 .home{
   .row{
     height: 8em;
@@ -201,8 +113,6 @@ h3.items-tag{
       .product-name{
         font-size: 0.833em;
         font-weight: normal;
-        padding-top: 0.833em;
-        padding-bottom: 0.2em;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -228,13 +138,13 @@ h3.items-tag{
   .card.product{
     padding-top: 0.5em;
     border-bottom: 1px #dddddd solid;
+    margin: 0;
     .item{
       border: 0;
-      padding: 0.4em 0.833em 0 0.833em;
+      padding: 0.4em 0.833em 0 0.5em;
     }
     .product-name{
       font-size: 1em;
-      padding-top: 0.6em;
     }
     .item-image img{
       text-align: center;
@@ -243,6 +153,7 @@ h3.items-tag{
     }
     .item-avatar{
       padding-left: 2.75em;
+      min-height: 2em;
       img{
         left: 0.5em;
         top: 0.5em;

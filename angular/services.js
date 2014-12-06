@@ -25,7 +25,6 @@
       return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
-          $log.info("Get url " + url + " success:").log(data.data);
           return data.data;
         }, function(error){
           $log.error('Get ' + url + " error:").log(error);

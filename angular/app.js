@@ -56,7 +56,6 @@
       .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl'}}})
-
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'});
 
@@ -77,13 +76,13 @@
         $rootScope.messages.push(message);
         return message;
       }
-          
+
       $delegate.log = function(msg){_log(addMessage(msg)); return this;};
       $delegate.warn = function(msg){_warn(addMessage(msg)); return this;};
       $delegate.info = function(msg){_info(addMessage(msg)); return this;};
       $delegate.debug = function(msg){_debug(addMessage(msg)); return this;};
       $delegate.error = function(msg){_error(addMessage(msg)); return this;};
-          
+
       return $delegate;
     });
   }
