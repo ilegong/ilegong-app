@@ -19,7 +19,7 @@
 
     function active(){
       Products.list().then(function(data){
-        vm.slideBoxItems = [];
+        vm.bannerItems = data.bannerItems;
         vm.brands = data.brands;
         vm.tagsWithProducts = data.tagsWithProducts;
       });
