@@ -5,14 +5,21 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($rootScope, $scope, $stateParams){
-    $rootScope.hideTabs = false;
+  function ProductDetailCtrl($rootScope, $scope, $stateParams,$http,Products){
+    $rootScope.hideTabs = true;
     var vm = this;
     active();
 
     function active(){
       var id = $stateParams.id;
-      
+      Products.getProduct(id).then(
+        function(data)
+        {
+          vm.product = data.product;
+          vm.recommends = data.recommends;
+          vm.brand = data.brand;
+        }
+        );
     }
     $scope.pid=1;
     $scope.id = $stateParams.id;

@@ -1,14 +1,14 @@
 <ion-view title="商品详情">
 
-  <ion-content >
+  <ion-content style="padding-left:10px;padding-right:10px;">
 
     <div>
-      <img src="{{item[pid].imgUrl}}" style="width:100%;"/>
+      <img src="{{vm.product.Product.coverimg}}" style="width:100%;"/>
     </div>
     <div>
       <span>
         <span style="font-size:1.5em;">
-          {{item[pid].title}}
+          {{vm.product.Product.name}}
         </span>
         <span ng-show="{{item[pid].hasRedPacket}}" style="border: 1px solid red;color: white;padding: 1px 2px;font-size: 0.633em;background: red;">
           有红包
@@ -18,19 +18,19 @@
     <p/>
     <div>
       <span >
-        {{item[pid].postDetail}}
+        {{vm.product.Product.promote_name}}
       </span>
     </div>
     <p/>
     <div>
       <span style="color: #c71673;font-size: 24px;">
-        {{item[pid].price | currency:"￥"}}
+        {{vm.product.Product.price | currency:"￥"}}
       </span>
-      <span style="text-decoration: line-through;color: #888;" ng-show="{{item[pid].oldPrice != 0}}">
-        {{item[pid].oldPrice | currency:"￥"}}
+      <span style="text-decoration: line-through;color: #888;" ng-show="{{item[pid].original_price != null}}">
+        {{vm.product.Product.original_price | currency:"￥"}}
       </span>
       <span style="float:right;">
-        {{item[pid].postStyle}}
+        邮费：{{vm.product.Product.ship_fee==null?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
       </span>
     </div>
     <p/>
@@ -61,9 +61,7 @@
         </button>
       </a>
     </div>
-    <div style="display:block;">
-      <a style="color:red;" href="/brands/20140127/10">查看商家更多商品</a>
-    </div>
+
     <p/>
     <div>
       <a class="button button-stable tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro" style="width:50%;margin-left:10px;">
@@ -74,8 +72,7 @@
       </a>
     </div>
     <div ui-view  >
-      <iframe src="/#/tab/products/12/product-detail-intro">
-      </iframe>
+
     </div>
   </ion-content>
 

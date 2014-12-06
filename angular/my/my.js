@@ -37,10 +37,24 @@
   }
 
   function MyListCtrl($scope){
+    var vm = this;
+    active();
     $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
+    function active()
+    {
+
+    }
   }
-  function MyDetailCtrl($scope){
-    $scope.userDetail = new UserInfo(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***');
+  function MyDetailCtrl($scope,$rootScope,$http,UserDetail){
+    var vm = this;
+    active();
+    
+    function active()
+    {
+      UserDetail.list().then(function(data){
+        vm.userDetail = data;
+      })
+    }
   }
   function MyCartsCtrl($scope,$rootScope){
     $rootScope.hideTabs = true;
@@ -245,7 +259,6 @@
     {
       OrderDetail.list().then(function(data)
       {
-        
         vm.order = data.order;
         vm.carts = data.carts;
         vm.ship_type = data.ship_type;

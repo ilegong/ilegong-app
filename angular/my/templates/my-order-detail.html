@@ -1,7 +1,7 @@
 <ion-view title="订单详情">
   <ion-content >
 
-    <div style="padding-left:10px;padding-right:10px;">
+    <div class="orderDetail main">
       <div ng-show="getOrderState_UNPAID() == vm.order.state">
         <a class="button button-assertive" href="http://baidu.com">
           去支付宝支付
@@ -23,7 +23,7 @@
         <span>
         收货人：{{vm.order.Order.consignee_name}}
         </span>
-        <span style="float:right;">
+        <span class="mobilephone">
           {{vm.order.Order.consignee_mobilephone}}
         </span>
       </div>
@@ -92,7 +92,7 @@
           </div>
           <div>
             优惠券：{{vm.order.Order.coupon_total | currency:'￥'}}
-          </div>
+          </div>  
           <div>
             实付（含运费）：{{vm.order.Order.total_all_price | currency:'￥'}}
           </div>

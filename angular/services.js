@@ -12,7 +12,7 @@
 
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
-
+  .service('UserDetail',UserDetail)
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -45,12 +45,16 @@
     var self = this;
 
     return {
-      list: list
+      list: list,
+      getProduct:getProduct
     }
 
     function list(){
 
       return Base.get('/categories/mobileHome.json');
+    }
+    function getProduct(id){
+      return Base.get('/api_orders/product_detail/293.json'); 
     }
   }
 
@@ -110,4 +114,15 @@
       return Base.get('orderDetail')
     }
   }
+  function UserDetail(Base)
+  {
+    var self = this;
+    return {
+      list:list
+    }
+    function list(){
+      return Base.get('myDetail');
+    }
+  }
+
 })(window, window.angular);
