@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.brands', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
@@ -29,7 +29,7 @@
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
 
-      .state('app.sharings', {url: '/sharings', views: {'app-sharings': {templateUrl: 'sharings.main.html',controller: 'SharingsCtrl as vm'}}})
+      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html',controller: 'BrandsCtrl as vm'}}})
       .state('app.sharing-detail', {url: '/sharings/:id', views: {'app-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl as vm'}}})
       .state('app.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
       .state('app.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})

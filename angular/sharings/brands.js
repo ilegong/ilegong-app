@@ -1,12 +1,12 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.sharings', ['app.services'])
-  .controller('SharingsCtrl', SharingsCtrl)
+  angular.module('ilegong.brands', ['app.services'])
+  .controller('BrandsCtrl', BrandsCtrl)
   .controller('SharingDetailCtrl', SharingDetailCtrl)
 
   /* @ngInject */
-  function SharingsCtrl($rootScope, $scope, Brands){
+  function BrandsCtrl($rootScope, $scope, Brands){
     $rootScope.hideTabs = false;
     var vm = this;
     activate();
