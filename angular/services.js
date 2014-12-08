@@ -22,7 +22,7 @@
     }
 
     function get(url){
-      //return deferred(data[url]);
+      // return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -41,7 +41,7 @@
   }
 
   /* @ngInject */
-  function Products(Base){
+  function Products($log, Base){
     var self = this;
 
     return {
@@ -50,7 +50,7 @@
     }
 
     function list(){
-
+      $log.log('get /categories/mobileHome.json');
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){

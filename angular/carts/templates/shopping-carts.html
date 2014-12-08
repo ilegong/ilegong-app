@@ -1,52 +1,25 @@
 <ion-view title="购物车">
   <ion-content >
-  	<div class="list">
-      <div class="row">
-        <div class="col">
-          名称
-        </div>
-        <div class="col-15">
-          价格
-        </div>
-        <div class="col">
-          数量
-        </div>
-        <div class="col-20">
-          合计
-        </div>
-      </div>
-      <div class="row" ng-repeat="item in items">
-        <div class="col">
-          <a href="{{item.linkUrl}}">
-          <div>
-            {{item.title}}
-            <img style="width:100%;" src="{{item.imgUrl}}"/>
-          </div>
+  	<div class="list cart">
+      <div class="row item" ng-repeat="item in items">
+        <a class="col col-33 item-title" href="">
+          <span>{{item.title}}</span><br/>
+          <img style="width:100%;" src="{{item.imgUrl}}"/>
         </a>
+
+        <div class="col col-33">
+          <div class='item-price'>{{item.price | currency:""}}</div>
+          <div class='item-count'>
+            <span class="count-reduce" ng-click="buttonReduceClick($index)">-</span>
+            <input size="3" class="count" ng-model="item.count"/>
+            <span class="count-add" ng-click="buttonAddClick($index)">+</span>
+          </div>
         </div>
-        <div class="col col-15">
-          {{item.price | currency:""}}
-        </div>
-        <div class="col" >
-          <span>
-            <button  style="width:20%;" ng-click="buttonReduceClick($index)">
-              -
-            </button>
-          </span>
-            <input size="3" style="width:50%;"  ng-model="item.count"/>
-            <span>
-            <button   style="width:20%;" ng-click="buttonAddClick($index)">
-              +
-            </button>
-          </span>
-          
-        </div>
-        <div class="col-20">
-          {{item.price * item.count | currency:""}}
+        <div class="col-33">
+          <div>{{item.price * item.count | currency:""}}</div>
           <button class="button" style="width:20%;font-size:10px;" ng-click="removeAt($index)">
             删除
           </button>
-
         </div>
       </div>
       <div class="row">
