@@ -21,9 +21,19 @@
           vm.product = data.product;
           vm.recommends = data.recommends;
           vm.brand = data.brand;
-        
+
         }
         );
+      Products.getProductContent(id).then(
+        function(data)
+        {
+          vm.content = data.content;
+        });
+      Products.getProductComment(id).then(
+        function(data)
+        {
+          vm.comment = data;
+        });
 
     }
     
@@ -40,20 +50,29 @@
     };
     $scope.getRankText = function(rank)
     {
-      if(rank=='A')
+      if(rank==5)
         return '好评';
-      if(rank=='B')
+      if(rank==4)
+        return '四分';
+      if(rank==3)
         return '中评';
-      if(rank=='C')
+      if(rank==2)
+        return '两分';
+      if(rank==1)
         return '差评';
+       
     }
     $scope.getRankColor = function(rank)
     {
-      if(rank=='A')
+      if(rank==5)
         return 'green';
-      if(rank=='B')
+      if(rank==4)
         return 'gray';
-      if(rank=='C')
+      if(rank==3)
+        return 'gray';
+      if(rank==2)
+        return 'red';
+      if(rank==1)
         return 'red';
     }
 

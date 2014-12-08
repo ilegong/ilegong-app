@@ -1,30 +1,32 @@
 <div>
   <div class="list">
-    <div class="item" ng-repeat="ite in item[pid].evaluate">
+
+ 
+    <div class="item" ng-repeat="ite in vm.comment">
+
       <div class="row">
         <div class="col">
-          {{ite.name}}
+
+            {{ite.Comment.username}}
+
+        
         </div>
         <div class="col" >
-          <span style="background-color:{{getRankColor(ite.rank)}};
+          <span style="background-color:{{getRankColor(ite.Comment.rating)}};
           display: inline;padding: .2em .6em .3em;font-size: 75%;font-weight: bold;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;border-radius: .25em;">
-            {{getRankText(ite.rank)}}
-          </span>
-          <span ng-repeat="cIte in ite.content">
-            <span ng-show="cIte.type=='content'">
-              {{cIte.content}}
-            </span>
-            <div ng-show="cIte.type=='image'" style="padding-top:10px;">
-              
-              <img src="{{cIte.content}}" style="width:100%;"/>
-              
-            </div>
 
+            {{getRankText(ite.Comment.rating)}}
+            
           </span>
+          {{ite.Comment.body}}
+
+      
           <p/>
-          
+          <div>
+            <img ng-repeat="img in ite.Comment.images" src="{{img}}" style="width:100%;"/>
+          </div>
           <div style="color: #d0d0d0;font-size: 12px;margin-top: 10px;text-align:right;">
-            {{ite.time}}
+            {{ite.Comment.created}}
           </div>
         </div>
 
@@ -33,11 +35,11 @@
   </div>
   <div class="list" style="background-color:lightgray;">
     <div class="list">
-      <div class="row">
+      <div class="row" >
         <div class="col">
           <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content">
+            <div class="item-content" style="font-size:0.7em;">
               好评
             </div>
             <i class="radio-icon ion-checkmark"></i>
@@ -46,7 +48,7 @@
         <div class="col">
             <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content">
+            <div class="item-content" style="font-size:0.7em;">
               中评
             </div>
             <i class="radio-icon ion-checkmark"></i>
@@ -55,7 +57,7 @@
         <div class="col">
             <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content">
+            <div class="item-content" style="font-size:0.7em;">
               差评
             </div>
             <i class="radio-icon ion-checkmark"></i>

@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', [])
-  .value('software', {app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
@@ -22,15 +22,19 @@
     }
 
     function get(url){
-      //return deferred(data[url]);
-      return $http.get(software.server.address + url).then(
-        function(data){
-          return data.data;
-        }, function(error){
-          $log.error('Get ' + url + " error:").log(error);
-          return error;
-        }
-      );
+      if(software.staticData)
+        return deferred(data[url]);
+      else
+      {
+        return $http.get(software.server.address + url).then(
+          function(data){
+            return data.data;
+          }, function(error){
+            $log.error('Get ' + url + " error:").log(error);
+            return error;
+          }
+        );
+      }
     }
 
     function deferred(data){
@@ -41,21 +45,37 @@
   }
 
   /* @ngInject */
-  function Products(Base){
+  function Products(Base,software){
     var self = this;
-
     return {
       list: list,
-      getProduct:getProduct
+      getProduct:getProduct,
+      getProductContent:getProductContent,
+      getProductComment:getProductComment
     }
 
     function list(){
 
       return Base.get('/categories/mobileHome.json');
+
     }
     function getProduct(id){
-
-      return Base.get('/api_orders/product_detail/'+id+'.json'); 
+      if(software.staticData)
+        return Base.get('/api_orders/product_detail/293.json')
+      else
+        return Base.get('/api_orders/product_detail/'+id+'.json'); 
+    }
+    function getProductContent(id){
+      if(software.staticData)
+        return Base.get('productContent')
+      else
+        return Base.get('/apiOrders/product_content/'+id+'.json')
+    }
+    function getProductComment(id){
+      if(software.staticData)
+        return Base.get('productComment')
+      else
+        return Base.get('/comments/getlist/Product/'+id+'.json')
     }
   }
 
