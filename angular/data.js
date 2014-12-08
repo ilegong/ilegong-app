@@ -4559,7 +4559,38 @@ var productDetail = {
          "notice":""
       }
    }
-}
+};
+
+var storeListJson = {"brands":[  
+  {  
+    "Brand":{  
+      "creator":"819",
+      "name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73",
+      "slug":"qian_yang_wan_cheng",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/ea5bb474293_1208.jpg",
+      "id":"121"
+    }
+  },
+  {  
+    "Brand":{  
+      "creator":"562128",
+      "name":"西域美农专门专门专门点点点",
+      "slug":"xiang_tian_bing_tang_cheng_eva",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/83255d8fc4e_1206.jpg",
+      "id":"123"
+    }
+  },
+  {  
+    "Brand":{  
+      "creator":"562304",
+      "name":"\u5357\u4e30\u871c\u6a58-\u5434\u6e05\u4e91",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/e12f444f1d7_1206.png",
+      "id":"122"
+    }
+  }
+]};
+
 var data = {
   '/categories/mobileHome.json': mobileHomeJson,
   '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
@@ -4567,5 +4598,6 @@ var data = {
   'orderDetail' : orderDetail,
   'carts':carts,
   'myDetail':myDetail,
-  '/api_orders/product_detail/293.json':productDetail
+  '/api_orders/product_detail/293.json':productDetail, 
+  '/api_orders/store_list.json': storeListJson
 }

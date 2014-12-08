@@ -13,6 +13,9 @@
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
   .service('UserDetail',UserDetail)
+
+  .service("Brands", Brands)
+
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -126,4 +129,16 @@
     }
   }
 
+  /* @ngInject */
+  function Brands($log, Base){
+    var self = this;
+
+    return {
+      list: list
+    }
+
+    function list(){
+      return Base.get('/api_orders/store_list.json');
+    }
+  }
 })(window, window.angular);

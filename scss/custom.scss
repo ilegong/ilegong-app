@@ -235,6 +235,17 @@ a{
   } 
 }
 
+.brands{
+  .brand{
+    .item-image{
+      min-height: 12em;
+    }
+    .brand-name{
+      padding: 4px 6px;
+    }
+  }
+}
+
 .orders{
   
 }
