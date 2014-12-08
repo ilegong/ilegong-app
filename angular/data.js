@@ -4452,7 +4452,114 @@ var orderDetail = {
 var carts = [{title:'title1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:11.5,count:5,linkUrl:'http://baidu.com'},
                   {title:'title2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:6,count:7,linkUrl:'http://baidu.com'}]
 var myDetail = {userId:1,userName:'lilei',nickName:'昵称',imgUrl:'none',sex:'男',company:'单位',content:'个性签名',mobilephone:'手机号',mail:'邮箱',password:'***'}
-var productDetail = {"product":{"Product":{"id":"293","user_id":"0","name":"\u65b0\u9c9c\u73b0\u7838\u6838\u6843\u4ec1","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/b624fb29dea_1124.jpg","slug":"xin_xian_xian_za_he_tao_ren","color":null,"material":"","manufacturer":null,"price":"24.7","special":"0","manual":null,"remoteurl":null,"status":"0","deleted":false,"priority":"0","seotitle":"","seodescription":"","seokeywords":"","created":"2014-11-24 11:24:00","updated":"2014-12-05 12:36:05","published":true,"brand_id":"87","photo":"","cate_id":"114","end_time":"2015-11-24 11:24:00","promote_name":"","comment_nums":"2","recommend":"288","ship_fee":"5","original_price":null,"specs":null}},"recommends":{"235":{"id":"235","name":"\u5761\u5761\u4e0a\u6563\u88c5\u6838\u6843","created":"2014-11-04 11:32:00","brand_id":"75","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/be8c3164db7_1104.jpg","promote_name":"49\u5143\/\u65a4\uff083\u65a4\u5305\u90ae\uff09","comment_nums":"1","price":"49","original_price":null,"slug":"ling_shou_he_tao"},"331":{"id":"331","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","created":"2014-12-04 11:19:00","brand_id":"113","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","promote_name":"\u519c\u5bb6\u81ea\u5236\uff0c\u4f20\u7edf\u5de5\u827a\uff0c\u53e4\u6cd5\u667e\u6652\u3001\u4fdd\u8bc1\u67ff\u997c\u6700\u5929\u7136\u7684\u5473\u9053\u548c\u8425\u517b","comment_nums":"0","price":"27","original_price":null,"slug":"fu_ping_te_ji_jian_shi_bing"},"202":{"id":"202","name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b410\u65a4\u88c5","created":"2014-10-13 19:32:00","brand_id":"57","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/27447802fd3_1101.jpg","promote_name":"","comment_nums":"8","price":"129","original_price":"158","slug":"he_nan_xing_yang_he_yin_ruan_zi_shi_liu_8liang"},"269":{"id":"269","name":"\u641c\u72d0\u6f58\u5a77\u5bb6\u7684\u5580\u4ec0\u7070\u67a3\u541b","created":"2014-11-17 20:35:00","brand_id":"10","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/4114dd5ab71_1119.jpg","promote_name":"\uff082\u65a4\u5305\u90ae\uff09","comment_nums":"4","price":"40","original_price":null,"slug":"xin_jiang_hui_zao"}},"brand":{"235":{"id":"235","name":"\u5761\u5761\u4e0a\u6563\u88c5\u6838\u6843","created":"2014-11-04 11:32:00","brand_id":"75","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/be8c3164db7_1104.jpg","promote_name":"49\u5143\/\u65a4\uff083\u65a4\u5305\u90ae\uff09","comment_nums":"1","price":"49","original_price":null,"slug":"ling_shou_he_tao"},"331":{"id":"331","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","created":"2014-12-04 11:19:00","brand_id":"113","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","promote_name":"\u519c\u5bb6\u81ea\u5236\uff0c\u4f20\u7edf\u5de5\u827a\uff0c\u53e4\u6cd5\u667e\u6652\u3001\u4fdd\u8bc1\u67ff\u997c\u6700\u5929\u7136\u7684\u5473\u9053\u548c\u8425\u517b","comment_nums":"0","price":"27","original_price":null,"slug":"fu_ping_te_ji_jian_shi_bing"},"202":{"id":"202","name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b410\u65a4\u88c5","created":"2014-10-13 19:32:00","brand_id":"57","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/27447802fd3_1101.jpg","promote_name":"","comment_nums":"8","price":"129","original_price":"158","slug":"he_nan_xing_yang_he_yin_ruan_zi_shi_liu_8liang"},"269":{"id":"269","name":"\u641c\u72d0\u6f58\u5a77\u5bb6\u7684\u5580\u4ec0\u7070\u67a3\u541b","created":"2014-11-17 20:35:00","brand_id":"10","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/4114dd5ab71_1119.jpg","promote_name":"\uff082\u65a4\u5305\u90ae\uff09","comment_nums":"4","price":"40","original_price":null,"slug":"xin_jiang_hui_zao"}}}
+var productDetail = {  
+   "product":{  
+      "Product":{  
+         "id":"293",
+         "user_id":"0",
+         "name":"\u65b0\u9c9c\u73b0\u7838\u6838\u6843\u4ec1",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/b624fb29dea_1124.jpg",
+         "slug":"xin_xian_xian_za_he_tao_ren",
+         "color":null,
+         "material":"",
+         "manufacturer":null,
+         "price":"24.7",
+         "special":"0",
+         "manual":null,
+         "remoteurl":null,
+         "status":"0",
+         "deleted":false,
+         "priority":"0",
+         "seotitle":"",
+         "seodescription":"",
+         "seokeywords":"",
+         "created":"2014-11-24 11:24:00",
+         "updated":"2014-12-05 12:36:05",
+         "published":true,
+         "brand_id":"87",
+         "photo":"",
+         "cate_id":"114",
+         "end_time":"2015-11-24 11:24:00",
+         "promote_name":"",
+         "comment_nums":"2",
+         "recommend":"288",
+         "ship_fee":"5",
+         "original_price":null,
+         "specs":null
+      }
+   },
+   "recommends":{  
+      "274":{  
+         "id":"274",
+         "name":"\u65b0\u7586\u7279\u4ea7\u575a\u679c\u624b\u7ed8\u793c\u76d26\u888b\u88c5",
+         "created":"2014-11-18 14:18:00",
+         "brand_id":"37",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/77fae9b1721_1118.jpg",
+         "promote_name":"\u5305\u90ae",
+         "comment_nums":"0",
+         "price":"114.99",
+         "original_price":"198",
+         "slug":"xin_jiang_te_chan_jian_guo_shou_hui_li_he_6dai_zhuang"
+      },
+      "144":{  
+         "id":"144",
+         "name":"nancy\u5bb6\u4e61\u5927\u67b8\u675e",
+         "created":"2014-09-02 08:17:00",
+         "brand_id":"35",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/e290ad8a984_1101.jpg",
+         "promote_name":"",
+         "comment_nums":"9",
+         "price":"35",
+         "original_price":null,
+         "slug":"nancyjia_xiang_da_gou_qi"
+      },
+      "202":{  
+         "id":"202",
+         "name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b410\u65a4\u88c5",
+         "created":"2014-10-13 19:32:00",
+         "brand_id":"57",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/27447802fd3_1101.jpg",
+         "promote_name":"",
+         "comment_nums":"9",
+         "price":"129",
+         "original_price":"158",
+         "slug":"he_nan_xing_yang_he_yin_ruan_zi_shi_liu_8liang"
+      },
+      "269":{  
+         "id":"269",
+         "name":"\u641c\u72d0\u6f58\u5a77\u5bb6\u7684\u5580\u4ec0\u7070\u67a3\u541b",
+         "created":"2014-11-17 20:35:00",
+         "brand_id":"10",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/4114dd5ab71_1119.jpg",
+         "promote_name":"\uff082\u65a4\u5305\u90ae\uff09",
+         "comment_nums":"6",
+         "price":"40",
+         "original_price":null,
+         "slug":"xin_jiang_hui_zao"
+      }
+   },
+   "brand":{  
+      "Brand":{  
+         "id":"87",
+         "name":"\u5c71\u897f\u6838\u6843-\u5218\u5bcc\u660e",
+         "creator":"9134",
+         "lastupdator":"0",
+         "website":null,
+         "status":"0",
+         "published":true,
+         "deleted":false,
+         "created":"2014-11-17 11:22:05",
+         "updated":"2014-11-25 14:34:18",
+         "content":"<div>&nbsp;<\/div>\r\n\r\n<div>\r\n<p style=\"max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; color: rgb(62, 62, 62); font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', \u5fae\u8f6f\u96c5\u9ed1, Arial, sans-serif; font-size: 16px; line-height: 25.6000003814697px;\"><img data-=\"\" data-ratio=\"1.2391304347826086\" data-s=\"300,640\" data-w=\"\" src=\"http:\/\/mmbiz.qpic.cn\/mmbiz\/UuGM2hE8WNE8r3I9CmM2eZWzpYUHq2TZ70j6Ad4ibOjBBaPWhYNPVIBjkKOHk1H3Wo5u4Dic5CcXYqqjaKLNxn1A\/0\" style=\"max-width: 100%; word-wrap: break-word !important; height: auto !important; width: auto !important; visibility: visible !important;\" \/><\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u5927\u5bb6\u597d\uff0c\u6211\u662f\u5218\u5bcc\u660e,\u6211\u7684\u5bb6\u4e61\u5728\u53e4\u53bf\u65e7\u53bf\u9547\u7684\u5e76\u4faf\u6751\uff0c\u65e7\u53bf\u9547\u5219\u662f\u8fc7\u53bb\u7684\u53bf\u57ce\uff0c\u76f8\u4f20\u5f53\u5e74\u6731\u5fb7\u5728\u6297\u65e5\u6218\u4e89\u65f6\u671f\u4f4f\u5728\u8fd9\u91cc\uff0c\u65e5\u672c\u6218\u673a\u5f97\u5230\u6d88\u606f\u8981\u53bb\u8f70\u70b8\u6731\u5fb7\u9a7b\u5730\uff0c\u4f46\u662f\u56e0\u4e3a\u6545\u53bf\u548c\u53e4\u53bf\u8bfb\u97f3\u76f8\u540c\uff0c\u5bfc\u81f4\u53bb\u4e86\u9519\u8bef\u7684\u5730\u65b9\u3002\u6240\u4ee5\u6731\u5fb7\u8001\u603b\u5e73\u5b89\u65e0\u4e8b\uff0c\u4e5f\u56e0\u6b64\u5927\u5bb6\u90fd\u89c9\u5f97\u5f53\u5730\u6709\u5177\u6709\u66f4\u591a\u7684\u5e73\u5b89\u7965\u548c\u4e4b\u6c14\uff0c\u53ef\u4ee5\u5e87\u4f51\u4e00\u65b9\u767e\u59d3\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u5728\u5916\u4e0a\u5b66\uff0c\u5de5\u4f5c\u4e5f\u52a0\u8d77\u6765\u4e5f\u67097\u5e74\u4e86\uff0c\u4ece\u521a\u8e0f\u5165\u804c\u573a\u5230\u73b0\u5728\u5b9e\u5c5e\u4e0d\u6613\uff0c\u5e38\u5e74\u7684\u52a0\u73ed\uff0c\u8ba9\u6211\u4eec\u7684\u8eab\u4f53\u4e00\u76f4\u5904\u4e8e\u4e9a\u5065\u5eb7\uff0c\u5076\u5c14\u7684\u4e0d\u9002\u4e5f\u8ba9\u6211\u5f00\u59cb\u82b1\u66f4\u591a\u5fc3\u601d\u53bb\u7814\u7a76\u4e2d\u533b\uff0c\u53bb\u5173\u6ce8\u517b\u751f\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u5e38\u5e38\u60f3\u8d77\u98df\u54c1\u7684\u5b89\u5168\u5982\u6b64\u7684\u4ee4\u4eba\u62c5\u5fe7\uff0c\u6211\u4eec\u4f5c\u4e3a\u57ce\u5e02\u91cc\u7684\u519c\u6751\u4eba\uff0c\u6709\u571f\u5730\uff0c\u6709\u60f3\u6cd5\uff0c\u53ef\u4ee5\u505a\u70b9\u4ec0\u4e48\u5462\uff1f\u7ecf\u5e38\u5728\u540c\u4e8b\u6216\u8005\u670b\u53cb\u7684\u53e3\u4e2d\u542c\u5230&ldquo;\u6211\u5b81\u613f\u82b1\u9ad8\u51fa\u4e00\u500d\u7684\u6216\u8005\u66f4\u9ad8\u7684\u4ef7\u683c\u53bb\u8d2d\u4e70\u4e0d\u7ecf\u8fc7\u52a0\u5de5\u7684\uff0c\u539f\u6c41\u539f\u5473\u7684\u4e1c\u897f\uff0c\u56e0\u4e3a\u5403\u7684\u653e\u5fc3\uff0c\u5403\u7684\u5065\u5eb7&rdquo;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u4ece\u8fd9\u5f00\u59cb\u601d\u8003\uff0c\u5f00\u59cb\u60f3\u8d77\u7236\u4eb2\u7684\u8bdd\u3002\u5f00\u59cb\u7528\u81ea\u5df1\u7684\u79ef\u84c4\u8d2d\u7f6e\u4e86\u4e00\u90e8\u5206\u571f\u5730\uff0c\u5f00\u59cb\u505a\u81ea\u5df1\u60f3\u505a\u7684\u4e8b\u3002\u4e5f\u53ef\u4ee5\u628a\u7236\u4eb2\u7684\u5fc3\u8840\u7ee7\u7eed\u5ef6\u7eed\u4e0b\u53bb\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u7238\u7238\u5728\u4e16\u65f6\u5e38\u8bf4\uff1a&ldquo;\u7236\u8f88\u4eec\u6570\u767e\u5e74\u7684\u667a\u6167\u4e0e\u4f20\u627f\uff0c\u9762\u671d\u9ec4\u571f\uff0c\u80cc\u671d\u5929\uff0c\u7ecf\u5386\u6570\u8f7d\uff0c\u5c06\u6838\u6843\u6811\u683d\u57f9\u6210\u7ed3\u679c\u7684\u53c2\u5929\u5927\u6811\uff0c\u7ed3\u51fa\u5929\u7136\u7684\u679c\u5b9e\uff0c\u5728\u5982\u4eca\u79d1\u6280\u53d1\u8fbe\u7684\u65f6\u4ee3\uff0c\u8bb8\u591a\u751f\u4ea7\u52a0\u5de5\u8005\uff0c\u6539\u53d8\u4e86\u98df\u7269\u7684\u672c\u6027\uff0c\u7834\u574f\u4e86\u5b83\u7684\u8425\u517b\u4f53\u7cfb\uff0c\u5bf9\u6211\u4eec\u7684\u5065\u5eb7\u9020\u6210\u4e0d\u540c\u7a0b\u5ea6\u7684\u5371\u5bb3\uff0c\u7236\u8f88\u4eec\u7559\u4e0b\u4e86\u4e0a\u5343\u6210\u4e07\u68f5\u6838\u6843\u6811\uff0c\u867d\u7136\u4ea7\u91cf\u4e0d\u4e0d\u591a\uff0c\u4f46\u662f\u4e5f\u8981\u4fdd\u8bc1\u539f\u4ea7\uff0c\u4e0d\u8981\u53bb\u7834\u574f\u6838\u6843\u672c\u8eab\u7684\u7ed3\u6784\uff0c\u53ea\u505a\u5927\u81ea\u7136\u7684\u642c\u8fd0\u5de5\uff0c\u4e0d\u505a\u52a0\u5de5\u8005&rdquo;\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u6211\u4eec\u53ea\u6709\u7528\u7eaf\u624b\u5de5\uff0c\u7528\u8001\u5b9e\u7684\u6001\u5ea6\u3001\u8bda\u6073\u7684\u5fc3\u610f\uff0c\u628a\u6838\u6843\u7684\u8425\u517b\u5b8c\u5168\u5448\u73b0\u51fa\u6765\uff0c\u624d\u80fd\u8ba9\u6bcf\u4e00\u4e2a\u98df\u7528\u6838\u6843\u4ec1\u7684\u4eba\u5c06\u5b83\u5e26\u5230\u9910\u684c\u4e0a\uff0c\u628a\u5065\u5eb7\u5e26\u5230\u529e\u516c\u5ba4\uff0c\u628a\u539f\u751f\u6001\u7684\u8425\u517b\u5e26\u7ed9\u81ea\u5df1\u7684\u7236\u6bcd\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u73b0\u5728\u6211\u624d\u521a\u521a\u5f00\u59cb\uff0c\u6211\u8981\u505a\u7684\u5c31\u662f\u628a\u7236\u4eb2\u7684\u6d41\u4f20\u4e0b\u6765\u4ea7\u4e1a\uff0c\u5c31\u50cf\u4e00\u5757\u749e\u7389\u6108\u64e6\u6108\u4eae\uff0c\u6108\u8d4f\u6108\u6709\u5473\uff0c\u540e\u8f88\u7684\u575a\u6301\u4e0e\u8015\u8018\uff0c\u624d\u80fd\u4f7f\u5f97\u5927\u81ea\u7136\u7684\u4ea7\u7269\uff0c\u539f\u6c41\u539f\u5473\uff0c\u642c\u8fd0\u5230\u6bcf\u4e00\u4e2a\u98df\u7528\u5b83\u7684\u6d88\u8d39\u8005\u624b\u4e2d\u3002<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u6211\u60f3\u51ed\u6211\u7684\u52aa\u529b\uff0c\u5e94\u8be5\u4f1a\u6709\u6240\u6536\u83b7\uff0c\u4e5f\u5e0c\u671b\u5927\u5bb6\u591a\u591a\u652f\u6301\uff01<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">&nbsp;<\/p>\r\n\r\n<p style=\"margin-top: 5px; margin-bottom: 5px; clear: both; color: rgb(0, 0, 0); font-family: sans-serif; font-size: 16px; line-height: normal;\">\u6211\u53ea\u505a\u539f\u6c41\u539f\u5473\u7684\uff0c\u4e0d\u4f1a\u53bb\u7834\u574f\u98df\u7269\u672c\u8eab\u7684\u7ed3\u6784\uff0c\u4e00\u76f4\u52aa\u529b\u3001\u575a\u6301\uff0c\u65e0\u8bba\u5e26\u6765\u591a\u5c11\u7684\u6536\u76ca\u90fd\u6ca1\u6709\u5173\u7cfb\uff0c\u6211\u53ea\u60f3\u8ba9\u98df\u7528\u5b83\u7684\u4eba\uff0c\u5403\u7684\u5065\u5eb7\u3002<\/p>\r\n<\/div>\r\n",
+         "cate_id":"121",
+         "slug":"shan_xi_he_tao_liu_fu_ming",
+         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/ee4ff13b4d8_1117.jpg",
+         "photo":"",
+         "weixin_id":"",
+         "notice":""
+      }
+   }
+}
 var data = {
   '/categories/mobileHome.json': mobileHomeJson,
   '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,

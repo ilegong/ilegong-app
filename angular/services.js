@@ -22,7 +22,7 @@
     }
 
     function get(url){
-      return deferred(data[url]);
+      //return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -54,7 +54,8 @@
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
-      return Base.get('/api_orders/product_detail/293.json'); 
+
+      return Base.get('/api_orders/product_detail/'+id+'.json'); 
     }
   }
 

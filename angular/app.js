@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates',"ilegong.products"])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.sharings', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
@@ -43,8 +43,9 @@
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl'}}})
       .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl'}}})
       .state('app.my-list',{url:'/my-list',views:{'app-my':{templateUrl:'my-list.html',controller:'MyListCtrl'}}})
-      .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
-      .state('app.my-carts',{url:'/my-carts',views:{'app-my':{templateUrl:'my-carts.html',controller:'MyCartsCtrl'}}})
+
+      .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl'}}})
+
       .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl'}}})
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
@@ -57,7 +58,9 @@
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
-      .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'});
+      .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+
+      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}});
 
     $urlRouterProvider.otherwise('/app/home');
   }

@@ -5,7 +5,6 @@
   .controller('MyCtrl', MyCtrl)
   .controller('MyListCtrl',MyListCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
-  .controller('MyCartsCtrl',MyCartsCtrl)
   .controller('MyOrderInfoCtrl',MyOrderInfoCtrl)
   .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
   .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
@@ -55,35 +54,6 @@
         vm.userDetail = data;
       })
     }
-  }
-  function MyCartsCtrl($scope,$rootScope){
-    $rootScope.hideTabs = true;
-    $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
-                  new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
-    $scope.buttonReduceClick = function(index)
-    {
-      if($scope.items[index].count > 1)
-        $scope.items[index].count=Number($scope.items[index].count)-1;
-    };
-    $scope.buttonAddClick = function(index)
-    {
-      $scope.items[index].count=Number($scope.items[index].count) +1;
-    };
-    $scope.getTotallPrice = function()
-    {
-      $scope.totall=0;
-      $scope.i=0;
-      while($scope.i<$scope.items.length)
-      {
-        $scope.totall+=$scope.items[$scope.i].price * $scope.items[$scope.i].count;
-        $scope.i++;
-      }
-      return $scope.totall;
-    };
-    $scope.removeAt=function(index)
-    {
-      $scope.items.splice(index,1);
-    };
   }
   function MyOrderInfoCtrl($scope){
     $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
