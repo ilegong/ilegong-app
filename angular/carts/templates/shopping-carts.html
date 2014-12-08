@@ -2,34 +2,29 @@
   <ion-content >
   	<div class="list cart">
       <div class="row item" ng-repeat="item in items">
-        <a class="col col-33 item-title" href="">
+        <a class="col col-25 item-title" href="">
           <span>{{item.title}}</span><br/>
           <img style="width:100%;" src="{{item.imgUrl}}"/>
         </a>
 
-        <div class="col col-33">
-          <div class='item-price'>{{item.price | currency:""}}</div>
-          <div class='item-count'>
-            <span class="count-reduce" ng-click="buttonReduceClick($index)">-</span>
-            <input size="3" class="count" ng-model="item.count"/>
-            <span class="count-add" ng-click="buttonAddClick($index)">+</span>
+        <div class="col col-50">
+          <div class='item-price col-top'>{{item.price}}元</div>
+          <div class='item-count row col-center'>
+            <span class="count-reduce col col-25" ng-click="buttonReduceClick($index)">-</span>
+            <input class="count col col-50" ng-model="item.count"/>
+            <span class="count-add col col-25" ng-click="buttonAddClick($index)">+</span>
           </div>
         </div>
-        <div class="col-33">
-          <div>{{item.price * item.count | currency:""}}</div>
-          <button class="button" style="width:20%;font-size:10px;" ng-click="removeAt($index)">
+        <div class="col-25">
+          <div class='item-price-total'>{{item.price * item.count}}元</div>
+          <a href= "" class="" ng-click="removeAt($index)">
             删除
-          </button>
+          </a>
         </div>
       </div>
-      <div class="row">
-        <span class="col" style="text-align:right;font-size:20px;padding-top:13 px;">
-          总价：{{getTotallPrice() | currency:""}}</span>
-          <a ui-sref="app.my-order-info">
-            <div class="button button-positive" style="float:right;">
-              结算
-            </div>
-          </a>
+      <div class="padding-top">
+        <button class="button button-positive fr" ui-sref="app.my-order-info">结算</button>
+        <div class="fr cart-price-total">总价：{{getTotallPrice()}}元</div>
       </div>
     </div>
   </ion-content>

@@ -146,16 +146,10 @@ a{
         max-width: 6em;
       }
     }
-    .item-price{
-      margin-bottom: 5px;
-    }
     .item-count{
-      position: relative;
-      display: table;
       border-collapse: separate;
       span{
-        padding: 8px 12px;
-        width: 0;
+        display: inline-block;
         font-size: 14px;
         font-weight: normal;
         line-height: 1;
@@ -176,9 +170,15 @@ a{
       }
       .count{
         padding: 4px 1px;
-        width: auto;
+        width: 34%;
       }
     }
+    .item-price-total{
+      padding: 8px 0;
+    }
+  }
+  .cart-price-total{
+    padding: 14px 5px;
   }
 }
 

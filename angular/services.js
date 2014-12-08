@@ -22,7 +22,7 @@
     }
 
     function get(url){
-      // return deferred(data[url]);
+      return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
