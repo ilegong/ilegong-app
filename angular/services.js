@@ -16,6 +16,8 @@
 
   .service("Brands", Brands)
 
+  .service("Tryings", Tryings)
+
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -139,6 +141,19 @@
 
     function list(){
       return Base.get('/api_orders/store_list.json');
+    }
+  }
+
+  /* @ngInject */
+  function Tryings($log, Base){
+    var self = this;
+
+    return {
+      list: list
+    }
+
+    function list(){
+      return Base.get('/shichituan.json');
     }
   }
 })(window, window.angular);
