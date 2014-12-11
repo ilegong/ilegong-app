@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', [])
-  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
@@ -13,6 +13,11 @@
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
   .service('UserDetail',UserDetail)
+
+  .service("Brands", Brands)
+
+  .service("Tryings", Tryings)
+
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -22,19 +27,17 @@
     }
 
     function get(url){
-      if(software.staticData)
-        return deferred(data[url]);
-      else
-      {
-        return $http.get(software.server.address + url).then(
-          function(data){
-            return data.data;
-          }, function(error){
-            $log.error('Get ' + url + " error:").log(error);
-            return error;
-          }
-        );
-      }
+
+      return deferred(data[url]);
+      return $http.get(software.server.address + url).then(
+        function(data){
+          return data.data;
+        }, function(error){
+          $log.error('Get ' + url + " error:").log(error);
+          return error;
+        }
+      );
+
     }
 
     function deferred(data){
@@ -45,7 +48,9 @@
   }
 
   /* @ngInject */
-  function Products(Base,software){
+
+  function Products($log, Base,software){
+
     var self = this;
     return {
       list: list,
@@ -55,7 +60,7 @@
     }
 
     function list(){
-
+      $log.log('get /categories/mobileHome.json');
       return Base.get('/categories/mobileHome.json');
 
     }
@@ -146,4 +151,29 @@
     }
   }
 
+  /* @ngInject */
+  function Brands($log, Base){
+    var self = this;
+
+    return {
+      list: list
+    }
+
+    function list(){
+      return Base.get('/api_orders/store_list.json');
+    }
+  }
+
+  /* @ngInject */
+  function Tryings($log, Base){
+    var self = this;
+
+    return {
+      list: list
+    }
+
+    function list(){
+      return Base.get('/shichituan.json');
+    }
+  }
 })(window, window.angular);

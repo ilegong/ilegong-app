@@ -40,7 +40,7 @@ a{
   .icon.icon-home {
     background-position: 0 -2.083em;
   }
-  .icon.icon-sharings {
+  .icon.icon-brands {
     background-position: -4.167em -2.083em;
   }
   .icon.icon-tryings {
@@ -62,7 +62,7 @@ a{
   .icon.icon-home {
     background-position: 0 0;
   }
-  .icon.icon-sharings {
+  .icon.icon-brands {
     background-position: -4.167em 0;
   }
   .icon.icon-tryings {
@@ -76,7 +76,7 @@ a{
   }
 }
 
-.slider slider-slides .slider-slide a img {
+.slider .slider-slides .slider-slide a img {
   height: 12em;
 }
 
@@ -138,6 +138,50 @@ a{
   }
 }
 
+.cart{
+  .item{
+    text-align: center;
+    .item-title{
+      img{
+        max-width: 6em;
+      }
+    }
+    .item-count{
+      border-collapse: separate;
+      span{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      span.count-reduce{
+        border-right: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      span.count-add{
+        border-left: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+      .count{
+        padding: 4px 1px;
+        width: 34%;
+      }
+    }
+    .item-price-total{
+      padding: 8px 0;
+    }
+  }
+  .cart-price-total{
+    padding: 14px 5px;
+  }
+}
+
 .category{
   .card.product{
     padding-top: 0.5em;
@@ -189,6 +233,17 @@ a{
       }
     }
   } 
+}
+
+.brands{
+  .brand{
+    .item-image{
+      min-height: 12em;
+    }
+    .brand-name{
+      padding: 4px 6px;
+    }
+  }
 }
 
 .orders{
@@ -257,4 +312,97 @@ a{
     float:right;
   }
 
+}
+
+.productDetail{
+  .imageWidthFull{
+    width:100%;
+  }
+  .nameFont{
+    font-size:1.5em;
+  }
+  .price{
+    color: #c71673;
+    font-size: 24px;
+  }
+  .originalPrice{
+    text-decoration: line-through;
+    color: #888;
+  }
+  .shipFee{
+    float:right;
+  }
+  .item-count{
+    border-collapse: separate;
+    span{
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 1;
+      text-align: center;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    span.count-reduce{
+      border-right: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+    span.count-add{
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+    }
+    .count{
+      padding: 4px 1px;
+      width: 34%;
+    }
+  }
+  .numBox{
+    width:10%;
+  }
+  .brandImg{
+    width:20%;
+  }
+  .buttonHeight{
+    height:30px;
+  }
+  .tabButton{
+    width:50%;
+    margin-left:5px;
+  }
+}
+
+.productDetailEvaluate{
+  .rankText{
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+  }
+  .imageWidthFull{
+    width:100%;
+  }
+  .date{
+    color: #d0d0d0;
+    font-size: 12px;
+    margin-top: 10px;
+    text-align:right;
+  }
+  .buttonColor{
+    background-color:lightgray;
+  }
+  .buttonFont{
+    font-size:0.7em !important;
+  }
+  .contentBox{
+    height:50px;
+  }
 }

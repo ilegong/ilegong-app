@@ -1,5 +1,5 @@
-<div>
-  <div class="list">
+<div class="productDetailEvaluate">
+  <div class="list ">
 
  
     <div class="item" ng-repeat="ite in vm.comment">
@@ -12,8 +12,7 @@
         
         </div>
         <div class="col" >
-          <span style="background-color:{{getRankColor(ite.Comment.rating)}};
-          display: inline;padding: .2em .6em .3em;font-size: 75%;font-weight: bold;line-height: 1;color: #fff;text-align: center;white-space: nowrap;vertical-align: baseline;border-radius: .25em;">
+          <span style="background-color:{{getRankColor(ite.Comment.rating)}};" class="rankText">
 
             {{getRankText(ite.Comment.rating)}}
             
@@ -23,9 +22,9 @@
       
           <p/>
           <div>
-            <img ng-repeat="img in ite.Comment.images" src="{{img}}" style="width:100%;"/>
+            <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="imageWidthFull"/>
           </div>
-          <div style="color: #d0d0d0;font-size: 12px;margin-top: 10px;text-align:right;">
+          <div class="date">
             {{ite.Comment.created}}
           </div>
         </div>
@@ -33,13 +32,13 @@
       </div>
     </div>
   </div>
-  <div class="list" style="background-color:lightgray;">
+  <div class="list buttonColor">
     <div class="list">
       <div class="row" >
         <div class="col">
           <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content" style="font-size:0.7em;">
+            <div class="item-content buttonFont" >
               好评
             </div>
             <i class="radio-icon ion-checkmark"></i>
@@ -48,7 +47,7 @@
         <div class="col">
             <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content" style="font-size:0.7em;">
+            <div class="item-content buttonFont">
               中评
             </div>
             <i class="radio-icon ion-checkmark"></i>
@@ -57,7 +56,7 @@
         <div class="col">
             <label class="item item-radio">
             <input type="radio" name="group">
-            <div class="item-content" style="font-size:0.7em;">
+            <div class="item-content buttonFont">
               差评
             </div>
             <i class="radio-icon ion-checkmark"></i>
@@ -68,7 +67,7 @@
         <div>
       
             <span class="input-label">请输入评价：</span>
-            <textarea style="height:50px;"></textarea>
+            <textarea class="contentBox"></textarea>
           <div>
             <p/>
           <div>
