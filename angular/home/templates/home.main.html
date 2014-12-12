@@ -2,8 +2,8 @@
   <ion-content class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems">
-        <a href="{{bannerItem.url}}">
-          <img style="width:100%;height:100%;" src="http://51daifan.sinaapp.com/{{bannerItem.img}}"></img>
+        <a ui-sref="app.product-detail.intro({id: bannerItem.id})">
+          <img src="http://51daifan.sinaapp.com/{{bannerItem.img}}"></img>
         </a>
       </ion-slide>
     </ion-slide-box>
