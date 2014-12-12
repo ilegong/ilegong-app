@@ -1,41 +1,41 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.brands', ['app.services'])
-  .controller('BrandsCtrl', BrandsCtrl)
-  .controller('BrandCtrl', BrandCtrl)
-  .controller('BrandHomeCtrl', BrandHomeCtrl)
-  .controller('BrandIntroCtrl', BrandIntroCtrl)
+  angular.module('ilegong.stores', ['app.services'])
+  .controller('StoresCtrl', StoresCtrl)
+  .controller('StoreCtrl', StoreCtrl)
+  .controller('StoreHomeCtrl', StoreHomeCtrl)
+  .controller('StoreIntroCtrl', StoreIntroCtrl)
 
   /* @ngInject */
-  function BrandsCtrl($rootScope, $scope, Brands){
+  function StoresCtrl($rootScope, $scope, Stores){
     $rootScope.hideTabs = false;
     var vm = this;
     activate();
     
     function activate(){
-      Brands.list().then(function(data){
-        vm.brands = data.brands;
+      Stores.list().then(function(data){
+        vm.stores = data.brands;
       });
     }
   }
 
   /* @ngInject */
-  function BrandCtrl($rootScope, $scope, $stateParams, Brands){
+  function StoreCtrl($rootScope, $scope, $stateParams, Stores){
     $rootScope.hideTabs = false;
     var app = this;
     activate();
     
     function activate(){
-      app.brandId = $stateParams.id;
-      Brands.getBrand(app.brandId).then(function(data){
-        app.brand = data.content;
+      app.storeId = $stateParams.id;
+      Stores.getStore(app.storeId).then(function(data){
+        app.store = data.content;
       });
     }
   }
 
   /* @ngInject */
-  function BrandHomeCtrl($rootScope, $scope, $stateParams, Brands){
+  function StoreHomeCtrl($rootScope, $scope, $stateParams, Stores){
     $rootScope.hideTabs = false;
     var vm = this;
     activate();
@@ -45,14 +45,14 @@
   }
 
   /* @ngInject */
-  function BrandIntroCtrl($rootScope, $scope, $stateParams, $sce, Brands){
+  function StoreIntroCtrl($rootScope, $scope, $stateParams, $sce, Stores){
     $rootScope.hideTabs = false;
     var vm = this;
     activate();
     
     function activate(){
-      Brands.getBrandIntro($stateParams.id).then(function(data){
-        vm.brandIntro = $sce.trustAsHtml(data.Brand.content);
+      Stores.getStoreIntro($stateParams.id).then(function(data){
+        vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
       });
     }
   }

@@ -14,7 +14,7 @@
   .service('OrderDetail',OrderDetail)
   .service('UserDetail',UserDetail)
 
-  .service("Brands", Brands)
+  .service("Stores", Stores)
 
   .service("Tryings", Tryings)
 
@@ -131,22 +131,22 @@
   }
 
   /* @ngInject */
-  function Brands($log, Base){
+  function Stores($log, Base){
     var self = this;
 
     return {
       list: list, 
-      getBrand: getBrand, 
-      getBrandIntro: getBrandIntro
+      getStore: getStore, 
+      getStoreIntro: getStoreIntro
     }
 
     function list(){
       return Base.get('/api_orders/store_list.json');
     }
-    function getBrand(id){
+    function getStore(id){
       return Base.get('/apiOrders/store_content/' + id + '.json');
     }
-    function getBrandIntro(id){
+    function getStoreIntro(id){
       return Base.get('/apiOrders/store_story/' + id + '.json');
     }
   }

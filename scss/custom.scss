@@ -40,7 +40,7 @@ a{
   .icon.icon-home {
     background-position: 0 -2.083em;
   }
-  .icon.icon-brands {
+  .icon.icon-stores {
     background-position: -4.167em -2.083em;
   }
   .icon.icon-tryings {
@@ -55,7 +55,7 @@ a{
   .icon.icon-pyshuo{
     background-position: -13em -4.5em;
   }
-  .icon.icon-brand-intro{
+  .icon.icon-store-intro{
     background-position: -6.25em -2.083em;
   }
   .tab-title{
@@ -76,7 +76,7 @@ a{
   .icon.icon-home {
     background-position: 0 0;
   }
-  .icon.icon-brands {
+  .icon.icon-stores {
     background-position: -4.167em 0;
   }
   .icon.icon-tryings {
@@ -88,7 +88,7 @@ a{
   .icon.icon-my {
     background-position: -8.333em 0;
   }
-  .icon.icon-brand-intro{
+  .icon.icon-store-intro{
     background-position: -6.25em 0;
   }
 }
@@ -256,18 +256,18 @@ a{
   } 
 }
 
-.brands{
-  .brand{
+.stores{
+  .store{
     .item-image{
       min-height: 12em;
     }
-    .brand-name{
+    .store-name{
       padding: 4px 6px;
     }
   }
 }
 
-.brand{
+.store{
   .card.product{
     padding-top: 0.5em;
     border-bottom: 1px #dddddd solid;

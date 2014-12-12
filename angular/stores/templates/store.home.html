@@ -1,8 +1,8 @@
-<ion-view title="{{app.brand.info.name}}">
-  <ion-content class='brand'>
+<ion-view title="{{app.store.info.name}}">
+  <ion-content class='store'>
     <div class='list'>
-      <div class="row" ng-repeat="p in app.brand.products" ng-if="$index % 2 == 0">
-        <div class='product card col col-50' ng-repeat="p in app.brand.products.slice($index, $index+2)" ng-init="product=p.Product">
+      <div class="row" ng-repeat="p in app.store.products" ng-if="$index % 2 == 0">
+        <div class='product card col col-50' ng-repeat="p in app.store.products.slice($index, $index+2)" ng-init="product=p.Product">
           <a ui-sref="app.product-detail.intro({id: product.id})">
             <div class="item item-image">
               <img title="{{product.title}}" src="{{product.coverimg}}">
