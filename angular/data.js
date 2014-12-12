@@ -4672,17 +4672,32 @@ var brandIntroJson = {
    }
 }
 
-var data = {
-  '/categories/mobileHome.json': mobileHomeJson,
-  '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
-  '/api_orders/mine.json?token=1' : ordersJson,
-  'orderDetail' : orderDetail,
-  'carts':carts,
-  'myDetail':myDetail,
-  '/api_orders/product_detail/293.json':productDetail, 
-  '/api_orders/store_list.json': storeListJson, 
-  '/shichituan.json': tryingsJson,
-  '/apiOrders/store_content/63.json': brandJson,
-  '/apiOrders/store_content/121.json': brandJson,  
-  '/apiOrders/store_story/121.json': brandIntroJson 
-}
+var FakeData = function(){
+  var dataMap = {
+    '/categories/mobileHome.json': mobileHomeJson,
+    '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
+    '/api_orders/mine.json?token=1' : ordersJson,
+    'orderDetail' : orderDetail,
+    'carts':carts,
+    'myDetail':myDetail,
+    '/api_orders/store_list.json': storeListJson, 
+    '/shichituan.json': tryingsJson
+  }
+  return {
+    get: get
+  }
+  function get(url){
+    if(typeof(dataMap[url]) != 'undefined'){
+      return dataMap[url];
+    }
+    if(/\/api_orders\/product_detail\/\d+.json/.test(url)){
+      return productDetail;
+    }
+    if(/\/apiOrders\/store_content\/\d+.json/.test(url)){
+      return brandJson;
+    }
+    if(/\/apiOrders\/store_story\/\d+.json/.test(url)){
+      return brandIntroJson;
+    }
+  }
+}();

@@ -27,8 +27,7 @@
     }
 
     function get(url){
-      $log.log(url);
-      return deferred(data[url]);
+      return deferred(FakeData.get(url));
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
