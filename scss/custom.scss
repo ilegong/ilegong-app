@@ -257,7 +257,9 @@ a{
 }
 
 .stores{
-  .store{
+  .store.card{
+    padding: 0 5px;
+    margin: 0 0 1em 0;
     .item-image{
       min-height: 12em;
     }
