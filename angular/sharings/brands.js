@@ -27,7 +27,8 @@
     activate();
     
     function activate(){
-      Brands.getBrand($stateParams.id).then(function(data){
+      app.brandId = $stateParams.id;
+      Brands.getBrand(app.brandId).then(function(data){
         app.brand = data.content;
       });
     }
@@ -44,14 +45,14 @@
   }
 
   /* @ngInject */
-  function BrandIntroCtrl($rootScope, $scope, $stateParams){
-    $rootScope.hideTabs = true;
-    console.log('in brand intro ctrl');
+  function BrandIntroCtrl($rootScope, $scope, $stateParams, $sce, Brands){
+    $rootScope.hideTabs = false;
+    var vm = this;
     activate();
     
     function activate(){
-      Brands.getBrand($stateParams.id).then(function(data){
-        vm.brand = data.content;
+      Brands.getBrandIntro($stateParams.id).then(function(data){
+        vm.brandIntro = $sce.trustAsHtml(data.Brand.content);
       });
     }
   }

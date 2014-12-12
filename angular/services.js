@@ -138,7 +138,8 @@
 
     return {
       list: list, 
-      getBrand: getBrand
+      getBrand: getBrand, 
+      getBrandIntro: getBrandIntro
     }
 
     function list(){
@@ -146,6 +147,9 @@
     }
     function getBrand(id){
       return Base.get('/apiOrders/store_content/' + id + '.json');
+    }
+    function getBrandIntro(id){
+      return Base.get('/apiOrders/store_story/' + id + '.json');
     }
   }
 

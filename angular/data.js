@@ -4666,6 +4666,12 @@ var brandJson = {
   }
 }
 
+var brandIntroJson = {
+   "Brand":{
+      "content":"<p style=\"max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; color: rgb(62, 62, 62); font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', \u5fae\u8f6f\u96c5\u9ed1, Arial, sans-serif; font-size: 16px; line-height: 25.6000003814697px;\"><img data-=\"\" data-ratio=\"1.5\" data-s=\"300,640\" data-w=\"\" src=\"http:\/\/mmbiz.qpic.cn\/mmbiz\/UuGM2hE8WNEicjZAyDEiaLOThI08J7JhwzhCrXrGarvxDK57rpjN9OKWO8eIW3hNdEK0dLojVKStTSxBWPgrqEcA\/0\" style=\"max-width: 100%; word-wrap: break-word !important; height: auto !important; width: auto !important; visibility: visible !important;\" \/><\/p>\r\n\r\n<p style=\"max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; color: rgb(62, 62, 62); font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', \u5fae\u8f6f\u96c5\u9ed1, Arial, sans-serif; font-size: 16px; line-height: 25.6000003814697px;\">\u5927\u5bb6\u597d\uff0c\u6211\u53eb\u5218\u4e19\u5b66\uff0c\u662f\u6765\u81ea\u4e8e\u5c71\u4e1c\u7701\u5e73\u5ea6\u5e02\u4e00\u4e2a\u519c\u6751\u7684\u6750\u6599\u5b66\u535a\u58eb\uff0c\u867d\u7136\u5728\u5317\u4eac\u5df2\u7ecf\u5f85\u4e86\u5341\u51e0\u5e74\u4e86\uff0c\u4f46\u5bf9\u5bb6\u4e61\u7684\u7279\u4ea7\u6709\u7740\u96be\u4ee5\u5272\u820d\u7684\u60c5\u6000\u548c\u65e0\u6cd5\u63a9\u9970\u7684\u81ea\u8c6a\uff0c\u65e0\u8bba\u4e0a\u5b66\u671f\u95f4\u8fd8\u662f\u5de5\u4f5c\u4ee5\u540e\uff0c\u6bcf\u6b21\u4ece\u5bb6\u56de\u5317\u4eac\u90fd\u4f1a\u5e26\u56de\u5bb6\u4e61\u7684\u7279\u4ea7\u4e0e\u5468\u56f4\u7684\u670b\u53cb\u5206\u4eab\uff0c\u65e0\u8bba\u662f\u82f9\u679c\u3001\u8349\u8393\u3001\u6a31\u6843\u3001\u6843\u5b50\u7b49\u6c34\u679c\uff0c\u8fd8\u662f\u82b1\u751f\u3001\u7389\u7c73\u7b49\u90fd\u6536\u83b7\u597d\u8bc4\u65e0\u6570\uff0c\u73b0\u5728\u5e0c\u671b\u5c06\u81ea\u5bb6\u4ea7\u7684\u82f9\u679c\u7b49\u4e0e\u66f4\u591a\u7684\u4eba\u5206\u4eab\u3002<\/p>\r\n"
+   }
+}
+
 var data = {
   '/categories/mobileHome.json': mobileHomeJson,
   '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
@@ -4677,5 +4683,6 @@ var data = {
   '/api_orders/store_list.json': storeListJson, 
   '/shichituan.json': tryingsJson,
   '/apiOrders/store_content/63.json': brandJson,
-  '/apiOrders/store_content/121.json': brandJson 
+  '/apiOrders/store_content/121.json': brandJson,  
+  '/apiOrders/store_story/121.json': brandIntroJson 
 }

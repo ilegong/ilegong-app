@@ -1,16 +1,5 @@
-<ion-view title="{{sharing.product}}—{{sharing.name}}">
-  <div class="tabs-top tabs-striped">
-    <div class="tabs">
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.sharing-detail.intro({id:sharing.id})">
-        同事介绍
-      </a>
-      <a class="tab-item" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.sharing-detail.products({id:sharing.id})">
-        分享商品
-      </a>
-    </div>
-  </div>
-
+<ion-view title="{{app.brand.info.name}}">
   <ion-content>
-    <div ui-view  class='pane-secondary'></div>
+    <div ng-bind-html="vm.brandIntro"></div>
   </ion-content>
 </ion-view>
