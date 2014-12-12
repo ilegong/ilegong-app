@@ -75,8 +75,19 @@
       if(rank==1)
         return 'red';
     }
+  $scope.click = function()
+  {
+    navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    destinationType: Camera.DestinationType.DATA_URL
+});
+  }
 
   }
 
 
 })(window, window.angular);
+
+
+
+
+

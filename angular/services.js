@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', [])
-  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
@@ -28,7 +28,7 @@
 
     function get(url){
 
-      return deferred(data[url]);
+     // return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
