@@ -133,6 +133,9 @@ a{
     .product{
       text-align: center;
       .product-name{
+        display: inline-block;
+        line-height: 1em;
+        width: 100%;
         font-size: 0.833em;
         font-weight: normal;
         overflow: hidden;

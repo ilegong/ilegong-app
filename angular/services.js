@@ -59,7 +59,6 @@
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
-
       return Base.get('/api_orders/product_detail/'+id+'.json'); 
     }
   }
