@@ -8,9 +8,6 @@
   .config(extendExceptionHandler)
   .config(configCompileProvider)
 
-  var state = state;
-  var subState = subState;
-
   function initApp($ionicPlatform) {
     $ionicPlatform.ready(function() {
       if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,7 +21,7 @@
 
   function configStates($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('app', state("/app", "tabs.html", AppCtrl, {abstract: true}))
+      .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
@@ -57,10 +54,10 @@
 
       .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
 
-      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html',controller: 'BrandsCtrl as vm'}}})
-      .state('brand', state("/brands/:id", "brand.html", BrandCtrl, {abstract: true}))
-      .state('brand.home', {url: '/home', views: {'brand-home': {templateUrl: 'brand.home.html',controller: 'BrandHomeCtrl as vm'}}})
-      .state('brand.intro', {url: '/intro', views: {'brand-intro': {templateUrl: 'brand.intro.html',controller: 'BrandIntroCtrl as vm'}}})
+      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html', controller: 'BrandsCtrl as vm'}}})
+      .state('brand', {url: '/brands/:id', templateUrl: 'brand.html', controller: 'BrandCtrl as app', abstract: true})
+      .state('brand.home', {url: '/home', views: {'brand-home': {templateUrl: 'brand.home.html', controller: 'BrandHomeCtrl as vm'}}})
+      .state('brand.intro', {url: '/intro', views: {'brand-intro': {templateUrl: 'brand.intro.html', controller: 'BrandIntroCtrl as vm'}}})
 
     $urlRouterProvider.otherwise('/app/home');
   }
@@ -111,17 +108,8 @@
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
   }
 
-  function state(url, templateUrl, controller, options){
-    return _.extend({url: url, templateUrl: templateUrl, controller: controller}, options || {});
-  }
-  function subState(url, templateUrl, controller, options){
-    var menuContent = {templateUrl: templateUrl, controller: controller || function(){}}
-    return _.extend({url: url, views: {'menuContent' : menuContent}}, options || {})
-  }
-
   function AppCtrl($scope,$rootScope)
   {
-  //address region
     $rootScope.regionSelectItems=[
                               new RegionSelectItem('beijing',1,[
                                 new RegionSelectItem('beijing-1',11,[
@@ -259,8 +247,5 @@
   //--coupon state
   }
 
-  function BrandCtrl(){
-
-  }
 })();
 

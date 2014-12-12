@@ -3,6 +3,7 @@
 
   angular.module('ilegong.brands', ['app.services'])
   .controller('BrandsCtrl', BrandsCtrl)
+  .controller('BrandCtrl', BrandCtrl)
   .controller('BrandHomeCtrl', BrandHomeCtrl)
   .controller('BrandIntroCtrl', BrandIntroCtrl)
 
@@ -20,14 +21,38 @@
   }
 
   /* @ngInject */
-  function BrandHomeCtrl($rootScope, $scope){
-    $rootScope.hideTabs = true;
-    $scope.sharing = new Sharing(1, '阿里巴巴', '李瑞', 'http://www.tongshijia.com/brands/20141117/qu_na_er_li_rui.html', 'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/858bbafb0fb_1117.jpg')
+  function BrandCtrl($rootScope, $scope, $stateParams, Brands){
+    $rootScope.hideTabs = false;
+    var app = this;
+    activate();
+    
+    function activate(){
+      Brands.getBrand($stateParams.id).then(function(data){
+        app.brand = data.content;
+      });
+    }
   }
 
   /* @ngInject */
-  function BrandIntroCtrl($rootScope, $scope){
+  function BrandHomeCtrl($rootScope, $scope, $stateParams, Brands){
+    $rootScope.hideTabs = false;
+    var vm = this;
+    activate();
+
+    function activate(){
+    }
+  }
+
+  /* @ngInject */
+  function BrandIntroCtrl($rootScope, $scope, $stateParams){
     $rootScope.hideTabs = true;
-    $scope.sharing = new Sharing(1, '阿里巴巴', '李瑞', 'http://www.tongshijia.com/brands/20141117/qu_na_er_li_rui.html', 'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/858bbafb0fb_1117.jpg')
+    console.log('in brand intro ctrl');
+    activate();
+    
+    function activate(){
+      Brands.getBrand($stateParams.id).then(function(data){
+        vm.brand = data.content;
+      });
+    }
   }
 })(window, window.angular);

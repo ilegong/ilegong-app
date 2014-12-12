@@ -27,6 +27,7 @@
     }
 
     function get(url){
+      $log.log(url);
       return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
@@ -136,11 +137,15 @@
     var self = this;
 
     return {
-      list: list
+      list: list, 
+      getBrand: getBrand
     }
 
     function list(){
       return Base.get('/api_orders/store_list.json');
+    }
+    function getBrand(id){
+      return Base.get('/apiOrders/store_content/' + id + '.json');
     }
   }
 

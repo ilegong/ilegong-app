@@ -4620,6 +4620,52 @@ var tryingsJson = {
   ]
 };
 
+var brandJson = {  
+  "content":{
+    "info":{
+       "name":"\u9c9clife-Adi",
+       "slug":"xian_life_adi",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/e679d5dbfaf_1010.jpg",
+       "weixin_id":"",
+       "notice":""
+    },
+    "products":[  
+      {"Product":{  
+        "id":"213",
+        "name":"\u65e5\u6e05Nissin\u725b\u5976\u5de7\u514b\u529b\u7389\u7c73\u8106\u7247",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/043e321f3a8_1018.jpg",
+        "slug":"ri_qing_nissinniu_nai_qiao_ke_li_yu_mi_cui_pian",
+        "price":"9.8",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"198",
+        "name":"\u53ef\u73d1 Collon \u5976\u6cb9\u5939\u5fc3\u534e\u592b\u5706\u7b52\u997c\u5e72",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/83912a790ec_1013.jpg",
+        "slug":"ke_long_collon_nai_you_jia_xin_hua_fu_yuan_tong_bing_gan",
+        "price":"21.5",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"214",
+        "name":"\u60a0\u54c8UHA\u5473\u89c9\u7cd6e-ma\u795e\u5947\u6362\u5473\u6da6\u5589\u7cd6",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/aa0cc3ed544_1018.jpg",
+        "slug":"you_ha_uhawei_jue_tang_e_mashen_qi_huan_wei_run_hou_tang",
+        "price":"14",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"263",
+        "name":"\u5404\u56fd\u8fdb\u53e3\u840c\u5b9d\u5c0f\u98df",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/d527a86c9dc_1113.jpg",
+        "slug":"ge_guo_jin_kou_meng_bao_xiao_shi",
+        "price":"55",
+        "original_price":"69"
+      }}
+    ]
+  }
+}
+
 var data = {
   '/categories/mobileHome.json': mobileHomeJson,
   '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
@@ -4630,4 +4676,6 @@ var data = {
   '/api_orders/product_detail/293.json':productDetail, 
   '/api_orders/store_list.json': storeListJson, 
   '/shichituan.json': tryingsJson,
+  '/apiOrders/store_content/63.json': brandJson,
+  '/apiOrders/store_content/121.json': brandJson 
 }

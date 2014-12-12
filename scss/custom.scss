@@ -63,6 +63,14 @@ a{
   }
 }
 
+.card{
+  .item.item-text{
+    margin: 0.5em 0 0 0;
+    padding: 0;
+    border: 0;
+  }
+}
+
 .tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
   color: #29ac0e;
   .icon.icon-home {
@@ -256,6 +264,18 @@ a{
   }
 }
 
+.brand{
+  .card.product{
+    padding-top: 0.5em;
+    border-bottom: 1px #dddddd solid;
+    margin: 0;
+    .price-current{
+      font-size: 1.2em;
+      color: #ffa200;
+    }
+  }
+}
+
 .orders{
   
 }
@@ -321,5 +341,4 @@ a{
   .right{
     float:right;
   }
-
 }
