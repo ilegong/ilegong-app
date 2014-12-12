@@ -4,10 +4,10 @@
       <div class="row" ng-repeat="b in vm.brands" ng-if="$index % 2 == 0">
         <div class='brand card col col-50' ng-repeat="b in vm.brands.slice($index, $index+2)" ng-init="brand=b.Brand">
           <div class="item item-image">
-            <a ui-sref="app.brand-detail.intro({id: brand.id})"><img src="{{brand.coverimg}}" alt="" width="182px"></a>  
+            <a ui-sref="brand.home({id: brand.id})"><img src="{{brand.coverimg}}" alt="" width="182px"></a>  
           </div>
           <div class="item brand-name" style="text-align:center;">
-            <a ui-sref="app.brand-detail({id: brand.id})">{{brand.name}}</a>
+            <a ui-sref="brand.home({id: brand.id})">{{brand.name}}</a>
           </div>
         </div>
       </div>

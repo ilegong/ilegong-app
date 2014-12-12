@@ -28,11 +28,6 @@
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
-
-      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html',controller: 'BrandsCtrl as vm'}}})
-      .state('app.sharing-detail', {url: '/sharings/:id', views: {'app-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl as vm'}}})
-      .state('app.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
-      .state('app.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
       
       .state('app.tryings', {url: '/tryings',views: {'app-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl as vm'}}})
       .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl as vm'}}})
@@ -60,7 +55,12 @@
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
-      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}});
+      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
+
+      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html',controller: 'BrandsCtrl as vm'}}})
+      .state('brand', state("/brands/:id", "brand.html", BrandCtrl, {abstract: true}))
+      .state('brand.home', {url: '/home', views: {'brand-home': {templateUrl: 'brand.home.html',controller: 'BrandHomeCtrl as vm'}}})
+      .state('brand.intro', {url: '/intro', views: {'brand-intro': {templateUrl: 'brand.intro.html',controller: 'BrandIntroCtrl as vm'}}})
 
     $urlRouterProvider.otherwise('/app/home');
   }
@@ -257,6 +257,10 @@
       return pState==$rootScope.couponStatus['UNUSED'].state?true:false;
     }
   //--coupon state
+  }
+
+  function BrandCtrl(){
+
   }
 })();
 

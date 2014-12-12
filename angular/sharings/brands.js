@@ -3,7 +3,8 @@
 
   angular.module('ilegong.brands', ['app.services'])
   .controller('BrandsCtrl', BrandsCtrl)
-  .controller('SharingDetailCtrl', SharingDetailCtrl)
+  .controller('BrandHomeCtrl', BrandHomeCtrl)
+  .controller('BrandIntroCtrl', BrandIntroCtrl)
 
   /* @ngInject */
   function BrandsCtrl($rootScope, $scope, Brands){
@@ -19,9 +20,14 @@
   }
 
   /* @ngInject */
-  function SharingDetailCtrl($rootScope, $scope){
+  function BrandHomeCtrl($rootScope, $scope){
     $rootScope.hideTabs = true;
     $scope.sharing = new Sharing(1, '阿里巴巴', '李瑞', 'http://www.tongshijia.com/brands/20141117/qu_na_er_li_rui.html', 'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/858bbafb0fb_1117.jpg')
   }
 
+  /* @ngInject */
+  function BrandIntroCtrl($rootScope, $scope){
+    $rootScope.hideTabs = true;
+    $scope.sharing = new Sharing(1, '阿里巴巴', '李瑞', 'http://www.tongshijia.com/brands/20141117/qu_na_er_li_rui.html', 'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/858bbafb0fb_1117.jpg')
+  }
 })(window, window.angular);
