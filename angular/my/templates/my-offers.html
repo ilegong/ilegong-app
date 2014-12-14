@@ -1,23 +1,25 @@
 <ion-view title="红包">
   <ion-content >
     <div class="list">
-      <div class="item" ng-repeat="item in vm.offers">
+
+      <div class="item" ng-repeat="item in vm.sharedOffers">
           <div class="row">
             <div class="col col-25">
-              {{item.price | currency:'￥'}}
+              {{(item.SharedOffer.total_number / 100) | currency:'￥'}}
             </div>
             <div class="col-50">
               <div>
-                {{item.name}}
+               
+                {{item.SharedOffer.name}}
               </div>
               <div>
-                {{item.date}}前有效
+                {{item.SharedOffer.start}}前有效</p>这个是错误的！需要计算截止时间并实时判断有效性
               </div>
             </div>
             <div class="col">
-              <a class="button {{offerStatus['UNUSED'].state == item.state?'button-assertive':'button-static'}}"  href="{{item.linkUrl}}">
-                {{offerStatus['UNUSED'].state == item.state?'去使用':getOfferValue(item.state)}}
-              </a>
+              <div class="button {{OfferIsValid(item.SharedOffer.status)?'button-assertive':'button-static'}}"   >
+                {{OfferIsValid(item.SharedOffer.status)?'去使用':getOfferValue(item.SharedOffer.status)}}
+              </div>
             </div>
           </div>
       </div>

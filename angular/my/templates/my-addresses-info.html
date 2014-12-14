@@ -3,6 +3,7 @@
   		<h4>
   			常用地址
   		</h4>
+
       <div class="list">
         <div  ng-repeat="address in addresses" >
           <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " style="background-color:{{values.getDefColor($index)}};">
@@ -62,7 +63,7 @@
           <div class="col">
             
               <div >
-                <select id="selectRegion_1" ng-model="values.editAddress.region_1_model" ng-options="m.title for m in regionSelectItems" ng-change="values.editAddress.region_2_model='';values.editAddress.region_3_model='';">
+                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="values.editAddress.region_2_model='';values.editAddress.region_3_model='';vm.getCities(vm.provinceModel.id);">
                   <option value="">-- 请选择 --</option>
     
                 </select>
@@ -70,12 +71,12 @@
         
               
               <div >
-                <select id="selectRegion_2" ng-model="values.editAddress.region_2_model" ng-options=" m.title for m in values.editAddress.region_1_model.content" ng-change="values.editAddress.region_3_model='';">
+                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="values.editAddress.region_3_model='';vm.getCounties(vm.cityModel.id);">
                   <option value="">-- 请选择 --</option>
                 </select>
               </div>
               <div >
-                <select id="selectRegion_3" ng-model="values.editAddress.region_3_model" ng-options=" m.title for m in values.editAddress.region_2_model.content" ng-change="">
+                <select id="selectRegion_3" ng-model="vm.countyModel" ng-options=" m.name for m in vm.counties" ng-change="">
                   <option value="">-- 请选择 --</option>
                 </select>
               </div>

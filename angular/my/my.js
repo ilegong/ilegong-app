@@ -99,10 +99,13 @@
         $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
 
   }
-  function MyAddressesInfoCtrl($scope,$rootScope)
+  function MyAddressesInfoCtrl($scope,$rootScope,Orders)
   {
+
+    var vm = this;
+    active();
     $rootScope.hideTabs = true;
- 
+    
     $scope.accessEditVisible=false;
     $scope.addresses=[
                                       new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
@@ -162,10 +165,69 @@
       }
       $scope.addresses[index].def=true;
     }
+
+
+    function active()
+    {
+      Orders.allProvince().then(function(data){
+          vm.provincesT = data ;
+          vm.provinces = Array();
+ 
+          for(var zzz in vm.provincesT)
+          {
+           vm.provinces.push({'id':zzz,'name':vm.provincesT[zzz]});
+          }
+        }
+      );
+      
+    }
+    vm.getCities = function(id)
+    {
+      if(id==null)
+      {
+        vm.cities = null;
+        vm.counties = null;
+        return;
+      }
+      Orders.getCities(vm.provinceModel.id).then(function(data){
+        vm.citiesT = data;
+        vm.cities = Array();
+        for(var zzz in vm.citiesT)
+        {
+          vm.cities.push({'id':zzz,'name':vm.citiesT[zzz]});
+        }
+ 
+
+      })
+
+        
+    }
+    vm.getCounties = function(id)
+    {
+      if(id == null)
+      {
+        vm.counties = null;
+        return;
+
+      }
+      Orders.getCounties(id).then(function(data){
+        vm.countiesT = data;
+        vm.counties = Array();
+
+        for(var zzz in vm.countiesT)
+        {
+          vm.counties.push({id:zzz,name:vm.countiesT[zzz]});
+        }
+
+    })
+    }
+
   }
-  function MyCouponsCtrl($scope,$rootScope)
+  function MyCouponsCtrl($scope,$rootScope,Coupons)
   {
     $rootScope.hideTabs = true;
+    var vm = this;
+    active();
     $scope.coupons = [
       new Coupon('铁棍山药2','n1',1,12.3,'date1','date2','http://baidu.com'),
       new Coupon('铁棍山药3','n1',1,1.3,'date1','date2','http://baidu.com'),
@@ -174,7 +236,19 @@
       new Coupon('铁棍山药6','n1',3,12.3,'date1','date2','http://baidu.com'),
       new Coupon('铁棍山药7','n1',3,12.3,'date1','date2','http://baidu.com')
     ]
-
+    function active()
+    {
+      Coupons.list(1).then(function(data){
+        vm.coupons = data.coupons;
+        var brandsT = data.brands;  
+        vm.brands = Array();
+        for(var zzz in brandsT)
+        {
+          vm.brands[zzz] = brandsT[zzz];
+        }
+        
+      })
+    }
   }
   function MyOffersCtrl($scope,$rootScope,$http,Offers)
   {
@@ -183,8 +257,19 @@
     active();
     function active()
     {
-      Offers.list().then(function(data){
-        vm.offers = data.offers;
+      Offers.list(1).then(function(data){
+        vm.sharedOffers = data.sharedOffers;
+        vm.expiredIds = data.expiredIds;
+        vm.soldOuts = data.soldOuts;
+        var brandsT = data.brands;
+        vm.brands = Array();
+        for(var zzz in brandsT)
+        {
+
+          vm.brands[zzz] = brandsT[zzz];
+      
+        }
+
       });
 
     }
@@ -194,15 +279,17 @@
     $rootScope.hideTabs = true;
     var vm = this;
     active();
-   
+    
     vm.stateFilter = -1;
     function active()
     {
+ 
       Orders.list().then(function(data){
         vm.orders = data.orders;
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
+    
       });
 
     }

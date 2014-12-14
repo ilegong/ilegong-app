@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', [])
-  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
@@ -17,7 +17,8 @@
   .service("Brands", Brands)
 
   .service("Tryings", Tryings)
-
+  .service("Offers",Offers)
+  .service("Coupons",Coupons)
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -28,7 +29,7 @@
 
     function get(url){
 
-     // return deferred(data[url]);
+      return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -96,16 +97,37 @@
     }
   }
 
-  function Orders(Base){
+  function Orders(Base,software){
     var self = this;
 
     return {
-      list: list
+      list: list,
+      allProvince: allProvince,
+      getCities:getCities,
+      getCounties:getCounties
     }
 
     function list(){
        return Base.get('/api_orders/mine.json?token=1');
 
+    }
+    function allProvince()
+    {
+      return Base.get('/Locations/get_province.json');
+    }
+    function getCities(id)
+    {
+      if(software.staticData)
+        return Base.get('cities');
+      else
+        return Base.get('/Locations/get_city.json?provinceId='+id);
+    }
+    function getCounties(id)
+    {
+      if(software.staticData)
+        return Base.get('counties');
+      else
+        return Base.get('/Locations/get_county.json?cityId='+id);
     }
   }
 
@@ -174,6 +196,40 @@
 
     function list(){
       return Base.get('/shichituan.json');
+    }
+  }
+  function Offers($log,Base,software)
+  {
+    var self = this;
+    return{
+      list:list
+    }
+    function list(token){
+        if(software.staticData)
+        {
+          return Base.get('Offers');
+        }else
+        {
+         return Base.get('/api_orders/my_offers?token='+token);
+        }
+    }
+  }
+  function Coupons($log,Base,software)
+  {
+    var self = this;
+    return{
+      list:list
+    }
+    function list(token)
+    {
+      if(software.staticData)
+      {
+        return Base.get('Coupons');
+      }
+      else
+      {
+        return Base.get('/api_orders/my_coupons.json?token='+token);
+      }
     }
   }
 })(window, window.angular);

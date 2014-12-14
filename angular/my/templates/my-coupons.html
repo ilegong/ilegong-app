@@ -1,30 +1,32 @@
 <ion-view title="优惠券">
   <ion-content >
     <div class="list coupons">
-      <div class="item" ng-repeat="item in coupons">
+      <div class="item" ng-repeat="item in vm.coupons">
         <div>
           <h4 class="title">
             <span>
-              {{item.title}}
+              {{item.Coupon.name}}
             </span>
             <span>
-              {{item.name}}
+              {{vm.brands[item.Coupon.brand_id].Brand.name}}
             </span>
-            <span class="value" style="background-color:{{getCouponColor(item.state)}};">
-              {{getCouponValue(item.state)}}
+            <span class="value" style="background-color:{{getCouponColor(item.Coupon.status)}};">
+              {{getCouponValue(item.Coupon.status)}}
             </span>
-
+          </p>
             <span class="priceText">
             面值:
             </span>
+
             <span class="priceValue">
-              {{item.price | currency:'￥'}}
+              {{item.Coupon.reduced_price /100 | currency:'￥'}}
             </span>
           </h4>
         </div>
+      </p>
         <div>
           有效期：
-          {{item.date_begin}} - {{item.date_end}}
+          {{item.Coupon.valid_begin}} - {{item.Coupon.valid_end}}
         </div>
         <div ng-show="isCouponAvailable(item.state)" class="goShopText">
           去

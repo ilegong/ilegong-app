@@ -210,9 +210,10 @@
   //offer state
 
     $rootScope.offerStatus = {
-      'UNUSED':{state:1,value:'未使用'},
-      'USED':{state:2,value:'已使用'},
-      'OVERDUE':{state:3,value:'已过期'}
+      'NEW':{state:0,value:'新的'},
+      'GOING':{state:3,value:'可以使用'},
+      'EXPIRED':{state:1,value:'已过期'},
+      'INVALID':{state:2,value:'已失效'}
     }
     $rootScope.getOfferValue = function(pState)
     {
@@ -224,12 +225,25 @@
       }
       return '';
     }
+    $rootScope.OfferIsValid = function(status)
+    {
+
+      if(status == $rootScope.offerStatus['NEW'].state || status == $rootScope.offerStatus['GOING'].state)
+      {
+
+        return true;
+      }
+
+      return false;
+    }
   //--offer state
   //coupon state
     $rootScope.couponStatus = {
-      'UNUSED':{state:1,value:'未使用',color:'#73a839'},
+      'VALID':{state:1,value:'有效',color:'#73a839'},
+      'TO_USE':{state:1,value:'可用',color:'#73a839'},
       'USED':{state:2,value:'已使用',color:'#999'},
-      'OVERDUE':{state:3,value:'已过期',color:'#999'}
+      'TO_SEND':{state:3,value:'TO_SEND',color:'#999'},
+      'SENT':{state:1,value:'SENT',color:'#999'}
     }
     $rootScope.getCouponValue = function(pState)
     {
@@ -249,12 +263,12 @@
         {
           return $rootScope.couponStatus[key].color;
         }
-      }
+      } 
       return '';
     }
     $rootScope.isCouponAvailable = function(pState)
     {
-      return pState==$rootScope.couponStatus['UNUSED'].state?true:false;
+      return (pState==$rootScope.couponStatus['TO_USE'].state == pState || $rootScope.couponStatus['VALID'].state == pState);
     }
   //--coupon state
   }
