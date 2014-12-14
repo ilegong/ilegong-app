@@ -228,14 +228,7 @@
     $rootScope.hideTabs = true;
     var vm = this;
     active();
-    $scope.coupons = [
-      new Coupon('铁棍山药2','n1',1,12.3,'date1','date2','http://baidu.com'),
-      new Coupon('铁棍山药3','n1',1,1.3,'date1','date2','http://baidu.com'),
-      new Coupon('铁棍山药4','n1',2,1,'date1','date2','http://baidu.com'),
-      new Coupon('铁棍山药5','n1',2,12.31,'date1','date2','http://baidu.com'),
-      new Coupon('铁棍山药6','n1',3,12.3,'date1','date2','http://baidu.com'),
-      new Coupon('铁棍山药7','n1',3,12.3,'date1','date2','http://baidu.com')
-    ]
+
     function active()
     {
       Coupons.list(1).then(function(data){

@@ -3,12 +3,12 @@
 
   angular
   .module('app.services', [])
-  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
   .service('Orders',Orders)
-  .service('Offers',Offers)
+
 
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
@@ -29,7 +29,7 @@
 
     function get(url){
 
-      return deferred(data[url]);
+      //return deferred(data[url]);
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -131,27 +131,6 @@
     }
   }
 
-  function Offers(Base){
-    var self = this;
-
-    return {
-      list: list
-    }
-
-    function list(){
-      // return Base.get('/categories/mobileHome.json');
-      var sample = {offers:[
-      new Offer('n1','d1',11.1,1,'http://baidu.com'),
-      new Offer('n2','d2',3.54,1,'http://baidu.com'),
-      new Offer('n3','d3',3,2,'http://baidu.com'),
-      new Offer('n4','d4',1.2,2,'http://baidu.com'),
-      new Offer('n5','d5',5.5,3,'http://baidu.com'),
-      new Offer('n6','d6',3.2,3,'http://baidu.com')
-
-    ]};
-      return Base.deferred(sample);
-    }
-  }
   function OrderDetail(Base)
   {
     var self = this;
@@ -210,7 +189,7 @@
           return Base.get('Offers');
         }else
         {
-         return Base.get('/api_orders/my_offers?token='+token);
+         return Base.get('/api_orders/my_offers.json?token='+token);
         }
     }
   }
