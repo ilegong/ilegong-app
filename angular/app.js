@@ -1,15 +1,12 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.brands', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.stores', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
   .config(extendExceptionHandler)
   .config(configCompileProvider)
-
-  var state = state;
-  var subState = subState;
 
   function initApp($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -24,15 +21,10 @@
 
   function configStates($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('app', state("/app", "tabs.html", AppCtrl, {abstract: true}))
+      .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
-
-      .state('app.brands', {url: '/brands', views: {'app-brands': {templateUrl: 'brands.main.html',controller: 'BrandsCtrl as vm'}}})
-      .state('app.sharing-detail', {url: '/sharings/:id', views: {'app-sharings': {templateUrl: 'sharing-detail.html',controller: 'SharingDetailCtrl as vm'}}})
-      .state('app.sharing-detail.intro', {url: '/intro', templateUrl: 'sharing-detail-intro.html'})
-      .state('app.sharing-detail.products', {url: '/products', templateUrl: 'sharing-detail-products.html'})
       
       .state('app.tryings', {url: '/tryings',views: {'app-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl as vm'}}})
       .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl as vm'}}})
@@ -60,7 +52,12 @@
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
-      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}});
+      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
+
+      .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
+      .state('store', {url: '/stores/:id', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
+      .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
+      .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
 
     $urlRouterProvider.otherwise('/app/home');
   }
@@ -111,17 +108,8 @@
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
   }
 
-  function state(url, templateUrl, controller, options){
-    return _.extend({url: url, templateUrl: templateUrl, controller: controller}, options || {});
-  }
-  function subState(url, templateUrl, controller, options){
-    var menuContent = {templateUrl: templateUrl, controller: controller || function(){}}
-    return _.extend({url: url, views: {'menuContent' : menuContent}}, options || {})
-  }
-
   function AppCtrl($scope,$rootScope)
   {
-  //address region
     $rootScope.regionSelectItems=[
                               new RegionSelectItem('beijing',1,[
                                 new RegionSelectItem('beijing-1',11,[
@@ -272,5 +260,6 @@
     }
   //--coupon state
   }
+
 })();
 

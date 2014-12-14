@@ -1,0 +1,16 @@
+<ion-view title="朋友说">
+  <ion-content class='stores'>
+    <div class='list'>
+      <div class="row" ng-repeat="s in vm.stores" ng-if="$index % 2 == 0">
+        <div class='store card col col-50' ng-repeat="s in vm.stores.slice($index, $index+2)" ng-init="store=s.Brand">
+          <div class="item item-image">
+            <a ui-sref="store.home({id: store.id})"><img src="{{store.coverimg}}" alt="" width="182px"></a>  
+          </div>
+          <div class="item store-name" style="text-align:center;">
+            <a ui-sref="store.home({id: store.id})">{{store.name}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

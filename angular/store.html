@@ -3,29 +3,24 @@
   Each tab's child <ion-nav-view> directive will have its own 
   navigation history that also transitions its views in and out.
 -->
-<ion-tabs class="tabs-icon-top" ng-class="{'tabs-item-hide': hideTabs}">
+<ion-tabs class="tabs-icon-top">
   <!-- Dashboard Tab -->
-  <ion-tab title="首页" icon="icon-home" href="#/app/home">
+  <ion-tab title="朋友说" icon="icon-pyshuo" href="#/app/home">
     <ion-nav-view name="app-home"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="分享圈" icon="icon-stores" href="#/app/stores">
-    <ion-nav-view name="app-stores"></ion-nav-view>
+  <ion-tab title="商铺首页" icon="icon-home" href="#/stores/{{app.storeId}}/home">
+    <ion-nav-view name="store-home"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="试吃团" icon="icon-tryings" href="#/app/tryings">
-    <ion-nav-view name="app-tryings"></ion-nav-view>
+  <ion-tab title="我的故事" icon="icon-tryings" href="#/stores/{{app.storeId}}/intro">
+    <ion-nav-view name="store-intro"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
   <ion-tab title="购物车" icon="icon-shopping-carts" href="#/app/shoppingCarts">
     <ion-nav-view name="app-shopping-carts"></ion-nav-view>
-  </ion-tab>
-
-  <!-- Account Tab -->
-  <ion-tab title="我的" icon="icon-my" href="#/app/my">
-    <ion-nav-view name="app-my"></ion-nav-view>
   </ion-tab>
 </ion-tabs>

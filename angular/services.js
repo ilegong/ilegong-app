@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', [])
-  .value('software', {staticData:false,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Products', Products)
 
@@ -14,7 +14,7 @@
   .service('OrderDetail',OrderDetail)
   .service('UserDetail',UserDetail)
 
-  .service("Brands", Brands)
+  .service("Stores", Stores)
 
   .service("Tryings", Tryings)
   .service("Offers",Offers)
@@ -29,7 +29,11 @@
 
     function get(url){
 
-      //return deferred(data[url]);
+
+      return deferred(data[url]);
+
+      //return deferred(FakeData.get(url));
+
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -66,6 +70,7 @@
 
     }
     function getProduct(id){
+
       if(software.staticData)
         return Base.get('/api_orders/product_detail/293.json')
       else
@@ -82,6 +87,9 @@
         return Base.get('productComment')
       else
         return Base.get('/comments/getlist/Product/'+id+'.json')
+
+//      return Base.get('/api_orders/product_detail/'+id+'.json'); 
+
     }
   }
 
@@ -153,15 +161,23 @@
   }
 
   /* @ngInject */
-  function Brands($log, Base){
+  function Stores($log, Base){
     var self = this;
 
     return {
-      list: list
+      list: list, 
+      getStore: getStore, 
+      getStoreIntro: getStoreIntro
     }
 
     function list(){
       return Base.get('/api_orders/store_list.json');
+    }
+    function getStore(id){
+      return Base.get('/apiOrders/store_content/' + id + '.json');
+    }
+    function getStoreIntro(id){
+      return Base.get('/apiOrders/store_story/' + id + '.json');
     }
   }
 

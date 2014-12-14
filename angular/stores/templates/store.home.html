@@ -1,0 +1,21 @@
+<ion-view title="{{app.store.info.name}}">
+  <ion-content class='store'>
+    <div class='list'>
+      <div class="row" ng-repeat="p in app.store.products" ng-if="$index % 2 == 0">
+        <div class='product card col col-50' ng-repeat="p in app.store.products.slice($index, $index+2)" ng-init="product=p.Product">
+          <a ui-sref="app.product-detail.intro({id: product.id})">
+            <div class="item item-image">
+              <img title="{{product.title}}" src="{{product.coverimg}}">
+            </div>
+            <div class='item item-text'>
+              <strong>{{product.name}}</strong>
+            </div>
+          </a>
+          <div class='item item-text'>
+            <span class='price-current'><strong>¥{{product.price}}</strong></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

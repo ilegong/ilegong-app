@@ -1,3 +1,4 @@
+
 var mobileHomeJson = {  
   "brands":{  
     "8":{  
@@ -4624,6 +4625,7 @@ var tryingsJson = {
   ]
 };
 
+
 var allProvince = {"110100":"\u5317\u4eac","120100":"\u5929\u6d25","130000":"\u6cb3\u5317","140000":"\u5c71\u897f","150000":"\u5185\u8499\u53e4","210000":"\u8fbd\u5b81","220000":"\u5409\u6797","230000":"\u9ed1\u9f99\u6c5f","310100":"\u4e0a\u6d77","320000":"\u6c5f\u82cf","330000":"\u6d59\u6c5f","340000":"\u5b89\u5fbd","350000":"\u798f\u5efa","360000":"\u6c5f\u897f","370000":"\u5c71\u4e1c","410000":"\u6cb3\u5357","420000":"\u6e56\u5317","430000":"\u6e56\u5357","440000":"\u5e7f\u4e1c","450000":"\u5e7f\u897f","460000":"\u6d77\u5357","500100":"\u91cd\u5e86","510000":"\u56db\u5ddd","520000":"\u8d35\u5dde","530000":"\u4e91\u5357","540000":"\u897f\u85cf","610000":"\u9655\u897f","620000":"\u7518\u8083","630000":"\u9752\u6d77","640000":"\u5b81\u590f","650000":"\u65b0\u7586","710000":"\u53f0\u6e7e","810000":"\u9999\u6e2f","820000":"\u6fb3\u95e8"}
 var cities = {"110101":"\u4e1c\u57ce","110102":"\u897f\u57ce","110105":"\u671d\u9633","110106":"\u4e30\u53f0","110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0","110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71","110112":"\u901a\u5dde","110113":"\u987a\u4e49","110114":"\u660c\u5e73","110115":"\u5927\u5174","110116":"\u6000\u67d4","110117":"\u5e73\u8c37","110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"}
 var counties = {"110101001":"\u4e1c\u534e\u95e8\u8857\u9053","110101002":"\u666f\u5c71\u8857\u9053","110101003":"\u4ea4\u9053\u53e3\u8857\u9053","110101004":"\u5b89\u5b9a\u95e8\u8857\u9053","110101005":"\u5317\u65b0\u6865\u8857\u9053","110101006":"\u4e1c\u56db\u8857\u9053","110101007":"\u671d\u9633\u95e8\u8857\u9053","110101008":"\u5efa\u56fd\u95e8\u8857\u9053","110101009":"\u4e1c\u76f4\u95e8\u8857\u9053","110101010":"\u548c\u5e73\u91cc\u8857\u9053","110101011":"\u524d\u95e8\u8857\u9053","110101012":"\u5d07\u6587\u95e8\u5916\u8857\u9053","110101013":"\u4e1c\u82b1\u5e02\u8857\u9053","110101014":"\u9f99\u6f6d\u8857\u9053","110101015":"\u4f53\u80b2\u9986\u8def\u8857\u9053","110101016":"\u5929\u575b\u8857\u9053","110101017":"\u6c38\u5b9a\u95e8\u5916\u8857\u9053"}
@@ -4650,3 +4652,86 @@ var data = {
   'Coupons':Coupons
 
 }
+
+var brandJson = {  
+  "content":{
+    "info":{
+       "name":"\u9c9clife-Adi",
+       "slug":"xian_life_adi",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/e679d5dbfaf_1010.jpg",
+       "weixin_id":"",
+       "notice":""
+    },
+    "products":[  
+      {"Product":{  
+        "id":"213",
+        "name":"\u65e5\u6e05Nissin\u725b\u5976\u5de7\u514b\u529b\u7389\u7c73\u8106\u7247",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/043e321f3a8_1018.jpg",
+        "slug":"ri_qing_nissinniu_nai_qiao_ke_li_yu_mi_cui_pian",
+        "price":"9.8",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"198",
+        "name":"\u53ef\u73d1 Collon \u5976\u6cb9\u5939\u5fc3\u534e\u592b\u5706\u7b52\u997c\u5e72",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/83912a790ec_1013.jpg",
+        "slug":"ke_long_collon_nai_you_jia_xin_hua_fu_yuan_tong_bing_gan",
+        "price":"21.5",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"214",
+        "name":"\u60a0\u54c8UHA\u5473\u89c9\u7cd6e-ma\u795e\u5947\u6362\u5473\u6da6\u5589\u7cd6",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/aa0cc3ed544_1018.jpg",
+        "slug":"you_ha_uhawei_jue_tang_e_mashen_qi_huan_wei_run_hou_tang",
+        "price":"14",
+        "original_price":null
+      }},
+      {"Product":{  
+        "id":"263",
+        "name":"\u5404\u56fd\u8fdb\u53e3\u840c\u5b9d\u5c0f\u98df",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/d527a86c9dc_1113.jpg",
+        "slug":"ge_guo_jin_kou_meng_bao_xiao_shi",
+        "price":"55",
+        "original_price":"69"
+      }}
+    ]
+  }
+}
+
+var brandIntroJson = {
+   "Brand":{
+      "content":"<p style=\"max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; color: rgb(62, 62, 62); font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', \u5fae\u8f6f\u96c5\u9ed1, Arial, sans-serif; font-size: 16px; line-height: 25.6000003814697px;\"><img data-=\"\" data-ratio=\"1.5\" data-s=\"300,640\" data-w=\"\" src=\"http:\/\/mmbiz.qpic.cn\/mmbiz\/UuGM2hE8WNEicjZAyDEiaLOThI08J7JhwzhCrXrGarvxDK57rpjN9OKWO8eIW3hNdEK0dLojVKStTSxBWPgrqEcA\/0\" style=\"max-width: 100%; word-wrap: break-word !important; height: auto !important; width: auto !important; visibility: visible !important;\" \/><\/p>\r\n\r\n<p style=\"max-width: 100%; word-wrap: normal; min-height: 1em; white-space: pre-wrap; color: rgb(62, 62, 62); font-family: 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', \u5fae\u8f6f\u96c5\u9ed1, Arial, sans-serif; font-size: 16px; line-height: 25.6000003814697px;\">\u5927\u5bb6\u597d\uff0c\u6211\u53eb\u5218\u4e19\u5b66\uff0c\u662f\u6765\u81ea\u4e8e\u5c71\u4e1c\u7701\u5e73\u5ea6\u5e02\u4e00\u4e2a\u519c\u6751\u7684\u6750\u6599\u5b66\u535a\u58eb\uff0c\u867d\u7136\u5728\u5317\u4eac\u5df2\u7ecf\u5f85\u4e86\u5341\u51e0\u5e74\u4e86\uff0c\u4f46\u5bf9\u5bb6\u4e61\u7684\u7279\u4ea7\u6709\u7740\u96be\u4ee5\u5272\u820d\u7684\u60c5\u6000\u548c\u65e0\u6cd5\u63a9\u9970\u7684\u81ea\u8c6a\uff0c\u65e0\u8bba\u4e0a\u5b66\u671f\u95f4\u8fd8\u662f\u5de5\u4f5c\u4ee5\u540e\uff0c\u6bcf\u6b21\u4ece\u5bb6\u56de\u5317\u4eac\u90fd\u4f1a\u5e26\u56de\u5bb6\u4e61\u7684\u7279\u4ea7\u4e0e\u5468\u56f4\u7684\u670b\u53cb\u5206\u4eab\uff0c\u65e0\u8bba\u662f\u82f9\u679c\u3001\u8349\u8393\u3001\u6a31\u6843\u3001\u6843\u5b50\u7b49\u6c34\u679c\uff0c\u8fd8\u662f\u82b1\u751f\u3001\u7389\u7c73\u7b49\u90fd\u6536\u83b7\u597d\u8bc4\u65e0\u6570\uff0c\u73b0\u5728\u5e0c\u671b\u5c06\u81ea\u5bb6\u4ea7\u7684\u82f9\u679c\u7b49\u4e0e\u66f4\u591a\u7684\u4eba\u5206\u4eab\u3002<\/p>\r\n"
+   }
+}
+
+var FakeData = function(){
+  var dataMap = {
+    '/categories/mobileHome.json': mobileHomeJson,
+    '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
+    '/api_orders/mine.json?token=1' : ordersJson,
+    'orderDetail' : orderDetail,
+    'carts':carts,
+    'myDetail':myDetail,
+    '/api_orders/store_list.json': storeListJson, 
+    '/shichituan.json': tryingsJson
+  }
+  return {
+    get: get
+  }
+  function get(url){
+    if(typeof(dataMap[url]) != 'undefined'){
+      return dataMap[url];
+    }
+    if(/\/api_orders\/product_detail\/\d+.json/.test(url)){
+      return productDetail;
+    }
+    if(/\/apiOrders\/store_content\/\d+.json/.test(url)){
+      return brandJson;
+    }
+    if(/\/apiOrders\/store_story\/\d+.json/.test(url)){
+      return brandIntroJson;
+    }
+  }
+}();
+

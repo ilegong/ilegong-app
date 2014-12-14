@@ -40,7 +40,7 @@ a{
   .icon.icon-home {
     background-position: 0 -2.083em;
   }
-  .icon.icon-brands {
+  .icon.icon-stores {
     background-position: -4.167em -2.083em;
   }
   .icon.icon-tryings {
@@ -52,8 +52,22 @@ a{
   .icon.icon-my {
     background-position: -8.333em -2.083em;
   }
+  .icon.icon-pyshuo{
+    background-position: -13em -4.5em;
+  }
+  .icon.icon-store-intro{
+    background-position: -6.25em -2.083em;
+  }
   .tab-title{
     display: block;
+  }
+}
+
+.card{
+  .item.item-text{
+    margin: 0.5em 0 0 0;
+    padding: 0;
+    border: 0;
   }
 }
 
@@ -62,7 +76,7 @@ a{
   .icon.icon-home {
     background-position: 0 0;
   }
-  .icon.icon-brands {
+  .icon.icon-stores {
     background-position: -4.167em 0;
   }
   .icon.icon-tryings {
@@ -74,10 +88,14 @@ a{
   .icon.icon-my {
     background-position: -8.333em 0;
   }
+  .icon.icon-store-intro{
+    background-position: -6.25em 0;
+  }
 }
 
 .slider .slider-slides .slider-slide a img {
   height: 12em;
+  width: 100%;
 }
 
 .my{
@@ -115,6 +133,9 @@ a{
     .product{
       text-align: center;
       .product-name{
+        display: inline-block;
+        line-height: 1em;
+        width: 100%;
         font-size: 0.833em;
         font-weight: normal;
         overflow: hidden;
@@ -235,13 +256,27 @@ a{
   } 
 }
 
-.brands{
-  .brand{
+.stores{
+  .store.card{
+    padding: 0 5px;
+    margin: 0 0 1em 0;
     .item-image{
       min-height: 12em;
     }
-    .brand-name{
+    .store-name{
       padding: 4px 6px;
+    }
+  }
+}
+
+.store{
+  .card.product{
+    padding-top: 0.5em;
+    border-bottom: 1px #dddddd solid;
+    margin: 0;
+    .price-current{
+      font-size: 1.2em;
+      color: #ffa200;
     }
   }
 }
@@ -311,7 +346,6 @@ a{
   .right{
     float:right;
   }
-
 }
 
 .productDetail{
