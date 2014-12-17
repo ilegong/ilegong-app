@@ -12,13 +12,15 @@
 
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
-  .service('UserDetail',UserDetail)
+
 
   .service("Stores", Stores)
 
   .service("Tryings", Tryings)
   .service("Offers",Offers)
   .service("Coupons",Coupons)
+  .service('UserDetail',UserDetail)
+  .service('Addresses',Addresses)
   /* @ngInject */
   function Base($http, $q, $log, software){
     var self = this;
@@ -149,16 +151,7 @@
       return Base.get('orderDetail')
     }
   }
-  function UserDetail(Base)
-  {
-    var self = this;
-    return {
-      list:list
-    }
-    function list(){
-      return Base.get('myDetail');
-    }
-  }
+
 
   /* @ngInject */
   function Stores($log, Base){
@@ -207,6 +200,57 @@
         {
          return Base.get('/api_orders/my_offers.json?token='+token);
         }
+    }
+  }
+
+  function UserDetail($log,Base,software)
+  {
+    var self = this;
+    return{
+      list:list
+    }
+    function list(token)
+    {
+      if(software.staticData)
+      {
+        return Base.get('Profile');
+      }
+      else
+      {
+        return Base.get('/api_orders/my_profile.json?token='+ token);
+      }
+
+    }
+  }
+  function Addresses(Base,software)
+  {
+    var self = this;
+    return{
+      list:list,
+      getAddress:getAddress
+    }
+    function list(token)
+    {
+
+      if(software.staticData)
+      {
+        return Base.get('Addresses');
+      }
+      else
+      {
+        return Base.get('/api_orders/order_consignees.json?token='+ token);
+      }
+    }
+    function getAddress(provinceId,cityId,countyId)
+    {
+      if(software.staticData)
+      {
+        return Base.get('Address');
+      }
+      else
+      {
+        return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId);
+      }
     }
   }
   function Coupons($log,Base,software)

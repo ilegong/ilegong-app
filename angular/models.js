@@ -135,15 +135,22 @@ var UserInfoWithAddresses= function(pUserId,pUserName,pNickName,pImgUrl,pSex,pCo
 
 };
 
-var AddressItem = function(pDef,pName,pRegion_1,pRegion_2,pRegion_3,pAddress,pTelephone)
+var AddressItem = function(id,name,area,address,mobilephone,telephone,email,postcode,province_id,city_id,county_id)
+
 {
-  this.def = pDef;
-  this.name = pName;
-  this.region_1 = pRegion_1;
-  this.region_2 = pRegion_2;
-  this.region_3 = pRegion_3;
-  this.address = pAddress;
-  this.telephone = pTelephone;
+  this.OrderConsignees={
+    'id':id,
+    'name':name,
+    'area':area,
+    'address':address,
+    'mobilephone':mobilephone,
+    'telephone':telephone,
+    'email':email,
+    'postcode':postcode,
+    'province_id':province_id,
+    'city_id':city_id,
+    'county_id':county_id
+  }
 };
 
 var OrderProductItem = function(pUserName,pTitle,pPrice,pCount,pMessage)

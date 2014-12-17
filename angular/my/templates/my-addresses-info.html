@@ -5,16 +5,17 @@
   		</h4>
 
       <div class="list">
-        <div  ng-repeat="address in addresses" >
-          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " style="background-color:{{values.getDefColor($index)}};">
+        <div  ng-repeat="address in vm.addresses" >
+          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " ><!--style="background-color:{{values.getDefColor($index)}};">-->
 
             <input type="radio" name="group" />
           
-            <div class="item-content" style="background-color:{{values.getDefColor($index)}};">
-              {{address.name}}({{address.telephone}})
+            <div class="item-content"><!-- style="background-color:{{values.getDefColor($index)}};">-->
+              {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
-            <div > 
-              {{address.region_1 + address.region_2 + address.region_3}}
+            <div >
+
+              {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
             </div>
  
   
@@ -30,11 +31,13 @@
         			删除
         		</button>
         	</label>
+          <!--
         	<label ng-click="values.setDef($index);">
         		<button class="button button-static">
         			设置为默认
         		</button>
         	</label>
+        -->
         </div>
         <label class="item item-radio" ng-click="accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
           <input type="radio" name="group"/>
@@ -52,7 +55,7 @@
             收货人
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.name"/>
+            <input style="text" ng-model="values.editAddress.OrderConsignees.name"/>
           </div>
 
         </div>
@@ -63,7 +66,7 @@
           <div class="col">
             
               <div >
-                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="values.editAddress.region_2_model='';values.editAddress.region_3_model='';vm.getCities(vm.provinceModel.id);">
+                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="vm.cityModel='';vm.countyModel='';vm.getCities(vm.provinceModel.id);">
                   <option value="">-- 请选择 --</option>
     
                 </select>
@@ -71,7 +74,7 @@
         
               
               <div >
-                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="values.editAddress.region_3_model='';vm.getCounties(vm.cityModel.id);">
+                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="vm.countyModel='';vm.getCounties(vm.cityModel.id);">
                   <option value="">-- 请选择 --</option>
                 </select>
               </div>
@@ -80,6 +83,7 @@
                   <option value="">-- 请选择 --</option>
                 </select>
               </div>
+
           </div>
         </div>
         <div class="row">
@@ -87,7 +91,7 @@
             详细地址
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.address"/>
+            <input style="text" ng-model="values.editAddress.OrderConsignees.address"/>
           </div>
         </div>
         <div class="row">
@@ -95,11 +99,11 @@
             手机
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.telephone"/>
+            <input style="text" ng-model="values.editAddress.OrderConsignees.mobilephone"/>
           </div>  
         </div>
         <div class="row">
-          <button class="button button-assertive">
+          <button class="button button-assertive" ng-click="vm.confirm()">
             保存收货人信息
  
           </button>

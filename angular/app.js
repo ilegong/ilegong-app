@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.stores', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'ilegong.my', 'ilegong.tryings', 'ilegong.stores', 'ilegong.categories', 'ilegong.templates','ilegong.products','ilegong.carts','app.services'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
@@ -10,7 +10,7 @@
 
   function initApp($ionicPlatform) {
     $ionicPlatform.ready(function() {
-      if(window.cordova && window.cordova.plugins.Keyboard) {
+      if(window.cordova && window.cordova.plugins.Keyboard) {app
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
       if(window.StatusBar) {
@@ -34,11 +34,11 @@
       .state('app.my-account-register', {url: '/my/account-register', views: {'app-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
       .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
-      .state('app.my-list',{url:'/my-list',views:{'app-my':{templateUrl:'my-list.html',controller:'MyListCtrl as vm'}}})
+      
 
       .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
 
-      .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'MyOrderInfoCtrl as vm'}}})
+
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
       .state('app.my-orders',{url:'/my-orders',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
@@ -53,6 +53,7 @@
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
       .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
+      .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:id', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
@@ -108,8 +109,10 @@
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
   }
 
-  function AppCtrl($scope,$rootScope)
+  function AppCtrl($scope,$rootScope,Orders)
   {
+
+    //address info
     $rootScope.regionSelectItems=[
                               new RegionSelectItem('beijing',1,[
                                 new RegionSelectItem('beijing-1',11,[
@@ -165,10 +168,51 @@
           return {id:i,content:t.content[i]};
         }
         i++;
-      }
+      } 
       return null;
     }
+    $rootScope.allProvince = function()
+    {
+      var provinces = Array();
+      Orders.allProvince().then(function(data){
+          var provincesT = data ;
+          
+          
+          for(var zzz in provincesT)
+          {
 
+            provinces.push({'id':zzz,'name':provincesT[zzz]});
+          }
+
+      });
+      return provinces;
+    }
+    $rootScope.getCities = function(id)
+    {
+      var cities = Array();
+      Orders.getCities(id).then(function(data){
+        var citiesT = data;
+        for(var zzz in citiesT)
+        {
+          cities.push({'id':zzz,'name':citiesT[zzz]});
+        }
+      }
+      );
+      return cities;
+    }
+    $rootScope.getCounties = function(id)
+    {
+      var counties = Array();
+      Orders.getCounties(id).then(function(data)
+      {
+        var countiesT = data;
+        for(var zzz in countiesT)
+        {
+          counties.push({id:zzz,name:countiesT[zzz]});
+        }
+      });
+      return counties;
+    }
   //--address region
 
 

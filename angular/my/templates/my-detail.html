@@ -5,11 +5,10 @@
   		<a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
   			<div>
-          <span class="portraitText">
-            头像
-          </span>
-          <span class="portraitImg">
-            <img src="{{vm.userDetail.imgUrl}}"/>
+
+          <span >
+            <img src="{{vm.my_profile.User.image}}"/>
+
 
           </span>
         </div>
@@ -21,7 +20,7 @@
             昵称
           </span>
           <span class="right">
-            {{vm.userDetail.nickName}}
+            {{vm.my_profile.User.nickname}}
           </span>
         </div>
       </a>
@@ -32,7 +31,7 @@
             性别
           </span>
           <span class="right">
-            {{vm.userDetail.sex}}
+            {{vm.my_profile.User.sex==0?'女':'男'}}
           </span>
         </div>
       </a>
@@ -43,7 +42,7 @@
             单位
           </span>
           <span class="right">
-            {{vm.userDetail.company}}
+            {{vm.my_profile.User.companies}}
           </span>
         </div>
       </a>
@@ -54,7 +53,7 @@
             个性签名
           </span>
           <span class="right">
-            {{vm.userDetail.content}}
+            {{vm.my_profile.User.bio}}
           </span>
         </div>
       </a>
@@ -65,7 +64,7 @@
             手机号
           </span>
           <span class="right">
-            {{vm.userDetail.mobilephone}}
+            {{vm.my_profile.User.mobilephone}}
           </span>
         </div>
       </a>
@@ -76,7 +75,7 @@
             邮箱
           </span>
           <span class="right">
-            {{vm.userDetail.mail}}
+            {{vm.my_profile.User.email}}
           </span>
         </div>
       </a>
@@ -87,18 +86,7 @@
             用户名
           </span>
           <span class="right">
-            {{vm.userDetail.userName}}
-          </span>
-        </div>
-      </a>
-      <a class="item item-icon-right" >
-        <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            密码
-          </span>
-          <span class="right">
-            {{vm.userDetail.password}}
+            {{vm.my_profile.User.username}}
           </span>
         </div>
       </a>
@@ -109,7 +97,7 @@
             用户ID
           </span>
           <span class="right">
-            {{vm.userDetail.userId}}
+            {{vm.my_profile.User.id}}
           </span>
         </div>
       </a>

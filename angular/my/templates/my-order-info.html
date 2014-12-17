@@ -45,7 +45,7 @@
           <div class="col">
             
             <div >
-              <select id="selectRegion_1" ng-model="region_1_model" ng-options="m.title for m in regionSelectItems" ng-change="region_2_model='';region_3_model='';">
+              <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="region_2_model='';region_3_model='';vm.getCities(vm.provinceModel.id);">
                 <option value="">-- 请选择 --</option>
   
               </select>
@@ -53,13 +53,13 @@
         
             
             <div >
-              <select id="selectRegion_2" ng-model="region_2_model" ng-options="m.title for m in region_1_model.content" ng-change="region_3_model='';">
+              <select id="selectRegion_2" ng-model="vm.cityModel" ng-options="m.name for m in vm.cities" ng-change="region_3_model='';vm.getCounties(vm.cityModel.id);">
                 <option value="">-- 请选择 --</option>
               </select>
             </div>
     
             <div >
-              <select id="selectRegion_3" ng-model="region_3_model" ng-options="m.title for m in region_2_model.content" ng-change="">
+              <select id="selectRegion_3" ng-model="vm.countyModel" ng-options="m.name for m in vm.counties" ng-change="">
                 <option value="">-- 请选择 --</option>
               </select>
             </div>
