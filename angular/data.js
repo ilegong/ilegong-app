@@ -4688,44 +4688,33 @@ var brandIntroJson = {
 }
 
 var FakeData = function(){
-  var dataMap = {
+  var regExpMap = {
     '/categories/mobileHome.json': mobileHomeJson,
     '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
-    '/api_orders/mine.json?token=1' : ordersJson,
-    'orderDetail' : orderDetail,
-    'carts':carts,
-    'myDetail':myDetail,
+    '/api_orders/mine.json' : ordersJson,
+    'orderDetail': orderDetail,
+    '/carts': carts,
+    '/myDetail': myDetail,
     '/api_orders/store_list.json': storeListJson, 
     '/shichituan.json': tryingsJson, 
-    'productContent':productContent,
-    'productComment':productComment,
     '/api_orders/store_list.json': storeListJson, 
     '/shichituan.json': tryingsJson,
-    '/Locations/get_province.json':allProvince,
-    'cities':cities,
-    'counties':counties,
-    'Offers':Offers,
-    'Coupons':Coupons,
-    'Profile':Profile,
-    'Addresses':Addresses,
-    'Address':Address
+    '/Locations/get_province.json':allProvince, 
+    "/api_orders/product_detail/\\d+.json": productDetail, 
+    "/apiOrders/store_content/\\d+.json": brandJson, 
+    "/apiOrders/store_story/\\d+.json": brandIntroJson, 
+    "/apiOrders/product_content/\\d+.json": productContent, 
+    "/comments/getlist/Product/\\d+.json": productComment, 
+    "/Locations/get_city.json": cities, 
+    "/Locations/get_county.json": counties, 
+    "/api_orders/my_offers.json": Offers,
+    "/api_orders/my_coupons.json": Coupons, 
+    "/Locations/get_address.json": Address,
+    "/api_orders/order_consignees.json": Addresses,
+    "/api_orders/my_profile.json": Profile
   }
   return {
-    get: get
-  }
-  function get(url){
-    if(typeof(dataMap[url]) != 'undefined'){
-      return dataMap[url];
-    }
-    if(/\/api_orders\/product_detail\/\d+.json/.test(url)){
-      return productDetail;
-    }
-    if(/\/apiOrders\/store_content\/\d+.json/.test(url)){
-      return brandJson;
-    }
-    if(/\/apiOrders\/store_story\/\d+.json/.test(url)){
-      return brandIntroJson;
-    }
+    get: function(url){return _.find(regExpMap, function(v, k){return new RegExp(k).test(url)});}
   }
 }();
 

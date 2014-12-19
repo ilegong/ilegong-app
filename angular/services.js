@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {fakeData: true, app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -29,7 +29,9 @@
     }
 
     function get(url){
-      return deferred(FakeData.get(url));
+      if(software.fakeData){
+        return deferred(FakeData.get(url));
+      }
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -48,7 +50,7 @@
   }
 
   /* @ngInject */
-  function Users($window, $localForage, $log, $q, Base){
+  function Users($window, $localForage, $log, $q, software, Base){
     var self = this;
     self.user = null;
     $window.device = $window.device || {};
@@ -60,6 +62,10 @@
     }
 
     function loadUserLocally(){
+      if(software.fakeData){
+        return;
+      }
+
       return $localForage.getItem('user').then(function(item) {
         if(!_.isEmpty(item)){
           self.user = item;
@@ -92,26 +98,13 @@
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
-
-      if(software.staticData)
-        return Base.get('/api_orders/product_detail/293.json')
-      else
         return Base.get('/api_orders/product_detail/'+id+'.json'); 
     }
     function getProductContent(id){
-      if(software.staticData)
-        return Base.get('productContent')
-      else
-        return Base.get('/apiOrders/product_content/'+id+'.json')
+      return Base.get('/apiOrders/product_content/'+id+'.json')
     }
     function getProductComment(id){
-      if(software.staticData)
-        return Base.get('productComment')
-      else
-        return Base.get('/comments/getlist/Product/'+id+'.json')
-
-//      return Base.get('/api_orders/product_detail/'+id+'.json'); 
-
+      return Base.get('/comments/getlist/Product/'+id+'.json')
     }
   }
 
@@ -123,7 +116,6 @@
 
     function get(slug){
       return Base.get("/categories/tag/" + slug + ".json");
-
     }
   }
 
@@ -139,7 +131,6 @@
 
     function list(){
        return Base.get('/api_orders/mine.json?token=1');
-
     }
     function allProvince()
     {
@@ -147,17 +138,11 @@
     }
     function getCities(id)
     {
-      if(software.staticData)
-        return Base.get('cities');
-      else
-        return Base.get('/Locations/get_city.json?provinceId='+id);
+      return Base.get('/Locations/get_city.json?provinceId='+id);
     }
     function getCounties(id)
     {
-      if(software.staticData)
-        return Base.get('counties');
-      else
-        return Base.get('/Locations/get_county.json?cityId='+id);
+      return Base.get('/Locations/get_county.json?cityId='+id);
     }
   }
 
@@ -168,7 +153,7 @@
       list: list
     }
     function list(){
-      return Base.get('orderDetail')
+      return Base.get('/orderDetail')
     }
   }
 
@@ -213,13 +198,7 @@
       list:list
     }
     function list(token){
-        if(software.staticData)
-        {
-          return Base.get('Offers');
-        }else
-        {
-         return Base.get('/api_orders/my_offers.json?token='+token);
-        }
+      return Base.get('/api_orders/my_offers.json?token='+token);
     }
   }
 
@@ -229,17 +208,8 @@
     return{
       list:list
     }
-    function list(token)
-    {
-      if(software.staticData)
-      {
-        return Base.get('Profile');
-      }
-      else
-      {
-        return Base.get('/api_orders/my_profile.json?token='+ token);
-      }
-
+    function list(token){
+      return Base.get('/api_orders/my_profile.json?token='+ token);
     }
   }
   function Addresses(Base,software)
@@ -249,28 +219,11 @@
       list:list,
       getAddress:getAddress
     }
-    function list(token)
-    {
-
-      if(software.staticData)
-      {
-        return Base.get('Addresses');
-      }
-      else
-      {
-        return Base.get('/api_orders/order_consignees.json?token='+ token);
-      }
+    function list(token){
+      return Base.get('/api_orders/order_consignees.json?token='+ token);
     }
-    function getAddress(provinceId,cityId,countyId)
-    {
-      if(software.staticData)
-      {
-        return Base.get('Address');
-      }
-      else
-      {
-        return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId);
-      }
+    function getAddress(provinceId,cityId,countyId){
+      return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId);
     }
   }
   function Coupons($log,Base,software)
@@ -279,16 +232,8 @@
     return{
       list:list
     }
-    function list(token)
-    {
-      if(software.staticData)
-      {
-        return Base.get('Coupons');
-      }
-      else
-      {
-        return Base.get('/api_orders/my_coupons.json?token='+token);
-      }
+    function list(token) {
+      return Base.get('/api_orders/my_coupons.json?token='+token);
     }
   }
 })(window, window.angular);
