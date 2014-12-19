@@ -38,15 +38,17 @@ var libJsPath = {
       'angular/angular.js',
       'ionic/js/ionic.js',
       'ionic/js/ionic-angular.js',
+      'localforage/dist/localforage.js', 
       'angular-animate/angular-animate.js',
       'angular-sanitize/angular-sanitize.js',
       'angular-ui-bootstrap-bower/ui-bootstrap-tpls.js',
       'angular-ui-router/release/angular-ui-router.js',
       'angular-touch/angular-touch.js',
       'angular-spinner/angular-spinner.js',
+      'angular-localforage/dist/angular-localForage.js', 
       'collide/collide.js',
       'restangular/dist/restangular.js',
-      'lodash/dist/lodash.js'
+      'lodash/dist/lodash.js'      
     ], function (sPath) {
       return path.join(libPath, sPath);
     }),
