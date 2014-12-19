@@ -7,15 +7,17 @@
   .config(extendLog)
   .config(extendExceptionHandler)
   .config(configCompileProvider)
+  .config(configLocalForage)
 
-  function initApp($ionicPlatform) {
+  function initApp($ionicPlatform, $log, Users) {
     $ionicPlatform.ready(function() {
-      if(window.cordova && window.cordova.plugins.Keyboard) {app
+      if(window.cordova && window.cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
+      Users.loadUserLocally();
     });
   };
 
@@ -34,10 +36,8 @@
       .state('app.my-account-register', {url: '/my/account-register', views: {'app-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
       .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
-      
 
       .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
-
 
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
@@ -109,9 +109,15 @@
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
   }
 
+  /* @ngInject */
+  function configLocalForage($localForageProvider){
+    $localForageProvider.config({
+      name        : 'kaoba', // name of the database and prefix for your data, it is "lf" by default
+    });
+  }
+
   function AppCtrl($scope,$rootScope,Orders)
   {
-
     //address info
     $rootScope.regionSelectItems=[
                               new RegionSelectItem('beijing',1,[
@@ -176,11 +182,8 @@
       var provinces = Array();
       Orders.allProvince().then(function(data){
           var provincesT = data ;
-          
-          
           for(var zzz in provincesT)
           {
-
             provinces.push({'id':zzz,'name':provincesT[zzz]});
           }
 
@@ -240,7 +243,6 @@
   //--order state
 
   //offer state
-
     $rootScope.offerStatus = {
       'NEW':{state:0,value:'新的'},
       'GOING':{state:3,value:'可以使用'},
@@ -249,7 +251,6 @@
     }
     $rootScope.getOfferValue = function(pState)
     {
-
       for(var key in $rootScope.offerStatus)
       {
         if($rootScope.offerStatus[key].state == pState)
@@ -259,10 +260,8 @@
     }
     $rootScope.OfferIsValid = function(status)
     {
-
       if(status == $rootScope.offerStatus['NEW'].state || status == $rootScope.offerStatus['GOING'].state)
       {
-
         return true;
       }
 

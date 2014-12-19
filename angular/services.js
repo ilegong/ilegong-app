@@ -2,17 +2,16 @@
   "use strict";
 
   angular
-  .module('app.services', [])
+  .module('app.services', ['LocalForageModule'])
   .value('software', {staticData:true,app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
+  .service('Users', Users)
   .service('Products', Products)
 
   .service('Orders',Orders)
 
-
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
-
 
   .service("Stores", Stores)
 
@@ -30,12 +29,7 @@
     }
 
     function get(url){
-
-
-      return deferred(data[url]);
-
-      //return deferred(FakeData.get(url));
-
+      return deferred(FakeData.get(url));
       return $http.get(software.server.address + url).then(
         function(data){
           return data.data;
@@ -44,7 +38,6 @@
           return error;
         }
       );
-
     }
 
     function deferred(data){
@@ -55,9 +48,37 @@
   }
 
   /* @ngInject */
+  function Users($window, $localForage, $log, $q, Base){
+    var self = this;
+    self.user = null;
+    $window.device = $window.device || {};
+    return {
+      loadUserLocally: loadUserLocally,
+      isUserLoggedIn: function(){return !_.isEmpty(self.user);},
+      getUserFromCache: function(){return self.user;},
+      register: register
+    }
 
+    function loadUserLocally(){
+      return $localForage.getItem('user').then(function(item) {
+        if(!_.isEmpty(item)){
+          self.user = item;
+        }
+        return self.user;
+      });
+    }
+    function register(){
+      var data = {app_id: Base.app().id, device_uuid: $window.device.uuid, device_platform: $window.device.platform, device_model: $window.device.model, device_version: $window.device.version}
+      return Base.post('/login', data).then(function(item){
+        self.user = item;
+        $localForage.setItem('user', self.user);
+        return self.user;
+      });
+    }
+  }
+
+  /* @ngInject */
   function Products($log, Base,software){
-
     var self = this;
     return {
       list: list,
@@ -69,7 +90,6 @@
     function list(){
       $log.log('get /categories/mobileHome.json');
       return Base.get('/categories/mobileHome.json');
-
     }
     function getProduct(id){
 
