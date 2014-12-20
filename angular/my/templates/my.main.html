@@ -1,14 +1,14 @@
-<ion-view title="朋友说">
+<ion-view title="朋友说" hide-back-button='true'>
   <ion-content class="list my">
-    <a class="item item-icon-right" ui-sref="app.my-detail">
+    <a class="item item-icon-right" ui-sref="app.my-detail" ng-hide="vm.loggedIn">
       <i class="icon ion-ios7-arrow-right"></i>
-      账号
+      账号{{vm.loggedIn}}
     </a>
-    <a href="#" class="item head">
+    <a ui-sref="app.my-detail" class="item head" ng-show="vm.loggedIn">
       <span class="fl">
-        <img class="fr" src="{{vm.image}}">
+        <img class="fr" src="{{vm.user.image}}">
       </span>
-      <span class="name fl">{{vm.nickname}}</span>
+      <span class="name fl">{{vm.user.nickname}}</span>
       <span class="fr more"></span>
     </a>
 

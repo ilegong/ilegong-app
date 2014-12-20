@@ -17,7 +17,7 @@
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
-      Users.loadUserLocally();
+      Users.init();
     });
   };
 

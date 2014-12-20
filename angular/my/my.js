@@ -9,7 +9,6 @@
   .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
-
   .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
   .controller('MyCouponsCtrl',MyCouponsCtrl)
   .controller('MyOffersCtrl',MyOffersCtrl)
@@ -18,19 +17,22 @@
   .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
 
   /* @ngInject */
-  function MyCtrl($rootScope, $scope,UserDetail){
+  function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
     var vm = this;
     active();
-    function active()
-    {
-      UserDetail.list().then(function(data){
-        vm.nickname = data.my_profile.User.nickname;
-        vm.image = data.my_profile.User.image;
 
-      })
+    function active() {
+      vm.loggedIn = false;
+      Users.getToken().then(function(token){
+        vm.token = token;
+      });
+      Users.getUser().then(function(user){
+        vm.user = user.my_profile.User;
+        vm.trying = user.my_profile.Shichituan;
+        vm.loggedIn = !_.isEmpty(vm.user);
+      });
     }
-    
   }
   /* @ngInject */
   function MyAccountLoginCtrl($rootScope, $scope){
@@ -289,14 +291,9 @@
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
-    
       });
-
     }
-
   }
-
-
 
   function MyOrderDetailCtrl($scope,$rootScope,$http,OrderDetail)
   {
@@ -306,12 +303,10 @@
     $scope.getTotalPrice = function()
     {
       var sum = 0;
-      
       for(var key in vm.carts)
       {
         sum+=Number(vm.carts[key].Cart.price);
       }
-      
       return sum;
     }
     function active()

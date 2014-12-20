@@ -18,14 +18,14 @@
   .service("Tryings", Tryings)
   .service("Offers",Offers)
   .service("Coupons",Coupons)
-  .service('UserDetail',UserDetail)
   .service('Addresses',Addresses)
   /* @ngInject */
-  function Base($http, $q, $log, software){
+  function Base($http, $q, $log, $localForage, software){
     var self = this;
     return {
       get: get, 
-      deferred: deferred
+      deferred: deferred, 
+      loadLocally: loadLocally
     }
 
     function get(url){
@@ -36,10 +36,16 @@
         function(data){
           return data.data;
         }, function(error){
-          $log.error('Get ' + url + " error:").log(error);
           return error;
         }
       );
+    }
+
+    function loadLocally(key){
+      if(software.fakeData){
+        return deferred(FakeData.loadLocally(key));
+      }
+      return $localForage.getItem(key);
     }
 
     function deferred(data){
@@ -50,29 +56,31 @@
   }
 
   /* @ngInject */
-  function Users($window, $localForage, $log, $q, software, Base){
+  function Users($window, $log, $q, software, Base){
     var self = this;
+    self.token = null;
     self.user = null;
     $window.device = $window.device || {};
     return {
-      loadUserLocally: loadUserLocally,
-      isUserLoggedIn: function(){return !_.isEmpty(self.user);},
-      getUserFromCache: function(){return self.user;},
+      init: init,
+      getToken: function(){return Base.loadLocally('/token')},
+      getUser: function(){return Base.loadLocally('/api_orders/my_profile.json')},
       register: register
     }
 
-    function loadUserLocally(){
-      if(software.fakeData){
-        return;
-      }
-
-      return $localForage.getItem('user').then(function(item) {
-        if(!_.isEmpty(item)){
-          self.user = item;
+    function init(){
+      Base.loadLocally('/token').then(function(token){
+        self.token = token;
+        $log.log("get token successfully: " + token);
+        if(!_.isEmpty(self.token)){
+          Base.loadLocally('/api_orders/my_profile.json').then(function(user){
+            $log.log("get user successfully: " + user);
+            self.user = user;
+          });
         }
-        return self.user;
       });
     }
+
     function register(){
       var data = {app_id: Base.app().id, device_uuid: $window.device.uuid, device_platform: $window.device.platform, device_model: $window.device.model, device_version: $window.device.version}
       return Base.post('/login', data).then(function(item){
@@ -94,7 +102,6 @@
     }
 
     function list(){
-      $log.log('get /categories/mobileHome.json');
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
@@ -202,16 +209,6 @@
     }
   }
 
-  function UserDetail($log,Base,software)
-  {
-    var self = this;
-    return{
-      list:list
-    }
-    function list(token){
-      return Base.get('/api_orders/my_profile.json?token='+ token);
-    }
-  }
   function Addresses(Base,software)
   {
     var self = this;

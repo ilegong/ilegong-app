@@ -4688,7 +4688,7 @@ var brandIntroJson = {
 }
 
 var FakeData = function(){
-  var regExpMap = {
+  var remoteDataMap = {
     '/categories/mobileHome.json': mobileHomeJson,
     '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
     '/api_orders/mine.json' : ordersJson,
@@ -4712,9 +4712,14 @@ var FakeData = function(){
     "/Locations/get_address.json": Address,
     "/api_orders/order_consignees.json": Addresses,
     "/api_orders/my_profile.json": Profile
+  };
+  var localDataMap = {
+    '/token': {'access_token':'316e1d41b44f1cb8c6a79dac93d13ea43ac93284','expires_in':3600,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}, 
+    "/api_orders/my_profile": {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":null,"sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
   }
   return {
-    get: function(url){return _.find(regExpMap, function(v, k){return new RegExp(k).test(url)});}
+    get: function(url){return _.find(remoteDataMap, function(v, k){return new RegExp(k).test(url)});}, 
+    loadLocally: function(key){return _.find(localDataMap, function(v, k){return new RegExp(k).test(key)});}
   }
 }();
 
