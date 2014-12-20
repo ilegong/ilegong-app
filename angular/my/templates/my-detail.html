@@ -1,107 +1,66 @@
 <ion-view title="个人信息">
   <ion-content >
   	<div class="list myDetail">
-
-  		<a class="item item-icon-right" >
-        <i class="icon ion-ios7-arrow-right"></i>
-  			<div>
-
-          <span >
-            <img src="{{vm.my_profile.User.image}}"/>
-
-
-          </span>
-        </div>
+  		<a class="item item-avatar-right" >
+        头像
+        <img src="{{vm.user.image}}"/>
   		</a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            昵称
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.nickname}}
-          </span>
-        </div>
+        昵称
+        <span class="item-note">
+          {{vm.user.nickname}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            性别
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.sex==0?'女':'男'}}
-          </span>
-        </div>
+        性别
+        <span class="item-note">
+          {{vm.user.sex==0?'女':'男'}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            单位
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.companies}}
-          </span>
-        </div>
+        单位
+        <span class="item-note">
+          {{vm.user.companies}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            个性签名
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.bio}}
-          </span>
-        </div>
+        个性签名
+        <span class="item-note">
+          {{vm.user.bio}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            手机号
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.mobilephone}}
-          </span>
-        </div>
+        手机号
+        <span class="item-note">
+          {{vm.user.mobilephone}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            邮箱
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.email}}
-          </span>
-        </div>
+        邮箱
+        <span class="item-note">
+          {{vm.user.email}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            用户名
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.username}}
-          </span>
-        </div>
+        用户名
+        <span class="item-note">
+          {{vm.user.username}}
+        </span>
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        <div>
-          <span class="left">
-            用户ID
-          </span>
-          <span class="right">
-            {{vm.my_profile.User.id}}
-          </span>
-        </div>
+        用户ID
+        <span class="item-note">
+          {{vm.user.id}}
+        </span>
       </a>
-
     </div>
  </ion-content>
 </ion-view>

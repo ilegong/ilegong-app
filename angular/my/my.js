@@ -35,6 +35,20 @@
     }
   }
   /* @ngInject */
+  function MyDetailCtrl($scope, $rootScope, $http, Users){
+    var vm = this;
+    active();
+    
+    function active() {
+      Users.getUser().then(function(user){
+        vm.user = user.my_profile.User;
+        vm.trying = user.my_profile.Shichituan;
+      });
+    }
+  }
+  
+
+  /* @ngInject */
   function MyAccountLoginCtrl($rootScope, $scope){
     $rootScope.hideTabs = true;
   }
@@ -47,20 +61,6 @@
     $rootScope.hideTabs = true;
   }
 
-
-  function MyDetailCtrl($scope,$rootScope,$http,UserDetail){
-    var vm = this;
-    active();
-    
-    function active()
-    {
-      UserDetail.list(1).then(function(data){
-        vm.my_profile = data.my_profile;
-
-      })
-    }
-  }
-  
   function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses)
   {
 

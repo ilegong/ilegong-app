@@ -4715,7 +4715,7 @@ var FakeData = function(){
   };
   var localDataMap = {
     '/token': {'access_token':'316e1d41b44f1cb8c6a79dac93d13ea43ac93284','expires_in':3600,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}, 
-    "/api_orders/my_profile": {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":null,"sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
+    "/api_orders/my_profile": {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
   }
   return {
     get: function(url){return _.find(remoteDataMap, function(v, k){return new RegExp(k).test(url)});}, 
