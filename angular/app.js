@@ -8,6 +8,7 @@
   .config(extendExceptionHandler)
   .config(configCompileProvider)
   .config(configLocalForage)
+  .config(configHttpProvider)
 
   function initApp($ionicPlatform, $log, Users) {
     $ionicPlatform.ready(function() {
@@ -112,8 +113,14 @@
   /* @ngInject */
   function configLocalForage($localForageProvider){
     $localForageProvider.config({
-      name        : 'kaoba', // name of the database and prefix for your data, it is "lf" by default
+      name        : 'ilegong',
     });
+  }
+
+  /* @ngInject */
+  function configHttpProvider($httpProvider){
+    $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
   function AppCtrl($scope,$rootScope,Orders)
