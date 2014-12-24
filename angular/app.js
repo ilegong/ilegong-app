@@ -46,14 +46,14 @@
       .state('app.my-orders.unpaid',{url:'/unpaid',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unsent',{url:'/unsent',templateUrl:'my-orders-total.html'})
       .state('app.my-orders.unreceived',{url:'/unreceived',templateUrl:'my-orders-total.html'})
-      .state('app.my-order-detail',{url:'/my-order-detail',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
+      .state('app.my-order-detail',{url:'/my-order-detail/:id',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
       .state('app.product-detail', {url: '/products/:id', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
       .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
-      .state('app.my-order-info',{url:'/my-order-info',views:{'app-my':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
+      .state('app.order-info',{url:'/my-order-info',views:{'app-shopping-carts':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:id', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})

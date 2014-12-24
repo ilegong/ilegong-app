@@ -4,8 +4,11 @@
   angular.module('ilegong.carts', ['app.services'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
-  function ShoppingCartsCtrl($scope,$rootScope){
+  function ShoppingCartsCtrl($log,$scope,$rootScope,Carts){
     $rootScope.hideTabs = false;
+    var vm = this;
+    active();
+
     $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
                   new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
     $scope.buttonReduceClick = function(index)
@@ -32,12 +35,29 @@
     {
       $scope.items.splice(index,1);
     };
+    function active()
+    {
+      Carts.list().then(function(data){
+        vm.total_price = data.total_price;
+        vm.carts = data.carts;
+ 
+
+      })
+    }
+
+    vm.del = function(id)
+    {
+      Carts.del(id).then(function(data){
+        $log.log(data); 
+      });
+      active();
+    }
   }
 
   function OrderInfoCtrl($scope,$rootScope){
  
     var vm = this;
-    $rootScope.hideTabs = true;
+    //$rootScope.hideTabs = true;
     active();
     $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
                                         new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),

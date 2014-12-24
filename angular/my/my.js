@@ -48,20 +48,21 @@
   }
 
 
-  function MyDetailCtrl($scope,$rootScope,$http,UserDetail){
+  function MyDetailCtrl($scope,$rootScope,$http,Users){
     var vm = this;
     active();
     
     function active()
     {
-      UserDetail.list(1).then(function(data){
+      Users.getUser().then(function(data){
+        
         vm.my_profile = data.my_profile;
 
       })
     }
   }
   
-  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses)
+  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses,$log)
   {
 
     var vm = this;
@@ -180,8 +181,7 @@
       Addresses.list(1).then(function(data)
       {
         vm.addresses = data;
-        
-      
+
       })
       
 
@@ -295,7 +295,7 @@
     }
   }
 
-  function MyOrderDetailCtrl($scope,$rootScope,$http,OrderDetail)
+  function MyOrderDetailCtrl($scope,$rootScope,$http,$stateParams,OrderDetail)
   {
     var vm = this;
     active();
@@ -311,8 +311,10 @@
     }
     function active()
     {
-      OrderDetail.list().then(function(data)
+      OrderDetail.list($stateParams.id).then(function(data)
       {
+        console.log('sdf');
+        console.log(data);
         vm.order = data.order;
         vm.carts = data.carts;
         vm.ship_type = data.ship_type;

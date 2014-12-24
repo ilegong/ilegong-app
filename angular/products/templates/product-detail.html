@@ -1,89 +1,77 @@
 <ion-view title="商品详情">
 
-  <ion-content class="productDetail" style="padding-left:10px;padding-right:10px;">
-
-    <div>
-      <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
-    </div>
-    <div>
-      <span>
-        <span class="nameFont">
-          {{vm.product.Product.name}}
-        </span>
-
-      </span>
-    </div>
-    <p/>
-    <div>
-      <span >
-        {{vm.product.Product.promote_name}}
-      </span>
-    </div>
-    <p/>
-    <div>
-      <span class="price">
-        {{vm.product.Product.price | currency:"￥"}}
-      </span>
-      <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
-        {{vm.product.Product.original_price | currency:"￥"}}
-      </span>
-      <span class="shipFee">
-        邮费：{{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
-      </span>
-    </div>
-    <p/>
-    <div class="item-count row">
-
+  <ion-content class="productDetail">
+    <div class="main">
+      <div>
+        <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
+      </div>
+      <div class="row">
+        <div class="col col-50">
+          <span class="nameFont">
+            {{vm.product.Product.name}}
+          </span>
+          <p/>
+          <span>
+            {{vm.product.Product.promote_name}}
+          </span>
+        </div>
+        <div class="col">
+          <span class="price">
+            {{vm.product.Product.price | currency:"￥"}}
+          </span>
+          <p/>
+          <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
+            {{vm.product.Product.original_price | currency:"￥"}}
+          </span>
+          <p/>
+          <span class="shipFee">
+            邮费：{{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
+          </span>
+        </div>
+      </div>
+      <div class="item-count row">
         <span class="count-reduce col col-25" ng-click="buttonReduceClick()">-</span>
+        <input class="count col col-50" ng-model="vm.count"></input>
+        <span class="count-add col col-25" ng-click="buttonAddClick()">+</span>
+      </div>
+      <div class="list">
+        <a class="item item-icon-right">
+            <i class="icon ion-ios7-arrow-right"></i>
+            <img src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
+            店家：{{vm.brand.Brand.name}}
+        </a>
+      </div>
+      <div >
 
-      <input class="count col col-50" ng-model="vm.count"></input>
-      <span class="count-add col col-25" ng-click="buttonAddClick()">+</span>
-  
-    </div>
-
-    <div class="list">
-      <a class="item item-icon-right">
-
-          <i class="icon ion-ios7-arrow-right"></i>
-          <img src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
-          店家：{{vm.brand.Brand.name}}
- 
-      </a>
-    </div>
-
-    <div >
-      <p/>
-      <p/>
-
-      <a href="http://www.baidu.com">
-        <button class="button button-energized buttonHeight">
-          添加到购物车
-        </button>
-      </a>
-      <a href="http://www.baidu.com" >
-        <button class="button button-assertive buttonHeight" >
-          立即购买
-        </button>
-      </a>
-
-    </div>
-
-    <p/>
-    <div class="row">
-
-        <a class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro({id:vm.product.Product.id})">
-          产品介绍
+        <a href="http://www.baidu.com">
+          <button class="button button-energized buttonHeight">
+            添加到购物车
+          </button>
+        </a>
+        <a href="http://www.baidu.com" >
+          <button class="button button-assertive buttonHeight" >
+            立即购买
+          </button>
         </a>
 
-        <a class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
-          口碑评价
-        </a>
+      </div>
 
+      <p/>
+      <div class="row">
+
+          <a class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro({id:vm.product.Product.id})">
+            产品介绍
+          </a>
+
+          <a class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
+            口碑评价
+          </a>
+
+      </div>
+
+      <ui-view>
+      </ui-view>
     </div>
-
-    <ui-view>
-    </ui-view>
-
   </ion-content>
 
 

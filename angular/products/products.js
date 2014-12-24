@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($rootScope, $scope, $stateParams,$http,Products){
+  function ProductDetailCtrl($log,$rootScope, $scope, $stateParams,$http,Products){
 
     $rootScope.hideTabs = true;
     var vm = this;
@@ -19,8 +19,10 @@
         function(data)
         {
           vm.product = data.product;
+
           vm.recommends = data.recommends;
           vm.brand = data.brand;
+          
 
         }
         );

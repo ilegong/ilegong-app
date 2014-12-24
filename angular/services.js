@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {fakeData: true   , app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -19,6 +19,8 @@
   .service("Offers",Offers)
   .service("Coupons",Coupons)
   .service('Addresses',Addresses)
+  .service('Carts',Carts)
+
   /* @ngInject */
   function Base($http, $q, $log, $localForage, software){
     var self = this;
@@ -29,11 +31,13 @@
     }
 
     function get(url){
+      console.log(software.server.address + url);
       if(software.fakeData){
         return deferred(FakeData.get(url));
       }
       return $http.get(software.server.address + url).then(
         function(data){
+
           return data.data;
         }, function(error){
           return error;
@@ -65,6 +69,7 @@
       init: init,
       getToken: function(){return Base.loadLocally('/token')},
       getUser: function(){return Base.loadLocally('/api_orders/my_profile.json')},
+      getTokenDict:function(){return FakeData.loadLocally('/token')},
       register: register
     }
 
@@ -92,7 +97,7 @@
   }
 
   /* @ngInject */
-  function Products($log, Base,software){
+  function Products($log, Base,software,Users){
     var self = this;
     return {
       list: list,
@@ -105,7 +110,7 @@
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
-        return Base.get('/api_orders/product_detail/'+id+'.json'); 
+        return Base.get('/api_orders/product_detail/'+id+'.json?access_token='+Users.getTokenDict().access_token); 
     }
     function getProductContent(id){
       return Base.get('/apiOrders/product_content/'+id+'.json')
@@ -113,6 +118,7 @@
     function getProductComment(id){
       return Base.get('/comments/getlist/Product/'+id+'.json')
     }
+
   }
 
   function Categories(Base){
@@ -126,7 +132,7 @@
     }
   }
 
-  function Orders(Base,software){
+  function Orders(Base,software,Users){
     var self = this;
 
     return {
@@ -137,7 +143,8 @@
     }
 
     function list(){
-       return Base.get('/api_orders/mine.json?token=1');
+
+       return Base.get('/api_orders/mine.json?access_token='+Users.getTokenDict().access_token);
     }
     function allProvince()
     {
@@ -153,14 +160,15 @@
     }
   }
 
-  function OrderDetail(Base)
+  function OrderDetail(Base,Users)
   {
     var self = this;
     return {
       list: list
     }
-    function list(){
-      return Base.get('/orderDetail')
+    function list(id){
+
+      return Base.get('/apiOrders/order_detail/'+id+'.json?access_token='+Users.getTokenDict().access_token)
     }
   }
 
@@ -198,18 +206,18 @@
       return Base.get('/shichituan.json');
     }
   }
-  function Offers($log,Base,software)
+  function Offers($log,Base,software,Users)
   {
     var self = this;
     return{
       list:list
     }
     function list(token){
-      return Base.get('/api_orders/my_offers.json?token='+token);
+      return Base.get('/api_orders/my_offers.json?access_token='+Users.getTokenDict().access_token);
     }
   }
 
-  function Addresses(Base,software)
+  function Addresses(Base,software,Users)
   {
     var self = this;
     return{
@@ -217,20 +225,34 @@
       getAddress:getAddress
     }
     function list(token){
-      return Base.get('/api_orders/order_consignees.json?token='+ token);
+      return Base.get('/api_orders/order_consignees.json?access_token='+ Users.getTokenDict().access_token);
     }
     function getAddress(provinceId,cityId,countyId){
-      return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId);
+      return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+Users.getTokenDict().access_token);
     }
   }
-  function Coupons($log,Base,software)
+  function Coupons($log,Base,software,Users)
   {
     var self = this;
     return{
       list:list
     }
-    function list(token) {
-      return Base.get('/api_orders/my_coupons.json?token='+token);
+    function list() {
+      return Base.get('/api_orders/my_coupons.json?access_token='+Users.getTokenDict().access_token);
+    }
+  }
+  function Carts(Base,software,Users)
+  {
+    var self = this;
+    return{
+      list:list,
+      del:del
+    }
+    function list(){
+      return Base.get('/ApiOrders/list_cart.json?access_token='+Users.getTokenDict().access_token);
+    }
+    function del(id){
+      return Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+Users.getTokenDict().access_token)
     }
   }
 })(window, window.angular);

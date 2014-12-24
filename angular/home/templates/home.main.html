@@ -3,7 +3,7 @@
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems">
         <a ui-sref="app.product-detail.intro({id: bannerItem.id})">
-          <img src="http://51daifan.sinaapp.com/{{bannerItem.img}}"></img>
+          <img src="http://51daifan.sinaapp.com/{{bannerItem.img}}"/>
         </a>
       </ion-slide>
     </ion-slide-box>
@@ -11,7 +11,7 @@
     <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
       <div class="col col-33 category">
         <a ui-sref="app.category-detail({slug:tagWithProducts.ProductTag.slug})">
-          <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"/>
+          <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"></img>
         </a>
       </div>
       <div class="col col-33 product" ng-repeat="product in tagWithProducts.Products.slice(0, 2)" ng-init="brand=vm.brands[product.brand_id].Brand">
