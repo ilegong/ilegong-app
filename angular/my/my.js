@@ -93,7 +93,7 @@
     function verifyCaptchaCode(){
       $log.log('to verify captcha code');
       Users.verifyCaptchaCode(vm.user.captchaCode).then(function(data){
-        $log.log('captcha code is: ').log(data);
+        $log.log('captcha code is: ').log(data).log('------');
         if(data.success){
           vm.user.captchaCodeVerified = true;  
         }
@@ -107,7 +107,7 @@
     function getSmsCode(){
       $log.log('to get sms code');
       Users.getSmsCode(vm.user.mobile, vm.user.captchaCode).then(function(data){
-        $log.log('sms code is: ').log(data);
+        $log.log('sms code is: ').log(data).log('------');
         if(data.success){
           vm.user.smsSent = true;
         }
@@ -117,10 +117,11 @@
     function register(){
       $log.log('to register');
       Users.register(vm.user.mobile, vm.user.password, vm.user.smsCode).then(function(data){
-        $log.log('register successfully:').log(data);
+        $log.log('register successfully:').log(data).log('----');
         $state.go('app.my');
       }, function(e){
-        $log.log('register successfully');
+        vm.user.registerFailed = true;
+        $log.log('register error').log(e);
       });
     }
   }

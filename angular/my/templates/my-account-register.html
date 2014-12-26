@@ -20,7 +20,7 @@
           <span class="input-label">短信验证码</span>
           <input type="text" ng-model='vm.user.smsCode' placeholder="短信验证码">
         </label>
-        <button id="smsCodeButton" class="sms-code col col-33" ng-class="{enabled: vm.user.captchaCodeVerified, disabled: vm.user.captchaCodeVerified}" ng-click="vm.getSmsCode()" ng-disabled="!vm.user.captchaCodeVerified || vm.user.smsSent">
+        <button id="smsCodeButton" class="sms-code col col-33" ng-class="{enabled: vm.user.captchaCodeVerified && !vm.user.smsSent}" ng-click="vm.getSmsCode()" ng-disabled="!vm.user.captchaCodeVerified || vm.user.smsSent">
           {{vm.user.smsSent? "短信已发送" : "点击获取"}}
         </button>
       </div>

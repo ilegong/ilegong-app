@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -24,6 +24,7 @@
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, software){
     var self = this;
+    self.getUrl = getUrl;
     $window.device = $window.device || {};
     return {
       get: get, 
@@ -38,15 +39,19 @@
     }
 
     function get(url){
-      console.log('get ' + software.server.address + url);
       if(software.fakeData){
         return deferred(FakeData.get(url));
       }
 
       var defer = $q.defer();
-      $http.get(software.server.address + url)
+      $http.get(self.getUrl(url))
         .success(function(data, status, headers, config) {
-          defer.resolve(data);
+          if(status == 200){
+            defer.resolve(data);
+          }
+          else{
+            defer.reject({data: data, status: status});
+          }
         })
         .error(function(data, status, headers, config) {
           $log.log("get " + url + " failed: " + status).log(data).log(config);
@@ -59,9 +64,14 @@
         return deferred(FakeData.post(url));
       }
       var defer = $q.defer();
-      return $http.post(software.server.address + url, data)        
+      return $http.post(self.getUrl(url), data)        
         .success(function(data, status, headers, config) {
-          defer.resolve(data);
+          if(status == 200){
+            defer.resolve(data);
+          }
+          else{
+            defer.reject({data: data, status: status});
+          }
         })
         .error(function(data, status, headers, config) {
           $log.log("post to " + url + " failed: " + status).log(data).log(config);
@@ -91,6 +101,7 @@
       return $localForage.removeItem(key);
     }
     function getUrl(url){
+      $log.log('get ' + software.server.address + url);
       return software.server.address + url;
     }
     function deferred(data){
@@ -131,7 +142,6 @@
         self.token = token;
         if(!_.isEmpty(self.token)){
           Base.getLocal('user').then(function(user){
-            $log.log("get user successfully: " + user);
             self.user = user;
           });
         }
@@ -206,10 +216,10 @@
         client_id: software.app.client_id, 
         mobile: mobile, 
         password: password, 
-        smsCode: smsCode, 
+        code: smsCode, 
         device_uuid: Base.getDevice().uuid
       }
-      Base.post('/oauth/register', data).then(function(token){
+      Base.get('/oauth/register?client_id=' + software.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid).then(function(token){
         self.onGetTokenSuccessfully(token, defer);
       }, function(e){defer.reject(e)});
       return defer.promise;
