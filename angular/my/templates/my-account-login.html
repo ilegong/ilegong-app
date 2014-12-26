@@ -6,15 +6,15 @@
     <div class="list">
       <label class="item item-input item-stacked-label">
         <span class="input-label">用户名</span>
-        <input type="text" placeholder="用户名">
+        <input type="text" placeholder="用户名" ng-model="vm.username">
       </label>
       <label class="item item-input item-stacked-label">
         <span class="input-label">密码</span>
-        <input type="text" placeholder="密码">
+        <input type="password" placeholder="密码" ng-model="vm.password">
       </label>
     </div>
     <div class="padding">
-      <button class="button button-block button-positive">登陆</button>
+      <button class="button button-block button-positive" ng-click="vm.login()">登陆</button>
     </div>
   </ion-content>
 </ion-view>

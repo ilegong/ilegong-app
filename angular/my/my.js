@@ -35,8 +35,34 @@
     }
   }
   /* @ngInject */
-  function MyAccountLoginCtrl($rootScope, $scope){
+  function MyDetailCtrl($scope, $rootScope, $http, Users){
     $rootScope.hideTabs = true;
+    var vm = this;
+    active();
+    
+    function active() {
+      Users.getUser().then(function(user){
+        vm.user = user.my_profile.User;
+        vm.trying = user.my_profile.Shichituan;
+      });
+    }
+  }
+  
+  /* @ngInject */
+  function MyAccountLoginCtrl($rootScope, $scope, $state, $log, Users){
+    $rootScope.hideTabs = true;
+    var vm = this;
+    vm.username = "";
+    vm.password = "";
+    vm.login = login;
+
+    function login(){
+      Users.login(vm.username, vm.password).then(function(){
+        $state.go('app.my');
+      }, function(error){
+        $log.log('login failed: ' + error.status).log(error.data);
+      })
+    }
   }
   /* @ngInject */
   function MyAccountRegisterCtrl($rootScope, $scope){
@@ -46,6 +72,7 @@
   function MyIlegongCtrl($rootScope, $scope){
     $rootScope.hideTabs = true;
   }
+
 
 
   function MyDetailCtrl($scope,$rootScope,$http,Users){
@@ -62,9 +89,10 @@
     }
   }
   
-  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses,$log)
-  {
 
+  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses)
+
+  {
     var vm = this;
     active();
     $rootScope.hideTabs = true;

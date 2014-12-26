@@ -3,7 +3,9 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false , app: {id: '201411290001', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -26,8 +28,10 @@
     var self = this;
     return {
       get: get, 
-      deferred: deferred, 
-      loadLocally: loadLocally
+      post: post, 
+      getLocal: getLocal, 
+      setLocal: setLocal, 
+      deferred: deferred 
     }
 
     function get(url){
@@ -35,6 +39,7 @@
       if(software.fakeData){
         return deferred(FakeData.get(url));
       }
+/*
       return $http.get(software.server.address + url).then(
         function(data){
 
@@ -43,13 +48,48 @@
           return error;
         }
       );
+*/
+      var defer = $q.defer();
+      $log.log('get ' + url);
+      $http.get(software.server.address + url)
+        .success(function(data, status, headers, config) {
+          defer.resolve(data);
+        })
+        .error(function(data, status, headers, config) {
+          $log.log("get " + url + " failed: " + status).log(data).log(config);
+          defer.reject({data: data, status: status});
+        });
+      return defer.promise;
+    }
+    function post(url, data){
+      if(software.fakeData){
+        return deferred(FakeData.post(url));
+      }
+      var defer = $q.defer();
+      return $http.post(software.server.address + url, data)        
+        .success(function(data, status, headers, config) {
+          defer.resolve(data);
+        })
+        .error(function(data, status, headers, config) {
+          $log.log("post to " + url + " failed: " + status).log(data).log(config);
+          defer.reject({data: data, status: status});
+        });
+      return defer.promise;
+
     }
 
-    function loadLocally(key){
+    function getLocal(key){
       if(software.fakeData){
-        return deferred(FakeData.loadLocally(key));
+        return deferred(FakeData.getLocal(key));
       }
       return $localForage.getItem(key);
+    }
+
+    function setLocal(key, value){
+      if(software.fakeData){
+        return deferred(value);
+      }
+      return $localForage.setItem(key, value);
     }
 
     function deferred(data){
@@ -67,23 +107,48 @@
     $window.device = $window.device || {};
     return {
       init: init,
+/*
       getToken: function(){return Base.loadLocally('/token')},
       getUser: function(){return Base.loadLocally('/api_orders/my_profile.json')},
       getTokenDict:function(){return FakeData.loadLocally('/token')},
       register: register
+*/
+      getToken: function(){return Base.getLocal('token')},
+      getUser: function(){return Base.getLocal('user')},
+      getTokenDict:function(){return FakeData.loadLocally('token')},
+      register: register, 
+      login: login
+
     }
 
     function init(){
-      Base.loadLocally('/token').then(function(token){
+      Base.getLocal('/token').then(function(token){
         self.token = token;
-        $log.log("get token successfully: " + token);
         if(!_.isEmpty(self.token)){
-          Base.loadLocally('/api_orders/my_profile.json').then(function(user){
+          Base.getLocal('/api_orders/my_profile.json').then(function(user){
             $log.log("get user successfully: " + user);
             self.user = user;
           });
         }
       });
+    }
+
+    function login(username, password){
+      var data = {grant_type: 'authorization_code', client_id: software.app.client_id, username: username, password: password}
+      var defer = $q.defer();
+      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id)
+        .then(function(token) {
+          $log.log("login successfully: ").log(token);
+          self.token = token;
+          Base.setLocal('token', self.token);
+          Base.get('/api_orders/my_profile.json?access_token=' + self.token.access_token).then(function(user){
+            $log.log("get user successfully: ").log(user);
+            self.user = user;
+            Base.setLocal('user', self.user);
+            defer.resolve(self.token);
+          }, function(error){defer.reject(error)});
+        }, function(error){defer.reject(error)});
+      return defer.promise; 
     }
 
     function register(){
