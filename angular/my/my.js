@@ -20,6 +20,7 @@
   function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
     var vm = this;
+    vm.logout = logout;
     active();
 
     function active() {
@@ -31,6 +32,12 @@
         vm.loggedIn = true;
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
+      });
+    }
+
+    function logout(){
+      Users.logout().then(function(){
+        vm.loggedIn = false;
       });
     }
   }

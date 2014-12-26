@@ -30,7 +30,7 @@
       post: post, 
       getLocal: getLocal, 
       setLocal: setLocal, 
-
+      removeLocal: removeLocal,
       deferred: deferred, 
       getUrl: getUrl, 
       getDevice: function(){return $window.device}
@@ -84,6 +84,12 @@
       }
       return $localForage.setItem(key, value);
     }
+    function removeLocal(key){
+      if(software.fakeData){
+        return deferred(key);
+      }
+      return $localForage.removeItem(key);
+    }
     function getUrl(url){
       return software.server.address + url;
     }
@@ -116,7 +122,8 @@
       verifyCaptchaCode: verifyCaptchaCode, 
       getSmsCode: getSmsCode, 
       register: register, 
-      login: login
+      login: login, 
+      logout: logout
     }
 
     function init(){
@@ -164,6 +171,10 @@
           self.onGetTokenSuccessfully(token, defer);
         }, function(error){defer.reject(error)});
       return defer.promise; 
+    }
+
+    function logout(){
+      return $q.all(Base.removeLocal('token'), Base.removeLocal('user'));
     }
 
     function onGetTokenSuccessfully(token, defer){
