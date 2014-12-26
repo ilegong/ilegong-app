@@ -3,9 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-
   .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
-
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -26,6 +24,7 @@
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, software){
     var self = this;
+    $window.device = $window.device || {};
     return {
       get: get, 
       post: post, 
@@ -108,13 +107,14 @@
     var self = this;
     self.token = null;
     self.user = null;
+    self.onGetTokenSuccessfully = onGetTokenSuccessfully;
     return {
       init: init,
-
       getToken: getToken,
       getUser: getUser,
       getCaptchaImageUrl: getCaptchaImageUrl, 
-
+      verifyCaptchaCode: verifyCaptchaCode, 
+      getSmsCode: getSmsCode, 
       register: register, 
       login: login
     }
@@ -134,7 +134,7 @@
       var defer = $q.defer();
       Base.getLocal('token').then(function(token){
         if(!_.isEmpty(token)){
-          defer.resovle(token);
+          defer.resolve(token);
         }
         else{
           defer.reject("no local token found");
@@ -146,7 +146,7 @@
       var defer = $q.defer();
       Base.getLocal('user').then(function(user){
         if(!_.isEmpty(user)){
-          defer.resovle(user);
+          defer.resolve(user);
         }
         else{
           defer.reject("no local user found");
@@ -161,29 +161,47 @@
       Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id)
         .then(function(token) {
           $log.log("login successfully: ").log(token);
-          self.token = token;
-          Base.setLocal('token', self.token);
-          Base.get('/api_orders/my_profile.json?access_token=' + self.token.access_token).then(function(user){
-            $log.log("get user successfully: ").log(user);
-            self.user = user;
-            Base.setLocal('user', self.user);
-            defer.resolve(self.token);
-          }, function(error){defer.reject(error)});
+          self.onGetTokenSuccessfully(token, defer);
         }, function(error){defer.reject(error)});
       return defer.promise; 
+    }
+
+    function onGetTokenSuccessfully(token, defer){
+      self.token = token;
+      Base.setLocal('token', self.token);
+      Base.get('/api_orders/my_profile.json?access_token=' + self.token.access_token).then(function(user){
+        $log.log("get user successfully: ").log(user);
+        self.user = user;
+        Base.setLocal('user', self.user);
+        defer.resolve(self.token);
+      }, function(error){defer.reject(error)});
     }
 
     function getCaptchaImageUrl(){
       return Base.getUrl("/check/captcha?type=app&device_uuid=" + Base.getDevice().uuid);
     }
 
-    function register(){
-      var data = {app_id: Base.app().id, device_uuid: Base.getDevice().uuid, device_platform: Base.getDevice().platform, device_model: Base.getDevice().model, device_version: Base.getDevice().version}
-      return Base.post('/login', data).then(function(item){
-        self.user = item;
-        $localForage.setItem('user', self.user);
-        return self.user;
-      });
+    function verifyCaptchaCode(captchaCode){
+      return Base.get("/check/verify?type=app&device_uuid=" + Base.getDevice().uuid + "&keyString=" + captchaCode);
+    }
+
+    function getSmsCode(mobile, captchaCode){
+      return Base.get("/check/message_code?type=app&mobile=" + mobile + "&device_uuid=" + Base.getDevice().uuid + "&keyString=" + captchaCode);
+    }
+
+    function register(mobile, password, smsCode){
+      var defer = $q.defer();
+      var data = {
+        client_id: software.app.client_id, 
+        mobile: mobile, 
+        password: password, 
+        smsCode: smsCode, 
+        device_uuid: Base.getDevice().uuid
+      }
+      Base.post('/oauth/register', data).then(function(token){
+        self.onGetTokenSuccessfully(token, defer);
+      }, function(e){defer.reject(e)});
+      return defer.promise;
     }
   }
 

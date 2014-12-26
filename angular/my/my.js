@@ -28,9 +28,9 @@
         vm.token = token;
       });
       Users.getUser().then(function(user){
+        vm.loggedIn = true;
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
-        vm.loggedIn = !_.isEmpty(vm.user);
       });
     }
   }
@@ -65,18 +65,56 @@
     }
   }
   /* @ngInject */
-  function MyAccountRegisterCtrl($rootScope, $scope, $log, Users){
+  function MyAccountRegisterCtrl($rootScope, $scope, $log, $state, Users){
     $rootScope.hideTabs = true;
     var vm = this;
-    vm.hexToBase64 = hexToBase64;
+    vm.showCaptchaCode = showCaptchaCode;
+    vm.verifyCaptchaCode = verifyCaptchaCode;
+    vm.getSmsCode = getSmsCode;
+    vm.register = register;
+
     activate();
 
     function activate(){
+      vm.user = {mobile: '', captchaCode: '', smsCode: '', password: '', captchaCodeVerified: false, smsSent: false, registerFailed: false};
+      vm.showCaptchaCode();
+    }
+    function showCaptchaCode(){
       var captchaImage = document.getElementById("captchaImage");
       captchaImage.src = Users.getCaptchaImageUrl();
     }
-    function hexToBase64(str) {
-      return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+    function verifyCaptchaCode(){
+      $log.log('to verify captcha code');
+      Users.verifyCaptchaCode(vm.user.captchaCode).then(function(data){
+        $log.log('captcha code is: ').log(data);
+        if(data.success){
+          vm.user.captchaCodeVerified = true;  
+        }
+        else{
+          vm.showCaptchaCode();
+        }
+      }, function(error){
+        vm.showCaptchaCode(); 
+      });
+    }
+    function getSmsCode(){
+      $log.log('to get sms code');
+      Users.getSmsCode(vm.user.mobile, vm.user.captchaCode).then(function(data){
+        $log.log('sms code is: ').log(data);
+        if(data.success){
+          vm.user.smsSent = true;
+        }
+      })
+    }
+
+    function register(){
+      $log.log('to register');
+      Users.register(vm.user.mobile, vm.user.password, vm.user.smsCode).then(function(data){
+        $log.log('register successfully:').log(data);
+        $state.go('app.my');
+      }, function(e){
+        $log.log('register successfully');
+      });
     }
   }
   /* @ngInject */
@@ -91,9 +129,7 @@
     function active()
     {
       Users.getUser().then(function(data){
-        
         vm.my_profile = data.my_profile;
-
       })
     }
   }

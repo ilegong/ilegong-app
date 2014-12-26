@@ -27,6 +27,11 @@ a{
   margin-top: 50px;
   padding-top: 15px;
 }
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
   font-size: 14px;
@@ -478,15 +483,22 @@ a{
 }
 
 .my-account-register{
-  .item{
-    .row{
+  .item.item-row{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+
+    .sms-code.enabled{
+      color: #fff;
+      background-color: #dd5600;
+      border-color: #dd5600;
+    }
+    #captchaImage{
       padding: 0;
-      .sms-verify{
-        margin: 10px 0;
-      }
-      #captchaImage{
-        padding: 0;
-      }
     }
   }
 }
