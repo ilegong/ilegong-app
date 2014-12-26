@@ -3,9 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-
   .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
-
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -24,14 +22,15 @@
   .service('Carts',Carts)
 
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, software){
+  function Base($http, $q, $log, $localForage, $window, software){
     var self = this;
     return {
       get: get, 
       post: post, 
       getLocal: getLocal, 
       setLocal: setLocal, 
-      deferred: deferred 
+      deferred: deferred, 
+      getDevice: function(){return $window.device}
     }
 
     function get(url){
@@ -100,11 +99,10 @@
   }
 
   /* @ngInject */
-  function Users($window, $log, $q, software, Base){
+  function Users($log, $q, software, Base){
     var self = this;
     self.token = null;
     self.user = null;
-    $window.device = $window.device || {};
     return {
       init: init,
 /*
@@ -116,6 +114,7 @@
       getToken: function(){return Base.getLocal('token')},
       getUser: function(){return Base.getLocal('user')},
       getTokenDict:function(){return FakeData.loadLocally('token')},
+      getCaptcha: getCaptcha, 
       register: register, 
       login: login
 
@@ -151,8 +150,14 @@
       return defer.promise; 
     }
 
+    function getCaptcha(){
+      Base.get("/check/captcha?type=app&mobile=" + Base.getDevice().uuid).then(function(data){
+        $log.log(data);
+      });
+    }
+
     function register(){
-      var data = {app_id: Base.app().id, device_uuid: $window.device.uuid, device_platform: $window.device.platform, device_model: $window.device.model, device_version: $window.device.version}
+      var data = {app_id: Base.app().id, device_uuid: Base.getDevice().uuid, device_platform: Base.getDevice().platform, device_model: Base.getDevice().model, device_version: Base.getDevice().version}
       return Base.post('/login', data).then(function(item){
         self.user = item;
         $localForage.setItem('user', self.user);
