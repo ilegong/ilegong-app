@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -30,26 +30,17 @@
       getLocal: getLocal, 
       setLocal: setLocal, 
       deferred: deferred, 
+      getUrl: getUrl, 
       getDevice: function(){return $window.device}
     }
 
     function get(url){
-      console.log(software.server.address + url);
+      console.log('get ' + software.server.address + url);
       if(software.fakeData){
         return deferred(FakeData.get(url));
       }
-/*
-      return $http.get(software.server.address + url).then(
-        function(data){
 
-          return data.data;
-        }, function(error){
-          return error;
-        }
-      );
-*/
       var defer = $q.defer();
-      $log.log('get ' + url);
       $http.get(software.server.address + url)
         .success(function(data, status, headers, config) {
           defer.resolve(data);
@@ -90,7 +81,9 @@
       }
       return $localForage.setItem(key, value);
     }
-
+    function getUrl(url){
+      return software.server.address + url;
+    }
     function deferred(data){
       var defer = $q.defer();
       defer.resolve(data);
@@ -105,31 +98,47 @@
     self.user = null;
     return {
       init: init,
-/*
-      getToken: function(){return Base.loadLocally('/token')},
-      getUser: function(){return Base.loadLocally('/api_orders/my_profile.json')},
-      getTokenDict:function(){return FakeData.loadLocally('/token')},
-      register: register
-*/
-      getToken: function(){return Base.getLocal('token')},
-      getUser: function(){return Base.getLocal('user')},
-      getTokenDict:function(){return FakeData.loadLocally('token')},
-      getCaptcha: getCaptcha, 
+      getToken: getToken,
+      getUser: getUser,
+      getCaptchaImageUrl: getCaptchaImageUrl, 
       register: register, 
       login: login
-
     }
 
     function init(){
-      Base.getLocal('/token').then(function(token){
+      Base.getLocal('token').then(function(token){
         self.token = token;
         if(!_.isEmpty(self.token)){
-          Base.getLocal('/api_orders/my_profile.json').then(function(user){
+          Base.getLocal('user').then(function(user){
             $log.log("get user successfully: " + user);
             self.user = user;
           });
         }
       });
+    }
+    function getToken(){
+      var defer = $q.defer();
+      Base.getLocal('token').then(function(token){
+        if(!_.isEmpty(token)){
+          defer.resovle(token);
+        }
+        else{
+          defer.reject("no local token found");
+        }
+      }, function(e){defer.reject(e);});
+      return defer.promise;
+    }
+    function getUser(){
+      var defer = $q.defer();
+      Base.getLocal('user').then(function(user){
+        if(!_.isEmpty(user)){
+          defer.resovle(user);
+        }
+        else{
+          defer.reject("no local user found");
+        }
+      }, function(e){defer.reject(e);});
+      return defer.promise;
     }
 
     function login(username, password){
@@ -150,10 +159,8 @@
       return defer.promise; 
     }
 
-    function getCaptcha(){
-      Base.get("/check/captcha?type=app&mobile=" + Base.getDevice().uuid).then(function(data){
-        $log.log(data);
-      });
+    function getCaptchaImageUrl(){
+      return Base.getUrl("/check/captcha?type=app&device_uuid=" + Base.getDevice().uuid);
     }
 
     function register(){
