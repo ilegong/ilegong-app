@@ -7,35 +7,7 @@
   function ShoppingCartsCtrl($log,$scope,$rootScope,Carts){
     $rootScope.hideTabs = false;
     var vm = this;
-    active();
-
-    $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
-                  new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
-    $scope.buttonReduceClick = function(index)
-    {
-      if($scope.items[index].count > 1)
-        $scope.items[index].count=Number($scope.items[index].count)-1;
-    };
-    $scope.buttonAddClick = function(index)
-    {
-      $scope.items[index].count=Number($scope.items[index].count) +1;
-    };
-    $scope.getTotallPrice = function()
-    {
-      $scope.totall=0;
-      $scope.i=0;
-      while($scope.i<$scope.items.length)
-      {
-        $scope.totall+=$scope.items[$scope.i].price * $scope.items[$scope.i].count;
-        $scope.i++;
-      }
-      return $scope.totall;
-    };
-    $scope.removeAt=function(index)
-    {
-      $scope.items.splice(index,1);
-    };
-    function active()
+    vm.active = function()
     {
       Carts.list().then(function(data){
         vm.total_price = data.total_price;
@@ -44,13 +16,42 @@
 
       })
     }
+    vm.active();
+
+    $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
+                  new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
+    $scope.buttonReduceClick = function(cart)
+    {
+      if(cart.num > 1)
+        cart.num=Number(cart.num)-1;
+    };
+    $scope.buttonAddClick = function(cart)
+    {
+      cart.num=Number(cart.num) +1;
+    };
+    vm.getTotallPrice = function()
+    {
+      var totall=0;
+      var i = 0;
+      while(i<vm.carts.length)
+      {
+        vm.totall+=vm.carts[i].Cart.price * vm.carts[i].Cart.num;
+        i++;
+      }
+      return totall;
+    };
+    $scope.removeAt=function(index)
+    {
+      $scope.items.splice(index,1);
+    };
+
 
     vm.del = function(id)
     {
       Carts.del(id).then(function(data){
         $log.log(data); 
       });
-      active();
+      vm.active();
     }
   }
 

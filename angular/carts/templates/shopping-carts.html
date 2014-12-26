@@ -10,14 +10,14 @@
         <div class="col col-50">
           <div class='item-price col-top'>{{item.Cart.price}}元</div>
           <div class='item-count row col-center'>
-            <span class="count-reduce col col-25" ng-click="buttonReduceClick($index)">-</span>
-            <input class="count col col-50" ng-model="item.count"/>
-            <span class="count-add col col-25" ng-click="buttonAddClick($index)">+</span>
+            <span class="count-reduce col col-25" ng-click="buttonReduceClick(item.Cart)">-</span>
+            <input class="count col col-50" ng-model="item.Cart.num"/>
+            <span class="count-add col col-25" ng-click="buttonAddClick(item.Cart)">+</span>
           </div>
         </div>
         <div class="col-25">
-          <div class='item-price-total'>{{item.Cart.price * item.count}}元</div>
-          <a href= "" class="" ng-click="vm.del({{item.Cart.product_id}})">
+          <div class='item-price-total'>{{item.Cart.price * item.Cart.num}}元</div>
+          <a href= "" class="" ng-click="vm.del({{item.Cart.id}})">
             删除
           </a>
         </div>
