@@ -65,15 +65,24 @@
     }
   }
   /* @ngInject */
-  function MyAccountRegisterCtrl($rootScope, $scope){
+  function MyAccountRegisterCtrl($rootScope, $scope, $log, Users){
     $rootScope.hideTabs = true;
+    var vm = this;
+    vm.hexToBase64 = hexToBase64;
+    activate();
+
+    function activate(){
+      var captchaImage = document.getElementById("captchaImage");
+      captchaImage.src = Users.getCaptchaImageUrl();
+    }
+    function hexToBase64(str) {
+      return btoa(String.fromCharCode.apply(null, str.replace(/\r|\n/g, "").replace(/([\da-fA-F]{2}) ?/g, "0x$1 ").replace(/ +$/, "").split(" ")));
+    }
   }
   /* @ngInject */
   function MyIlegongCtrl($rootScope, $scope){
     $rootScope.hideTabs = true;
   }
-
-
 
   function MyDetailCtrl($scope,$rootScope,$http,Users){
     var vm = this;

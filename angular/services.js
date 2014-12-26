@@ -4,7 +4,7 @@
   angular
   .module('app.services', ['LocalForageModule'])
 
-  .value('software', {fakeData: false  , app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
 
   .service('Base', Base)
   .service('Users', Users)
@@ -24,34 +24,27 @@
   .service('Carts',Carts)
 
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, software){
+  function Base($http, $q, $log, $localForage, $window, software){
     var self = this;
     return {
       get: get, 
       post: post, 
       getLocal: getLocal, 
       setLocal: setLocal, 
-      deferred: deferred,
-      getLocalDict:getLocal
+
+      deferred: deferred, 
+      getUrl: getUrl, 
+      getDevice: function(){return $window.device}
+
     }
 
     function get(url){
-      console.log(software.server.address + url);
+      console.log('get ' + software.server.address + url);
       if(software.fakeData){
         return deferred(FakeData.get(url));
       }
-/*
-      return $http.get(software.server.address + url).then(
-        function(data){
 
-          return data.data;
-        }, function(error){
-          return error;
-        }
-      );
-*/
       var defer = $q.defer();
-      $log.log('get ' + url);
       $http.get(software.server.address + url)
         .success(function(data, status, headers, config) {
           defer.resolve(data);
@@ -92,7 +85,9 @@
       }
       return $localForage.setItem(key, value);
     }
-
+    function getUrl(url){
+      return software.server.address + url;
+    }
     function deferred(data){
       var defer = $q.defer();
       defer.resolve(data);
@@ -109,25 +104,19 @@
   }
 
   /* @ngInject */
-  function Users($window, $log, $q, software, Base){
+  function Users($log, $q, software, Base){
     var self = this;
     self.token = null;
     self.user = null;
-    $window.device = $window.device || {};
     return {
       init: init,
-/*
-      getToken: function(){return Base.loadLocally('/token')},
-      getUser: function(){return Base.loadLocally('/api_orders/my_profile.json')},
-      getTokenDict:function(){return FakeData.loadLocally('/token')},
-      register: register
-*/
-      getToken: function(){return Base.getLocal('token')},
-      getUser: function(){return Base.getLocal('user')},
-      getTokenDict:function(){return Base.getLocalDict('token')},
+
+      getToken: getToken,
+      getUser: getUser,
+      getCaptchaImageUrl: getCaptchaImageUrl, 
+
       register: register, 
       login: login
-
     }
 
     function init(){
@@ -140,6 +129,30 @@
           });
         }
       });
+    }
+    function getToken(){
+      var defer = $q.defer();
+      Base.getLocal('token').then(function(token){
+        if(!_.isEmpty(token)){
+          defer.resovle(token);
+        }
+        else{
+          defer.reject("no local token found");
+        }
+      }, function(e){defer.reject(e);});
+      return defer.promise;
+    }
+    function getUser(){
+      var defer = $q.defer();
+      Base.getLocal('user').then(function(user){
+        if(!_.isEmpty(user)){
+          defer.resovle(user);
+        }
+        else{
+          defer.reject("no local user found");
+        }
+      }, function(e){defer.reject(e);});
+      return defer.promise;
     }
 
     function login(username, password){
@@ -160,8 +173,12 @@
       return defer.promise; 
     }
 
+    function getCaptchaImageUrl(){
+      return Base.getUrl("/check/captcha?type=app&device_uuid=" + Base.getDevice().uuid);
+    }
+
     function register(){
-      var data = {app_id: Base.app().id, device_uuid: $window.device.uuid, device_platform: $window.device.platform, device_model: $window.device.model, device_version: $window.device.version}
+      var data = {app_id: Base.app().id, device_uuid: Base.getDevice().uuid, device_platform: Base.getDevice().platform, device_model: Base.getDevice().model, device_version: Base.getDevice().version}
       return Base.post('/login', data).then(function(item){
         self.user = item;
         $localForage.setItem('user', self.user);

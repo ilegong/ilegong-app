@@ -18,7 +18,11 @@ a{
 .card .item {
   font-size: 14px;
 }
-
+.btn-warning {
+  color: #fff;
+  background-color: #dd5600;
+  border-color: #dd5600;
+}
 .pane-secondary{
   margin-top: 50px;
   padding-top: 15px;
@@ -465,12 +469,24 @@ a{
     float:right;
     padding-top:10px;
   }
- }
- .productDetail{
+}
+.productDetail{
   .main{
     padding-left:10px;  
     padding-right:10px;
   }
+}
 
-
- }
+.my-account-register{
+  .item{
+    .row{
+      padding: 0;
+      .sms-verify{
+        margin: 10px 0;
+      }
+      #captchaImage{
+        padding: 0;
+      }
+    }
+  }
+}
