@@ -4,7 +4,7 @@
   angular
   .module('app.services', ['LocalForageModule'])
 
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
+  .value('software', {fakeData: false  , app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com', port: 80}})
 
   .service('Base', Base)
   .service('Users', Users)
@@ -31,7 +31,8 @@
       post: post, 
       getLocal: getLocal, 
       setLocal: setLocal, 
-      deferred: deferred 
+      deferred: deferred,
+      getLocalDict:getLocal
     }
 
     function get(url){
@@ -97,6 +98,14 @@
       defer.resolve(data);
       return defer.promise;
     }
+    function getLocalSync(key){
+      if(software.fakeData){
+        return FakeData.getLocal(key);
+      }
+      else{
+        return $localForage.getItem(key);
+      }
+    }
   }
 
   /* @ngInject */
@@ -115,17 +124,17 @@
 */
       getToken: function(){return Base.getLocal('token')},
       getUser: function(){return Base.getLocal('user')},
-      getTokenDict:function(){return FakeData.loadLocally('token')},
+      getTokenDict:function(){return Base.getLocalDict('token')},
       register: register, 
       login: login
 
     }
 
     function init(){
-      Base.getLocal('/token').then(function(token){
+      Base.getLocal('token').then(function(token){
         self.token = token;
         if(!_.isEmpty(self.token)){
-          Base.getLocal('/api_orders/my_profile.json').then(function(user){
+          Base.getLocal('user').then(function(user){
             $log.log("get user successfully: " + user);
             self.user = user;
           });
@@ -162,7 +171,7 @@
   }
 
   /* @ngInject */
-  function Products($log, Base,software,Users){
+  function Products($q,$log, Base,software,Users){
     var self = this;
     return {
       list: list,
@@ -175,7 +184,15 @@
       return Base.get('/categories/mobileHome.json');
     }
     function getProduct(id){
-        return Base.get('/api_orders/product_detail/'+id+'.json?access_token='+Users.getTokenDict().access_token); 
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/product_detail/'+id+'.json?access_token='+token.access_token).then(function(product){
+          defer.resolve(product);
+
+        })
+
+      })
+        return defer.promise;
     }
     function getProductContent(id){
       return Base.get('/apiOrders/product_content/'+id+'.json')
@@ -197,7 +214,7 @@
     }
   }
 
-  function Orders(Base,software,Users){
+  function Orders($q,Base,software,Users){
     var self = this;
 
     return {
@@ -208,8 +225,13 @@
     }
 
     function list(){
-
-       return Base.get('/api_orders/mine.json?access_token='+Users.getTokenDict().access_token);
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/mine.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
+      return defer.promise;
     }
     function allProvince()
     {
@@ -225,15 +247,21 @@
     }
   }
 
-  function OrderDetail(Base,Users)
+  function OrderDetail($q,Base,Users)
   {
     var self = this;
     return {
       list: list
     }
     function list(id){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/apiOrders/order_detail/'+id+'.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
 
-      return Base.get('/apiOrders/order_detail/'+id+'.json?access_token='+Users.getTokenDict().access_token)
+      return defer.promise;
     }
   }
 
@@ -271,18 +299,24 @@
       return Base.get('/shichituan.json');
     }
   }
-  function Offers($log,Base,software,Users)
+  function Offers($q,$log,Base,software,Users)
   {
     var self = this;
     return{
       list:list
     }
     function list(token){
-      return Base.get('/api_orders/my_offers.json?access_token='+Users.getTokenDict().access_token);
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/my_offers.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);    
+        })
+      })
+      return defer.promise;
     }
   }
 
-  function Addresses(Base,software,Users)
+  function Addresses($q,Base,software,Users)
   {
     var self = this;
     return{
@@ -290,34 +324,87 @@
       getAddress:getAddress
     }
     function list(token){
-      return Base.get('/api_orders/order_consignees.json?access_token='+ Users.getTokenDict().access_token);
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/order_consignees.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
+      return defer.promise;
     }
     function getAddress(provinceId,cityId,countyId){
-      return Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+Users.getTokenDict().access_token);
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
+      return defer.promise;
     }
   }
-  function Coupons($log,Base,software,Users)
+  function Coupons($q,$log,Base,software,Users)
   {
     var self = this;
     return{
       list:list
     }
     function list() {
-      return Base.get('/api_orders/my_coupons.json?access_token='+Users.getTokenDict().access_token);
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/my_coupons.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
+      return defer.promise;
     }
   }
-  function Carts(Base,software,Users)
+  function Carts($q,$log,Base,software,Users)
   {
     var self = this;
     return{
       list:list,
-      del:del
+      del:del,
+      add:add
     }
     function list(){
-      return Base.get('/ApiOrders/list_cart.json?access_token='+Users.getTokenDict().access_token);
+
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        console.log(token);
+        Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
+          defer.resolve(list);
+        }, function(e){defer.reject(e)})
+      })
+      return defer.promise;
+
     }
     function del(id){
-      return Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+Users.getTokenDict().access_token)
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+token.access_token).then(function(item){
+          defer.resolve(item);
+        })
+      })
+      return defer.promise;
+    }
+    function add(id,num,spec,type,try_id){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        var json = '{"product_id":'+id+',"num":'+num+',"spec":'+spec+',"type":'+type+',"try_id":'+try_id+'}';
+        console.log(json);
+        console.log('/api_orders/cart_add.json?access_token='+token.access_token);
+        Base.post('/api_orders/cart_add.json?access_token='+token.access_token,json).then(function(result){
+          var i;
+          for(i=0;i<30;i++)
+            $log.log('b');
+          $log.log(result);
+        },function(e){
+          var i;
+          for(i=0;i<30;i++)
+            $log.log('a');
+          $log.log(e);
+        })
+      })
     }
   }
 })(window, window.angular);

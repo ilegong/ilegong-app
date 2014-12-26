@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($log,$rootScope, $scope, $stateParams,$http,Products){
+  function ProductDetailCtrl($log,$rootScope, $scope, $stateParams,$http,Products,Carts){
 
     $rootScope.hideTabs = true;
     var vm = this;
@@ -77,13 +77,15 @@
       if(rank==1)
         return 'red';
     }
-  $scope.click = function()
-  {
-    navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    destinationType: Camera.DestinationType.DATA_URL
-});
-  }
-
+    $scope.click = function()
+    {
+      navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL
+    });
+    }
+    vm.addToCart = function(){
+      Carts.add(vm.product.Product.id,vm.count,0,1,0);
+    }
   }
 
 
