@@ -138,20 +138,17 @@
 
   
 
-  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses)
-  {
+  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses){
     var vm = this;
     active();
     $rootScope.hideTabs = true;
     
-    $scope.accessEditVisible=false;
+  
 
     $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1,addressEditIndex:-2};
-    $scope.values.setEditAddress=function(index)
-    {
+    $scope.values.setEditAddress=function(index){
       $scope.values.addressEditIndex = index;
-      if(index==-1)
-      {
+      if(index==-1){
         $scope.values.editAddress=new AddressItem('','','','','','','','',-1,-1,-1);
         vm.provinceModel = null;
         vm.cityModel = null;
@@ -160,8 +157,7 @@
         vm.counties = null;
         return;
       }
-      if(index>=0)
-      {
+      if(index>=0){
         var t=vm.addresses[index];
 
         $scope.values.editAddress=t;
@@ -169,10 +165,8 @@
         var cityId = $scope.values.editAddress.OrderConsignees.city_id;
         var countyId = $scope.values.editAddress.OrderConsignees.county_id;
        
-        for(var zzz in vm.provinces)
-        {
-          if(vm.provinces[zzz].id == provinceId)
-          {
+        for(var zzz in vm.provinces){
+          if(vm.provinces[zzz].id == provinceId){
             
             vm.provinceModel = vm.provinces[zzz];
             break;
@@ -182,24 +176,20 @@
         Addresses.getAddress(provinceId,cityId,countyId).then(function(data){
           var ct = data.city_list;
           vm.cities = Array();
-          for(var zzz in ct)
-          {
+          for(var zzz in ct){
             var t = {'id':zzz,'name':ct[zzz]};
             vm.cities.push(t);
-            if(zzz == cityId)
-            {
+            if(zzz == cityId){
               vm.cityModel = t; 
             }
           }
           ct = data.county_list;
           vm.counties = Array();
-          for(var zzz in ct)
-          {
+          for(var zzz in ct){
 
             var t = {'id':zzz,'name':ct[zzz]};
             vm.counties.push(t);
-            if(zzz == countyId)
-            {
+            if(zzz == countyId){
 
               vm.countyModel = t;
             }

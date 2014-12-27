@@ -126,64 +126,6 @@
   function AppCtrl($scope,$rootScope,Orders)
   {
     //address info
-    $rootScope.regionSelectItems=[
-                              new RegionSelectItem('beijing',1,[
-                                new RegionSelectItem('beijing-1',11,[
-                                  new RegionSelectItem('beijing-1-1',111,null),
-                                  new RegionSelectItem('beijing-1-2',112,null)]),
-                                new RegionSelectItem("beijing-2",12,[
-                                  new RegionSelectItem('beijing-2-1',121,null),
-                                  new RegionSelectItem('beijing-2-2',122,null)])]),
-                              new RegionSelectItem('shanghai',2,[
-                                new RegionSelectItem('shanghai-1',21,[
-                                  new RegionSelectItem('shanghai-1-1',211,null),
-                                  new RegionSelectItem('shanghai-1-2',212,null)]),
-                                new RegionSelectItem('shanghai-2',22,[
-                                  new RegionSelectItem('shanghai-2-1',221,null),
-                                  new RegionSelectItem('shanghai-2-2',222,null)])])];
-    $rootScope.getRegion_1_model=function(title)
-    {
-      var i=0;
-      while(i<$rootScope.regionSelectItems.length)
-      {
-        if($rootScope.regionSelectItems[i].title == title)
-        {
-          return {id:i,content:$rootScope.regionSelectItems[i]};
-        }
-        i++;
-      }
-      return null;
-    }
-    $rootScope.getReion_2_model=function(index_1,title)
-    {
-      var t = $rootScope.regionSelectItems[index_1];
-      var i = 0;
-
-      while(i<t.content.length)
-      {
-        if(t.content[i].title==title)
-        {
-          return {id:i,content:t.content[i]};
-        }
-        i++;
-      }
-
-      return null;
-    }
-    $rootScope.getRegion_3_model=function(index_1,index_2,title)
-    {
-      var t = $rootScope.regionSelectItems[index_1].content[index_2];
-      var i = 0;
-      while(i<t.content.length)
-      {
-        if(t.content[i].title==title)
-        {
-          return {id:i,content:t.content[i]};
-        }
-        i++;
-      } 
-      return null;
-    }
     $rootScope.allProvince = function()
     {
       var provinces = Array();
@@ -193,7 +135,6 @@
           {
             provinces.push({'id':zzz,'name':provincesT[zzz]});
           }
-
       });
       return provinces;
     }

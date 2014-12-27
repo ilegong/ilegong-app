@@ -3,18 +3,14 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
-
   .service('Orders',Orders)
-
   .service('Categories', Categories)
   .service('OrderDetail',OrderDetail)
-
   .service("Stores", Stores)
-
   .service("Tryings", Tryings)
   .service("Offers",Offers)
   .service("Coupons",Coupons)
