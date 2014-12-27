@@ -18,10 +18,10 @@
       <div class='item item-input item-row item-stacked-label'>
         <label class="col col-50">
           <span class="input-label">短信验证码</span>
-          <input type="text" ng-model='vm.user.smsCode' placeholder="短信验证码">
+          <input type="text" ng-model='vm.user.smsCode' class='smsCode' placeholder="短信验证码">
         </label>
-        <button id="smsCodeButton" class="sms-code col col-33" ng-class="{enabled: vm.user.captchaCodeVerified && !vm.user.smsSent}" ng-click="vm.getSmsCode()" ng-disabled="!vm.user.captchaCodeVerified || vm.user.smsSent">
-          {{vm.user.smsSent? "短信已发送" : "点击获取"}}
+        <button id="smsCodeButton" class="sms-code col col-33" ng-class="{disabled: vm.shouldDisableSmsCodeButton()}" ng-click="vm.getSmsCode()" ng-disabled="vm.shouldDisableSmsCodeButton()">
+          {{vm.user.smsSent? vm.user.nextSentInterval + "秒后可重试" : "点击获取"}}
         </button>
       </div>
       <label class="item item-input item-stacked-label">
@@ -34,9 +34,9 @@
         <i class="icon ion-close"></i>
         注册失败
       </span>
-      </div>
+    </div>
     <div class="padding">
-      <button class="button button-block button-positive" ng-disabled="!vm.user.captchaCodeVerified" ng-click="vm.register()">注册</button>
+      <button class="button button-block button-positive" ng-disabled="!vm.shouldEnableRegisterButton()" ng-click="vm.register()">注册</button>
     </div>
   </ion-content>
 </ion-view>

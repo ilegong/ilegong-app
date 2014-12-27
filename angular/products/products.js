@@ -36,11 +36,8 @@
         {
           vm.comment = data;
         });
-
     }
     
-
-
     $scope.buttonReduceClick = function()
     {
       if(vm.count > 1)

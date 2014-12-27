@@ -492,10 +492,15 @@ a{
     display: flex;
     width: 100%;
 
-    .sms-code.enabled{
+    .sms-code{
       color: #fff;
       background-color: #dd5600;
       border-color: #dd5600;
+    }
+    .sms-code.disabled{
+      color: #7F7F7F;
+      background-color: #C0C0C0;
+      border-color: #C0C0C0;
     }
     #captchaImage{
       padding: 0;
