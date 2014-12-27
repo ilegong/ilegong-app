@@ -7,11 +7,11 @@
     <p/>
     <div class="list">
       <div ng-click="values.accessDivVisible=false;">
-          <label class="item item-radio"  ng-repeat="address in order.userInfo.addresses" ng-click="values.accessSelectedIndex=$index;" > 
+          <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedIndex=$index;" > 
             <input type="radio" name="group" />
     
             <div class="item-content" >
-              {{address.name}}({{address.telephone}})
+              {{address.OrderConsignees.name}}({{address.telephone}})
             </div>
             <div > 
               {{address.region_1 + address.region_2 + address.region_3}}

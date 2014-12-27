@@ -59,6 +59,7 @@
     var vm = this;
     //$rootScope.hideTabs = true;
     active();
+    console.log('asd'); 
     $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
                                         new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
                                         new AddressItem(true,'name2','beijing','beijing-2','beijing-2-1','地址','12345678911'),
