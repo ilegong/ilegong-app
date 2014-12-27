@@ -54,7 +54,7 @@
     }
   }
 
-  function OrderInfoCtrl($scope,$rootScope){
+  function OrderInfoCtrl($scope,$rootScope,Addresses){
  
     var vm = this;
     //$rootScope.hideTabs = true;
@@ -101,6 +101,10 @@
 
     function active(){
       vm.provinces = $rootScope.allProvince();
+      Addresses.list().then(function(adds){
+        vm.addresses = adds;
+        console.log(vm.addresses);
+      })
     }
 
     vm.getCities = function(id){

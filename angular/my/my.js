@@ -241,7 +241,7 @@
 
     function active() {
       vm.provinces = $rootScope.allProvince();
-      Addresses.list(1).then(function(data) {
+      Addresses.list().then(function(data) {
         vm.addresses = data;
       })
     }
