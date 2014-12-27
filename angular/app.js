@@ -57,9 +57,12 @@
       .state('app.order-info',{url:'/order-info',views:{'app-shopping-carts':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
-      .state('store', {url: '/stores/:id', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
+      .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
+      .state('store.product-detail', {url: '/products/:id', views: {'store-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
+      .state('store.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
+      .state('store.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
     $urlRouterProvider.otherwise('/app/home');
   }

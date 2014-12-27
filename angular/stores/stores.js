@@ -27,7 +27,7 @@
     activate();
     
     function activate(){
-      app.storeId = $stateParams.id;
+      app.storeId = $stateParams.storeId;
       Stores.getStore(app.storeId).then(function(data){
         app.store = data.content;
       });
@@ -38,6 +38,7 @@
   function StoreHomeCtrl($rootScope, $scope, $stateParams, Stores){
     $rootScope.hideTabs = false;
     var vm = this;
+    vm.storeId = $stateParams.storeId;
     activate();
 
     function activate(){
