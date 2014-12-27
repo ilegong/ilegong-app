@@ -229,25 +229,18 @@
       }
     }
 
-
-
-    $scope.values.deleteAddressItem=function(index)
-    {
+    $scope.values.deleteAddressItem=function(index) {
       vm.addresses.splice(index,1);
     }
-    $scope.values.getDefColor=function(index)
-    {
-      if($scope.addresses[index].def==true)
-      {
+    $scope.values.getDefColor=function(index) {
+      if($scope.addresses[index].def==true) {
         return '#eeeeee';
       }
       return 'white'; 
     }
-    $scope.values.setDef=function(index)
-    {
+    $scope.values.setDef=function(index) {
       var i =0;
-      while(i<$scope.addresses.length)
-      {
+      while(i<$scope.addresses.length) {
         $scope.addresses[i].def= false;
         i++;
       }
@@ -255,47 +248,29 @@
     }
 
 
-    function active()
-    {
-  
+    function active() {
       vm.provinces = $rootScope.allProvince();
-      Addresses.list(1).then(function(data)
-      {
+      Addresses.list(1).then(function(data) {
         vm.addresses = data;
-
       })
-      
-
     }
-    vm.getCities = function(id)
-    {
-      if(id==null)
-      {
+    vm.getCities = function(id) {
+      if(id==null) {
         vm.cities = null;
         vm.counties = null;
         return;
       }
-
       vm.cities = $rootScope.getCities(id);
- 
-
-        
     }
-    vm.getCounties = function(id)
-    {
-      
-      if(id == null)
-      {
+    vm.getCounties = function(id) {
+      if(id == null) {
         vm.counties = null;
         return;
-
       }
       vm.counties = $rootScope.getCounties(id);
- 
     }
 
-    vm.confirm = function()
-    {
+    vm.confirm = function() {
       var index = $scope.values.addressEditIndex;
       var t = $scope.values.editAddress.OrderConsignees;
       if(t.name !='' && t.name!=null && 
@@ -303,70 +278,54 @@
         vm.cityModel!=null && 
         vm.countyModel != null && 
         t.address != '' && t.address != null && 
-        t.mobilephone != '' && t.mobilephone != null)
-      {
+        t.mobilephone != '' && t.mobilephone != null) {
         if(index == -1)
           console.log('confirm create')
         else if(index >=0)
           console.log('confirm change');
-        //confirm
       }
     }
   }
-  function MyCouponsCtrl($scope,$rootScope,Coupons)
-  {
+  function MyCouponsCtrl($scope,$rootScope,Coupons) {
     $rootScope.hideTabs = true;
     var vm = this;
     active();
 
-    function active()
-    {
+    function active() {
       Coupons.list(1).then(function(data){
         vm.coupons = data.coupons;
         var brandsT = data.brands;  
         vm.brands = Array();
-        for(var zzz in brandsT)
-        {
+        for(var zzz in brandsT) {
           vm.brands[zzz] = brandsT[zzz];
         }
-        
       })
     }
   }
-  function MyOffersCtrl($scope,$rootScope,$http,Offers)
-  {
+  function MyOffersCtrl($scope,$rootScope,$http,Offers) {
     $rootScope.hideTabs = true;
     var vm = this;
     active();
-    function active()
-    {
+    function active() {
       Offers.list(1).then(function(data){
         vm.sharedOffers = data.sharedOffers;
         vm.expiredIds = data.expiredIds;
         vm.soldOuts = data.soldOuts;
         var brandsT = data.brands;
         vm.brands = Array();
-        for(var zzz in brandsT)
-        {
-
+        for(var zzz in brandsT) {
           vm.brands[zzz] = brandsT[zzz];
-      
         }
-
       });
-
     }
   }
   function MyOrdersCtrl($scope,$rootScope,$http,Orders){
-  
     $rootScope.hideTabs = true;
     var vm = this;
     active();
     
     vm.stateFilter = -1;
-    function active()
-    {
- 
+    function active() {
       Orders.list().then(function(data){
         vm.orders = data.orders;
         vm.brands = data.brands;
@@ -376,24 +335,19 @@
     }
   }
 
-  function MyOrderDetailCtrl($scope,$rootScope,$http,$stateParams,OrderDetail)
-  {
+  function MyOrderDetailCtrl($scope,$rootScope,$http,$stateParams,OrderDetail) {
     var vm = this;
     active();
     
-    $scope.getTotalPrice = function()
-    {
+    $scope.getTotalPrice = function() {
       var sum = 0;
-      for(var key in vm.carts)
-      {
+      for(var key in vm.carts) {
         sum+=Number(vm.carts[key].Cart.price);
       }
       return sum;
     }
-    function active()
-    {
-      OrderDetail.list($stateParams.id).then(function(data)
-      {
+    function active() {
+      OrderDetail.list($stateParams.id).then(function(data) {
         console.log('sdf');
         console.log(data);
         vm.order = data.order;
