@@ -20,7 +20,6 @@
   function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
     var vm = this;
-    vm.logout = logout;
     active();
 
     function active() {
@@ -34,24 +33,25 @@
         vm.trying = user.my_profile.Shichituan;
       });
     }
-
-    function logout(){
-      Users.logout().then(function(){
-        vm.loggedIn = false;
-      });
-    }
   }
   /* @ngInject */
-  function MyDetailCtrl($log,$scope, $rootScope, $http, Users){
-    $log.log('sdf');
+  function MyDetailCtrl($scope, $rootScope, $log, $state, Users){
     $rootScope.hideTabs = true;
     var vm = this;
+    vm.logout = logout;
     active();
+
     function active() {
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
         console.log(vm.user);
+      });
+    }
+
+    function logout(){
+      Users.logout().then(function(){
+        $state.go('app.my');
       });
     }
   }
