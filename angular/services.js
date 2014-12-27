@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -78,7 +78,6 @@
           defer.reject({data: data, status: status});
         });
       return defer.promise;
-
     }
 
     function getLocal(key){
@@ -289,22 +288,18 @@
       })
       return defer.promise;
     }
-    function allProvince()
-    {
+    function allProvince(){
       return Base.get('/Locations/get_province.json');
     }
-    function getCities(id)
-    {
+    function getCities(id){
       return Base.get('/Locations/get_city.json?provinceId='+id);
     }
-    function getCounties(id)
-    {
+    function getCounties(id){
       return Base.get('/Locations/get_county.json?cityId='+id);
     }
   }
 
-  function OrderDetail($q,Base,Users)
-  {
+  function OrderDetail($q,Base,Users){
     var self = this;
     return {
       list: list
@@ -355,8 +350,7 @@
       return Base.get('/shichituan.json');
     }
   }
-  function Offers($q,$log,Base,software,Users)
-  {
+  function Offers($q,$log,Base,software,Users){
     var self = this;
     return{
       list:list
@@ -372,8 +366,7 @@
     }
   }
 
-  function Addresses($q,Base,software,Users)
-  {
+  function Addresses($q,Base,software,Users){
     var self = this;
     return{
       list:list,
@@ -398,8 +391,7 @@
       return defer.promise;
     }
   }
-  function Coupons($q,$log,Base,software,Users)
-  {
+  function Coupons($q,$log,Base,software,Users){
     var self = this;
     return{
       list:list
@@ -414,16 +406,15 @@
       return defer.promise;
     }
   }
-  function Carts($q,$log,Base,software,Users)
-  {
+  function Carts($q,$log,Base,software,Users){
     var self = this;
     return{
       list:list,
       del:del,
-      add:add
+      add:add,
+      editNum:editNum
     }
     function list(){
-
       var defer = $q.defer();
       Users.getToken().then(function(token){
         console.log(token);
@@ -432,7 +423,6 @@
         }, function(e){defer.reject(e)})
       })
       return defer.promise;
-
     }
     function del(id){
       var defer = $q.defer();
@@ -461,6 +451,15 @@
           $log.log(e);
         })
       })
+    }
+    function editNum(id,num){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/cart_edit_num/'+id+'/'+num+'.json?access_token='+token.access_token).then(function(result){
+          defer.resolve(result);
+        })
+      })
+      return defer.promise;
     }
   }
 })(window, window.angular);

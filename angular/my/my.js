@@ -42,15 +42,16 @@
     }
   }
   /* @ngInject */
-  function MyDetailCtrl($scope, $rootScope, $http, Users){
+  function MyDetailCtrl($log,$scope, $rootScope, $http, Users){
+    $log.log('sdf');
     $rootScope.hideTabs = true;
     var vm = this;
     active();
-    
     function active() {
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
+        console.log(vm.user);
       });
     }
   }
@@ -86,10 +87,12 @@
       vm.user = {mobile: '', captchaCode: '', smsCode: '', password: '', captchaCodeVerified: false, smsSent: false, registerFailed: false};
       vm.showCaptchaCode();
     }
+
     function showCaptchaCode(){
       var captchaImage = document.getElementById("captchaImage");
       captchaImage.src = Users.getCaptchaImageUrl();
     }
+
     function verifyCaptchaCode(){
       $log.log('to verify captcha code');
       Users.verifyCaptchaCode(vm.user.captchaCode).then(function(data){
@@ -104,6 +107,7 @@
         vm.showCaptchaCode(); 
       });
     }
+
     function getSmsCode(){
       $log.log('to get sms code');
       Users.getSmsCode(vm.user.mobile, vm.user.captchaCode).then(function(data){
@@ -125,26 +129,16 @@
       });
     }
   }
+
   /* @ngInject */
   function MyIlegongCtrl($rootScope, $scope){
     $rootScope.hideTabs = true;
   }
 
-  function MyDetailCtrl($scope,$rootScope,$http,Users){
-    var vm = this;
-    active();
-    
-    function active()
-    {
-      Users.getUser().then(function(data){
-        vm.my_profile = data.my_profile;
-      })
-    }
-  }
+
   
 
   function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses)
-
   {
     var vm = this;
     active();
@@ -213,19 +207,7 @@
 
 
         })
-        /*
-         var r = $rootScope.getRegion_1_model(t.region_1);
-         
-        $scope.values.editAddress.region_1_model = r.content;
-        var r2 = $rootScope.getReion_2_model(r.id,t.region_2);
-                  
-        $scope.values.editAddress.region_2_model = r2.content;
-        var r3 = $rootScope.getRegion_3_model(r.id,r2.id,t.region_3);
-                 
-        $scope.values.editAddress.region_3_model = r3.content;
-        */
         return;
-
       }
     }
 

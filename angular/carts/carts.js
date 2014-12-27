@@ -7,49 +7,48 @@
   function ShoppingCartsCtrl($log,$scope,$rootScope,Carts){
     $rootScope.hideTabs = false;
     var vm = this;
-    vm.active = function()
-    {
+    vm.active = function(){
       Carts.list().then(function(data){
         vm.total_price = data.total_price;
         vm.carts = data.carts;
- 
-
       })
     }
     vm.active();
-
-    $scope.items=[new CartItem('title1','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',11.5,5,'http://baidu.com'),
-                  new CartItem('title2','http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',6,7,'http://baidu.com')];
     $scope.buttonReduceClick = function(cart)
     {
+      var t = cart.num;
       if(cart.num > 1)
-        cart.num=Number(cart.num)-1;
+        cart.num = Number(cart.num)-1;
+      Carts.editNum(cart.id,cart.num).then(function(result){
+        if(result.success == false){
+          cart.num = t;
+        }
+      });
     };
-    $scope.buttonAddClick = function(cart)
-    {
+    $scope.buttonAddClick = function(cart){
+      var t = cart.num;
       cart.num=Number(cart.num) +1;
+      Carts.editNum(cart.id,cart.num).then(function(result){
+        if(result.success == false){
+          cart.num = t;
+        }
+      });
     };
-    vm.getTotallPrice = function()
-    {
+    vm.getTotallPrice = function(){
       var totall=0;
       var i = 0;
-      while(i<vm.carts.length)
-      {
+      while(i<vm.carts.length){
         vm.totall+=vm.carts[i].Cart.price * vm.carts[i].Cart.num;
         i++;
       }
       return totall;
     };
-    $scope.removeAt=function(index)
-    {
+    $scope.removeAt=function(index){
       $scope.items.splice(index,1);
     };
-
-
-    vm.del = function(id)
-    {
+    vm.del = function(id){
       Carts.del(id).then(function(data){
-        $log.log(data); 
+          $log.log(data); 
       });
       vm.active();
     }
@@ -88,46 +87,36 @@
 
                 );
 
-      $scope.getTotallPrice=function()
-      {
-        var i=0;
-        var totall=0;
-        while(i < $scope.order.products.length)
-        {
-          var t = $scope.order.products[i];
-          totall += t.price * t.count;
-          i++;
-        }
-        return totall;
+    $scope.getTotallPrice=function(){
+      var i=0;
+      var totall=0;
+      while(i < $scope.order.products.length){
+        var t = $scope.order.products[i];
+        totall += t.price * t.count;
+        i++;
       }
-        $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
+      return totall;
+    }
+    $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
 
-        function active()
-        {
-          vm.provinces = $rootScope.allProvince();
-        }
+    function active(){
+      vm.provinces = $rootScope.allProvince();
+    }
 
-        vm.getCities = function(id)
-        {
-          if(id==null)
-          {
-            vm.cities = null;
-            vm.counties = null;
-            return;
-          }
-          vm.cities = $rootScope.getCities(id);
-        }
-        vm.getCounties = function(id)
-        {
-          if(id == null)
-          {
-            vm.counties = null;
-            return;
-          }
-          vm.counties = $rootScope.getCounties(id);
-        }
-
-
+    vm.getCities = function(id){
+      if(id==null){
+        vm.cities = null;
+        vm.counties = null;
+        return;
+      }
+      vm.cities = $rootScope.getCities(id);
+    }
+    vm.getCounties = function(id){
+      if(id == null){
+        vm.counties = null;
+        return;
+      }
+      vm.counties = $rootScope.getCounties(id);
+    }
   }
- 
 })(window, window.angular);

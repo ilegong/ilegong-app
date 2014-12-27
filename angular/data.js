@@ -4687,6 +4687,8 @@ var brandIntroJson = {
    }
 }
 
+var CartsEditNumResult = {"success":true}
+
 var FakeData = function(){
   var getData = {
     '/categories/mobileHome.json': mobileHomeJson,
@@ -4712,7 +4714,8 @@ var FakeData = function(){
     "/Locations/get_address.json": Address,
     "/api_orders/order_consignees.json": Addresses,
     "/api_orders/my_profile.json": Profile,
-    "/ApiOrders/list_cart.json":Carts
+    "/ApiOrders/list_cart.json":Carts,
+    "/api_orders/cart_edit_num/\\d+/\\d+.json":CartsEditNumResult
   };
 
   var localDataMap = {
