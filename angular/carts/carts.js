@@ -4,7 +4,7 @@
   angular.module('ilegong.carts', ['app.services'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
-  function ShoppingCartsCtrl($log,$scope,$rootScope,Carts){
+  function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
     $rootScope.hideTabs = false;
     var vm = this;
     vm.active = function(){
@@ -48,66 +48,129 @@
     };
     vm.del = function(id){
       Carts.del(id).then(function(data){
-          $log.log(data); 
+          
       });
       vm.active();
     }
+    vm.confirm = function(){
+      var defer = $q.defer();
+    
+
+      
+      var items=[];
+      for(var item in vm.carts){
+        items.push(Number(vm.carts[item].Cart.product_id));
+      }
+      Addresses.list().then(function(adds){
+        var id = adds[0].OrderConsignees.id;
+        for(var item in adds){
+          if(adds[item].OrderConsignees.status == 1){
+            id = adds[item].OrderConsignees.id;
+            break;
+          }
+        }
+
+        
+        Orders.cartInfo(items,id,null).then(function(result){
+          defer.resolve(result);
+          
+        });
+      })
+      $rootScope.cartInfoPromise = defer.promise;
+    }
   }
 
-  function OrderInfoCtrl($scope,$rootScope,Addresses){
+  function OrderInfoCtrl($log,$scope,$rootScope,Addresses,Orders){
  
     var vm = this;
     //$rootScope.hideTabs = true;
     active();
-    console.log('asd'); 
-    $scope.order = new Order(new UserInfoWithAddresses(1,'lilei','昵称','none','男','单位','个性签名','手机号','邮箱','***',[
-                                        new AddressItem(false,'name1','beijing','beijing-2','beijing-2-1','地址','12345678911'),
-                                        new AddressItem(true,'name2','beijing','beijing-2','beijing-2-1','地址','12345678911'),
-                                        new AddressItem(false,'name3','shanghai','shanghai-2','shanghai-2-1','地址','12345678911')
-                            ]),
-                  [
-                          new OrderProductItem('分享人1',
-                            '商品1',
-                            12,
-                            2,
-                            ""),
-                          new OrderProductItem('分享人2',
-                            '商品2',
-                            15,
-                            1,
-                            ""),
-                          new OrderProductItem('分享人3',
-                            '商品3',
-                            11.2,
-                            6,
-                            "")
-                          ],
-                    "",
-                    20,
-                    15
+ 
 
-                );
 
-    $scope.getTotallPrice=function(){
-      var i=0;
-      var totall=0;
-      while(i < $scope.order.products.length){
-        var t = $scope.order.products[i];
-        totall += t.price * t.count;
-        i++;
-      }
-      return totall;
-    }
-    $scope.values={accessDivVisible:false,accessSelectedIndex:-1};
+    $scope.values={accessDivVisible:false,accessSelectedId:-1};
 
     function active(){
       vm.provinces = $rootScope.allProvince();
       Addresses.list().then(function(adds){
         vm.addresses = adds;
-        console.log(vm.addresses);
+        for(var i in vm.addresses){
+          var t = vm.addresses[i];
+          if(t.OrderConsignees.status == 1){
+            $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
+            
+            break;
+          }
+        }
+        
       })
-    }
+   
 
+
+      cartRefresh();
+    }
+    function cartRefresh(){
+
+      $rootScope.cartInfoPromise.then(function(data){
+   
+        vm.CartInfo = data.data;
+
+      $rootScope.cartInfoPromise = null;
+
+      })
+      
+
+
+          
+    }
+    vm.loadBrandById = function(id){
+    
+      for(var item in vm.CartInfo.brands){
+        var t = vm.CartInfo.brands[item];
+        if(t.Brand.id == id){
+          return t;
+          
+        }
+        return null;
+      }
+    }
+    vm.confirmCoupon_code = function(){
+
+      vm.coupon_code = vm.coupon_code_t;
+      console.log(vm.coupon_code);
+    }
+    vm.confirm = function(){
+
+      var pid_list = Array();
+      for(var item in vm.CartInfo.cart.brandItems){
+        var t = vm.CartInfo.cart.brandItems[item];
+        for(var i in t.items){
+          pid_list.push(t.items[i].pid);
+        }
+      }
+      var remarks = {};
+      for(var item in vm.CartInfo.brands){
+        var b = vm.CartInfo.brands[item];
+        remarks[b.Brand.id] = b.Brand['remark'];
+      }
+
+     
+      Orders.balance(pid_list,$scope.values.accessSelectedId,vm.coupon_code,remarks);
+      
+
+    }
+    vm.getTotalShipFees = function(){
+
+      var t = 0;
+      if(vm.CartInfo==null)
+        return 0;
+      for(var i in vm.CartInfo.shipFees){
+
+        t+=vm.CartInfo.shipFees[i];
+      }
+      return t;
+
+    }
     vm.getCities = function(id){
       if(id==null){
         vm.cities = null;

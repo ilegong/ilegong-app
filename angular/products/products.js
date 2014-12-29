@@ -5,15 +5,16 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($log,$rootScope, $scope, $stateParams,$http,Products,Carts){
+  function ProductDetailCtrl($q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
 
     $rootScope.hideTabs = true;
     var vm = this;
     vm.count=1;
+    vm.id = $stateParams.id;
     active();
-
+    
     function active(){
-      var id = $stateParams.id;
+      var id = vm.id;
 
       Products.getProduct(id).then(
         function(data)
@@ -37,6 +38,8 @@
           vm.comment = data;
         });
     }
+
+
     
     $scope.buttonReduceClick = function()
     {

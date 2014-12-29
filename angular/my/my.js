@@ -213,8 +213,6 @@
               vm.countyModel = t;
             }
           }
-
-
         })
         return;
       }

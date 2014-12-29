@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -57,6 +57,7 @@
     }
     function post(url, data){
       if(software.fakeData){
+
         return deferred(FakeData.post(url));
       }
       var defer = $q.defer();
@@ -288,14 +289,16 @@
     }
   }
 
-  function Orders($q,Base,software,Users){
+  function Orders($log,$q,Base,software,Users){
     var self = this;
 
     return {
       list: list,
       allProvince: allProvince,
       getCities:getCities,
-      getCounties:getCounties
+      getCounties:getCounties,
+      cartInfo:cartInfo,
+      balance:balance
     }
 
     function list(){
@@ -315,6 +318,36 @@
     }
     function getCounties(id){
       return Base.get('/Locations/get_county.json?cityId='+id);
+    }
+    function cartInfo(pid_list,addressId,coupon_code){
+
+      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
+
+     
+      var defer = $q.defer();
+
+      Users.getToken().then(function(token){
+      Base.post('/api_orders/cart_info.json?access_token='+token.access_token,json).then(function(data) {
+
+         
+    
+            defer.resolve(data);
+          
+        })
+      })
+      return defer.promise;
+    }
+    function balance(pid_list,addressId,coupon_code,remarks){
+      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
+      var defer =  $q.defer();
+      for(var i=0;i<50;i++)
+        $log.log('asd');
+      $log.log(json);
+      Users.getToken().then(function(token){
+        Base.post('/api_orders/balance.json?access_token='+token.access_token,json).then(function(result){
+          $log.log(result);
+        })
+      })
     }
   }
 
@@ -436,7 +469,7 @@
     function list(){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        console.log(token);
+        
         Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
           defer.resolve(list);
         }, function(e){defer.reject(e)})
@@ -456,18 +489,12 @@
       var defer = $q.defer();
       Users.getToken().then(function(token){
         var json = '{"product_id":'+id+',"num":'+num+',"spec":'+spec+',"type":'+type+',"try_id":'+try_id+'}';
-        console.log(json);
-        console.log('/api_orders/cart_add.json?access_token='+token.access_token);
         Base.post('/api_orders/cart_add.json?access_token='+token.access_token,json).then(function(result){
-          var i;
-          for(i=0;i<30;i++)
-            $log.log('b');
-          $log.log(result);
+    
+       
         },function(e){
-          var i;
-          for(i=0;i<30;i++)
-            $log.log('a');
-          $log.log(e);
+          
+       
         })
       })
     }

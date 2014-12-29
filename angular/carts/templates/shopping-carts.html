@@ -1,5 +1,6 @@
 <ion-view title="朋友说">
   <ion-content >
+  
   	<div class="list cart">
       <div class="row item" ng-repeat="item in vm.carts">
         <a class="col col-25 item-title" href="">
@@ -23,9 +24,11 @@
         </div>
       </div>
       <div class="padding">
-        <a class="button button-positive fr" ui-sref="app.order-info">结算</a>
+        
+       <a class="button button-positive fr" ng-click="vm.confirm()"  ui-sref="app.order-info" >结算</a>
         <div class="fr cart-price-total">总价：{{vm.total_price}}元</div>
       </div>
     </div>
+
   </ion-content>
 </ion-view>

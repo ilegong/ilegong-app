@@ -7,14 +7,14 @@
     <p/>
     <div class="list">
       <div ng-click="values.accessDivVisible=false;">
-          <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedIndex=$index;" > 
-            <input type="radio" name="group" />
-    
+          <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedId={{address.OrderConsignees.id}};" > 
+            <input type="radio" name="group"  ng-checked="address.OrderConsignees.status==1"/>
+            
             <div class="item-content" >
-              {{address.OrderConsignees.name}}({{address.telephone}})
+              {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
             <div > 
-              {{address.region_1 + address.region_2 + address.region_3}}
+              {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
             </div>
             <i class="radio-icon ion-checkmark"></i>
           </label>
@@ -91,31 +91,36 @@
       </div>
       <hr style="margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;"/>
       <div style="padding-left:10px;padding-right:10px;border:3px solid #aaaaaa; ">
-      <div ng-repeat="item in order.products" >
-        <div>
-          <h4>
-            分享人： {{item.userName}}
-          </h4>
+      <div ng-repeat="item in vm.CartInfo.cart.brandItems" >
+        <div class="row">
+          <div class="col col-33">
+            <img style="width:100%;" src="{{vm.loadBrandById(item.id).Brand.coverimg}}"/>
+          </div>
+          <div class="col">
+            <h4>分享人： {{vm.loadBrandById(item.id).Brand.name}}</h4>
+            {{vm.loadBrandById(item.id).Brand.notice}}
+          </div>
         </div>
         <div class="list">
-          <div class="row">
+          <div class="row" ng-repeat="product in item.items">
+
             <div class="col col-33">
-              {{item.title}}
+              {{product.name}}
             </div>
             <div class="col col-33">
-              单价： {{item.price | currency:'￥'}}
+              单价： {{product.price | currency:'￥'}}
             </div>
             <div class="col col-10">
-              X {{item.count}}
+              X {{product.num}}
             </div>
             <div class="col">
-              {{item.price * item.count | currency:'￥'}}
+              {{product.price * product.num | currency:'￥'}}
             </div>
           </div>
         </div>
         <div>
           <label class="item item-input">
-            <textarea ng-model="item.message" placeholder="给分享人留言"></textarea>
+            <textarea ng-model="vm.loadBrandById(item.id).Brand['remark']" placeholder="给分享人留言"></textarea>
 
           </label>
           <p/>
@@ -123,27 +128,29 @@
       </div>
     </div>
     <div style="padding-top:20px;">
-      <label class="item item-input">
-        <textarea placeholder="使用优惠码" ng-model="order.promotionCode"></textarea>
-        <button class="button button-assertive">
-          应用
-        </button>
-      </label>
+      <span>
+        <textarea placeholder="使用优惠码" ng-model="vm.coupon_code_t"></textarea>
+
+   
+        <a class="button button-assertive"  ng-click="vm.confirmCoupon_code();">
+        应用
+        </a>
+      </span>
     </div>
 
     <div style="padding-top:20px;">
       <div>
-        以优惠：{{order.privilege | currency:'￥'}}
+        已优惠：{{vm.CartInfo.reduced | currency:'￥'}}
       </div>
       <div>
-        运费：{{order.freight | currency:'￥'}}
+        运费：{{vm.getTotalShipFees() | currency:'￥'}}
       </div>
       <div style='color:red;'>
-        总价（含运费）：{{getTotallPrice() + order.freight - order.privilege | currency:'￥'}}
+        总价（含运费）：{{vm.CartInfo.total_price | currency:'￥'}}
       </div>
-      <button class="button button-assertive">
+      <a class="button button-assertive" ng-click="vm.confirm();">
         提交订单
-      </button>
+      </a>
     </div>
   </ion-content>
 </ion-view>
