@@ -20,7 +20,6 @@
   function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
     var vm = this;
-    vm.logout = logout;
     active();
 
     function active() {
@@ -34,24 +33,25 @@
         vm.trying = user.my_profile.Shichituan;
       });
     }
-
-    function logout(){
-      Users.logout().then(function(){
-        vm.loggedIn = false;
-      });
-    }
   }
   /* @ngInject */
-  function MyDetailCtrl($log,$scope, $rootScope, $http, Users){
-    $log.log('sdf');
+  function MyDetailCtrl($scope, $rootScope, $log, $state, Users){
     $rootScope.hideTabs = true;
     var vm = this;
+    vm.logout = logout;
     active();
+
     function active() {
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
         console.log(vm.user);
+      });
+    }
+
+    function logout(){
+      Users.logout().then(function(){
+        $state.go('app.my');
       });
     }
   }
@@ -157,7 +157,7 @@
 
   
 
-  function MyAddressesInfoCtrl($scope,$rootScope,Orders,Addresses){
+  function MyAddressesInfoCtrl($log,$scope,$rootScope,Orders,Addresses){
     var vm = this;
     active();
     $rootScope.hideTabs = true;
@@ -169,6 +169,7 @@
       $scope.values.addressEditIndex = index;
       if(index==-1){
         $scope.values.editAddress=new AddressItem('','','','','','','','',-1,-1,-1);
+        $scope.values['newAddress']=true;
         vm.provinceModel = null;
         vm.cityModel = null;
         vm.countyModel = null;
@@ -177,6 +178,7 @@
         return;
       }
       if(index>=0){
+        $scope.values['newAddress']=false;
         var t=vm.addresses[index];
 
         $scope.values.editAddress=t;
@@ -217,7 +219,33 @@
         return;
       }
     }
+    vm.save = function(id){
 
+      if($scope.values['newAddress']==true){
+        vm.add();
+        
+      }
+      else{
+        vm.edit(id);
+      }
+      active();
+
+    }
+    vm.del = function(id){
+      Addresses.del(id);
+      active();
+    }
+    vm.edit = function(){
+      var t = $scope.values.editAddress.OrderConsignees;
+      Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+ 
+    }
+    vm.add = function(){
+
+      var t = $scope.values.editAddress.OrderConsignees;
+      Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+  
+    }
     $scope.values.deleteAddressItem=function(index) {
       vm.addresses.splice(index,1);
     }
@@ -259,21 +287,7 @@
       vm.counties = $rootScope.getCounties(id);
     }
 
-    vm.confirm = function() {
-      var index = $scope.values.addressEditIndex;
-      var t = $scope.values.editAddress.OrderConsignees;
-      if(t.name !='' && t.name!=null && 
-        vm.provinceModel != null &&
-        vm.cityModel!=null && 
-        vm.countyModel != null && 
-        t.address != '' && t.address != null && 
-        t.mobilephone != '' && t.mobilephone != null) {
-        if(index == -1)
-          console.log('confirm create')
-        else if(index >=0)
-          console.log('confirm change');
-      }
-    }
+
   }
   function MyCouponsCtrl($scope,$rootScope,Coupons) {
     $rootScope.hideTabs = true;

@@ -418,11 +418,14 @@
     }
   }
 
-  function Addresses($q,Base,software,Users){
+  function Addresses($log,$q,Base,software,Users){
     var self = this;
     return{
       list:list,
-      getAddress:getAddress
+      getAddress:getAddress,
+      del:del,
+      edit:edit,
+      add:add
     }
     function list(){
       var defer = $q.defer();
@@ -441,6 +444,35 @@
         })
       })
       return defer.promise;
+    }
+    function del(id){
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/delete_consignee/'+id+'.json?access_token='+token.access_token).then(function(result){
+          for(var i = 0;i<50;i++)
+            $log.log('del');
+          $log.log(result);
+        })
+      })
+    }
+    function edit(id,name,address,province_id,city_id,county_id,mobilephone){
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
+          for(var i = 0;i<50;i++)
+            $log.log('edit');
+          $log.log('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
+          $log.log(result);
+        })
+      })
+    }
+    function add(name,address,province_id,city_id,county_id,mobilephone){
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
+          for(var i =0;i<50;i++)
+            $log.log('add');
+          $log.log('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
+          $log.log(result);
+        })
+      })
     }
   }
   function Coupons($q,$log,Base,software,Users){

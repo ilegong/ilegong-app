@@ -27,7 +27,7 @@
 	            </button>
         	</label>
         	<label ng-click="values.deleteAddressItem($index);values.accessEditVisible=false;">
-        		<button class="button button-static">
+        		<button class="button button-static" ng-click="vm.del({{address.OrderConsignees.id}})">
         			删除
         		</button>
         	</label>
@@ -39,11 +39,12 @@
         	</label>
         -->
         </div>
-        <label class="item item-radio" ng-click="accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
+        <label class="item item-radio" ng-click="values.accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
           <input type="radio" name="group"/>
           <div class="item-content">
 
             使用新地址
+            {{values['newAddress']==true?'true':'false'}}
           </div>
 
           <i class="radio-icon ion-checkmark"></i>
@@ -103,7 +104,7 @@
           </div>  
         </div>
         <div class="row">
-          <button class="button button-assertive" ng-click="vm.confirm()">
+          <button class="button button-assertive" ng-click="vm.save()">
             保存收货人信息
  
           </button>
