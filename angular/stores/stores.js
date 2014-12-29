@@ -16,6 +16,7 @@
     function activate(){
       Stores.list().then(function(data){
         vm.stores = data.brands;
+        console.log(vm.stores);
       });
     }
   }
@@ -52,7 +53,7 @@
     activate();
     
     function activate(){
-      Stores.getStoreIntro($stateParams.id).then(function(data){
+      Stores.getStoreIntro($stateParams.storeId).then(function(data){
         vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
       });
     }

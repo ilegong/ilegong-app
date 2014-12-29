@@ -61,11 +61,17 @@
       <p/>
       <div class="row">
 
-          <a class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro({id:vm.product.Product.id})">
+          <a ng-show="vm.from==-1" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro({id:vm.id,from:vm.from})">
+            产品介绍
+          </a>
+          <a ng-show="vm.from!=-1" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.intro({id:vm.id,from:vm.from})">
             产品介绍
           </a>
 
-          <a class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
+          <a ng-show="vm.from==-1" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
+            口碑评价
+          </a>
+          <a ng-show="vm.from!=-1" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
             口碑评价
           </a>
 

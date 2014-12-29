@@ -11,6 +11,7 @@
     var vm = this;
     vm.count=1;
     vm.id = $stateParams.id;
+    vm.from = $stateParams.from;
     active();
     
     function active(){

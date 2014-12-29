@@ -36,6 +36,8 @@
 
     function get(url){
       if(software.fakeData){
+        console.log(url);
+        console.log(FakeData.get(url));
         return deferred(FakeData.get(url));
       }
 
@@ -383,6 +385,9 @@
       return Base.get('/api_orders/store_list.json');
     }
     function getStore(id){
+      Base.get('/apiOrders/store_content/' + id + '.json').then(function(data){
+        console.log(data);
+      })
       return Base.get('/apiOrders/store_content/' + id + '.json');
     }
     function getStoreIntro(id){
@@ -503,6 +508,7 @@
       Users.getToken().then(function(token){
         
         Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
+          
           defer.resolve(list);
         }, function(e){defer.reject(e)})
       })

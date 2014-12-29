@@ -15,7 +15,7 @@
         </a>
       </div>
       <div class="col col-33 product" ng-repeat="product in tagWithProducts.Products.slice(0, 2)" ng-init="brand=vm.brands[product.brand_id].Brand">
-        <a ui-sref="app.product-detail.intro({id: product.id})">
+        <a ui-sref="app.product-detail.intro({id: product.id,from: -1})">
           <span class="product-name">
             {{product.name}}
           </span>
