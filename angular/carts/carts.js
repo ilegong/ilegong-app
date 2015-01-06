@@ -92,7 +92,13 @@
 
     function active(){
       vm.provinces = $rootScope.allProvince();
-      Addresses.list().then(function(adds){
+   
+
+      getAddresses();
+      cartRefresh();
+    }
+    function getAddresses(){
+        Addresses.list().then(function(adds){
         vm.addresses = adds;
         for(var i in vm.addresses){
           var t = vm.addresses[i];
@@ -104,10 +110,6 @@
         }
         
       })
-   
-
-
-      cartRefresh();
     }
     function cartRefresh(){
 
@@ -185,6 +187,13 @@
         return;
       }
       vm.counties = $rootScope.getCounties(id);
+    }
+    vm.addAddress = function(){
+      for(var i =0;i<50;i++)
+        $log.log('xxx');
+
+      Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone);
+      getAddresses();
     }
   }
 })(window, window.angular);

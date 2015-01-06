@@ -39,6 +39,7 @@
       .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
 
       .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
+      .state('app.my-detail-edit',{url:'/my-detail-edit/:state',views:{'app-my':{templateUrl:'my-detail-edit.html',controller:'MyDetailEditCtrl as vm'}}})
 
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
@@ -52,6 +53,11 @@
       .state('app.product-detail', {url: '/products/:id/:from', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+
+      .state('app.product-detail-o', {url: '/products-o/:id/:from', views: {'app-my': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
+      .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
+      .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+
 
       .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
       .state('app.order-info',{url:'/order-info',views:{'app-shopping-carts':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})

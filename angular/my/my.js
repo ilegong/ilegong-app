@@ -4,6 +4,7 @@
   angular.module('ilegong.my', ['app.services'])
   .controller('MyCtrl', MyCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
+  .controller('MyDetailEditCtrl',MyDetailEditCtrl)
 
   .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
   .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
@@ -54,6 +55,55 @@
         $state.go('app.my');
       });
     }
+  }
+
+  function MyDetailEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
+    $rootScope.hideTabs = true;
+    var vm = this;
+
+    active();
+
+    function active(){
+      vm.state = $stateParams.state;
+      vm.sex = -1;
+
+    }
+
+    vm.confirm = function(){
+      if(vm.state == 'portrait'){
+        Profile.edit(null,vm.text,null,null,null);
+      }
+      if(vm.state == 'nickname'){
+        Profile.edit(vm.text,null,null,null,null);
+      }
+      if(vm.state == 'sex'){
+        if(vm.sex != -1){
+          Profile.edit(null,null,vm.sex,null,null); 
+        }
+      }
+      if(vm.state == 'bio'){
+        Profile.edit(null,null,null,vm.text,null);
+      }
+      if(vm.state == 'company'){
+        Profile.edit(null,null,null,null,vm.text);
+      }
+
+    }
+
+    vm.getContent = function(){
+      if(vm.state == 'portrait')
+        return '头像';
+      if(vm.state == 'nickname')
+        return '昵称';
+      if(vm.state == 'sex')
+        return '性别';
+      if(vm.state == 'company')
+        return '单位';
+      if(vm.state == 'bio')
+        return '个性签名';
+      return '?';
+    }
+
   }
   
   /* @ngInject */
@@ -270,6 +320,7 @@
       Addresses.list().then(function(data) {
         vm.addresses = data;
       })
+      vm.asd=0;
     }
     vm.getCities = function(id) {
       if(id==null) {
@@ -285,6 +336,12 @@
         return;
       }
       vm.counties = $rootScope.getCounties(id);
+    }
+    vm.def = function(id){
+
+      Addresses.def(id).then(function(result){
+        active();
+      })
     }
 
 
@@ -322,20 +379,41 @@
       });
     }
   }
-  function MyOrdersCtrl($scope,$rootScope,$http,Orders){
+  function MyOrdersCtrl($log,$scope,$rootScope,$http,Orders){
     $rootScope.hideTabs = true;
     var vm = this;
-    active();
+    activate();
     
     vm.stateFilter = -1;
-    function active() {
+    function activate() {
       Orders.list().then(function(data){
         vm.orders = data.orders;
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
+        for(var i=0;i<30;i++){
+          $log.log('qqqq');
+        }
       });
     }
+    vm.undo = function(id){
+      Orders.undo(id).then(function(result){
+        activate();
+      });
+      
+    }
+    vm.remove = function(id){
+      Orders.remove(id).then(function(result){
+        activate();
+        $log.log(result);
+      });
+    }
+    vm.receive = function(id){
+      Orders.receive(id).then(function(result){
+        activate();
+      });
+    }
+
   }
 
   function MyOrderDetailCtrl($scope,$rootScope,$http,$stateParams,OrderDetail) {

@@ -28,9 +28,9 @@
           有效期：
           {{item.Coupon.valid_begin}} - {{item.Coupon.valid_end}}
         </div>
-        <div ng-show="isCouponAvailable(item.state)" class="goShopText">
+        <div ng-show="isCouponAvailable(item.Coupon.status)" class="goShopText">
           去
-          <a href="{{item.shopUrl}}" class="goShopLink">专店</a>
+          <a ui-sref="store.home({storeId: item.Coupon.brand_id})" class="goShopLink">专店</a>
           选购
         </div>
       </div>

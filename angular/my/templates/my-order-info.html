@@ -1,156 +1,158 @@
 <ion-view title="结算">
   <ion-content >
-    <h2>
-      收货人信息
-    </h2>
-    常用地址
-    <p/>
-    <div class="list">
-      <div ng-click="values.accessDivVisible=false;">
-          <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedId={{address.OrderConsignees.id}};" > 
-            <input type="radio" name="group"  ng-checked="address.OrderConsignees.status==1"/>
-            
-            <div class="item-content" >
-              {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
+    <div class="my-order-info">
+      <h2>
+        收货人信息
+      </h2>
+      常用地址
+      <p/>
+      <div class="list">
+        <div ng-click="values.accessDivVisible=false;">
+            <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedId={{address.OrderConsignees.id}};" > 
+              <input type="radio" name="group"  ng-checked="address.OrderConsignees.status==1"/>
+              
+              <div class="item-content" >
+                {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
+              </div>
+              <div > 
+                {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
+              </div>
+              <i class="radio-icon ion-checkmark"></i>
+            </label>
+          </div>
+          <label class="item item-radio" ng-click="values.accessDivVisible=true">
+            <input type="radio" name="group"/>
+            <div class="item-content">
+              使用新地址
             </div>
-            <div > 
-              {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
-            </div>
+
             <i class="radio-icon ion-checkmark"></i>
           </label>
         </div>
-        <label class="item item-radio" ng-click="values.accessDivVisible=true">
-          <input type="radio" name="group"/>
-          <div class="item-content">
-            使用新地址
-          </div>
-
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
-      </div>
-      <div ng-show="values.accessDivVisible">
-        <div class="row">
-          <div class="col col-25" >
-            收货人
-          </div>
-          <div class="col">
-            <input style="text"/>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col col-25" >
-            地区
-          </div>
-          <div class="col">
-            
-            <div >
-              <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="region_2_model='';region_3_model='';vm.getCities(vm.provinceModel.id);">
-                <option value="">-- 请选择 --</option>
-  
-              </select>
-            </div>
-        
-            
-            <div >
-              <select id="selectRegion_2" ng-model="vm.cityModel" ng-options="m.name for m in vm.cities" ng-change="region_3_model='';vm.getCounties(vm.cityModel.id);">
-                <option value="">-- 请选择 --</option>
-              </select>
-            </div>
-    
-            <div >
-              <select id="selectRegion_3" ng-model="vm.countyModel" ng-options="m.name for m in vm.counties" ng-change="">
-                <option value="">-- 请选择 --</option>
-              </select>
-            </div>
-  
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-25" >
-            详细地址
-          </div>
-          <div class="col">
-            <input style="text"/>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col col-25" >
-            手机
-          </div>
-          <div class="col">
-            <input style="text"/>
-          </div>  
-        </div>
-        <div class="row">
-          <button class="button button-assertive">
-            保存收货人信息
-          </button>
-        </div>
-      </div>
-      <hr style="margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #eee;"/>
-      <div style="padding-left:10px;padding-right:10px;border:3px solid #aaaaaa; ">
-      <div ng-repeat="item in vm.CartInfo.cart.brandItems" >
-        <div class="row">
-          <div class="col col-33">
-            <img style="width:100%;" src="{{vm.loadBrandById(item.id).Brand.coverimg}}"/>
-          </div>
-          <div class="col">
-            <h4>分享人： {{vm.loadBrandById(item.id).Brand.name}}</h4>
-            {{vm.loadBrandById(item.id).Brand.notice}}
-          </div>
-        </div>
-        <div class="list">
-          <div class="row" ng-repeat="product in item.items">
-
-            <div class="col col-33">
-              {{product.name}}
-            </div>
-            <div class="col col-33">
-              单价： {{product.price | currency:'￥'}}
-            </div>
-            <div class="col col-10">
-              X {{product.num}}
+        <div ng-show="values.accessDivVisible">
+          <div class="row">
+            <div class="col col-25" >
+              收货人
             </div>
             <div class="col">
-              {{product.price * product.num | currency:'￥'}}
+              <input tyle="text" ng-model="vm.newAddr_name"/>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col col-25" >
+              地区
+            </div>
+            <div class="col">
+              
+              <div >
+                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="region_2_model='';region_3_model='';vm.getCities(vm.provinceModel.id);">
+                  <option value="">-- 请选择 --</option>
+    
+                </select>
+              </div>
+          
+              
+              <div >
+                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options="m.name for m in vm.cities" ng-change="region_3_model='';vm.getCounties(vm.cityModel.id);">
+                  <option value="">-- 请选择 --</option>
+                </select>
+              </div>
+      
+              <div >
+                <select id="selectRegion_3" ng-model="vm.countyModel" ng-options="m.name for m in vm.counties" ng-change="">
+                  <option value="">-- 请选择 --</option>
+                </select>
+              </div>
+    
             </div>
           </div>
+          <div class="row">
+            <div class="col col-25" >
+              详细地址
+            </div>
+            <div class="col">
+              <input type="text" ng-model="vm.newAddr_address"/>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col col-25" >
+              手机
+            </div>
+            <div class="col">
+              <input type="text" ng-model="vm.newAddr_mobilephone"/>
+            </div>  
+          </div>
+          <div class="row">
+            <a class="button button-assertive" ng-click="vm.addAddress()">
+              保存收货人信息
+            </a>
+          </div>
+        </div>
+      <hr class="devide_line"/>
+      <div class="cart_border cart_item">
+        <div ng-repeat="item in vm.CartInfo.cart.brandItems" >
+          <div class="row">
+            <div class="col col-33">
+              <img class="img" src="{{vm.loadBrandById(item.id).Brand.coverimg}}"/>
+            </div>
+            <div class="col">
+              <h4>分享人： {{vm.loadBrandById(item.id).Brand.name}}</h4>
+              {{vm.loadBrandById(item.id).Brand.notice}}
+            </div>
+          </div>
+          <div class="list">
+            <div class="row" ng-repeat="product in item.items">
+
+              <div class="col col-33">
+                {{product.name}}
+              </div>
+              <div class="col col-33">
+                单价： {{product.price | currency:'￥'}}
+              </div>
+              <div class="col col-10">
+                X {{product.num}}
+              </div>
+              <div class="col">
+                {{product.price * product.num | currency:'￥'}}
+              </div>
+            </div>
+          </div>
+          <div>
+            <label class="item item-input">
+              <textarea ng-model="vm.loadBrandById(item.id).Brand['remark']" placeholder="给分享人留言"></textarea>
+
+            </label>
+            <p/>
+          </div>
+        </div>
+      </div>
+      <div class="coupon">
+        <span>
+          <textarea placeholder="使用优惠码" ng-model="vm.coupon_code_t"></textarea>
+
+     
+          <a class="button button-assertive"  ng-click="vm.confirmCoupon_code();">
+          应用
+          </a>
+        </span>
+      </div>
+
+      <div class="bottom_div">
+        <div>
+          已优惠：{{vm.CartInfo.reduced | currency:'￥'}}
         </div>
         <div>
-          <label class="item item-input">
-            <textarea ng-model="vm.loadBrandById(item.id).Brand['remark']" placeholder="给分享人留言"></textarea>
-
-          </label>
-          <p/>
+          运费：{{vm.getTotalShipFees() | currency:'￥'}}
         </div>
-      </div>
-    </div>
-    <div style="padding-top:20px;">
-      <span>
-        <textarea placeholder="使用优惠码" ng-model="vm.coupon_code_t"></textarea>
-
-   
-        <a class="button button-assertive"  ng-click="vm.confirmCoupon_code();">
-        应用
+        <div class="total_price">
+          总价（含运费）：{{vm.CartInfo.total_price | currency:'￥'}}
+        </div>
+        <a class="button button-assertive" ng-click="vm.confirm();">
+          提交订单
         </a>
-      </span>
-    </div>
-
-    <div style="padding-top:20px;">
-      <div>
-        已优惠：{{vm.CartInfo.reduced | currency:'￥'}}
       </div>
-      <div>
-        运费：{{vm.getTotalShipFees() | currency:'￥'}}
-      </div>
-      <div style='color:red;'>
-        总价（含运费）：{{vm.CartInfo.total_price | currency:'￥'}}
-      </div>
-      <a class="button button-assertive" ng-click="vm.confirm();">
-        提交订单
-      </a>
     </div>
   </ion-content>
 </ion-view>

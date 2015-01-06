@@ -58,21 +58,15 @@
               <a href="{{item.linkUrl}}">
                 {{item.Cart.name}}
               </a>
-              <div ng-show="orderStatus['RECEIVED'].state = order.Order.status">
-                <a href="http://baidu.com" class="button button-assertive">
-              
-                
+              <div ng-show="(orderStatus['RECEIVED'].state == vm.order.Order.status) || (orderStatus['SEND'].state == vm.order.Order.status) || 1"  >
+                <a ui-sref="app.product-detail-o.intro({id: item.Cart.product_id,from: -2})" class="button button-assertive">
                   去评论
-                
-             
                 </a>
               </div>
               <div>
                 {{item.Cart.price | currency:'￥'}} × {{item.Cart.num}}
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

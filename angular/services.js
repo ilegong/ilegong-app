@@ -16,6 +16,7 @@
   .service("Coupons",Coupons)
   .service('Addresses',Addresses)
   .service('Carts',Carts)
+  .service('Profile',Profile)
 
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, software){
@@ -300,7 +301,10 @@
       getCities:getCities,
       getCounties:getCounties,
       cartInfo:cartInfo,
-      balance:balance
+      balance:balance,
+      undo:undo,
+      remove:remove,
+      receive:receive
     }
 
     function list(){
@@ -350,6 +354,34 @@
           $log.log(result);
         })
       })
+    }
+    function undo(id){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/confirm_undo/'+id+'.json?access_token='+token.access_token).then(function(result){
+          defer.resolve(result);
+        })
+      })
+      return defer.promise;
+    }
+    function remove(id){
+      var defer = $q.defer()
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/confirm_remove/'+id+'.json?access_token='+token.access_token).then(function(result){
+          defer.resolve(result);
+
+        })
+      })
+      return defer.promise;
+    }
+    function receive(id){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/confirm_receive/'+id+'.json?access_token='+token.access_token).then(function(result){
+          defer.resolve(result);
+        })
+      })
+      return defer.promise;
     }
   }
 
@@ -430,7 +462,8 @@
       getAddress:getAddress,
       del:del,
       edit:edit,
-      add:add
+      add:add,
+      def:def
     }
     function list(){
       var defer = $q.defer();
@@ -470,6 +503,8 @@
       })
     }
     function add(name,address,province_id,city_id,county_id,mobilephone){
+                        for(var i =0;i<50;i++)
+            $log.log('adsz');
       Users.getToken().then(function(token){
         Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
           for(var i =0;i<50;i++)
@@ -477,7 +512,21 @@
           $log.log('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
           $log.log(result);
         })
+                  for(var i =0;i<50;i++)
+            $log.log('ads');
       })
+    }
+    function def(id){
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=default&id='+id).then(function(result){
+          for(var i=0;i<30;i++)
+            $log.log('defaultAddr');
+          $log.log(result);
+          defer.resolve(result);
+        })
+      })
+      return defer.promise;
     }
   }
   function Coupons($q,$log,Base,software,Users){
@@ -545,5 +594,41 @@
       })
       return defer.promise;
     }
+  }
+  function Profile($q,$log,Base,software,Users){
+    var self = this;
+    return {
+      edit:edit
+    }
+    function edit(nickname,image,sex,bio,companies){
+      var json = {};
+      if(nickname != null){
+        json['nickname'] = nickname; 
+      }
+      if(image != null){
+        json['image'] = image;
+      }
+      if(sex != null){
+        json['sex'] = sex;
+      }
+      if(bio != null){
+        json['bio'] = bio;
+      }
+      if(companies != null){
+        json['companies'] = companies;
+      }
+      for(var i=0;i<30;i++){
+            $log.log('editProfile');
+          }
+      $log.log(json);
+      Users.getToken().then(function(token){
+        Base.post('/api_orders/edit_my_profile.json?access_token='+token.access_token,json).then(function(result){
+          
+            $log.log(result);
+          
+        })
+      })
+    }
+
   }
 })(window, window.angular);

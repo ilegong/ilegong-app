@@ -4691,6 +4691,11 @@ var tokenJson = {'access_token':'c39f627fcee9153ed99529494ae566f137a4c076','expi
 var userJson = {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
 var CartInfo = {"data":{"success":true,"total_price":53,"shipFee":0,"coupons_of_products":[],"cart":{"order_id":null,"user_id":"146","is_try":false,"brandItems":{"121":{"id":"121","items":{"365":{"pid":365,"num":"1","price":"58","name":"\u9ed4\u9633\u4e07\u6a59\uff08\u51b0\u7cd6\u6a59\uff095\u65a4\u88c5","used_coupons":""}},"used_coupons":null}}},"brands":[{"Brand":{"id":"121","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","slug":"qian_yang_wan_cheng","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/ea5bb474293_1208.jpg","weixin_id":"","notice":""}}],"shipFees":{"121":0},"reduced":5}}
 var Balance = {"success":true,"order_ids":["7957"],"reason":null}
+var OrderUndo = {order_id:"123",ok: 1, msg:"订单已取消"}
+var OrderRemove = {order_id:"123",ok: 1, msg:"订单已删除"}
+var OrderReceive = {order_id:"123",ok: 1, msg:"货物已接收"}
+var ProfileEdit = {msg:1}
+var DefAddr = {msg:1}
 var FakeData = function(){
   var getData = {
     '/categories/mobileHome.json': mobileHomeJson,
@@ -4721,8 +4726,11 @@ var FakeData = function(){
     "/check/verify": {success: true}, 
     "/check/message_code": {success: true}, 
     "/oauth/register": tokenJson, 
-    "/api_orders/my_profile.json": userJson
-    
+    "/api_orders/my_profile.json": userJson,
+    "/api_orders/confirm_undo/\\d+.json": OrderUndo,
+    "/api_orders/confirm_remove/\\d+.json": OrderRemove,
+    "/api_orders/confirm_receive/\\d+.json": OrderReceive,
+    "/api_orders/my_coupons.json":DefAddr
   };
 
   var localDataMap = {
@@ -4731,8 +4739,8 @@ var FakeData = function(){
   }
   var postData = {
     "/api_orders/cart_info.json": CartInfo,
-    "/api_orders/balance.json": Balance
-
+    "/api_orders/balance.json": Balance,
+    "/api_orders/edit_my_profile.json":ProfileEdit
   };
   var getLocalData = {
      'token': tokenJson, 

@@ -1,32 +1,32 @@
 <ion-view title="个人信息">
   <ion-content >
   	<div class="list myDetail">
-  		<a class="item item-avatar-right" >
+  		<a class="item item-avatar-right" ui-sref="app.my-detail-edit({state:'portrait'})">
         头像
         <img src="{{vm.user.image}}"/>
   		</a>
-      <a class="item item-icon-right" >
+      <a class="item item-icon-right" ui-sref="app.my-detail-edit({state:'nickname'})" >
         <i class="icon ion-ios7-arrow-right"></i>
         昵称
         <span class="item-note">
           {{vm.user.nickname}}
         </span>
       </a>
-      <a class="item item-icon-right" >
+      <a class="item item-icon-right" ui-sref="app.my-detail-edit({state:'sex'})" >
         <i class="icon ion-ios7-arrow-right"></i>
         性别
         <span class="item-note">
           {{vm.user.sex==0?'女':'男'}}
         </span>
       </a>
-      <a class="item item-icon-right" >
+      <a class="item item-icon-right" ui-sref="app.my-detail-edit({state:'company'})"  >
         <i class="icon ion-ios7-arrow-right"></i>
         单位
         <span class="item-note">
           {{vm.user.companies}}
         </span>
       </a>
-      <a class="item item-icon-right" >
+      <a class="item item-icon-right" ui-sref="app.my-detail-edit({state:'bio'})" >
         <i class="icon ion-ios7-arrow-right"></i>
         个性签名
         <span class="item-note">
@@ -35,7 +35,8 @@
       </a>
   
       <div class="item item-divider"></div>
-      <a class="item item-icon-right" >
+       <!-- 
+       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
         手机号
         <span class="item-note">
@@ -56,6 +57,7 @@
           {{vm.user.username}}
         </span>
       </a>
+    -->
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
         用户ID
@@ -68,6 +70,7 @@
       <a class="item" ng-click="vm.logout()">
         退出登录
       </a>
+
     </div>
  </ion-content>
 </ion-view>

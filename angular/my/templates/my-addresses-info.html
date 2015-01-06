@@ -8,7 +8,7 @@
         <div  ng-repeat="address in vm.addresses" >
           <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " ><!--style="background-color:{{values.getDefColor($index)}};">-->
 
-            <input type="radio" name="group" />
+            <input type="radio" name="group" ng-checked="address.OrderConsignees.status == 1" ng-click="vm.def({{address.OrderConsignees.id}})"/>
           
             <div class="item-content"><!-- style="background-color:{{values.getDefColor($index)}};">-->
               {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
@@ -56,7 +56,7 @@
             收货人
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.OrderConsignees.name"/>
+            <input  ng-model="values.editAddress.OrderConsignees.name"/>
           </div>
 
         </div>
@@ -92,7 +92,7 @@
             详细地址
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.OrderConsignees.address"/>
+            <input  ng-model="values.editAddress.OrderConsignees.address"/>
           </div>
         </div>
         <div class="row">
@@ -100,7 +100,7 @@
             手机
           </div>
           <div class="col">
-            <input style="text" ng-model="values.editAddress.OrderConsignees.mobilephone"/>
+            <input  ng-model="values.editAddress.OrderConsignees.mobilephone"/>
           </div>  
         </div>
         <div class="row">

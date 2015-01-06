@@ -1,8 +1,5 @@
 <ion-view title="商品详情">
-
-
   <ion-content class="product-detail">
-
     <div class="main">
       <div>
         <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
@@ -44,45 +41,39 @@
         </a>
       </div>
       <div >
-
-
           <a class="button button-energized buttonHeight" ng-click="vm.addToCart()">
             添加到购物车
           </a>
- 
-   
           <a class="button button-assertive buttonHeight" ng-click="vm.addToCart()" ui-sref="app.shopping-carts" >
             立即购买
           </a>
-       
-
       </div>
-
       <p/>
       <div class="row">
 
           <a ng-show="vm.from==-1" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.intro({id:vm.id,from:vm.from})">
             产品介绍
           </a>
-          <a ng-show="vm.from!=-1" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.intro({id:vm.id,from:vm.from})">
+          <a ng-show="vm.from >-1" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.intro({id:vm.id,from:vm.from})">
             产品介绍
           </a>
+          <a ng-show="vm.from==-2" class="col col-50 button button-stable tab-item tabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail-o.intro({id:vm.id,from:vm.from})">
+            产品介绍
+          </a>
+
 
           <a ng-show="vm.from==-1" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
             口碑评价
           </a>
-          <a ng-show="vm.from!=-1" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
+          <a ng-show="vm.from >-1" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="store.product-detail.evaluate({id:vm.product.Product.id})" style="width:50%;">
             口碑评价
           </a>
-
+          <a ng-show="vm.from ==-2" class="col col-50 button button-stable tab-item rabButton" ng-class="{'tab-item-active': isTabActive()}" ui-sref="app.product-detail-o.evaluate({id:vm.product.Product.id})" style="width:50%;">
+            口碑评价
+          </a>
       </div>
-
       <ui-view>
       </ui-view>
     </div>
   </ion-content>
-
-
-  
- 
 </ion-view>
