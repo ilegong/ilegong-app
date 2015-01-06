@@ -1,0 +1,27 @@
+<ion-view title="修改信息">
+  <ion-content >
+    <div>
+      <div>
+      修改：{{vm.getContent()}}
+      </div>
+      <div ng-show="vm.state == 'portrait'">
+        img
+      </div>
+      <div ng-show="vm.state == 'sex'">
+        <div class="list">
+          <button class="row" ng-click="vm.sex=1" style="background:{{vm.sex==1?'blue':'white'}};">
+            男
+          </button>
+          <button class="row" ng-click="vm.sex=0" style="background:{{vm.sex==0? 'blue':'white'}};">
+            女
+          </button>
+        </div>
+      </div>
+
+  
+      <input ng-show="vm.state != 'sex'" type="text" style="background:blue;" ng-model="vm.text"/>
+      <a ng-click="vm.confirm()">提交</a>
+    </div>
+ </ion-content>
+</ion-view>
+
