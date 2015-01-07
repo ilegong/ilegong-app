@@ -96,6 +96,9 @@
       getAddresses();
       cartRefresh();
     }
+    vm.goBack = function(){
+      $ionicHistory.goBack();
+    }
     function getAddresses(){
         Addresses.list().then(function(adds){
         vm.addresses = adds;
