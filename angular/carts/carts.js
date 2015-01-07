@@ -78,9 +78,7 @@
     }
   }
 
-
   function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
- 
     var vm = this;
     $rootScope.hideTabs = true;
     active();
@@ -91,8 +89,9 @@
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function active(){
-      vm.provinces = $rootScope.allProvince();
-
+      Orders.getProvinces(function(provinces){
+        vm.provinces = provinces;
+      })
       getAddresses();
       cartRefresh();
     }

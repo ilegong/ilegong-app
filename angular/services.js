@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -297,7 +297,7 @@
 
     return {
       list: list,
-      allProvince: allProvince,
+      getProvinces: getProvinces,
       getCities:getCities,
       getCounties:getCounties,
       cartInfo:cartInfo,
@@ -316,8 +316,10 @@
       })
       return defer.promise;
     }
-    function allProvince(){
-      return Base.get('/Locations/get_province.json');
+    function getProvinces(){
+      return Base.get('/Locations/get_province.json').then(function(provinces){
+        return _.map(provinces, function(name, id){return {'id': id, 'name': name}})
+      });
     }
     function getCities(id){
       return Base.get('/Locations/get_city.json?provinceId='+id);

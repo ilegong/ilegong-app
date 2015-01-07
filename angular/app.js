@@ -138,18 +138,6 @@
   function AppCtrl($scope,$rootScope,Orders)
   {
     //address info
-    $rootScope.allProvince = function()
-    {
-      var provinces = Array();
-      Orders.allProvince().then(function(data){
-          var provincesT = data ;
-          for(var zzz in provincesT)
-          {
-            provinces.push({'id':zzz,'name':provincesT[zzz]});
-          }
-      });
-      return provinces;
-    }
     $rootScope.getCities = function(id)
     {
       var cities = Array();
