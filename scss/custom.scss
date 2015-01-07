@@ -32,6 +32,9 @@ a{
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+.padding .row{
+  padding: 5px 0;
+}
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
   font-size: 14px;
