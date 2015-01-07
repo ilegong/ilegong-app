@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.carts', ['app.services'])
+  angular.module('ilegong.carts', ['app.services','ionic'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
   function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
@@ -80,12 +80,12 @@
     }
   }
 
-  function OrderInfoCtrl($log,$scope,$rootScope,Addresses,Orders){
+  function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
  
     var vm = this;
-    //$rootScope.hideTabs = true;
+    $rootScope.hideTabs = true;
     active();
- 
+
 
 
     $scope.values={accessDivVisible:false,accessSelectedId:-1};
@@ -102,6 +102,7 @@
         vm.addresses = adds;
         for(var i in vm.addresses){
           var t = vm.addresses[i];
+          //$rootScope.selectedAddrId = 
           if(t.OrderConsignees.status == 1){
             $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
             
@@ -114,16 +115,9 @@
     function cartRefresh(){
 
       $rootScope.cartInfoPromise.then(function(data){
-   
         vm.CartInfo = data.data;
-
-      $rootScope.cartInfoPromise = null;
-
+        $rootScope.cartInfoPromise = null;
       })
-      
-
-
-          
     }
     vm.loadBrandById = function(id){
     

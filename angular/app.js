@@ -36,7 +36,8 @@
       .state('app.my-account-login', {url: '/my/account-login', views: {'app-my': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
       .state('app.my-account-register', {url: '/my/account-register', views: {'app-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
-      .state('app.my-addresses-info',{url:'/my-addresses-info',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
+      .state('app.my-addresses-info',{url:'/my-addresses-info/:state/:addrId',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
+      .state('app.my-address-edit',{url:'/my-address-edit/:editId',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
 
       .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
       .state('app.my-detail-edit',{url:'/my-detail-edit/:state',views:{'app-my':{templateUrl:'my-detail-edit.html',controller:'MyDetailEditCtrl as vm'}}})
@@ -61,6 +62,8 @@
 
       .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
       .state('app.order-info',{url:'/order-info',views:{'app-shopping-carts':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
+      .state('app.my-addresses-info-s',{url:'/my-addresses-info/:state/:addrId',views:{'app-shopping-carts':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
+      .state('app.my-address-edit-s',{url:'/my-address-edit/:editId',views:{'app-shopping-carts':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})

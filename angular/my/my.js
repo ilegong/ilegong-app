@@ -16,7 +16,7 @@
   .controller('MyOrdersCtrl',MyOrdersCtrl)
 
   .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
-
+  .controller('MyAddressEditCtrl',MyAddressEditCtrl)
   /* @ngInject */
   function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
@@ -207,8 +207,10 @@
 
   
 
-  function MyAddressesInfoCtrl($log,$scope,$rootScope,Orders,Addresses){
+  function MyAddressesInfoCtrl($stateParams,$log,$scope,$rootScope,Orders,Addresses){
     var vm = this;
+    vm.state = $stateParams.state;
+    vm.addrId = $stateParams.addrId;
     active();
     $rootScope.hideTabs = true;
     
@@ -269,8 +271,23 @@
         return;
       }
     }
+    vm.isChecked = function(addr){
+      if(vm.state == 0){
+        return addr.OrderConsignees.status == 1;
+      }
+      if(vm.state == 1){
+        for(var i in vm.addresses){
+          if(vm.addresses[i].OrderConsignees.id == addr.OrderConsignees.id){
+            return true;
+          }
+        }
+      }
+    }
+    vm.del = function(id){
+      Addresses.del(id);
+      active();
+    }
     vm.save = function(id){
-
       if($scope.values['newAddress']==true){
         vm.add();
         
@@ -279,16 +296,10 @@
         vm.edit(id);
       }
       active();
-
-    }
-    vm.del = function(id){
-      Addresses.del(id);
-      active();
     }
     vm.edit = function(){
       var t = $scope.values.editAddress.OrderConsignees;
       Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
- 
     }
     vm.add = function(){
 
@@ -439,5 +450,104 @@
         vm.products = data.products;
       })
     }
+  }
+  function MyAddressEditCtrl($log,$scope,$rootScope,$stateParams,Addresses){
+    var vm = this;
+
+
+    vm.editId = $stateParams.editId;
+    active();
+
+    function active(){
+      vm.provinces = $rootScope.allProvince();
+      if(vm.editId == -1){
+        vm.provinceModel = null;
+        vm.cityModel = null;
+        vm.countyModel = null;
+        vm.cities = null;
+        vm.counties = null;
+        return;
+
+      }
+      if(vm.editId>=0){
+        Addresses.list().then(function(data) {
+          for(var i in data){
+            if(data[i].OrderConsignees.id == vm.editId){
+              vm.editAddr = data[i];
+              break;
+            }
+          }
+               for(var i=0;i<30;i++)
+        $log.log('a');
+          var t=vm.editAddr;
+          var provinceId = t.OrderConsignees.province_id;
+          var cityId = t.OrderConsignees.city_id;
+          var countyId = t.OrderConsignees.county_id;
+          for(var zzz in vm.provinces){
+           
+            if(vm.provinces[zzz].id == provinceId){
+       
+              vm.provinceModel = vm.provinces[zzz];
+              break;
+            }
+          }
+          
+          
+          Addresses.getAddress(provinceId,cityId,countyId).then(function(data){
+            var ct = data.city_list;
+            vm.cities = Array();
+            for(var zzz in ct){
+              var t = {'id':zzz,'name':ct[zzz]};
+              vm.cities.push(t);
+              if(zzz == cityId){
+                vm.cityModel = t; 
+              }
+            }
+            ct = data.county_list;
+            vm.counties = Array();
+            for(var zzz in ct){
+              var t = {'id':zzz,'name':ct[zzz]};
+              vm.counties.push(t);
+              if(zzz == countyId){
+                vm.countyModel = t;
+              }
+            }
+          })
+        })
+      }
+    }
+    vm.getCities = function(id) {
+      if(id==null) {
+        vm.cities = null;
+        vm.counties = null;
+        return;
+      }
+      vm.cities = $rootScope.getCities(id);
+    }
+    vm.getCounties = function(id) {
+      if(id == null) {
+        vm.counties = null;
+        return;
+      }
+      vm.counties = $rootScope.getCounties(id);
+    }
+    vm.save = function(id){
+      if(vm.editId == -1){
+        vm.add();
+      }
+      else{
+        vm.edit(id);
+      }
+      active();
+    }
+    vm.edit = function(){
+      var t = vm.editAddr.OrderConsignees;
+      Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+    }
+    vm.add = function(){
+      var t = vm.editAddr.OrderConsignees;
+      Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+    }
+
   }   
 })(window, window.angular);

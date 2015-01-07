@@ -3,112 +3,27 @@
   		<h4>
   			常用地址
   		</h4>
-
       <div class="list">
-        <div  ng-repeat="address in vm.addresses" >
-          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " ><!--style="background-color:{{values.getDefColor($index)}};">-->
-
-            <input type="radio" name="group" ng-checked="address.OrderConsignees.status == 1" ng-click="vm.def({{address.OrderConsignees.id}})"/>
-          
-            <div class="item-content"><!-- style="background-color:{{values.getDefColor($index)}};">-->
+        <div class="row"  ng-repeat="address in vm.addresses" >
+          <div class="col col-10">
+            <i class="icon ion-checkmark-circled" ng-show="vm.isChecked(address);"  ng-click="vm.def({{address.OrderConsignees.id}})"></i>
+          </div>
+          <div class="col"   ng-click="values.addressSelectedIndex=$index;vm.def({{address.OrderConsignees.id}}); ">
+            <div >
               {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
             <div >
-
               {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
-            </div>
- 
-  
-            <i class="radio-icon ion-checkmark"></i>
-          </label>
-          <label ng-click="values.accessEditVisible=true;values.setEditAddress($index);">
-	            <button class="button button-static" >
-	            	编辑
-	            </button>
-        	</label>
-        	<label ng-click="values.deleteAddressItem($index);values.accessEditVisible=false;">
-        		<button class="button button-static" ng-click="vm.del({{address.OrderConsignees.id}})">
-        			删除
-        		</button>
-        	</label>
-          <!--
-        	<label ng-click="values.setDef($index);">
-        		<button class="button button-static">
-        			设置为默认
-        		</button>
-        	</label>
-        -->
-        </div>
-        <label class="item item-radio" ng-click="values.accessSelectedIndex=-1;values.setEditAddress(-1);values.accessEditVisible=true;">
-          <input type="radio" name="group"/>
-          <div class="item-content">
-
-            使用新地址
-            {{values['newAddress']==true?'true':'false'}}
+            </div>  
           </div>
-
-          <i class="radio-icon ion-checkmark"></i>
-        </label>
+          <i class="icon">
+            <div class=" ion-edit" ui-sref="app.my-address-edit({editId:address.OrderConsignees.id})"></div>
+            <div class="ion-trash-b" ng-click="vm.del({{address.OrderConsignees.id}})"></div>
+          </i>
+        </div>
       </div>
-      <div ng-show="values.accessEditVisible">
-      	<div class="row">
-          <div class="col col-25" >
-            收货人
-          </div>
-          <div class="col">
-            <input  ng-model="values.editAddress.OrderConsignees.name"/>
-          </div>
-
-        </div>
-        <div class="row">
-          <div class="col col-25" >
-            地区
-          </div>
-          <div class="col">
-            
-              <div >
-                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="vm.cityModel='';vm.countyModel='';vm.getCities(vm.provinceModel.id);">
-                  <option value="">-- 请选择 --</option>
-    
-                </select>
-              </div>
-        
-              
-              <div >
-                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="vm.countyModel='';vm.getCounties(vm.cityModel.id);">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
-              <div >
-                <select id="selectRegion_3" ng-model="vm.countyModel" ng-options=" m.name for m in vm.counties" ng-change="">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
-
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-25">
-            详细地址
-          </div>
-          <div class="col">
-            <input  ng-model="values.editAddress.OrderConsignees.address"/>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col col-25" >
-            手机
-          </div>
-          <div class="col">
-            <input  ng-model="values.editAddress.OrderConsignees.mobilephone"/>
-          </div>  
-        </div>
-        <div class="row">
-          <button class="button button-assertive" ng-click="vm.save()">
-            保存收货人信息
- 
-          </button>
-        </div>
+      <div class="item" ui-sref="app.my-address-edit({editId: -1})">
+            使用新地址
       </div>
   	</ion-content>
 </ion-view>
