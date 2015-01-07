@@ -83,13 +83,10 @@
     $rootScope.hideTabs = true;
     active();
 
-
-
-
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function active(){
-      Orders.getProvinces(function(provinces){
+      Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
       getAddresses();

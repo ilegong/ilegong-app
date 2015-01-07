@@ -327,7 +327,7 @@
 
 
     function active() {
-      Orders.getProvinces(function(provinces){
+      Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
       Addresses.list().then(function(data) {
@@ -453,15 +453,17 @@
       })
     }
   }
-  function MyAddressEditCtrl($log,$scope,$rootScope,$stateParams,Addresses){
+  function MyAddressEditCtrl($log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
 
-
     vm.editId = $stateParams.editId;
-    active();
+    activate();
 
-    function active(){
-      vm.provinces = $rootScope.allProvince();
+    function activate(){
+      Orders.getProvinces().then(function(provinces){
+        vm.provinces = provinces;
+      });
+      
       if(vm.editId == -1){
         vm.provinceModel = null;
         vm.cityModel = null;

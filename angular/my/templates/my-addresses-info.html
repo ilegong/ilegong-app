@@ -4,21 +4,12 @@
   			常用地址
   		</h4>
       <div class="list">
-<<<<<<< HEAD
         <div class="row"  ng-repeat="address in vm.addresses" >
           <div class="col col-10">
             <i class="icon ion-checkmark-circled" ng-show="vm.isChecked(address);"  ng-click="vm.def({{address.OrderConsignees.id}})"></i>
           </div>
           <div class="col"   ng-click="values.addressSelectedIndex=$index;vm.def({{address.OrderConsignees.id}}); ">
             <div >
-=======
-        <div  ng-repeat="address in vm.addresses" >
-          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " >
-
-            <input type="radio" name="group" ng-checked="address.OrderConsignees.status == 1" ng-click="vm.def({{address.OrderConsignees.id}})"/>
-          
-            <div class="item-content">
->>>>>>> aa49f7439bcb79d5e7400152af0fb37647732dbe
               {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
             <div >
