@@ -216,39 +216,6 @@
       return false;
     }
   //--offer state
-  //coupon state
-    $rootScope.couponStatus = {
-      'VALID':{state:1,value:'有效',color:'#73a839'},
-      'TO_USE':{state:1,value:'可用',color:'#73a839'},
-      'USED':{state:2,value:'已使用',color:'#999'},
-      'TO_SEND':{state:3,value:'TO_SEND',color:'#999'},
-      'SENT':{state:1,value:'SENT',color:'#999'}
-    }
-    $rootScope.getCouponValue = function(pState)
-    {
-
-      for(var key in $rootScope.couponStatus)
-      {
-        if($rootScope.couponStatus[key].state==pState)
-          return $rootScope.couponStatus[key].value;
-      }
-      return '';
-    }
-    $rootScope.getCouponColor = function(pState)
-    {
-      for(var key in $rootScope.couponStatus)
-      {
-        if($rootScope.couponStatus[key].state==pState)
-        {
-          return $rootScope.couponStatus[key].color;
-        }
-      } 
-      return '';
-    }
-    $rootScope.isCouponAvailable = function(pState)
-    {
-      return (pState==$rootScope.couponStatus['TO_USE'].state == pState || $rootScope.couponStatus['VALID'].state == pState);
-    }
   //--coupon state
   }
 

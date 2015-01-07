@@ -351,28 +351,50 @@
       vm.counties = $rootScope.getCounties(id);
     }
     vm.def = function(id){
-
       Addresses.def(id).then(function(result){
         active();
       })
     }
-
-
   }
   function MyCouponsCtrl($scope,$rootScope,Coupons) {
     $rootScope.hideTabs = true;
     var vm = this;
-    active();
+    vm.couponStatus = {
+      'VALID':{state:1,value:'有效',color:'#73a839'},
+      'TO_USE':{state:1,value:'可用',color:'#73a839'},
+      'USED':{state:2,value:'已使用',color:'#999'},
+      'TO_SEND':{state:3,value:'TO_SEND',color:'#999'},
+      'SENT':{state:1,value:'SENT',color:'#999'}
+    };
+    vm.getCouponValue = getCouponValue;
+    vm.getCouponColor = getCouponColor;
+    vm.isCouponAvailable = isCouponAvailable;
 
-    function active() {
+    activate();
+
+    function activate() {
       Coupons.list(1).then(function(data){
         vm.coupons = data.coupons;
-        var brandsT = data.brands;  
-        vm.brands = Array();
-        for(var zzz in brandsT) {
-          vm.brands[zzz] = brandsT[zzz];
-        }
+        vm.brands = _.map(data.brands, function(brand){return brand});
       })
+    }
+    function getCouponValue(state){
+      for(var key in vm.couponStatus){
+        if(vm.couponStatus[key].state==state)
+          return $rootScope.couponStatus[key].value;
+      }
+      return '';
+    }
+    function getCouponColor(state){
+      for(var key in vm.couponStatus){
+        if(vm.couponStatus[key].state==state){
+          return vm.couponStatus[key].color;
+        }
+      } 
+      return '';
+    }
+    function isCouponAvailable(state){
+      return (vm.couponStatus['TO_USE'].state == state || vm.couponStatus['VALID'].state == state);
     }
   }
   function MyOffersCtrl($scope,$rootScope,$http,Offers) {

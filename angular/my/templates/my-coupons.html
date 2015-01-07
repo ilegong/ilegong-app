@@ -10,8 +10,8 @@
             <span>
               {{vm.brands[item.Coupon.brand_id].Brand.name}}
             </span>
-            <span class="value" style="background-color:{{getCouponColor(item.Coupon.status)}};">
-              {{getCouponValue(item.Coupon.status)}}
+            <span class="value" style="background-color:{{vm.getCouponColor(item.Coupon.status)}};">
+              {{vm.getCouponValue(item.Coupon.status)}}
             </span>
           </p>
             <span class="priceText">
@@ -28,7 +28,7 @@
           有效期：
           {{item.Coupon.valid_begin}} - {{item.Coupon.valid_end}}
         </div>
-        <div ng-show="isCouponAvailable(item.Coupon.status)" class="goShopText">
+        <div ng-show="vm.isCouponAvailable(item.Coupon.status)" class="goShopText">
           去
           <a ui-sref="store.home({storeId: item.Coupon.brand_id})" class="goShopLink">专店</a>
           选购
