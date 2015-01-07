@@ -6,11 +6,11 @@
 
       <div class="list">
         <div  ng-repeat="address in vm.addresses" >
-          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " ><!--style="background-color:{{values.getDefColor($index)}};">-->
+          <label class="item item-radio"   ng-click="values.addressSelectedIndex=$index;values.accessEditVisible=false; " >
 
             <input type="radio" name="group" ng-checked="address.OrderConsignees.status == 1" ng-click="vm.def({{address.OrderConsignees.id}})"/>
           
-            <div class="item-content"><!-- style="background-color:{{values.getDefColor($index)}};">-->
+            <div class="item-content">
               {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
             <div >

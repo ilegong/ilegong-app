@@ -16,13 +16,12 @@
     vm.active();
     $scope.buttonReduceClick = function(cart)
     {
-      var t = cart.num;
-      if(cart.num > 1)
+      var originalNum = cart.num;
+      if(cart.num > 1){
         cart.num = Number(cart.num)-1;
-      Carts.editNum(cart.id,cart.num).then(function(result){
-        if(result.success == false){
-          cart.num = t;
-        }
+      }
+      Carts.editNum(cart.id,cart.num).then(function(result){}, function(e){
+        cart.num = originalNum;
       });
     };
     $scope.buttonAddClick = function(cart){
@@ -32,6 +31,8 @@
         if(result.success == false){
           cart.num = t;
         }
+      }, function(e){
+        cart.num = original
       });
     };
     vm.getTotallPrice = function(){
@@ -54,8 +55,6 @@
     }
     vm.confirm = function(){
       var defer = $q.defer();
-    
-
       
       var items=[];
       for(var item in vm.carts){
@@ -69,7 +68,6 @@
             break;
           }
         }
-
         
         Orders.cartInfo(items,id,null).then(function(result){
           defer.resolve(result);
@@ -81,18 +79,13 @@
   }
 
   function OrderInfoCtrl($log,$scope,$rootScope,Addresses,Orders){
- 
     var vm = this;
-    //$rootScope.hideTabs = true;
     active();
- 
 
-
-    $scope.values={accessDivVisible:false,accessSelectedId:-1};
+    $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function active(){
       vm.provinces = $rootScope.allProvince();
-   
 
       getAddresses();
       cartRefresh();
@@ -104,45 +97,31 @@
           var t = vm.addresses[i];
           if(t.OrderConsignees.status == 1){
             $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
-            
             break;
           }
         }
-        
       })
     }
     function cartRefresh(){
-
       $rootScope.cartInfoPromise.then(function(data){
-   
         vm.CartInfo = data.data;
-
-      $rootScope.cartInfoPromise = null;
-
+        $rootScope.cartInfoPromise = null;
       })
-      
-
-
-          
     }
     vm.loadBrandById = function(id){
-    
       for(var item in vm.CartInfo.brands){
         var t = vm.CartInfo.brands[item];
         if(t.Brand.id == id){
           return t;
-          
         }
         return null;
       }
     }
     vm.confirmCoupon_code = function(){
-
       vm.coupon_code = vm.coupon_code_t;
       console.log(vm.coupon_code);
     }
     vm.confirm = function(){
-
       var pid_list = Array();
       for(var item in vm.CartInfo.cart.brandItems){
         var t = vm.CartInfo.cart.brandItems[item];
@@ -156,22 +135,16 @@
         remarks[b.Brand.id] = b.Brand['remark'];
       }
 
-     
       Orders.balance(pid_list,$scope.values.accessSelectedId,vm.coupon_code,remarks);
-      
-
     }
     vm.getTotalShipFees = function(){
-
       var t = 0;
       if(vm.CartInfo==null)
         return 0;
       for(var i in vm.CartInfo.shipFees){
-
         t+=vm.CartInfo.shipFees[i];
       }
       return t;
-
     }
     vm.getCities = function(id){
       if(id==null){
@@ -189,9 +162,6 @@
       vm.counties = $rootScope.getCounties(id);
     }
     vm.addAddress = function(){
-      for(var i =0;i<50;i++)
-        $log.log('xxx');
-
       Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone);
       getAddresses();
     }
