@@ -59,7 +59,6 @@
     }
     function post(url, data){
       if(software.fakeData){
-
         return deferred(FakeData.post(url));
       }
       var defer = $q.defer();
@@ -265,11 +264,9 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/product_detail/'+id+'.json?access_token='+token.access_token).then(function(product){
           defer.resolve(product);
-
         })
-
       })
-        return defer.promise;
+      return defer.promise;
     }
     function getProductContent(id){
       return Base.get('/apiOrders/product_content/'+id+'.json')
@@ -277,7 +274,6 @@
     function getProductComment(id){
       return Base.get('/comments/getlist/Product/'+id+'.json')
     }
-
   }
 
   function Categories(Base){
@@ -327,21 +323,13 @@
       return Base.get('/Locations/get_county.json?cityId='+id);
     }
     function cartInfo(pid_list,addressId,coupon_code){
-
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
-
-     
       var defer = $q.defer();
-
       Users.getToken().then(function(token){
-      Base.post('/api_orders/cart_info.json?access_token='+token.access_token,json).then(function(data) {
-
-         
-    
-            defer.resolve(data);
-          
-        })
-      })
+        Base.post('/api_orders/cart_info.json?access_token='+token.access_token,json).then(function(data) {
+          defer.resolve(data);
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
     function balance(pid_list,addressId,coupon_code,remarks){
@@ -624,12 +612,9 @@
       $log.log(json);
       Users.getToken().then(function(token){
         Base.post('/api_orders/edit_my_profile.json?access_token='+token.access_token,json).then(function(result){
-          
-            $log.log(result);
-          
+          $log.log(result);
         })
       })
     }
-
   }
 })(window, window.angular);
