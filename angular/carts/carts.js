@@ -4,12 +4,9 @@
   angular.module('ilegong.carts', ['app.services','ionic'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
-<<<<<<< HEAD
-  function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders){
-=======
 
-  function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
->>>>>>> 88640db25ab83f3978d35695f922a21ffbe02012
+  function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders){
+
     $rootScope.hideTabs = false;
     var vm = this;
     vm.carts = [];
@@ -79,10 +76,10 @@
 //_.map(array,function(e,index){})
   function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
     $rootScope.hideTabs = true;
-<<<<<<< HEAD
-    active();
+
+    activate();
     vm.orderInfoParams = $rootScope.orderInfoParams;
-=======
+
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
@@ -94,7 +91,7 @@
     vm.getTotalShipFees = getTotalShipFees;
     activate();
 
->>>>>>> 88640db25ab83f3978d35695f922a21ffbe02012
+
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function activate(){
