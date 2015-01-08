@@ -552,7 +552,7 @@
     var self = this;
     return{
       list:list,
-      del:del,
+      deleteCartItem: deleteCartItem,
       add:add,
       editNum:editNum
     }
@@ -565,7 +565,7 @@
       }, function(e){defer.reject(e)})
       return defer.promise;
     }
-    function del(id){
+    function deleteCartItem(id){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+token.access_token).then(function(item){
@@ -591,9 +591,14 @@
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/cart_edit_num/'+id+'/'+num+'.json?access_token='+token.access_token).then(function(result){
-          defer.resolve(result);
-        })
-      })
+          if(result.success == true){
+            defer.resolve(result);
+          }
+          else{
+            defer.reject(result);
+          }
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
   }
