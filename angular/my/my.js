@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.my', ['app.services'])
+  angular.module('ilegong.my', ['app.services','ionic'])
   .controller('MyCtrl', MyCtrl)
   .controller('MyDetailCtrl',MyDetailCtrl)
   .controller('MyDetailEditCtrl',MyDetailEditCtrl)
@@ -207,16 +207,40 @@
 
   
 
-  function MyAddressesInfoCtrl($stateParams,$log,$scope,$rootScope,Orders,Addresses){
+  function MyAddressesInfoCtrl($state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
     var vm = this;
     vm.state = $stateParams.state;
     vm.addrId = $stateParams.addrId;
     active();
     $rootScope.hideTabs = true;
-    
-  
-
+    vm.itemClick = itemClick;
+    vm.setAddressDefault = setAddressDefault;
+    vm.goAddressEdit = goAddressEdit;
     $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1,addressEditIndex:-2};
+
+    function itemClick(addr){
+      if(vm.state == 0){
+        vm.setAddressDefault(addr.OrderConsignees.id);
+      }
+      if(vm.state == 1){
+        $rootScope.orderInfoParams['state'] = 1;
+        $rootScope.orderInfoParams['addressId'] = addr.OrderConsignees.id;
+        $ionicHistory.goBack();
+      }
+    }
+    function goAddressEdit(addr){
+      var id = -1;
+      if(addr !=null){
+        id = addr.OrderConsignees.id;
+      }
+      if(vm.state == 0){
+        $state.go('app.my-address-edit',{editId:id});
+
+      }
+      if(vm.state == 1){
+        $state.go('app.order-address-edit',{editId:id});
+      }
+    }
     $scope.values.setEditAddress=function(index){
       $scope.values.addressEditIndex = index;
       if(index==-1){
@@ -292,6 +316,7 @@
         vm.edit(id);
       }
       active();
+
     }
     vm.edit = function(){
       var t = $scope.values.editAddress.OrderConsignees;
@@ -346,7 +371,7 @@
       }
       vm.counties = $rootScope.getCounties(id);
     }
-    vm.def = function(id){
+    function setAddressDefault(id){
       Addresses.def(id).then(function(result){
         active();
       })
@@ -452,7 +477,7 @@
       })
     }
   }
-  function MyAddressEditCtrl($log,$scope,$rootScope,$stateParams,Addresses, Orders){
+  function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
 
     vm.editId = $stateParams.editId;
@@ -534,7 +559,7 @@
       }
       vm.counties = $rootScope.getCounties(id);
     }
-    vm.save = function(id){
+    vm.save = function(){
       if(vm.editId == -1){
         vm.add();
       }
@@ -542,6 +567,7 @@
         vm.edit(id);
       }
       active();
+      $ionicHistory.goBack();
     }
     vm.edit = function(){
       var t = vm.editAddr.OrderConsignees;
