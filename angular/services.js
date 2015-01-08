@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -539,7 +539,7 @@
     var self = this;
     return{
       list:list,
-      del:del,
+      deleteCartItem: deleteCartItem,
       add:add,
       editNum:editNum
     }
@@ -552,7 +552,7 @@
       }, function(e){defer.reject(e)})
       return defer.promise;
     }
-    function del(id){
+    function deleteCartItem(id){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+token.access_token).then(function(item){
@@ -578,9 +578,14 @@
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/cart_edit_num/'+id+'/'+num+'.json?access_token='+token.access_token).then(function(result){
-          defer.resolve(result);
-        })
-      })
+          if(result.success == true){
+            defer.resolve(result);
+          }
+          else{
+            defer.reject(result);
+          }
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
   }

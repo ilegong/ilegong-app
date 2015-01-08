@@ -4,18 +4,20 @@
   angular.module('ilegong.carts', ['app.services','ionic'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
+
   function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
     $rootScope.hideTabs = false;
     var vm = this;
-    vm.active = function(){
+    vm.carts = [];
+    activate();
+
+    function activate(){
       Carts.list().then(function(data){
         vm.total_price = data.total_price || 0;
         vm.carts = data.carts || [];
       })
     }
-    vm.active();
-    $scope.buttonReduceClick = function(cart)
-    {
+    vm.reduceCartItemNum = function(cart) {
       var originalNum = cart.num;
       if(cart.num > 1){
         cart.num = Number(cart.num)-1;
@@ -24,34 +26,18 @@
         cart.num = originalNum;
       });
     };
-    $scope.buttonAddClick = function(cart){
-      var t = cart.num;
+    vm.addCartItemNum = function(cart){
+      var original = cart.num;
       cart.num=Number(cart.num) +1;
-      Carts.editNum(cart.id,cart.num).then(function(result){
-        if(result.success == false){
-          cart.num = t;
-        }
-      }, function(e){
-        cart.num = original
+      Carts.editNum(cart.id,cart.num).then(function(result){}, function(e){
+        cart.num = original;
       });
     };
     vm.getTotallPrice = function(){
-      var totall=0;
-      var i = 0;
-      while(i<vm.carts.length){
-        vm.totall+=vm.carts[i].Cart.price * vm.carts[i].Cart.num;
-        i++;
-      }
-      return totall;
+      return _.reduce(vm.carts, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
     };
-    $scope.removeAt=function(index){
-      $scope.items.splice(index,1);
-    };
-    vm.del = function(id){
-      Carts.del(id).then(function(data){
-          
-      });
-      vm.active();
+    vm.deleteCartItem = function(id){
+      Carts.deleteCartItem(id).then(vm.activate, vm.activate);
     }
     vm.confirm = function(){
       var defer = $q.defer();
@@ -89,11 +75,11 @@
     vm.getCounties = getCounties;
     vm.getCities = getCities;
     vm.getTotalShipFees = getTotalShipFees;
-    active();
+    activate();
 
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
-    function active(){
+    function activate(){
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
