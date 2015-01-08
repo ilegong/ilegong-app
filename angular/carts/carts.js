@@ -8,7 +8,13 @@
   function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
     $rootScope.hideTabs = false;
     var vm = this;
+    vm.reduceCartItemNum = reduceCartItemNum;
+    vm.addCartItemNum = addCartItemNum;
+    vm.getTotallPrice = getTotallPrice;
+    vm.deleteCartItem = deleteCartItem;
+    vm.confirmCartInfo = confirmCartInfo;
     vm.carts = [];
+
     activate();
 
     function activate(){
@@ -17,7 +23,7 @@
         vm.carts = data.carts || [];
       })
     }
-    vm.reduceCartItemNum = function(cart) {
+    function reduceCartItemNum(cart) {
       var originalNum = cart.num;
       if(cart.num > 1){
         cart.num = Number(cart.num)-1;
@@ -26,20 +32,20 @@
         cart.num = originalNum;
       });
     };
-    vm.addCartItemNum = function(cart){
+    function addCartItemNum(cart){
       var original = cart.num;
       cart.num=Number(cart.num) +1;
       Carts.editNum(cart.id,cart.num).then(function(result){}, function(e){
         cart.num = original;
       });
     };
-    vm.getTotallPrice = function(){
+    function getTotallPrice(){
       return _.reduce(vm.carts, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
     };
-    vm.deleteCartItem = function(id){
+    function deleteCartItem(id){
       Carts.deleteCartItem(id).then(vm.activate, vm.activate);
     }
-    vm.confirm = function(){
+    function confirmCartInfo(){
       var defer = $q.defer();
       
       var items=[];
@@ -70,7 +76,7 @@
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
     vm.confirmCoupon_code = confirmCoupon_code;
-    vm.confirmCartInfo = confirmCartInfo;
+    vm.submitOrder = submitOrder;
     vm.addAddress = addAddress;
     vm.getCounties = getCounties;
     vm.getCities = getCities;
@@ -118,7 +124,7 @@
       vm.coupon_code = vm.coupon_code_t;
       console.log(vm.coupon_code);
     }
-    function confirmCartInfo(){
+    function submitOrder(){
       var pid_list = Array();
       for(var item in vm.CartInfo.cart.brandItems){
         var t = vm.CartInfo.cart.brandItems[item];
