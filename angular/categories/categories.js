@@ -7,7 +7,6 @@
 
   /* @ngInject */
   function CategoriesCtrl($rootScope, $scope){
-    $rootScope.hideTabs = false;
     $scope.categories = [
       new Category(1, '新鲜水果', '苹果/柠檬/橙子/石榴/梨', 'http://www.tongshijia.com/img/class/class3.jpg', 'http://51daifan-images.stor.sinaapp.com/files/201409/thumb_m/56653661417_0908.jpg'),
       new Category(2, '枣、干果', '枸杞/核桃/葡萄干/无花果/枣', 'http://www.tongshijia.com/img/class/class5.jpg', 'http://51daifan-images.stor.sinaapp.com/files/201409/thumb_m/56653661417_0908.jpg')
@@ -15,7 +14,6 @@
   }
 
   function CategoryDetailCtrl($rootScope, $scope, $stateParams, $log, Categories){
-    $rootScope.hideTabs = true;
     var vm = this;
     active();
 

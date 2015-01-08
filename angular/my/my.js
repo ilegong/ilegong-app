@@ -19,7 +19,6 @@
   .controller('MyAddressEditCtrl',MyAddressEditCtrl)
   /* @ngInject */
   function MyCtrl($rootScope, $scope, $log, Users){
-  	$rootScope.hideTabs = false;
     var vm = this;
     activate();
 
@@ -37,7 +36,6 @@
   }
   /* @ngInject */
   function MyDetailCtrl($scope, $rootScope, $log, $state, Users){
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.logout = logout;
     activate();
@@ -58,7 +56,6 @@
   }
 
   function MyDetailEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
-    $rootScope.hideTabs = true;
     var vm = this;
 
     activate();
@@ -108,7 +105,6 @@
   
   /* @ngInject */
   function MyAccountLoginCtrl($rootScope, $scope, $state, $log, Users){
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.username = "";
     vm.password = "";
@@ -124,7 +120,6 @@
   }
   /* @ngInject */
   function MyAccountRegisterCtrl($rootScope, $scope, $log, $state, $interval, $timeout, Users){
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.isMobileValid = isMobileValid;
     vm.showCaptchaCode = showCaptchaCode;
@@ -201,11 +196,9 @@
 
   /* @ngInject */
   function MyIlegongCtrl($rootScope, $scope){
-    $rootScope.hideTabs = true;
   }
 
   function MyAddressesInfoCtrl($state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.state = $stateParams.state;
     vm.addrId = $stateParams.addrId;
@@ -281,7 +274,6 @@
     }
   }
   function MyCouponsCtrl($scope,$rootScope,Coupons) {
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.couponStates = [
       {state:1, value:'有效', available: true},
@@ -307,7 +299,6 @@
     }
   }
   function MyOffersCtrl($scope,$rootScope,$http,Offers) {
-    $rootScope.hideTabs = true;
     var vm = this;
     activate();
     function activate() {
@@ -320,7 +311,6 @@
     }
   }
   function MyOrdersCtrl($log,$scope,$rootScope,$http,Orders){
-    $rootScope.hideTabs = true;
     var vm = this;
     activate();
     

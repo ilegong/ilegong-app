@@ -6,8 +6,6 @@
 
   /* @ngInject */
   function ProductDetailCtrl($q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
-
-    $rootScope.hideTabs = true;
     var vm = this;
     vm.count=1;
     vm.id = $stateParams.id;
@@ -40,8 +38,6 @@
         });
     }
 
-
-    
     $scope.buttonReduceClick = function()
     {
       if(vm.count > 1)

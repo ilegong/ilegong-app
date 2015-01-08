@@ -6,8 +6,6 @@
   .controller('OrderInfoCtrl',OrderInfoCtrl)
 
   function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders){
-
-    $rootScope.hideTabs = false;
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
@@ -78,8 +76,6 @@
 //_.find(array,function (e){return e.status == 1})
 //_.map(array,function(e,index){})
   function OrderInfoCtrl($ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders){
-    $rootScope.hideTabs = true;
-
     var vm = this;
     vm.cartInfo = $rootScope.cartInfo;
     vm.goBack = function(){$ionicHistory.goBack();}

@@ -9,7 +9,6 @@
 
   /* @ngInject */
   function StoresCtrl($rootScope, $scope, Stores){
-    $rootScope.hideTabs = false;
     var vm = this;
     activate();
     
@@ -23,7 +22,6 @@
 
   /* @ngInject */
   function StoreCtrl($rootScope, $scope, $stateParams, Stores){
-    $rootScope.hideTabs = false;
     var app = this;
     activate();
     
@@ -37,7 +35,6 @@
 
   /* @ngInject */
   function StoreHomeCtrl($rootScope, $scope, $stateParams, Stores){
-    $rootScope.hideTabs = false;
     var vm = this;
     vm.storeId = $stateParams.storeId;
     activate();
@@ -48,7 +45,6 @@
 
   /* @ngInject */
   function StoreIntroCtrl($rootScope, $scope, $stateParams, $sce, Stores){
-    $rootScope.hideTabs = false;
     var vm = this;
     activate();
     
