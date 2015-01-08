@@ -3,7 +3,7 @@
 
     <div class="orderDetail main">
       <div ng-show="getOrderState_UNPAID() == vm.order.state">
-        <a class="button button-assertive" href="http://baidu.com">
+        <a class="button button-assertive" ng-click="vm.payByAli()">
           去支付宝支付
         </a>
       </div>
@@ -76,7 +76,7 @@
       <div>
         <div style="text-align:right;">
           <div>
-            商品总价：{{getTotalPrice() | currency:'￥'}}
+            商品总价：{{vm.getTotalPrice() | currency:'￥'}}
           </div>
           <div>
             运费：{{vm.order.Order.ship_fee | currency:'￥'}}

@@ -131,7 +131,8 @@
       getSmsCode: getSmsCode, 
       register: register, 
       login: login, 
-      logout: logout
+      logout: logout, 
+      payByAli: payByAli
     }
 
     function init(){
@@ -244,6 +245,23 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
+    function payByAli(orderId){
+      var defer = $q.defer();
+      getUser().then(function(user){
+        var userId = user.my_profile.User.id
+        Base.get("/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId).then(function(result){
+          if(result.success){
+            defer.resolve(result);
+          }
+          else{
+            defer.reject(result);
+          }
+        }, function(e){
+          defer.reject(e);
+        });
+      });
+      return defer.promise;
+    }
   }
 
   /* @ngInject */
@@ -348,14 +366,17 @@
     function balance(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
       var defer =  $q.defer();
-      for(var i=0;i<50;i++)
-        $log.log('asd');
-      $log.log(json);
       Users.getToken().then(function(token){
         Base.post('/api_orders/balance.json?access_token='+token.access_token,json).then(function(result){
-          $log.log(result);
-        })
-      })
+          if(result.success){
+            defer.resolve(result);
+          }
+          else{
+            defer.reject(result);
+          }
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
+      return defer.promise;
     }
     function undo(id){
       var defer = $q.defer();

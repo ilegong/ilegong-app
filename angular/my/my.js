@@ -21,9 +21,9 @@
   function MyCtrl($rootScope, $scope, $log, Users){
   	$rootScope.hideTabs = false;
     var vm = this;
-    active();
+    activate();
 
-    function active() {
+    function activate() {
       vm.loggedIn = false;
       Users.getToken().then(function(token){
         vm.token = token;
@@ -40,9 +40,9 @@
     $rootScope.hideTabs = true;
     var vm = this;
     vm.logout = logout;
-    active();
+    activate();
 
-    function active() {
+    function activate() {
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
@@ -61,9 +61,9 @@
     $rootScope.hideTabs = true;
     var vm = this;
 
-    active();
+    activate();
 
-    function active(){
+    function activate(){
       vm.state = $stateParams.state;
       vm.sex = -1;
 
@@ -204,9 +204,6 @@
     $rootScope.hideTabs = true;
   }
 
-
-  
-
   function MyAddressesInfoCtrl($state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
     $rootScope.hideTabs = true;
     var vm = this;
@@ -216,9 +213,9 @@
     vm.setDefaultAddress = setDefaultAddress;
     vm.editAddress = editAddress;
     vm.getEditText = getEditText;
-    active();
+    activate();
 
-    function active() {
+    function activate() {
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
@@ -275,12 +272,11 @@
     }
     vm.del = function(id){
       Addresses.del(id);
-      active();
+      activate();
     }
-
     function setDefaultAddress(id){
       Addresses.def(id).then(function(result){
-        active();
+        activate();
       })
     }
   }
@@ -313,8 +309,8 @@
   function MyOffersCtrl($scope,$rootScope,$http,Offers) {
     $rootScope.hideTabs = true;
     var vm = this;
-    active();
-    function active() {
+    activate();
+    function activate() {
       Offers.list().then(function(data){
         vm.sharedOffers = data.sharedOffers;
         vm.expiredIds = data.expiredIds;
@@ -360,21 +356,14 @@
 
   }
 
-  function MyOrderDetailCtrl($scope,$rootScope,$http,$stateParams,OrderDetail) {
+  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, OrderDetail, Users) {
     var vm = this;
-    active();
+    vm.getTotalPrice = getTotalPrice;
+    vm.payByAli = payByAli;
+    activate();
     
-    $scope.getTotalPrice = function() {
-      var sum = 0;
-      for(var key in vm.carts) {
-        sum+=Number(vm.carts[key].Cart.price);
-      }
-      return sum;
-    }
-    function active() {
+    function activate() {
       OrderDetail.list($stateParams.id).then(function(data) {
-        console.log('sdf');
-        console.log(data);
         vm.order = data.order;
         vm.carts = data.carts;
         vm.ship_type = data.ship_type;
@@ -383,7 +372,20 @@
         vm.products = data.products;
       })
     }
+    function getTotalPrice() {
+      var sum = 0;
+      for(var key in vm.carts) {
+        sum+=Number(vm.carts[key].Cart.price);
+      }
+      return sum;
+    }
+    function payByAli(){
+      Users.payByAli($stateParams.id).then(function(result){
+        $log.log(result);
+      }, function(e){$log.log(e)});
+    }
   }
+
   function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
 
@@ -473,7 +475,7 @@
       else{
         vm.edit(id);
       }
-      active();
+      activate();
       $ionicHistory.goBack();
     }
     vm.edit = function(){

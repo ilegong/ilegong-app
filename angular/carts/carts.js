@@ -77,13 +77,11 @@
 
 //_.find(array,function (e){return e.status == 1})
 //_.map(array,function(e,index){})
-  function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
+  function OrderInfoCtrl($ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders){
     $rootScope.hideTabs = true;
 
     var vm = this;
     vm.cartInfo = $rootScope.cartInfo;
-
-    
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
     vm.confirmCoupon_code = confirmCoupon_code;
@@ -150,7 +148,11 @@
         remarks[b.Brand.id] = b.Brand['remark'];
       }
 
-      Orders.balance(pid_list,vm.selectedAddressId,vm.coupon_code,remarks);
+      Orders.balance(pid_list,vm.selectedAddressId,vm.coupon_code,remarks).then(function(result){
+        $state.go("app.my-order-detail", {id: result.order_ids[0]})
+      }, function(e){
+
+      });
     }
     function getTotalShipFees(){
       var t = 0;
