@@ -387,15 +387,11 @@
     var vm = this;
     active();
     function active() {
-      Offers.list(1).then(function(data){
+      Offers.list().then(function(data){
         vm.sharedOffers = data.sharedOffers;
         vm.expiredIds = data.expiredIds;
         vm.soldOuts = data.soldOuts;
-        var brandsT = data.brands;
-        vm.brands = Array();
-        for(var zzz in brandsT) {
-          vm.brands[zzz] = brandsT[zzz];
-        }
+        vm.brands = _.map(data.brands, function(brand){return brand});
       });
     }
   }

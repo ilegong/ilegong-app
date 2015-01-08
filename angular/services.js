@@ -32,7 +32,6 @@
       deferred: deferred, 
       getUrl: getUrl, 
       getDevice: function(){return $window.device}
-
     }
 
     function get(url){
@@ -446,13 +445,13 @@
     return{
       list:list
     }
-    function list(token){
+    function list(){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/my_offers.json?access_token='+token.access_token).then(function(item){
           defer.resolve(item);    
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
   }
@@ -481,8 +480,8 @@
       Users.getToken().then(function(token){
         Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+token.access_token).then(function(item){
           defer.resolve(item);
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
     function del(id){
