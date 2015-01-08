@@ -208,27 +208,50 @@
   
 
   function MyAddressesInfoCtrl($state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
+    $rootScope.hideTabs = true;
     var vm = this;
     vm.state = $stateParams.state;
     vm.addrId = $stateParams.addrId;
-    active();
-    $rootScope.hideTabs = true;
     vm.itemClick = itemClick;
-    vm.setAddressDefault = setAddressDefault;
-    vm.goAddressEdit = goAddressEdit;
-    $scope.values={accessEditVisible:false, editAddress:null,addressSelectedIndex:-1,addressEditIndex:-2};
+    vm.setDefaultAddress = setDefaultAddress;
+    vm.editAddress = editAddress;
+    vm.getEditText = getEditText;
+    active();
+
+    function active() {
+      Orders.getProvinces().then(function(provinces){
+        vm.provinces = provinces;
+      })
+      Addresses.list().then(function(data) {
+        vm.addresses = data;
+      })
+      vm.asd=0;
+      vm.editModel = false;
+    }
+    function getEditText(){
+      return vm.editMode?'完成':'编辑';
+    }
 
     function itemClick(addr){
       if(vm.state == 0){
-        vm.setAddressDefault(addr.OrderConsignees.id);
+        if(vm.editMode){
+          vm.goAddressEdit(addr);
+        }
+        else{
+          vm.setDefaultAddress(addr.OrderConsignees.id);
+        }
       }
-      if(vm.state == 1){
-        $rootScope.orderInfoParams['state'] = 1;
-        $rootScope.orderInfoParams['addressId'] = addr.OrderConsignees.id;
-        $ionicHistory.goBack();
+      else{
+        if(vm.editMode){
+           vm.editAddress(addr);
+        }
+        else{
+          $rootScope.cartInfo['addressId'] = addr.OrderConsignees.id;
+          $ionicHistory.goBack();
+        }
       }
     }
-    function goAddressEdit(addr){
+    function editAddress(addr){
       var id = -1;
       if(addr !=null){
         id = addr.OrderConsignees.id;
@@ -241,60 +264,7 @@
         $state.go('app.order-address-edit',{editId:id});
       }
     }
-    $scope.values.setEditAddress=function(index){
-      $scope.values.addressEditIndex = index;
-      if(index==-1){
-        $scope.values.editAddress=new AddressItem('','','','','','','','',-1,-1,-1);
-        $scope.values['newAddress']=true;
-        vm.provinceModel = null;
-        vm.cityModel = null;
-        vm.countyModel = null;
-        vm.cities = null;
-        vm.counties = null;
-        return;
-      }
-      if(index>=0){
-        $scope.values['newAddress']=false;
-        var t=vm.addresses[index];
 
-        $scope.values.editAddress=t;
-        var provinceId = $scope.values.editAddress.OrderConsignees.province_id;
-        var cityId = $scope.values.editAddress.OrderConsignees.city_id;
-        var countyId = $scope.values.editAddress.OrderConsignees.county_id;
-       
-        for(var zzz in vm.provinces){
-          if(vm.provinces[zzz].id == provinceId){
-            
-            vm.provinceModel = vm.provinces[zzz];
-            break;
-          }
-        }
-
-        Addresses.getAddress(provinceId,cityId,countyId).then(function(data){
-          var ct = data.city_list;
-          vm.cities = Array();
-          for(var zzz in ct){
-            var t = {'id':zzz,'name':ct[zzz]};
-            vm.cities.push(t);
-            if(zzz == cityId){
-              vm.cityModel = t; 
-            }
-          }
-          ct = data.county_list;
-          vm.counties = Array();
-          for(var zzz in ct){
-
-            var t = {'id':zzz,'name':ct[zzz]};
-            vm.counties.push(t);
-            if(zzz == countyId){
-
-              vm.countyModel = t;
-            }
-          }
-        })
-        return;
-      }
-    }
     vm.isChecked = function(addr){
       if(vm.state == 0){
         return addr.OrderConsignees.status == 1;
@@ -307,71 +277,8 @@
       Addresses.del(id);
       active();
     }
-    vm.save = function(id){
-      if($scope.values['newAddress']==true){
-        vm.add();
-        
-      }
-      else{
-        vm.edit(id);
-      }
-      active();
 
-    }
-    vm.edit = function(){
-      var t = $scope.values.editAddress.OrderConsignees;
-      Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
-    }
-    vm.add = function(){
-
-      var t = $scope.values.editAddress.OrderConsignees;
-      Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
-  
-    }
-    $scope.values.deleteAddressItem=function(index) {
-      vm.addresses.splice(index,1);
-    }
-    $scope.values.getDefColor=function(index) {
-      if($scope.addresses[index].def==true) {
-        return '#eeeeee';
-      }
-      return 'white'; 
-    }
-    $scope.values.setDef=function(index) {
-      var i =0;
-      while(i<$scope.addresses.length) {
-        $scope.addresses[i].def= false;
-        i++;
-      }
-      $scope.addresses[index].def=true;
-    }
-
-
-    function active() {
-      Orders.getProvinces().then(function(provinces){
-        vm.provinces = provinces;
-      })
-      Addresses.list().then(function(data) {
-        vm.addresses = data;
-      })
-      vm.asd=0;
-    }
-    vm.getCities = function(id) {
-      if(id==null) {
-        vm.cities = null;
-        vm.counties = null;
-        return;
-      }
-      vm.cities = $rootScope.getCities(id);
-    }
-    vm.getCounties = function(id) {
-      if(id == null) {
-        vm.counties = null;
-        return;
-      }
-      vm.counties = $rootScope.getCounties(id);
-    }
-    function setAddressDefault(id){
+    function setDefaultAddress(id){
       Addresses.def(id).then(function(result){
         active();
       })

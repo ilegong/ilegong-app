@@ -1,16 +1,15 @@
 <ion-view title="收货地址">
       <ion-nav-buttons side='right'>
-        <button class='button button-clear button-positive'>保存</button>
+        <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.getEditText()}}</button>
       </ion-nav-buttons>
   	<ion-content  class="padding">
-
       <div class="list">
         <div class="row"  ng-repeat="address in vm.addresses" >
           <div class="col col-10">
             <i class="icon ion-checkmark-round " ng-show="vm.isChecked(address);"  ng-click="vm.itemClick(address)"></i>
             <i class="icon ion-load-c" ng-show="!vm.isChecked(address);"  ng-click="vm.itemClick(address)"></i>
           </div>
-          <div class="col"   ng-click="vm.itemClick(address) ">
+          <div class="col"   ng-click="vm.itemClick(address)">
             <div >
               {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
             </div>
@@ -18,10 +17,9 @@
               {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
             </div>  
           </div>
-          <i class="icon">
-            <div class=" ion-edit" ng-click="vm.goAddressEdit(address)"></div>
-            <div class="ion-trash-b" ng-click="vm.del({{address.OrderConsignees.id}})"></div>
-          </i>
+          <div class="col col-10" ng-show="(vm.editMode == 1)">
+            <div class="icon ion-chevron-right" ng-click="vm.itemClick(address)"></div>
+          </div>
         </div>
       </div>
       <div class="button button-outline button-balanced button-block" ng-click="vm.goAddressEdit(null)">

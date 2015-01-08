@@ -61,13 +61,10 @@
             break;
           }
         }
-        $rootScope.cartInfo = [];
+        $rootScope.cartInfo = {};
         $rootScope.cartInfo['pidList'] = items;
         $rootScope.cartInfo['addressId'] = id;
         $rootScope.cartInfo['couponCode'] = null;
-        $rootScope.orderInfoParams = [];
-        $rootScope.orderInfoParams['state'] = 0;
-        $rootScope.orderInfoParams['addressId'] = 0;
         $state.go('app.order-info');
       })
 
@@ -84,7 +81,7 @@
     $rootScope.hideTabs = true;
 
     var vm = this;
-    vm.orderInfoParams = $rootScope.orderInfoParams;
+    vm.cartInfo = $rootScope.cartInfo;
 
     
     vm.goBack = function(){$ionicHistory.goBack();}
@@ -98,7 +95,6 @@
     activate();
 
 
-    $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function activate(){
       Orders.getProvinces().then(function(provinces){
@@ -107,30 +103,20 @@
       getAddresses();
       cartRefresh();
     }
+    
     function getAddresses(){
       Addresses.list().then(function(adds){
         vm.addresses = adds;
-        $scope.values.accessSelectedId=-1;
-        if(vm.orderInfoParams['state'] == 0){
-          for(var i in vm.addresses){
-            var t = vm.addresses[i];
-            if(t.OrderConsignees.status == 1){
-              $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
-              break;
-            }
-          }
-        }
-        else{
-          for(var i in vm.addresses){
-            var t = vm.addresses[i];
-            if(t.OrderConsignees.id == vm.orderInfoParams['addressId']){
-              $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
-              break;
-            }
+        for(var i in vm.addresses){
+          var t = vm.addresses[i];
+          if(t.OrderConsignees.id == vm.cartInfo['addressId']){
+            vm.selectedAddressId = Number(t.OrderConsignees.id);
+            break;
           }
         }
       })
     }
+
     function cartRefresh(){
       var t = $rootScope.cartInfo;
       Orders.cartInfo(t['pidList'],t['addressId'],t['couponCode']).then(function(data){
@@ -164,7 +150,7 @@
         remarks[b.Brand.id] = b.Brand['remark'];
       }
 
-      Orders.balance(pid_list,$scope.values.accessSelectedId,vm.coupon_code,remarks);
+      Orders.balance(pid_list,vm.selectedAddressId,vm.coupon_code,remarks);
     }
     function getTotalShipFees(){
       var t = 0;
@@ -196,12 +182,7 @@
     }
     vm.isAddressShow = function(addr){
       console.log(vm.orderInfoParams);
-      if(vm.orderInfoParams['state'] == 0){
-        return addr.OrderConsignees.status == 1;
-      }
-      if(vm.orderInfoParams['state'] == 1){
-        return addr.OrderConsignees.id == vm.orderInfoParams['addressId'];
-      }
+      return addr.OrderConsignees.id == vm.cartInfo['addressId'];
     }
   }
 })(window, window.angular);
