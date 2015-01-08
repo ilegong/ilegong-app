@@ -299,7 +299,8 @@
       balance:balance,
       undo:undo,
       remove:remove,
-      receive:receive
+      receive:receive,
+      getCartInfo:getCartInfo
     }
 
     function list(){
@@ -331,6 +332,18 @@
         }, function(e){defer.reject(e)});
       }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function getCartInfo(){
+                for(var i=0;i<30;i++){
+            $log.log('a');
+          }
+      Users.getToken().then(function(token){
+        Base.get('/api_orders/cart_info.json?access_token='+token.access_token).then(function(data) {
+
+          $log.log(data);
+        });
+      })
+
     }
     function balance(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};

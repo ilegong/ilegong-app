@@ -4,7 +4,7 @@
   angular.module('ilegong.carts', ['app.services','ionic'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
-  function ShoppingCartsCtrl($q,$log,$scope,$rootScope,Carts,Addresses,Orders){
+  function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders){
     $rootScope.hideTabs = false;
     var vm = this;
     vm.active = function(){
@@ -68,21 +68,30 @@
             break;
           }
         }
-        
-        Orders.cartInfo(items,id,null).then(function(result){
-          defer.resolve(result);
-          
-        });
+        $rootScope.cartInfo = [];
+        $rootScope.cartInfo['pidList'] = items;
+        $rootScope.cartInfo['addressId'] = id;
+        $rootScope.cartInfo['couponCode'] = null;
+        $rootScope.orderInfoParams = [];
+        $rootScope.orderInfoParams['state'] = 0;
+        $rootScope.orderInfoParams['addressId'] = 0;
+        $state.go('app.order-info');
       })
-      $rootScope.cartInfoPromise = defer.promise;
+
+    }
+    vm.test = function()
+    {
+      Orders.getCartInfo();
     }
   }
 
+//_.find(array,function (e){return e.status == 1})
+//_.map(array,function(e,index){})
   function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
     var vm = this;
     $rootScope.hideTabs = true;
     active();
-
+    vm.orderInfoParams = $rootScope.orderInfoParams;
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
 
     function active(){
@@ -96,22 +105,33 @@
       $ionicHistory.goBack();
     }
     function getAddresses(){
-        Addresses.list().then(function(adds){
+      Addresses.list().then(function(adds){
         vm.addresses = adds;
-        for(var i in vm.addresses){
-          var t = vm.addresses[i];
-          //$rootScope.selectedAddrId = 
-          if(t.OrderConsignees.status == 1){
-            $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
-            break;
+        $scope.values.accessSelectedId=-1;
+        if(vm.orderInfoParams['state'] == 0){
+          for(var i in vm.addresses){
+            var t = vm.addresses[i];
+            if(t.OrderConsignees.status == 1){
+              $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
+              break;
+            }
+          }
+        }
+        else{
+          for(var i in vm.addresses){
+            var t = vm.addresses[i];
+            if(t.OrderConsignees.id == orderInfoParams['addressId']){
+              $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
+              break;
+            }
           }
         }
       })
     }
     function cartRefresh(){
-      $rootScope.cartInfoPromise.then(function(data){
+      var t = $rootScope.cartInfo;
+      Orders.cartInfo(t['pidList'],t['addressId'],t['couponCode']).then(function(data){
         vm.CartInfo = data.data;
-        $rootScope.cartInfoPromise = null;
       })
     }
     vm.loadBrandById = function(id){
@@ -170,6 +190,15 @@
     vm.addAddress = function(){
       Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone);
       getAddresses();
+    }
+    vm.isAddressShow = function(addr){
+      console.log(vm.orderInfoParams);
+      if(vm.orderInfoParams['state'] == 0){
+        return addr.OrderConsignees.status == 1;
+      }
+      if(vm.orderInfoParams['state'] == 1){
+        return addr.OrderConsignees.id == vm.orderInfoParams['addressId'];
+      }
     }
   }
 })(window, window.angular);

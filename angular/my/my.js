@@ -276,11 +276,7 @@
         return addr.OrderConsignees.status == 1;
       }
       if(vm.state == 1){
-        for(var i in vm.addresses){
-          if(vm.addresses[i].OrderConsignees.id == addr.OrderConsignees.id){
-            return true;
-          }
-        }
+        return vm.addrId == addr.OrderConsignees.id;
       }
     }
     vm.del = function(id){

@@ -3,95 +3,22 @@
 
   <a ng-click="vm.goBack();">sdf</a>
     <div class="my-order-info">
+      <a ui-sref="app.my-addresses-info-s({state:1,addrId:57})">go</a>
       <h2>
         收货人信息
       </h2>
       常用地址
       <p/>
       <div class="list">
-        <div ng-click="values.accessDivVisible=false;">
-            <label class="item item-radio"  ng-repeat="address in vm.addresses" ng-click="values.accessSelectedId={{address.OrderConsignees.id}};" > 
-              <input type="radio" name="group"  ng-checked="address.OrderConsignees.status==1"/>
-              
-              <div class="item-content" >
-                {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
-              </div>
-              <div > 
-                {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
-              </div>
-              <i class="radio-icon ion-checkmark"></i>
-            </label>
+        <div ng-show="vm.isAddressShow(address)" class="item"  ng-repeat="address in vm.addresses" ng-click="" ui-sref="app.order-addresses-info({state:1,addrId:address.OrderConsignees.id})" > 
+          <div class="item-content" >
+            {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
           </div>
-          <label class="item item-radio" ng-click="values.accessDivVisible=true">
-            <input type="radio" name="group"/>
-            <div class="item-content">
-              使用新地址
-            </div>
-
-            <i class="radio-icon ion-checkmark"></i>
-          </label>
-        </div>
-        <div ng-show="values.accessDivVisible">
-          <div class="row">
-            <div class="col col-25" >
-              收货人
-            </div>
-            <div class="col">
-              <input tyle="text" ng-model="vm.newAddr_name"/>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col col-25" >
-              地区
-            </div>
-            <div class="col">
-              
-              <div >
-                <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="region_2_model='';region_3_model='';vm.getCities(vm.provinceModel.id);">
-                  <option value="">-- 请选择 --</option>
-    
-                </select>
-              </div>
-          
-              
-              <div >
-                <select id="selectRegion_2" ng-model="vm.cityModel" ng-options="m.name for m in vm.cities" ng-change="region_3_model='';vm.getCounties(vm.cityModel.id);">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
-      
-              <div >
-                <select id="selectRegion_3" ng-model="vm.countyModel" ng-options="m.name for m in vm.counties" ng-change="">
-                  <option value="">-- 请选择 --</option>
-                </select>
-              </div>
-    
-            </div>
-          </div>
-          <div class="row">
-            <div class="col col-25" >
-              详细地址
-            </div>
-            <div class="col">
-              <input type="text" ng-model="vm.newAddr_address"/>
-            </div>
-
-          </div>
-          <div class="row">
-            <div class="col col-25" >
-              手机
-            </div>
-            <div class="col">
-              <input type="text" ng-model="vm.newAddr_mobilephone"/>
-            </div>  
-          </div>
-          <div class="row">
-            <a class="button button-assertive" ng-click="vm.addAddress()">
-              保存收货人信息
-            </a>
+          <div > 
+            {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
           </div>
         </div>
+      </div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
         <div ng-repeat="item in vm.CartInfo.cart.brandItems" >
