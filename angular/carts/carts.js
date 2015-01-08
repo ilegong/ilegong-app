@@ -79,8 +79,16 @@
   }
 
   function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
-    var vm = this;
     $rootScope.hideTabs = true;
+    var vm = this;
+    vm.goBack = function(){$ionicHistory.goBack();}
+    vm.loadBrandById = loadBrandById;
+    vm.confirmCoupon_code = confirmCoupon_code;
+    vm.confirmCartInfo = confirmCartInfo;
+    vm.addAddress = addAddress;
+    vm.getCounties = getCounties;
+    vm.getCities = getCities;
+    vm.getTotalShipFees = getTotalShipFees;
     active();
 
     $scope.values={accessDivVisible:false, accessSelectedId:-1};
@@ -91,9 +99,6 @@
       })
       getAddresses();
       cartRefresh();
-    }
-    vm.goBack = function(){
-      $ionicHistory.goBack();
     }
     function getAddresses(){
         Addresses.list().then(function(adds){
@@ -114,7 +119,7 @@
         $rootScope.cartInfoPromise = null;
       })
     }
-    vm.loadBrandById = function(id){
+    function loadBrandById(id){
       for(var item in vm.CartInfo.brands){
         var t = vm.CartInfo.brands[item];
         if(t.Brand.id == id){
@@ -123,11 +128,11 @@
         return null;
       }
     }
-    vm.confirmCoupon_code = function(){
+    function confirmCoupon_code(){
       vm.coupon_code = vm.coupon_code_t;
       console.log(vm.coupon_code);
     }
-    vm.confirm = function(){
+    function confirmCartInfo(){
       var pid_list = Array();
       for(var item in vm.CartInfo.cart.brandItems){
         var t = vm.CartInfo.cart.brandItems[item];
@@ -143,7 +148,7 @@
 
       Orders.balance(pid_list,$scope.values.accessSelectedId,vm.coupon_code,remarks);
     }
-    vm.getTotalShipFees = function(){
+    function getTotalShipFees(){
       var t = 0;
       if(vm.CartInfo==null)
         return 0;
@@ -152,7 +157,7 @@
       }
       return t;
     }
-    vm.getCities = function(id){
+    function getCities(id){
       if(id==null){
         vm.cities = null;
         vm.counties = null;
@@ -160,14 +165,14 @@
       }
       vm.cities = $rootScope.getCities(id);
     }
-    vm.getCounties = function(id){
+    function getCounties(id){
       if(id == null){
         vm.counties = null;
         return;
       }
       vm.counties = $rootScope.getCounties(id);
     }
-    vm.addAddress = function(){
+    function addAddress(){
       Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone);
       getAddresses();
     }
