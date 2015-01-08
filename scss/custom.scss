@@ -317,6 +317,10 @@ a{
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25em;
+    background-color: #999;
+  }
+  .value.available{
+    background-color: #73a839;
   }
   .priceText{
     padding-left:10px;

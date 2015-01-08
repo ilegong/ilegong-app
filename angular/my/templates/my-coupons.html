@@ -10,7 +10,7 @@
             <span>
               {{vm.brands[item.Coupon.brand_id].Brand.name}}
             </span>
-            <span class="value" style="background-color:{{vm.getCouponColor(item.Coupon.status)}};">
+            <span class="value" ng-class="{available: vm.isCouponAvailable(item.Coupon.status)}">
               {{vm.getCouponValue(item.Coupon.status)}}
             </span>
           </p>

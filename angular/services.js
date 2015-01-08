@@ -531,12 +531,13 @@
       return defer.promise;
     }
   }
+
   function Coupons($q,$log,Base,software,Users){
     var self = this;
     return{
-      list:list
+      getCoupons: getCoupons
     }
-    function list() {
+    function getCoupons() {
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/my_coupons.json?access_token='+token.access_token).then(function(item){
@@ -546,6 +547,7 @@
       return defer.promise;
     }
   }
+
   function Carts($q,$log,Base,software,Users){
     var self = this;
     return{
