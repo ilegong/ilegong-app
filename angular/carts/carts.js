@@ -9,8 +9,8 @@
     var vm = this;
     vm.active = function(){
       Carts.list().then(function(data){
-        vm.total_price = data.total_price;
-        vm.carts = data.carts;
+        vm.total_price = data.total_price || 0;
+        vm.carts = data.carts || [];
       })
     }
     vm.active();

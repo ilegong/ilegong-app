@@ -1,7 +1,9 @@
 <ion-view title="朋友说">
   <ion-content >
-  
-  	<div class="list cart">
+    <div class="list cart padding" ng-show="vm.carts.length == 0">
+      您的购物车是空的，先去逛逛吧。
+    </div>
+  	<div class="list cart padding" ng-show="vm.carts.length > 0">
       <div class="row item" ng-repeat="item in vm.carts">
         <a class="col col-25 item-title" href="">
           <span>{{item.Cart.name}}</span><br/>
@@ -23,8 +25,7 @@
           </a>
         </div>
       </div>
-      <div class="padding">
-        
+      <div>
        <a class="button button-positive fr" ng-click="vm.confirm()"  ui-sref="app.order-info" >结算</a>
         <div class="fr cart-price-total">总价：{{vm.total_price}}元</div>
       </div>
