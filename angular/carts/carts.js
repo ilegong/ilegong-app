@@ -83,10 +83,10 @@
   function OrderInfoCtrl($ionicHistory,$log,$scope,$rootScope,Addresses,Orders){
     $rootScope.hideTabs = true;
 
-    activate();
+    var vm = this;
     vm.orderInfoParams = $rootScope.orderInfoParams;
 
-    var vm = this;
+    
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
     vm.confirmCoupon_code = confirmCoupon_code;
@@ -123,7 +123,7 @@
         else{
           for(var i in vm.addresses){
             var t = vm.addresses[i];
-            if(t.OrderConsignees.id == orderInfoParams['addressId']){
+            if(t.OrderConsignees.id == vm.orderInfoParams['addressId']){
               $scope.values.accessSelectedId = Number(t.OrderConsignees.id);
               break;
             }
