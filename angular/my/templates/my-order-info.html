@@ -4,18 +4,15 @@
       <h2>
         收货人信息
       </h2>
-      常用地址
-      <p/>
-      <div class="list">
-        <div ng-show="vm.isAddressShow(address)" class="item"  ng-repeat="address in vm.addresses" ng-click="" ui-sref="app.order-addresses-info({state:1,addrId:address.OrderConsignees.id})" > 
-          <div class="item-content" >
-            {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
-          </div>
-          <div > 
-            {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
-          </div>
+      <div ui-sref="app.order-addresses-info({state:1,addrId:address.OrderConsignees.id})" ng-show="!_.isEmpty(vm.defaultAddress)"> 
+        <div class="item-content" >
+          {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
+        </div>
+        <div > 
+          {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
         </div>
       </div>
+      <div ng-show="_.isEmpty(vm.defaultAddress)"></div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
         <div ng-repeat="item in vm.CartInfo.cart.brandItems" >

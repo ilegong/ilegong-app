@@ -8,47 +8,32 @@
   function ProductDetailCtrl($q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
     var vm = this;
     vm.count=1;
-    vm.id = $stateParams.id;
     vm.from = $stateParams.from;
-    active();
+    activate();
     
-    function active(){
-      var id = vm.id;
-
-      Products.getProduct(id).then(
-        function(data)
-        {
-          vm.product = data.product;
-
-          vm.recommends = data.recommends;
-          vm.brand = data.brand;
-          
-
-        }
-        );
-      Products.getProductContent(id).then(
-        function(data)
-        {
-          vm.content = data.content;
-        });
-      Products.getProductComment(id).then(
-        function(data)
-        {
-          vm.comment = data;
-        });
+    function activate(){
+      var id = $stateParams.id;
+      Products.getProduct(id).then(function(data){
+        vm.product = data.product;
+        vm.recommends = data.recommends;
+        vm.brand = data.brand;
+      }, function(e){$log.log(e)});
+      Products.getProductContent(id).then(function(data){
+        vm.content = data.content;
+      }, function(e){$log.log(e)});
+      Products.getProductComment(id).then(function(data){
+        vm.comment = data;
+      }, function(e){$log.log(e)});
     }
 
-    $scope.buttonReduceClick = function()
-    {
+    $scope.buttonReduceClick = function(){
       if(vm.count > 1)
         vm.count=Number(vm.count)-1;
     };
-    $scope.buttonAddClick = function()
-    {
+    $scope.buttonAddClick = function() {
       vm.count=Number(vm.count)+1;
     };
-    $scope.getRankText = function(rank)
-    {
+    $scope.getRankText = function(rank) {
       if(rank==5)
         return '好评';
       if(rank==4)
@@ -59,10 +44,8 @@
         return '两分';
       if(rank==1)
         return '差评';
-       
     }
-    $scope.getRankColor = function(rank)
-    {
+    $scope.getRankColor = function(rank) {
       if(rank==5)
         return 'green';
       if(rank==4)
@@ -74,18 +57,18 @@
       if(rank==1)
         return 'red';
     }
-    $scope.click = function()
-    {
-      navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL
-    });
-    }
+    // $scope.click = function(){
+    //   navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+    //     destinationType: Camera.DestinationType.DATA_URL
+    //   });
+    // }
     vm.addToCart = function(){
-      Carts.add(vm.product.Product.id,vm.count,0,1,0);
+      $log.log("add product " + vm.product.Product.id + " to cart");
+      Carts.addCartItem(vm.product.Product.id,vm.count,0,1,0).then(function(result){
+        $log.log("add to cart successfully: ").log(result);
+      }, function(e){$log.log("add to cart failed: ").log(e)});
     }
   }
-
-
 })(window, window.angular);
 
 

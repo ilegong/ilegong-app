@@ -282,8 +282,8 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/product_detail/'+id+'.json?access_token='+token.access_token).then(function(product){
           defer.resolve(product);
-        })
-      })
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)})
       return defer.promise;
     }
     function getProductContent(id){
@@ -317,8 +317,7 @@
       balance:balance,
       undo:undo,
       remove:remove,
-      receive:receive,
-      getCartInfo:getCartInfo
+      receive:receive
     }
 
     function list(){
@@ -351,25 +350,13 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function getCartInfo(){
-                for(var i=0;i<30;i++){
-            $log.log('a');
-          }
-      Users.getToken().then(function(token){
-        Base.get('/api_orders/cart_info.json?access_token='+token.access_token).then(function(data) {
-
-          $log.log(data);
-        });
-      })
-
-    }
     function balance(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
       var defer =  $q.defer();
       Users.getToken().then(function(token){
         Base.post('/api_orders/balance.json?access_token='+token.access_token,json).then(function(result){
           if(result.success){
-            defer.resolve(result);
+            defer.resolve(result.order_ids[0]);
           }
           else{
             defer.reject(result);
@@ -483,6 +470,7 @@
     return{
       list:list,
       getAddress:getAddress,
+      getDefaultAddress: getDefaultAddress, 
       del:del,
       edit:edit,
       add:add,
@@ -493,9 +481,18 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/order_consignees.json?access_token='+token.access_token).then(function(item){
           defer.resolve(item);
-        })
-      })
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function getDefaultAddress(){
+      return list().then(function(addresses){
+        var defaultAddress =  _.find(addresses, function(address){return address.OrderConsignees.status == 1});
+        if(_.isEmpty(defaultAddress) && addresses.length > 0){
+          defaultAddress = addresses[0];
+        }
+        return defaultAddress;
+      });
     }
     function getAddress(provinceId,cityId,countyId){
       var defer = $q.defer();
@@ -526,18 +523,14 @@
       })
     }
     function add(name,address,province_id,city_id,county_id,mobilephone){
-                        for(var i =0;i<50;i++)
-            $log.log('adsz');
+      var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
-          for(var i =0;i<50;i++)
-            $log.log('add');
-          $log.log('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
-          $log.log(result);
-        })
-                  for(var i =0;i<50;i++)
-            $log.log('ads');
-      })
+          $log.log("add address successfully:").log(result);
+          defer.resolve(result);
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
+      return defer.promise;
     }
     function def(id){
       var defer = $q.defer();
@@ -574,7 +567,7 @@
     return{
       list:list,
       deleteCartItem: deleteCartItem,
-      add:add,
+      addCartItem: addCartItem,
       editNum:editNum
     }
     function list(){
@@ -595,18 +588,20 @@
       })
       return defer.promise;
     }
-    function add(id,num,spec,type,try_id){
+    function addCartItem(id,num,spec,type,try_id){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         var json = '{"product_id":'+id+',"num":'+num+',"spec":'+spec+',"type":'+type+',"try_id":'+try_id+'}';
         Base.post('/api_orders/cart_add.json?access_token='+token.access_token,json).then(function(result){
-    
-       
-        },function(e){
-          
-       
-        })
-      })
+          if(result.data.success){
+              defer.resolve(result.data.id);
+          }
+          else{
+            defer.reject(result);
+          }
+        },function(e){defer.reject(e);})
+      }, function(e){defer.reject(e)});
+      return defer.promise;
     }
     function editNum(id,num){
       var defer = $q.defer();
