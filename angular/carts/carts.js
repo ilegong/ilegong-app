@@ -145,9 +145,8 @@
       }
 
       Orders.balance(pid_list,vm.selectedAddressId,vm.coupon_code,remarks).then(function(result){
-        $state.go("app.my-order-detail", {id: result.order_ids[0]})
       }, function(e){
-
+        $log.log(e);
       });
     }
     function getTotalShipFees(){
