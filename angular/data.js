@@ -4450,8 +4450,6 @@ var orderDetail = {
     }
   ]
 }
-var carts = [{title:'title1',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:11.5,count:5,linkUrl:'http://baidu.com'},
-                  {title:'title2',imgUrl:'http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/03ca7900316_1104.jpg',price:6,count:7,linkUrl:'http://baidu.com'}]
 var myDetail = {userId:1,userName:'lilei',nickName:'昵称',imgUrl:'none',sex:'男',company:'单位',content:'个性签名',mobilephone:'手机号',mail:'邮箱',password:'***'}
 var productDetail = {  
    "product":{  
@@ -4645,7 +4643,16 @@ var Profile = {
   }
 var Addresses = [{"OrderConsignees":{"id":"57","name":"\u5218\u53ec\u4ec1","status":"1","area":"\u5317\u4eac\u6d77\u6dc0\u897f\u4e09\u65d7\u8857\u9053","address":"\u4e0a\u5965\u4e16\u7eaaB\u5ea7430","mobilephone":"18910275329","telephone":"","email":"","postcode":"","province_id":"110100","city_id":"110108","county_id":"110108019"}},{"OrderConsignees":{"id":"535","name":"\u5218\u53ec\u4ec1","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u660c\u5e73\u533a\u521b\u65b0\u56ed30\u53f71\u5355\u51431704","mobilephone":"18901267609","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"539","name":"\u5f20\u8fdb\u708e","status":"0","area":null,"address":"\u6d77\u6dc0\u533a\u897f\u5c0f\u53e3\u8def66\u53f7\u4e2d\u5173\u6751\u4e1c\u5347\u79d1\u6280\u56ed\u5317\u9886\u5730B-2\u697c5\u5c42","mobilephone":"134-6663-4438","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"545","name":"\u59dc\u7231\u8363","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u6d77\u6dc0\u533a\u4e94\u9053\u53e3\u641c\u72d0\u7f51\u7edc\u5927\u53a68\u5c42","mobilephone":"13520919545","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"566","name":"\u738b\u6708\u971e","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u901a\u5dde\u533a\u73e0\u6c5f\u9038\u666f220\u53f7\u697c2\u5355\u51431102","mobilephone":"138-1078-1383","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"793","name":"\u738b\u5f3a","status":"0","area":"\u6cb3\u5317\u4fdd\u5b9a\u5317\u5e02\u4e94\u56db\u8def\u8857\u9053","address":"\u4e94\u56db\u4e1c\u8def\u6cb3\u5317\u5927\u5b66","mobilephone":"155-3328-2987","telephone":null,"email":null,"postcode":null,"province_id":"130000","city_id":"130600","county_id":"130603"}},{"OrderConsignees":{"id":"1814","name":"\u674e\u96ea\u4ead","status":"0","area":"\u5c71\u4e1c\u6dc4\u535a\u5f20\u5e97","address":"\u5357\u5bb6\u67511\u53f7\u697c2\u5355\u5143401","mobilephone":"18764355556","telephone":null,"email":null,"postcode":null,"province_id":"370000","city_id":"370300","county_id":"370303"}},{"OrderConsignees":{"id":"2098","name":"\u5f20\u857e","status":"0","area":"\u5317\u4eac\u660c\u5e73\u57ce\u5317\u8857\u9053","address":"\u521b\u65b0\u56ed30\u53f7\u697c1\u5355\u51431704","mobilephone":"18618398049","telephone":null,"email":null,"postcode":null,"province_id":"110100","city_id":"110114","county_id":"110114001"}}]
 var Address = {"histories":{"110100":"\u5317\u4eac","110108":"\u6d77\u6dc0","110108019":"\u897f\u4e09\u65d7\u8857\u9053"},"city_list":{"110101":"\u4e1c\u57ce","110102":"\u897f\u57ce","110105":"\u671d\u9633","110106":"\u4e30\u53f0","110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0","110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71","110112":"\u901a\u5dde","110113":"\u987a\u4e49","110114":"\u660c\u5e73","110115":"\u5927\u5174","110116":"\u6000\u67d4","110117":"\u5e73\u8c37","110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"},"county_list":{"110108001":"\u4e07\u5bff\u8def\u8857\u9053","110108002":"\u6c38\u5b9a\u8def\u8857\u9053","110108003":"\u7f8a\u574a\u5e97\u8857\u9053","110108004":"\u7518\u5bb6\u53e3\u8857\u9053","110108005":"\u516b\u91cc\u5e84\u8857\u9053","110108006":"\u7d2b\u7af9\u9662\u8857\u9053","110108007":"\u5317\u4e0b\u5173\u8857\u9053","110108008":"\u5317\u592a\u5e73\u5e84\u8857\u9053","110108010":"\u5b66\u9662\u8def\u8857\u9053","110108011":"\u4e2d\u5173\u6751\u8857\u9053","110108012":"\u6d77\u6dc0\u8857\u9053","110108013":"\u9752\u9f99\u6865\u8857\u9053","110108014":"\u6e05\u534e\u56ed\u8857\u9053","110108015":"\u71d5\u56ed\u8857\u9053","110108016":"\u9999\u5c71\u8857\u9053","110108017":"\u6e05\u6cb3\u8857\u9053","110108018":"\u82b1\u56ed\u8def\u8857\u9053","110108019":"\u897f\u4e09\u65d7\u8857\u9053","110108020":"\u9a6c\u8fde\u6d3c\u8857\u9053","110108021":"\u7530\u6751\u8def\u8857\u9053","110108022":"\u4e0a\u5730\u8857\u9053","110108023":"\u4e07\u67f3","110108024":"\u4e1c\u5347","110108025":"\u66d9\u5149\u8857\u9053","110108026":"\u6e29\u6cc9","110108027":"\u56db\u5b63\u9752","110108028":"\u897f\u5317\u65fa","110108029":"\u82cf\u5bb6\u5768","110108030":"\u4e0a\u5e84"},"town_list":null}
-var Carts = {"total_price":42,"carts":[{"Cart":{"id":"17997","name":"\u519c\u5bb6\u5976\u6cb9\u82b1\u751f","product_id":"466","num":"1","price":"15","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/d49297ce62d_1217.jpg","used_coupons":""}},{"Cart":{"id":"18291","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","product_id":"331","num":"1","price":"27","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","used_coupons":""}}]}
+var Carts = {
+  "total_price":42,
+  "carts":[
+  {"Cart":{
+      "id":"17997","name":"\u519c\u5bb6\u5976\u6cb9\u82b1\u751f","product_id":"466","num":"1","price":"15","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/d49297ce62d_1217.jpg","used_coupons":""}
+    },
+  {"Cart":{
+    "id":"18291","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","product_id":"331","num":"1","price":"27","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","used_coupons":""}
+  }]
+}
 var Coupons = {
   "coupons":[
     {"Coupon":{"id":"17652","name":"\u9ed4\u9633\u51b0\u7cd6\u6a5958\u5143\u5238","brand_id":"121","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-26 11:20:44","valid_end":"2014-12-18 23:59:59","reduced_price":"5800","type":"2"},"CouponItem":{"id":"32704","code":"","bind_user":"146","coupon_id":"17652","cart_item_id":"0","status":"1","created":"2014-12-13 15:57:58","applied_order":"0","applied_time":null,"source":"qinyBTC1412_25738_1"}},
@@ -4722,7 +4729,42 @@ var brandIntroJson = {
 var CartsEditNumResult = {"success":true}
 var tokenJson = {'access_token':'c39f627fcee9153ed99529494ae566f137a4c076','expires_in':3600,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}
 var userJson = {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
-var CartInfo = {"data":{"success":true,"total_price":53,"shipFee":0,"coupons_of_products":[],"cart":{"order_id":null,"user_id":"146","is_try":false,"brandItems":{"121":{"id":"121","items":{"365":{"pid":365,"num":"1","price":"58","name":"\u9ed4\u9633\u4e07\u6a59\uff08\u51b0\u7cd6\u6a59\uff095\u65a4\u88c5","used_coupons":""}},"used_coupons":null}}},"brands":[{"Brand":{"id":"121","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","slug":"qian_yang_wan_cheng","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/ea5bb474293_1208.jpg","weixin_id":"","notice":""}}],"shipFees":{"121":0},"reduced":5}}
+var CartInfo = {
+  "data":{
+    "success":true,
+    "total_price":53,
+    "shipFee":0,
+    "coupons_of_products":[],
+    "cart":{
+      "order_id":null,"user_id":"146","is_try":false,
+      "brandItems":{
+        "121":{
+          "id":"121",
+          "items":{
+            "365":{
+              "pid":365,
+              "num":"1",
+              "price":"58",
+              "name":"\u9ed4\u9633\u4e07\u6a59\uff08\u51b0\u7cd6\u6a59\uff095\u65a4\u88c5",
+              "used_coupons":""}},
+          "used_coupons":null
+        }
+      }
+    },
+    "brands":[{
+      "Brand":{
+        "id":"121",
+        "name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73",
+        "slug":"qian_yang_wan_cheng",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/ea5bb474293_1208.jpg",
+        "weixin_id":"",
+        "notice":""
+      }
+    }],
+    "shipFees":{"121":0},
+    "reduced":5
+  }
+}
 var Balance = {"success":true,"order_ids":["7957"],"reason":null}
 var OrderUndo = {order_id:"123",ok: 1, msg:"订单已取消"}
 var OrderRemove = {order_id:"123",ok: 1, msg:"订单已删除"}
@@ -4730,13 +4772,13 @@ var OrderReceive = {order_id:"123",ok: 1, msg:"货物已接收"}
 var ProfileEdit = {msg:1}
 var DefAddr = {msg:1}
 var aliPay = {success: true};
+var addCartJson = {data: {success: true, msg: '', id: 123456}, status: 200}
 var FakeData = function(){
   var getData = {
     '/categories/mobileHome.json': mobileHomeJson,
     '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
     '/api_orders/mine.json' : ordersJson,
     '/apiOrders/order_detail/\\d+.json': orderDetail,
-    '/carts': carts,
     '/myDetail': myDetail,
     '/api_orders/store_list.json': storeListJson, 
     '/shichituan.json': tryingsJson, 
@@ -4774,7 +4816,8 @@ var FakeData = function(){
   var postData = {
     "/api_orders/cart_info.json": CartInfo,
     "/api_orders/balance.json": Balance,
-    "/api_orders/edit_my_profile.json":ProfileEdit
+    "/api_orders/edit_my_profile.json":ProfileEdit, 
+    "/api_orders/cart_add.json": addCartJson
   };
   var getLocalData = {
      'token': tokenJson, 

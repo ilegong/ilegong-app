@@ -1,29 +1,29 @@
 <ion-view title="朋友说" hide-back-button='true'>
   <ion-content class="cart padding">
-    <div  ng-show="vm.carts.length == 0">
+    <div  ng-show="vm.cartItems.length == 0">
       您的购物车是空的，先去逛逛吧。
     </div>
-    <div class="row item" ng-repeat="item in vm.carts" ng-show="vm.carts.length > 0">
+    <div class="row item" ng-repeat="cartItem in vm.cartItems" ng-show="vm.cartItems.length > 0">
       <a class="col col-25 item-title" href="">
-        <span>{{item.Cart.name}}</span><br/>
-        <img class="img" src="{{item.Cart.coverimg}}"/>
+        <span>{{cartItem.Cart.name}}</span><br/>
+        <img class="img" src="{{cartItem.Cart.coverimg}}"/>
       </a>
       <div class="col col-50">
-        <div class='item-price col-top'>{{item.Cart.price}}元</div>
+        <div class='item-price col-top'>{{cartItem.Cart.price}}元</div>
         <div class='item-count row col-center'>
-          <span class="count-reduce col col-25" ng-click="vm.reduceCartItemNum(item.Cart)">-</span>
-          <input class="count col col-50" ng-model="item.Cart.num"/>
-          <span class="count-add col col-25" ng-click="vm.addCartItemNum(item.Cart)">+</span>
+          <span class="count-reduce col col-25" ng-click="vm.reduceCartItemNum(cartItem.Cart)">-</span>
+          <input class="count col col-50" ng-model="cartItem.Cart.num"/>
+          <span class="count-add col col-25" ng-click="vm.addCartItemNum(cartItem.Cart)">+</span>
         </div>
       </div>
       <div class="col-25">
-        <div class='item-price-total'>{{item.Cart.price * item.Cart.num}}元</div>
-        <a href= "" class="" ng-click="vm.deleteCartItem({{item.Cart.id}})">
+        <div class='item-price-total'>{{cartItem.Cart.price * cartItem.Cart.num}}元</div>
+        <a href= "" class="" ng-click="vm.deleteCartItem({{cartItem.Cart.id}})">
           删除
         </a>
       </div>
     </div>
-    <div ng-show="vm.carts.length > 0">
+    <div ng-show="vm.cartItems.length > 0">
       <a class="button button-positive fr" ng-click="vm.confirmCartInfo()">结算</a>
       <div class="fr cart-price-total">总价：{{vm.total_price}}元</div>
     </div>

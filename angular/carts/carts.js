@@ -12,16 +12,15 @@
     vm.getTotallPrice = getTotallPrice;
     vm.deleteCartItem = deleteCartItem;
     vm.confirmCartInfo = confirmCartInfo;
-    vm.carts = [];
-
     activate();
 
     function activate(){
-      Carts.list().then(function(data){
-        vm.total_price = data.total_price || 0;
-        vm.carts = data.carts || [];
-      })
       $rootScope.cartInfo = $rootScope.cartInfo || {}
+      vm.cartItems = $rootScope.cartInfo.cartItems || [];
+      Carts.getCartItems().then(function(result){
+        vm.cartItems = result.carts || [];
+        vm.total_price = vm.getTotallPrice();
+      })
       Addresses.getDefaultAddress().then(function(defaultAddress){
         $rootScope.cartInfo.defaultAddress = defaultAddress;
       });
@@ -41,13 +40,16 @@
       });
     };
     function getTotallPrice(){
-      return _.reduce(vm.carts, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
+      return _.reduce(vm.cartItems, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
     };
     function deleteCartItem(id){
-      Carts.deleteCartItem(id).then(vm.activate, vm.activate);
+      Carts.deleteCartItem(id).then(function(result){
+        var cartItem = _.filter(vm.cartItems, function(cartItem){return cartItem.id == id});
+        vm.cartItems.splice(vm.cartItems.indexOf(cartItem), 1);
+      }, function(e){});
     }
     function confirmCartInfo(){      
-      var pids = _.map(vm.carts, function(cart){return Number(cart.Cart.product_id)});
+      var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
       $rootScope.cartInfo.pidList = pids;
       $state.go('app.order-info');
     }
@@ -55,7 +57,7 @@
 
 //_.find(array,function (e){return e.status == 1})
 //_.map(array,function(e,index){})
-  function OrderInfoCtrl($ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders){
+  function OrderInfoCtrl($ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
@@ -73,34 +75,24 @@
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
-      cartRefresh();
-    }
-    function cartRefresh(){
-      Orders.cartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id,vm.cartInfo.couponCode).then(function(data){
-        vm.CartInfo = data.data;
+      Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(cartInfo){
+        vm.cartInfo = cartInfo;
       })
     }
     function loadBrandById(id){
-      return _.find(vm.CartInfo.brands, function(brand){return brand.Brand.id == id});
+      return _.find(vm.cartInfo.brands, function(brand){return brand.Brand.id == id});
     }
     function confirmCoupon_code(){
       vm.coupon_code = vm.coupon_code_t;
     }
     function submitOrder(){
-      var pid_list = Array();
-      for(var item in vm.CartInfo.cart.brandItems){
-        var t = vm.CartInfo.cart.brandItems[item];
-        for(var i in t.items){
-          pid_list.push(t.items[i].pid);
-        }
-      }
+      var pid_list = _.flatten(_.map(vm.cartInfo.brandItems, function(bi){return _.map(bi.items, function(i){return i.pid})}))
       var remarks = {};
-      for(var item in vm.CartInfo.brands){
-        var b = vm.CartInfo.brands[item];
-        remarks[b.Brand.id] = b.Brand['remark'];
-      }
-      $log.log("submit order for products ").log(pid_list);
-      Orders.balance(pid_list,vm.selectedAddressId,vm.coupon_code,remarks).then(function(orderId){
+      _.each(vm.cartInfo.brands, function(brand){
+        remarks[brand.Brand.id] = brand.Brand.remark;
+      });
+      $log.log("submit order for products ").log(pid_list).log(", with remarks ").log(remarks);
+      Orders.submitOrder(pid_list, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
         $state.go("app.my-order-detail", {id: orderId});
       }, function(e){
@@ -109,10 +101,10 @@
     }
     function getTotalShipFees(){
       var t = 0;
-      if(vm.CartInfo==null)
+      if(vm.cartInfo==null)
         return 0;
-      for(var i in vm.CartInfo.shipFees){
-        t+=vm.CartInfo.shipFees[i];
+      for(var i in vm.cartInfo.shipFees){
+        t+=vm.cartInfo.shipFees[i];
       }
       return t;
     }

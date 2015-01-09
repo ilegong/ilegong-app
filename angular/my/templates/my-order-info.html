@@ -15,7 +15,7 @@
       <div ng-show="_.isEmpty(vm.defaultAddress)"></div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
-        <div ng-repeat="item in vm.CartInfo.cart.brandItems" >
+        <div ng-repeat="item in vm.cartInfo.cart.brandItems" ng-init="brand=vm.loadBrandById(item.id);">
           <div class="row">
             <div class="col col-33">
               <img class="img" src="{{vm.loadBrandById(item.id).Brand.coverimg}}"/>
@@ -44,8 +44,7 @@
           </div>
           <div>
             <label class="item item-input">
-              <textarea ng-model="vm.loadBrandById(item.id).Brand['remark']" placeholder="给分享人留言"></textarea>
-
+              <textarea ng-model="brand.Brand.remark" placeholder="给分享人留言"></textarea>
             </label>
             <p/>
           </div>
@@ -54,8 +53,6 @@
       <div class="coupon">
         <span>
           <textarea placeholder="使用优惠码" ng-model="vm.coupon_code_t"></textarea>
-
-     
           <a class="button button-assertive"  ng-click="vm.confirmCoupon_code();">
           应用
           </a>
@@ -64,13 +61,13 @@
 
       <div class="bottom_div">
         <div>
-          已优惠：{{vm.CartInfo.reduced | currency:'￥'}}
+          已优惠：{{vm.cartInfo.reduced | currency:'￥'}}
         </div>
         <div>
           运费：{{vm.getTotalShipFees() | currency:'￥'}}
         </div>
         <div class="total_price">
-          总价（含运费）：{{vm.CartInfo.total_price | currency:'￥'}}
+          总价（含运费）：{{vm.cartInfo.total_price | currency:'￥'}}
         </div>
         <a class="button button-assertive" ng-click="vm.submitOrder();">
           提交订单

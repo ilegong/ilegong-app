@@ -7,16 +7,16 @@
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
-  .service('Orders',Orders)
+  .service('Orders', Orders)
   .service('Categories', Categories)
-  .service('OrderDetail',OrderDetail)
+  .service('OrderDetail', OrderDetail)
   .service("Stores", Stores)
   .service("Tryings", Tryings)
-  .service("Offers",Offers)
-  .service("Coupons",Coupons)
-  .service('Addresses',Addresses)
-  .service('Carts',Carts)
-  .service('Profile',Profile)
+  .service("Offers", Offers)
+  .service("Coupons", Coupons)
+  .service('Addresses', Addresses)
+  .service('Carts', Carts)
+  .service('Profile', Profile)
 
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, software){
@@ -311,13 +311,12 @@
     return {
       list: list,
       getProvinces: getProvinces,
-      getCities:getCities,
-      getCounties:getCounties,
-      cartInfo:cartInfo,
-      balance:balance,
+      getCities: getCities,
+      getCounties: getCounties,
+      submitOrder: submitOrder,
       undo:undo,
-      remove:remove,
-      receive:receive
+      remove: remove,
+      receive: receive
     }
 
     function list(){
@@ -340,17 +339,7 @@
     function getCounties(id){
       return Base.get('/Locations/get_county.json?cityId='+id);
     }
-    function cartInfo(pid_list,addressId,coupon_code){
-      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
-      var defer = $q.defer();
-      Users.getToken().then(function(token){
-        Base.post('/api_orders/cart_info.json?access_token='+token.access_token,json).then(function(data) {
-          defer.resolve(data);
-        }, function(e){defer.reject(e)});
-      }, function(e){defer.reject(e)});
-      return defer.promise;
-    }
-    function balance(pid_list,addressId,coupon_code,remarks){
+    function submitOrder(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
       var defer =  $q.defer();
       Users.getToken().then(function(token){
@@ -565,15 +554,27 @@
   function Carts($q,$log,Base,software,Users){
     var self = this;
     return{
-      list:list,
+      getCartItems:getCartItems,
       deleteCartItem: deleteCartItem,
       addCartItem: addCartItem,
-      editNum:editNum
+      editNum:editNum, 
+      getCartInfo: getCartInfo
     }
-    function list(){
+    function getCartInfo(pid_list,addressId,coupon_code){
+      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
+      var defer = $q.defer();
+      Users.getToken().then(function(token){
+        Base.post('/api_orders/cart_info.json?access_token='+token.access_token,json).then(function(result) {
+          defer.resolve(result.data);
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
+      return defer.promise;
+    }
+    function getCartItems(){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
+          $log.log("get cart items successfully: ").log(list);
           defer.resolve(list);
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)})
@@ -582,8 +583,9 @@
     function deleteCartItem(id){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+token.access_token).then(function(item){
-          defer.resolve(item);
+        Base.get('/ApiOrders/cart_del/'+id+'.json?access_token='+token.access_token).then(function(result){
+          $log.log("delete cart item successfully: ").log(result)
+          defer.resolve(result);
         })
       })
       return defer.promise;
@@ -594,7 +596,7 @@
         var json = '{"product_id":'+id+',"num":'+num+',"spec":'+spec+',"type":'+type+',"try_id":'+try_id+'}';
         Base.post('/api_orders/cart_add.json?access_token='+token.access_token,json).then(function(result){
           if(result.data.success){
-              defer.resolve(result.data.id);
+            defer.resolve(result.data);
           }
           else{
             defer.reject(result);
