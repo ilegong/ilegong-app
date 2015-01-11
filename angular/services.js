@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -344,8 +344,8 @@
       var defer =  $q.defer();
       Users.getToken().then(function(token){
         Base.post('/api_orders/balance.json?access_token='+token.access_token,json).then(function(result){
-          if(result.success){
-            defer.resolve(result.order_ids[0]);
+          if(result.data.success){
+            defer.resolve(result.data.order_ids[0]);
           }
           else{
             defer.reject(result);
@@ -368,7 +368,6 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/confirm_remove/'+id+'.json?access_token='+token.access_token).then(function(result){
           defer.resolve(result);
-
         })
       })
       return defer.promise;
@@ -574,8 +573,7 @@
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
-          $log.log("get cart items successfully: ").log(list);
-          defer.resolve(list);
+          defer.resolve(list.carts);
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)})
       return defer.promise;

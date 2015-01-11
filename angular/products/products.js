@@ -63,12 +63,12 @@
     //   });
     // }
     vm.addToCart = function(){
-      $log.log("add product " + vm.product.Product.id + " to cart");
-      Carts.addCartItem(vm.product.Product.id,vm.count,0,1,0).then(function(result){
+      $log.log("add product " + $stateParams.id + " to cart");
+      Carts.addCartItem($stateParams.id, vm.count, 0, 1, 0).then(function(result){
         $rootScope.cartInfo = $rootScope.cartInfo || {};
         Carts.getCartItems().then(function(cartItems){
           $rootScope.cartInfo.cartItems = cartItems;
-        })
+        });
       }, function(e){$log.log("add to cart failed: ").log(e)});
     }
   }

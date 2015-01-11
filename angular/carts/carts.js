@@ -9,21 +9,22 @@
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
-    vm.getTotallPrice = getTotallPrice;
     vm.deleteCartItem = deleteCartItem;
     vm.confirmCartInfo = confirmCartInfo;
+    vm.watchCartItems = watchCartItems;
     activate();
 
     function activate(){
       $rootScope.cartInfo = $rootScope.cartInfo || {}
       vm.cartItems = $rootScope.cartInfo.cartItems || [];
-      Carts.getCartItems().then(function(result){
-        vm.cartItems = result.carts || [];
-        vm.total_price = vm.getTotallPrice();
+      Carts.getCartItems().then(function(cartItems){
+        vm.cartItems = cartItems || [];
+        vm.total_price = _.reduce(vm.cartItems, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
       })
       Addresses.getDefaultAddress().then(function(defaultAddress){
         $rootScope.cartInfo.defaultAddress = defaultAddress;
       });
+      vm.watchCartItems();
     }
     function reduceCartItemNum(cart) {
       var originalNum = cart.num;
@@ -39,19 +40,21 @@
         cart.num = original;
       });
     };
-    function getTotallPrice(){
-      return _.reduce(vm.cartItems, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
-    };
     function deleteCartItem(id){
       Carts.deleteCartItem(id).then(function(result){
-        var cartItem = _.filter(vm.cartItems, function(cartItem){return cartItem.id == id});
-        vm.cartItems.splice(vm.cartItems.indexOf(cartItem), 1);
-      }, function(e){});
+        $rootScope.cartInfo.cartItems = _.filter($rootScope.cartInfo.cartItems, function(cartItem){return cartItem.Cart.id != id});
+      }, function(e){$log.log("delete cart item failed: ").log(e)});
     }
     function confirmCartInfo(){      
       var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
       $rootScope.cartInfo.pidList = pids;
+      $log.log("confirm cart info for pids: ").log(pids);
       $state.go('app.order-info');
+    }
+    function watchCartItems(){
+      $scope.$watch('cartInfo.cartItems', function(newCartItems, oldCartItems) {
+        vm.cartItems = newCartItems;
+      });
     }
   }
 
@@ -75,8 +78,10 @@
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
-      Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(cartInfo){
-        vm.cartInfo = cartInfo;
+      Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(result){
+        vm.cartInfo.brands = result.brands;
+        vm.cartInfo.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
+        $log.log("update pidList to :").log(vm.cartInfo.pidList);
       })
     }
     function loadBrandById(id){
@@ -86,13 +91,13 @@
       vm.coupon_code = vm.coupon_code_t;
     }
     function submitOrder(){
-      var pid_list = _.flatten(_.map(vm.cartInfo.brandItems, function(bi){return _.map(bi.items, function(i){return i.pid})}))
+      var pid_list = vm.cartInfo.pidList;
       var remarks = {};
       _.each(vm.cartInfo.brands, function(brand){
         remarks[brand.Brand.id] = brand.Brand.remark;
       });
-      $log.log("submit order for products ").log(pid_list).log(", with remarks ").log(remarks);
-      Orders.submitOrder(pid_list, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
+      $log.log("submit order for products " + vm.cartInfo.pidList);
+      Orders.submitOrder(vm.cartInfo.pidList, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
         $state.go("app.my-order-detail", {id: orderId});
       }, function(e){
