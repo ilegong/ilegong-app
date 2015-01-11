@@ -4765,7 +4765,7 @@ var CartInfo = {
     "reduced":5
   }
 }
-var Balance = {"success":true,"order_ids":["7957"],"reason":null}
+var Balance = {data: {"success":true,"order_ids":["7957"],"reason":null}}
 var OrderUndo = {order_id:"123",ok: 1, msg:"订单已取消"}
 var OrderRemove = {order_id:"123",ok: 1, msg:"订单已删除"}
 var OrderReceive = {order_id:"123",ok: 1, msg:"货物已接收"}
