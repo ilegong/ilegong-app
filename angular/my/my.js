@@ -358,31 +358,25 @@
 
   }
 
-  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, OrderDetail, Users) {
+  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, Orders, Users) {
     var vm = this;
-    vm.getTotalPrice = getTotalPrice;
     vm.payByAli = payByAli;
     activate();
     
     function activate() {
-      OrderDetail.list($stateParams.id).then(function(data) {
+      vm.orderId = $stateParams.id;
+      Orders.getOrderDetail(vm.orderId).then(function(data) {
         vm.order = data.order;
         vm.carts = data.carts;
+        vm.totalPrice = _.reduce(vm.carts, function(cart, sum){return sum + cart.Cart.price}, 0);
         vm.ship_type = data.ship_type;
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;
         vm.products = data.products;
       })
     }
-    function getTotalPrice() {
-      var sum = 0;
-      for(var key in vm.carts) {
-        sum+=Number(vm.carts[key].Cart.price);
-      }
-      return sum;
-    }
     function payByAli(){
-      Users.payByAli($stateParams.id).then(function(result){
+      Users.payByAli(vm.orderId).then(function(result){
         $log.log(result);
       }, function(e){$log.log(e)});
     }

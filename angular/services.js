@@ -3,13 +3,12 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
   .service('Orders', Orders)
   .service('Categories', Categories)
-  .service('OrderDetail', OrderDetail)
   .service("Stores", Stores)
   .service("Tryings", Tryings)
   .service("Offers", Offers)
@@ -333,7 +332,8 @@
       submitOrder: submitOrder,
       undo:undo,
       remove: remove,
-      receive: receive
+      receive: receive,
+      getOrderDetail: getOrderDetail
     }
 
     function list(){
@@ -376,8 +376,8 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/confirm_undo/'+id+'.json?access_token='+token.access_token).then(function(result){
           defer.resolve(result);
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
     function remove(id){
@@ -385,8 +385,8 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/confirm_remove/'+id+'.json?access_token='+token.access_token).then(function(result){
           defer.resolve(result);
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
     function receive(id){
@@ -394,29 +394,21 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/confirm_receive/'+id+'.json?access_token='+token.access_token).then(function(result){
           defer.resolve(result);
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
-  }
-
-  function OrderDetail($q,Base,Users){
-    var self = this;
-    return {
-      list: list
-    }
-    function list(id){
+    function getOrderDetail(orderId){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        Base.get('/apiOrders/order_detail/'+id+'.json?access_token='+token.access_token).then(function(item){
+        Base.get('/apiOrders/order_detail/' + orderId + '.json?access_token='+token.access_token).then(function(item){
           defer.resolve(item);
-        })
-      })
+        }, function(e){defer.reject(e)})
+      }, function(e){defer.reject(e)});
 
       return defer.promise;
     }
   }
-
 
   /* @ngInject */
   function Stores($log, Base){
