@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -271,7 +271,8 @@
       list: list,
       getProduct:getProduct,
       getProductContent:getProductContent,
-      getProductComment:getProductComment
+      getProductComment:getProductComment,
+      makeComment:makeComment
     }
 
     function list(){
@@ -291,6 +292,22 @@
     }
     function getProductComment(id){
       return Base.get('/comments/getlist/Product/'+id+'.json')
+    }
+    function makeComment(id,rating,body,pictures){
+
+      var defer = $q.defer();
+      var json = {'data_id':""+id,'type':'Product','rating':""+rating,'body':body,'pictures':pictures};
+      for(var i=0;i<30;i++)
+        $log.log("comment");
+      $log.log(json);
+
+      Users.getToken().then(function(token){
+        Base.post('/api_orders/comment_add.json?access_token='+token.access_token,json).then(function(result){
+          defer.resolve(result);
+          //$log.log(result);
+        })
+      })
+      return defer.promise;
     }
   }
 

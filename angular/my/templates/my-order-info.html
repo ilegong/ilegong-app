@@ -4,7 +4,7 @@
       <h2>
         收货人信息
       </h2>
-      <div ui-sref="app.order-addresses-info({state:1,addrId:address.OrderConsignees.id})" ng-show="!_.isEmpty(vm.defaultAddress)"> 
+      <div ng-click="vm.setAddress(vm.defaultAddress)"  ng-show="!_.isEmpty(vm.defaultAddress)"> 
         <div class="item-content" >
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
         </div>

@@ -4773,6 +4773,7 @@ var ProfileEdit = {msg:1}
 var DefAddr = {msg:1}
 var aliPay = {success: true};
 var addCartJson = {data: {success: true, msg: '', id: 123456}, status: 200}
+var commentAddJson = {success:true};
 var FakeData = function(){
   var getData = {
     '/categories/mobileHome.json': mobileHomeJson,
@@ -4817,7 +4818,8 @@ var FakeData = function(){
     "/api_orders/cart_info.json": CartInfo,
     "/api_orders/balance.json": Balance,
     "/api_orders/edit_my_profile.json":ProfileEdit, 
-    "/api_orders/cart_add.json": addCartJson
+    "/api_orders/cart_add.json": addCartJson,
+    "/api_orders/comment_add.json":commentAddJson
   };
   var getLocalData = {
      'token': tokenJson, 

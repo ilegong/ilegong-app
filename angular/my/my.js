@@ -198,7 +198,7 @@
   function MyIlegongCtrl($rootScope, $scope){
   }
 
-  function MyAddressesInfoCtrl($state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
+  function MyAddressesInfoCtrl($q,$state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
     var vm = this;
     vm.state = $stateParams.state;
     vm.addrId = $stateParams.addrId;
@@ -225,7 +225,12 @@
     function itemClick(addr){
       if(vm.state == 0){
         if(vm.editMode){
-          vm.goAddressEdit(addr);
+          $rootScope['editAddress'] = {};
+          $rootScope['editAddress']['defer'] = $q.defer();
+          vm.editAddress(addr);
+          $rootScope['editAddress']['defer'].promise.then(function(data){
+            activate();
+          })
         }
         else{
           vm.setDefaultAddress(addr.OrderConsignees.id);
@@ -233,13 +238,20 @@
       }
       else{
         if(vm.editMode){
-           vm.editAddress(addr);
+          $rootScope['editAddress'] = {};
+          $rootScope['editAddress']['defer'] = $q.defer();
+          vm.editAddress(addr);
+          $rootScope['editAddress']['defer'].promise.then(function(data){
+            activate();
+          })
         }
         else{
-          $rootScope.cartInfo['addressId'] = addr.OrderConsignees.id;
+          console.log($rootScope.cartInfo);
+          $rootScope.cartInfo['setAddressDefer'].resolve(addr);
           $ionicHistory.goBack();
         }
       }
+
     }
     function editAddress(addr){
       var id = -1;
@@ -378,11 +390,24 @@
 
   function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
+    vm.editId = $stateParams.editId;    
+    if(vm.editId == -1){
 
-    vm.editId = $stateParams.editId;
+      vm.showProvince = true;
+      vm.showCity = false;
+      vm.showCounty = false;
+    }else{
+      vm.showProvince = true;
+      vm.showCity = true;
+      vm.showCounty = true;
+    }
+
     activate();
 
     function activate(){
+
+
+
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
@@ -459,13 +484,15 @@
       vm.counties = $rootScope.getCounties(id);
     }
     vm.save = function(){
+      for(var i=0;i<30;i++)
+        $log.log('azz');
       if(vm.editId == -1){
         vm.add();
       }
       else{
-        vm.edit(id);
+        vm.edit(vm.editId);
       }
-      activate();
+      $rootScope['editAddress']['defer'].resolve(null);
       $ionicHistory.goBack();
     }
     vm.edit = function(){

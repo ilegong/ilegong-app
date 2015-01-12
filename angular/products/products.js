@@ -9,6 +9,8 @@
     var vm = this;
     vm.count=1;
     vm.from = $stateParams.from;
+    vm.rating = 5;
+    vm.confirmComment = confirmComment;
     activate();
     
     function activate(){
@@ -62,6 +64,14 @@
     //     destinationType: Camera.DestinationType.DATA_URL
     //   });
     // }
+    function confirmComment(){
+      for(var i=0;i<30;i++)
+        $log.log('aqaq');
+      $log.log(vm.product);
+      Products.makeComment(vm.product.Product.id,vm.rating,vm.commentText,null).then(function(data){
+        activate();
+      });
+    }
     vm.addToCart = function(){
       $log.log("add product " + $stateParams.id + " to cart");
       Carts.addCartItem($stateParams.id, vm.count, 0, 1, 0).then(function(result){

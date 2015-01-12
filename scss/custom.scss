@@ -546,3 +546,29 @@ a{
   }
 
 }
+.my-address-edit{
+  background:#dddddd;
+  .div-content{
+    background:#ffffff;
+  }
+  .select{
+    width:100%;
+  }
+  .row-save{
+    padding-top:20px;
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .button-save{
+    width:100%;
+    border-color: #45a011;
+    background-color: #45a011;
+    color: #fff; 
+  }
+  .padding-content{
+    padding-top:10px;
+  }
+  .text{
+    border:none;
+  }
+}

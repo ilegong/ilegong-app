@@ -60,7 +60,8 @@
 
 //_.find(array,function (e){return e.status == 1})
 //_.map(array,function(e,index){})
-  function OrderInfoCtrl($ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
+  function OrderInfoCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
+
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
@@ -70,9 +71,11 @@
     vm.getCounties = getCounties;
     vm.getCities = getCities;
     vm.getTotalShipFees = getTotalShipFees;
+    vm.setAddress = setAddress;
     activate();
 
     function activate(){
+
       vm.cartInfo = $rootScope.cartInfo;
       vm.defaultAddress = vm.cartInfo.defaultAddress;
       Orders.getProvinces().then(function(provinces){
@@ -81,8 +84,21 @@
       Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(result){
         vm.cartInfo.brands = result.brands;
         vm.cartInfo.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
+        vm.cartInfo = result;
+        $log.log(vm.defaultAddress);
         $log.log("update pidList to :").log(vm.cartInfo.pidList);
       })
+    }
+    function setAddress(addr){
+      $rootScope.cartInfo['setAddressDefer'] = $q.defer();
+      $rootScope.cartInfo['setAddressDefer'].promise.then(function(addr){
+        $log.log(addr);
+        $rootScope.cartInfo['defaultAddress'] = addr;
+        activate();
+      })
+      console.log('asdad');
+      console.log($rootScope.cartInfo);
+      $state.go('app.order-addresses-info',{state:1,addrId:addr.OrderConsignees.id});
     }
     function loadBrandById(id){
       return _.find(vm.cartInfo.brands, function(brand){return brand.Brand.id == id});

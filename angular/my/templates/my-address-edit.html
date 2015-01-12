@@ -1,21 +1,31 @@
 <ion-view title="编辑地址" hide-tabs>
-  <ion-content >
-    <div class="list">
-      <div class="row">
+  <ion-content class="my-address-edit">
+    <div class="div-content ">
+      <div class="row padding-content">
         <div class="col col-25" >
           收货人
         </div>
         <div class="col">
-          <input  ng-model="vm.editAddr.OrderConsignees.name"/>
+          <input  class="text" ng-model="vm.editAddr.OrderConsignees.name"/>
         </div>
       </div>
-      <div class="row">
+      <hr/>
+      <div class="row padding-content">
         <div class="col col-25" >
-          省市
+          联系方式
+        </div>
+        <div class="col">
+          <input class="text" ng-model="vm.editAddr.OrderConsignees.mobilephone"/>
+        </div>  
+      </div>
+      <hr/>
+      <div class="row padding-content">
+        <div class="col col-25" >
+          省
         </div>
         <div class="col">
             <div >
-              <select id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="vm.cityModel='';vm.countyModel='';vm.getCities(vm.provinceModel.id);">
+              <select class="select" id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="vm.cityModel='';vm.countyModel='';vm.getCities(vm.provinceModel.id);vm.showCity=true;vm.showCounty=false;" ng-show="vm.showProvince">
                 <option value="">-- 请选择 --</option>
 
               </select>
@@ -24,46 +34,39 @@
       </div>
       <div class="row">
         <div class="col col-25">
-          2
+          市
         </div>  
         <div class="col">
-          <select id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="vm.countyModel='';vm.getCounties(vm.cityModel.id);">
+          <select class="select" id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="vm.countyModel='';vm.getCounties(vm.cityModel.id);vm.showCounty=true" ng-show="vm.showCity">
             <option value="">-- 请选择 --</option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="col col-25">
-          3
+          区/县
         </div>
         <div class="col">
-          <select id="selectRegion_3" ng-model="vm.countyModel" ng-options=" m.name for m in vm.counties" ng-change="">
+          <select class="select" id="selectRegion_3" ng-model="vm.countyModel" ng-options=" m.name for m in vm.counties" ng-change="" ng-show="vm.showCounty">
             <option value="">-- 请选择 --</option>
           </select>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col col-25">
-        详细地址
+      <hr/>
+      <div class="row padding-content">
+        <div class="col col-25">
+          详细地址
+        </div>
+        <div class="col">
+          <input class="text" ng-model="vm.editAddr.OrderConsignees.address"/>
+        </div>
       </div>
-      <div class="col">
-        <input  ng-model="vm.editAddr.OrderConsignees.address"/>
-      </div>
     </div>
-    <div class="row">
-      <div class="col col-25" >
-        手机
-      </div>
-      <div class="col">
-        <input  ng-model="vm.editAddr.OrderConsignees.mobilephone"/>
-      </div>  
-    </div>
-    <div class="row">
-      <button class="button button-assertive" ng-click="vm.save()">
+    <div class="row row-save padding-content">
+      <div class="button button-save" ng-click="vm.save()">
         保存收货人信息
 
-      </button>
+      </div>
     </div>
   </ion-content>
 </ion-view>
