@@ -4,41 +4,93 @@
       <div>
         <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
       </div>
-      <div class="row">
-        <div class="col col-50">
-          <span class="nameFont">
-            {{vm.product.Product.name}}
-          </span>
+
+      <div >
+        <span class="nameFont">
+          {{vm.product.Product.name}}
+        </span>
         <p/>
-          <span>
-            {{vm.product.Product.promote_name}}
-          </span>
+        <span>
+          {{vm.product.Product.promote_name}}
+        </span>
+      </div>
+      <div>
+        <span class="price">
+          {{vm.product.Product.price | currency:"￥"}}
+        </span>
+        <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
+          t_o_price{{vm.product.Product.original_price | currency:"￥"}}
+        </span>
+        <span class="comment-count">
+          t_口碑评价(123)
+        </span>
+        <p/>
+        <span>
+          t_好友。。。推荐了该产品
+        </span>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col col-20">
+          促销：
         </div>
         <div class="col">
-          <span class="price">
-            {{vm.product.Product.price | currency:"￥"}}
+          <span>
+            t_有红包
           </span>
           <p/>
-          <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
-            {{vm.product.Product.original_price | currency:"￥"}}
-          </span>
-          <p/>
-          <span class="shipFee">
-            邮费：{{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
+          <span>
+            t_本店商品满99元立减10元
           </span>
         </div>
       </div>
-      <div class="item-count row">
-        <span class="count-reduce col col-25" ng-click="buttonReduceClick()">-</span>
-        <input class="count col col-50" ng-model="vm.count"></input>
-        <span class="count-add col col-25" ng-click="buttonAddClick()">+</span>
-      </div>
+      <hr/>
+        <div class="row">
+          <div class="col col-20">
+            规格：
+          </div>
+          <div class="col">
+            t_..........
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-20">
+            数量：
+          </div>
+          <div class="col">
+              <div class="item-count row">
+              <span class="count-reduce col col-25" ng-click="buttonReduceClick()">-</span>
+              <input class="count col col-50" ng-model="vm.count"></input>
+              <span class="count-add col col-25" ng-click="buttonAddClick()">+</span>
+            </div>
+          </div>
+        </div>
+
+
       <div class="list">
         <a class="item item-icon-right">
           <i class="icon ion-ios7-arrow-right"></i>
           <img src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
           店家：{{vm.brand.Brand.name}}
         </a>
+      </div>
+      <div class="row">
+        <div class="col col-20">
+          快递：
+        </div>
+        <div class="col">
+          <span class="shipFee">
+          邮费：{{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-20">
+          服务：
+        </div>
+        <div class="col">
+          t_本商品由。。提供，周日统一发货，朋友说提供售后服务。。。
+        </div>
       </div>
       <div >
         <a class="button button-energized buttonHeight" ng-click="vm.addToCart()">

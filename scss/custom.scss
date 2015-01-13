@@ -380,17 +380,18 @@ a{
     font-size:1.5em;
   }
   .price{
-    float:right;
     color: #c71673;
     font-size: 24px;
   }
   .originalPrice{
-    float:right;
     text-decoration: line-through;
     color: #888;
   }
-  .shipFee{
+  .comment-count{
     float:right;
+  }
+  .shipFee{
+    
   }
   .item-count{
     border-collapse: separate;
@@ -408,11 +409,15 @@ a{
       border-right: 0;
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
     }
     span.count-add{
       border-left: 0;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
     }
     .count{
       padding: 4px 1px;
