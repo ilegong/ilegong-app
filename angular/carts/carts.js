@@ -12,19 +12,46 @@
     vm.deleteCartItem = deleteCartItem;
     vm.confirmCartInfo = confirmCartInfo;
     vm.watchCartItems = watchCartItems;
+    vm.getProductsByBrandId = getProductsByBrandId;
+    vm.toggleEditMode = toggleEditMode;
+    vm.toggleCartItem = toggleCartItem;
+    vm.getTotalPrice = getTotalPrice;
     activate();
 
     function activate(){
-      $rootScope.cartInfo = $rootScope.cartInfo || {}
+      vm.editMode = false;
+      $rootScope.cartInfo = $rootScope.cartInfo || {carts:[],brands:[],defaultAddress:{}}
       vm.cartItems = $rootScope.cartInfo.cartItems || [];
-      Carts.getCartItems().then(function(cartItems){
-        vm.cartItems = cartItems || [];
-        vm.total_price = _.reduce(vm.cartItems, function(memo, cart){ return memo + cart.Cart.price * cart.Cart.num; }, 0);
+      Carts.getCartItems().then(function(result){
+        vm.carts = result.carts || [];
+        vm.brands = result.brands || [];
+        $rootScope.cartInfo['carts'] = vm.carts;
+        $rootScope.cartInfo['brands'] = vm.brands;
+
+      
       })
       Addresses.getDefaultAddress().then(function(defaultAddress){
         $rootScope.cartInfo.defaultAddress = defaultAddress;
       });
       vm.watchCartItems();
+    }
+    function toggleCartItem(editMode,product){
+      if(editMode){
+        product['deleteMode'] = !product['deleteMode'];
+      }
+      else{
+        product['checked'] = !product['checked'];
+      }
+    }
+    function getTotalPrice(){
+      if(_.isEmpty(vm.carts))
+        return 0;
+      return _.reduce(_.filter(vm.carts, function(cart){return cart.checked}), function(memo, cart){
+          return memo + cart.Cart.price * cart.Cart.num;
+      }, 0);
+    }
+    function toggleEditMode(){
+      vm.editMode = !vm.editMode;
     }
     function reduceCartItemNum(cart) {
       var originalNum = cart.num;
@@ -42,7 +69,7 @@
     };
     function deleteCartItem(id){
       Carts.deleteCartItem(id).then(function(result){
-        $rootScope.cartInfo.cartItems = _.filter($rootScope.cartInfo.cartItems, function(cartItem){return cartItem.Cart.id != id});
+        $rootScope.cartInfo.carts = _.filter($rootScope.cartInfo.carts, function(cartItem){return cartItem.Cart.id != id});
       }, function(e){$log.log("delete cart item failed: ").log(e)});
     }
     function confirmCartInfo(){      
@@ -56,12 +83,12 @@
         vm.cartItems = newCartItems;
       });
     }
+    function getProductsByBrandId(id){
+      return _.filter(vm.carts,function(cart){return cart.Cart.brand_id == id})
+    }
   }
 
-//_.find(array,function (e){return e.status == 1})
-//_.map(array,function(e,index){})
   function OrderInfoCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
-
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.loadBrandById = loadBrandById;
@@ -82,7 +109,7 @@
         vm.provinces = provinces;
       });
       Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(result){
-        vm.cartInfo.brands = result.brands;
+        vm.cartInfo.brands = result.brands; 
         vm.cartInfo.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
         if(_.isEmpty(vm.cartInfo.pidList)){
           $log.log("get cart info successfully:").log(result.cart.brandItems).log(vm.cartInfo.pidList);

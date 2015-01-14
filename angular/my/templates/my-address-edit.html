@@ -1,4 +1,7 @@
 <ion-view title="编辑地址" hide-tabs>
+  <ion-nav-buttons side='right'>
+    <button  class='button button-clear button-positive' ng-click="vm.deleteAddress(vm.editAddr.OrderConsignees.id)">删除</button>
+  </ion-nav-buttons>
   <ion-content class="my-address-edit">
     <div class="div-content ">
       <div class="row padding-content">

@@ -499,6 +499,7 @@
           for(var i = 0;i<50;i++)
             $log.log('del');
           $log.log(result);
+           $log.log(id);
         })
       })
     }
@@ -529,6 +530,7 @@
           for(var i=0;i<30;i++)
             $log.log('defaultAddr');
           $log.log(result);
+         
           defer.resolve(result);
         })
       })
@@ -574,8 +576,10 @@
     function getCartItems(){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
-          defer.resolve(list.carts);
+      Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
+          defer.resolve(list);
+
+
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)})
       return defer.promise;

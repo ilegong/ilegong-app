@@ -172,7 +172,103 @@ a{
 }
 
 .cart{
+  background:#eeeeee;
+  .icon{
+    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+    background-size: 25em 25em;
+  }
+  .icon-edit{
+    width:1.2em;
+    height:1.2em;
+    background-position: -15.625em 0;
+  }
+  .icon-save{
+    width:28px;
+    height:19px;
+    background-position: -420px 0;
+  }
+  .icon-circle{
+    width:1.75em;
+    height:1.75em;
+    background-position: -19.16em 0;
+  }
+  .icon-circle-checked{
+    width:1.75em;
+    height:1.75em;
+    background-position: -21.25em 0;
+  }
+  .icon-delete{
+    width:1.75em;
+    height:1.75em;
+    background-position: -23.33em 0;
+  }
+  .icon-add{
+    width:51px;
+    height:51px;
+    background-position: -310px -80px;
+  }
+  .icon-reduce{
+    width:51px;
+    height:51px;
+    background-position: -240px -80px;
+  }
+  .brand-name{
+    font-size:20px;
+  }
+  .delete-icon{
+    display:inline-block; 
+    margin-top: 1.25em;
+  }
+  .circle-checked-icon{
+    display:inline-block;
+    margin-top:1.25em;
+  }
+  .circle-icon{
+    display:inline-block;
+    margin-top: 1.25em;
+  }
+  .product-img{
+    display:inline-block;
+  }
+  .product-content{
+    display:inline-block;
+    width:50%;
+  }
+  .product-title{
+    display:block;
+    font-size:1.25em;
+  }
+  .product-subtitle{
+    display:block;
+  }
+  .product-rest{
+    display:inline-block;
+  }
+  .product-price{
+    display:block;
+    font-size:1.25em;
+
+  }
+  .product-num{
+    display:inline-block;
+    padding-left:0.5em;
+    font-size:1.25em;
+  }
+  .product-delete{
+    display:inline-block;
+    background:#45a011;
+    width:2.7em;
+    text-align:center;
+    padding-top:2.25em;
+  }
+  .edit-icon{
+    display:inline-block;
+  }
+  .brand{
+    background:white;
+  }
   .item{
+
     text-align: center;
     .img{
       width:100%;

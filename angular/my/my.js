@@ -275,10 +275,7 @@
         return vm.addrId == addr.OrderConsignees.id;
       }
     }
-    vm.del = function(id){
-      Addresses.del(id);
-      activate();
-    }
+
     function setDefaultAddress(id){
       Addresses.def(id).then(function(result){
         activate();
@@ -398,6 +395,7 @@
 
   function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
+    vm.deleteAddress = deleteAddress;
     vm.editId = $stateParams.editId;    
     if(vm.editId == -1){
 
@@ -511,6 +509,9 @@
       var t = vm.editAddr.OrderConsignees;
       Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
     }
-
+    function deleteAddress(addressId){
+      Addresses.del(addressId);
+      $ionicHistory.goBack();
+    }
   }   
 })(window, window.angular);
