@@ -76,7 +76,7 @@
       var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
       $rootScope.cartInfo.pidList = pids;
       $log.log("confirm cart info for pids: ").log(pids);
-      $state.go('app.order-info');
+      $state.go('app.cart-order-info');
     }
     function watchCartItems(){
       $scope.$watch('cartInfo.cartItems', function(newCartItems, oldCartItems) {

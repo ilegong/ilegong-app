@@ -398,7 +398,6 @@
     vm.deleteAddress = deleteAddress;
     vm.editId = $stateParams.editId;    
     if(vm.editId == -1){
-
       vm.showProvince = true;
       vm.showCity = false;
       vm.showCounty = false;
@@ -407,13 +406,9 @@
       vm.showCity = true;
       vm.showCounty = true;
     }
-
     activate();
 
     function activate(){
-
-
-
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
@@ -425,7 +420,6 @@
         vm.cities = null;
         vm.counties = null;
         return;
-
       }
       if(vm.editId>=0){
         Addresses.list().then(function(data) {
@@ -449,7 +443,6 @@
               break;
             }
           }
-          
           
           Addresses.getAddress(provinceId,cityId,countyId).then(function(data){
             var ct = data.city_list;
