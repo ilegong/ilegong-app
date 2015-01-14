@@ -59,11 +59,11 @@
       .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
-      .state('app.shopping-carts', {url: '/shoppingCarts', views: {'app-shopping-carts': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
-      .state('app.order-info',{url:'/order-info',views:{'app-shopping-carts':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
-      .state('app.order-addresses-info',{url:'/order-addresses-info/:state/:addrId',views:{'app-shopping-carts':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
-      .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-shopping-carts':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
-      .state('app.cart-order-detail',{url:'/my-order-detail/:id',views:{'app-shopping-carts':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
+      .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
+      .state('app.order-info',{url:'/order-info',views:{'app-cart':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
+      .state('app.order-addresses-info',{url:'/order-addresses-info/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
+      .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
+      .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
