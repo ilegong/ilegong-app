@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.carts', ['app.services','ionic'])
+  angular.module('ilegong.cart', ['app.services','ionic'])
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
 
@@ -12,26 +12,23 @@
     vm.deleteCartItem = deleteCartItem;
     vm.confirmCartInfo = confirmCartInfo;
     vm.watchCartItems = watchCartItems;
-    vm.getProductsByBrandId = getProductsByBrandId;
-    vm.toggleEditMode = toggleEditMode;
+    vm.getCartItemsOfBrand = getCartItemsOfBrand;
     vm.toggleCartItem = toggleCartItem;
     vm.getTotalPrice = getTotalPrice;
     activate();
 
     function activate(){
       vm.editMode = false;
-      $rootScope.cartInfo = $rootScope.cartInfo || {carts:[],brands:[],defaultAddress:{}}
-      vm.cartItems = $rootScope.cartInfo.cartItems || [];
+      $rootScope.cart = $rootScope.cart || {carts:[],brands:[],defaultAddress:{}}
+      vm.cartItems = $rootScope.cart.cartItems || [];
       Carts.getCartItems().then(function(result){
-        vm.carts = result.carts || [];
+        vm.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
         vm.brands = result.brands || [];
-        $rootScope.cartInfo['carts'] = vm.carts;
-        $rootScope.cartInfo['brands'] = vm.brands;
-
-      
+        $rootScope.cart.cartItems = vm.cartItems;
+        $rootScope.cart.brands = vm.brands;
       })
       Addresses.getDefaultAddress().then(function(defaultAddress){
-        $rootScope.cartInfo.defaultAddress = defaultAddress;
+        $rootScope.cart.defaultAddress = defaultAddress;
       });
       vm.watchCartItems();
     }
@@ -44,14 +41,11 @@
       }
     }
     function getTotalPrice(){
-      if(_.isEmpty(vm.carts))
+      if(_.isEmpty(vm.cartItems))
         return 0;
-      return _.reduce(_.filter(vm.carts, function(cart){return cart.checked}), function(memo, cart){
-          return memo + cart.Cart.price * cart.Cart.num;
+      return _.reduce(_.filter(vm.cartItems, function(cartItem){return cartItem.checked}), function(memo, cartItem){
+          return memo + cartItem.Cart.price * cartItem.Cart.num;
       }, 0);
-    }
-    function toggleEditMode(){
-      vm.editMode = !vm.editMode;
     }
     function reduceCartItemNum(cart) {
       var originalNum = cart.num;
@@ -69,12 +63,12 @@
     };
     function deleteCartItem(id){
       Carts.deleteCartItem(id).then(function(result){
-        $rootScope.cartInfo.carts = _.filter($rootScope.cartInfo.carts, function(cartItem){return cartItem.Cart.id != id});
+        $rootScope.cart.cartItems = _.filter($rootScope.cart.cartItems, function(cartItem){return cartItem.Cart.id != id});
       }, function(e){$log.log("delete cart item failed: ").log(e)});
     }
     function confirmCartInfo(){      
       var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
-      $rootScope.cartInfo.pidList = pids;
+      $rootScope.cart.pidList = pids;
       $log.log("confirm cart info for pids: ").log(pids);
       $state.go('app.cart-order-info');
     }
@@ -83,8 +77,8 @@
         vm.cartItems = newCartItems;
       });
     }
-    function getProductsByBrandId(id){
-      return _.filter(vm.carts,function(cart){return cart.Cart.brand_id == id})
+    function getCartItemsOfBrand(id){
+      return _.filter(vm.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
     }
   }
 
@@ -102,45 +96,44 @@
     activate();
 
     function activate(){
-
-      vm.cartInfo = $rootScope.cartInfo;
-      vm.defaultAddress = vm.cartInfo.defaultAddress;
+      vm.cart = $rootScope.cart;
+      vm.defaultAddress = vm.cart.defaultAddress;
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
-      Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(result){
-        vm.cartInfo.brands = result.brands; 
-        vm.cartInfo.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
-        if(_.isEmpty(vm.cartInfo.pidList)){
-          $log.log("get cart info successfully:").log(result.cart.brandItems).log(vm.cartInfo.pidList);
+      Carts.getCartInfo(vm.cart.pidList, vm.cart.defaultAddress.OrderConsignees.id, vm.cart.couponCode).then(function(result){
+        vm.cart.brands = result.brands; 
+        vm.cart.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
+        if(_.isEmpty(vm.cart.pidList)){
+          $log.log("get cart info successfully:").log(result.cart.brandItems).log(vm.cart.pidList);
         }
       })
     }
     function setAddress(addr){
-      $rootScope.cartInfo['setAddressDefer'] = $q.defer();
-      $rootScope.cartInfo['setAddressDefer'].promise.then(function(addr){
+      $rootScope.cart['setAddressDefer'] = $q.defer();
+      $rootScope.cart['setAddressDefer'].promise.then(function(addr){
         $log.log(addr);
-        $rootScope.cartInfo['defaultAddress'] = addr;
+        $rootScope.cart['defaultAddress'] = addr;
         activate();
       })
       console.log('asdad');
-      console.log($rootScope.cartInfo);
+      console.log($rootScope.cart);
       $state.go('app.order-addresses-info',{state:1,addrId:addr.OrderConsignees.id});
     }
     function loadBrandById(id){
-      return _.find(vm.cartInfo.brands, function(brand){return brand.Brand.id == id});
+      return _.find(vm.cart.brands, function(brand){return brand.Brand.id == id});
     }
     function confirmCoupon_code(){
       vm.coupon_code = vm.coupon_code_t;
     }
     function submitOrder(){
-      var pid_list = vm.cartInfo.pidList;
+      var pid_list = vm.cart.pidList;
       var remarks = {};
-      _.each(vm.cartInfo.brands, function(brand){
+      _.each(vm.cart.brands, function(brand){
         remarks[brand.Brand.id] = brand.Brand.remark;
       });
-      $log.log("submit order for products " + vm.cartInfo.pidList);
-      Orders.submitOrder(vm.cartInfo.pidList, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
+      $log.log("submit order for products " + vm.cart.pidList);
+      Orders.submitOrder(vm.cart.pidList, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
         $state.go("app.cart-order-detail", {id: orderId});
       }, function(e){
@@ -149,10 +142,10 @@
     }
     function getTotalShipFees(){
       var t = 0;
-      if(vm.cartInfo==null)
+      if(vm.cart==null)
         return 0;
-      for(var i in vm.cartInfo.shipFees){
-        t+=vm.cartInfo.shipFees[i];
+      for(var i in vm.cart.shipFees){
+        t+=vm.cart.shipFees[i];
       }
       return t;
     }
@@ -173,7 +166,7 @@
     }
     function addAddress(){
       Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone).then(function(address){
-        $rootScope.cartInfo.defaultAddress = address;
+        $rootScope.cart.defaultAddress = address;
       })
     }
   }

@@ -246,8 +246,8 @@
           })
         }
         else{
-          console.log($rootScope.cartInfo);
-          $rootScope.cartInfo['setAddressDefer'].resolve(addr);
+          console.log($rootScope.cart);
+          $rootScope.cart['setAddressDefer'].resolve(addr);
           $ionicHistory.goBack();
         }
       }
@@ -362,8 +362,8 @@
       vm.orderId = $stateParams.id;
       Orders.getOrderDetail(vm.orderId).then(function(data) {
         vm.order = data.order;
-        vm.carts = data.carts;
-        vm.totalPrice = _.reduce(vm.carts, function(sum, cart){return sum + cart.Cart.price}, 0);
+        vm.cartItems = data.carts;
+        vm.totalPrice = _.reduce(vm.cartItems, function(sum, cartItem){return sum + cartItem.Cart.price}, 0);
         vm.ship_type = data.ship_type;
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;

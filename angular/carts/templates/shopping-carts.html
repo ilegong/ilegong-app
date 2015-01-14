@@ -1,12 +1,12 @@
 <ion-view title="朋友说" hide-back-button='true'>
   <ion-nav-buttons side='right'>
-    <button  class='button button-clear button-positive' ng-click="vm.editOnClick();">{{vm.editMode?"完成":"编辑"}}</button>
+    <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button>
   </ion-nav-buttons>
   <ion-content class="cart padding">
-    <div  ng-show="vm.cartItems.length == 0">
+    <div  ng-show="vm.brands.length == 0">
       您的购物车是空的，先去逛逛吧。
     </div>
-    <div class="list brand " ng-repeat="brand in vm.cartItems.brands">
+    <div class="list brand " ng-repeat="brand in vm.brands">
       <div class="row">
         <span class="col col-10"></span>
         <span class="col col-10">
@@ -17,17 +17,17 @@
         </span>
       </div>
       <hr/>
-      <div class="row" ng-repeat="product in vm.getProductsByBrandId(brand.Brand.id)" ng-init="product['deleteMode'] = false;product['checked'] = false;" >
-        <span ng-show="!vm.editMode || !product['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,product);">
-          <span class="icon {{vm.editMode?'icon-delete delete-icon':(product['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
+      <div class="row" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;" >
+        <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem);">
+          <span class="icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
           </span>
         </span>
         <span class="product-img col col-20">
-          <img style="width:100%;" src="{{product.Cart.coverimg}}"></img>
+          <img style="width:100%;" src="{{cartItem.Cart.coverimg}}"></img>
         </span>
         <span class="product-content ">
           <span class="product-title">
-            {{product.Cart.name}}
+            {{cartItem.Cart.name}}
           </span>
           <span class="product-subtitle">
             subtitle
@@ -35,23 +35,23 @@
         </span>
         <span class="product-rest col">
           <span class="product-price">
-            {{product.Cart.price | currency:"￥"}}
+            {{cartItem.Cart.price | currency:"￥"}}
           </span>
           <span class="product-num">
-            × {{product.Cart.num}}
+            × {{cartItem.Cart.num}}
           </span>
 
           <span ng-show="vm.editMode" class="icon icon-edit edit-icon">
           </span>
  
         </span>
-        <span ng-show="vm.editMode && product['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(product.Cart.id)">
+        <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem.Cart.id)">
           删除
         </span>
         <hr/>
       </div>
     </div>
-    {{vm.getTotalPrice()}}
+    总价：￥{{vm.getTotalPrice()}}
 
 <!--
 
