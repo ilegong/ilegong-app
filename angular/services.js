@@ -248,16 +248,8 @@
       var defer = $q.defer();
       getUser().then(function(user){
         var userId = user.my_profile.User.id
-        Base.get("/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId).then(function(result){
-          if(result.success){
-            defer.resolve(result);
-          }
-          else{
-            defer.reject(result);
-          }
-        }, function(e){
-          defer.reject(e);
-        });
+        var url = "http://www.tongshijia.com/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId;
+        var ref = window.open(url, '_blank', 'location=no');
       });
       return defer.promise;
     }

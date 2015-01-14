@@ -333,9 +333,6 @@
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
-        for(var i=0;i<30;i++){
-          $log.log('qqqq');
-        }
       });
     }
     vm.undo = function(id){
@@ -368,7 +365,7 @@
       Orders.getOrderDetail(vm.orderId).then(function(data) {
         vm.order = data.order;
         vm.carts = data.carts;
-        vm.totalPrice = _.reduce(vm.carts, function(cart, sum){return sum + cart.Cart.price}, 0);
+        vm.totalPrice = _.reduce(vm.carts, function(sum, cart){return sum + cart.Cart.price}, 0);
         vm.ship_type = data.ship_type;
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;
