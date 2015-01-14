@@ -84,9 +84,9 @@
       Carts.getCartInfo(vm.cartInfo.pidList, vm.cartInfo.defaultAddress.OrderConsignees.id, vm.cartInfo.couponCode).then(function(result){
         vm.cartInfo.brands = result.brands;
         vm.cartInfo.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
-        vm.cartInfo = result;
-        $log.log(vm.defaultAddress);
-        $log.log("update pidList to :").log(vm.cartInfo.pidList);
+        if(_.isEmpty(vm.cartInfo.pidList)){
+          $log.log("get cart info successfully:").log(result.cart.brandItems).log(vm.cartInfo.pidList);
+        }
       })
     }
     function setAddress(addr){
@@ -115,7 +115,7 @@
       $log.log("submit order for products " + vm.cartInfo.pidList);
       Orders.submitOrder(vm.cartInfo.pidList, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
-        $state.go("app.my-order-detail", {id: orderId});
+        $state.go("app.cart-order-detail", {id: orderId});
       }, function(e){
         $log.log("submit order failed: ").log(e);
       });

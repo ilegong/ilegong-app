@@ -131,7 +131,7 @@
       register: register, 
       login: login, 
       logout: logout, 
-      payByAli: payByAli
+      aliPay: aliPay
     }
 
     function init(){
@@ -244,13 +244,14 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function payByAli(orderId){
+    function aliPay(orderId){
       var defer = $q.defer();
       getUser().then(function(user){
         var userId = user.my_profile.User.id
         var url = "http://www.tongshijia.com/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId;
         var ref = window.open(url, '_blank', 'location=no');
-      });
+        defer.resolve(ref);
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
   }

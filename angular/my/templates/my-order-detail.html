@@ -1,8 +1,8 @@
-<ion-view title="订单详情">
+<ion-view title="订单详情" hide-tabs>
   <ion-content>
     <div class="orderDetail main">
       <div ng-show="getOrderState_UNPAID() == vm.order.state">
-        <a class="button button-assertive" ng-click="vm.payByAli()">
+        <a class="button button-assertive" ng-click="vm.aliPay()">
           去支付宝支付
         </a>
       </div>

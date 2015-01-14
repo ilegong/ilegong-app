@@ -355,9 +355,10 @@
 
   }
 
-  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, Orders, Users) {
+  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
     var vm = this;
-    vm.payByAli = payByAli;
+    vm.aliPay = aliPay;
+    vm.onAliPayFinished = onAliPayFinished;
     activate();
     
     function activate() {
@@ -372,10 +373,26 @@
         vm.products = data.products;
       })
     }
-    function payByAli(){
-      Users.payByAli(vm.orderId).then(function(result){
-        $log.log(result);
+    function aliPay(){
+      Users.aliPay(vm.orderId).then(function(ref){
+        ref.addEventListener('loadstart', function(e){vm.onAliPayLoadStart(vm.orderId, e)});
+        ref.addEventListener('loadStop', function(e){vm.onAliPayLoadStop(vm.orderId, e)});
+        ref.addEventListener('loaderror', function(e){vm.onAliPayLoadError(vm.orderId, e)});
+        ref.addEventListener('exit', function(e){vm.onAliPayFinished(vm.orderId)});
       }, function(e){$log.log(e)});
+    }
+    function onAliPayLoadStart(orderId, e){
+      $log.log("on ali pay load start for order " + orderId).log(e);
+    }
+    function onAliPayLoadStop(orderId, e){
+      $log.log("on ali pay load stop for order " + orderId).log(e);
+    }
+    function onAliPayLoadError(orderId, e){
+      $log.log("on ali pay load error for order " + orderId).log(e);
+    }
+    function onAliPayFinished(orderId, e){
+      $log.log("on ali pay finished for order " + orderId).log(e);
+      $state.go("app.my-order-detail", {id: orderId});
     }
   }
 

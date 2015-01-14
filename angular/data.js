@@ -4646,12 +4646,13 @@ var Address = {"histories":{"110100":"\u5317\u4eac","110108":"\u6d77\u6dc0","110
 var Carts = {
   "total_price":42,
   "carts":[
-  {"Cart":{
-      "id":"17997","name":"\u519c\u5bb6\u5976\u6cb9\u82b1\u751f","product_id":"466","num":"1","price":"15","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/d49297ce62d_1217.jpg","used_coupons":""}
-    },
-  {"Cart":{
-    "id":"18291","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","product_id":"331","num":"1","price":"27","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","used_coupons":""}
-  }]
+    {"Cart":{
+      "id":"17997","name":"\u519c\u5bb6\u5976\u6cb9\u82b1\u751f","product_id":"466","num":"1","price":"15","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/d49297ce62d_1217.jpg","used_coupons":""
+    }},
+    {"Cart":{
+    "id":"18291","name":"\u4e60\u5927\u5927\u8001\u5bb6\u5bcc\u5e73\u971c\u964d\u7279\u7ea7\u5c16\u67ff\u997c\u519c\u5bb6\u81ea\u5236","product_id":"331","num":"1","price":"27","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/673a283255d_1204.jpg","used_coupons":""
+    }}
+  ]
 }
 var Coupons = {
   "coupons":[
