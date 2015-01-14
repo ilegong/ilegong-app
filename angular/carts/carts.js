@@ -19,13 +19,13 @@
 
     function activate(){
       vm.editMode = false;
-      $rootScope.cart = $rootScope.cart || {carts:[],brands:[],defaultAddress:{}}
-      vm.cartItems = $rootScope.cart.cartItems || [];
+      vm.cartItems = $rootScope.cart.cartItems;
+      vm.brands = $rootScope.cart.brands;
       Carts.getCartItems().then(function(result){
-        vm.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        vm.brands = result.brands || [];
-        $rootScope.cart.cartItems = vm.cartItems;
-        $rootScope.cart.brands = vm.brands;
+        $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+        $rootScope.cart.brands = result.brands;
+        vm.cartItems = $rootScope.cart.cartItems;
+        vm.brands = $rootScope.cart.brands;
       })
       Addresses.getDefaultAddress().then(function(defaultAddress){
         $rootScope.cart.defaultAddress = defaultAddress;
@@ -41,8 +41,6 @@
       }
     }
     function getTotalPrice(){
-      if(_.isEmpty(vm.cartItems))
-        return 0;
       return _.reduce(_.filter(vm.cartItems, function(cartItem){return cartItem.checked}), function(memo, cartItem){
           return memo + cartItem.Cart.price * cartItem.Cart.num;
       }, 0);
@@ -97,7 +95,7 @@
 
     function activate(){
       vm.cart = $rootScope.cart;
-      vm.defaultAddress = vm.cart.defaultAddress;
+      vm.defaultAddress = $rootScope.cart.defaultAddress;
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });

@@ -6,7 +6,7 @@
     <div  ng-show="vm.brands.length == 0">
       您的购物车是空的，先去逛逛吧。
     </div>
-    <div class="list brand " ng-repeat="brand in vm.brands">
+    <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0">
       <div class="row">
         <span class="col col-10"></span>
         <span class="col col-10">

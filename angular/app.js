@@ -137,6 +137,8 @@
 
   function AppCtrl($scope,$rootScope,Orders)
   {
+    $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
+
     //address info
     $rootScope.getCities = function(id)
     {
