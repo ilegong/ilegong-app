@@ -28,29 +28,28 @@
         </div>
         <div class="col">
             <div >
-              <select class="select" id="selectRegion_1" ng-model="vm.provinceModel" ng-options="m.name for m in vm.provinces" ng-change="vm.onProvinceChanged(vm.provinceModel)" ng-show="vm.showProvince">
+              <select class="select" id="selectRegion_1" ng-model="vm.province" ng-options="m.name for m in vm.provinces" ng-change="vm.onProvinceChanged(vm.province)">
                 <option value="">-- 请选择 --</option>
-
               </select>
             </div>
         </div>
       </div>
-      <div class="row" ng-show='vm.showCity'>
+      <div class="row" ng-show='vm.cities.length > 0'>
         <div class="col col-25">
-          市
+          市{{_.isEmpty(vm.cities)}}
         </div>  
         <div class="col">
-          <select class="select" id="selectRegion_2" ng-model="vm.cityModel" ng-options=" m.name for m in vm.cities" ng-change="vm.onCityChanged(vm.cityModel)" ng-show="vm.showCity">
+          <select class="select" id="selectRegion_2" ng-model="vm.city" ng-options=" m.name for m in vm.cities" ng-change="vm.onCityChanged(vm.city)">
             <option value="">-- 请选择 --</option>
           </select>
         </div>
       </div>
-      <div class="row" ng-show='vm.showCounty'>
+      <div class="row" ng-show="vm.counties.length > 0">
         <div class="col col-25">
-          区/县
+          区/县{{_.isEmpty(vm.counties)}}
         </div>
         <div class="col">
-          <select class="select" id="selectRegion_3" ng-model="vm.countyModel" ng-options=" m.name for m in vm.counties" ng-change="" ng-show="vm.showCounty">
+          <select class="select" id="selectRegion_3" ng-model="vm.county" ng-options=" m.name for m in vm.counties" ng-change="">
             <option value="">-- 请选择 --</option>
           </select>
         </div>

@@ -209,7 +209,7 @@
     activate();
 
     function activate() {
-      Orders.getProvinces().then(function(provinces){
+      Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
       Addresses.list().then(function(data) {
@@ -407,86 +407,47 @@
     vm.deleteAddress = deleteAddress;
     vm.onProvinceChanged = onProvinceChanged;
     vm.onCityChanged = onCityChanged;  
-    if(vm.editId == -1){
-      vm.showProvince = true;
-      vm.showCity = false;
-      vm.showCounty = false;
-    }else{
-      vm.showProvince = true;
-      vm.showCity = true;
-      vm.showCounty = true;
-    }
     activate();
 
     function activate(){
       vm.editId = $stateParams.editId;  
       vm.cities = vm.counties = [];
-      vm.showCity = vm.showCounty = false;
-      Orders.getProvinces().then(function(provinces){
-        vm.provinces = provinces;
-      });
+      vm.province = vm.city = vm.county = {};
       
       if(vm.editId == -1){
-        vm.provinceModel = null;
-        vm.cityModel = null;
-        vm.countyModel = null;
         return;
       }
-      if(vm.editId>=0){
-        Orders.getAddressById(vm.editId).then(function(address){
-          vm.address = address;
-          vm.provinceModel = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
-
-          var provinceId = vm.address.OrderConsignees.province_id;
-          var cityId = vm.address.OrderConsignees.city_id;
-          var countyId = vm.address.OrderConsignees.county_id;
-          
-          Addresses.getAddress(provinceId, cityId, countyId).then(function(data){
-            var ct = data.city_list;
-            vm.cities = Array();
-            for(var zzz in ct){
-              var t = {'id':zzz,'name':ct[zzz]};
-              vm.cities.push(t);
-              if(zzz == cityId){
-                vm.cityModel = t; 
-              }
-            }
-            ct = data.county_list;
-            vm.counties = Array();
-            for(var zzz in ct){
-              var t = {'id':zzz,'name':ct[zzz]};
-              vm.counties.push(t);
-              if(zzz == countyId){
-                vm.countyModel = t;
-              }
-            }
-          })
+      Addresses.getAddressById(vm.editId).then(function(address){
+        vm.address = address;
+        Addresses.getProvinces().then(function(provinces){
+          vm.provinces = provinces;
+          vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
         });
-      }
+
+        var corderConsignees = vm.address.OrderConsignees;        
+        Addresses.getAddress(corderConsignees.province_id, corderConsignees.city_id, corderConsignees.county_id).then(function(data){
+          vm.cities = data.city_list;
+          vm.counties = data.county_list;
+        });
+      });
     }
-    function onProvinceChanged(provinceModel){
-      vm.counties = [];
-      vm.showCounty = false;
-      if(_.isEmpty(provinceModel.id)){
-        vm.cities = [];
-        vm.showCity = false;
+    function onProvinceChanged(province){
+      vm.cities = vm.counties = [];
+      if(_.isEmpty(province)){
         return;
       }
-      vm.showCity = true;
-      Orders.getCities(provinceModel.id).then(function(cities){
+      Addresses.getCities(province.id).then(function(cities){
         vm.cities = cities;
       });
     }
-    function onCityChanged(cityModel) {
-      if(_.isEmpty(cityModel.id)){
-        vm.counties = [];
-        vm.showCounty = false;
+    function onCityChanged(city) {
+      vm.counties = [];
+      if(_.isEmpty(city)){
         return;
       }
-      vm.showCounty = true;
-      Orders.getCounties(cityModel.id).then(function(counties){
+      Addresses.getCounties(city.id).then(function(counties){
         vm.counties = counties;
-      })
+      });
     }
     vm.save = function(){
       var promise;
@@ -503,13 +464,13 @@
 
       $ionicHistory.goBack();
     }
-    vm.editAddress = function(){
+    function editAddress(){
       var t = vm.address.OrderConsignees;
-      return Addresses.editAddress(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+      return Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
-    vm.addAddress = function(){
+    function addAddress(){
       var t = vm.address.OrderConsignees;
-      return Addresses.addAddress(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+      return Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
     function deleteAddress(addressId){
       Addresses.deleteAddress(addressId).then(function(data){

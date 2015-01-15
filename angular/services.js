@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -331,9 +331,6 @@
       list: list,
       getOrderStatus: getOrderStatus, 
       isOfStates: isOfStates, 
-      getProvinces: getProvinces,
-      getCities: getCities,
-      getCounties: getCounties,
       submitOrder: submitOrder,
       undo:undo,
       remove: remove,
@@ -360,21 +357,6 @@
         return _.contains(states, value);
       }
       return value == states;
-    }
-    function getProvinces(){
-      return Base.get('/Locations/get_province.json').then(function(provinces){
-        return _.map(provinces, function(name, id){return {'id': id, 'name': name}})
-      });
-    }
-    function getCities(id){
-      return Base.get('/Locations/get_city.json?provinceId='+id).then(function(cities){
-        return _.map(cities, function(name, id){return {id: id, name: name}});
-      });
-    }
-    function getCounties(id){
-      return Base.get('/Locations/get_county.json?cityId='+id).then(function(counties){
-        return _.map(counties, function(name, id){return {id: id, name: name}});
-      });
     }
     function submitOrder(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
@@ -507,6 +489,9 @@
       deleteAddress: deleteAddress,
       editAddress: editAddress,
       addAddress: addAddress,
+      getProvinces: getProvinces,
+      getCities: getCities,
+      getCounties: getCounties,
       def:def
     }
     function list(){
@@ -535,8 +520,12 @@
     function getAddress(provinceId,cityId,countyId){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+token.access_token).then(function(item){
-          defer.resolve(item);
+        Base.get('/Locations/get_address.json?province_id='+provinceId+'&city_id='+cityId+'&county_id='+countyId+'&access_token='+token.access_token).then(function(result){
+          defer.resolve({
+            'histories': _.map(result.histories, function(name, id){return {id: id, name: name}}), 
+            'city_list': _.map(result.city_list, function(name, id){return {id: id, name: name}}), 
+            'county_list': _.map(result.county_list, function(name, id){return {id: id, name: name}})
+          });
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)});
       return defer.promise;
@@ -577,6 +566,21 @@
         }, function(e){defer.reject(e)});
       }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function getProvinces(){
+      return Base.get('/Locations/get_province.json').then(function(provinces){
+        return _.map(provinces, function(name, id){return {'id': id, 'name': name}})
+      });
+    }
+    function getCities(id){
+      return Base.get('/Locations/get_city.json?provinceId='+id).then(function(cities){
+        return _.map(cities, function(name, id){return {id: id, name: name}});
+      });
+    }
+    function getCounties(id){
+      return Base.get('/Locations/get_county.json?cityId='+id).then(function(counties){
+        return _.map(counties, function(name, id){return {id: id, name: name}});
+      });
     }
   }
 
