@@ -183,9 +183,9 @@ a{
     background-position: -15.625em 0;
   }
   .icon-save{
-    width:28px;
-    height:19px;
-    background-position: -420px 0;
+    width:1.167em;
+    height:1em;
+    background-position: -17.5em 0;
   }
   .icon-circle{
     width:1.75em;
@@ -203,14 +203,38 @@ a{
     background-position: -23.33em 0;
   }
   .icon-add{
-    width:51px;
-    height:51px;
-    background-position: -310px -80px;
+    width:2.126em;
+    height:2.126em;
+    background-position: -12.92em -3.34em;
   }
   .icon-reduce{
-    width:51px;
-    height:51px;
-    background-position: -240px -80px;
+    width:2.126em;
+    height:2.126em;
+    background-position: -10em -3.34em;
+  }
+  .icon-cart{
+    width:5.505em;
+    height:3.84em;
+    background-position:-17.5em -3.34em;
+  }
+  .empty-cart{
+    margin-left:10em;
+    margin-top:12em;
+  }
+  .empty-button{
+    margin-top:1em;
+    background:orange;
+    color:white;
+    border:none;
+    border-radius:4px;
+
+  }
+  .empty-div{
+    text-align:center;
+  }
+  .empty-text{
+    margin-top:0.5em;
+    color:#999999;
   }
   .brand-name{
     font-size:20px;
@@ -226,6 +250,12 @@ a{
   .circle-icon{
     display:inline-block;
     margin-top: 1.25em;
+  }
+  .add-icon{
+    display:inline-block;
+  }
+  .reduce-icon{
+    display:inline-block;
   }
   .product-img{
     display:inline-block;
@@ -264,8 +294,65 @@ a{
   .edit-icon{
     display:inline-block;
   }
+  .save-icon{
+    display:inline-block;
+  }
+  .input-number{
+    display:inline-block;
+    width:5em;
+  }
   .brand{
     background:white;
+  }
+  .number-span{
+      border-collapse: separate;
+      span{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      span.count-reduce{
+        border-right: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      span.count-add{
+        border-left: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+      .count{
+        padding: 4px 1px;
+        width: 34%;
+        border-radius:0px;
+      }
+  }
+  .footer-bar{
+    .total-price{
+      padding-left:10px;
+      margin-top:-6px;
+      .total-price{
+        font-size:1.25em;
+      }
+      .total-price-content{
+
+      }
+    }
+    .total-price-price{
+      color:orange;
+      font-size:1.5em;
+      margin-left:14px;
+    }
+    .jiesuan{
+      background:orange;
+      color:white;
+    }
+
   }
   .item{
 

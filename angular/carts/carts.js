@@ -15,6 +15,11 @@
     vm.getCartItemsOfBrand = getCartItemsOfBrand;
     vm.toggleCartItem = toggleCartItem;
     vm.getTotalPrice = getTotalPrice;
+    vm.cancelProductDelete = cancelProductDelete;
+    vm.checkAllCartItems = checkAllCartItems;
+    vm.uncheckAllCartItems = uncheckAllCartItems;
+    vm.getCheckedNumber = getCheckedNumber;
+    vm.goShop = goShop;
     activate();
 
     function activate(){
@@ -29,9 +34,34 @@
       });
       vm.watchCartItems();
     }
-    function toggleCartItem(editMode,product){
+    function goShop(){
+      $state.go('app.stores');
+    }
+    function getCheckedNumber(){
+      return (_.filter($rootScope.cart.cartItems,function(item){
+        return item['checked'];
+      })).length;
+    }
+    function checkAllCartItems(){
+      _.each($rootScope.cart.cartItems,function(cartItem){
+        cartItem['checked'] = true;
+      })
+    }
+    function uncheckAllCartItems(){
+      _.each($rootScope.cart.cartItems,function(cartItem){
+        cartItem['checked'] = false;
+      })
+    }
+    function cancelProductDelete(){
+      _.map(vm.cartItems,function(cartItem){
+        cartItem['deleteMode'] = false;
+      })
+    }
+
+    function toggleCartItem(editMode,product,e){
       if(editMode){
         product['deleteMode'] = !product['deleteMode'];
+        e.stopPropagation();
       }
       else{
         product['checked'] = !product['checked'];
@@ -56,15 +86,26 @@
         cart.num = original;
       });
     };
-    function deleteCartItem(id){
-      Carts.deleteCartItem(id).then(function(result){
-        $rootScope.cart.cartItems = _.filter($rootScope.cart.cartItems, function(cartItem){return cartItem.Cart.id != id});
+    function deleteCartItem(cartItem){
+      Carts.deleteCartItem(cartItem.Cart.id).then(function(result){
+        $rootScope.cart.cartItems = _.filter($rootScope.cart.cartItems, function(cartItemm){return cartItemm.Cart.id != cartItem.Cart.id});
+
+        if(getCartItemsOfBrand(cartItem.Cart.brand_id).length == 0){
+          $rootScope.cart.brands = _.filter($rootScope.cart.brands,function(brand){
+            return brand.Brand.id != cartItem.Cart.brand_id;
+          })
+        }
+        $log.log($rootScope.cart.cartItems);
       }, function(e){$log.log("delete cart item failed: ").log(e)});
     }
-    function confirmCartInfo(){      
-      var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
-      $rootScope.cart.pidList = pids;
-      $state.go('app.cart-order-info');
+    function confirmCartInfo(){
+      if(!_.isEmpty($rootScope.cart.defaultAddress))
+      {
+        var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
+        $rootScope.cart.pidList = pids;
+        $state.go('app.cart-order-info');        
+      }      
+
     }
     function watchCartItems(){
       $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
@@ -75,7 +116,7 @@
       });
     }
     function getCartItemsOfBrand(id){
-      return _.filter(vm.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
+      return _.filter($rootScope.cart.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
     }
   }
 
@@ -101,12 +142,16 @@
       });
       vm.brands = $rootScope.cart.brands;
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      
       Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
+        console.log('asdasd');
+        console.log(result);
         vm.brands = result.brands;
         vm.shipFees = result.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = result.reduced;
-        vm.totalPrice = result.totalPrice;
+        vm.total_price = result.total_price;
+        vm.cart = result.cart;
         vm.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
         if(_.isEmpty(vm.cart.pidList)){
           $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
@@ -137,7 +182,7 @@
       $log.log("submit order for products " + vm.pidList);
       Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
-        $state.go("app.cart-order-detail", {id: orderId});
+        $state.go("app.cart-orders.total");
       }, function(e){
         $log.log("submit order failed: ").log(e);
       });

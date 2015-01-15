@@ -1,10 +1,14 @@
-<ion-view title="朋友说" hide-back-button='true'>
+<ion-view title="朋友说" hide-back-button='true' class="cart">
   <ion-nav-buttons side='right'>
     <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button>
   </ion-nav-buttons>
-  <ion-content class="cart padding">
-    <div  ng-show="vm.brands.length == 0">
-      您的购物车是空的，先去逛逛吧。
+  <ion-content ng-click="vm.cancelProductDelete();" class=" padding">
+    <div  class="empty-div" ng-show="vm.brands.length == 0">
+      <div class="icon icon-cart empty-cart"></div>
+      <div class="empty-text">
+        购物车还是空的，去选点好吃的吧！
+      </div>
+      <a class="button empty-button" ng-click="vm.goShop();">去逛逛</a>
     </div>
     <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0">
       <div class="row">
@@ -17,8 +21,8 @@
         </span>
       </div>
       <hr/>
-      <div class="row" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;" >
-        <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem);">
+      <div class="row" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['checked'] = false;cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
+        <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
           <span class="icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
           </span>
         </span>
@@ -29,8 +33,15 @@
           <span class="product-title">
             {{cartItem.Cart.name}}
           </span>
-          <span class="product-subtitle">
+          <span class="product-subtitle" ng-show="!vm.editMode || !cartItem['showEdit']">
             subtitle
+          </span>
+          <span class="number-span" ng-show="vm.editMode && cartItem['showEdit']">
+            <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
+            <span class="count">
+              <input  ng-model="cartItem.Cart.num"/>
+            </span>
+            <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
           </span>
         </span>
         <span class="product-rest col">
@@ -40,12 +51,11 @@
           <span class="product-num">
             × {{cartItem.Cart.num}}
           </span>
-
-          <span ng-show="vm.editMode" class="icon icon-edit edit-icon">
+          <span ng-show="vm.editMode" class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
           </span>
- 
         </span>
-        <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem.Cart.id)">
+
+        <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
           删除
         </span>
         <hr/>
@@ -74,9 +84,27 @@
       </div>
     </div>
 -->
-    <div class="row" ng-show="vm.cartItems.length > 0">
-      <a class="button button-positive fr" ng-click="vm.confirmCartInfo()">结算</a>
-      <div class="fr cart-price-total">总价：￥{{vm.getTotalPrice()}}</div>
-    </div>
+
   </ion-content>
+  <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
+    <div class="row">
+      <div class="col col-10">
+        <div class="icon {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></div>
+      </div>
+      <div class="total-price col col-25">
+        <div class="total-price">
+          合计
+        </div>
+        <div>
+          不含运费
+        </div>
+      </div>
+      <div class="col col-50">
+        <h1 class="total-price-price">{{vm.getTotalPrice() | currency:"￥"}}</h1>
+      </div>
+      <div class="buttons" ng-click="vm.confirmCartInfo()">
+        <button class="button jiesuan">结算({{vm.getCheckedNumber()}})</button>
+      </div>
+    </div>
+  </ion-footer-bar>
 </ion-view>

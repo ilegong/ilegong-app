@@ -4,6 +4,7 @@
       <h2>
         收货人信息
       </h2>
+
       <div ng-click="vm.setAddress(vm.defaultAddress)"  ng-show="!_.isEmpty(vm.defaultAddress)"> 
         <div class="item-content" >
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
@@ -15,7 +16,7 @@
       <div ng-show="_.isEmpty(vm.defaultAddress)"></div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
-        <div ng-repeat="item in vm.cartInfo.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
+        <div ng-repeat="item in vm.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
           <div class="row">
             <div class="col col-33">
               <img class="img" src="{{vm.getBrandById(item.id).Brand.coverimg}}"/>
@@ -61,13 +62,13 @@
 
       <div class="bottom_div">
         <div>
-          已优惠：{{vm.cartInfo.reduced | currency:'￥'}}
+          已优惠：{{vm.reduced | currency:'￥'}}
         </div>
         <div>
           运费：{{vm.totalShipFees | currency:'￥'}}
         </div>
         <div class="total_price">
-          总价（含运费）：{{vm.cartInfo.total_price | currency:'￥'}}
+          总价（含运费）：{{vm.total_price | currency:'￥'}}
         </div>
         <a class="button button-assertive" ng-click="vm.submitOrder();">
           提交订单

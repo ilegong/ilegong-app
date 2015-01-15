@@ -64,6 +64,8 @@
       .state('app.order-addresses-info',{url:'/order-addresses-info/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
       .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
+      .state('app.cart-orders',{url:'/cart-orders',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
+      .state('app.cart-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})

@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -503,7 +503,7 @@
       list:list,
       getAddress:getAddress,
       getDefaultAddress: getDefaultAddress, 
-      del:del,
+      deleteAddress:deleteAddress,
       edit:edit,
       add:add,
       def:def
@@ -535,25 +535,23 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function del(id){
+    function deleteAddress(id){
+      var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/delete_consignee/'+id+'.json?access_token='+token.access_token).then(function(result){
-          for(var i = 0;i<50;i++)
-            $log.log('del');
-          $log.log(result);
-           $log.log(id);
-        })
+          defer.resolve(result);
+        });
       })
+      return defer.promise;
     }
     function edit(id,name,address,province_id,city_id,county_id,mobilephone){
+      var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
-          for(var i = 0;i<50;i++)
-            $log.log('edit');
-          $log.log('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
-          $log.log(result);
-        })
+          defer.resolve(result);
+        });
       })
+      return defer.promise;
     }
     function add(name,address,province_id,city_id,county_id,mobilephone){
       var defer = $q.defer();

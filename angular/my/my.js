@@ -225,12 +225,7 @@
     function itemClick(addr){
       if(vm.state == 0){
         if(vm.editMode){
-          $rootScope['editAddress'] = {};
-          $rootScope['editAddress']['defer'] = $q.defer();
           vm.editAddress(addr);
-          $rootScope['editAddress']['defer'].promise.then(function(data){
-            activate();
-          })
         }
         else{
           vm.setDefaultAddress(addr.OrderConsignees.id);
@@ -238,12 +233,7 @@
       }
       else{
         if(vm.editMode){
-          $rootScope['editAddress'] = {};
-          $rootScope['editAddress']['defer'] = $q.defer();
           vm.editAddress(addr);
-          $rootScope['editAddress']['defer'].promise.then(function(data){
-            activate();
-          })
         }
         else{
           console.log($rootScope.cart);
@@ -254,6 +244,8 @@
 
     }
     function editAddress(addr){
+      $rootScope['editAddress'] = {};
+      $rootScope['editAddress']['defer'] = $q.defer();
       var id = -1;
       if(addr !=null){
         id = addr.OrderConsignees.id;
@@ -265,6 +257,9 @@
       if(vm.state == 1){
         $state.go('app.order-address-edit',{editId:id});
       }
+      $rootScope['editAddress']['defer'].promise.then(function(data){
+        activate();
+      })
     }
 
     vm.isChecked = function(addr){
@@ -495,28 +490,34 @@
       vm.counties = $rootScope.getCounties(id);
     }
     vm.save = function(){
-      for(var i=0;i<30;i++)
-        $log.log('azz');
+      var promise;
       if(vm.editId == -1){
-        vm.add();
+        promise = vm.add();
       }
       else{
-        vm.edit(vm.editId);
+        promise = vm.edit(vm.editId);
       }
-      $rootScope['editAddress']['defer'].resolve(null);
+      $log.log(promise);
+      promise.then(function(data){
+        $rootScope['editAddress']['defer'].resolve(null);
+      })
+
       $ionicHistory.goBack();
     }
     vm.edit = function(){
       var t = vm.editAddr.OrderConsignees;
-      Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+      return Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
     }
     vm.add = function(){
       var t = vm.editAddr.OrderConsignees;
-      Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+      return Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
     }
     function deleteAddress(addressId){
-      Addresses.del(addressId);
-      $ionicHistory.goBack();
+      Addresses.deleteAddress(addressId).then(function(data){
+        $rootScope['editAddress']['defer'].resolve(null);
+        $ionicHistory.goBack();
+      });
+
     }
   }   
 })(window, window.angular);
