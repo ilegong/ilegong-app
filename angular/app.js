@@ -157,18 +157,6 @@
       );
       return cities;
     }
-    $rootScope.getCounties = function(id) {
-      var counties = Array();
-      Orders.getCounties(id).then(function(data)
-      {
-        var countiesT = data;
-        for(var zzz in countiesT)
-        {
-          counties.push({id:zzz,name:countiesT[zzz]});
-        }
-      });
-      return counties;
-    }
   }
 
 })();

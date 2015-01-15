@@ -367,10 +367,14 @@
       });
     }
     function getCities(id){
-      return Base.get('/Locations/get_city.json?provinceId='+id);
+      return Base.get('/Locations/get_city.json?provinceId='+id).then(function(cities){
+        return _.map(cities, function(name, id){return {id: id, name: name}});
+      });
     }
     function getCounties(id){
-      return Base.get('/Locations/get_county.json?cityId='+id);
+      return Base.get('/Locations/get_county.json?cityId='+id).then(function(counties){
+        return _.map(counties, function(name, id){return {id: id, name: name}});
+      });
     }
     function submitOrder(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
@@ -497,11 +501,12 @@
     var self = this;
     return{
       list:list,
+      getAddressById: getAddressById, 
       getAddress:getAddress,
       getDefaultAddress: getDefaultAddress, 
-      deleteAddress:deleteAddress,
-      edit:edit,
-      add:add,
+      deleteAddress: deleteAddress,
+      editAddress: editAddress,
+      addAddress: addAddress,
       def:def
     }
     function list(){
@@ -522,6 +527,11 @@
         return defaultAddress;
       });
     }
+    function getAddressById(id){
+      return list().then(function(addresses){
+        return _.find(addresses, function(address){return address.OrderConsignees.id == id});
+      });
+    }
     function getAddress(provinceId,cityId,countyId){
       var defer = $q.defer();
       Users.getToken().then(function(token){
@@ -536,20 +546,20 @@
       Users.getToken().then(function(token){
         Base.get('/api_orders/delete_consignee/'+id+'.json?access_token='+token.access_token).then(function(result){
           defer.resolve(result);
-        });
-      })
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function edit(id,name,address,province_id,city_id,county_id,mobilephone){
+    function editAddress(id,name,address,province_id,city_id,county_id,mobilephone){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
           defer.resolve(result);
-        });
-      })
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function add(name,address,province_id,city_id,county_id,mobilephone){
+    function addAddress(name,address,province_id,city_id,county_id,mobilephone){
       var defer = $q.defer();
       Users.getToken().then(function(token){
         Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
@@ -562,14 +572,10 @@
     function def(id){
       var defer = $q.defer();
       Users.getToken().then(function(token){
-        Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=default&id='+id).then(function(result){
-          for(var i=0;i<30;i++)
-            $log.log('defaultAddr');
-          $log.log(result);
-         
+        Base.get('/api_orders/info_consignee.json?access_token='+token.access_token+'&type=default&id='+id).then(function(result){         
           defer.resolve(result);
-        })
-      })
+        }, function(e){defer.reject(e)});
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
   }

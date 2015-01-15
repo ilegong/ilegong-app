@@ -127,7 +127,6 @@
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
     vm.addAddress = addAddress;
-    vm.getCounties = getCounties;
     vm.getCities = getCities;
     vm.setAddress = setAddress;
     activate();
@@ -195,15 +194,8 @@
       }
       vm.cities = $rootScope.getCities(id);
     }
-    function getCounties(id){
-      if(id == null){
-        vm.counties = null;
-        return;
-      }
-      vm.counties = $rootScope.getCounties(id);
-    }
     function addAddress(){
-      Addresses.add(vm.newAddr_name,vm.newAddr_address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone).then(function(address){
+      Addresses.add(vm.newAddr_name, vm.newAddr_address, vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone).then(function(address){
         $rootScope.cart.defaultAddress = address;
       })
     }
