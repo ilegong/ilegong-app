@@ -174,15 +174,6 @@
 
 
   //orderState
-    $rootScope.getOrderValue = function(pState)
-    {
-      for(var key in $rootScope.orderStatus)
-      {
-        if($rootScope.orderStatus[key].state == pState)
-          return $rootScope.orderStatus[key].value;
-      }
-      return '';
-    }
     $rootScope.orderStatus = {
       'UNPAID':{state:0,value:'未支付'},
       'PAID': {state:1,value:'已支付'},

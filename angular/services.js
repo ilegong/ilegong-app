@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -316,9 +316,23 @@
 
   function Orders($log,$q,Base,software,Users){
     var self = this;
-
+    self.orderStates = {
+      'UNPAID':{state:0,value:'未支付', needToPay: true, needToReview: false},
+      'PAID': {state:1,value:'已支付', needToPay: false, needToReview: false},
+      'SENT':{state:2,value:'已发货', needToPay: false, needToReview: true},
+      'RECEIVED':{state:3,value:'已收货', needToPay: false, needToReview: true},
+      'REFUNDED':{state:4,value:'已退款', needToPay: false, needToReview: false},
+      'SUCCESSED':{state:9,value:'已完成', needToPay: false, needToReview: false},
+      'CANCELED':{state:10,value:'已取消', needToPay: false, needToReview: false},
+      'VERIFIED':{state:11,value:'已确认有效', needToPay: false, needToReview: false},
+      'COMPLAINED':{state:12,value:'已投诉', needToPay: false, needToReview: false}
+    }
+    self.getOrderState = getOrderState;
     return {
       list: list,
+      needToPay: needToPay,
+      needToReview: needToReview, 
+      getOrderValue: getOrderValue, 
       getProvinces: getProvinces,
       getCities: getCities,
       getCounties: getCounties,
@@ -338,6 +352,21 @@
       })
       return defer.promise;
     }
+    function getOrderState(state){
+      return _.find(self.orderStates, function(orderState){return orderState.state == state}) || {};
+    }
+    function needToPay(order){
+      order = order || {Order: {}}
+      return self.getOrderState(order.Order.status).needToPay;
+    }
+    function needToReview(order){
+      order = order || {Order: {}}
+      return self.getOrderState(order.Order.status).needToReview;
+    }
+    function getOrderValue(order) {
+      order = order || {Order: {}}
+      return self.getOrderState(order.Order.status).value;
+    }  
     function getProvinces(){
       return Base.get('/Locations/get_province.json').then(function(provinces){
         return _.map(provinces, function(name, id){return {'id': id, 'name': name}})

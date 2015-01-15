@@ -1,4 +1,4 @@
-(function (window, angular) {
+(function ($window, angular) {
   "use strict";
 
   angular.module('ilegong.my', ['app.services','ionic'])
@@ -321,6 +321,7 @@
   }
   function MyOrdersCtrl($log,$scope,$rootScope,$http,Orders){
     var vm = this;
+    vm.getOrderValue = function(order){return Orders.getOrderValue(order);};
     activate();
     
     vm.stateFilter = -1;
@@ -336,7 +337,6 @@
       Orders.undo(id).then(function(result){
         activate();
       });
-      
     }
     vm.remove = function(id){
       Orders.remove(id).then(function(result){
@@ -354,12 +354,18 @@
 
   function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
     var vm = this;
+    vm.needToPay = function(order){return Orders.needToPay(order);};
+    vm.needToReview = function(order){return Orders.needToReview(order)}
+    vm.getOrderValue = function(order){return Orders.getOrderValue(order);};
     vm.aliPay = aliPay;
+    vm.onAliPayLoadStart = onAliPayLoadStart;
+    vm.onAliPayLoadStop = onAliPayLoadStop;
     vm.onAliPayFinished = onAliPayFinished;
     activate();
     
     function activate() {
       vm.orderId = $stateParams.id;
+      vm.inAppBrowserEvents = {'loadstart': vm.onAliPayLoadStart, 'loadstop': vm.onAliPayLoadStop, 'exit': vm.onAliPayFinished}
       Orders.getOrderDetail(vm.orderId).then(function(data) {
         vm.order = data.order;
         vm.cartItems = data.carts;
@@ -368,28 +374,32 @@
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;
         vm.products = data.products;
-      })
+      });
     }
     function aliPay(){
-      Users.aliPay(vm.orderId).then(function(ref){
-        ref.addEventListener('loadstart', function(e){vm.onAliPayLoadStart(vm.orderId, e)});
-        ref.addEventListener('loadStop', function(e){vm.onAliPayLoadStop(vm.orderId, e)});
-        ref.addEventListener('loaderror', function(e){vm.onAliPayLoadError(vm.orderId, e)});
-        ref.addEventListener('exit', function(e){vm.onAliPayFinished(vm.orderId)});
+      Users.aliPay(vm.orderId).then(function(inAppBrowser){
+        vm.inAppBrowser = inAppBrowser;
+        _.each(vm.inAppBrowserEvents, function(callback, event){
+          vm.inAppBrowser.addEventListener(event, callback);  
+        });
       }, function(e){$log.log(e)});
     }
-    function onAliPayLoadStart(orderId, e){
-      $log.log("on ali pay load start for order " + orderId).log(e);
+    function onAliPayLoadStart(e){
     }
-    function onAliPayLoadStop(orderId, e){
-      $log.log("on ali pay load stop for order " + orderId).log(e);
+    function onAliPayLoadStop(e){
+      if(e.url.match("/ali_pay/wap_return_back_app")){
+        $log.log("will close in app browser...");
+        vm.inAppBrowser.close();
+      }
     }
-    function onAliPayLoadError(orderId, e){
-      $log.log("on ali pay load error for order " + orderId).log(e);
-    }
-    function onAliPayFinished(orderId, e){
-      $log.log("on ali pay finished for order " + orderId).log(e);
-      $state.go("app.cart-order-detail", {id: orderId});
+    function onAliPayFinished(e){
+      _.each(vm.inAppBrowserEvents, function(callback, event){
+        try{
+          vm.inAppBrowser.removeEventListener(event, callback);  
+        }catch(e){$log.log("failed to remove event listener " + event).log(e)}
+      });
+      $log.log("ali pay finished, will reload order detail for order " + vm.orderId);
+      $window.location.reload(true)
     }
   }
 
