@@ -473,8 +473,7 @@
     return{
       list:list, 
       getOfferStatus: getOfferStatus, 
-      isOfStates: isOfStates, 
-      isOfferValid: isOfferValid
+      isOfStates: isOfStates
     }
     function list(){
       var defer = $q.defer();
@@ -491,9 +490,6 @@
     }
     function isOfStates(offer, states){
       var offerStatus = getOfferStatus(offer);
-    }
-    function isOfferValid(offer){
-      return isOfStates(offer, ['NEW', 'GOING']);
     }
   }
 
