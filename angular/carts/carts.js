@@ -88,7 +88,6 @@
     vm.addAddress = addAddress;
     vm.getCounties = getCounties;
     vm.getCities = getCities;
-    vm.getTotalShipFees = getTotalShipFees;
     vm.setAddress = setAddress;
     activate();
 
@@ -103,8 +102,11 @@
       vm.brands = $rootScope.cart.brands;
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
       Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
-        vm.brands = result.brands; 
-        
+        vm.brands = result.brands;
+        vm.shipFees = result.shipFees; 
+        vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
+        vm.reduced = result.reduced;
+        vm.totalPrice = result.totalPrice;
         vm.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
         if(_.isEmpty(vm.cart.pidList)){
           $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
@@ -139,15 +141,6 @@
       }, function(e){
         $log.log("submit order failed: ").log(e);
       });
-    }
-    function getTotalShipFees(){
-      var t = 0;
-      if(vm.cart==null)
-        return 0;
-      for(var i in vm.cart.shipFees){
-        t+=vm.cart.shipFees[i];
-      }
-      return t;
     }
     function getCities(id){
       if(id==null){
