@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -316,23 +316,21 @@
 
   function Orders($log,$q,Base,software,Users){
     var self = this;
-    self.orderStates = {
-      'UNPAID':{state:0,value:'未支付', needToPay: true, needToReview: false},
-      'PAID': {state:1,value:'已支付', needToPay: false, needToReview: false},
-      'SENT':{state:2,value:'已发货', needToPay: false, needToReview: true},
-      'RECEIVED':{state:3,value:'已收货', needToPay: false, needToReview: true},
-      'REFUNDED':{state:4,value:'已退款', needToPay: false, needToReview: false},
-      'SUCCESSED':{state:9,value:'已完成', needToPay: false, needToReview: false},
-      'CANCELED':{state:10,value:'已取消', needToPay: false, needToReview: false},
-      'VERIFIED':{state:11,value:'已确认有效', needToPay: false, needToReview: false},
-      'COMPLAINED':{state:12,value:'已投诉', needToPay: false, needToReview: false}
-    }
-    self.getOrderState = getOrderState;
+    self.ORDER_STATUS = [
+      {value: 'UNPAID', state:0, desc:'未支付'},
+      {value: 'PAID', state:1, desc:'已支付'},
+      {value: 'SENT', state:2, desc:'已发货'},
+      {value: 'RECEIVED', state:3, desc:'已收货'},
+      {value: 'REFUNDED', state:4, desc:'已退款'},
+      {value: 'SUCCESSED', state:9, desc:'已完成'},
+      {value: 'CANCELED', state:10, desc:'已取消'},
+      {value: 'VERIFIED', state:11, desc:'已确认有效'},
+      {value: 'COMPLAINED', state:12, desc:'已投诉'}
+    ]
     return {
       list: list,
-      needToPay: needToPay,
-      needToReview: needToReview, 
-      getOrderValue: getOrderValue, 
+      getOrderStatus: getOrderStatus, 
+      isOfStates: isOfStates, 
       getProvinces: getProvinces,
       getCities: getCities,
       getCounties: getCounties,
@@ -352,21 +350,17 @@
       })
       return defer.promise;
     }
-    function getOrderState(state){
-      return _.find(self.orderStates, function(orderState){return orderState.state == state}) || {};
-    }
-    function needToPay(order){
+    function getOrderStatus(order){
       order = order || {Order: {}}
-      return self.getOrderState(order.Order.status).needToPay;
+      return _.find(self.ORDER_STATUS, function(orderStatus){return orderStatus.state == order.Order.status}) || {};
     }
-    function needToReview(order){
-      order = order || {Order: {}}
-      return self.getOrderState(order.Order.status).needToReview;
+    function isOfStates(order, states){
+      var value = getOrderStatus(order).value;
+      if(_.isArray(states)){
+        return _.contains(states, value);
+      }
+      return value == states;
     }
-    function getOrderValue(order) {
-      order = order || {Order: {}}
-      return self.getOrderState(order.Order.status).value;
-    }  
     function getProvinces(){
       return Base.get('/Locations/get_province.json').then(function(provinces){
         return _.map(provinces, function(name, id){return {'id': id, 'name': name}})

@@ -172,21 +172,6 @@
     }
   //--address region
 
-
-  //orderState
-    $rootScope.orderStatus = {
-      'UNPAID':{state:0,value:'未支付'},
-      'PAID': {state:1,value:'已支付'},
-      'SENT':{state:2,value:'已发货'},
-      'RECEIVED':{state:3,value:'已收货'},
-      'REFUNDED':{state:4,value:'已退款'},
-      'SUCCESSED':{state:9,value:'已完成'},
-      'CANCELED':{state:10,value:'已取消'},
-      'VERIFIED':{state:11,value:'已确认有效'},
-      'COMPLAINED':{state:12,value:'已投诉'}
-    }
-  //--order state
-
   //offer state
     $rootScope.offerStatus = {
       'NEW':{state:0,value:'新的'},

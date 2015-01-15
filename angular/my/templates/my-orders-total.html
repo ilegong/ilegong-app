@@ -1,15 +1,13 @@
 <div>
 
   <div class="list myOrdersTotal">
-    <div class="item" ng-repeat="item in vm.orders " ng-show="((item.Order.status == vm.stateFilter) || (vm.stateFilter==-1))">
+    <div class="item" ng-repeat="item in vm.orders " ng-show="((vm.isOfStates(item.Order, vm.stateFilter)) || (_.isEmpty(vm.stateFilter)))">
   	  <div>
   	  	<span class="brandName">
-          
   	  		{{vm.brands[item.Order.brand_id].Brand.name}}
-
   	  	</span>
   	  	<span class="orderStatus">
-  	  		{{vm.getOrderValue(item)}}
+  	  		{{vm.getOrderDesc(item).desc}}
   	  	</span>
   	  </div>
   	  <div class="list">
@@ -36,14 +34,13 @@
   	  	</span>
   	  </div>
   	  <div>
-
   	  	<span class="buttons">
   	  		<a class="button button-calm" ui-sref="app.my-order-detail({id: item.Order.id})">详细</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['SENT'].state" ng-click="vm.receive({{item.Order.id}})">确认收货</a>
-  	  		<a class="button button-calm" ng-show="item.Order.status==orderStatus['SENT'].state">查看物流</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['CANCELED'].state" ng-click="vm.remove({{item.Order.id}})">删除订单</a>
-  	  		<a class="button  button-calm" ng-show="item.Order.status==orderStatus['UNPAID'].state" ng-click="vm.undo({{item.Order.id}})">取消订单</a>
-  	  		<a class="button button-assertive" ng-show="item.Order.status==orderStatus['UNPAID'].state">去支付</a>
+  	  		<a class="button button-assertive" ng-show="vm.isOfStates(item, 'SENT')" ng-click="vm.receive({{item.Order.id}})">确认收货</a>
+  	  		<a class="button button-calm" ng-show="vm.isOfStates(item, 'SENT')">查看物流</a>
+  	  		<a class="button button-assertive" ng-show="vm.isOfStates(item, 'CANCELED')" ng-click="vm.remove({{item.Order.id}})">删除订单</a>
+  	  		<a class="button button-calm" ng-show="vm.isOfStates(item, 'UNPAID')" ng-click="vm.undo({{item.Order.id}})">取消订单</a>
+  	  		<a class="button button-assertive" ng-show="vm.isOfStates(item, 'UNPAID')">去支付</a>
   	  	</span>
   	  </div>
   	</div>

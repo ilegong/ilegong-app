@@ -321,10 +321,11 @@
   }
   function MyOrdersCtrl($log,$scope,$rootScope,$http,Orders){
     var vm = this;
-    vm.getOrderValue = function(order){return Orders.getOrderValue(order);};
+    vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
+    vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     activate();
     
-    vm.stateFilter = -1;
+    vm.stateFilter = '';
     function activate() {
       Orders.list().then(function(data){
         vm.orders = data.orders;
@@ -354,9 +355,8 @@
 
   function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
     var vm = this;
-    vm.needToPay = function(order){return Orders.needToPay(order);};
-    vm.needToReview = function(order){return Orders.needToReview(order)}
-    vm.getOrderValue = function(order){return Orders.getOrderValue(order);};
+    vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
+    vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.aliPay = aliPay;
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;

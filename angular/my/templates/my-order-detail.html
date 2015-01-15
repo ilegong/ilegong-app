@@ -1,13 +1,13 @@
 <ion-view title="订单详情" show-tabs>
   <ion-content>
     <div class="orderDetail main">
-      <div ng-show="vm.needToPay(vm.order)">
+      <div ng-show="vm.isOfStates(vm.order, 'UNPAID')">
         <a class="button button-assertive" ng-click="vm.aliPay()">
           去支付宝支付
         </a>
       </div>
       <div>
-        订单状态：{{vm.getOrderValue(vm.order)}}
+        订单状态：{{vm.getOrderDesc(vm.order)}}
       </div>
       <div>
         下单时间：{{vm.order.Order.created}}
@@ -57,7 +57,7 @@
               <a href="{{item.linkUrl}}">
                 {{item.Cart.name}}
               </a>
-              <div ng-show="vm.needToReview(vm.order)"  >
+              <div ng-show="vm.isOfStates(vm.order, ['SENT', 'RECEIVED'])"  >
                 <a ui-sref="app.product-detail-o.intro({id: item.Cart.product_id,from: -2})" class="button button-assertive">
                   去评论
                 </a>
