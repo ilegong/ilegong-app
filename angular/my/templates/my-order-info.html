@@ -15,14 +15,14 @@
       <div ng-show="_.isEmpty(vm.defaultAddress)"></div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
-        <div ng-repeat="item in vm.cartInfo.cart.brandItems" ng-init="brand=vm.loadBrandById(item.id);">
+        <div ng-repeat="item in vm.cartInfo.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
           <div class="row">
             <div class="col col-33">
-              <img class="img" src="{{vm.loadBrandById(item.id).Brand.coverimg}}"/>
+              <img class="img" src="{{vm.getBrandById(item.id).Brand.coverimg}}"/>
             </div>
             <div class="col">
-              <h4>分享人： {{vm.loadBrandById(item.id).Brand.name}}</h4>
-              {{vm.loadBrandById(item.id).Brand.notice}}
+              <h4>分享人： {{vm.getBrandById(item.id).Brand.name}}</h4>
+              {{vm.getBrandById(item.id).Brand.notice}}
             </div>
           </div>
           <div class="list">
@@ -52,8 +52,8 @@
       </div>
       <div class="coupon">
         <span>
-          <textarea placeholder="使用优惠码" ng-model="vm.coupon_code_t"></textarea>
-          <a class="button button-assertive"  ng-click="vm.confirmCoupon_code();">
+          <textarea placeholder="使用优惠码" ng-model="vm.couponCodeTemp"></textarea>
+          <a class="button button-assertive"  ng-click="vm.confirmCouponCode();">
           应用
           </a>
         </span>

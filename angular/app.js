@@ -60,7 +60,7 @@
       .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'shopping-carts.html',controller: 'ShoppingCartsCtrl as vm'}}})
-      .state('app.order-info',{url:'/cart-order-info',views:{'app-cart':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
+      .state('app.cart-order-info',{url:'/cart-order-info',views:{'app-cart':{templateUrl:'my-order-info.html',controller:'OrderInfoCtrl as vm'}}})
       .state('app.order-addresses-info',{url:'/order-addresses-info/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
       .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
@@ -138,6 +138,10 @@
   function AppCtrl($scope,$rootScope,Orders)
   {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
+    $rootScope.updateCart = function(result){
+      $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+      $rootScope.cart.brands = result.brands;
+    }
 
     //address info
     $rootScope.getCities = function(id)

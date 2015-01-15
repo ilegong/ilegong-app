@@ -578,8 +578,6 @@
       Users.getToken().then(function(token){
       Base.get('/ApiOrders/list_cart.json?access_token='+token.access_token).then(function(list){
           defer.resolve(list);
-
-
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)})
       return defer.promise;

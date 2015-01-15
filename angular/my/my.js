@@ -389,7 +389,7 @@
     }
     function onAliPayFinished(orderId, e){
       $log.log("on ali pay finished for order " + orderId).log(e);
-      $state.go("app.my-order-detail", {id: orderId});
+      $state.go("app.cart-order-detail", {id: orderId});
     }
   }
 

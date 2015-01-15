@@ -22,10 +22,7 @@
       vm.cartItems = $rootScope.cart.cartItems;
       vm.brands = $rootScope.cart.brands;
       Carts.getCartItems().then(function(result){
-        $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        $rootScope.cart.brands = result.brands;
-        vm.cartItems = $rootScope.cart.cartItems;
-        vm.brands = $rootScope.cart.brands;
+        $rootScope.updateCart(result);
       })
       Addresses.getDefaultAddress().then(function(defaultAddress){
         $rootScope.cart.defaultAddress = defaultAddress;
@@ -67,12 +64,14 @@
     function confirmCartInfo(){      
       var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
       $rootScope.cart.pidList = pids;
-      $log.log("confirm cart info for pids: ").log(pids);
       $state.go('app.cart-order-info');
     }
     function watchCartItems(){
-      $scope.$watch('cartInfo.cartItems', function(newCartItems, oldCartItems) {
+      $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
         vm.cartItems = newCartItems;
+      });
+      $scope.$watch('cart.brands', function(newBrands, oldBrands) {
+        vm.brands = newBrands;
       });
     }
     function getCartItemsOfBrand(id){
@@ -83,8 +82,8 @@
   function OrderInfoCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
-    vm.loadBrandById = loadBrandById;
-    vm.confirmCoupon_code = confirmCoupon_code;
+    vm.getBrandById = getBrandById;
+    vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
     vm.addAddress = addAddress;
     vm.getCounties = getCounties;
@@ -95,15 +94,20 @@
 
     function activate(){
       vm.cart = $rootScope.cart;
+      vm.cartItems = $rootScope.cart.cartItems;
       vm.defaultAddress = $rootScope.cart.defaultAddress;
+      vm.couponCode = $rootScope.cart.couponCode;
       Orders.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
-      Carts.getCartInfo(vm.cart.pidList, vm.cart.defaultAddress.OrderConsignees.id, vm.cart.couponCode).then(function(result){
-        vm.cart.brands = result.brands; 
-        vm.cart.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
+      vm.brands = $rootScope.cart.brands;
+      vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
+        vm.brands = result.brands; 
+        
+        vm.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
         if(_.isEmpty(vm.cart.pidList)){
-          $log.log("get cart info successfully:").log(result.cart.brandItems).log(vm.cart.pidList);
+          $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
         }
       })
     }
@@ -114,24 +118,22 @@
         $rootScope.cart['defaultAddress'] = addr;
         activate();
       })
-      console.log('asdad');
       console.log($rootScope.cart);
       $state.go('app.order-addresses-info',{state:1,addrId:addr.OrderConsignees.id});
     }
-    function loadBrandById(id){
-      return _.find(vm.cart.brands, function(brand){return brand.Brand.id == id});
+    function getBrandById(id){
+      return _.find(vm.brands, function(brand){return brand.Brand.id == id});
     }
-    function confirmCoupon_code(){
-      vm.coupon_code = vm.coupon_code_t;
+    function confirmCouponCode(){
+      vm.couponCode = vm.couponCodeTemp;
     }
     function submitOrder(){
-      var pid_list = vm.cart.pidList;
       var remarks = {};
-      _.each(vm.cart.brands, function(brand){
+      _.each(vm.brands, function(brand){
         remarks[brand.Brand.id] = brand.Brand.remark;
       });
-      $log.log("submit order for products " + vm.cart.pidList);
-      Orders.submitOrder(vm.cart.pidList, vm.defaultAddress.OrderConsignees.id,vm.coupon_code,remarks).then(function(orderId){
+      $log.log("submit order for products " + vm.pidList);
+      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
         $state.go("app.cart-order-detail", {id: orderId});
       }, function(e){
