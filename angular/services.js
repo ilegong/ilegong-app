@@ -464,8 +464,17 @@
   }
   function Offers($q,$log,Base,software,Users){
     var self = this;
+    self.OFFER_STATUS = [
+      {value: 'NEW', state:0, desc:'新的'},
+      {value: 'GOING', state:3, desc:'可以使用'},
+      {value: 'EXPIRED', state:1, desc:'已过期'},
+      {value: 'INVALID', state:2, desc:'已失效'}
+    ]
     return{
-      list:list
+      list:list, 
+      getOfferStatus: getOfferStatus, 
+      isOfStates: isOfStates, 
+      isOfferValid: isOfferValid
     }
     function list(){
       var defer = $q.defer();
@@ -475,6 +484,16 @@
         }, function(e){defer.reject(e)})
       }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function getOfferStatus(offer){
+      offer = offer || {SharedOffer: {}};
+      return _.find(self.OFFER_STATUS, function(offerStatus){return offerStatus.state == offer.SharedOffer.status}) || {};
+    }
+    function isOfStates(offer, states){
+      var offerStatus = getOfferStatus(offer);
+    }
+    function isOfferValid(offer){
+      return isOfStates(offer, ['NEW', 'GOING']);
     }
   }
 

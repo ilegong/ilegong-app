@@ -17,8 +17,8 @@
               </div>
             </div>
             <div class="col">
-              <div class="button {{OfferIsValid(item.SharedOffer.status)?'button-assertive':'button-static'}}"   >
-                {{OfferIsValid(item.SharedOffer.status)?'去使用':getOfferValue(item.SharedOffer.status)}}
+              <div class="button {{vm.isOfferValid(item)?'button-assertive':'button-static'}}"   >
+                {{vm.isOfferValid(item)?'去使用':vm.getOfferDesc(item)}}
               </div>
             </div>
           </div>

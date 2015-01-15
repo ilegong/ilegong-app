@@ -309,6 +309,8 @@
   }
   function MyOffersCtrl($scope,$rootScope,$http,Offers) {
     var vm = this;
+    vm.isOfferValid = function(offer){return Offers.isOfStates(offer, ['NEW', 'GOING'])};
+    vm.getOfferDesc = function(offer){return Offers.getOfferStatus(offer).desc};
     activate();
     function activate() {
       Offers.list().then(function(data){

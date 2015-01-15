@@ -135,8 +135,7 @@
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
-  function AppCtrl($scope,$rootScope,Orders)
-  {
+  function AppCtrl($scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
@@ -144,8 +143,7 @@
     }
 
     //address info
-    $rootScope.getCities = function(id)
-    {
+    $rootScope.getCities = function(id){
       var cities = Array();
       Orders.getCities(id).then(function(data){
         var citiesT = data;
@@ -157,8 +155,7 @@
       );
       return cities;
     }
-    $rootScope.getCounties = function(id)
-    {
+    $rootScope.getCounties = function(id) {
       var counties = Array();
       Orders.getCounties(id).then(function(data)
       {
@@ -170,35 +167,6 @@
       });
       return counties;
     }
-  //--address region
-
-  //offer state
-    $rootScope.offerStatus = {
-      'NEW':{state:0,value:'新的'},
-      'GOING':{state:3,value:'可以使用'},
-      'EXPIRED':{state:1,value:'已过期'},
-      'INVALID':{state:2,value:'已失效'}
-    }
-    $rootScope.getOfferValue = function(pState)
-    {
-      for(var key in $rootScope.offerStatus)
-      {
-        if($rootScope.offerStatus[key].state == pState)
-          return $rootScope.offerStatus[key].value;
-      }
-      return '';
-    }
-    $rootScope.OfferIsValid = function(status)
-    {
-      if(status == $rootScope.offerStatus['NEW'].state || status == $rootScope.offerStatus['GOING'].state)
-      {
-        return true;
-      }
-
-      return false;
-    }
-  //--offer state
-  //--coupon state
   }
 
 })();
