@@ -76,14 +76,12 @@
         });
       return defer.promise;
     }
-
     function getLocal(key){
       if(software.fakeData){
         return deferred(FakeData.getLocal(key));
       }
       return $localForage.getItem(key);
     }
-
     function setLocal(key, value){
       if(software.fakeData){
         return deferred(value);
@@ -118,12 +116,13 @@
   /* @ngInject */
   function Users($log, $q, software, Base){
     var self = this;
-    self.token = null;
-    self.user = null;
+    self.token = {};
+    self.user = {};
     self.onGetTokenSuccessfully = onGetTokenSuccessfully;
     return {
       init: init,
       getToken: getToken,
+      getTokenLocally: getTokenLocally, 
       getUser: getUser,
       getCaptchaImageUrl: getCaptchaImageUrl, 
       verifyCaptchaCode: verifyCaptchaCode, 
@@ -135,13 +134,12 @@
     }
 
     function init(){
-      Base.getLocal('token').then(function(token){
+      getToken().then(function(token){
         self.token = token;
-        if(!_.isEmpty(self.token)){
-          Base.getLocal('user').then(function(user){
-            self.user = user;
-          });
-        }
+        getUser().then(function(user){
+          self.user = user;
+        });
+      }, function(e){
       });
     }
     function getToken(){
@@ -155,6 +153,9 @@
         }
       }, function(e){defer.reject(e);});
       return defer.promise;
+    }
+    function getTokenLocally(){
+      return self.token;
     }
     function getUser(){
       var defer = $q.defer();
@@ -208,9 +209,7 @@
         else{
           defer.reject(data);
         }
-      }, function(e){
-        defer.reject(e);
-      });
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
 
@@ -223,9 +222,7 @@
         else{
           defer.reject(data);
         }
-      }, function(e){
-        defer.reject(e);
-      })
+      }, function(e){defer.reject(e)});
       return defer.promise;
     }
 

@@ -24,9 +24,6 @@
 
     function activate() {
       vm.loggedIn = false;
-      Users.getToken().then(function(token){
-        vm.token = token;
-      });
       Users.getUser().then(function(user){
         vm.loggedIn = true;
         vm.user = user.my_profile.User;
