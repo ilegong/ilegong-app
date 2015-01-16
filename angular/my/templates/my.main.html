@@ -1,4 +1,4 @@
-<ion-view title="朋友说" hide-back-button='true'>
+<ion-view title="朋友说" hide-back-button='true' hide-nav-bar="true">
   <ion-content class="list my">
     <a class="item item-icon-right" ng-click="vm.profileClick()"  ng-hide="vm.loggedIn">
       <i class="icon ion-ios7-arrow-right"></i>
@@ -13,36 +13,35 @@
     </a>
 
     <div class="item item-divider"></div>
-    <a class="item item-icon-right" ui-sref="app.my-orders.total">
+    <a class="item item-icon-left item-icon-right" ui-sref="app.my-orders.total">
+      <span class="icon pys-icon icon-my-order"></span>
       <i class="icon ion-ios7-arrow-right"></i>
-      订单
+      我的订单
     </a>
-    <a class="item item-icon-right" ui-sref="app.my-coupons">
+    <a class="item item-icon-left item-icon-right" ui-sref="app.my-coupons">
+      <span class="icon pys-icon icon-my-coupon"></span>
       <i class="icon ion-ios7-arrow-right"></i>
-      优惠券
+      我的优惠券
     </a>
-    <a class="item item-icon-right" ui-sref="app.my-offers">
-      <i class="icon ion-ios7-arrow-right"></i>
-      红包
-    </a>
+
     <div class="item item-divider"></div>
-    <a class="item item-icon-right" ui-sref="app.my-addresses-info({state:0,addrId:0})">
+    <a class="item item-icon-left item-icon-right" ui-sref="app.my-offers">
+      <span class="icon pys-icon icon-my-offer"></span>
       <i class="icon ion-ios7-arrow-right"></i>
-      收货地址
+      我要发红包
     </a>
+
     <div class="item item-divider"></div>
-    <a class="item item-icon-right" ui-sref="app.my-ilegong">
+    <a class="item item-icon-left item-icon-right" ui-sref="app.my-addresses-info({state:0,addrId:0})">
+      <span class="icon pys-icon icon-my-address"></span>
       <i class="icon ion-ios7-arrow-right"></i>
-      关于朋友说
+      地址管理
     </a>
+
     <div class="item item-divider"></div>
     <a class="item item-icon-right" ui-sref="app.product-detail-o.intro({id: 220,from:-1})">
       <i class="icon ion-ios7-arrow-right"></i>
       1分钱产品
     </a>
-    <a class="item item-icon-right" ui-sref="app.my-order-detail({id: 12138})">
-      <i class="icon ion-ios7-arrow-right"></i>
-      查看订单12138
-    </a>    
  </ion-content>
 </ion-view>

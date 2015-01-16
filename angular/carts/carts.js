@@ -189,14 +189,6 @@
         $log.log("submit order failed: ").log(e);
       });
     }
-    function getCities(id){
-      if(id==null){
-        vm.cities = null;
-        vm.counties = null;
-        return;
-      }
-      vm.cities = $rootScope.getCities(id);
-    }
     function addAddress(){
       Addresses.add(vm.newAddr_name, vm.newAddr_address, vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,vm.newAddr_mobilephone).then(function(address){
         $rootScope.cart.defaultAddress = address;

@@ -15,8 +15,14 @@ a{
 .fr, .pull-right{
   float: right; 
 }
-.card .item {
+.item {
   font-size: 14px;
+}
+.item-divider{
+  min-height: 1.57142857143em;
+}
+.pane, .view {
+  background-color: #f5f5f5;
 }
 .btn-warning {
   color: #fff;
@@ -34,6 +40,29 @@ a{
 }
 .padding .row{
   padding: 5px 0;
+}
+
+.item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
+  font-size: 14px;
+  background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+  display: inline-block;
+  background-size: 28.5714285714em 28.5714285714em;
+  width: 2.28571428571em;
+  height: 2.28571428571em;
+  position: absolute;
+  top: 10px;
+}
+.icon.pys-icon.icon-my-order{
+  background-position: -6.6666666666em -8.57142857143em;
+}
+.icon.pys-icon.icon-my-coupon{
+  background-position: -12.380952381em -8.57142857143em;
+}
+.icon.pys-icon.icon-my-offer{
+  background-position: -15.2380952381em -8.57142857143em;
+}
+.icon.pys-icon.icon-my-address{
+  background-position: -18.0952380952em -8.57142857143em;
 }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{

@@ -146,19 +146,6 @@
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
     }
-
-    //address info
-    $rootScope.getCities = function(id){
-      var cities = Array();
-      Orders.getCities(id).then(function(data){
-        var citiesT = data;
-        for(var zzz in citiesT){
-          cities.push({'id':zzz,'name':citiesT[zzz]});
-        }
-      }
-      );
-      return cities;
-    }
   }
 
 })();
