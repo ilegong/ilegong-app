@@ -18,17 +18,31 @@
   .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
   .controller('MyAddressEditCtrl',MyAddressEditCtrl)
   /* @ngInject */
-  function MyCtrl($rootScope, $scope, $log, Users){
+  function MyCtrl($q,$state,$rootScope, $scope, $log, Users){
     var vm = this;
+    vm.profileClick = profileClick;
     activate();
 
     function activate() {
+      console.log("afad");
       vm.loggedIn = false;
       Users.getUser().then(function(user){
         vm.loggedIn = true;
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
       });
+    }
+    function profileClick(){
+      $rootScope.myMain.defer = $q.defer();
+      $rootScope.myMain.defer.promise.then(function(result){
+        activate();
+      })
+      if(vm.loggedIn){
+        $state.go("app.my-detail");
+      }
+      else{
+        $state.go("app.my-account-login");
+      }
     }
   }
   /* @ngInject */
@@ -47,6 +61,7 @@
 
     function logout(){
       Users.logout().then(function(){
+        $rootScope.myMain.defer.resolve(null);
         $state.go('app.my');
       });
     }
@@ -97,11 +112,10 @@
         return '个性签名';
       return '?';
     }
-
   }
   
   /* @ngInject */
-  function MyAccountLoginCtrl($rootScope, $scope, $state, $log, Users){
+  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, Users){
     var vm = this;
     vm.username = "";
     vm.password = "";
@@ -109,7 +123,8 @@
 
     function login(){
       Users.login(vm.username, vm.password).then(function(){
-        $state.go('app.my');
+        $rootScope.myMain.defer.resolve(null);
+        $ionicHistory.goBack();
       }, function(error){
         $log.log('login failed: ' + error.status).log(error.data);
       })

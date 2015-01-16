@@ -2501,7 +2501,7 @@ var brandIntroJson = {
    }
 }
 var CartsEditNumResult = {"success":true}
-var tokenJson = {'access_token':'c39f627fcee9153ed99529494ae566f137a4c076','expires_in':3600,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}
+var tokenJson = {'access_token':'c39f627fcee9153ed99529494ae566f137a4c076','expires_in':3600,'expires_at':1000000000,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}
 var userJson = {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
 var CartInfo = {
   "data":{

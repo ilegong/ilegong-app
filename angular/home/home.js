@@ -6,7 +6,7 @@
   .controller('HomeCtrl', HomeCtrl)
   
   /* @ngInject */
-  function HomeCtrl($rootScope, $scope, $http, $log, Products){
+  function HomeCtrl(Users,$rootScope, $scope, $http, $log, Products){
     var vm = this;
     active();
 

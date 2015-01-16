@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -139,10 +139,15 @@
     function init(){
       Base.getLocal('token').then(function(token){
         self.token = token;
-        if(!_.isEmpty(self.token)){
-          Base.getLocal('user').then(function(user){
-            self.user = user;
-          });
+        if(  !_.isEmpty(self.token)){
+          if(self.token.expires_at >= (((new Date()).valueOf())/1000)){
+            Base.getLocal('user').then(function(user){
+              self.user = user;
+            });
+          }
+          else{
+            refreshToken(token.refresh_token);
+          }
         }
       });
     }
@@ -187,13 +192,20 @@
         }, function(error){defer.reject(error)});
       return defer.promise; 
     }
-
+    function refreshToken(refreshToken){
+      var defer = $q.defer();
+      Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+software.app.client_id).then(function(token){
+        self.onGetTokenSuccessfully(token, defer);
+      },function(error){defer.reject(error)})
+      return defer.promise;
+    }
     function logout(){
       return $q.all(Base.removeLocal('token'), Base.removeLocal('user'));
     }
 
     function onGetTokenSuccessfully(token, defer){
-      self.token = token;
+
+      self.token = _.extend(token,{expires_at:token.expires_in + ((new Date()).valueOf())/1000});
       Base.setLocal('token', self.token);
       Base.get('/api_orders/my_profile.json?access_token=' + self.token.access_token).then(function(user){
         $log.log("get user successfully: ").log(user);

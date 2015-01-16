@@ -304,6 +304,18 @@ a{
   .brand{
     background:white;
   }
+  .login-text{
+    margin-top:-1em;
+  }
+  .login-button{
+    background:lightcoral;
+    color:white;
+    border:none;
+    border-radiux:7px;
+    margin-top:-6px;
+    margin-bottom:7px;
+
+  }
   .number-span{
       border-collapse: separate;
       span{
@@ -353,6 +365,7 @@ a{
       color:white;
       margin-left:6em;
       width:5em;
+      border:none;
     }
 
   }

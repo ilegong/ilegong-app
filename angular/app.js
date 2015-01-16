@@ -66,6 +66,7 @@
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
       .state('app.cart-orders',{url:'/cart-orders',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
       .state('app.cart-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
+      .state('app.cart-account-login', {url: '/cart-account-login', views: {'app-cart': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
       .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
@@ -137,9 +138,10 @@
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
-  function AppCtrl($scope,$rootScope,Orders) {
+  function AppCtrl($q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
     $rootScope.editAddress = $rootScope.editAddress || {defer:{}};
+    $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
@@ -150,8 +152,7 @@
       var cities = Array();
       Orders.getCities(id).then(function(data){
         var citiesT = data;
-        for(var zzz in citiesT)
-        {
+        for(var zzz in citiesT){
           cities.push({'id':zzz,'name':citiesT[zzz]});
         }
       }

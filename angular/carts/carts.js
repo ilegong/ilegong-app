@@ -5,7 +5,7 @@
   .controller('ShoppingCartsCtrl',ShoppingCartsCtrl)
   .controller('OrderInfoCtrl',OrderInfoCtrl)
 
-  function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders){
+  function ShoppingCartsCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders,Users){
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
@@ -20,6 +20,8 @@
     vm.uncheckAllCartItems = uncheckAllCartItems;
     vm.getCheckedNumber = getCheckedNumber;
     vm.goShop = goShop;
+    vm.isShowLogin = isShowLogin;
+    vm.goLogin = goLogin;
     activate();
 
     function activate(){
@@ -33,6 +35,12 @@
         $rootScope.cart.defaultAddress = defaultAddress;
       });
       vm.watchCartItems();
+    }
+    function isShowLogin(){
+      return !Users.isLoggedIn();
+    }
+    function goLogin(){
+      $state.go("app.cart-account-login");
     }
     function goShop(){
       $state.go('app.home');
