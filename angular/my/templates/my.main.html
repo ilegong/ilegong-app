@@ -1,12 +1,15 @@
 <ion-view title="朋友说" hide-back-button='true' hide-nav-bar="true">
   <ion-content class="my">
-    <div class="profile" ng-hide="vm.loggedIn">
+    <div class="profile">
       <div class="account row">
         <span class="col"></span>
-        <a class="col" ng-click="vm.profileClick()">
+        <a class="col" ng-click="vm.profileClick()" ng-show="vm.loggedIn">
           <span class="avatar"></span>
-          13521509118
+          <span class="mobile">13521509118</span>
         </a>
+        <span class="col" ng-show="!vm.loggedIn">
+          <button class="button-login button button-outline">登录/注册</button>
+        </span>
         <span class="col"></span>
       </div>
       <div class="orders row">
@@ -28,15 +31,6 @@
           待评价
         </div>
       </div>
-    </div>
-    <div class="profile" ng-show="vm.loggedIn">
-      <a  class="head" ng-click="vm.profileClick()">
-        <span class="fl">
-          <img class="fr" src="{{vm.user.image}}">
-        </span>
-        <span class="name fl">{{vm.user.nickname}}</span>
-        <span class="fr more"></span>
-      </a>
     </div>
     <div class="list">
       <div class="item item-divider"></div>
