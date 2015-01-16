@@ -209,7 +209,7 @@
     activate();
 
     function activate() {
-      Orders.getProvinces().then(function(provinces){
+      Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       })
       Addresses.list().then(function(data) {
@@ -402,100 +402,60 @@
 
   function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
+    vm.addAddress = addAddress;
+    vm.editAddress = editAddress;
     vm.deleteAddress = deleteAddress;
-    vm.editId = $stateParams.editId;    
-    if(vm.editId == -1){
-      vm.showProvince = true;
-      vm.showCity = false;
-      vm.showCounty = false;
-    }else{
-      vm.showProvince = true;
-      vm.showCity = true;
-      vm.showCounty = true;
-    }
+    vm.onProvinceChanged = onProvinceChanged;
+    vm.onCityChanged = onCityChanged;  
     activate();
 
     function activate(){
-      Orders.getProvinces().then(function(provinces){
-        vm.provinces = provinces;
-      });
+      vm.editId = $stateParams.editId;  
+      vm.cities = vm.counties = [];
+      vm.province = vm.city = vm.county = {};
       
       if(vm.editId == -1){
-        vm.provinceModel = null;
-        vm.cityModel = null;
-        vm.countyModel = null;
-        vm.cities = null;
-        vm.counties = null;
         return;
       }
-      if(vm.editId>=0){
-        Addresses.list().then(function(data) {
-          for(var i in data){
-            if(data[i].OrderConsignees.id == vm.editId){
-              vm.editAddr = data[i];
-              break;
-            }
-          }
-               for(var i=0;i<30;i++)
-        $log.log('a');
-          var t=vm.editAddr;
-          var provinceId = t.OrderConsignees.province_id;
-          var cityId = t.OrderConsignees.city_id;
-          var countyId = t.OrderConsignees.county_id;
-          for(var zzz in vm.provinces){
-           
-            if(vm.provinces[zzz].id == provinceId){
-       
-              vm.provinceModel = vm.provinces[zzz];
-              break;
-            }
-          }
-          
-          Addresses.getAddress(provinceId,cityId,countyId).then(function(data){
-            var ct = data.city_list;
-            vm.cities = Array();
-            for(var zzz in ct){
-              var t = {'id':zzz,'name':ct[zzz]};
-              vm.cities.push(t);
-              if(zzz == cityId){
-                vm.cityModel = t; 
-              }
-            }
-            ct = data.county_list;
-            vm.counties = Array();
-            for(var zzz in ct){
-              var t = {'id':zzz,'name':ct[zzz]};
-              vm.counties.push(t);
-              if(zzz == countyId){
-                vm.countyModel = t;
-              }
-            }
-          })
-        })
-      }
+      Addresses.getAddressById(vm.editId).then(function(address){
+        vm.address = address;
+        Addresses.getProvinces().then(function(provinces){
+          vm.provinces = provinces;
+          vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
+        });
+
+        var corderConsignees = vm.address.OrderConsignees;        
+        Addresses.getAddress(corderConsignees.province_id, corderConsignees.city_id, corderConsignees.county_id).then(function(data){
+          vm.cities = data.city_list;
+          vm.counties = data.county_list;
+        });
+      });
     }
-    vm.getCities = function(id) {
-      if(id==null) {
-        vm.cities = null;
-        vm.counties = null;
+    function onProvinceChanged(province){
+      vm.cities = vm.counties = [];
+      if(_.isEmpty(province)){
         return;
       }
-      vm.cities = $rootScope.getCities(id);
+      Addresses.getCities(province.id).then(function(cities){
+        vm.cities = cities;
+      });
     }
-    vm.getCounties = function(id) {
-      if(id == null) {
-        vm.counties = null;
+    function onCityChanged(city) {
+      vm.counties = [];
+      if(_.isEmpty(city)){
         return;
       }
-      vm.counties = $rootScope.getCounties(id);
+      Addresses.getCounties(city.id).then(function(counties){
+        vm.counties = counties;
+      });
     }
     vm.save = function(){
       var promise;
       if(vm.editId == -1){
-        promise = vm.add();
+        promise = vm.addAddress();
       }
       else{
-        promise = vm.edit(vm.editId);
+        promise = vm.editAddress(vm.editId);
       }
       $log.log(promise);
       promise.then(function(data){
@@ -504,20 +464,19 @@
 
       $ionicHistory.goBack();
     }
-    vm.edit = function(){
-      var t = vm.editAddr.OrderConsignees;
-      return Addresses.edit(t.id,t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+    function editAddress(){
+      var t = vm.address.OrderConsignees;
+      return Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
-    vm.add = function(){
-      var t = vm.editAddr.OrderConsignees;
-      return Addresses.add(t.name,t.address,vm.provinceModel.id,vm.cityModel.id,vm.countyModel.id,t.mobilephone);
+    function addAddress(){
+      var t = vm.address.OrderConsignees;
+      return Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
     function deleteAddress(addressId){
       Addresses.deleteAddress(addressId).then(function(data){
         $rootScope['editAddress']['defer'].resolve(null);
         $ionicHistory.goBack();
       });
-
     }
   }   
 })(window, window.angular);

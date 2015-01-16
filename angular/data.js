@@ -2335,8 +2335,35 @@ var tryingsJson = {
 
 
 var allProvince = {"110100":"\u5317\u4eac","120100":"\u5929\u6d25","130000":"\u6cb3\u5317","140000":"\u5c71\u897f","150000":"\u5185\u8499\u53e4","210000":"\u8fbd\u5b81","220000":"\u5409\u6797","230000":"\u9ed1\u9f99\u6c5f","310100":"\u4e0a\u6d77","320000":"\u6c5f\u82cf","330000":"\u6d59\u6c5f","340000":"\u5b89\u5fbd","350000":"\u798f\u5efa","360000":"\u6c5f\u897f","370000":"\u5c71\u4e1c","410000":"\u6cb3\u5357","420000":"\u6e56\u5317","430000":"\u6e56\u5357","440000":"\u5e7f\u4e1c","450000":"\u5e7f\u897f","460000":"\u6d77\u5357","500100":"\u91cd\u5e86","510000":"\u56db\u5ddd","520000":"\u8d35\u5dde","530000":"\u4e91\u5357","540000":"\u897f\u85cf","610000":"\u9655\u897f","620000":"\u7518\u8083","630000":"\u9752\u6d77","640000":"\u5b81\u590f","650000":"\u65b0\u7586","710000":"\u53f0\u6e7e","810000":"\u9999\u6e2f","820000":"\u6fb3\u95e8"}
-var cities = {"110101":"\u4e1c\u57ce","110102":"\u897f\u57ce","110105":"\u671d\u9633","110106":"\u4e30\u53f0","110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0","110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71","110112":"\u901a\u5dde","110113":"\u987a\u4e49","110114":"\u660c\u5e73","110115":"\u5927\u5174","110116":"\u6000\u67d4","110117":"\u5e73\u8c37","110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"}
-var counties = {"110101001":"\u4e1c\u534e\u95e8\u8857\u9053","110101002":"\u666f\u5c71\u8857\u9053","110101003":"\u4ea4\u9053\u53e3\u8857\u9053","110101004":"\u5b89\u5b9a\u95e8\u8857\u9053","110101005":"\u5317\u65b0\u6865\u8857\u9053","110101006":"\u4e1c\u56db\u8857\u9053","110101007":"\u671d\u9633\u95e8\u8857\u9053","110101008":"\u5efa\u56fd\u95e8\u8857\u9053","110101009":"\u4e1c\u76f4\u95e8\u8857\u9053","110101010":"\u548c\u5e73\u91cc\u8857\u9053","110101011":"\u524d\u95e8\u8857\u9053","110101012":"\u5d07\u6587\u95e8\u5916\u8857\u9053","110101013":"\u4e1c\u82b1\u5e02\u8857\u9053","110101014":"\u9f99\u6f6d\u8857\u9053","110101015":"\u4f53\u80b2\u9986\u8def\u8857\u9053","110101016":"\u5929\u575b\u8857\u9053","110101017":"\u6c38\u5b9a\u95e8\u5916\u8857\u9053"}
+var cities = {
+  "110101":"\u4e1c\u57ce","110102":"\u897f\u57ce",
+  "110105":"\u671d\u9633","110106":"\u4e30\u53f0",
+  "110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0",
+  "110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71",
+  "110112":"\u901a\u5dde","110113":"\u987a\u4e49",
+  "110114":"\u660c\u5e73","110115":"\u5927\u5174",
+  "110116":"\u6000\u67d4","110117":"\u5e73\u8c37",
+  "110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"
+}
+var counties = {
+  "110101001":"\u4e1c\u534e\u95e8\u8857\u9053",
+  "110101002":"\u666f\u5c71\u8857\u9053",
+  "110101003":"\u4ea4\u9053\u53e3\u8857\u9053",
+  "110101004":"\u5b89\u5b9a\u95e8\u8857\u9053",
+  "110101005":"\u5317\u65b0\u6865\u8857\u9053",
+  "110101006":"\u4e1c\u56db\u8857\u9053",
+  "110101007":"\u671d\u9633\u95e8\u8857\u9053",
+  "110101008":"\u5efa\u56fd\u95e8\u8857\u9053",
+  "110101009":"\u4e1c\u76f4\u95e8\u8857\u9053",
+  "110101010":"\u548c\u5e73\u91cc\u8857\u9053",
+  "110101011":"\u524d\u95e8\u8857\u9053",
+  "110101012":"\u5d07\u6587\u95e8\u5916\u8857\u9053",
+  "110101013":"\u4e1c\u82b1\u5e02\u8857\u9053",
+  "110101014":"\u9f99\u6f6d\u8857\u9053",
+  "110101015":"\u4f53\u80b2\u9986\u8def\u8857\u9053",
+  "110101016":"\u5929\u575b\u8857\u9053",
+  "110101017":"\u6c38\u5b9a\u95e8\u5916\u8857\u9053"
+}
 var Offers = {
   "sharedOffers":[
     {"SharedOffer":{"id":"12106","total_number":"6500","uid":"146","start":"2014-12-10 20:58:44","status":"2","valid_days":"7","brand_id":"121","name":"\u9ed4\u9633\u51b0\u7cd6\u6a59\u7ea2\u5305"}},
@@ -2371,9 +2398,22 @@ var Profile = {
       "sex":"1","companies":"","bio":null,"mobilephone":"","username":"jeffliu1","id":"146"}
     }
   }
-var Addresses = [{"OrderConsignees":{"id":"57","name":"\u5218\u53ec\u4ec1","status":"1","area":"\u5317\u4eac\u6d77\u6dc0\u897f\u4e09\u65d7\u8857\u9053","address":"\u4e0a\u5965\u4e16\u7eaaB\u5ea7430","mobilephone":"18910275329","telephone":"","email":"","postcode":"","province_id":"110100","city_id":"110108","county_id":"110108019"}},{"OrderConsignees":{"id":"535","name":"\u5218\u53ec\u4ec1","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u660c\u5e73\u533a\u521b\u65b0\u56ed30\u53f71\u5355\u51431704","mobilephone":"18901267609","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"539","name":"\u5f20\u8fdb\u708e","status":"0","area":null,"address":"\u6d77\u6dc0\u533a\u897f\u5c0f\u53e3\u8def66\u53f7\u4e2d\u5173\u6751\u4e1c\u5347\u79d1\u6280\u56ed\u5317\u9886\u5730B-2\u697c5\u5c42","mobilephone":"134-6663-4438","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"545","name":"\u59dc\u7231\u8363","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u6d77\u6dc0\u533a\u4e94\u9053\u53e3\u641c\u72d0\u7f51\u7edc\u5927\u53a68\u5c42","mobilephone":"13520919545","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"566","name":"\u738b\u6708\u971e","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u901a\u5dde\u533a\u73e0\u6c5f\u9038\u666f220\u53f7\u697c2\u5355\u51431102","mobilephone":"138-1078-1383","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},{"OrderConsignees":{"id":"793","name":"\u738b\u5f3a","status":"0","area":"\u6cb3\u5317\u4fdd\u5b9a\u5317\u5e02\u4e94\u56db\u8def\u8857\u9053","address":"\u4e94\u56db\u4e1c\u8def\u6cb3\u5317\u5927\u5b66","mobilephone":"155-3328-2987","telephone":null,"email":null,"postcode":null,"province_id":"130000","city_id":"130600","county_id":"130603"}},{"OrderConsignees":{"id":"1814","name":"\u674e\u96ea\u4ead","status":"0","area":"\u5c71\u4e1c\u6dc4\u535a\u5f20\u5e97","address":"\u5357\u5bb6\u67511\u53f7\u697c2\u5355\u5143401","mobilephone":"18764355556","telephone":null,"email":null,"postcode":null,"province_id":"370000","city_id":"370300","county_id":"370303"}},{"OrderConsignees":{"id":"2098","name":"\u5f20\u857e","status":"0","area":"\u5317\u4eac\u660c\u5e73\u57ce\u5317\u8857\u9053","address":"\u521b\u65b0\u56ed30\u53f7\u697c1\u5355\u51431704","mobilephone":"18618398049","telephone":null,"email":null,"postcode":null,"province_id":"110100","city_id":"110114","county_id":"110114001"}}]
-var Address = {"histories":{"110100":"\u5317\u4eac","110108":"\u6d77\u6dc0","110108019":"\u897f\u4e09\u65d7\u8857\u9053"},"city_list":{"110101":"\u4e1c\u57ce","110102":"\u897f\u57ce","110105":"\u671d\u9633","110106":"\u4e30\u53f0","110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0","110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71","110112":"\u901a\u5dde","110113":"\u987a\u4e49","110114":"\u660c\u5e73","110115":"\u5927\u5174","110116":"\u6000\u67d4","110117":"\u5e73\u8c37","110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"},"county_list":{"110108001":"\u4e07\u5bff\u8def\u8857\u9053","110108002":"\u6c38\u5b9a\u8def\u8857\u9053","110108003":"\u7f8a\u574a\u5e97\u8857\u9053","110108004":"\u7518\u5bb6\u53e3\u8857\u9053","110108005":"\u516b\u91cc\u5e84\u8857\u9053","110108006":"\u7d2b\u7af9\u9662\u8857\u9053","110108007":"\u5317\u4e0b\u5173\u8857\u9053","110108008":"\u5317\u592a\u5e73\u5e84\u8857\u9053","110108010":"\u5b66\u9662\u8def\u8857\u9053","110108011":"\u4e2d\u5173\u6751\u8857\u9053","110108012":"\u6d77\u6dc0\u8857\u9053","110108013":"\u9752\u9f99\u6865\u8857\u9053","110108014":"\u6e05\u534e\u56ed\u8857\u9053","110108015":"\u71d5\u56ed\u8857\u9053","110108016":"\u9999\u5c71\u8857\u9053","110108017":"\u6e05\u6cb3\u8857\u9053","110108018":"\u82b1\u56ed\u8def\u8857\u9053","110108019":"\u897f\u4e09\u65d7\u8857\u9053","110108020":"\u9a6c\u8fde\u6d3c\u8857\u9053","110108021":"\u7530\u6751\u8def\u8857\u9053","110108022":"\u4e0a\u5730\u8857\u9053","110108023":"\u4e07\u67f3","110108024":"\u4e1c\u5347","110108025":"\u66d9\u5149\u8857\u9053","110108026":"\u6e29\u6cc9","110108027":"\u56db\u5b63\u9752","110108028":"\u897f\u5317\u65fa","110108029":"\u82cf\u5bb6\u5768","110108030":"\u4e0a\u5e84"},"town_list":null}
-
+var Addresses = [
+  {"OrderConsignees":{"id":"57","name":"\u5218\u53ec\u4ec1","status":"1","area":"\u5317\u4eac\u6d77\u6dc0\u897f\u4e09\u65d7\u8857\u9053","address":"\u4e0a\u5965\u4e16\u7eaaB\u5ea7430","mobilephone":"18910275329","telephone":"","email":"","postcode":"","province_id":"110100","city_id":"110108","county_id":"110108019"}},
+  {"OrderConsignees":{"id":"535","name":"\u5218\u53ec\u4ec1","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u660c\u5e73\u533a\u521b\u65b0\u56ed30\u53f71\u5355\u51431704","mobilephone":"18901267609","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},
+  {"OrderConsignees":{"id":"539","name":"\u5f20\u8fdb\u708e","status":"0","area":null,"address":"\u6d77\u6dc0\u533a\u897f\u5c0f\u53e3\u8def66\u53f7\u4e2d\u5173\u6751\u4e1c\u5347\u79d1\u6280\u56ed\u5317\u9886\u5730B-2\u697c5\u5c42","mobilephone":"134-6663-4438","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},
+  {"OrderConsignees":{"id":"545","name":"\u59dc\u7231\u8363","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u6d77\u6dc0\u533a\u4e94\u9053\u53e3\u641c\u72d0\u7f51\u7edc\u5927\u53a68\u5c42","mobilephone":"13520919545","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},
+  {"OrderConsignees":{"id":"566","name":"\u738b\u6708\u971e","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u901a\u5dde\u533a\u73e0\u6c5f\u9038\u666f220\u53f7\u697c2\u5355\u51431102","mobilephone":"138-1078-1383","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},
+  {"OrderConsignees":{"id":"793","name":"\u738b\u5f3a","status":"0","area":"\u6cb3\u5317\u4fdd\u5b9a\u5317\u5e02\u4e94\u56db\u8def\u8857\u9053","address":"\u4e94\u56db\u4e1c\u8def\u6cb3\u5317\u5927\u5b66","mobilephone":"155-3328-2987","telephone":null,"email":null,"postcode":null,"province_id":"130000","city_id":"130600","county_id":"130603"}},
+  {"OrderConsignees":{"id":"1814","name":"\u674e\u96ea\u4ead","status":"0","area":"\u5c71\u4e1c\u6dc4\u535a\u5f20\u5e97","address":"\u5357\u5bb6\u67511\u53f7\u697c2\u5355\u5143401","mobilephone":"18764355556","telephone":null,"email":null,"postcode":null,"province_id":"370000","city_id":"370300","county_id":"370303"}},
+  {"OrderConsignees":{"id":"2098","name":"\u5f20\u857e","status":"0","area":"\u5317\u4eac\u660c\u5e73\u57ce\u5317\u8857\u9053","address":"\u521b\u65b0\u56ed30\u53f7\u697c1\u5355\u51431704","mobilephone":"18618398049","telephone":null,"email":null,"postcode":null,"province_id":"110100","city_id":"110114","county_id":"110114001"}}
+]
+var Address = {
+  "histories":{"110100":"\u5317\u4eac","110108":"\u6d77\u6dc0","110108019":"\u897f\u4e09\u65d7\u8857\u9053"},
+  "city_list":{"110101":"\u4e1c\u57ce","110102":"\u897f\u57ce","110105":"\u671d\u9633","110106":"\u4e30\u53f0","110107":"\u77f3\u666f\u5c71","110108":"\u6d77\u6dc0","110109":"\u95e8\u5934\u6c9f","110111":"\u623f\u5c71","110112":"\u901a\u5dde","110113":"\u987a\u4e49","110114":"\u660c\u5e73","110115":"\u5927\u5174","110116":"\u6000\u67d4","110117":"\u5e73\u8c37","110228":"\u5bc6\u4e91","110229":"\u5ef6\u5e86"},
+  "county_list":{"110108001":"\u4e07\u5bff\u8def\u8857\u9053","110108002":"\u6c38\u5b9a\u8def\u8857\u9053","110108003":"\u7f8a\u574a\u5e97\u8857\u9053","110108004":"\u7518\u5bb6\u53e3\u8857\u9053","110108005":"\u516b\u91cc\u5e84\u8857\u9053","110108006":"\u7d2b\u7af9\u9662\u8857\u9053","110108007":"\u5317\u4e0b\u5173\u8857\u9053","110108008":"\u5317\u592a\u5e73\u5e84\u8857\u9053","110108010":"\u5b66\u9662\u8def\u8857\u9053","110108011":"\u4e2d\u5173\u6751\u8857\u9053","110108012":"\u6d77\u6dc0\u8857\u9053","110108013":"\u9752\u9f99\u6865\u8857\u9053","110108014":"\u6e05\u534e\u56ed\u8857\u9053","110108015":"\u71d5\u56ed\u8857\u9053","110108016":"\u9999\u5c71\u8857\u9053","110108017":"\u6e05\u6cb3\u8857\u9053","110108018":"\u82b1\u56ed\u8def\u8857\u9053","110108019":"\u897f\u4e09\u65d7\u8857\u9053","110108020":"\u9a6c\u8fde\u6d3c\u8857\u9053","110108021":"\u7530\u6751\u8def\u8857\u9053","110108022":"\u4e0a\u5730\u8857\u9053","110108023":"\u4e07\u67f3","110108024":"\u4e1c\u5347","110108025":"\u66d9\u5149\u8857\u9053","110108026":"\u6e29\u6cc9","110108027":"\u56db\u5b63\u9752","110108028":"\u897f\u5317\u65fa","110108029":"\u82cf\u5bb6\u5768","110108030":"\u4e0a\u5e84"},
+  "town_list":null
+}
 var Carts = {
   "total_price":169,
   "carts":[
