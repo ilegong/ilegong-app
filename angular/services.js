@@ -147,7 +147,7 @@
       });
     }
     function isLoggedIn(){
-      return true;
+      return self.token != null;
     }
     function getToken(){
       var defer = $q.defer();
