@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -116,7 +116,7 @@
   }
 
   /* @ngInject */
-  function Users($log, $q, software, Base){
+  function Users($rootScope,$log, $q, software, Base){
     var self = this;
     self.token = null;
     self.user = null;
@@ -137,12 +137,14 @@
     }
 
     function init(){
+      self.token = {};
+      $rootScope.user.token = {};
       Base.getLocal('token').then(function(token){
-        self.token = token;
-        if(  !_.isEmpty(self.token)){
-          if(self.token.expires_at >= (((new Date()).valueOf())/1000)){
+        $rootScope.user.token = token;
+        if(  !_.isEmpty($rootScope.user.token)){
+          if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
             Base.getLocal('user').then(function(user){
-              self.user = user;
+              $rootScope.user.user = user;
             });
           }
           else{
@@ -152,7 +154,8 @@
       });
     }
     function isLoggedIn(){
-      return _.isEmpty(self.token);
+
+      return !_.isEmpty($rootScope.user.token);
     }
     function getToken(){
       var defer = $q.defer();
@@ -167,7 +170,7 @@
       return defer.promise;
     }
     function getTokenLocally(){
-      return self.token;
+      return $rootScope.user.token;
     }
     function getUser(){
       var defer = $q.defer();
@@ -204,14 +207,14 @@
     }
 
     function onGetTokenSuccessfully(token, defer){
-
-      self.token = _.extend(token,{expires_at:token.expires_in + ((new Date()).valueOf())/1000});
-      Base.setLocal('token', self.token);
-      Base.get('/api_orders/my_profile.json?access_token=' + self.token.access_token).then(function(user){
+      console.log(token);
+      $rootScope.user.token = _.extend(token,{expires_at:token.expires_in + ((new Date()).valueOf())/1000});
+      Base.setLocal('token', $rootScope.user.token);
+      Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
         $log.log("get user successfully: ").log(user);
-        self.user = user;
-        Base.setLocal('user', self.user);
-        defer.resolve(self.token);
+        $rootScope.user.token = user;
+        Base.setLocal('user', $rootScope.user.user);
+        defer.resolve($rootScope.user.token);
       }, function(error){defer.reject(error)});
     }
 

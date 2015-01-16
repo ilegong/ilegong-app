@@ -140,8 +140,9 @@
 
   function AppCtrl($q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
-    $rootScope.editAddress = $rootScope.editAddress || {defer:{}};
+    $rootScope.editAddress = $rootScope.editAddress || {defer:{}};//currentAddress
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
+    $rootScope.user = $rootScope.user || {token:{},user:{}}
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;

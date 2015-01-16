@@ -37,6 +37,8 @@
       vm.watchCartItems();
     }
     function isShowLogin(){
+
+ 
       return !Users.isLoggedIn();
     }
     function goLogin(){
