@@ -11,6 +11,7 @@
     active();
 
     function active(){
+      vm.date = (new Date()).valueOf();
       Products.list().then(function(data){
         vm.bannerItems = data.bannerItems;
         vm.brands = data.brands;

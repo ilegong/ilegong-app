@@ -130,7 +130,8 @@
       register: register, 
       login: login, 
       logout: logout, 
-      aliPay: aliPay
+      aliPay: aliPay,
+      getTokenLocally:getTokenLocally
     }
 
     function init(){
