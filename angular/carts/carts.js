@@ -38,9 +38,13 @@
       $state.go('app.home');
     }
     function getCheckedNumber(){
-      return (_.countBy($rootScope.cart.cartItems,function(item){
+      var t = (_.countBy($rootScope.cart.cartItems,function(item){
         return item['checked'];
       }))['true'];
+      if(t == null)
+        return 0;
+      else
+        return t;
 
     }
     function checkAllCartItems(){
@@ -127,7 +131,7 @@
       vm.cartItems = $rootScope.cart.cartItems;
       vm.defaultAddress = $rootScope.cart.defaultAddress;
       vm.couponCode = $rootScope.cart.couponCode;
-      Orders.getProvinces().then(function(provinces){
+      Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
       });
       vm.brands = $rootScope.cart.brands;

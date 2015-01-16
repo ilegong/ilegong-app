@@ -211,6 +211,7 @@
     function activate() {
       Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
+
       })
       Addresses.list().then(function(data) {
         vm.addresses = data;
@@ -406,28 +407,27 @@
     vm.editAddress = editAddress;
     vm.deleteAddress = deleteAddress;
     vm.onProvinceChanged = onProvinceChanged;
-    vm.onCityChanged = onCityChanged;  
+    vm.onCityChanged = onCityChanged;
     activate();
-
     function activate(){
       vm.editId = $stateParams.editId;  
       vm.cities = vm.counties = [];
       vm.province = vm.city = vm.county = {};
-      
+      Addresses.getProvinces().then(function(provinces){
+        vm.provinces = provinces;
+      });
       if(vm.editId == -1){
         return;
       }
       Addresses.getAddressById(vm.editId).then(function(address){
-        vm.address = address;
-        Addresses.getProvinces().then(function(provinces){
-          vm.provinces = provinces;
-          vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
-        });
-
+        vm.address = address;          
+        vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
         var corderConsignees = vm.address.OrderConsignees;        
         Addresses.getAddress(corderConsignees.province_id, corderConsignees.city_id, corderConsignees.county_id).then(function(data){
           vm.cities = data.city_list;
+          vm.city = _.find(vm.cities, function(city){return city.id == vm.address.OrderConsignees.city_id});
           vm.counties = data.county_list;
+          vm.county = _.find(vm.counties, function(county){return county.id == vm.address.OrderConsignees.county_id});
         });
       });
     }
@@ -460,9 +460,10 @@
       $log.log(promise);
       promise.then(function(data){
         $rootScope['editAddress']['defer'].resolve(null);
+        $ionicHistory.goBack();
       })
 
-      $ionicHistory.goBack();
+      
     }
     function editAddress(){
       var t = vm.address.OrderConsignees;
