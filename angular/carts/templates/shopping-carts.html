@@ -10,7 +10,7 @@
       </div>
       <a class="button empty-button" ng-click="vm.goShop();">去逛逛</a>
     </div>
-    <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0">
+    <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
       <div class="row">
         <span class="col col-10"></span>
         <span class="col col-10">
@@ -84,7 +84,6 @@
       </div>
     </div>
 -->
-
   </ion-content>
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="row">

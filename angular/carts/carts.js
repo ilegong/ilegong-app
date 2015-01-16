@@ -35,12 +35,13 @@
       vm.watchCartItems();
     }
     function goShop(){
-      $state.go('app.stores');
+      $state.go('app.home');
     }
     function getCheckedNumber(){
-      return (_.filter($rootScope.cart.cartItems,function(item){
+      return (_.countBy($rootScope.cart.cartItems,function(item){
         return item['checked'];
-      })).length;
+      }))['true'];
+
     }
     function checkAllCartItems(){
       _.each($rootScope.cart.cartItems,function(cartItem){
@@ -89,20 +90,10 @@
     function deleteCartItem(cartItem){
       Carts.deleteCartItem(cartItem.Cart.id).then(function(result){
         $rootScope.cart.cartItems = _.filter($rootScope.cart.cartItems, function(cartItemm){return cartItemm.Cart.id != cartItem.Cart.id});
-
-        if(getCartItemsOfBrand(cartItem.Cart.brand_id).length == 0){
-          $rootScope.cart.brands = _.filter($rootScope.cart.brands,function(brand){
-            return brand.Brand.id != cartItem.Cart.brand_id;
-          })
-        }
-        $log.log($rootScope.cart.cartItems);
       }, function(e){$log.log("delete cart item failed: ").log(e)});
     }
     function confirmCartInfo(){
-      if(!_.isEmpty($rootScope.cart.defaultAddress))
-      {
-        var pids = _.map(vm.cartItems, function(cart){return Number(cart.Cart.product_id)});
-        $rootScope.cart.pidList = pids;
+      if(!_.isEmpty($rootScope.cart.defaultAddress)){
         $state.go('app.cart-order-info');        
       }      
 
@@ -150,7 +141,7 @@
         vm.shipFees = result.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = result.reduced;
-        vm.total_price = result.total_price;
+        vm.totalPrice = result.total_price;
         vm.cart = result.cart;
         vm.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
         if(_.isEmpty(vm.cart.pidList)){
