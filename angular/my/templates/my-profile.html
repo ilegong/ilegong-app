@@ -43,22 +43,18 @@
         </span>
       </a>
 
-      <div class="item item-divider"></div>
-
-      <a class="item item-icon-right" ui-sref="app.my-profile-edit({state:'bio'})">
+      <div class="item item-divider" ng-show="false"></div>
+      <a class="item item-icon-right" ng-show="false">
         <i class="icon ion-ios7-arrow-right"></i>
         修改密码
         <span class="item-note">
           {{vm.user.bio}}
         </span>
       </a>
-  
-      <div class="item item-divider"></div>
-  
-      <div class="item item-divider"></div>
-      <span class="item padding">
+      
+      <div class="padding">
         <button class="button button-block button-energized" ng-click="vm.logout()">退出登录</button>
-      </span>
+      </div>
     </div>
  </ion-content>
 </ion-view>

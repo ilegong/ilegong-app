@@ -14,31 +14,11 @@
     ];
 
     return {
-      edit: edit, 
+      editProfile: editProfile, 
       getProfileStatus: getProfileStatus
     }
-    function edit(nickname,image,sex,bio,companies){
-      var json = {};
-      if(nickname != null){
-        json['nickname'] = nickname; 
-      }
-      if(image != null){
-        json['image'] = image;
-      }
-      if(sex != null){
-        json['sex'] = sex;
-      }
-      if(bio != null){
-        json['bio'] = bio;
-      }
-      if(companies != null){
-        json['companies'] = companies;
-      }
-      $log.log(json);
-      Base.post('/api_orders/edit_my_profile.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
-        $log.log(result);
-        Users.refreshToken();
-      })
+    function editProfile(profile){
+      return Base.post('/api_orders/edit_my_profile.json?access_token='+Users.getTokenLocally().access_token, profile);
     }
 
     function getProfileStatus(state){

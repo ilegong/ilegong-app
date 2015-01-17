@@ -14,7 +14,10 @@
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
-        console.log(vm.user);
+      });
+      $scope.$watch('user.user', function(newUser, oldUser) {
+        $log.log("user has changed to :").log(newUser);
+        vm.user = newUser.my_profile.User;
       });
     }
 
