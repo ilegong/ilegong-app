@@ -5,7 +5,7 @@
   <ion-content class="my">
     <div class="list">
       <label class="item item-input">
-        <span class="input-label">用户名</span>
+        <span class="input-label">账号</span>
         <input type="text" placeholder="用户名" ng-model="vm.username">
       </label>
       <label class="item item-input">
@@ -14,7 +14,7 @@
       </label>
     </div>
     <div class="padding">
-      <button class="button button-block button-stable" ng-click="vm.login()">登陆</button>
+      <button class="button button-block" ng-class="{'button-energized': vm.readyToLogin()}" ng-click="vm.login()" ng-disabled="!vm.readyToLogin()">登录</button>
     </div>
   </ion-content>
 </ion-view>

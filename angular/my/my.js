@@ -117,9 +117,14 @@
   /* @ngInject */
   function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, Users){
     var vm = this;
-    vm.username = "";
-    vm.password = "";
     vm.login = login;
+    vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
+    activate();
+
+    function activate(){
+      vm.username = "";
+      vm.password = "";
+    }
 
     function login(){
       Users.login(vm.username, vm.password).then(function(){
