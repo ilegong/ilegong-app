@@ -26,20 +26,29 @@
     }
 
     function init(){
-      console.log('init');
-          $rootScope.user ={token:{},user:{}};
+      
+      for(var i=0;i<50;i++){
+        $log.log('locally');
+      }
+      $log.log('init');
+      $rootScope.user ={token:{},user:{}};
       Base.getLocal('token').then(function(token){
-        $rootScope.user.token = token;
+        $rootScope.user.token = token || {};
         if(  !_.isEmpty($rootScope.user.token)){
+          $log.log('not empty');
           if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
+            $log.log('token ok');
             Base.getLocal('user').then(function(user){
               $rootScope.user.user = user;
             });
           }
           else{
+            $log.log('refresh');
             refreshToken(token.refresh_token);
           }
         }
+        $log.log('may empty');
+        $log.log($rootScope.user.token);
       });
     }
     function getToken(){
@@ -55,6 +64,8 @@
       return defer.promise;
     }
     function getTokenLocally(){
+
+      $log.log($rootScope.user.token);
       return $rootScope.user.token;
     }
     function getUser(){

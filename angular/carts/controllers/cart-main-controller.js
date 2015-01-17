@@ -36,7 +36,7 @@
       vm.watchCartItems();
     }
     function isShowLogin(){
-      return !_.isEmpty($rootScope.user.user);
+      return _.isEmpty($rootScope.user.token);
     }
     function goLogin(){
       $state.go("app.cart-account-login");
