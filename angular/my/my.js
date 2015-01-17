@@ -22,11 +22,9 @@
     var vm = this;
     vm.profileClick = profileClick;
     activate();
-
     function activate() {
       vm.loggedIn = Users.isLoggedIn();
       Users.getUser().then(function(user){
-
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
         console.log('user');
@@ -69,7 +67,7 @@
     }
   }
 
-  function MyDetailEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
+  function MyDetailEditCtrl($ionicHistory,$stateParams,$scope,$rootScope,$log,Profile){
     var vm = this;
 
     activate();
@@ -98,7 +96,7 @@
       if(vm.state == 'company'){
         Profile.edit(null,null,null,null,vm.text);
       }
-
+      $ionicHistory.goBack();
     }
 
     vm.getContent = function(){
