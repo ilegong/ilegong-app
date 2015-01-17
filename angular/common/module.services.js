@@ -6,7 +6,7 @@
   .value('software', {fakeData: true, timeout: 3000, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, $window, software){
+  function Base($http, $q, $log, $localForage, $window, software, FakeData){
     var self = this;
     self.getUrl = getUrl;
     $window.device = $window.device || {};
