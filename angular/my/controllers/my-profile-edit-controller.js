@@ -6,12 +6,13 @@
 
   function MyProfileEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
     var vm = this;
-
     activate();
 
     function activate(){
       vm.state = $stateParams.state;
-      vm.sex = -1;
+      vm.profile = _.isEmpty($rootScope.user.user) ? {} : $rootScope.user.user.my_profile.User;
+      vm.profileStatus = Profile.getProfileStatus(vm.state);
+      $log.log("vm.state: " + vm.state +", profile status: ").log(vm.profileStatus);
     }
 
     vm.confirm = function(){
@@ -33,20 +34,6 @@
         Profile.edit(null,null,null,null,vm.text);
       }
       $ionicHistory.goBack();
-    }
-
-    vm.getContent = function(){
-      if(vm.state == 'portrait')
-        return '头像';
-      if(vm.state == 'nickname')
-        return '昵称';
-      if(vm.state == 'sex')
-        return '性别';
-      if(vm.state == 'company')
-        return '单位';
-      if(vm.state == 'bio')
-        return '个性签名';
-      return '?';
     }
   }
 })(window, window.angular);
