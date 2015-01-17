@@ -5,6 +5,9 @@
         头像
         <img src="{{vm.user.image}}"/>
   		</a>
+
+      <div class="item item-divider"></div>
+      
       <a class="item item-icon-right" ui-sref="app.my-profile-edit({state:'nickname'})" >
         <i class="icon ion-ios7-arrow-right"></i>
         昵称
@@ -19,26 +22,9 @@
           {{vm.user.sex==0?'女':'男'}}
         </span>
       </a>
-      <a class="item item-icon-right" ui-sref="app.my-profile-edit({state:'company'})"  >
-        <i class="icon ion-ios7-arrow-right"></i>
-        单位
-        <span class="item-note">
-          {{vm.user.companies}}
-        </span>
-      </a>
-      <a class="item item-icon-right" ui-sref="app.my-profile-edit({state:'bio'})" >
-        <i class="icon ion-ios7-arrow-right"></i>
-        个性签名
-        <span class="item-note">
-          {{vm.user.bio}}
-        </span>
-      </a>
-  
-      <div class="item item-divider"></div>
-       <!-- 
        <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        手机号
+        手机
         <span class="item-note">
           {{vm.user.mobilephone}}
         </span>
@@ -52,25 +38,28 @@
       </a>
       <a class="item item-icon-right" >
         <i class="icon ion-ios7-arrow-right"></i>
-        用户名
-        <span class="item-note">
-          {{vm.user.username}}
-        </span>
-      </a>
-    -->
-      <a class="item item-icon-right" >
-        <i class="icon ion-ios7-arrow-right"></i>
         用户ID
         <span class="item-note">
           {{vm.user.id}}
         </span>
       </a>
+
+      <div class="item item-divider"></div>
+
+      <a class="item item-icon-right" ui-sref="app.my-profile-edit({state:'bio'})" >
+        <i class="icon ion-ios7-arrow-right"></i>
+        修改密码
+        <span class="item-note">
+          {{vm.user.bio}}
+        </span>
+      </a>
   
       <div class="item item-divider"></div>
-      <a class="item" ng-click="vm.logout()">
-        退出登录
-      </a>
-
+  
+      <div class="item item-divider"></div>
+      <span class="item padding">
+        <button class="button button-block button-energized" ng-click="vm.logout()">退出登录</button>
+      </span>
     </div>
  </ion-content>
 </ion-view>

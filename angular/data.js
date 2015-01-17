@@ -1,4 +1,3 @@
-
 var mobileHomeJson = {  
   "brands":{  
     "8":{  
@@ -2385,19 +2384,6 @@ var Offers = {
     "121":{"Brand":{"id":"121","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","slug":"qian_yang_wan_cheng","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/ea5bb474293_1208.jpg","weixin_id":"","notice":""}}
   }
 }
-var Profile = {
-  "my_profile":{
-    "Shichituan":{
-      "shichi_id":"591",
-      "pictures":"",
-      "status":"0",
-      "period":"3"},
-    "User":{
-      "nickname":"\u897f\u5e73","email":null,
-      "image":"http:\/\/wx.qlogo.cn\/mmopen\/v6XbW38nFORANec49kfDonR01BaH7jX6R2TW7ZyjdZYF4uQ85Az9TVlwPlbxbbFqyI0NSWrGZWkLE1kH4F2Fqg\/0",
-      "sex":"1","companies":"","bio":null,"mobilephone":"","username":"jeffliu1","id":"146"}
-    }
-  }
 var Addresses = [
   {"OrderConsignees":{"id":"57","name":"\u5218\u53ec\u4ec1","status":"1","area":"\u5317\u4eac\u6d77\u6dc0\u897f\u4e09\u65d7\u8857\u9053","address":"\u4e0a\u5965\u4e16\u7eaaB\u5ea7430","mobilephone":"18910275329","telephone":"","email":"","postcode":"","province_id":"110100","city_id":"110108","county_id":"110108019"}},
   {"OrderConsignees":{"id":"535","name":"\u5218\u53ec\u4ec1","status":"0","area":null,"address":"\u5317\u4eac\u5e02\u660c\u5e73\u533a\u521b\u65b0\u56ed30\u53f71\u5355\u51431704","mobilephone":"18901267609","telephone":null,"email":null,"postcode":null,"province_id":null,"city_id":null,"county_id":null}},
@@ -2502,7 +2488,12 @@ var brandIntroJson = {
 }
 var CartsEditNumResult = {"success":true}
 var tokenJson = {'access_token':'c39f627fcee9153ed99529494ae566f137a4c076','expires_in':3600,'expires_at':1000000000,'token_type':'bearer','scope':null,"refresh_token":"def4c6102af1ce25e19e5a77cbd21f95b071e74c"}
-var userJson = {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
+var myProfileJson = {
+  "my_profile":{
+    "Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},
+    "User":{"nickname":"okysen","email":null,"image":"http://51daifan.sinaapp.com/img/default_user_icon.jpg","sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}
+  }
+}
 var CartInfo = {
   "data":{
     "success":true,
@@ -2548,63 +2539,3 @@ var DefAddr = {msg:1}
 var aliPay = {success: true};
 var addCartJson = {data: {success: true, msg: '', id: 123456}, status: 200}
 var commentAddJson = {success:true};
-var FakeData = function(){
-  var getData = {
-    '/categories/mobileHome.json': mobileHomeJson,
-    '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
-    '/api_orders/mine.json' : ordersJson,
-    '/apiOrders/order_detail/\\d+.json': orderDetail,
-    '/myDetail': myDetail,
-    '/api_orders/store_list.json': storeListJson, 
-    '/shichituan.json': tryingsJson, 
-    '/api_orders/store_list.json': storeListJson, 
-    '/shichituan.json': tryingsJson,
-    '/Locations/get_province.json':allProvince, 
-    "/api_orders/product_detail/\\d+.json": productDetail, 
-    "/apiOrders/store_content/\\d+.json": brandJson, 
-    "/apiOrders/store_story/\\d+.json": brandIntroJson, 
-    "/apiOrders/product_content/\\d+.json": productContent, 
-    "/comments/getlist/Product/\\d+.json": productComment, 
-    "/Locations/get_city.json": cities, 
-    "/Locations/get_county.json": counties, 
-    "/api_orders/my_offers.json": Offers,
-    "/api_orders/my_coupons.json": Coupons, 
-    "/Locations/get_address.json": Address,
-    "/api_orders/order_consignees.json": Addresses,
-    "/api_orders/my_profile.json": Profile,
-    "/ApiOrders/list_cart.json":Carts,
-    "/api_orders/cart_edit_num/\\d+/\\d+.json":CartsEditNumResult, 
-    "/check/verify": {success: true}, 
-    "/check/message_code": {success: true}, 
-    "/api_orders/my_profile.json": userJson,
-    "/api_orders/confirm_undo/\\d+.json": OrderUndo,
-    "/api_orders/confirm_remove/\\d+.json": OrderRemove,
-    "/api_orders/confirm_receive/\\d+.json": OrderReceive, 
-    "/ali_pay/wap_to_alipay/\\d+": aliPay,
-    "/oauth/register": tokenJson, 
-    "grant_type=password":tokenJson, 
-    "grant_type=refresh_token":tokenJson
-  };
-
-  var localDataMap = {
-    '/token': tokenJson, 
-    "/api_orders/my_profile": {"my_profile":{"Shichituan":{"shichi_id":"591","pictures":"","status":"0","period":"3"},"User":{"nickname":"okysen","email":null,"image":null,"sex":null,"companies":"","bio":null,"mobilephone":"","username":"okysen","id":"401180"}}}
-  }
-  var postData = {
-    "/api_orders/cart_info.json": CartInfo,
-    "/api_orders/balance.json": Balance,
-    "/api_orders/edit_my_profile.json":ProfileEdit, 
-    "/api_orders/cart_add.json": addCartJson,
-    "/api_orders/comment_add.json":commentAddJson
-  };
-  var getLocalData = {
-     'token': tokenJson, 
-     "user": userJson
-  }
-  return {
-    get: function(url){return _.find(getData, function(v, k){return new RegExp(k).test(url)});},
-    post: function(url){return _.find(postData, function(v, k){return new RegExp(k).test(url)});},
-    getLocal: function(key){return _.find(getLocalData, function(v, k){return new RegExp(k).test(key)});}
-  }
-}();
-

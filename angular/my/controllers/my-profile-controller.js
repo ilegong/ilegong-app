@@ -20,7 +20,6 @@
 
     function logout(){
       Users.logout().then(function(){
-        $rootScope.myMain.defer.resolve(null);
         $state.go('app.my');
       });
     }

@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','app.services', 'app.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'app.directives'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
@@ -142,7 +142,7 @@
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
     $rootScope.editAddress = $rootScope.editAddress || {defer:{}};//currentAddress
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
-    $rootScope.user = $rootScope.user || {token:{},user:{}}
+    $rootScope.user = $rootScope.user || {token:{}, user:{}}
     Users.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});

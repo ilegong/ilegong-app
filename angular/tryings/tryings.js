@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.tryings', [])
+  angular.module('ilegong.tryings', ['module.services'])
   .controller('TryingsCtrl', TryingsCtrl)
   .controller('TryingDetailCtrl', TryingDetailCtrl)
 

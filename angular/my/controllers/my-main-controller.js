@@ -10,7 +10,7 @@
     vm.profileClick = profileClick;
     activate();
     function activate() {
-      vm.loggedIn = Users.isLoggedIn();
+      vm.loggedIn = !_.isEmpty($rootScope.user.user);
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;

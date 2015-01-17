@@ -12,7 +12,6 @@
     function activate(){
       vm.state = $stateParams.state;
       vm.sex = -1;
-
     }
 
     vm.confirm = function(){
