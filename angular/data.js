@@ -2597,7 +2597,7 @@ var FakeData = function(){
   };
   var getLocalData = {
      'token': tokenJson, 
-     "user": userJson
+     "user": {}
   }
   return {
     get: function(url){return _.find(getData, function(v, k){return new RegExp(k).test(url)});},
