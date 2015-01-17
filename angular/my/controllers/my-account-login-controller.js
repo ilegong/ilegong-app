@@ -17,8 +17,7 @@
     }
 
     function login(){
-      Users.login(vm.username, vm.password).then(function(){
-        $rootScope.myMain.defer.resolve(null);
+      Users.login(vm.username, vm.password).then(function(token){
         $ionicHistory.goBack();
       }, function(error){
         $log.log('login failed: ' + error.status).log(error.data);

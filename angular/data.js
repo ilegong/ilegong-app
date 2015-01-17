@@ -2582,6 +2582,7 @@ var FakeData = function(){
     "/api_orders/confirm_remove/\\d+.json": OrderRemove,
     "/api_orders/confirm_receive/\\d+.json": OrderReceive, 
     "/ali_pay/wap_to_alipay/\\d+": aliPay,
+    "grant_type=password":tokenJson, 
     "grant_type=refresh_token":tokenJson
   };
 

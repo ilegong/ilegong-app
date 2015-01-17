@@ -34,8 +34,7 @@
 
     function get(url){
       if(software.fakeData){
-        console.log(url);
-        console.log(FakeData.get(url));
+        $log.log(url).log(FakeData.get(url));
         return deferred(FakeData.get(url));
       }
 
@@ -187,13 +186,9 @@
     }
 
     function login(username, password){
-      for(var i=0;i<30;i++)
-            $log.log('login');
       var data = {grant_type: 'authorization_code', client_id: software.app.client_id, username: username, password: password}
       var defer = $q.defer();
-      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id)
-        .then(function(token) {
-          
+      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id).then(function(token) {
           $log.log("login successfully: ").log(token);
           $log.log(token);
           self.onGetTokenSuccessfully(token, defer);
@@ -215,7 +210,6 @@
     }
 
     function onGetTokenSuccessfully(token, defer){
-      console.log(token);
       $rootScope.user.token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
       Base.setLocal('token', $rootScope.user.token);
       Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
