@@ -14,9 +14,9 @@
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
-        console.log('user');
-        console.log(user);
-        console.log(vm.loggedIn);
+      });
+      $scope.$watch('user.user', function(newUser, oldUser) {
+        vm.loggedIn = !_.isEmpty(newUser);
       });
     }
     function profileClick(){

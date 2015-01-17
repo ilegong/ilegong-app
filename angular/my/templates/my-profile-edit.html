@@ -1,26 +1,31 @@
-<ion-view title="修改信息" hide-tabs>
+<ion-view title="{{vm.profileStatus.desc}}" hide-tabs>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-click="vm.saveProfile()">保存</button>
+  </ion-nav-buttons>
   <ion-content >
     <div>
-      <div>
-      修改：{{vm.getContent()}}
-      </div>
-      <div ng-show="vm.state == 'portrait'">
+      <div ng-show="vm.state == 'image'">
         img
       </div>
+      <label class="item item-input" ng-show="vm.state == 'nickname'">
+        <input type="text" placeholder="{{vm.profileStatus.desc}}" ng-model="vm.profile.nickname">
+      </label>
       <div ng-show="vm.state == 'sex'">
         <div class="list">
-          <button class="row" ng-click="vm.sex=1" style="background:{{vm.sex==1?'blue':'white'}};">
+          <button class="row" ng-click="vm.sex=1">
             男
           </button>
-          <button class="row" ng-click="vm.sex=0" style="background:{{vm.sex==0? 'blue':'white'}};">
+          <button class="row" ng-click="vm.sex=0">
             女
           </button>
         </div>
       </div>
-
-  
-      <input ng-show="vm.state != 'sex'" type="text" style="background:blue;" ng-model="vm.text"/>
-      <a ng-click="vm.confirm()">提交</a>
+      <label class="item item-input" ng-show="vm.state == 'email'">
+        <input type="text" placeholder="{{vm.profileStatus.desc}}" ng-model="vm.profile.email">
+      </label>
+      <label class="item item-input" ng-show="vm.state == 'mobilephone'">
+        <input type="text" placeholder="{{vm.profileStatus.desc}}" ng-model="vm.profile.mobilephone">
+      </label>
     </div>
  </ion-content>
 </ion-view>
