@@ -9,11 +9,8 @@
   function HomeCtrl(Users,$rootScope, $scope, $http, $log, Products){
     var vm = this;
     active();
-    for(var i=0;i<30;i++)
-      $log.log('avc');
-    vm.clickkk = function(){
-      $log.log(Users.isLoggedIn());
-    }
+
+
     function active(){
 
       vm.date = (new Date()).valueOf();

@@ -2581,7 +2581,8 @@ var FakeData = function(){
     "/api_orders/confirm_undo/\\d+.json": OrderUndo,
     "/api_orders/confirm_remove/\\d+.json": OrderRemove,
     "/api_orders/confirm_receive/\\d+.json": OrderReceive, 
-    "/ali_pay/wap_to_alipay/\\d+": aliPay
+    "/ali_pay/wap_to_alipay/\\d+": aliPay,
+    "grant_type=refresh_token":tokenJson
   };
 
   var localDataMap = {

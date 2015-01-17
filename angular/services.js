@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -137,8 +137,8 @@
     }
 
     function init(){
-      self.token = {};
-      $rootScope.user.token = {};
+      console.log('init');
+          $rootScope.user ={token:{},user:{}};
       Base.getLocal('token').then(function(token){
         $rootScope.user.token = token;
         if(  !_.isEmpty($rootScope.user.token)){
@@ -154,7 +154,8 @@
       });
     }
     function isLoggedIn(){
-
+      console.log('isLoggedIn');
+      console.log($rootScope.user.token);
       return !_.isEmpty($rootScope.user.token);
     }
     function getToken(){
@@ -186,10 +187,13 @@
     }
 
     function login(username, password){
+      for(var i=0;i<30;i++)
+            $log.log('login');
       var data = {grant_type: 'authorization_code', client_id: software.app.client_id, username: username, password: password}
       var defer = $q.defer();
       Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id)
         .then(function(token) {
+          
           $log.log("login successfully: ").log(token);
           self.onGetTokenSuccessfully(token, defer);
         }, function(error){defer.reject(error)});
@@ -198,11 +202,14 @@
     function refreshToken(refreshToken){
       var defer = $q.defer();
       Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+software.app.client_id).then(function(token){
+        console.log(token);
+        console.log('asd');
         self.onGetTokenSuccessfully(token, defer);
       },function(error){defer.reject(error)})
       return defer.promise;
     }
     function logout(){
+      $rootScope.user = {token:{},user:{}};
       return $q.all(Base.removeLocal('token'), Base.removeLocal('user'));
     }
 
@@ -212,7 +219,7 @@
       Base.setLocal('token', $rootScope.user.token);
       Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
         $log.log("get user successfully: ").log(user);
-        $rootScope.user.token = user;
+        $rootScope.user.user = user;
         Base.setLocal('user', $rootScope.user.user);
         defer.resolve($rootScope.user.token);
       }, function(error){defer.reject(error)});

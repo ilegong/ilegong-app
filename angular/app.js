@@ -18,7 +18,7 @@
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
-      Users.init();
+      
     });
   };
 
@@ -138,11 +138,12 @@
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
   }
 
-  function AppCtrl($q,$scope,$rootScope,Orders) {
+  function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
     $rootScope.editAddress = $rootScope.editAddress || {defer:{}};//currentAddress
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{},user:{}}
+    Users.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
