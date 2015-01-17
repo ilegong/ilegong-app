@@ -10,16 +10,23 @@
       <label class="item item-input" ng-show="vm.state == 'nickname'">
         <input type="text" placeholder="{{vm.profileStatus.desc}}" ng-model="vm.profile.nickname">
       </label>
-      <div ng-show="vm.state == 'sex'">
-        <div class="list">
-          <button class="row" ng-click="vm.sex=1">
+      <div class="list" ng-show="vm.state == 'sex'">
+        <label class="item item-radio">
+          <input type="radio" name="sex" ng-checked="vm.profile.sex != 0" ng-model="vm.profile.sex" ng-value="1">
+          <div class="item-content">
             男
-          </button>
-          <button class="row" ng-click="vm.sex=0">
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="sex" ng-checked="vm.profile.sex == 0" ng-model="vm.profile.sex"  ng-value="0">
+          <div class="item-content">
             女
-          </button>
-        </div>
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
       </div>
+
       <label class="item item-input" ng-show="vm.state == 'email'">
         <input type="text" placeholder="{{vm.profileStatus.desc}}" ng-model="vm.profile.email">
       </label>

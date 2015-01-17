@@ -20,7 +20,7 @@
         $rootScope.user.user.my_profile.User = _.extend($rootScope.user.user.my_profile.User, vm.profile);
         $state.go("app.my-profile");
       }, function(e){
-      });
+      }); 
     }
     vm.confirm = function(){
       $ionicHistory.goBack();
