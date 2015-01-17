@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, timeout: 3000, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -186,13 +186,13 @@
     }
 
     function login(username, password){
-      var data = {grant_type: 'authorization_code', client_id: software.app.client_id, username: username, password: password}
       var defer = $q.defer();
       Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id).then(function(token) {
+          defer.reject("");
           $log.log("login successfully: ").log(token);
           $log.log(token);
           self.onGetTokenSuccessfully(token, defer);
-        }, function(error){defer.reject(error)});
+        }, function(e){defer.reject(e)});
       return defer.promise; 
     }
     function refreshToken(refreshToken){

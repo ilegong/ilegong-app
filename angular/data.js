@@ -2576,12 +2576,12 @@ var FakeData = function(){
     "/api_orders/cart_edit_num/\\d+/\\d+.json":CartsEditNumResult, 
     "/check/verify": {success: true}, 
     "/check/message_code": {success: true}, 
-    "/oauth/register": tokenJson, 
     "/api_orders/my_profile.json": userJson,
     "/api_orders/confirm_undo/\\d+.json": OrderUndo,
     "/api_orders/confirm_remove/\\d+.json": OrderRemove,
     "/api_orders/confirm_receive/\\d+.json": OrderReceive, 
     "/ali_pay/wap_to_alipay/\\d+": aliPay,
+    "/oauth/register": tokenJson, 
     "grant_type=password":tokenJson, 
     "grant_type=refresh_token":tokenJson
   };
