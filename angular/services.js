@@ -3,7 +3,7 @@
 
   angular
   .module('app.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   .service('Users', Users)
   .service('Products', Products)
@@ -215,7 +215,7 @@
 
     function onGetTokenSuccessfully(token, defer){
       console.log(token);
-      $rootScope.user.token = _.extend(token,{expires_at:token.expires_in + ((new Date()).valueOf())/1000});
+      $rootScope.user.token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
       Base.setLocal('token', $rootScope.user.token);
       Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
         $log.log("get user successfully: ").log(user);

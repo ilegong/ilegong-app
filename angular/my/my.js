@@ -122,8 +122,8 @@
     vm.username = "";
     vm.password = "";
     vm.login = login;
-
     function login(){
+
       Users.login(vm.username, vm.password).then(function(){
         $rootScope.myMain.defer.resolve(null);
         $ionicHistory.goBack();

@@ -132,7 +132,7 @@
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
     vm.addAddress = addAddress;
-    vm.getCities = getCities;
+
     vm.setAddress = setAddress;
     activate();
 
