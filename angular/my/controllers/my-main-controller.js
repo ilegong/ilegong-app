@@ -9,14 +9,14 @@
     var vm = this;
     vm.profileClick = profileClick;
     activate();
-
     function activate() {
-      console.log("afad");
-      vm.loggedIn = false;
+      vm.loggedIn = Users.isLoggedIn();
       Users.getUser().then(function(user){
-        vm.loggedIn = true;
         vm.user = user.my_profile.User;
         vm.trying = user.my_profile.Shichituan;
+        console.log('user');
+        console.log(user);
+        console.log(vm.loggedIn);
       });
     }
     function profileClick(){
@@ -25,7 +25,7 @@
         activate();
       })
       if(vm.loggedIn){
-        $state.go("app.my-detail");
+        $state.go("app.my-profile");
       }
       else{
         $state.go("app.my-account-login");

@@ -65,6 +65,8 @@
         $rootScope['editAddress']['defer'].resolve(null);
         $ionicHistory.goBack();
       })
+
+      
     }
     function editAddress(){
       var t = vm.address.OrderConsignees;

@@ -7,22 +7,16 @@
   /* @ngInject */
   function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, software, Users){
     var vm = this;
+    vm.username = "";
+    vm.password = "";
     vm.login = login;
-    vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
-    activate();
-
-    function activate(){
-      vm.username = "";
-      vm.password = "";
-      vm.loginFailed = false;
-    }
-
     function login(){
-      Users.login(vm.username, vm.password).then(function(token){
+
+      Users.login(vm.username, vm.password).then(function(){
+        $rootScope.myMain.defer.resolve(null);
         $ionicHistory.goBack();
-      }, function(e){
-        vm.loginFailed = true;
-        $timeout(function(){vm.loginFailed = false}, software.timeout);
+      }, function(error){
+        $log.log('login failed: ' + error.status).log(error.data);
       })
     }
   }

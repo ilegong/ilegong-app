@@ -2,10 +2,10 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyDetailCtrl',MyDetailCtrl)
+  .controller('MyProfileCtrl', MyProfileCtrl)
 
   /* @ngInject */
-  function MyDetailCtrl($scope, $rootScope, $log, $state, Users){
+  function MyProfileCtrl($scope, $rootScope, $log, $state, Users){
     var vm = this;
     vm.logout = logout;
     activate();

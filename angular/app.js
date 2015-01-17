@@ -39,8 +39,8 @@
       .state('app.my-addresses-info',{url:'/my-addresses-info/:state/:addrId',views:{'app-my':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
       .state('app.my-address-edit',{url:'/my-address-edit/:editId',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
 
-      .state('app.my-detail',{url:'/my-detail',views:{'app-my':{templateUrl:'my-detail.html',controller:'MyDetailCtrl as vm'}}})
-      .state('app.my-detail-edit',{url:'/my-detail-edit/:state',views:{'app-my':{templateUrl:'my-detail-edit.html',controller:'MyDetailEditCtrl as vm'}}})
+      .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
+      .state('app.my-profile-edit',{url:'/my-profile-edit/:state',views:{'app-my':{templateUrl:'my-profile-edit.html',controller:'MyProfileEditCtrl as vm'}}})
 
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})

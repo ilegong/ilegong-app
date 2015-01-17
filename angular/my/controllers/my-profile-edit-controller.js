@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyDetailEditCtrl',MyDetailEditCtrl)
+  .controller('MyProfileEditCtrl', MyProfileEditCtrl)
 
-  function MyDetailEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
+  function MyProfileEditCtrl($stateParams,$scope,$rootScope,$log,Profile){
     var vm = this;
 
     activate();
@@ -12,6 +12,7 @@
     function activate(){
       vm.state = $stateParams.state;
       vm.sex = -1;
+
     }
 
     vm.confirm = function(){
@@ -32,6 +33,7 @@
       if(vm.state == 'company'){
         Profile.edit(null,null,null,null,vm.text);
       }
+      $ionicHistory.goBack();
     }
 
     vm.getContent = function(){
