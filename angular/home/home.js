@@ -2,7 +2,7 @@
   "use strict";
 
   angular
-  .module('ilegong.home', ['app.services'])
+  .module('ilegong.home', ['module.services'])
   .controller('HomeCtrl', HomeCtrl)
   
   /* @ngInject */

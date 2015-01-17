@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','app.services', 'app.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'app.directives'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)

@@ -1,4 +1,4 @@
 (function (window, angular) {
   "use strict";
-  angular.module('module.cart', ['app.services','ionic'])
+  angular.module('module.cart', ['module.services','ionic'])
 })(window, window.angular);
