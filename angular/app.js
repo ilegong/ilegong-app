@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'ilegong.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','app.services', 'app.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','app.services', 'app.directives'])
   .run(initApp)
   .config(configStates)
   .config(extendLog)
@@ -68,8 +68,8 @@
       .state('app.cart-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
       .state('app.cart-account-login', {url: '/cart-account-login', views: {'app-cart': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
 
-      .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoresCtrl as vm'}}})
-      .state('store', {url: '/stores/:storeId', templateUrl: 'store.html', controller: 'StoreCtrl as app', abstract: true})
+      .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
+      .state('store', {url: '/stores/:storeId', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
       .state('store.product-detail', {url: '/products/:id/:from', views: {'store-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
