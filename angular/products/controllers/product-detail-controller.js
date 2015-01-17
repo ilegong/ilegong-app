@@ -1,7 +1,7 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.products', [])
+  angular.module('module.products')
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
