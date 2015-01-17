@@ -131,7 +131,6 @@
       logout: logout, 
       aliPay: aliPay,
       getTokenLocally:getTokenLocally,
-      isLoggedIn:isLoggedIn,
       refreshToken:refreshToken
     }
 
@@ -151,11 +150,6 @@
           }
         }
       });
-    }
-    function isLoggedIn(){
-      console.log('isLoggedIn');
-      console.log($rootScope.user.token);
-      return !_.isEmpty($rootScope.user.token);
     }
     function getToken(){
       var defer = $q.defer();
