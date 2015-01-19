@@ -293,6 +293,10 @@ a{
 
 .cart{
   background:#eeeeee;
+  .nav-bar-button{
+    color:white;
+    font-weight:bold;
+  }
   .icon{
     background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
     background-size: 25em 25em;
@@ -325,7 +329,7 @@ a{
   .icon-add{
     width:2.126em;
     height:2.126em;
-    background-position: -12.92em -3.34em;
+    background-position: -13em -3.34em;
   }
   .icon-reduce{
     width:2.126em;
@@ -382,12 +386,15 @@ a{
   }
   .product-content{
     display:inline-block;
-    width:50%;
+    width:45%;
   }
   .product-title{
     display:block;
     font-size:1.25em;
     color:#666666;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
   }
   .product-subtitle{
     display:block;
@@ -423,7 +430,7 @@ a{
     width:5em;
   }
   .brand{
-    background:white;
+    background:snow;
     .brand-name{
       font-size:20px;
       color:#444444;
@@ -444,8 +451,16 @@ a{
       width:100%;
       border:1px solid #bbbbbb;
     }
-    .hr{
-   
+    .brand-hr{
+      border-top:none;
+      border-bottom:1px solid darkgray;
+    }
+    .item-hr{
+      border-top:none;
+      border-bottom:1px solid lightgray;
+    }
+    .item-row{
+      height:6em;
     }
   }
   .login-text{
@@ -476,16 +491,25 @@ a{
         border-right: 0;
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
+        margin-bottom:-12px;
+        padding-bottom:31px;
       }
       span.count-add{
         border-left: 0;
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
+        margin-left:-4px;
+        margin-bottom:-12px;
+        padding-bottom:31px;
       }
       .count{
         padding: 4px 1px;
         width: 34%;
         border-radius:0px;
+        border-left:none;
+        border-right:none;
+        margin-left:-4px;
+        height:33px;
       }
   }
   .bar-footer{
@@ -510,6 +534,7 @@ a{
       font-size:1.5em;
       margin-left:14px;
       margin-top:-5px;
+      width:7em;
     }
     .buttons{
       margin-left:-10px;

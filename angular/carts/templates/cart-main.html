@@ -1,6 +1,6 @@
 <ion-view title="朋友说" hide-back-button='true' class="cart">
-  <ion-nav-buttons side='right'>
-    <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button ng-show="vm.brands.length > 0">
+  <ion-nav-buttons  side='right'>
+    <button  style="color:white;font-weight:bold"class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button ng-show="vm.brands.length > 0">
   </ion-nav-buttons>
 
   <ion-header-bar align-title="left" class="bar-subheader" ng-show="{{vm.isShowLogin()}}" >
@@ -12,7 +12,7 @@
     </div>
   </ion-header-bar>
 
-  <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{(!vm.isShowLogin())?'padding-top:4em;':''}}">
+  <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{(!vm.isShowLogin())?'padding-top:75px;':''}}">
     <div  class="empty-div" ng-show="vm.brands.length == 0">
       <div class="icon icon-cart empty-cart"></div>
       <div class="empty-text">
@@ -22,7 +22,7 @@
     </div>
     <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
 
-      <div class="row">
+      <div class="row ">
         <span class="col col-10">
           <span class="brand-circle icon {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(vm.editMode,brand.Brand.id)" ng-show="!vm.editMode">
           </span>          
@@ -35,9 +35,9 @@
           {{brand.Brand.name}}
         </span>
       </div>
-      <hr/>
+      <hr class="brand-hr"/>
       <div  ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['checked'] = false;cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
-        <div class="row">
+        <div class="row item-row">
         <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
           <span class="item-circle icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
           </span>
@@ -75,7 +75,7 @@
           删除
         </span>
         </div>
-        <hr class="hr" />
+        <hr class="item-hr" />
       </div>
     </div>
 
