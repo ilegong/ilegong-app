@@ -26,29 +26,19 @@
     }
 
     function init(){
-      
-      for(var i=0;i<50;i++){
-        $log.log('locally');
-      }
-      $log.log('init');
       $rootScope.user ={token:{},user:{}};
       Base.getLocal('token').then(function(token){
         $rootScope.user.token = token || {};
         if(  !_.isEmpty($rootScope.user.token)){
-          $log.log('not empty');
           if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
-            $log.log('token ok');
             Base.getLocal('user').then(function(user){
               $rootScope.user.user = user;
             });
           }
           else{
-            $log.log('refresh');
             refreshToken(token.refresh_token);
           }
         }
-        $log.log('may empty');
-        $log.log($rootScope.user.token);
       });
     }
     function getToken(){
@@ -64,8 +54,6 @@
       return defer.promise;
     }
     function getTokenLocally(){
-
-      $log.log($rootScope.user.token);
       return $rootScope.user.token;
     }
     function getUser(){
@@ -84,8 +72,6 @@
     function login(username, password){
       var defer = $q.defer();
       Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id).then(function(token) {
-          $log.log("login successfully: ").log(token);
-          $log.log(token);
           self.onGetTokenSuccessfully(token, defer);
         }, function(e){defer.reject(e)});
       return defer.promise; 

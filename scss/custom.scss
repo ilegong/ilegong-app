@@ -338,7 +338,7 @@ a{
     background-position:-17.5em -3.34em;
   }
   .empty-cart{
-    margin-left:10em;
+    margin-left:9.5em;
     margin-top:12em;
   }
   .empty-button{
@@ -346,8 +346,11 @@ a{
     background:orange;
     color:white;
     border:none;
-    border-radius:4px;
-
+    border-radius:8px;
+    width:5em;
+    padding-top:3px;
+    font-size:1.5em;
+    font-weight:bold;
   }
   .empty-div{
     text-align:center;
@@ -355,9 +358,6 @@ a{
   .empty-text{
     margin-top:0.5em;
     color:#999999;
-  }
-  .brand-name{
-    font-size:20px;
   }
   .delete-icon{
     display:inline-block; 
@@ -387,6 +387,7 @@ a{
   .product-title{
     display:block;
     font-size:1.25em;
+    color:#666666;
   }
   .product-subtitle{
     display:block;
@@ -423,6 +424,29 @@ a{
   }
   .brand{
     background:white;
+    .brand-name{
+      font-size:20px;
+      color:#444444;
+    }
+    .brand-image{
+      width:100%;
+      padding-top:0.025em;
+      border-radius:7px;
+      height:26px;
+    }
+    .brand-circle{
+      margin-top:2px;
+    }
+    .item-circle{
+      margin-left:6px;
+    }
+    .item-image{
+      width:100%;
+      border:1px solid #bbbbbb;
+    }
+    .hr{
+   
+    }
   }
   .login-text{
     margin-top:-1em;
@@ -464,8 +488,13 @@ a{
         border-radius:0px;
       }
   }
-  .footer-bar{
+  .bar-footer{
+    padding-right:0;
+    .circle{
+      margin-top:-4px;
+    }
     .total-price{
+      color:gray;
       padding-left:10px;
       margin-top:-6px;
       .total-price{
@@ -474,20 +503,34 @@ a{
       .total-price-content{
 
       }
+
     }
     .total-price-price{
       color:orange;
       font-size:1.5em;
       margin-left:14px;
+      margin-top:-5px;
     }
-    .jiesuan{
-      background:orange;
-      color:white;
-      margin-left:6em;
-      width:5em;
-      border:none;
+    .buttons{
+      margin-left:-10px;
+      .jiesuan{
+        background:orange;
+        color:white;
+        margin-left:5em;
+        border:none;
+        width:6em;
+        border-radius:0;
+        margin-top:-10px;
+        margin-bottom:-10px;
+        font-weight: bold;
+        font-size:1.04em;
+      }    
     }
 
+
+    .footer-bar-row{
+      padding-right:0;
+    }
   }
   .item{
 
@@ -537,7 +580,7 @@ a{
 }
 
 .category{
-  .card.product{
+  .card.product{ 
     padding-top: 0.5em;
     border-bottom: 1px #dddddd solid;
     margin: 0;

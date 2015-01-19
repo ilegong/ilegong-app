@@ -21,6 +21,8 @@
     vm.goShop = goShop;
     vm.isShowLogin = isShowLogin;
     vm.goLogin = goLogin;
+    vm.brandChecked = brandChecked;
+    vm.toggleBrand = toggleBrand;
     activate();
 
     function activate(){
@@ -69,7 +71,26 @@
         cartItem['deleteMode'] = false;
       })
     }
-
+    function brandChecked(id){
+      var t = vm.getCartItemsOfBrand(id);
+      return t.length == (_.countBy(t,function(cartItem){
+        return cartItem.checked;
+      }).true);
+    }
+    function toggleBrand(editMode,brandId){
+      if(!editMode){
+        if(!vm.brandChecked(brandId)){
+          _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
+          cartItem['checked'] = true;
+          });          
+        }
+        else{
+          _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
+          cartItem['checked'] = false;
+          });
+        }
+      }
+    }
     function toggleCartItem(editMode,product,e){
       if(editMode){
         product['deleteMode'] = !product['deleteMode'];
