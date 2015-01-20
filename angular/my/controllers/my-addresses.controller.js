@@ -15,10 +15,6 @@
     activate();
 
     function activate() {
-      Addresses.getProvinces().then(function(provinces){
-        vm.provinces = provinces;
-
-      })
       Addresses.list().then(function(data) {
         vm.addresses = data;
       })
