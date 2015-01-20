@@ -1,12 +1,11 @@
 uct
-<ion-view title="商品详情" hide-tabs>
-  <ion-content class="product-detail padding">
+<ion-view class="product-detail" title="商品详情" hide-tabs>
+  <ion-content class=" padding">
     <div class="main">
-      <div>
+      <div class="product-image">
         <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
       </div>
-
-      <div >
+      <div class="product-name-margin-top">
         <span class="nameFont">
           {{vm.product.Product.name}}
         </span>
@@ -16,8 +15,12 @@ uct
         </span>
       </div>
       <div>
+        <span class="price-symbol"
+        >
+          ￥
+        </span>
         <span class="price">
-          {{vm.product.Product.price | currency:"￥"}}
+          {{vm.product.Product.price | currency:''}}
         </span>
         <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
           t_o_price{{vm.product.Product.original_price | currency:"￥"}}
@@ -26,43 +29,48 @@ uct
           t_口碑评价(123)
         </span>
         <p/>
-        <span>
+        <span class="suggest">
           t_好友。。。推荐了该产品
         </span>
       </div>
       <hr/>
       <div class="row">
-        <div class="col col-20">
+        <div class="left-title col col-20">
           促销：
         </div>
         <div class="col">
-          <span>
+          <span class="offer">
             t_有红包
           </span>
-          <p/>
-          <span>
+          <p class="promotion-text"/>
+          <span >
             t_本店商品满99元立减10元
           </span>
         </div>
       </div>
       <hr/>
         <div class="row">
-          <div class="col col-20">
+          <div class="left-title col col-20">
             规格：
           </div>
           <div class="col">
-            t_..........
+            <span class="specs-item">
+              t_8斤2颗
+            </span>
           </div>
         </div>
         <div class="row">
-          <div class="col col-20">
+          <div class="left-title col col-20">
             数量：
           </div>
           <div class="col">
-              <div class="item-count row">
-              <span class="count-reduce col col-25" ng-click="buttonReduceClick()">-</span>
-              <input class="count col col-50" ng-model="vm.count"></input>
-              <span class="count-add col col-25" ng-click="buttonAddClick()">+</span>
+              <span class="number-span ">
+                <span class="icon icon-reduce count-reduce " ng-click="buttonReduceClick()"></span>
+                <span class="count">
+                  <input  ng-model="vm.count">
+                </span>
+                <span class="icon icon-add count-add " ng-click="buttonAddClick()"></span>
+              </span>
             </div>
           </div>
         </div>
@@ -70,13 +78,15 @@ uct
 
       <div class="list">
         <a class="item item-icon-right">
-          <i class="icon ion-ios7-arrow-right"></i>
-          <img src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
-          店家：{{vm.brand.Brand.name}}
+          <i class=" icon ion-ios7-arrow-right"></i>
+          <img class="brand-image" src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
+          <span class="brand-name">
+            进入{{vm.brand.Brand.name}}的店铺
+          </span>
         </a>
       </div>
       <div class="row">
-        <div class="col col-20">
+        <div class="left-title col col-20">
           快递：
         </div>
         <div class="col">
@@ -86,20 +96,12 @@ uct
         </div>
       </div>
       <div class="row">
-        <div class="col col-20">
+        <div class="left-title col col-20">
           服务：
         </div>
         <div class="col">
           t_本商品由。。提供，周日统一发货，朋友说提供售后服务。。。
         </div>
-      </div>
-      <div >
-        <a class="button button-energized buttonHeight" ng-click="vm.addToCart()">
-          添加到购物车
-        </a>
-        <a class="button button-assertive buttonHeight" ng-click="vm.addToCart()" ui-sref="app.cart" >
-          立即购买
-          </a>
       </div>
       <p/>
       <div class="row">
@@ -128,4 +130,20 @@ uct
       </ui-view>
     </div>
   </ion-content>
+  <ion-footer-bar class="footer footer-bar">
+    <span class="footer-buy-now">
+      立即购买
+    </span>
+    <span class="footer-add-cart">
+      加入购物车
+    </span>
+    <span class="footer-cart">
+      <span class="footer-cart-image icon icon-cart">
+      </span>
+      <br/>
+      <span class="footer-cart-text">
+        购物车
+      </span>
+    </span>
+  </ion-footer-bar>
 </ion-view>

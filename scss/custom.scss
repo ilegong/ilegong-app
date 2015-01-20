@@ -395,7 +395,8 @@ a{
   }
   .product-content{
     display:inline-block;
-    width:45%;
+    width:54%;
+    margin-right:-14px;
   }
   .product-title{
     display:block;
@@ -404,6 +405,8 @@ a{
     text-overflow:ellipsis;
     overflow:hidden;
     white-space:nowrap;
+    margin-top:6px;
+    margin-bottom:2px;
   }
   .product-subtitle{
     display:block;
@@ -416,6 +419,7 @@ a{
     font-size:1.25em;
 
   }
+
   .product-num{
     display:inline-block;
     padding-left:0.5em;
@@ -427,6 +431,9 @@ a{
     width:2.7em;
     text-align:center;
     padding-top:2.25em;
+    padding-top:28px;
+    color:white;
+    font-weight:bold;
   }
   .edit-icon{
     display:inline-block;
@@ -439,10 +446,11 @@ a{
     width:5em;
   }
   .brand{
-    background:snow;
+    background:ivory;
     .brand-name{
       font-size:20px;
       color:#444444;
+      margin-top:3px;
     }
     .brand-image{
       width:100%;
@@ -471,6 +479,7 @@ a{
     .item-row{
       height:6em;
     }
+
   }
   .login-text{
     margin-top:-1em;
@@ -763,10 +772,78 @@ a{
 }
 
 .product-detail{
+  color:#666666;
+  hr{
+    border-bottom:1px solid;
+    border-left:none;
+    border-right:none;
+    border-top:none;
+  }
+  .icon{
+    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+    background-size: 25em 25em;
+  }
+  .icon-cart{
+    width:2.09em;
+    height:1.55em;
+    background-position:-10.84em 0;
+  }
+  .footer{
+    height:3em;
+    font-size:1.5em;
+    color:white;
+    font-weight:bold;
+  }
+  .footer-buy-now{
+    background:#ffa200;
+    border-radius:7px;
+    padding:0.7em;
+    margin-left:0.5em;
+    width:6.4em;
+    text-align:center;
+  }
+  .footer-add-cart{
+    background:red;
+    border-radius:7px;
+    padding:0.7em;
+    margin-left:0.8em;
+    width:6.4em;
+    text-align:center;
+  }
+  .footer-cart{
+    margin-left:0.9em;
+    margin-top:0.1em;
+
+  }
+  .footer-cart-text{
+    color:#666666;
+    font-weight:normal;
+    font-size:0.5em;
+    width:4em;
+    margin-left:0.3em;
+  }
+  .footer-cart-image{
+    display:inline-block;
+    margin-bottom:-0.3em;
+  }
   .product-intro{
     img{
       width:100%;
     }
+  }
+  .suggest{
+    font-size:1.25em;
+  }
+
+  .offer{
+    background:#29ac0e;
+    border-radius:3px;
+    padding:2px;
+    color:white;
+    font-weight:bold;
+  }
+  .product-image{
+    margin:-9px;
   }
   .imageWidthFull{
     width:100%;
@@ -774,9 +851,14 @@ a{
   .nameFont{
     font-size:1.5em;
   }
+  .price-symbol{
+    color:#ffa200;
+    margin-right:-0.3em;
+  }
   .price{
-    color: #c71673;
+    color: #ffa200;
     font-size: 24px;
+
   }
   .originalPrice{
     text-decoration: line-through;
@@ -784,40 +866,86 @@ a{
   }
   .comment-count{
     float:right;
+    font-size:1.25em;
+  }
+  .product-name-margin-top{
+    margin-top:11px;
+  }
+  .left-title{
+    font-size:1.25em;
+    padding-left:13px;
+    padding-top:3px;
+  }
+  .brand-image{
+    height:38px;
+    margin-top:-7px;
+    margin-bottom:-10px;
+    width:38px;
+    border-radius:7px;
+  }
+  .brand-name{
+    margin-left:6px;
+    font-size:1.375em;
+    color:#ffa200;
+  }
+  .specs-item{
+    border:1px black solid;
+    padding:7px;
+    font-weight:bold;
   }
   .shipFee{
     
   }
-  .item-count{
-    border-collapse: separate;
-    span{
-      display: inline-block;
-      font-size: 14px;
-      font-weight: normal;
-      line-height: 1;
-      text-align: center;
-      background-color: #eee;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    span.count-reduce{
-      border-right: 0;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-    }
-    span.count-add{
-      border-left: 0;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-    }
-    .count{
-      padding: 4px 1px;
-      width: 34%;
-    }
+  .promotion-text{
+    margin-top:4px;
+    margin-bottom:-2px;
+  }
+  .number-span{
+      border-collapse: separate;
+      span{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      span.count-reduce{
+        border-right: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        margin-bottom:-12px;
+        padding-bottom:31px;
+      }
+      span.count-add{
+        border-left: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left:-4px;
+        margin-bottom:-12px;
+        padding-bottom:31px;
+      }
+      .count{
+        padding: 4px 1px;
+        width: 34%;
+        border-radius:0px;
+        border-left:none;
+        border-right:none;
+        margin-left:-4px;
+        height:33px;
+      }
+      .icon-reduce{
+        width:2.45em;
+        height:2.39em;
+        background-position:-5.02em 0;
+      }
+      .icon-add{
+        width:2.55em;
+        height:2.39em;
+        background-position:-7.98em 0;
+      }
   }
   .numBox{
     width:10%;

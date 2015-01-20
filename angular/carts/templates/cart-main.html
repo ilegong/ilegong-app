@@ -49,10 +49,10 @@
           <span class="product-title">
             {{cartItem.Cart.name}}
           </span>
-          <span class="product-subtitle" ng-show="!vm.editMode || !cartItem['showEdit']">
+          <span class="product-subtitle" ng-show="!cartItem['showEdit']">
             subtitle
           </span>
-          <span class="number-span" ng-show="vm.editMode && cartItem['showEdit']">
+          <span class="number-span" ng-show="cartItem['showEdit']">
             <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
             <span class="count">
               <input  ng-model="cartItem.Cart.num"/>
@@ -67,7 +67,7 @@
           <span class="product-num">
             × {{cartItem.Cart.num}}
           </span>
-          <span ng-show="vm.editMode" class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
+          <span  class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
           </span>
         </span>
 
