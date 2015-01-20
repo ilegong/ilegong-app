@@ -142,6 +142,7 @@
   /* @ngInject */
   function configApp($ionicConfigProvider){
     $ionicConfigProvider.tabs.position('bottom');
+    $ionicConfigProvider.navBar.alignTitle('center')
   }
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
