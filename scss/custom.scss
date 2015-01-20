@@ -49,7 +49,10 @@ a{
     border-color: #ddd;
   }
 }
-
+.item-select select {
+  width: 100%;
+  direction: inherit;
+}
 .padding .row{
   padding: 5px 0;
 }
