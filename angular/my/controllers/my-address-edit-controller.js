@@ -27,7 +27,7 @@
         vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
 
         var orderConsignees = vm.address.OrderConsignees;        
-        Addresses.getAddress(corderConsignees.province_id, orderConsignees.city_id, corderConsignees.county_id).then(function(data){
+        Addresses.getAddress(orderConsignees.province_id, orderConsignees.city_id, orderConsignees.county_id).then(function(data){
           vm.cities = data.city_list;
           vm.city = _.find(vm.cities, function(city){return city.id == vm.address.OrderConsignees.city_id});
           vm.counties = data.county_list;

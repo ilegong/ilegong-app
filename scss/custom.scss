@@ -86,6 +86,15 @@ a{
 .icon.pys-icon.icon-my-address{
   background-position: -18.0952380952em -8.57142857143em;
 }
+.icon.pys-icon.icon-unchecked{
+  background-position: -21.9047619048em 0;
+}
+.icon.pys-icon.icon-checked{
+  background-position: -24.2857142857em 0;
+}
+.icon.pys-icon.icon-edit{
+  background-position: -17.8571428571em 0;
+}
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
   font-size: 14px;
@@ -935,7 +944,18 @@ a{
     }
 
   }
-
+}
+.my-addresses{
+  .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
+    top: 1.42857142857em;
+  }
+  .address{
+    .name, .detail{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
 }
 .my-address-edit{
   background:#dddddd;

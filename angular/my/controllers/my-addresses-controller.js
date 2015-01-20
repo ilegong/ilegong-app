@@ -7,15 +7,14 @@
   function MyAddressesCtrl($q, $state, $ionicHistory, $stateParams, $log, $scope, $rootScope, Orders, Addresses){
     var vm = this;
     vm.isChecked = isChecked;
-    vm.itemClick = itemClick;
     vm.setDefaultAddress = setDefaultAddress;
+    vm.addAddress = addAddress;
     vm.editAddress = editAddress;
     activate();
 
     function activate() {
       vm.state = $stateParams.state;
       vm.addrId = $stateParams.addrId;
-      vm.editMode = false;
       Addresses.list().then(function(addresses) {
         vm.addresses = _.map(addresses, function(address){
           address.OrderConsignees.checked = vm.isChecked(address);
@@ -24,26 +23,6 @@
       })
     }
 
-    function itemClick(addr){
-      if(vm.state == 0){
-        if(vm.editMode){
-          vm.editAddress(addr);
-        }
-        else{
-          vm.setDefaultAddress(addr.OrderConsignees.id);
-        }
-      }
-      else{
-        if(vm.editMode){
-          vm.editAddress(addr);
-        }
-        else{
-          console.log($rootScope.cart);
-          $rootScope.cart['setAddressDefer'].resolve(addr);
-          $ionicHistory.goBack();
-        }
-      }
-    }
     function editAddress(addr){
       $rootScope['editAddress'] = {};
       $rootScope['editAddress']['defer'] = $q.defer();
@@ -62,7 +41,9 @@
         activate();
       })
     }
+    function addAddress(){
 
+    }
     function isChecked(address){
       if(vm.state == 0){
         return address.OrderConsignees.status == 1;
@@ -74,7 +55,15 @@
 
     function setDefaultAddress(id){
       Addresses.setDefaultAddress(id).then(function(result){
-        activate();
+        if(vm.state == 0){
+          _.each(vm.addresses, function(address){
+             address.OrderConsignees.checked = address.OrderConsignees.id == id;
+          });
+        }
+        else{
+          $rootScope.cart['setAddressDefer'].resolve(addr);
+          $ionicHistory.goBack();
+        }
       });
     }
   }  
