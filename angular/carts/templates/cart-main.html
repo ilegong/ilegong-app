@@ -3,22 +3,22 @@
     <button  style="color:white;font-weight:bold"class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button ng-show="vm.brands.length > 0">
   </ion-nav-buttons>
 
-  <ion-header-bar align-title="left" class="bar-subheader" ng-show="{{vm.isShowLogin()}}" >
+  <ion-header-bar align-title="left" class="bar-subheader" ng-show="{{!vm.isLoggedIn()}}" >
     <div class="row">
       <div class="col col-75 login-text">温馨提示：登陆后您可以同步电脑，微信与APP购物车中的商品。</div>
-      <div class="buttons" ng-click="vm.goLogin()">
+      <div class="buttons" ng-click="vm.toLoginPage()">
         <button class="button login-button">马上登陆</button>
       </div>
     </div>
   </ion-header-bar>
 
-  <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{(!vm.isShowLogin())?'padding-top:75px;':''}}">
+  <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{(vm.isLoggedIn())?'padding-top:75px;':''}}">
     <div  class="empty-div" ng-show="vm.brands.length == 0">
       <div class="icon icon-cart empty-cart"></div>
       <div class="empty-text">
         购物车还是空的，去选点好吃的吧！
       </div>
-      <a class="button empty-button go-show-button" ng-click="vm.goShop();">去逛逛</a>
+      <a class="button empty-button go-show-button" ng-click="$log.log('clicked');$state.go('app.home');">去逛逛</a>
     </div>
     <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
 
@@ -78,29 +78,6 @@
         <hr class="item-hr" />
       </div>
     </div>
-
-<!--
-    <div class="row item" ng-repeat="cartItem in vm.cartItems" ng-show="vm.cartItems.length > 0">
-      <a class="col col-25 item-title" href="">
-        <span>{{cartItem.Cart.name}}</span><br/>
-        <img class="img" src="{{cartItem.Cart.coverimg}}"/>
-      </a>
-      <div class="col col-50">
-        <div class='item-price col-top'>{{cartItem.Cart.price}}元</div>
-        <div class='item-count row col-center'>
-          <span class="count-reduce col col-25" ng-click="vm.reduceCartItemNum(cartItem.Cart)">-</span>
-          <input class="count col col-50" ng-model="cartItem.Cart.num"/>
-          <span class="count-add col col-25" ng-click="vm.addCartItemNum(cartItem.Cart)">+</span>
-        </div>
-      </div>
-      <div class="col-25">
-        <div class='item-price-total'>{{cartItem.Cart.price * cartItem.Cart.num}}元</div>
-        <a href= "" class="" ng-click="vm.deleteCartItem({{cartItem.Cart.id}})">
-          删除
-        </a>
-      </div>
-    </div>
--->
   </ion-content>
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="row footer-bar-row">
@@ -118,8 +95,8 @@
       <div class="col col-25">
         <h1 class="total-price-price">{{vm.getTotalPrice() | currency:"￥"}}</h1>
       </div>
-      <div class="buttons buttons" ng-click="vm.confirmCartInfo()">
-        <button class="button jiesuan">结算({{vm.getCheckedNumber()}})</button>
+      <div class="buttons buttons">
+        <button class="button jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()">结算({{vm.getCheckedNumber()}})</button>
       </div>
     </div>
   </ion-footer-bar>

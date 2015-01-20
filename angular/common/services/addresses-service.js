@@ -10,7 +10,6 @@
       list:list,
       getAddressById: getAddressById, 
       getAddress:getAddress,
-      getDefaultAddress: getDefaultAddress, 
       deleteAddress: deleteAddress,
       editAddress: editAddress,
       addAddress: addAddress,
@@ -21,15 +20,6 @@
     }
     function list(){
       return Base.get('/api_orders/order_consignees.json?access_token='+Users.getTokenLocally().access_token);
-    }
-    function getDefaultAddress(){
-      return list().then(function(addresses){
-        var defaultAddress =  _.find(addresses, function(address){return address.OrderConsignees.status == 1});
-        if(_.isEmpty(defaultAddress) && addresses.length > 0){
-          defaultAddress = addresses[0];
-        }
-        return defaultAddress;
-      });
     }
     function getAddressById(id){
       return list().then(function(addresses){

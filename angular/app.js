@@ -139,18 +139,24 @@
   }
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
-    $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
-    $rootScope.addresses = $rootScope.addresses || [];
-    $rootScope.editAddress = $rootScope.editAddress || {defer:{}};//currentAddress
+    $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
+    $rootScope.address = $rootScope.address || {addresses: [], defaultAddress: {}, currentAddress: {}};
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
-    console.log('userInit');
     Users.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
     }
+    $rootScope.updateAddresses = function(addresses){
+      var defaultAddress =  _.find(addresses, function(address){return address.OrderConsignees.status == 1});
+      if(_.isEmpty(defaultAddress) && addresses.length > 0){
+        defaultAddress = addresses[0];
+      }
+      $rootScope.address.addresses = addresses;
+      $rootScope.address.defaultAddress = defaultAddress;
+      $rootScope.address.currentAddress = defaultAddress;
+    }
   }
-
 })();
 

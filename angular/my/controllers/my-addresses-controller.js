@@ -8,7 +8,6 @@
     var vm = this;
     vm.isChecked = isChecked;
     vm.setDefaultAddress = setDefaultAddress;
-    vm.addAddress = addAddress;
     vm.editAddress = editAddress;
     activate();
 
@@ -28,25 +27,12 @@
     }
 
     function editAddress(addr){
-      $rootScope['editAddress'] = {};
-      $rootScope['editAddress']['defer'] = $q.defer();
-      var id = -1;
-      if(addr !=null){
-        id = addr.OrderConsignees.id;
-      }
       if(vm.state == 0){
-        $state.go('app.my-address-edit',{editId:id});
-
+        $state.go('app.my-address-edit',{editId: addr.OrderConsignees.id});
       }
       if(vm.state == 1){
-        $state.go('app.order-address-edit',{editId:id});
+        $state.go('app.order-address-edit',{editId: addr.OrderConsignees.id});
       }
-      $rootScope['editAddress']['defer'].promise.then(function(data){
-        activate();
-      })
-    }
-    function addAddress(){
-
     }
     function isChecked(address){
       if(vm.state == 0){

@@ -4,16 +4,15 @@
       <h2>
         收货人信息
       </h2>
-
-      <div ng-click="vm.setAddress(vm.defaultAddress)"  ng-show="!_.isEmpty(vm.defaultAddress)"> 
+      <div ng-click="$state.go('app.order-addresses',{state:1, addrId:vm.currentAddress.OrderConsignees.id});"  ng-show="!_.isEmpty(vm.currentAddress)"> 
         <div class="item-content" >
-          {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
+          {{vm.currentAddress.OrderConsignees.name}}({{vm.currentAddress.OrderConsignees.mobilephone}})
         </div>
         <div > 
-          {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
+          {{vm.currentAddress.OrderConsignees.area}}{{vm.currentAddress.OrderConsignees.address}}
         </div>
       </div>
-      <div ng-show="_.isEmpty(vm.defaultAddress)"></div>
+      <div ng-show="_.isEmpty(vm.currentAddress)"></div>
       <hr class="devide_line"/>
       <div class="cart_border cart_item">
         <div  ng-repeat="item in vm.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
