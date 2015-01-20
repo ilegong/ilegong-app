@@ -4,25 +4,24 @@
   angular.module('module.my')
   .controller('MyAddressesCtrl', MyAddressesCtrl)
 
-  function MyAddressesCtrl($q,$state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
+  function MyAddressesCtrl($q, $state, $ionicHistory, $stateParams, $log, $scope, $rootScope, Orders, Addresses){
     var vm = this;
-    vm.state = $stateParams.state;
-    vm.addrId = $stateParams.addrId;
+    vm.isChecked = isChecked;
     vm.itemClick = itemClick;
     vm.setDefaultAddress = setDefaultAddress;
     vm.editAddress = editAddress;
-    vm.getEditText = getEditText;
     activate();
 
     function activate() {
-      Addresses.list().then(function(data) {
-        vm.addresses = data;
+      vm.state = $stateParams.state;
+      vm.addrId = $stateParams.addrId;
+      vm.editMode = false;
+      Addresses.list().then(function(addresses) {
+        vm.addresses = _.map(addresses, function(address){
+          address.OrderConsignees.checked = vm.isChecked(address);
+          return address;
+        });
       })
-      vm.asd=0;
-      vm.editModel = false;
-    }
-    function getEditText(){
-      return vm.editMode?'完成':'编辑';
     }
 
     function itemClick(addr){
@@ -44,7 +43,6 @@
           $ionicHistory.goBack();
         }
       }
-
     }
     function editAddress(addr){
       $rootScope['editAddress'] = {};
@@ -65,19 +63,19 @@
       })
     }
 
-    vm.isChecked = function(addr){
+    function isChecked(address){
       if(vm.state == 0){
-        return addr.OrderConsignees.status == 1;
+        return address.OrderConsignees.status == 1;
       }
       if(vm.state == 1){
-        return vm.addrId == addr.OrderConsignees.id;
+        return vm.addrId == address.OrderConsignees.id;
       }
     }
 
     function setDefaultAddress(id){
-      Addresses.def(id).then(function(result){
+      Addresses.setDefaultAddress(id).then(function(result){
         activate();
-      })
+      });
     }
   }  
 })(window, window.angular);

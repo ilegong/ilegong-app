@@ -1,13 +1,13 @@
 <ion-view title="收货地址" hide-tabs>
-      <ion-nav-buttons side='right'>
-        <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.getEditText()}}</button>
-      </ion-nav-buttons>
+    <ion-nav-buttons side='right'>
+      <button  class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?'完成':'编辑'}}</button>
+    </ion-nav-buttons>
   	<ion-content  class="padding">
       <div class="list">
         <div class="row"  ng-repeat="address in vm.addresses" >
           <div class="col col-10">
-            <i class="icon ion-checkmark-round " ng-show="vm.isChecked(address);"  ng-click="vm.itemClick(address)"></i>
-            <i class="icon ion-load-c" ng-show="!vm.isChecked(address);"  ng-click="vm.itemClick(address)"></i>
+            <i class="icon ion-checkmark-round " ng-show="address.OrderConsignees.checked"  ng-click="vm.itemClick(address)"></i>
+            <i class="icon ion-load-c" ng-show="!address.OrderConsignees.checked"  ng-click="vm.itemClick(address)"></i>
           </div>
           <div class="col"   ng-click="vm.itemClick(address)">
             <div >

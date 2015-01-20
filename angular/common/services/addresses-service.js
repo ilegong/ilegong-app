@@ -14,10 +14,10 @@
       deleteAddress: deleteAddress,
       editAddress: editAddress,
       addAddress: addAddress,
+      setDefaultAddress: setDefaultAddress, 
       getProvinces: getProvinces,
       getCities: getCities,
-      getCounties: getCounties,
-      def:def
+      getCounties: getCounties
     }
     function list(){
       var defer = $q.defer();
@@ -52,33 +52,16 @@
       return defer.promise;
     }
     function deleteAddress(id){
-      var defer = $q.defer();
-      Base.get('/api_orders/delete_consignee/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/delete_consignee/'+id+'.json?access_token='+Users.getTokenLocally().access_token);
     }
     function editAddress(id,name,address,province_id,city_id,county_id,mobilephone){
-      var defer = $q.defer();
-      Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=edit&id='+id+'&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
     }
     function addAddress(name,address,province_id,city_id,county_id,mobilephone){
-      var defer = $q.defer();
-      Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone).then(function(result){
-        $log.log("add address successfully:").log(result);
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=create&name='+name+'&address='+address+'&province_id='+province_id+'&city_id='+city_id+'&county_id='+county_id+'&mobilephone='+mobilephone);
     }
-    function def(id){
-      var defer = $q.defer();
-      Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=default&id='+id).then(function(result){         
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+    function setDefaultAddress(id){
+      return Base.get('/api_orders/info_consignee.json?access_token='+Users.getTokenLocally().access_token+'&type=default&id='+id);
     }
     function getProvinces(){
       return Base.get('/Locations/get_province.json').then(function(provinces){

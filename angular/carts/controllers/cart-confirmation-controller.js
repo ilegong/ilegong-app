@@ -49,7 +49,7 @@
         activate();
       })
       console.log($rootScope.cart);
-      $state.go('app.order-addresses-info',{state:1,addrId:addr.OrderConsignees.id});
+      $state.go('app.order-addresses',{state:1,addrId:addr.OrderConsignees.id});
     }
     function getBrandById(id){
       return _.find(vm.brands, function(brand){return brand.Brand.id == id});
