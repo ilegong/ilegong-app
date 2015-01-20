@@ -20,7 +20,11 @@
           address.OrderConsignees.checked = vm.isChecked(address);
           return address;
         });
-      })
+      });
+      $scope.$watch('addresses', function(newAddresses, oldAddresses){
+        $log.log('address has been updated');
+        vm.addresses = newAddresses;
+      });
     }
 
     function editAddress(addr){

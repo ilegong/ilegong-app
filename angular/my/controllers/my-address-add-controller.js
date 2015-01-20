@@ -2,31 +2,27 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyAddressEditCtrl',MyAddressEditCtrl)
+  .controller('MyAddressAddCtrl', MyAddressAddCtrl)
 
-  function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
+  function MyAddressAddCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
     var vm = this;
     vm.addAddress = addAddress;
     vm.editAddress = editAddress;
     vm.deleteAddress = deleteAddress;
     vm.onProvinceChanged = onProvinceChanged;
     vm.onCityChanged = onCityChanged;
-    vm.onAddressUpdated = onAddressUpdated;
-    vm.readyToSave = readyToSave;
     activate();
     function activate(){
       vm.addressId = $stateParams.editId;  
-      vm.address = {OrderConsignees: {}};
       vm.cities = vm.counties = [];
       vm.province = vm.city = vm.county = {};
       Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
-      });
-      if(vm.addressId < 0){
+      });      
+      if(addressId == -1){
         return;
-      }      
-
-      Addresses.getAddressById(vm.addressId).then(function(address){
+      }
+      Addresses.getAddressById(addressId).then(function(address){
         vm.address = address;
         vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
 
@@ -41,7 +37,6 @@
     }
     function onProvinceChanged(province){
       vm.cities = vm.counties = [];
-      vm.city = vm.county = {};
       if(_.isEmpty(province)){
         return;
       }
@@ -51,7 +46,6 @@
     }
     function onCityChanged(city) {
       vm.counties = [];
-      vm.county = {};
       if(_.isEmpty(city)){
         return;
       }
@@ -59,30 +53,32 @@
         vm.counties = counties;
       });
     }
-    function readyToSave(){
-      var t = vm.address.OrderConsignees;
-      return !_.isEmpty(t.name) && !_.isEmpty(t.address) && !_.isEmpty(t.mobilephone) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
+    vm.save = function(){
+      var promise;
+      if(_.isEmpty(vm.address.OrderConsignees.id)){
+        promise = vm.addAddress();
+      }
+      else{
+        promise = vm.editAddress(vm.address.OrderConsignees.id);
+      }
+      promise.then(function(data){
+        $rootScope['editAddress']['defer'].resolve(null);
+        $ionicHistory.goBack();
+      })
+
+      
     }
     function editAddress(){
       var t = vm.address.OrderConsignees;
-      Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone).then(function(result){
-        vm.onAddressUpdated();
-      });
+      return Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
     function addAddress(){
       var t = vm.address.OrderConsignees;
-      Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone).then(function(result){
-        vm.onAddressUpdated();
-      });
+      return Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone);
     }
     function deleteAddress(addressId){
       Addresses.deleteAddress(addressId).then(function(data){
-        vm.onAddressUpdated();
-      });
-    }
-    function onAddressUpdated(){
-      Addresses.list().then(function(addresses){
-        $rootScope.addresses = addresses;
+        $rootScope['editAddress']['defer'].resolve(null);
         $ionicHistory.goBack();
       });
     }

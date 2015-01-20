@@ -1,73 +1,45 @@
-<ion-view title="编辑地址" hide-tabs>
-  <ion-nav-buttons side='right'>
-    <button  class='button button-clear button-positive' ng-click="vm.deleteAddress(vm.address.OrderConsignees.id)">删除</button>
-  </ion-nav-buttons>
+<ion-view title="编辑收货信息" hide-tabs>
   <ion-content class="my-address-edit">
-    <div class="div-content ">
-      <div class="row padding-content">
-        <div class="col col-25" >
-          收货人
-        </div>
-        <div class="col">
-          <input  class="text" ng-model="vm.address.OrderConsignees.name"/>
-        </div>
-      </div>
-      <hr/>
-      <div class="row padding-content">
-        <div class="col col-25" >
-          联系方式
-        </div>
-        <div class="col">
-          <input class="text" ng-model="vm.address.OrderConsignees.mobilephone"/>
-        </div>  
-      </div>
-      <hr/>
-      <div class="row padding-content">
-        <div class="col col-25" >
-          省
-        </div>
-        <div class="col">
-            <div >
-              <select class="select" id="selectRegion_1" ng-model="vm.province" ng-options="m.name for m in vm.provinces" ng-change="vm.onProvinceChanged(vm.province)">
-                <option value="">-- 请选择 --</option>
-              </select>
-            </div>
-        </div>
-      </div>
-      <div class="row" ng-show='vm.cities.length > 0'>
-        <div class="col col-25">
-          市{{_.isEmpty(vm.cities)}}
-        </div>  
-        <div class="col">
-          <select class="select" id="selectRegion_2" ng-model="vm.city" ng-options=" m.name for m in vm.cities" ng-change="vm.onCityChanged(vm.city)">
-            <option value="">-- 请选择 --</option>
-          </select>
-        </div>
-      </div>
-      <div class="row" ng-show="vm.counties.length > 0">
-        <div class="col col-25">
-          区/县{{_.isEmpty(vm.counties)}}
-        </div>
-        <div class="col">
-          <select class="select" id="selectRegion_3" ng-model="vm.county" ng-options=" m.name for m in vm.counties" ng-change="">
-            <option value="">-- 请选择 --</option>
-          </select>
-        </div>
-      </div>
-      <hr/>
-      <div class="row padding-content">
-        <div class="col col-25">
-          详细地址
-        </div>
-        <div class="col">
-          <input class="text" ng-model="vm.address.OrderConsignees.address"/>
-        </div>
-      </div>
+    <div class="list">
+      <label class="item item-input">
+        <span class="input-label">收货人</span>
+        <input type="text" ng-model="vm.address.OrderConsignees.name">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">联系方式</span>
+        <input type="text" ng-model="vm.address.OrderConsignees.mobilephone">
+      </label>
+      <label class="item item-select">
+        <span class="input-label">省</span>
+        <select class="select" ng-model="vm.province" ng-options="m.name for m in vm.provinces" ng-change="vm.onProvinceChanged(vm.province)">
+          <option value="">-- 请选择 --</option>
+        </select>      
+      </label>
+      <label class="item item-select" ng-show="vm.cities.length > 0">
+        <span class="input-label">市</span>
+        <select class="select" ng-model="vm.city" ng-options=" m.name for m in vm.cities" ng-change="vm.onCityChanged(vm.city)">
+          <option value="">-- 请选择 --</option>
+        </select>
+      </label>
+      <label class="item item-select" ng-show="vm.counties.length > 0">
+        <span class="input-label">区/县</span>
+        <select class="select" ng-model="vm.county" ng-options=" m.name for m in vm.counties" ng-change="">
+          <option value="">-- 请选择 --</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">详细地址</span>
+        <input class="text" ng-model="vm.address.OrderConsignees.address"/>
+      </label>
     </div>
-    <div class="row row-save padding-content">
-      <div class="button button-save" ng-click="vm.save()">
-        保存收货人信息
-      </div>
+    <div class="padding address-operations">
+      <span class="button button-block" ng-class="{'button-energized': vm.readyToSave()}" ng-click="vm.addressId > 0 ? vm.editAddress() : vm.addAddress()" ng-disabled="!vm.readyToSave()">
+        保存
+      </span>
+      <span class="button button-clear button-dark icon-left" ng-click="vm.deleteAddress(vm.addressId)" ng-show="vm.addressId > 0">
+        <i class="icon pys-icon icon-delete"></i>
+        删除收货地址
+      </span>
     </div>
   </ion-content>
 </ion-view>
