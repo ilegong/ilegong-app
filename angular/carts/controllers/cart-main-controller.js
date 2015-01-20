@@ -126,7 +126,7 @@
     }
     function confirmCartInfo(){
       if(!_.isEmpty($rootScope.cart.defaultAddress)){
-        $state.go('app.cart-order-info');        
+        $state.go('app.cart-confirmation');        
       }      
 
     }

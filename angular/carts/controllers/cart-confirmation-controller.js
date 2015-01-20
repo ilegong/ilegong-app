@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.cart')
-  .controller('CartInfoCtrl', CartInfoCtrl)
+  .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartInfoCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getBrandById = getBrandById;
