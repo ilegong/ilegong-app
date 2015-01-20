@@ -2,7 +2,7 @@
   "use strict";
 
   angular
-  .module('app.directives', [])
+  .module('module.directives')
   .directive('hideTabs', hideTabs)
   .directive('showTabs', showTabs);
 
