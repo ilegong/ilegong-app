@@ -180,6 +180,15 @@ a{
   z-index: 3;
 }
 
+.bar-subheader {
+  top: 49px;
+  display: block;
+  height: 54px;
+}
+.has-subheader {
+  top: 98px;
+}
+
 .card{
   .item.item-text{
     margin: 0.5em 0 0 0;

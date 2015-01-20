@@ -3,12 +3,10 @@
     <button  style="color:white;font-weight:bold"class='button button-clear button-positive' ng-click="vm.editMode = !vm.editMode">{{vm.editMode?"完成":"编辑"}}</button ng-show="vm.brands.length > 0">
   </ion-nav-buttons>
 
-  <ion-header-bar align-title="left" class="bar-subheader" ng-show="{{!vm.isLoggedIn()}}" >
+  <ion-header-bar align-title="left" class="bar-subheader padding" ng-show="{{!vm.isLoggedIn()}}" >
     <div class="row">
       <div class="col col-75 login-text">温馨提示：登陆后您可以同步电脑，微信与APP购物车中的商品。</div>
-      <div class="buttons" ng-click="vm.toLoginPage()">
-        <button class="button login-button">马上登陆</button>
-      </div>
+      <button class="button login-button" ng-click="vm.toLoginPage()">马上登陆</button>
     </div>
   </ion-header-bar>
 

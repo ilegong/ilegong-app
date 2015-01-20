@@ -39,10 +39,6 @@
       "grant_type=refresh_token":tokenJson
     };
 
-    var localDataMap = {
-      '/token': tokenJson,
-      "/api_orders/my_profile": myProfileJson
-    }
     var postData = {
       "/api_orders/cart_info.json": CartInfo,
       "/api_orders/balance.json": Balance,
@@ -51,8 +47,8 @@
       "/api_orders/comment_add.json":commentAddJson
     };
     var getLocalData = {
-       'token': tokenJson,
-       "user": myProfileJson
+       'token': {},
+       "user": {}
     }
     return {
       get: function(url){return getFrom(getData, url)},
