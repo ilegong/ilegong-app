@@ -140,6 +140,7 @@
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[], defaultAddress:{}};
+    $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.editAddress = $rootScope.editAddress || {defer:{}};//currentAddress
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}

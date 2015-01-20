@@ -64,7 +64,19 @@ a{
   border-color: #dddddd;
 }
 
-.item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
+.button.icon-left{
+  padding-left: 40px;
+}
+.button.icon-right {
+  padding-right: 54px;
+}
+.item-icon-right .icon, .icon-right .icon {
+  right: 0.78571428571em;
+}
+.item-icon-left .icon, .icon-left .icon {
+  left: 0.78571428571em;
+}
+.item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon, .icon-left .icon.pys-icon, .icon-right .icon.pys-icon {
   font-size: 14px;
   background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
   display: inline-block;
@@ -94,6 +106,11 @@ a{
 }
 .icon.pys-icon.icon-edit{
   background-position: -17.8571428571em 0;
+}
+.icon.pys-icon.icon-delete{
+  background-position: -22.8571428571em -8.57142857143em;
+  width: 2.21428571429em;
+  height: 2.35714285714em;
 }
 
 .tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
@@ -1084,30 +1101,21 @@ a{
       white-space: nowrap;
     }
   }
+  .no-address-container{
+    text-align: center;
+    .no-address{
+      background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+      background-size: 28.5714285714em 28.5714285714em;
+      background-position: -25em -8.57142857143em;
+      display: inline-block;
+      height: 5.04761904762em;
+      margin-top: 50%;
+      padding-top: 6em;
+    }
+  }
 }
 .my-address-edit{
-  background:#dddddd;
-  .div-content{
-    background:#ffffff;
-  }
-  .select{
-    width:100%;
-  }
-  .row-save{
-    padding-top:20px;
-    padding-left:20px;
-    padding-right:20px;
-  }
-  .button-save{
-    width:100%;
-    border-color: #45a011;
-    background-color: #45a011;
-    color: #fff; 
-  }
-  .padding-content{
-    padding-top:10px;
-  }
-  .text{
-    border:none;
+  .address-operations{
+    text-align: center;
   }
 }

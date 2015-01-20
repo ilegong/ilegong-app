@@ -20,11 +20,7 @@
       getCounties: getCounties
     }
     function list(){
-      var defer = $q.defer();
-      Base.get('/api_orders/order_consignees.json?access_token='+Users.getTokenLocally().access_token).then(function(item){
-        defer.resolve(item);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/order_consignees.json?access_token='+Users.getTokenLocally().access_token);
     }
     function getDefaultAddress(){
       return list().then(function(addresses){
