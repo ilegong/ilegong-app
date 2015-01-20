@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyAddressesInfoCtrl',MyAddressesInfoCtrl)
+  .controller('MyAddressesCtrl', MyAddressesCtrl)
 
-  function MyAddressesInfoCtrl($q,$state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
+  function MyAddressesCtrl($q,$state,$ionicHistory,$stateParams,$log,$scope,$rootScope,Orders,Addresses){
     var vm = this;
     vm.state = $stateParams.state;
     vm.addrId = $stateParams.addrId;
