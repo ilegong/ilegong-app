@@ -61,7 +61,7 @@
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
       .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
-      .state('app.order-addresses',{url:'/order-addresses/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses-info.html',controller:'MyAddressesInfoCtrl as vm'}}})
+      .state('app.order-addresses',{url:'/order-addresses/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
       .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
       .state('app.cart-orders',{url:'/cart-orders',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
@@ -140,7 +140,7 @@
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
-    $rootScope.address = $rootScope.address || {addresses: [], defaultAddress: {}, currentAddress: {}};
+    $rootScope.address = $rootScope.address || {addresses: [], defaultAddress: {}};
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     Users.init();
@@ -149,13 +149,12 @@
       $rootScope.cart.brands = result.brands;
     }
     $rootScope.updateAddresses = function(addresses){
-      var defaultAddress =  _.find(addresses, function(address){return address.OrderConsignees.status == 1});
+      var  defaultAddress =  _.find($rootScope.addresses, function(address){return address.OrderConsignees.status == 1});
       if(_.isEmpty(defaultAddress) && addresses.length > 0){
         defaultAddress = addresses[0];
       }
       $rootScope.address.addresses = addresses;
       $rootScope.address.defaultAddress = defaultAddress;
-      $rootScope.address.currentAddress = defaultAddress;
     }
   }
 })();

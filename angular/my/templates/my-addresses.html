@@ -4,8 +4,8 @@
   </ion-nav-buttons>
 	<ion-content class="my-addresses list">
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
-      <span ng-click="vm.setDefaultAddress(address.OrderConsignees.id)">
-        <i class="icon pys-icon" ng-class="{'icon-checked': address.OrderConsignees.checked, 'icon-unchecked': !address.OrderConsignees.checked}"></i>
+      <span ng-click="vm.checkAddress(address)">
+        <i class="icon pys-icon" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>
         <div class="name">
           {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
         </div>

@@ -7,25 +7,22 @@
   function MyAddressesCtrl($q, $state, $ionicHistory, $stateParams, $log, $scope, $rootScope, Orders, Addresses){
     var vm = this;
     vm.isChecked = isChecked;
-    vm.setDefaultAddress = setDefaultAddress;
+    vm.checkAddress = checkAddress;
     vm.editAddress = editAddress;
     activate();
 
     function activate() {
       vm.state = $stateParams.state;
-      vm.addrId = $stateParams.addrId;
-      Addresses.list().then(function(addresses) {
-        vm.addresses = _.map(addresses, function(address){
-          address.OrderConsignees.checked = vm.isChecked(address);
-          return address;
-        });
+      vm.addresses = [];
+      vm.selectedAddress = {};
+      Addresses.list().then(function(addresses){
+        $rootScope.updateAddresses(addresses);
+        vm.addresses = $rootScope.address.addresses;
       });
-      $scope.$watch('addresses', function(newAddresses, oldAddresses){
-        $log.log('address has been updated');
+      $scope.$watch('address.addresses', function(newAddresses, oldAddresses){
         vm.addresses = newAddresses;
       });
     }
-
     function editAddress(addr){
       if(vm.state == 0){
         $state.go('app.my-address-edit',{editId: addr.OrderConsignees.id});
@@ -35,23 +32,13 @@
       }
     }
     function isChecked(address){
-      if(vm.state == 0){
-        return address.OrderConsignees.status == 1;
-      }
-      if(vm.state == 1){
-        return vm.addrId == address.OrderConsignees.id;
-      }
+      return address.OrderConsignees.id == $rootScope.address.defaultAddress.OrderConsignees.id;
     }
 
-    function setDefaultAddress(id){
-      Addresses.setDefaultAddress(id).then(function(result){
-        if(vm.state == 0){
-          _.each(vm.addresses, function(address){
-             address.OrderConsignees.checked = address.OrderConsignees.id == id;
-          });
-        }
-        else{
-          $rootScope.cart['setAddressDefer'].resolve(addr);
+    function checkAddress(address){
+      Addresses.setDefaultAddress(address.OrderConsignees.id).then(function(result){
+        $rootScope.address.defaultAddress = address;
+        if(vm.state == 1){
           $ionicHistory.goBack();
         }
       });

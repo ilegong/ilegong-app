@@ -18,13 +18,11 @@
       </div>
       <a class="button empty-button go-show-button" ng-click="$log.log('clicked');$state.go('app.home');">去逛逛</a>
     </div>
-    <div class="list brand " ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
-
+    <div class="list brand" ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
       <div class="row ">
         <span class="col col-10">
           <span class="brand-circle icon {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(vm.editMode,brand.Brand.id)" ng-show="!vm.editMode">
           </span>          
-
         </span>
         <span class="col col-10">
           <img class="brand-image" src="{{brand.Brand.coverimg}}"></img>
@@ -34,7 +32,7 @@
         </span>
       </div>
       <hr class="brand-hr"/>
-      <div  ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['checked'] = false;cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
+      <div  ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
         <div class="row item-row">
         <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
           <span class="item-circle icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">

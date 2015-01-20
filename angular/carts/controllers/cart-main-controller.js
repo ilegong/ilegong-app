@@ -47,10 +47,9 @@
       })
     }
     function brandChecked(id){
-      var t = vm.getCartItemsOfBrand(id);
-      return t.length == (_.countBy(t,function(cartItem){
+      return _.all(vm.getCartItemsOfBrand(id),function(cartItem){
         return cartItem.checked;
-      }).true);
+      });
     }
     function toggleBrand(editMode,brandId){
       if(!editMode){
