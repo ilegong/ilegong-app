@@ -1,7 +1,7 @@
 <div>
 
   <div class="list myOrdersTotal">
-    <div class="item" ng-repeat="item in vm.orders " ng-show="((vm.isOfStates(item, vm.stateFilter)) || vm.stateFilter==''">
+    <div class="item" ng-repeat="item in vm.orders " ng-show="(vm.isOfStates(item, vm.stateFilter) || vm.stateFilter=='')">
   	  <div>
   	  	<span class="brandName">
   	  		{{vm.brands[item.Order.brand_id].Brand.name}}
