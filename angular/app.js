@@ -4,6 +4,7 @@
   angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'app.directives'])
   .run(initApp)
   .config(configStates)
+  .config(configApp)
   .config(extendLog)
   .config(extendExceptionHandler)
   .config(configCompileProvider)
@@ -18,7 +19,6 @@
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
-      
     });
   };
 
@@ -36,8 +36,9 @@
       .state('app.my-account-login', {url: '/my/account-login', views: {'app-my': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
       .state('app.my-account-register', {url: '/my/account-register', views: {'app-my': {templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
-      .state('app.my-addresses',{url:'/my-addresses/:state/:addrId',views:{'app-my':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
+      .state('app.my-addresses',{url:'/my-addresses/:state',views:{'app-my':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
       .state('app.my-address-edit',{url:'/my-address-edit/:editId',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
+      .state('app.my-address-add',{url:'/my-address-add',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
 
       .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
       .state('app.my-profile-edit',{url:'/my-profile-edit/:state',views:{'app-my':{templateUrl:'my-profile-edit.html',controller:'MyProfileEditCtrl as vm'}}})
@@ -136,6 +137,11 @@
   function configHttpProvider($httpProvider){
     $httpProvider.defaults.headers.common['Content-Type'] = 'application/json';
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
+  }
+
+  /* @ngInject */
+  function configApp($ionicConfigProvider){
+    $ionicConfigProvider.tabs.position('bottom');
   }
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {

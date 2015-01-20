@@ -1,10 +1,10 @@
 <ion-view title="收货地址" hide-tabs>
   <ion-nav-buttons side='right'>
-    <button  class='button button-clear' ng-click="$state.go('app.my-address-edit', {editId:-1});">{{'新建'}}</button>
+    <button  class='button button-clear' ng-click="vm.addAddress()">{{'新建'}}</button>
   </ion-nav-buttons>
 	<ion-content class="my-addresses list">
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
-      <span ng-click="vm.checkAddress(address)">
+      <span ng-click="vm.setDefaultAddress(address)">
         <i class="icon pys-icon" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>
         <div class="name">
           {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})

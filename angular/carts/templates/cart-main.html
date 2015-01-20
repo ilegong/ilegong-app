@@ -16,7 +16,7 @@
       <div class="empty-text">
         购物车还是空的，去选点好吃的吧！
       </div>
-      <a class="button empty-button go-show-button" ng-click="$log.log('clicked');$state.go('app.home');">去逛逛</a>
+      <a class="button empty-button go-show-button" ng-click="vm.toHomePage()">去逛逛</a>
     </div>
     <div class="list brand" ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
       <div class="row ">
