@@ -956,6 +956,18 @@ a{
       white-space: nowrap;
     }
   }
+  .no-address-container{
+    text-align: center;
+    .no-address{
+      background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+      background-size: 28.5714285714em 28.5714285714em;
+      background-position: -25em -8.57142857143em;
+      display: inline-block;
+      height: 5.04761904762em;
+      margin-top: 50%;
+      padding-top: 6em;
+    }
+  }
 }
 .my-address-edit{
   background:#dddddd;
