@@ -11,11 +11,15 @@
     vm.from = $stateParams.from;
     vm.rating = 5;
     vm.confirmComment = confirmComment;
-    vm.menuClick =     function menuClick(index){vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];}
+    vm.menuClick = function(index){vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];}
+    vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
+    vm.getShichiCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'num':'notshow'})['num']}
+    vm.getEvaluateCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'notshow':'num'})['num']}
+  
     activate();
     
     function activate(){
-      vm.isShowMenuContents = [false,false,true];
+      vm.isShowMenuContents = [false,false,false];
       var id = $stateParams.id;
       Products.getProduct(id).then(function(data){
         vm.product = data.product;
