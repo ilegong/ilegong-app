@@ -94,6 +94,7 @@
     }
     function deleteAddress(addressId){
       Addresses.deleteAddress(addressId).then(function(data){
+        $rootScope.alertMessage("已删除该收货地址");
         vm.onAddressUpdated();
       });
     }
