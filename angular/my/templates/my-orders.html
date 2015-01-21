@@ -1,7 +1,7 @@
-<ion-view title="订单" hide-tabs>
+<ion-view title="{{vm.name}}订单" hide-tabs>
   <ion-content>
     <div class="list myOrdersTotal">
-      <div class="item" ng-repeat="item in vm.orders " ng-show="vm.isOfStates(item, vm.orderStates)">
+      <div class="item" ng-repeat="item in vm.orders " ng-show="vm.isOfStates(item, vm.states)">
         <div>
           <span class="brandName">
             {{vm.brands[item.Order.brand_id].Brand.name}}

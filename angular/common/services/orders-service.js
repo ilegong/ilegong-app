@@ -7,15 +7,21 @@
   function Orders($log,$q,Base,software,Users){
     var self = this;
     self.ORDER_STATUS = [
-      {value: 'UNPAID', state:0, desc:'未支付'},
-      {value: 'PAID', state:1, desc:'已支付'},
-      {value: 'SENT', state:2, desc:'已发货'},
-      {value: 'RECEIVED', state:3, desc:'已收货'},
+      {value: 'UNPAID', state:0, desc:'未支付', descAlias: '待支付'},
+      {value: 'PAID', state:1, desc:'已支付', descAlias: '待发货'},
+      {value: 'SENT', state:2, desc:'已发货', descAlias: '待收货'},
+      {value: 'RECEIVED', state:3, desc:'已收货', descAlias: '待评价'},
       {value: 'REFUNDED', state:4, desc:'已退款'},
       {value: 'SUCCESSED', state:9, desc:'已完成'},
       {value: 'CANCELED', state:10, desc:'已取消'},
       {value: 'VERIFIED', state:11, desc:'已确认有效'},
       {value: 'COMPLAINED', state:12, desc:'已投诉'}
+    ]
+    self.UNFINISHED_ORDER_STATES = [
+      {states: 'UNPAID', name: '待支付'},
+      {states: 'PAID', name: '待发货'},
+      {states: 'SENT', name: '待收货'},
+      {states: ['SENT', 'RECEIVED'], name: '待评价'}
     ]
     return {
       list: list,
@@ -25,7 +31,8 @@
       undo:undo,
       remove: remove,
       receive: receive,
-      getOrderDetail: getOrderDetail
+      getOrderDetail: getOrderDetail, 
+      getUnFinishedOrderStates: function(){return self.UNFINISHED_ORDER_STATES}
     }
 
     function list(){

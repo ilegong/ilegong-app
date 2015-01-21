@@ -7,11 +7,15 @@
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, Orders){
     var vm = this;
     vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
-    vm.isOfStates = vm.isOfState = function(order, states){return _.isEmpty(states) || Orders.isOfStates(order, states)};
+    vm.isOfStates = vm.isOfState = function(order, states){
+      return _.isEmpty(states) || Orders.isOfStates(order, states)
+    };
     activate();
     
     function activate() {
-      vm.orderStates = $stateParams.orderStates;
+      vm.states = _.contains($stateParams.states, ",") ? $stateParams.states.split(",") : $stateParams.states;
+      vm.name = $stateParams.name;
+      $log.log("vm.states:").log(vm.states);
       Orders.list().then(function(data){
         vm.orders = data.orders;
         vm.brands = data.brands;
@@ -19,6 +23,7 @@
         vm.ship_type = data.ship_type;
       });
     }
+
     vm.undo = function(id){
       Orders.undo(id).then(function(result){
         activate();

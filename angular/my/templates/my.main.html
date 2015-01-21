@@ -16,27 +16,15 @@
       </div>
       <div class="orders row">
         <div class="bg"></div>
-        <div class="order col" ui-sref="app.my-orders({orderStates: 'UNPAID'})">
-          <span>0</span> <br/>
-          待支付
-        </div>
-        <div class="order col" ui-sref="app.my-orders({orderStates: 'PAID'})">
-          <span>0</span><br/>
-          待发货
-        </div>
-        <div class="order col" ui-sref="app.my-orders({orderStates: 'SENT'})">
-          <span class="as_badge">2</span> <br/>
-          待收货
-        </div>
-        <div class="order col" ui-sref="app.my-orders({orderStates: ['SENT', 'RECEIVED']})">
-          <span>0</span> <br/>
-          待评价
+        <div class="order col" ui-sref="app.my-orders({states: unFinishedOrderState.states, name: unFinishedOrderState.name})" ng-repeat="unFinishedOrderState in vm.unFinishedOrderStates">
+          <span ng-class="{as_badge: vm.getOrdersCountOf(unFinishedOrderState.states) > 0}">{{vm.getOrdersCountOf(unFinishedOrderState.states)}}</span> <br/>
+          {{unFinishedOrderState.name}}
         </div>
       </div>
     </div>
     <div class="list">
       <div class="item item-divider"></div>
-      <a class="item item-icon-left item-icon-right" ui-sref="app.my-orders({orderStates: ''})">
+      <a class="item item-icon-left item-icon-right" ui-sref="app.my-orders({states: '', name: '全部'})">
         <span class="icon pys-icon icon-my-order"></span>
         <i class="icon ion-ios7-arrow-right"></i>
         我的订单

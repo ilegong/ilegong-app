@@ -58,7 +58,7 @@
       $log.log("submit order for products " + vm.pidList);
       Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderId){
         $log.log("submit order successfully: ").log(orderId);
-        $state.go("app.cart-orders({orderStates: ''})");
+        $state.go("app.cart-orders({states: '', name: '全部'})");
       }, function(e){
         $log.log("submit order failed: ").log(e);
       });
