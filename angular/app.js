@@ -1,6 +1,6 @@
 // Ionic Starter App
 
-(function(window, angular, _){
+(function(window, angular){
   angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
   .run(initApp)
   .config(configStates)
@@ -150,7 +150,7 @@
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
-    $rootScope.alert = {error: ''};
+    $rootScope.alert = {message: ''};
     Users.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
@@ -163,12 +163,12 @@
       }
       return defaultAddress || {OrderConsignees: {}};
     }
-    $rootScope.alertError = function(message){
-      $rootScope.alert.error = message;
+    $rootScope.alertMessage = function(message){
+      $rootScope.alert.message = message;
       $timeout(function(){
-        $rootScope.alert.error = "";
+        $rootScope.alert.message = "";
       }, software.timeout);
     }
   }
-})(window, window.angular, _);
+})(window, window.angular);
 

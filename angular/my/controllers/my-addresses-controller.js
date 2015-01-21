@@ -42,6 +42,7 @@
         _.each($rootScope.addresses, function(address){
           address.OrderConsignees.status = (defaultAddress.OrderConsignees.id == address.OrderConsignees.id) ? 1 : 0;
         });
+        $rootScope.alertMessage("已修改默认收货地址");
         vm.defaultAddress = defaultAddress;
         if(vm.isFromOrder()){
           $ionicHistory.goBack();

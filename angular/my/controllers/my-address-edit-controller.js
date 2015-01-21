@@ -64,10 +64,10 @@
     function verifyMobilePhone(){
       var t = vm.address.OrderConsignees;
       if(!vm.isMobilePhoneValid(t.mobilephone)){
-        $rootScope.alertError("手机号输入错误");
+        $rootScope.alertMessage("手机号输入错误");
       }
       else{
-        $rootScope.alert.error = "";
+        $rootScope.alert.message = "";
       }
     }
     function isMobilePhoneValid(mobilePhone){
