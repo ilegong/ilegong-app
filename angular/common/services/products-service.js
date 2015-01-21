@@ -35,9 +35,6 @@
 
       var defer = $q.defer();
       var json = {'data_id':""+id,'type':'Product','rating':""+rating,'body':body,'pictures':pictures};
-      for(var i=0;i<30;i++)
-        $log.log("comment");
-      $log.log(json);
       Base.post('/api_orders/comment_add.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
         defer.resolve(result);
         //$log.log(result);

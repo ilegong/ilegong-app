@@ -804,8 +804,22 @@ a{
     border-right:none;
     border-top:none;
   }
+  .main{
+    background:white;
+    margin-left:-0.7em;
+    margin-right:-0.7em;
+    margin-bottom:0.8em;
+    .above-first-hr{
+      margin:1em;
+    }
+  }
+  .post-service{
+    background:white;
+    margin-left:-0.7em;
+    margin-right:-0.7em;
+    margin-bottom:0.8em;
+  }
   .menu-{
-
     .menu-text{
       font-size:1.5em;
       margin-left:-0.7em;
@@ -1000,15 +1014,24 @@ a{
     width:50%;
     margin-left:5px;
   }
+  .brand-button{
+    margin-left:-0.7em;
+    margin-right:-0.7em;
+  }
   .evaluate{
+    margin-left:-0.7em;
+    margin-right:-0.7em;
     .user-image{
-      width: 2em;
-      height: 2em;
+      width: 1.667em;
+      height: 1.667em;
       border-radius: 6px;
-      background: url('http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/ee4ff13b4d8_1117.jpg');
       display: inline-block;
       margin-bottom: -0.5em;
-      background-size: contain;
+    }
+    .icon-user{
+      background-position:0 0;
+      width:1.667em;
+      height:1.667em;
     }
     .create-time{
       float: right;
@@ -1036,6 +1059,9 @@ a{
     .evaluate-image{
       width:25%;
       margin-right:1em;
+    }
+    .text{
+      white-space:normal;
     }
 
   }

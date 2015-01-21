@@ -6,20 +6,13 @@
 
       <div class="row">
         <div class="col">
-
             {{ite.Comment.username}}
-
-        
         </div>
         <div class="col" >
           <span style="background-color:{{getRankColor(ite.Comment.rating)}};" class="rankText">
-
             {{getRankText(ite.Comment.rating)}}
-            
           </span>
           {{ite.Comment.body}}
-
-      
           <p/>
           <div>
             <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="imageWidthFull"/>
@@ -28,7 +21,6 @@
             {{ite.Comment.created}}
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -63,16 +55,14 @@
             <i class="radio-icon ion-checkmark"></i>
             </label>
         </div>
-
       </div>
+      <div>
         <div>
-      
-            <span class="input-label">请输入评价：</span>
-            <textarea ng-model="vm.commentText" class="contentBox"></textarea>
-          <div>
-            <p/>
-          <div>
-
+          <span class="input-label">请输入评价：</span>
+          <textarea ng-model="vm.commentText" class="contentBox"></textarea>
+        </div>
+          <p/>
+        <div>
           <button class="button button-static">
             添加图片
           </button>
@@ -84,6 +74,7 @@
               提交评论
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>

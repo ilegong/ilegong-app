@@ -11,9 +11,11 @@
     vm.from = $stateParams.from;
     vm.rating = 5;
     vm.confirmComment = confirmComment;
+    vm.menuClick =     function menuClick(index){vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];}
     activate();
     
     function activate(){
+      vm.isShowMenuContents = [false,false,true];
       var id = $stateParams.id;
       Products.getProduct(id).then(function(data){
         vm.product = data.product;
@@ -25,6 +27,11 @@
       }, function(e){$log.log(e)});
       Products.getProductComment(id).then(function(data){
         vm.comment = data;
+        for(var i=0;i<30;i++){
+          $log.log('comment');
+
+        }
+        $log.log(data);
       }, function(e){$log.log(e)});
     }
 
