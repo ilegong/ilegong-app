@@ -1,48 +1,45 @@
 <ion-view title="{{vm.name}}订单" hide-tabs>
-  <ion-content class="myOrdersTotal">
-    <div class="list" ng-show="vm.orders.length > 0">
-      <div class="item" ng-repeat="item in vm.orders">
-        <div>
-          <span class="brandName">
-            {{vm.brands[item.Order.brand_id].Brand.name}}
-          </span>
-          <span class="orderStatus">
-            {{vm.getOrderDesc(item).desc}}
-          </span>
-        </div>
-        <div class="list">
-          <div class="item" ng-repeat="pro in vm.order_carts[item.Order.id] ">
-            <div class="row">
-              <div class="col">
-                <img src="{{pro.Cart.coverimg}}" class="img"/>
-              </div>
-              <div class="col cartName">
-                {{pro.Cart.name}}
-                <div>
-                  {{pro.Cart.price | currency:'￥'}} × {{pro.Cart.num}}
-                </div>
+  <ion-content class="my-orders">
+    <div class="list card" ng-repeat="item in vm.orders" ng-show="vm.orders.length > 0" ng-init="brand=vm.brands[item.Order.brand_id].Brand; carts=vm.order_carts[item.Order.id]">
+      <div class="item item-avatar">
+        <img src="{{brand.coverimg}}">
+        <h2 class="brand-name">{{brand.name}}({{carts.length}})</h2>
+        <span class="order-state">
+          {{vm.name}}
+        </span>
+      </div>
+      <div class="list">
+        <div class="item" ng-repeat="pro in vm.order_carts[item.Order.id] ">
+          <div class="row">
+            <div class="col">
+              <img src="{{pro.Cart.coverimg}}" class="img"/>
+            </div>
+            <div class="col cartName">
+              {{pro.Cart.name}}
+              <div>
+                {{pro.Cart.price | currency:'￥'}} × {{pro.Cart.num}}
               </div>
             </div>
           </div>
         </div>
-        <div >
-          <span>
-            订单号：{{item.Order.id}}
-          </span>
-          <span class="info">
-            共{{vm.order_carts[item.Order.id].length}}件商品 实付:{{item.Order.total_price | currency:'￥'}}
-          </span>
-        </div>
-        <div>
-          <span class="buttons">
-            <a class="button button-calm" ui-sref="app.my-order-detail({id: item.Order.id})">详细</a>
-            <a class="button button-assertive" ng-show="vm.isOfStates(item, 'SENT')" ng-click="vm.receive({{item.Order.id}})">确认收货</a>
-            <a class="button button-calm" ng-show="vm.isOfStates(item, 'SENT')">查看物流</a>
-            <a class="button button-assertive" ng-show="vm.isOfStates(item, 'CANCELED')" ng-click="vm.remove({{item.Order.id}})">删除订单</a>
-            <a class="button button-calm" ng-show="vm.isOfStates(item, 'UNPAID')" ng-click="vm.undo({{item.Order.id}})">取消订单</a>
-            <a class="button button-assertive" ng-show="vm.isOfStates(item, 'UNPAID')">去支付</a>
-          </span>
-        </div>
+      </div>
+      <div >
+        <span>
+          订单号：{{item.Order.id}}
+        </span>
+        <span class="info">
+          共{{vm.order_carts[item.Order.id].length}}件商品 实付:{{item.Order.total_price | currency:'￥'}}
+        </span>
+      </div>
+      <div>
+        <span class="buttons">
+          <a class="button button-calm" ui-sref="app.my-order-detail({id: item.Order.id})">详细</a>
+          <a class="button button-assertive" ng-show="vm.isOfStates(item, 'SENT')" ng-click="vm.receive({{item.Order.id}})">确认收货</a>
+          <a class="button button-calm" ng-show="vm.isOfStates(item, 'SENT')">查看物流</a>
+          <a class="button button-assertive" ng-show="vm.isOfStates(item, 'CANCELED')" ng-click="vm.remove({{item.Order.id}})">删除订单</a>
+          <a class="button button-calm" ng-show="vm.isOfStates(item, 'UNPAID')" ng-click="vm.undo({{item.Order.id}})">取消订单</a>
+          <a class="button button-assertive" ng-show="vm.isOfStates(item, 'UNPAID')">去支付</a>
+        </span>
       </div>
     </div>
 
