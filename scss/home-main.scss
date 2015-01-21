@@ -1,0 +1,43 @@
+@import "variables";
+
+.home{
+  .row{
+    height: 8em;
+    border-bottom: 1px #dddddd solid;
+    border-top: 1px #dddddd solid;
+    margin-bottom: 0.625em;
+    padding: 0em;
+    .category{
+      img{
+        width: 100%;
+        background-color: #eeeeee;
+      }
+    }
+    .product{
+      text-align: center;
+      .product-name{
+        display: inline-block;
+        line-height: 1em;
+        width: 100%;
+        font-size: 0.833em;
+        font-weight: normal;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .brand-name{
+        font-size: 0.833em;
+        padding-bottom: 0.2em;
+        color: #999999;
+        margin: 0 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .product-image{
+        width: 6em;
+        height: 4.5em;
+      }
+    }
+  }
+}

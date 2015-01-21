@@ -1,0 +1,26 @@
+ @import "variables";
+ 
+ .my-orders{
+  .brand-name{
+    display: inline-block;
+    font-size: 1.2em;
+  }
+  .order-state{
+    float:right;
+    color: $energized;
+  }
+  .img{
+    width:100%;
+  }
+  .cartName{
+    font-size:15px;
+    text-align:center;
+  }
+  .info{
+    float:right;
+  }
+  .buttons{
+    float:right;
+    padding-top:10px;
+  }
+}
