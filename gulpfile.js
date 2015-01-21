@@ -16,7 +16,7 @@ var _ = require('lodash');
 var libPath = 'bower_components';
 
 var cssPath = {
-  src: ['scss/**/*.scss'],
+  src: ['scss/app.scss', 'scss/custom.scss'],
   dist: 'www/css',
 }
 var fontsPath = {
