@@ -79,10 +79,10 @@
         </div>
       </div>
       <div class="list brand-button">
-        <a class="item item-icon-right">
+        <a class="item item-icon-right" ui-sref="store.home({storeId:vm.brand.Brand.id})" >
           <i class=" icon ion-ios7-arrow-right"></i>
           <img class="brand-image" src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
-          <span ui-sref="store.home({storeId:vm.brand.Brand.id})" class="brand-name">
+          <span class="brand-name">
             进入{{vm.brand.Brand.name}}的店铺
           </span>
         </a>
