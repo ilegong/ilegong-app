@@ -1,4 +1,4 @@
-uct
+
 <ion-view class="product-detail" title="商品详情" hide-tabs>
   <ion-content class="ion-content padding">
     <div class="main">
@@ -82,7 +82,7 @@ uct
         <a class="item item-icon-right">
           <i class=" icon ion-ios7-arrow-right"></i>
           <img class="brand-image" src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
-          <span ui-sref="store.home({storeId:vm.brand.Brand.})" class="brand-name">
+          <span ui-sref="store.home({storeId:vm.brand.Brand.id})" class="brand-name">
             进入{{vm.brand.Brand.name}}的店铺
           </span>
         </a>
