@@ -59,7 +59,7 @@ gulp.task('default', ['dev']);
 
 gulp.task('dev', ['dev:templates', 'dev:libjs', 'dev:appjs', 'sass'], function () {
   gulp.watch([appJsPath.src, templatePath.src], ['dev:appjs']);
-  gulp.watch(cssPath.src, ['sass']);
+  gulp.watch('scss/**/*.scss', ['sass']);
 });
 
 /*=========================== CLEAN ===========================*/
