@@ -1,7 +1,7 @@
 <ion-view title="{{vm.name}}订单" hide-tabs>
-  <ion-content>
-    <div class="list myOrdersTotal">
-      <div class="item" ng-repeat="item in vm.orders " ng-show="vm.isOfStates(item, vm.states)">
+  <ion-content class="myOrdersTotal">
+    <div class="list" ng-show="vm.orders.length > 0">
+      <div class="item" ng-repeat="item in vm.orders">
         <div>
           <span class="brandName">
             {{vm.brands[item.Order.brand_id].Brand.name}}
@@ -45,5 +45,14 @@
         </div>
       </div>
     </div>
+
+    <div class="no-content-container" ng-show="vm.orders.length == 0">
+      <span class="no-content no-orders">
+      </span>
+      <span class="message">
+        暂无{{vm.name}}订单
+      </span>
+    </div>
+
   </ion-content>
 </ion-view>

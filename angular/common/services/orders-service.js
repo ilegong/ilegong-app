@@ -47,6 +47,9 @@
       return _.find(self.ORDER_STATUS, function(orderStatus){return orderStatus.state == order.Order.status}) || {};
     }
     function isOfStates(order, states){
+      if(_.isEmpty(states)){
+        return true;
+      }
       var value = getOrderStatus(order).value;
       if(_.isArray(states)){
         return _.contains(states, value);

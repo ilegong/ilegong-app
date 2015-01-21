@@ -223,6 +223,32 @@ a{
   width: 100%;
 }
 
+.no-content-container{
+  text-align: center;
+  .message{
+    display: block;
+  }
+  .no-content{
+    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+    background-size: 28.5714285714em 28.5714285714em;
+    display: inline-block;
+  }
+  .no-content.no-address{
+    background-position: -25em -8.57142857143em;
+    height: 5.04761904762em;
+    margin-top: 50%;
+    padding-top: 6em;
+  }
+  .no-content.no-orders{
+    background-position: 0 -14.2857142857em;
+    height: 5.80952380952em;
+    width: 4.85714285714em;
+    margin-top: 50%;
+    padding-top: 6em;
+  }
+}
+
+
 .my{
   .profile{
     height: 12em;
@@ -1188,18 +1214,6 @@ a{
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-  }
-  .no-address-container{
-    text-align: center;
-    .no-address{
-      background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-      background-size: 28.5714285714em 28.5714285714em;
-      background-position: -25em -8.57142857143em;
-      display: inline-block;
-      height: 5.04761904762em;
-      margin-top: 50%;
-      padding-top: 6em;
     }
   }
 }

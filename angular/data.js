@@ -221,7 +221,7 @@ var ordersJson = {
         "creator": "146", 
         "lastupdator": "897", 
         "remoteurl": "", 
-        "status": "2", 
+        "status": "1", 
         "published": "1", 
         "deleted": false, 
         "created": "2014-11-19 11:55:37", 

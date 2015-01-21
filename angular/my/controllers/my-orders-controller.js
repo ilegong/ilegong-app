@@ -7,17 +7,16 @@
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, Orders){
     var vm = this;
     vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
-    vm.isOfStates = vm.isOfState = function(order, states){
-      return _.isEmpty(states) || Orders.isOfStates(order, states)
-    };
+    vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
+    vm.getOrdersOfStates = function(states){return _.filter(vm.orders, function(order){return vm.isOfStates(order, states)})};
     activate();
     
     function activate() {
       vm.states = _.contains($stateParams.states, ",") ? $stateParams.states.split(",") : $stateParams.states;
       vm.name = $stateParams.name;
-      $log.log("vm.states:").log(vm.states);
+      vm.orders = [];
       Orders.list().then(function(data){
-        vm.orders = data.orders;
+        vm.orders = _.filter(data.orders, function(order){return Orders.isOfStates(order, vm.states)});
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
