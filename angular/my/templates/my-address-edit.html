@@ -7,7 +7,7 @@
       </label>
       <label class="item item-input">
         <span class="input-label">联系方式</span>
-        <input type="text" ng-model="vm.address.OrderConsignees.mobilephone">
+        <input type="text" ng-model="vm.address.OrderConsignees.mobilephone" ng-blur="vm.verifyMobilePhone()">
       </label>
       <label class="item item-select">
         <span class="input-label">省</span>

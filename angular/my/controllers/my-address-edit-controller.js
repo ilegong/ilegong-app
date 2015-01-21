@@ -12,6 +12,8 @@
     vm.onProvinceChanged = onProvinceChanged;
     vm.onCityChanged = onCityChanged;
     vm.onAddressUpdated = onAddressUpdated;
+    vm.verifyMobilePhone = verifyMobilePhone;
+    vm.isMobilePhoneValid = isMobilePhoneValid;
     vm.readyToSave = readyToSave;
     activate();
     function activate(){
@@ -59,12 +61,24 @@
         vm.counties = counties;
       });
     }
-    function readyToSave(){
+    function verifyMobilePhone(){
       var t = vm.address.OrderConsignees;
-      if(!/^1[3-8][0-9]\d{8}$/.test(t.mobilephone)){
+      if(!vm.isMobilePhoneValid(t.mobilephone)){
+        $rootScope.alertError("手机号输入错误");
+      }
+      else{
+        $rootScope.alert.error = "";
+      }
+    }
+    function isMobilePhoneValid(mobilePhone){
+      if(_.isEmpty(mobilePhone)){
         return false;
       }
-      return !_.isEmpty(t.name) && !_.isEmpty(t.address) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
+      return /^1[3-8][0-9]\d{8}$/.test(mobilePhone.replace(/-/g, ""));
+    }
+    function readyToSave(){
+      var t = vm.address.OrderConsignees;
+      return !_.isEmpty(t.name) && !_.isEmpty(t.address) && vm.isMobilePhoneValid(t.mobilephone) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
     }
     function editAddress(){
       var t = vm.address.OrderConsignees;
