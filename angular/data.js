@@ -2189,11 +2189,11 @@ var productDetail = {
          "photo":"",
          "cate_id":"114",
          "end_time":"2015-11-24 11:24:00",
-         "promote_name":"",
+         "promote_name":"promote",
          "comment_nums":"2",
          "recommend":"288",
          "ship_fee":"5",
-         "original_price":null,
+         "original_price":1000,
          "specs": "{\"map\":{\"1\":{\"name\":\"电科院\"},\"2\":{\"name\":\"1/22东升科技园\"},\"3\":{\"name\":\"1月22日电力科学院\"},\"4\":{\"name\":\"1月22日东盛科技园\"},\"5\":{\"name\":\"1月22日银科大厦附近\"},\"6\":{\"name\":\"1月22日东升科技园\"}},\"choices\":{\"送货日期地址\":[\"1月22日电力科学院\",\"1月22日银科大厦附近\",\"1月22日东升科技园\"]}}",
       }
    },

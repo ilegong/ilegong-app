@@ -24,13 +24,13 @@ uct
             {{vm.product.Product.price | currency:''}}
           </span>
           <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
-            t_o_price{{vm.product.Product.original_price | currency:"￥"}}
+            {{vm.product.Product.original_price | currency:"￥"}}
           </span>
           <span class="comment-count">
-            t_口碑评价(123)
+            口碑评价({{vm.getEvaluateCommentNum()==null?0:vm.getEvaluateCommentNum()}})
           </span>
           <p/>
-          <span class="suggest">
+          <span ng-show="false" class="suggest">
             t_好友。。。推荐了该产品
           </span>
         </div>
@@ -42,10 +42,10 @@ uct
         </div>
         <div class="col">
           <span class="offer">
-            t_有红包
+            暂无红包
           </span>
           <p class="promotion-text"/>
-          <span >
+          <span ng-show="false">
             t_本店商品满99元立减10元
           </span>
         </div>
@@ -82,7 +82,7 @@ uct
         <a class="item item-icon-right">
           <i class=" icon ion-ios7-arrow-right"></i>
           <img class="brand-image" src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
-          <span class="brand-name">
+          <span ui-sref="store.home({storeId:vm.brand.Brand.})" class="brand-name">
             进入{{vm.brand.Brand.name}}的店铺
           </span>
         </a>
@@ -102,7 +102,7 @@ uct
           <div class="left-title col col-20">
             服务：
           </div>
-          <div class="col">
+          <div ng-show="false" class="col">
             t_本商品由。。提供，周日统一发货，朋友说提供售后服务。。。
           </div>
         </div>
@@ -115,7 +115,7 @@ uct
         </div>
         <span class="item menu-text" ng-click="vm.menuClick(1)">
           试吃评价
-          <span class="menu-sub-text">({{vm.getShichiCommentNum()}})</span>
+          <span class="menu-sub-text">({{vm.getShichiCommentNum()==null?0:vm.getShichiCommentNum()}})</span>
         </span>
         <div ng-show="vm.isShowMenuContents[1]">
           <div class="list">
@@ -149,7 +149,7 @@ uct
         </div>
         <span class="item menu-text" ng-click="vm.menuClick(2)">
           口碑评价
-          <span class="menu-sub-text">({{vm.getEvaluateCommentNum()}})</span>
+          <span class="menu-sub-text">({{vm.getEvaluateCommentNum()==null?0:vm.getEvaluateCommentNum()}})</span>
         </span>
         <div class="productDetailEvaluate" ng-show="vm.isShowMenuContents[2]">
           <div class="list">
@@ -175,7 +175,7 @@ uct
               <div>
                 <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="evaluate-image"/>
               </div>
-              <span class="buy-time">
+              <span ng-show="false" class="buy-time">
                 购买时间：{{ite.Comment.created}}
               </span>
             </div>

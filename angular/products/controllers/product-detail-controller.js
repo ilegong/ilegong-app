@@ -21,7 +21,7 @@
     activate();
     
     function activate(){
-      vm.isShowMenuContents = [false,false,true];
+      vm.isShowMenuContents = [true,false,false];
       vm.specsChecks = {};
       vm.currentSpecs = 0;
       var id = $stateParams.id;
