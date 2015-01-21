@@ -147,7 +147,7 @@
 
   function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
-    $rootScope.address = $rootScope.address || {addresses: [], defaultAddress: {}};
+    $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     Users.init();
@@ -155,13 +155,12 @@
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
     }
-    $rootScope.updateAddresses = function(addresses){
-      var  defaultAddress =  _.find($rootScope.addresses, function(address){return address.OrderConsignees.status == 1});
-      if(_.isEmpty(defaultAddress) && addresses.length > 0){
-        defaultAddress = addresses[0];
+    $rootScope.getDefaultAddress = function(){
+      var defaultAddress =  _.find($rootScope.addresses, function(address){return address.OrderConsignees.status == 1});
+      if(_.isEmpty(defaultAddress) && $rootScope.addresses.length > 0){
+        defaultAddress = $rootScope.addresses[0];
       }
-      $rootScope.address.addresses = addresses;
-      $rootScope.address.defaultAddress = defaultAddress;
+      return defaultAddress || {OrderConsignees: {}};
     }
   }
 })();

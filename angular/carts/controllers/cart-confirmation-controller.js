@@ -23,7 +23,7 @@
       });
       vm.brands = $rootScope.cart.brands;
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
-      vm.defaultAddress = $rootScope.address.defaultAddress;
+      vm.defaultAddress = $rootScope.getDefaultAddress();
       
       Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
         vm.brands = result.brands;
@@ -37,8 +37,8 @@
           $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
         }
       });
-      $scope.$watch("address.defaultAddress", function(newAddress, oldAddress){
-        vm.defaultAddress = newAddress;
+      $scope.$watch("addresses", function(newAddress, oldAddress){
+        vm.defaultAddress = $rootScope.getDefaultAddress();
       })
     }
     function getBrandById(id){

@@ -15,18 +15,14 @@
 
     function activate() {
       vm.state = $stateParams.state;
-      vm.addresses = [];
-      vm.defaultAddress = {};
+      vm.addresses = $rootScope.addresses;
+      vm.defaultAddress = $rootScope.getDefaultAddress();
       Addresses.list().then(function(addresses){
-        $rootScope.updateAddresses(addresses);
-        vm.addresses = $rootScope.address.addresses;
-        vm.defaultAddress = $rootScope.address.defaultAddress;
+        $rootScope.addresses = addresses;
       });
-      $scope.$watch('address.addresses', function(newAddresses, oldAddresses){
+      $scope.$watch('addresses', function(newAddresses, oldAddresses){
         vm.addresses = newAddresses;
-      });
-      $scope.$watch('address.defaultAddress', function(newAddress, oldAddress){
-        vm.defaultAddress = newAddress;
+        vm.defaultAddress = $rootScope.getDefaultAddress();
       });
     }
     function editAddress(addr){
@@ -41,10 +37,12 @@
       return address.OrderConsignees.id == vm.defaultAddress.OrderConsignees.id;
     }
 
-    function setDefaultAddress(address){
-      Addresses.setDefaultAddress(address.OrderConsignees.id).then(function(result){
-        $rootScope.address.defaultAddress = address;
-        vm.defaultAddress = address;
+    function setDefaultAddress(defaultAddress){
+      Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id).then(function(result){
+        _.each($rootScope.addresses, function(address){
+          address.OrderConsignees.status = (defaultAddress.OrderConsignees.id == address.OrderConsignees.id) ? 1 : 0;
+        });
+        vm.defaultAddress = defaultAddress;
         if(vm.isFromOrder()){
           $ionicHistory.goBack();
         }

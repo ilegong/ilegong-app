@@ -82,7 +82,7 @@
     }
     function onAddressUpdated(){
       Addresses.list().then(function(addresses){
-        $rootScope.updateAddresses(addresses);
+        $rootScope.addresses = addresses;
         $ionicHistory.goBack();
       });
     }

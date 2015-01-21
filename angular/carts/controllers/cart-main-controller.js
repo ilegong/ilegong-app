@@ -33,7 +33,7 @@
         $rootScope.updateCart(result);
       })
       Addresses.list().then(function(addresses){
-        $rootScope.updateAddresses(addresses);
+        $rootScope.addresses = addresses;
       });
       $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
         vm.cartItems = newCartItems;
