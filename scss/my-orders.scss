@@ -2,9 +2,11 @@
  
  .my-orders{
   .brand{
+    line-height: 2em;
     .brand-name{
       display: inline-block;
       font-size: 1.2em;
+      line-height: 2em;
     }
   }
   .product{
@@ -13,6 +15,7 @@
     }
   }
   .summary{
+    padding-left: 6.4em;
     .total-price{
       float: left;
       line-height: 32px;

@@ -9,6 +9,9 @@
     vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.getOrdersOfStates = function(states){return _.filter(vm.orders, function(order){return vm.isOfStates(order, states)})};
+    vm.confirmReceivingGoods = confirmReceivingGoods;
+    vm.viewLogistics = viewLogistics;
+    vm.remindSendingGoods = remindSendingGoods;
     activate();
     
     function activate() {
@@ -34,10 +37,16 @@
         $log.log(result);
       });
     }
-    vm.receive = function(id){
+    function confirmReceivingGoods(id){
       Orders.receive(id).then(function(result){
         activate();
       });
+    }
+    function viewLogistics(id){
+    }
+    function addRemark(id){
+    }
+    function remindSendingGoods(){
     }
   }
 })(window, window.angular);

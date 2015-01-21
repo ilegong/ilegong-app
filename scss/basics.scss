@@ -24,6 +24,9 @@ a{
 .pane, .view {
   background-color: #f5f5f5;
 }
+.button{
+  font-size: 14px;
+}
 .btn-warning {
   color: #fff;
   background-color: #dd5600;
@@ -250,12 +253,13 @@ a{
   }
 }
 
+// item-avatar general
 .item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
-  padding-left: 4em;
+  padding: 1em 1em 1em 4em;
   min-height: 4em;
 }
 .item-avatar-right, .item-avatar-right .item-content {
-  padding-right: 4em;
+  padding: 1em 4em 1em 1em;
   min-height: 4em;
 }
 .item-avatar > img:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image {
@@ -263,6 +267,8 @@ a{
   left: 0.5em;
   max-width: 3em;
   max-height: 3em;
+  height: 3em;
+  width: 3em;
   border-radius: 0.5em;
 }
 .item-avatar-right > img:first-child, .item-avatar-right .item-image, .item-avatar-right .item-content > img:first-child, .item-avatar-right .item-content .item-image{
@@ -271,4 +277,17 @@ a{
   max-width: 3em;
   max-height: 3em;
   border-radius: 0.5em;
+}
+// item-avatar-big
+.item-avatar-big, .item-avatar-big .item-content, .item-avatar-big-left, .item-avatar-big-left .item-content {
+  padding: 1em 1em 1em 6.4em;
+  min-height: 6.4em;
+}
+.item-avatar-big > img:first-child, .item-avatar-big .item-image, .item-avatar-big .item-content > img:first-child, .item-avatar-big .item-content .item-image, .item-avatar-big-left > img:first-child, .item-avatar-big-left .item-image, .item-avatar-big-left .item-content > img:first-child, .item-avatar-big-left .item-content .item-image {
+  top: 0.7em;
+  left: 0.7em;
+  max-width: 5em;
+  max-height: 5em;
+  height: 5em;
+  width: 5em;
 }
