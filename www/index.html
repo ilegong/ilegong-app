@@ -20,7 +20,13 @@
         Back
       </ion-nav-back-button>
     </ion-nav-bar>
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view>
+    </ion-nav-view>
+    <div class="alert-container" ng-show="alert.error != ''">
+      <span class="alert alert-error">
+        {{alert.error}}
+      </span>
+    </div>
     <ul>
       <li ng-repeat='message in messages track by $index'>{{message}}</li>
     </ul>

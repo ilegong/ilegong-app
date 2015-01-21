@@ -79,8 +79,6 @@
     function refreshToken(refreshToken){
       var defer = $q.defer();
       Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+software.app.client_id).then(function(token){
-        console.log(token);
-        console.log('asd');
         self.onGetTokenSuccessfully(token, defer);
       },function(error){defer.reject(error)})
       return defer.promise;

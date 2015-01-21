@@ -1,6 +1,6 @@
 // Ionic Starter App
 
-(function(){
+(function(window, angular, _){
   angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'ilegong.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
   .run(initApp)
   .config(configStates)
@@ -145,11 +145,12 @@
     $ionicConfigProvider.navBar.alignTitle('center')
   }
 
-  function AppCtrl(Users,$q,$scope,$rootScope,Orders) {
+  function AppCtrl(Users,$q,$scope,$rootScope, $timeout, software, Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
+    $rootScope.alert = {error: ''};
     Users.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
@@ -162,6 +163,12 @@
       }
       return defaultAddress || {OrderConsignees: {}};
     }
+    $rootScope.alertError = function(message){
+      $rootScope.alert.error = message;
+      $timeout(function(){
+        $rootScope.alert.error = "";
+      }, software.timeout);
+    }
   }
-})();
+})(window, window.angular, _);
 

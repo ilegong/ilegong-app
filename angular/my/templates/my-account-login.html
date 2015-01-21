@@ -16,10 +16,5 @@
     <div class="padding">
       <button class="button button-block" ng-class="{'button-energized': vm.readyToLogin()}" ng-click="vm.login()" ng-disabled="!vm.readyToLogin()">登录</button>
     </div>
-    <div class="alert-container" ng-show="vm.loginFailed">
-      <span class="alert alert-error">
-        您输入的账户和密码不匹配！
-      </span>
-    </div>
   </ion-content>
 </ion-view>

@@ -21,7 +21,7 @@
       Users.login(vm.username, vm.password).then(function(){
         $ionicHistory.goBack();
       }, function(error){
-        $log.log('login failed: ' + error.status).log(error.data);
+        $rootScope.alertError("您输入的账户和密码不匹配！");
       })
     }
   }

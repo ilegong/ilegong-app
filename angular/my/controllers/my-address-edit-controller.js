@@ -61,7 +61,10 @@
     }
     function readyToSave(){
       var t = vm.address.OrderConsignees;
-      return !_.isEmpty(t.name) && !_.isEmpty(t.address) && !_.isEmpty(t.mobilephone) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
+      if(!/^1[3-8][0-9]\d{8}$/.test(t.mobilephone)){
+        return false;
+      }
+      return !_.isEmpty(t.name) && !_.isEmpty(t.address) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
     }
     function editAddress(){
       var t = vm.address.OrderConsignees;
