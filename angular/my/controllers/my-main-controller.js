@@ -8,6 +8,7 @@
   function MyMainCtrl($q,$state,$rootScope, $scope, $log, Users){
     var vm = this;
     vm.profileClick = profileClick;
+    vm.toMyOrdersPage = function(state){$state.go("app.my-orders", {orderState: state})};
     activate();
     function activate() {
       vm.loggedIn = !_.isEmpty($rootScope.user.user);

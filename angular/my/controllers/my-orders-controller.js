@@ -4,14 +4,14 @@
   angular.module('module.my')
   .controller('MyOrdersCtrl',MyOrdersCtrl)
 
-  function MyOrdersCtrl($log,$scope,$rootScope,$http,Orders){
+  function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, Orders){
     var vm = this;
     vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
-    vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
+    vm.isOfStates = vm.isOfState = function(order, states){return _.isEmpty(states) || Orders.isOfStates(order, states)};
     activate();
     
-    vm.stateFilter = '';
     function activate() {
+      vm.orderStates = $stateParams.orderStates;
       Orders.list().then(function(data){
         vm.orders = data.orders;
         vm.brands = data.brands;

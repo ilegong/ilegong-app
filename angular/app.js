@@ -45,11 +45,7 @@
 
       .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
-      .state('app.my-orders',{url:'/my-orders',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
-      .state('app.my-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
-      .state('app.my-orders.unpaid',{url:'/unpaid',templateUrl:'my-orders-total.html'})
-      .state('app.my-orders.unsent',{url:'/unsent',templateUrl:'my-orders-total.html'})
-      .state('app.my-orders.unreceived',{url:'/unreceived',templateUrl:'my-orders-total.html'})
+      .state('app.my-orders',{url:'/my-orders/:orderStates',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
       .state('app.my-order-detail',{url:'/my-order-detail/:id',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
       .state('app.product-detail', {url: '/products/:id/:from', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
@@ -65,8 +61,7 @@
       .state('app.order-addresses',{url:'/order-addresses/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
       .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
-      .state('app.cart-orders',{url:'/cart-orders',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
-      .state('app.cart-orders.total',{url:'/total',templateUrl:'my-orders-total.html'})
+      .state('app.cart-orders',{url:'/cart-orders/:orderStates',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
       .state('app.cart-account-login', {url: '/cart-account-login', views: {'app-cart': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})

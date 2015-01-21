@@ -16,19 +16,19 @@
       </div>
       <div class="orders row">
         <div class="bg"></div>
-        <div class="order col">
+        <div class="order col" ui-sref="app.my-orders({orderStates: 'UNPAID'})">
           <span>0</span> <br/>
           待支付
         </div>
-        <div class="order col">
+        <div class="order col" ui-sref="app.my-orders({orderStates: 'PAID'})">
           <span>0</span><br/>
           待发货
         </div>
-        <div class="order col">
+        <div class="order col" ui-sref="app.my-orders({orderStates: 'SENT'})">
           <span class="as_badge">2</span> <br/>
           待收货
         </div>
-        <div class="order col">
+        <div class="order col" ui-sref="app.my-orders({orderStates: ['SENT', 'RECEIVED']})">
           <span>0</span> <br/>
           待评价
         </div>
@@ -36,7 +36,7 @@
     </div>
     <div class="list">
       <div class="item item-divider"></div>
-      <a class="item item-icon-left item-icon-right" ui-sref="app.my-orders.total">
+      <a class="item item-icon-left item-icon-right" ui-sref="app.my-orders({orderStates: ''})">
         <span class="icon pys-icon icon-my-order"></span>
         <i class="icon ion-ios7-arrow-right"></i>
         我的订单
