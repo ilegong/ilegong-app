@@ -830,6 +830,9 @@ a{
     border-right:none;
     border-top:none;
   }
+  .ion-content{
+    margin-bottom:1.6em;
+  }
   .main{
     background:white;
     margin-left:-0.7em;
@@ -844,6 +847,7 @@ a{
     margin-left:-0.7em;
     margin-right:-0.7em;
     margin-bottom:0.8em;
+    margin-top:-0.8em;
   }
   .menu-{
     .menu-text{
@@ -969,9 +973,19 @@ a{
     color:#ffa200;
   }
   .specs-item{
-    border:1px black solid;
-    padding:7px;
+    padding:0.4em;
     font-weight:bold;
+    display:inline-block;
+    margin-bottom:0.9em;
+    margin-right:0.4em;
+  }
+  .specs-item-checked{
+    border:1px green solid;
+    color:green;
+  }
+  .specs-item-unchecked{
+    border:1px #cccccc solid;
+    color:#cccccc;
   }
   .shipFee{
     
@@ -981,51 +995,51 @@ a{
     margin-bottom:-2px;
   }
   .number-span{
-      border-collapse: separate;
-      span{
-        display: inline-block;
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 1;
-        text-align: center;
-        background-color: #eee;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      span.count-reduce{
-        border-right: 0;
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        margin-bottom:-12px;
-        padding-bottom:31px;
-      }
-      span.count-add{
-        border-left: 0;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        margin-left:-4px;
-        margin-bottom:-12px;
-        padding-bottom:31px;
-      }
-      .count{
-        padding: 4px 1px;
-        width: 34%;
-        border-radius:0px;
-        border-left:none;
-        border-right:none;
-        margin-left:-4px;
-        height:33px;
-      }
-      .icon-reduce{
-        width:2.45em;
-        height:2.39em;
-        background-position:-5.02em 0;
-      }
-      .icon-add{
-        width:2.55em;
-        height:2.39em;
-        background-position:-7.98em 0;
-      }
+    border-collapse: separate;
+    span{
+      display: inline-block;
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 1;
+      text-align: center;
+      background-color: #eee;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    span.count-reduce{
+      border-right: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      margin-bottom:-12px;
+      padding-bottom:31px;
+    }
+    span.count-add{
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      margin-left:-4px;
+      margin-bottom:-12px;
+      padding-bottom:31px;
+    }
+    .count{
+      padding: 4px 1px;
+      width: 34%;
+      border-radius:0px;
+      border-left:none;
+      border-right:none;
+      margin-left:-4px;
+      height:33px;
+    }
+    .icon-reduce{
+      width:2.45em;
+      height:2.39em;
+      background-position:-5.02em -0.24em;
+    }
+    .icon-add{
+      width:2.55em;
+      height:2.39em;
+      background-position:-7.98em -0.24em;
+    }
   }
   .numBox{
     width:10%;
@@ -1043,6 +1057,22 @@ a{
   .brand-button{
     margin-left:-0.7em;
     margin-right:-0.7em;
+  }
+  .stars{
+    margin-top: 0.4em;
+    .icon-star{
+      background-position:-2.084em 0;
+      width:1em;
+      height:1em;
+    }
+    .icon-star-gray{
+      background-position:-3.5em 0;
+      width:1em;
+      height:1em;      
+    }
+    span{
+      display:inline-block;
+    }
   }
   .evaluate{
     margin-left:-0.7em;
@@ -1063,22 +1093,7 @@ a{
       float: right;
       margin-top: 0.5em;
     }
-    .stars{
-      margin-top: 0.4em;
-      .icon-star{
-        background-position:-2.084em 0;
-        width:1em;
-        height:1em;
-      }
-      .icon-star-gray{
-        background-position:-3.5em 0;
-        width:1em;
-        height:1em;      
-      }
-      span{
-        display:inline-block;
-      }
-    }
+
     .buy-time{
       float:right;
       margin-top:1em;
@@ -1092,64 +1107,23 @@ a{
     }
 
   }
+  .make-comment{
+    background:white;
+    margin-left:-0.7em;
+    margin-right:-0.7em;
+    padding:1em;
+    margin-top:-0.8em;
+    .star{
+      margin-right:0.5em;
+    }
+    .textbox{
+      height:5em;
+      border:1px solid;
+    }
+  }
 }
 
-.productDetailEvaluate{
-  .rankText{
-    display: inline;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: bold;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-  }
-  .imageWidthFull{
-    width:100%;
-  }
-  .date{
-    color: #d0d0d0;
-    font-size: 12px;
-    margin-top: 10px;
-    text-align:right;
-  }
-  .buttonColor{
-    background-color:lightgray;
-  }
-  .buttonFont{
-    font-size:0.7em !important;
-  }
-  .contentBox{
-    height:50px;
-  }
- }
- .myOrdersTotal{
-  .brandName{
-    font-size:20px;
-    color:blue;
-  }
-  .orderStatus{
-    float:right;
-    color:red;
-  }
-  .img{
-    width:100%;
-  }
-  .cartName{
-    font-size:15px;
-    text-align:center;
-  }
-  .info{
-    float:right;
-  }
-  .buttons{
-    float:right;
-    padding-top:10px;
-  }
-}
+
 
 .my-account-register{
   .item.item-row{

@@ -38,7 +38,8 @@
     }
     function addCartItem(id,num,spec,type,try_id){
       var defer = $q.defer();
-      var json = '{"product_id":'+id+',"num":'+num+',"spec":'+spec+',"type":'+type+',"try_id":'+try_id+'}';
+      var json = {"product_id":id,"num":num,"spec":spec,"type":type,"try_id":try_id};
+
       Base.post('/api_orders/cart_add.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
         if(result.data.success){
           defer.resolve(result.data);
