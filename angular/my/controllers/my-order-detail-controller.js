@@ -6,7 +6,6 @@
 
   function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
     var vm = this;
-    vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.aliPay = aliPay;
     vm.onAliPayLoadStart = onAliPayLoadStart;
@@ -16,9 +15,12 @@
     
     function activate() {
       vm.orderId = $stateParams.id;
+      vm.order = {};
+      vm.orderState = {};
       vm.inAppBrowserEvents = {'loadstart': vm.onAliPayLoadStart, 'loadstop': vm.onAliPayLoadStop, 'exit': vm.onAliPayFinished}
       Orders.getOrderDetail(vm.orderId).then(function(data) {
         vm.order = data.order;
+        vm.orderState = Orders.getOrderState(vm.order.Order.status);
         vm.cartItems = data.carts;
         vm.totalPrice = _.reduce(vm.cartItems, function(sum, cartItem){return sum + cartItem.Cart.price}, 0);
         vm.ship_type = data.ship_type;

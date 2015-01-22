@@ -16,9 +16,9 @@
       </div>
       <div class="orders row">
         <div class="bg"></div>
-        <div class="order col" ui-sref="app.my-orders({states: unFinishedOrderState.states, name: unFinishedOrderState.name})" ng-repeat="unFinishedOrderState in vm.unFinishedOrderStates">
-          <span ng-class="{as_badge: vm.getOrdersCountOf(unFinishedOrderState.states) > 0}">{{vm.getOrdersCountOf(unFinishedOrderState.states)}}</span> <br/>
-          {{unFinishedOrderState.name}}
+        <div class="order col" ui-sref="app.my-orders({state: pendingOrderState.state})" ng-repeat="pendingOrderState in vm.pendingOrderStates">
+          <span ng-class="{as_badge: vm.countOfOrders(pendingOrderState.state) > 0}">{{vm.countOfOrders(pendingOrderState.state)}}</span> <br/>
+          {{pendingOrderState.name}}
         </div>
       </div>
     </div>

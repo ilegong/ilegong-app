@@ -4,22 +4,19 @@
   angular.module('module.my')
   .controller('MyOrdersCtrl',MyOrdersCtrl)
 
-  function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, Orders){
+  function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
-    vm.getOrderDesc = function(order){return Orders.getOrderStatus(order).desc};
-    vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
-    vm.getOrdersOfStates = function(states){return _.filter(vm.orders, function(order){return vm.isOfStates(order, states)})};
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
     activate();
     
     function activate() {
-      vm.states = _.contains($stateParams.states, ",") ? $stateParams.states.split(",") : $stateParams.states;
-      vm.name = $stateParams.name;
+      vm.state =$stateParams.state;
+      vm.orderState = Orders.getOrderState(vm.state);
       vm.orders = [];
       Orders.list().then(function(data){
-        vm.orders = _.filter(data.orders, function(order){return Orders.isOfStates(order, vm.states)});
+        vm.orders = _.filter(data.orders, function(order){return Orders.isOfStates(order, vm.state)});
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
@@ -37,7 +34,7 @@
         $log.log(result);
       });
     }
-    function confirmReceivingGoods(id){
+    function confirmReceivingGoods(order){
       Orders.receive(id).then(function(result){
         activate();
       });
@@ -46,7 +43,11 @@
     }
     function addRemark(id){
     }
-    function remindSendingGoods(){
+    function remindSendingGoods(order){
+      order.reminded = true;
+      $timeout(function(){
+        $rootScope.alertMessage('已经提醒卖家发货');
+      }, 500);
     }
   }
 })(window, window.angular);

@@ -6,33 +6,27 @@
 
   function Orders($log,$q,Base,software,Users){
     var self = this;
-    self.ORDER_STATUS = [
-      {value: 'UNPAID', state:0, desc:'未支付', descAlias: '待支付'},
-      {value: 'PAID', state:1, desc:'已支付', descAlias: '待发货'},
-      {value: 'SENT', state:2, desc:'已发货', descAlias: '待收货'},
-      {value: 'RECEIVED', state:3, desc:'已收货', descAlias: '待评价'},
-      {value: 'REFUNDED', state:4, desc:'已退款'},
-      {value: 'SUCCESSED', state:9, desc:'已完成'},
-      {value: 'CANCELED', state:10, desc:'已取消'},
-      {value: 'VERIFIED', state:11, desc:'已确认有效'},
-      {value: 'COMPLAINED', state:12, desc:'已投诉'}
-    ]
-    self.UNFINISHED_ORDER_STATES = [
-      {states: 'UNPAID', name: '待支付'},
-      {states: 'PAID', name: '待发货'},
-      {states: 'SENT', name: '待收货'},
-      {states: ['SENT', 'RECEIVED'], name: '待评价'}
+    self.ORDER_STATES = [
+      {state:0, value: 'UNPAID', name:'待支付', pending: true, status: '待支付'},
+      {state:1, value: 'PAID', name:'待发货', pending: true, status: '待发货'},
+      {state:2, value: 'SENT', name:'待收货', pending: true, status: '已发货'},
+      {state:3, value: 'RECEIVED', name:'待评价', pending: true, status: '交易成功'},
+      {state:4, value: 'REFUNDED', name:'已退款', pending: false},
+      {state:9, value: 'SUCCESSED', name:'已完成', pending: false},
+      {state:10, value: 'CANCELED', name:'已取消', pending: false},
+      {state:11, value: 'VERIFIED', name:'已确认有效', pending: false},
+      {state:12, value: 'COMPLAINED', name:'已投诉', pending: false}
     ]
     return {
       list: list,
-      getOrderStatus: getOrderStatus, 
       isOfStates: isOfStates, 
+      getOrderState: function(state){return _.find(self.ORDER_STATES, function(orderState){return orderState.state == state})},
+      getPendingOrderStates: function(){return _.filter(self.ORDER_STATES, function(orderState){return orderState.pending})}, 
       submitOrder: submitOrder,
       undo:undo,
       remove: remove,
       receive: receive,
-      getOrderDetail: getOrderDetail, 
-      getUnFinishedOrderStates: function(){return self.UNFINISHED_ORDER_STATES}
+      getOrderDetail: getOrderDetail 
     }
 
     function list(){
@@ -42,19 +36,15 @@
       });
       return defer.promise;
     }
-    function getOrderStatus(order){
-      order = order || {Order: {}}
-      return _.find(self.ORDER_STATUS, function(orderStatus){return orderStatus.state == order.Order.status}) || {};
-    }
     function isOfStates(order, states){
-      if(_.isEmpty(states)){
+      if(states == -1){
         return true;
       }
-      var value = getOrderStatus(order).value;
+      var state = (order || {Order: {}}).Order.status;
       if(_.isArray(states)){
-        return _.contains(states, value);
+        return _.contains(states, state);
       }
-      return value == states;
+      return state == states;
     }
     function submitOrder(pid_list,addressId,coupon_code,remarks){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};

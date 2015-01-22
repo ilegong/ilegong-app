@@ -8,12 +8,12 @@
   function MyMainCtrl($q,$state,$rootScope, $scope, $log, Users, Orders){
     var vm = this;
     vm.profileClick = profileClick;
-    vm.getOrdersCountOf = getOrdersCountOf;
+    vm.countOfOrders = function(state){return _.filter(vm.orders, function(order){return Orders.isOfStates(order, state)}).length};
     activate();
 
     function activate() {
       vm.loggedIn = !_.isEmpty($rootScope.user.user);
-      vm.unFinishedOrderStates = Orders.getUnFinishedOrderStates();
+      vm.pendingOrderStates = Orders.getPendingOrderStates();
       vm.orders = [];
       Users.getUser().then(function(user){
         vm.user = user.my_profile.User;
@@ -25,13 +25,6 @@
       $scope.$watch('user.user', function(newUser, oldUser) {
         vm.loggedIn = !_.isEmpty(newUser);
       });
-    }
-
-    function getOrdersCountOf(orderStates){
-      if(_.isEmpty(orderStates)){
-        return vm.orders.length;
-      }
-      return _.filter(vm.orders, function(order){return Orders.isOfStates(order, orderStates)}).length;
     }
 
     function profileClick(){
