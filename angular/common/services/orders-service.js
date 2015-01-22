@@ -7,14 +7,14 @@
   function Orders($log,$q,Base,software,Users){
     var self = this;
     self.ORDER_STATES = [
+      {state:-1, value: 'ALL', name:'全部', pending: false},
       {state:0, value: 'UNPAID', name:'待支付', pending: true, status: '待支付'},
       {state:1, value: 'PAID', name:'待发货', pending: true, status: '待发货'},
       {state:2, value: 'SENT', name:'待收货', pending: true, status: '已发货'},
       {state:3, value: 'RECEIVED', name:'待评价', pending: true, status: '交易成功'},
-      {state:4, value: 'REFUNDED', name:'已退款', pending: false},
-      {state:9, value: 'SUCCESSED', name:'已完成', pending: false},
-      {state:10, value: 'CANCELED', name:'已取消', pending: false},
-      {state:11, value: 'VERIFIED', name:'已确认有效', pending: false},
+      {state:4, value: 'REFUNDED', name:'已退款', pending: false, status: '交易关闭'},
+      {state:9, value: 'SUCCESSED', name:'已完成', pending: false, status: '交易成功'},
+      {state:10, value: 'CANCELED', name:'已取消', pending: false, status: '交易关闭'},
       {state:12, value: 'COMPLAINED', name:'已投诉', pending: false}
     ]
     return {

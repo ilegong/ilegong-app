@@ -6,6 +6,7 @@
 
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
+    vm.getOrderState = function(order){return Orders.getOrderState(order.Order.status)};
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.onGoodsReceived = onGoodsReceived;
     vm.viewLogistics = viewLogistics;
@@ -14,7 +15,7 @@
     
     function activate() {
       vm.state =$stateParams.state;
-      vm.orderState = Orders.getOrderState(vm.state);
+      vm.orderStateName = Orders.getOrderState(vm.state).name;
       vm.orders = [];
       Orders.list().then(function(data){
         $rootScope.orders = data.orders;
