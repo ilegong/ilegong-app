@@ -8,7 +8,6 @@
     var vm = this;
     vm.getOrderState = function(order){return Orders.getOrderState(order.Order.status)};
     vm.confirmReceivingGoods = confirmReceivingGoods;
-    vm.onGoodsReceived = onGoodsReceived;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
     activate();
@@ -20,13 +19,12 @@
       vm.brands = $rootScope.orders.brands;
       vm.order_carts = $rootScope.orders.order_carts;
       vm.ship_type = $rootScope.orders.ship_type;
-    }
-
-    vm.undo = function(id){
-      Orders.undo(id).then(function(result){
-        activate();
+      $rootScope.$on("orderStateChanged", function(event, order){
+        $log.log("order " + order.Order.id + " state changed to " + order.Order.status);
+        vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
       });
     }
+
     vm.remove = function(id){
       Orders.remove(id).then(function(result){
         activate();
@@ -39,15 +37,9 @@
       }
       var orderId = order.Order.id;
       Orders.confirmReceivingGoods(orderId).then(function(result){
-        var order = _.find($rootScope.orders.orders, function(order){return order.Order.id == orderId});
-        order.Order.status = 3;
-        vm.onGoodsReceived(order);
+        $rootScope.updateOrderState(orderId, 3);
+        $rootScope.alertMessage("已确认收货");
       });
-    }
-    function onGoodsReceived(order){
-      $rootScope.alertMessage("已确认收货");
-      vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
-      $rootScope.$broadcast('orderStateChanged', order);
     }
     function viewLogistics(id){
     }

@@ -23,7 +23,7 @@
       getOrderState: function(state){return _.find(self.ORDER_STATES, function(orderState){return orderState.state == state})},
       getPendingOrderStates: function(){return _.filter(self.ORDER_STATES, function(orderState){return orderState.pending})}, 
       submitOrder: submitOrder,
-      undo:undo,
+      cancelOrder: cancelOrder,
       remove: remove,
       confirmReceivingGoods: confirmReceivingGoods,
       getOrderDetail: getOrderDetail 
@@ -59,7 +59,7 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function undo(id){
+    function cancelOrder(id){
       var defer = $q.defer();
       Base.get('/api_orders/confirm_undo/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
         defer.resolve(result);

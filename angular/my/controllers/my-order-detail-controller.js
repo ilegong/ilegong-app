@@ -4,7 +4,7 @@
   angular.module('module.my')
   .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
 
-  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
+  function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, Orders, Users) {
     var vm = this;
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.cancelOrder = cancelOrder;
@@ -31,8 +31,16 @@
         vm.store = data.store;
       });
     }
-    function cancelOrder(){
-
+    function cancelOrder(order){
+      // if(order.Order.status != 0){
+      //   $log.log("cannot cancel order " +  order.Order.id + " with state " + order.Order.status);
+      //   return;
+      // }
+      var orderId =  order.Order.id;
+      Orders.cancelOrder(orderId).then(function(result){
+        $rootScope.updateOrderState(orderId, 10);
+        $ionicHistory.goBack();
+      });
     }
     function aliPay(){
       Users.aliPay(vm.orderId).then(function(inAppBrowser){

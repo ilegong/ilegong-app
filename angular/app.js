@@ -159,6 +159,11 @@
       }
       return defaultAddress || {OrderConsignees: {}};
     }
+    $rootScope.updateOrderState = function(orderId, state){
+      var order = _.find($rootScope.orders.orders, function(order){return order.Order.id == orderId});
+      order.Order.status = state;
+      $rootScope.$broadcast('orderStateChanged', order);
+    }
     $rootScope.alertMessage = function(message){
       $rootScope.alert.message = message;
       $timeout(function(){
