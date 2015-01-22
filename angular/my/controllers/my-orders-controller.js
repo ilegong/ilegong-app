@@ -7,6 +7,7 @@
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
     vm.confirmReceivingGoods = confirmReceivingGoods;
+    vm.onGoodsReceived = onGoodsReceived;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
     activate();
@@ -16,7 +17,8 @@
       vm.orderState = Orders.getOrderState(vm.state);
       vm.orders = [];
       Orders.list().then(function(data){
-        vm.orders = _.filter(data.orders, function(order){return Orders.isOfStates(order, vm.state)});
+        $rootScope.orders = data.orders;
+        vm.orders = _.filter($rootScope.orders, function(order){return Orders.isOfStates(order, vm.state)});
         vm.brands = data.brands;
         vm.order_carts = data.order_carts;
         vm.ship_type = data.ship_type;
@@ -35,9 +37,21 @@
       });
     }
     function confirmReceivingGoods(order){
-      Orders.receive(id).then(function(result){
-        activate();
+      if(order.Order.status != 2){
+        $log.log("cannot confirm receiving goods as current state is " + order.Order.status);
+        return;
+      }
+      var orderId = order.Order.id;
+      Orders.confirmReceivingGoods(orderId).then(function(result){
+        var order = _.find($rootScope.orders, function(order){return order.Order.id == orderId});
+        order.Order.status = 3;
+        vm.onGoodsReceived(order);
       });
+    }
+    function onGoodsReceived(order){
+      $rootScope.alertMessage("已确认收货");
+      vm.orders = _.filter($rootScope.orders, function(order){return Orders.isOfStates(order, vm.state)});
+      $rootScope.$broadcast('orderStateChanged', order);
     }
     function viewLogistics(id){
     }

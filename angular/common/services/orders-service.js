@@ -25,7 +25,7 @@
       submitOrder: submitOrder,
       undo:undo,
       remove: remove,
-      receive: receive,
+      confirmReceivingGoods: confirmReceivingGoods,
       getOrderDetail: getOrderDetail 
     }
 
@@ -73,7 +73,7 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function receive(id){
+    function confirmReceivingGoods(id){
       var defer = $q.defer();
       Base.get('/api_orders/confirm_receive/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
         defer.resolve(result);

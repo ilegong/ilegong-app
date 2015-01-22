@@ -143,6 +143,7 @@
   function AppCtrl(Users,$q,$scope,$rootScope, $timeout, software, Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
+    $rootScope.orders = [];
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     $rootScope.alert = {message: ''};

@@ -5,7 +5,7 @@
         <span class="col"></span>
         <a class="col" ng-click="vm.profileClick()" ng-show="vm.loggedIn">
           <span class="avatar"></span>
-          <span class="mobile">13521509118</span>
+          <span class="mobile">{{vm.user.nickname}}</span>
         </a>
         <span class="col" ng-show="!vm.loggedIn">
           <button class="button-login button button-outline" ui-sref="app.my-account-login">
@@ -16,9 +16,9 @@
       </div>
       <div class="orders row">
         <div class="bg"></div>
-        <div class="order col" ui-sref="app.my-orders({state: pendingOrderState.state})" ng-repeat="pendingOrderState in vm.pendingOrderStates">
-          <span ng-class="{as_badge: vm.countOfOrders(pendingOrderState.state) > 0}">{{vm.countOfOrders(pendingOrderState.state)}}</span> <br/>
-          {{pendingOrderState.name}}
+        <div class="order col" ui-sref="app.my-orders({state: pendingState.orderState.state})" ng-repeat="pendingState in vm.pendingStates">
+          <span ng-class="{as_badge: pendingState.orders.length > 0}">{{pendingState.orders.length}}</span> <br/>
+          {{pendingState.orderState.name}}
         </div>
       </div>
     </div>
