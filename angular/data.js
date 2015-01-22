@@ -2122,7 +2122,7 @@ var orderDetail = {
         "session_id": "1f51b7ef7d1d7b8c09e5fbc56432842c", 
         "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201411/thumb_s/801f40778e5_1101.jpg", 
         "used_coupons": "", 
-        "specId": "0", 
+        "spec": "1月22日电力科学院",
         "modified": "2014-11-19 11:55:27"
       }
     }
@@ -2154,10 +2154,15 @@ var orderDetail = {
         "created": "2014-09-09 08:46:00", 
         "slug": "xi_yu_mei_nong_xin_jiang_mei_zao", 
         "published": true, 
-        "deleted": false
+        "deleted": false, 
+        "specs": {
+          "map":{"1":{"name":"电科院"},"2":{"name":"1/22东升科技园"},"3":{"name":"1月22日电力科学院"},"4":{"name":"1月22日东盛科技园"},"5":{"name":"1月22日银科大厦附近"},"6":{"name":"1月22日东升科技园"},"7":{"name":"1月22日满20送上门"}},
+          "choices":{"送货日期地址":["1月22日电力科学院","1月22日银科大厦附近","1月22日东升科技园","1月22日满20送上门"]}
+        }
       }
     }
-  ]
+  ], 
+  "store": {"id":"37","name":"\u897f\u57df\u7f8e\u519c-\u674e\u6625\u671b","slug":"xi_yu_mei_nong_li_chun_wang","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_m\/56653661417_0908.jpg"}
 }
 
 var myDetail = {userId:1,userName:'lilei',nickName:'昵称',imgUrl:'none',sex:'男',company:'单位',content:'个性签名',mobilephone:'手机号',mail:'邮箱',password:'***'}

@@ -20,14 +20,14 @@
         vm.trying = user.my_profile.Shichituan;
       });
       Orders.list().then(function(data){
-        $rootScope.orders = data.orders;
-        vm.pendingStates = vm.getPendingStates($rootScope.orders);
+        $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
+        vm.pendingStates = vm.getPendingStates($rootScope.orders.orders);
       });
       $scope.$watch('user.user', function(newUser, oldUser) {
         vm.loggedIn = !_.isEmpty(newUser);
       });
       $rootScope.$on("orderStateChanged", function(event, order){
-        vm.pendingStates = vm.getPendingStates($rootScope.orders);
+        vm.pendingStates = vm.getPendingStates($rootScope.orders.orders);
       });
     }
 

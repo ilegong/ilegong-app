@@ -7,6 +7,7 @@
   function MyOrderDetailCtrl($scope, $rootScope, $http, $stateParams, $log, $state, Orders, Users) {
     var vm = this;
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
+    vm.cancelOrder = cancelOrder;
     vm.aliPay = aliPay;
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;
@@ -27,7 +28,11 @@
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;
         vm.products = data.products;
+        vm.store = data.store;
       });
+    }
+    function cancelOrder(){
+
     }
     function aliPay(){
       Users.aliPay(vm.orderId).then(function(inAppBrowser){

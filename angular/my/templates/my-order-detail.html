@@ -1,96 +1,53 @@
-<ion-view title="订单详情" show-tabs>
-  <ion-content>
-    <div class="orderDetail main">
-      <div ng-show="true">
-        <a class="button button-assertive" ng-click="vm.aliPay()">
-          去支付宝支付
-        </a>
+<ion-view title="订单详情" class="order-detail" show-tabs>
+  <ion-content class="list">
+    <div class="item">
+      <div>收货地址</div> 
+      <div class="text-sub-muted">
+        {{vm.order.Order.consignee_area}}{{vm.order.Order.consignee_address}}
       </div>
-      <div>
-        订单状态：{{vm.orderState.name}}
+      <span class="text-sub-muted">
+      {{vm.order.Order.consignee_name}}
+      </span>
+      <span class="text-sub-muted">
+        {{vm.order.Order.consignee_mobilephone}}
+      </span>
+    </div>
+    <div class="item item-avatar item-icon-right">
+      <img src="{{vm.store.coverimg}}"/>
+      <i class="icon ion-ios7-arrow-right"></i>
+      <div>{{vm.store.name}}</div>
+    </div>
+    <div class="item">
+      订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
+    </div>
+    <a class="item item-avatar item-avatar-big item-icon-right" ng-repeat="item in vm.cartItems">
+      <img src="{{item.Cart.coverimg}}"/>
+      <i class="icon ion-ios7-arrow-right"></i>
+      <div>{{item.Cart.name}}</div>
+      <div class="text-sub-muted">
+        价格：{{item.Cart.price | currency:'￥'}}&nbsp;数量：{{item.Cart.num}}
       </div>
-      <div>
+      <div class="text-sub-muted" ng-show="!_.isEmpty(item.Cart.spec)">
+        规则：{{item.Cart.spec}}
+      </div>
+    </a>
+    <div class="item">
+      运费：{{vm.order.Order.ship_fee | currency:'￥'}}
+    </div>
+    <div class="item">
+      订单号：{{vm.order.Order.id}}
+      <div class="text-sub-muted">
         下单时间：{{vm.order.Order.created}}
-      </div>
-      <div>
-        支付时间：{{vm.order.Order.pay_time}}
-      </div>
-      <div>
-        订单号：{{vm.order.Order.id}}
-      </div>
-      <div>
-        <span>
-        收货人：{{vm.order.Order.consignee_name}}
-        </span>
-        <span class="mobilephone">
-          {{vm.order.Order.consignee_mobilephone}}
-        </span>
-      </div>
-      <div>
-        收货地址：{{vm.order.Order.consignee_address}}
-      </div>
-      <hr>
-      <div>
-        <h4>
-          物流信息
-        </h4>
-        <p/>
-        <div>
-          <span>
-            快递公司：{{vm.ship_type[vm.order.Order.ship_type]}}
-          </span>
-          <span style="float:right;">
-            快递单号：{{vm.order.Order.ship_code}}
-          </span>
-        </div>
-      </div>
-      <hr>
-      <div class="list">
-        <div class="item" ng-repeat="item in vm.cartItems">
-          <div class="row">
-            <div class="col col-20">
-              <a href="{{item.linkUrl}}">
-                <img src="{{item.Cart.coverimg}}" style="width:100%"/>
-              </a>
-            </div>
-            <div class="col col-50">
-              <a href="{{item.linkUrl}}">
-                {{item.Cart.name}}
-              </a>
-              <div ng-show="vm.isOfStates(vm.order, 'RECEIVED')"  >
-                <a ui-sref="app.product-detail-o.intro({id: item.Cart.product_id,from: -2})" class="button button-assertive">
-                  去评论
-                </a>
-              </div>
-              <div>
-                {{item.Cart.price | currency:'￥'}} × {{item.Cart.num}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        订单备注：{{vm.order.Order.remark}}
-      </div>
-      <div>
-        <div style="text-align:right;">
-          <div>
-            商品总价：{{vm.totalPrice | currency:'￥'}}
-          </div>
-          <div>
-            运费：{{vm.order.Order.ship_fee | currency:'￥'}}
-          </div>
-          <div>
-            总价：{{vm.order.Order.total_price | currency:'￥'}}
-          </div>
-          <div>
-            优惠券：{{vm.order.Order.coupon_total | currency:'￥'}}
-          </div>  
-          <div>
-            实付（含运费）：{{vm.order.Order.total_all_price | currency:'￥'}}
-          </div>
-        </div>
       </div>
     </div>
   </ion-content>
+  <ion-footer-bar>
+    <span class="title pl">
+     合计：<span class="text-energized">{{vm.totalPrice | currency:'￥'}}</span>
+    </span>
+    <div class="buttons" ng-click="doSomething()">
+      <button class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？">取消订单</button>
+      <button class="button button-energized" ng-click="vm.aliPay()">支付</button>
+    </div>
+  </ion-footer-bar>
 </ion-view>

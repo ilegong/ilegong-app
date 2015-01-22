@@ -16,14 +16,10 @@
     function activate() {
       vm.state =$stateParams.state;
       vm.orderStateName = Orders.getOrderState(vm.state).name;
-      vm.orders = [];
-      Orders.list().then(function(data){
-        $rootScope.orders = data.orders;
-        vm.orders = _.filter($rootScope.orders, function(order){return Orders.isOfStates(order, vm.state)});
-        vm.brands = data.brands;
-        vm.order_carts = data.order_carts;
-        vm.ship_type = data.ship_type;
-      });
+      vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
+      vm.brands = $rootScope.orders.brands;
+      vm.order_carts = $rootScope.orders.order_carts;
+      vm.ship_type = $rootScope.orders.ship_type;
     }
 
     vm.undo = function(id){
@@ -34,24 +30,23 @@
     vm.remove = function(id){
       Orders.remove(id).then(function(result){
         activate();
-        $log.log(result);
       });
     }
     function confirmReceivingGoods(order){
       if(order.Order.status != 2){
-        $log.log("cannot confirm receiving goods as current state is " + order.Order.status);
+        $log.log("cannot confirm receiving goods for order " +  order.Order.id + " with state " + order.Order.status);
         return;
       }
       var orderId = order.Order.id;
       Orders.confirmReceivingGoods(orderId).then(function(result){
-        var order = _.find($rootScope.orders, function(order){return order.Order.id == orderId});
+        var order = _.find($rootScope.orders.orders, function(order){return order.Order.id == orderId});
         order.Order.status = 3;
         vm.onGoodsReceived(order);
       });
     }
     function onGoodsReceived(order){
       $rootScope.alertMessage("已确认收货");
-      vm.orders = _.filter($rootScope.orders, function(order){return Orders.isOfStates(order, vm.state)});
+      vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
       $rootScope.$broadcast('orderStateChanged', order);
     }
     function viewLogistics(id){
