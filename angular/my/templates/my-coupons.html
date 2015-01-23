@@ -21,8 +21,18 @@
       </div>
     </div>
     
-    <div style="text-align:center">
-      <p ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">{{vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'}}</p>
+    <div class="no-content-container" ng-show="vm.validCoupons.length == 0 && !vm.showInvalidCoupons">
+      <span class="no-content no-coupons">
+      </span>
+      <span class="message">
+        暂无优惠券
+      </span>
+    </div>
+
+    <div class="padding" style="text-align:center">
+      <p ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">
+        {{vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'}}
+      </p>
     </div>
 
     <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons">
@@ -38,20 +48,12 @@
         </p>
       </a>
       <div class="coupon-validity col col-33">
-        <p>有效期</p>
-        <p class="text-muted">
+        <p class="text-muted">有效期</p>
+        <p>
           {{item.Coupon.valid_begin | date:'MM.dd'}}~{{item.Coupon.valid_end | date:'MM.dd'}}
         </p>
         <p class="text-muted">{{vm.getCouponStatus(item)}}</p>
       </div>
-    </div>
-
-    <div class="no-content-container" ng-show="vm.coupons.length == 0">
-      <span class="no-content no-coupons">
-      </span>
-      <span class="message">
-        暂无优惠券
-      </span>
     </div>
   </ion-content>
 </ion-view>
