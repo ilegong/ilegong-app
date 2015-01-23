@@ -12,33 +12,39 @@
         {{vm.order.Order.consignee_mobilephone}}
       </span>
     </div>
-    <div class="item item-avatar item-icon-right">
+    <a class="item item-avatar item-icon-right" ui-sref="store.home({storeId: vm.store.id})">
       <img src="{{vm.store.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div>{{vm.store.name}}</div>
-    </div>
+    </a>
     <div class="item">
       订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
     </div>
     <a class="item item-avatar item-avatar-big item-icon-right" ng-repeat="item in vm.cartItems">
       <img src="{{item.Cart.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
-      <div>{{item.Cart.name}}</div>
+      <div class="text">{{item.Cart.name}}</div>
       <div class="text-sub-muted">
         价格：{{item.Cart.price | currency:'￥'}}&nbsp;数量：{{item.Cart.num}}
       </div>
       <div class="text-sub-muted" ng-show="!_.isEmpty(item.Cart.spec)">
-        规则：{{item.Cart.spec}}
+        规格：{{item.Cart.spec}}
       </div>
     </a>
     <div class="item">
       运费：{{vm.order.Order.ship_fee | currency:'￥'}}
     </div>
     <div class="item">
-      订单号：{{vm.order.Order.id}}
-      <div class="text-sub-muted">
-        下单时间：{{vm.order.Order.created}}
+      <div class="fl">
+        订单号：{{vm.order.Order.id}}
+        <div class="text-sub-muted">
+          下单时间：{{vm.order.Order.created}}
+        </div>
+        <div class="text-sub-muted" ng-show="vm.hasPaid">
+          支付时间：{{vm.order.Order.pay_time}}
+        </div>
       </div>
+      <a class="button fr" ng-show="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
     </div>
   </ion-content>
   <ion-footer-bar>
@@ -46,8 +52,16 @@
      合计：<span class="text-energized">{{vm.totalPrice | currency:'￥'}}</span>
     </span>
     <div class="buttons" ng-click="doSomething()">
-      <button class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？">取消订单</button>
-      <button class="button button-energized" ng-click="vm.aliPay()">支付</button>
+      <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0">取消订单</a>
+      <a class="button button-energized" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0">支付</a>
+
+      <a class="button" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
+
+      <a class="button button-energized" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？">确认收货</a>
+
+      <a class="button" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)">评价</a>
+
+      <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="app.my-order-detail({id: order.Order.id})">支付</a>
     </div>
   </ion-footer-bar>
 </ion-view>

@@ -28,7 +28,6 @@ a{
 // item
 .item {
   font-size: 14px;
-  padding: 1em;
 }
 .item-divider{
   min-height: 1.57142857143em;
@@ -56,7 +55,13 @@ a{
 }
 
 // text
+.text{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
 .text-muted {
+  @extend .text;
   color: $muted;
 }
 .text-sub-muted {
@@ -273,15 +278,19 @@ a{
 }
 
 // item-avatar general
-.item-avatar, .item-avatar .item-content, .item-avatar-left, .item-avatar-left .item-content {
-  padding: 1em 1em 1em 4em;
+.item-avatar, .item-avatar-left {
+  padding-left: 4em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   min-height: 4em;
 }
-.item-avatar-right, .item-avatar-right .item-content {
-  padding: 1em 4em 1em 1em;
+.item-avatar-right {
+  padding-right: 4em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   min-height: 4em;
 }
-.item-avatar > img:first-child, .item-avatar .item-image, .item-avatar .item-content > img:first-child, .item-avatar .item-content .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image, .item-avatar-left .item-content > img:first-child, .item-avatar-left .item-content .item-image {
+.item-avatar > img:first-child, .item-avatar .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image {
   top: 0.5em;
   left: 0.5em;
   max-width: 3em;
@@ -290,7 +299,7 @@ a{
   width: 3em;
   border-radius: 0.5em;
 }
-.item-avatar-right > img:first-child, .item-avatar-right .item-image, .item-avatar-right .item-content > img:first-child, .item-avatar-right .item-content .item-image{
+.item-avatar-right > img:first-child, .item-avatar-right .item-image {
   top: 0.5em;
   right: 0.5em;
   max-width: 3em;
@@ -298,11 +307,13 @@ a{
   border-radius: 0.5em;
 }
 // item-avatar-big
-.item-avatar-big, .item-avatar-big .item-content, .item-avatar-big-left, .item-avatar-big-left .item-content {
-  padding: 1em 1em 1em 6.4em;
+.item-avatar-big, .item-avatar-big-left {
+  padding-left: 6.4em;
+  padding-top: 1em;
+  padding-bottom: 1em;
   min-height: 6.4em;
 }
-.item-avatar-big > img:first-child, .item-avatar-big .item-image, .item-avatar-big .item-content > img:first-child, .item-avatar-big .item-content .item-image, .item-avatar-big-left > img:first-child, .item-avatar-big-left .item-image, .item-avatar-big-left .item-content > img:first-child, .item-avatar-big-left .item-content .item-image {
+.item-avatar-big > img:first-child, .item-avatar-big .item-image, .item-avatar-big-left > img:first-child, .item-avatar-big-left .item-image {
   top: 0.7em;
   left: 0.7em;
   max-width: 5em;

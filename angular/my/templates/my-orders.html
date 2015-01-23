@@ -23,7 +23,7 @@
           实付:<span class="text-energized">{{order.Order.total_price | currency:'￥'}}</span>
         </span>
         <span class="buttons fr">
-          <a class="button button-balanced button-outline" ng-show="order.Order.status == 2" ng-click="vm.viewLogistics()">查看物流</a>
+          <a class="button" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
           <a class="button button-balanced button-outline" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
           <a class="button" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>

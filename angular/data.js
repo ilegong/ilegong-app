@@ -2064,9 +2064,87 @@ var ordersJson = {
   }
 }
 
-
-
 var orderDetail = {
+  "order":{
+    "Order":{
+      "id":"13398",
+      "name":"",
+      "cate_id":"0",
+      "creator":"401180",
+      "lastupdator":"0",
+      "remoteurl":"",
+      "status":"2",
+      "published":"1",
+      "deleted":false,
+      "created":"2015-01-22 15:20:52",
+      "updated":"2015-01-22 15:20:52",
+      "consignee_id":null,
+      "consignee_name":"\u6881\u680b\u4e91\u6d4b\u8bd5",
+      "consignee_area":null,
+      "consignee_address":"\u6309\u5df2\u9009\u65e5\u671f\u3001\u533a\u57df\u914d\u9001, \u8bf7\u586b\u5199\u6536\u4ef6\u4eba\u548c\u624b\u673a\u53f7",
+      "consignee_mobilephone":"18810542383",
+      "consignee_telephone":null,
+      "consignee_email":null,"consignee_postcode":null,
+      "invoice_id":null,"total_price":"29.00",
+      "ship_type":null,"ship_fee":"0.00","remark":"",
+      "brand_id":"92",
+      "ship_code":null,
+      "total_all_price":"29",
+      "pay_time":null,
+      "applied_coupons":"",
+      "coupon_total":"0",
+      "applied_code":"",
+      "business_remark":null,
+      "try_id":"0",
+      "applied_global_coupon":"",
+      "global_coupon_total":"0",
+      "member_id":"0",
+      "type":"1"
+    }
+  },
+  "carts":[
+    {
+      "Cart":{
+        "id":"24880",
+        "name":"\u660c\u5e73\u5174\u5bff\u6709\u673a\u7ea2\u989c-\u65e9\u4e0a\u6458\u5f53\u5929\u8fbe (1\u670822\u65e5\u7535\u529b\u79d1\u5b66\u9662)",
+        "order_id":"13398","creator":"401180","lastupdator":"0",
+        "remoteurl":"","status":"1","published":false,"deleted":false,
+        "created":"2015-01-21 16:03:03","updated":"2015-01-22 15:20:23",
+        "product_id":"705","num":"1","price":"29",
+        "session_id":"5c6f51daa840502f262da13c5e9f075a",
+        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201501\/thumb_m\/0b325bffb23_0120.jpg",
+        "used_coupons":"",
+        "specId":"3",
+        "modified":"2015-01-22 15:20:23",
+        "type":"1",
+        "try_id":"0",
+        "applied_special":"0",
+        "spec":"1\u670822\u65e5\u7535\u529b\u79d1\u5b66\u9662"
+      }
+    }
+  ],
+  "ship_type":{
+    "101":"\u7533\u901a","102":"\u5706\u901a","103":"\u97f5\u8fbe",
+    "104":"\u987a\u4e30","105":"EMS","106":"\u90ae\u653f\u5305\u88f9",
+    "107":"\u5929\u5929","108":"\u6c47\u901a","109":"\u4e2d\u901a",
+    "110":"\u5168\u4e00","111":"\u5b85\u6025\u9001",
+    "112":"\u5168\u5cf0","113":"\u5feb\u6377",
+    "115":"\u57ce\u9645\u5feb\u9012","132":"\u4f18\u901f"
+  },
+  "expired_pids":["705"],
+  "no_more_money":false,
+  "products":{
+    "705":"you_ji_hong_yan_cao_mei_tuan_gou"
+  },
+  "store":{
+    "id":"92",
+    "name":"\u670b\u53cb\u8bf4",
+    "slug":"peng_you_shuo",
+    "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/0e1309c1731_1119.jpg"
+  }
+}
+
+var orderDetail2 = {
   "order": {
     "Order": {
       "id": "4467", 
