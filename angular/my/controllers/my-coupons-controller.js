@@ -4,30 +4,40 @@
   angular.module('module.my')
   .controller('MyCouponsCtrl',MyCouponsCtrl)
   
-  function MyCouponsCtrl($scope,$rootScope,Coupons) {
+  function MyCouponsCtrl($scope, $rootScope, $log, Coupons) {
     var vm = this;
-    vm.couponStates = [
-      {state:1, value:'有效', available: true},
-      {state:1, value:'可用', available: true},
-      {state:2, value:'已使用', available: false}
-    ];
-    vm.getCouponValue = getCouponValue;
-    vm.isCouponAvailable = isCouponAvailable;
+    vm.getBrand = getBrand;
 
     activate();
 
     function activate() {
-      vm.coupons = [];
+      vm.validCoupons = [];
+      vm.invalidCoupons = [];
+      vm.showInvalidCoupons = false;
       Coupons.getCoupons().then(function(data){
-        vm.coupons = data.coupons;
+        _.each(data.coupons, function(coupon){
+          if(coupon.Coupon.status == 2){
+            coupon.Coupon.valid = false;
+            coupon.Coupon.desc = "已使用";
+            return;
+          }
+          if (new Date(coupon.Coupon.valid_end) < new Date()){
+            coupon.Coupon.valid = false;
+            coupon.Coupon.status = '已过期';
+            return;
+          }
+          coupon.Coupon.valid = true;
+          coupon.Coupon.status = '可使用';
+        });
+        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.valid});
+        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return !coupon.Coupon.valid});
+        $log.log('valid coupons: ').log(vm.validCoupons);
+        $log.log('invalid coupons: ').log(vm.invalidCoupons.length);
         vm.brands = _.map(data.brands, function(brand){return brand});
       })
     }
-    function getCouponValue(state){
-      return _.find(vm.couponStates, function(couponState){return couponState.state == state}).value;
-    }
-    function isCouponAvailable(state){
-      return _.any(vm.couponStates, function(couponState){return couponState.state == state && couponState.available == true});
+    function getBrand(brandId){
+      return _.find(vm.brands, function(brand){return brand.Brand.id == brandId});
     }
   } 
 })(window, window.angular);

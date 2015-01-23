@@ -10,11 +10,7 @@
       getCoupons: getCoupons
     }
     function getCoupons() {
-      var defer = $q.defer(); 
-      Base.get('/api_orders/my_coupons.json?access_token='+Users.getTokenLocally().access_token).then(function(item){
-        defer.resolve(item);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/my_coupons.json?access_token='+Users.getTokenLocally().access_token);
     }
   }
 })(window, window.angular);

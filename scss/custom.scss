@@ -1,4 +1,4 @@
-@import "variables", "basics", "home-main", "my-main", "my-orders", "product-detail";
+@import "variables", "basics", "home-main", "my-main", "my-orders", "my-coupons", "product-detail";
 
 .cart{
   background:#eeeeee;
@@ -373,58 +373,6 @@
       color: #ffa200;
     }
   }
-}
-
-.orders{
-  
-}
-
-.coupons{
-  .title{
-    margin-top: 0;
-    margin-bottom: 5px;
-    font-size:16px;
-  }
-
-  .value{
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: bold;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-    background-color: #999;
-  }
-  .value.available{
-    background-color: #73a839;
-  }
-  .priceText{
-    padding-left:10px;
-  }
-  .priceValue{
-    color: #ffa200;
-  }
-  .goShopText{
-    padding: 5px 10px;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 3px;
-    color: #fff;
-    background-color: #dd5600;
-    border-color: #dd5600;
-    margin-bottom: 0;
-    line-height: 1.3;
-  }
-  .goShopLink{
-    color: #ffffff;
-    text-decoration: underline;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
 }
 
 .myDetail{

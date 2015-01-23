@@ -1,0 +1,39 @@
+@import "variables";
+
+.coupons{
+  .coupon{
+    height: 8em;
+    margin: 1em;
+    padding: 0;
+    width: auto;
+    border: 1px solid $border_color;
+    .coupon-info {
+      display: inline-block;
+      background-color: $energized;
+      color: #ffffff;
+      padding: 0.5em;
+      height: 100%;
+      .coupon-name{
+        display: block;
+      }
+      .coupon-price{
+        font-size: 2em;
+      }
+    }
+    .coupon-validity{
+      float: right;
+    }
+  }
+  .coupon-valid{
+    .coupon-info{
+      background-color: $energized;
+      color: #ffffff;
+    }
+  }
+  .coupon-invalid{
+    .coupon-info{
+      background-color: $invalid;
+      color: #999999;
+    }
+  }
+}
