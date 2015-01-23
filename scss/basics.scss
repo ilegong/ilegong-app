@@ -4,10 +4,14 @@
   margin: 0;
   padding: 0;
   font-family: 'Microsoft Yahei', 'Simsun';
+  color: $grey;
 }
 a{
   text-decoration: none;
   color: #2fa4e7;
+}
+.item, .input-label {
+  font-size: 14px;
 }
 
 // float
@@ -28,6 +32,13 @@ a{
 // item
 .item {
   font-size: 14px;
+  padding: 1em;
+}
+.item-icon-right {
+  padding-right: 3.85714285714em;
+}
+.item-icon-left {
+  padding-left: 3.85714285714em;
 }
 .item-divider{
   min-height: 1.57142857143em;
@@ -36,6 +47,9 @@ a{
   background-color: #f5f5f5;
 }
 
+.input-label{
+  padding: 0.5em 0.71428571428em 0.5em 0;
+}
 // button related
 .button{
   font-size: 14px;
@@ -95,8 +109,9 @@ a{
 .item-select select {
   width: 100%;
   direction: inherit;
-  padding-top: 25px;
+  padding: 1.5em 3em 1.5em 0;
 }
+
 .padding .row{
   padding: 5px 0;
 }
@@ -112,11 +127,12 @@ a{
 }
 
 .button.icon-left{
-  padding-left: 40px;
+  padding-left: 3em;
 }
 .button.icon-right {
   padding-right: 54px;
 }
+
 .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon, .icon-left .icon.pys-icon, .icon-right .icon.pys-icon {
   font-size: 14px;
   background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
@@ -126,6 +142,12 @@ a{
   height: 2.28571428571em;
   position: absolute;
   top: 10px;
+}
+.item-icon-left .icon.pys-icon, .icon-left .icon.pys-icon {
+  left: 1em;
+}
+.item-icon-right .icon.pys-icon, .icon-right .icon.pys-icon {
+  right: 1em;
 }
 .icon.pys-icon.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
