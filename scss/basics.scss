@@ -28,24 +28,6 @@ a{
   text-align: right !important;
 }
 
-// item
-.item {
-  font-size: 14px;
-  padding: 1em;
-}
-.item-icon-right {
-  padding-right: 3.85714285714em;
-}
-.item-icon-left {
-  padding-left: 3.85714285714em;
-}
-.item-divider{
-  min-height: 1.57142857143em;
-}
-.pane, .view {
-  background-color: #f5f5f5;
-}
-
 .input-label{
   padding: 0.5em 0.71428571428em 0.5em 0;
 }
@@ -83,6 +65,9 @@ a{
 }
 .text-energized{
   color: $energized;
+}
+.text-balanced{
+  color: $balanced;
 }
 
 .alert-container{
@@ -132,6 +117,28 @@ a{
   padding-right: 54px;
 }
 
+
+// item
+.item {
+  font-size: 14px;
+  padding: 1em;
+}
+.item.item-input-inset {
+  padding: 0.75em;
+}
+.item-icon-right {
+  padding-right: 3.85714285714em;
+}
+.item-icon-left {
+  padding-left: 3.85714285714em;
+}
+.item-divider{
+  min-height: 1.57142857143em;
+}
+.pane, .view {
+  background-color: #f5f5f5;
+}
+
 .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon, .icon-left .icon.pys-icon, .icon-right .icon.pys-icon {
   font-size: 14px;
   background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
@@ -148,6 +155,23 @@ a{
 .item-icon-right .icon.pys-icon, .icon-right .icon.pys-icon {
   right: 1em;
 }
+
+.item-text-medium {
+  padding-left: 4em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.item-text-large {
+  padding-left: 6.4em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+.item-text-medium > .text:first-child, .item-text-large > .text:first-child {
+  position: absolute;
+  top: 1em;
+  left: 1em;
+}
+
 .icon.pys-icon.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
 }

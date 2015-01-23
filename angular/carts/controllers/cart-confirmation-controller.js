@@ -7,6 +7,8 @@
   function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
+    vm.getPriceOfProduct = getPriceOfProduct;
+    vm.getPriceOfBrand = getPriceOfBrand;
     vm.changeAddress = changeAddress;
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
@@ -43,6 +45,12 @@
     }
     function getBrandById(id){
       return _.find(vm.brands, function(brand){return brand.Brand.id == id});
+    }
+    function getPriceOfProduct(product){
+      return product.price * product.num;
+    }
+    function getPriceOfBrand(brandItem){
+      return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0);
     }
     function changeAddress(){
       $state.go('app.order-addresses',{state:1});

@@ -1,4 +1,4 @@
-@import "variables", "basics", "home-main", "cart-main", "my-main", "my-orders", "product-detail","product-detail-comment";
+@import "variables", "basics", "home-main", "cart-main", "cart-confirmation", "my-main", "my-orders", "product-detail","product-detail-comment";
 
 .category{
   .card.product{ 
@@ -110,34 +110,6 @@
   }
 }
 
-.my-order-info{
-  .devide_line{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border: 0;
-    border-top: 1px solid #eee;
-  }
-  .cart_border{
-    padding-left:10px;
-    padding-right:10px;
-    border:3px solid #aaaaaa;
-  }
-  .cart_item{
-    .img{
-      width:100%;
-    }
-  }
-  .coupon{
-    padding-top:20px;
-  }
-  .bottom_div{
-    padding-top:20px;
-    .total_price{
-      color:red;
-    }
-
-  }
-}
 .my-addresses{
   .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
     top: 1.42857142857em;
