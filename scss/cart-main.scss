@@ -1,0 +1,300 @@
+@import "variables";
+
+.cart{
+  .nav-bar-button{
+    color:white;
+    font-weight:bold;
+  }
+  .icon{
+    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+    background-size: 25em 25em;
+  }
+  .icon-edit{
+    width:1.2em;
+    height:1.2em;
+    background-position: -15.625em 0;
+  }
+  .icon-save{
+    width:1.167em;
+    height:1em;
+    background-position: -17.5em 0;
+  }
+  .icon-circle{
+    width:1.75em;
+    height:1.75em;
+    background-position: -19.16em 0;
+  }
+  .icon-circle-checked{
+    width:1.75em;
+    height:1.75em;
+    background-position: -21.25em 0;
+  }
+  .icon-delete{
+    width:1.75em;
+    height:1.75em;
+    background-position: -23.33em 0;
+  }
+  .icon-add{
+    width:2.126em;
+    height:2.126em;
+    background-position: -13em -3.34em;
+  }
+  .icon-reduce{
+    width:2.126em;
+    height:2.126em;
+    background-position: -10em -3.34em;
+  }
+  .icon-cart{
+    width:5.505em;
+    height:3.84em;
+    background-position:-17.5em -3.34em;
+  }
+  .delete-icon{
+    display:inline-block; 
+    margin-top: 1.25em;
+  }
+  .circle-checked-icon{
+    display:inline-block;
+    margin-top:1.25em;
+  }
+  .circle-icon{
+    display:inline-block;
+    margin-top: 1.25em;
+  }
+  .add-icon{
+    display:inline-block;
+  }
+  .reduce-icon{
+    display:inline-block;
+  }
+  .product-img{
+    display:inline-block;
+  }
+  .product-content{
+    display:inline-block;
+    width:54%;
+    margin-right:-14px;
+  }
+  .product-title{
+    display:block;
+    font-size:1.25em;
+    color:#666666;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    margin-top:6px;
+    margin-bottom:2px;
+  }
+  .product-subtitle{
+    display:block;
+  }
+  .product-rest{
+    display:inline-block;
+  }
+  .product-price{
+    display:block;
+    font-size:1.25em;
+  }
+
+  .product-num{
+    display:inline-block;
+    padding-left:0.5em;
+    font-size:1.25em;
+  }
+  .product-delete{
+    display:inline-block;
+    background:#45a011;
+    width:2.7em;
+    text-align:center;
+    padding-top:2.25em;
+    padding-top:28px;
+    color:white;
+    font-weight:bold;
+  }
+  .edit-icon{
+    display:inline-block;
+  }
+  .save-icon{
+    display:inline-block;
+  }
+  .input-number{
+    display:inline-block;
+    width:5em;
+  }
+  .brand{
+    background:ivory;
+    .brand-name{
+      font-size:20px;
+      color:#444444;
+      margin-top:3px;
+    }
+    .brand-image{
+      width:100%;
+      padding-top:0.025em;
+      border-radius:7px;
+      height:26px;
+    }
+    .brand-circle{
+      margin-top:2px;
+    }
+    .item-circle{
+      margin-left:6px;
+    }
+    .item-image{
+      width:100%;
+      border:1px solid #bbbbbb;
+    }
+    .brand-hr{
+      border-top:none;
+      border-bottom:1px solid darkgray;
+    }
+    .item-hr{
+      border-top:none;
+      border-bottom:1px solid lightgray;
+    }
+    .item-row{
+      height:6em;
+    }
+
+  }
+  .login-text{
+    margin-top:-1em;
+  }
+  .login-button{
+    background:lightcoral;
+    color:white;
+    border:none;
+    border-radiux:7px;
+    margin-top:-6px;
+    margin-bottom:0.8em;
+
+
+  }
+  .number-span{
+      border-collapse: separate;
+      span{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      span.count-reduce{
+        border-right: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        margin-bottom:-12px;
+        padding-bottom:31px;
+      }
+      span.count-add{
+        border-left: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        margin-left:-4px;
+        margin-bottom:-12px;
+        padding-bottom:31px;
+      }
+      .count{
+        padding: 4px 1px;
+        width: 34%;
+        border-radius:0px;
+        border-left:none;
+        border-right:none;
+        margin-left:-4px;
+        height:33px;
+      }
+  }
+  .bar-footer{
+    padding-right:0;
+    .circle{
+      margin-top:-4px;
+    }
+    .total-price{
+      color:gray;
+      padding-left:10px;
+      margin-top:-6px;
+      .total-price{
+        font-size:1.25em;
+      }
+      .total-price-content{
+
+      }
+
+    }
+    .total-price-price{
+      color:orange;
+      font-size:1.5em;
+      margin-left:14px;
+      margin-top:-5px;
+      width:7em;
+    }
+    .buttons{
+      margin-left:-10px;
+      .jiesuan{
+        background:orange;
+        color:white;
+        margin-left:5em;
+        border:none;
+        width:6em;
+        border-radius:0;
+        margin-top:-10px;
+        margin-bottom:-10px;
+        font-weight: bold;
+        font-size:1.04em;
+      }    
+    }
+
+
+    .footer-bar-row{
+      padding-right:0;
+    }
+  }
+  .item{
+
+    text-align: center;
+    .img{
+      width:100%;
+    }
+    .item-title{
+      img{
+        max-width: 6em;
+      }
+    }
+    .item-count{
+      border-collapse: separate;
+      span{
+        display: inline-block;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1;
+        text-align: center;
+        background-color: #eee;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      span.count-reduce{
+        border-right: 0;
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+      span.count-add{
+        border-left: 0;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+      .count{
+        padding: 4px 1px;
+        width: 34%;
+      }
+    }
+    .item-price-total{
+      padding: 8px 0;
+    }
+  }
+  .cart-price-total{
+    padding: 14px 5px;
+  }
+}

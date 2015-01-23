@@ -76,8 +76,8 @@
       </span>
       <a class="button button-energized" ng-click="vm.toHomePage()">去逛逛</a>
     </div>
-
   </ion-content>
+  
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="row footer-bar-row">
       <div class="col col-10">
@@ -95,7 +95,7 @@
         <h1 class="total-price-price">{{vm.getTotalPrice() | currency:"￥"}}</h1>
       </div>
       <div class="buttons buttons">
-        <button class="button jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()">结算({{vm.getCheckedNumber()}})</button>
+        <button class="button jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()">结算({{vm.getCheckedNumber()}})<button>
       </div>
     </div>
   </ion-footer-bar>
