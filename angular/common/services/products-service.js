@@ -35,10 +35,12 @@
 
       var defer = $q.defer();
       var json = {'data_id':""+id,'type':'Product','rating':""+rating,'body':body,'pictures':pictures};
+      $log.log('posting comment!!!');
       Base.post('/api_orders/comment_add.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
+        $log.log('success!!!');
         defer.resolve(result);
         //$log.log(result);
-      });
+      },function(err){defer.reject(err);$log.log('error!!!');});
       return defer.promise;
     }
   }

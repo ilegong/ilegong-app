@@ -8,7 +8,7 @@
           {{vm.getOrderState(order).status}}
         </span>
       </a>
-      <a class="item item-avatar item-avatar-big product" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
+      <a class="item item-avatar item-thumbnail-left product" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
         <img src='{{product.Cart.coverimg}}'/>
         <div class="product-name">{{product.Cart.name}}</div>
         <div class="product-fee text-muted">

@@ -315,10 +315,10 @@ a{
 
 // item-avatar general
 .item-avatar, .item-avatar-left {
-  padding-left: 4em;
+  padding-left: 3.85714285714em;
   padding-top: 1em;
   padding-bottom: 1em;
-  min-height: 4em;
+  min-height: 3.85714285714em;
 }
 .item-avatar-right {
   padding-right: 4em;
@@ -342,14 +342,14 @@ a{
   max-height: 3em;
   border-radius: 0.5em;
 }
-// item-avatar-big
-.item-avatar-big, .item-avatar-big-left {
+// item-thumbnail
+.item-thumbnail-left {
   padding-left: 6.4em;
   padding-top: 1em;
   padding-bottom: 1em;
   min-height: 6.4em;
 }
-.item-avatar-big > img:first-child, .item-avatar-big .item-image, .item-avatar-big-left > img:first-child, .item-avatar-big-left .item-image {
+.item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image {
   top: 0.7em;
   left: 0.7em;
   max-width: 5em;
@@ -357,3 +357,5 @@ a{
   height: 5em;
   width: 5em;
 }
+
+

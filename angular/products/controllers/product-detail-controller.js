@@ -94,13 +94,8 @@
     //   });
     // }
     function confirmComment(){
-      for(var i=0;i<30;i++)
-        $log.log('aqaq');
-      $log.log(vm.product);
       Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null).then(function(data){
         activate();
-        $log.log('comment success');
-        $log.log(data);
       });
     }
     vm.addToCart = function(){

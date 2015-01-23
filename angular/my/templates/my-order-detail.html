@@ -20,7 +20,7 @@
     <div class="item">
       订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
     </div>
-    <a class="item item-avatar item-avatar-big item-icon-right" ng-repeat="item in vm.cartItems">
+    <a class="item item-thumbnail-left item-icon-right" ng-repeat="item in vm.cartItems">
       <img src="{{item.Cart.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="text">{{item.Cart.name}}</div>

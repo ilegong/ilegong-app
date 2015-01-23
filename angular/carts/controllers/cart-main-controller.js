@@ -19,8 +19,7 @@
     vm.uncheckAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = false;})};;
     vm.getCheckedNumber = function(){return _.filter($rootScope.cart.cartItems,function(item){return item.checked;}).length;};
     vm.isLoggedIn = function(){return !_.isEmpty($rootScope.user.token);};
-    vm.toLoginPage = function(){$state.go('app.cart-account-login')};
-    vm.toHomePage = function(){$state.go('app.home');};
+    vm.toLoginPage = function(){$state.go('app.cart-account-login')}; vm.toHomePage = function(){$state.go('app.home');};
     vm.brandChecked = brandChecked;
     vm.toggleBrand = toggleBrand;
     activate();
