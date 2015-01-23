@@ -12,7 +12,6 @@
     function activate(){
       Stores.list().then(function(data){
         vm.stores = data.brands;
-        console.log(vm.stores);
       });
     }
   }

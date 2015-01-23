@@ -9,11 +9,16 @@
     var self = this;
 
     return {
-      list: list
+      list: list, 
+      getArticle: getArticle
     }
 
     function list(){
       return Base.get('/shichituan.json');
+    }
+
+    function getArticle(articleId){
+      return Base.get("/articles/view/" + articleId + ".html");
     }
   }
 })(window, window.angular);
