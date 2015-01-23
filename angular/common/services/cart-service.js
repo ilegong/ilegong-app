@@ -11,7 +11,8 @@
       deleteCartItem: deleteCartItem,
       addCartItem: addCartItem,
       editNum:editNum, 
-      getCartInfo: getCartInfo
+      getCartInfo: getCartInfo,
+      init:init
     }
     function getCartInfo(pid_list,addressId,coupon_code){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
@@ -61,6 +62,12 @@
         }
       }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function init(){
+      if(Users.isLoggedIn)
+        getCartItems().then(function(result){
+          $rootScope.updateCart(result);
+      })
     }
   }
 })(window, window.angular);

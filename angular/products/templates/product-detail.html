@@ -153,15 +153,6 @@
             </div>
           </div>
         </div>
-
-
-<!--         <div ng-click="vm.menuClick(1)" class="item item-icon-right  menu-item ">
-          <i class=" icon ion-ios7-arrow-right"></i>
-          <span class="menu-text" >
-            试吃评价
-            <span class="menu-sub-text">({{vm.getShichiCommentNum()==null?0:vm.getShichiCommentNum()}})</span>
-          </span>
-        </div> -->
         <div ng-click="vm.menuClick(2)" class="item item-icon-right  menu-item menu-evaluate">
           <i class=" icon ion-ios7-arrow-right"></i>
           <span class="menu-text" >
@@ -247,7 +238,7 @@
       加入购物车
     </span>
     <div ng-click="vm.showTabs();" ui-sref="app.cart"  class="footer-cart">
-      <span class="badge">{{cart.cartItems.length}}</span>
+      <span ng-hide="cart.cartItems.length == 0" class="badge">{{cart.cartItems.length}}</span>
       <span class="footer-cart-image app-icon icon-cart">
       </span>
       <br/>

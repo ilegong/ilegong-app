@@ -11,7 +11,7 @@
     self.getUrl = getUrl;
     $window.device = $window.device || {};
     return {
-      get: get, 
+    get: get, 
       post: post, 
       getLocal: getLocal, 
       setLocal: setLocal, 

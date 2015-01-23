@@ -1,4 +1,5 @@
-@import "variables", "basics", "home-main", "my-main", "my-orders", "my-coupons", "product-detail";
+@import "variables", "basics", "home-main", "my-main", "my-orders", "product-detail","product-detail-comment";
+
 
 .cart{
   background:#eeeeee;
@@ -167,7 +168,8 @@
     border:none;
     border-radiux:7px;
     margin-top:-6px;
-    margin-bottom:7px;
+    margin-bottom:0.8em;
+
 
   }
   .number-span{

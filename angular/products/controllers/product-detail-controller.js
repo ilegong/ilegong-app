@@ -5,13 +5,13 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
+  function ProductDetailCtrl($state,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
     var vm = this;
     vm.count=1;
     vm.from = $stateParams.from;
     vm.rating = 5;
     vm.confirmComment = confirmComment;
-    vm.menuClick = function(index){vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];}
+    vm.menuClick = menuClick;
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
     vm.getShichiCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'num':'notshow'})['num']}
     vm.getEvaluateCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'notshow':'num'})['num']}
@@ -31,15 +31,8 @@
       Products.getProduct(id).then(function(data){
         vm.product = data.product;
         vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
-
-
-
         vm.recommends = data.recommends;
         vm.brand = data.brand;
-
-
-
-
         $log.log(vm.product);
       }, function(e){$log.log(e)});
       Products.getProductContent(id).then(function(data){
@@ -47,6 +40,7 @@
       }, function(e){$log.log(e)});
       Products.getProductComment(id).then(function(data){
         vm.comment = data;
+        $rootScope.productDetailComment.data = data;
       }, function(e){$log.log(e)});
     }
 
@@ -55,7 +49,14 @@
       vm.specsChecks[group][name].value = true;
       vm.currentSpecs = _.find(_.pairs(vm.product.Product.specs.map),function(item){return item[1].name == name})[0];
     } 
-
+    function menuClick(index){
+      vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];
+      if(index >=1 ){
+        var t = index ==1?1:0;
+        $rootScope.productDetailComment.flag = t;
+        $state.go("app.product-detail-comment");
+      }
+    }
     $scope.buttonReduceClick = function(){
       if(vm.count > 1)
         vm.count=Number(vm.count)-1;

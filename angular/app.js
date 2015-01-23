@@ -51,6 +51,7 @@
       .state('app.product-detail', {url: '/products/:id/:from', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+      .state('app.product-detail-comment',{url:'/product-comment',views:{'app-home':{templateUrl: 'product-detail-comment.html',controller:'ProductDetailCommentCtrl as vm'}}})
 
       .state('app.product-detail-o', {url: '/products-o/:id/:from', views: {'app-my': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
@@ -147,10 +148,10 @@
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     $rootScope.alert = {message: ''};
+    $rootScope.productDetailComment = $rootScope.productDetailComment || {data:[],flag:0};
     Users.init();
-    Carts.getCartItems().then(function(result){
-      $rootScope.updateCart(result);
-    })
+
+    Carts.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;
