@@ -7,6 +7,7 @@
   function MyCouponsCtrl($scope, $rootScope, $log, Coupons) {
     var vm = this;
     vm.getBrand = getBrand;
+    vm.getCouponStatus = getCouponStatus;
 
     activate();
 
@@ -14,30 +15,31 @@
       vm.validCoupons = [];
       vm.invalidCoupons = [];
       vm.showInvalidCoupons = false;
+      vm.currentDate = new Date();
       Coupons.getCoupons().then(function(data){
         _.each(data.coupons, function(coupon){
-          if(coupon.Coupon.status == 2){
-            coupon.Coupon.valid = false;
-            coupon.Coupon.desc = "已使用";
-            return;
-          }
-          if (new Date(coupon.Coupon.valid_end) < new Date()){
-            coupon.Coupon.valid = false;
-            coupon.Coupon.status = '已过期';
-            return;
-          }
-          coupon.Coupon.valid = true;
-          coupon.Coupon.status = '可使用';
+          coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
+          coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
         });
-        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.valid});
-        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return !coupon.Coupon.valid});
-        $log.log('valid coupons: ').log(vm.validCoupons);
-        $log.log('invalid coupons: ').log(vm.invalidCoupons.length);
+        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
+        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
         vm.brands = _.map(data.brands, function(brand){return brand});
       })
     }
     function getBrand(brandId){
       return _.find(vm.brands, function(brand){return brand.Brand.id == brandId});
+    }
+    function getCouponStatus(coupon){
+      if(_.isEmpty(coupon)){
+        return "使用";
+      }
+      if(coupon.Coupon.status == 2){
+        return "已使用";
+      }
+      if(coupon.Coupon.valid_end < vm.currentDate){
+        return "已过期";
+      }
+      return "使用"
     }
   } 
 })(window, window.angular);

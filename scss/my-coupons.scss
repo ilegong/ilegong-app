@@ -6,6 +6,7 @@
     margin: 1em;
     padding: 0;
     width: auto;
+    color: black;
     border: 1px solid $border_color;
     .coupon-info {
       display: inline-block;
@@ -22,6 +23,7 @@
     }
     .coupon-validity{
       float: right;
+      text-align: center;
     }
   }
   .coupon-valid{
