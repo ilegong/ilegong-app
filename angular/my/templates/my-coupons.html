@@ -1,39 +1,42 @@
-<ion-view title="优惠券" hide-tabs>
-  <ion-content >
-    <div class="list coupons">
-      <div class="item" ng-repeat="item in vm.coupons">
-        <div>
-          <h4 class="title">
-            <span>
-              {{item.Coupon.name}}
-            </span>
-            <span>
-              {{vm.brands[item.Coupon.brand_id].Brand.name}}
-            </span>
-            <span class="value" ng-class="{available: vm.isCouponAvailable(item.Coupon.status)}">
-              {{vm.getCouponValue(item.Coupon.status)}}
-            </span>
-          </p>
-            <span class="priceText">
-            面值:
-            </span>
+<ion-view title="优惠券" class="coupons" hide-tabs>
+  <ion-content class="list">
+    <div class="item" ng-repeat="item in vm.coupons">
+      <div>
+        <h4 class="title">
+          <span>
+            {{item.Coupon.name}}
+          </span>
+          <span>
+            {{vm.brands[item.Coupon.brand_id].Brand.name}}
+          </span>
+          <span class="value" ng-class="{available: vm.isCouponAvailable(item.Coupon.status)}">
+            {{vm.getCouponValue(item.Coupon.status)}}
+          </span>
+          <span class="priceText">
+          面值:
+          </span>
 
-            <span class="priceValue">
-              {{item.Coupon.reduced_price /100 | currency:'￥'}}
-            </span>
-          </h4>
-        </div>
-      </p>
-        <div>
-          有效期：
-          {{item.Coupon.valid_begin}} - {{item.Coupon.valid_end}}
-        </div>
-        <div ng-show="vm.isCouponAvailable(item.Coupon.status)" class="goShopText">
-          去
-          <a ui-sref="store.home({storeId: item.Coupon.brand_id})" class="goShopLink">专店</a>
-          选购
-        </div>
+          <span class="priceValue">
+            {{item.Coupon.reduced_price /100 | currency:'￥'}}
+          </span>
+        </h4>
       </div>
+      <div>
+        有效期：
+        {{item.Coupon.valid_begin}} - {{item.Coupon.valid_end}}
+      </div>
+      <div ng-show="vm.isCouponAvailable(item.Coupon.status)" class="goShopText">
+        去
+        <a ui-sref="store.home({storeId: item.Coupon.brand_id})" class="goShopLink">专店</a>
+        选购
+      </div>
+    </div>
+    <div class="no-content-container" ng-show="vm.coupons.length == 0">
+      <span class="no-content no-coupons">
+      </span>
+      <span class="message">
+        暂无优惠券
+      </span>
     </div>
   </ion-content>
 </ion-view>

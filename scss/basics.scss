@@ -259,21 +259,34 @@ a{
   text-align: center;
   .message{
     display: block;
+    margin-bottom: 1em;
   }
   .no-content{
     background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
     background-size: 28.5714285714em 28.5714285714em;
     display: inline-block;
     margin-top: 50%;
+    margin-bottom: 0.5em;
   }
   .no-content.no-address{
     background-position: -25em -8.57142857143em;
     height: 5.04761904762em;
+    width: 3.38095238095em;
   }
   .no-content.no-orders{
     background-position: 0 -14.2857142857em;
     height: 5.80952380952em;
     width: 4.85714285714em;
+  }
+  .no-content.no-coupons{
+    background-position: -6.19047619048em -14.2857142857em;
+    height: 3.71428571429em;
+    width: 5.42857142857em;
+  }
+  .no-content.no-cart-items{
+    background-position:-20em -3.80952380952em;
+    width: 5.7619047619em;
+    height: 4.38095238095em;
   }
 }
 

@@ -11,13 +11,6 @@
   </ion-header-bar>
 
   <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{(vm.isLoggedIn())?'padding-top:75px;':''}}">
-    <div  class="empty-div" ng-show="vm.brands.length == 0">
-      <div class="icon icon-cart empty-cart"></div>
-      <div class="empty-text">
-        购物车还是空的，去选点好吃的吧！
-      </div>
-      <a class="button empty-button go-show-button" ng-click="vm.toHomePage()">去逛逛</a>
-    </div>
     <div class="list brand" ng-repeat="brand in vm.brands" ng-show="vm.brands.length > 0" ng-show="vm.getCartItems(brand.Brand.id).length > 0">
       <div class="row ">
         <span class="col col-10">
@@ -32,48 +25,58 @@
         </span>
       </div>
       <hr class="brand-hr"/>
-      <div  ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
+      <div ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
         <div class="row item-row">
-        <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
-          <span class="item-circle icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
-          </span>
-        </span>
-        <span class="product-img col col-20">
-          <img class="item-image" src="{{cartItem.Cart.coverimg}}"></img>
-        </span>
-        <span class="product-content ">
-          <span class="product-title">
-            {{cartItem.Cart.name}}
-          </span>
-          <span class="product-subtitle" ng-show="!cartItem['showEdit']">
-            subtitle
-          </span>
-          <span class="number-span" ng-show="cartItem['showEdit']">
-            <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
-            <span class="count">
-              <input  ng-model="cartItem.Cart.num"/>
+          <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
+            <span class="item-circle icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
             </span>
-            <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
           </span>
-        </span>
-        <span class="product-rest col">
-          <span class="product-price">
-            {{cartItem.Cart.price | currency:"￥"}}
+          <span class="product-img col col-20">
+            <img class="item-image" src="{{cartItem.Cart.coverimg}}"></img>
           </span>
-          <span class="product-num">
-            × {{cartItem.Cart.num}}
+          <span class="product-content ">
+            <span class="product-title">
+              {{cartItem.Cart.name}}
+            </span>
+            <span class="product-subtitle" ng-show="!cartItem['showEdit']">
+              subtitle
+            </span>
+            <span class="number-span" ng-show="cartItem['showEdit']">
+              <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
+              <span class="count">
+                <input  ng-model="cartItem.Cart.num"/>
+              </span>
+              <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
+            </span>
           </span>
-          <span  class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
+          <span class="product-rest col">
+            <span class="product-price">
+              {{cartItem.Cart.price | currency:"￥"}}
+            </span>
+            <span class="product-num">
+              × {{cartItem.Cart.num}}
+            </span>
+            <span  class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
+            </span>
           </span>
-        </span>
 
-        <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
-          删除
-        </span>
+          <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
+            删除
+          </span>
         </div>
         <hr class="item-hr" />
       </div>
     </div>
+
+    <div class="no-content-container" ng-show="vm.brands.length == 0">
+      <span class="no-content no-cart-items">
+      </span>
+      <span class="message">
+        购物车还是空的，去选点好吃的吧！
+      </span>
+      <a class="button button-energized" ng-click="vm.toHomePage()">去逛逛</a>
+    </div>
+
   </ion-content>
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="row footer-bar-row">

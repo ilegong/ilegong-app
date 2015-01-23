@@ -47,7 +47,7 @@
         cartItem['deleteMode'] = false;
       })
     }
-    function brandChecked(id){
+    function brandChecked(id) {
       return _.all(vm.getCartItemsOfBrand(id),function(cartItem){
         return cartItem.checked;
       });
@@ -56,12 +56,12 @@
       if(!editMode){
         if(!vm.brandChecked(brandId)){
           _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-          cartItem['checked'] = true;
-          });          
+            cartItem['checked'] = true;
+          });
         }
         else{
           _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-          cartItem['checked'] = false;
+            cartItem['checked'] = false;
           });
         }
       }

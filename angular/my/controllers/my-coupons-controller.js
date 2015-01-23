@@ -17,6 +17,7 @@
     activate();
 
     function activate() {
+      vm.coupons = [];
       Coupons.getCoupons().then(function(data){
         vm.coupons = data.coupons;
         vm.brands = _.map(data.brands, function(brand){return brand});
