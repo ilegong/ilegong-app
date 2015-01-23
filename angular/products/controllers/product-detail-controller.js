@@ -18,6 +18,9 @@
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;
+    vm.showTabs = function(){$rootScope.hideTabs = false;}
+    vm.getEvaluateComment = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
+    vm.getShichiComment = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     activate();
     
     function activate(){

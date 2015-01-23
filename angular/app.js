@@ -140,7 +140,7 @@
     $ionicConfigProvider.navBar.alignTitle('center')
   }
 
-  function AppCtrl(Users,$q,$scope,$rootScope, $timeout, software, Orders) {
+  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, software, Orders) {
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
@@ -148,6 +148,9 @@
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     $rootScope.alert = {message: ''};
     Users.init();
+    Carts.getCartItems().then(function(result){
+      $rootScope.updateCart(result);
+    })
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;

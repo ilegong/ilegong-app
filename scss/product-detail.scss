@@ -32,9 +32,17 @@
       font-size:1.5em;
       margin-left:-0.7em;
       margin-right:-0.7em;
+      padding-left:19px;
     }
     .menu-sub-text{
       font-size:0.6em;
+    }
+    .menu-item{
+      margin-left:-0.7em;
+      margin-right:-0.7em;
+    }
+    .menu-evaluate{
+      border-bottom:none;
     }
   }
 
@@ -90,6 +98,11 @@
   }
   .product-intro{
     background:white;
+    padding-left:20px;
+    padding-right:20px;
+    margin-left:-0.7em;
+    margin-right:-0.7em;
+    padding-top:1em;
     img{
       width:100%;
     }
@@ -250,9 +263,19 @@
       display:inline-block;
     }
   }
+
   .evaluate{
+    border-top:none;
+    border-bottom:none;
     margin-left:-0.7em;
     margin-right:-0.7em;
+    padding-left:19px;
+    padding-right:19px;
+    .hr{
+      color:#dddddd;
+      margin-bottom:0.5em;
+      margin-top:-1.1em;
+    }
     .user-image{
       width: 1.667em;
       height: 1.667em;
@@ -281,14 +304,18 @@
     .text{
       white-space:normal;
     }
-
+    .all-comment{
+      text-align:center;
+      font-weight:bold;
+      padding-top:0.5em;
+    }
   }
   .make-comment{
     background:white;
     margin-left:-0.7em;
     margin-right:-0.7em;
     padding:1em;
-    margin-top:-0.8em;
+    margin-top:0.7em;
     .star{
       margin-right:0.5em;
     }

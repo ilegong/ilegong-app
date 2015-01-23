@@ -79,9 +79,9 @@
         </div>
       </div>
       <div class="list brand-button">
-        <a class="item item-icon-right" ui-sref="store.home({storeId:vm.brand.Brand.id})" >
+        <a class="item item-avatar item-icon-right" ui-sref="store.home({storeId:vm.brand.Brand.id})" >
+          <img src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
           <i class=" icon ion-ios7-arrow-right"></i>
-          <img class="brand-image" src="{{vm.brand.Brand.coverimg}}" class="brandImg"/>
           <span class="brand-name">
             进入{{vm.brand.Brand.name}}的店铺
           </span>
@@ -108,16 +108,22 @@
         </div>
       </div>
       <div class="list menu-">
-        <span class="item menu-text" ng-click="vm.menuClick(0)">
-          商品详情
-        </span>
+        <div  ng-click="vm.menuClick(0)"class="item item-icon-right  menu-item ">
+          <i class=" icon ion-ios7-arrow-right"></i>
+          <span class="menu-text" >
+            商品详情
+          </span>
+        </div>
         <div ng-show="vm.isShowMenuContents[0]" class="product-intro" ng-bind-html="vm.content.Product.content">
         </div>
-        <span class="item menu-text" ng-click="vm.menuClick(1)">
-          试吃评价
-          <span class="menu-sub-text">({{vm.getShichiCommentNum()==null?0:vm.getShichiCommentNum()}})</span>
-        </span>
-        <div ng-show="vm.isShowMenuContents[1]">
+        <div ng-click="vm.menuClick(1)" class="item item-icon-right  menu-item ">
+          <i class=" icon ion-ios7-arrow-right"></i>
+          <span class="menu-text" >
+            试吃评价
+            <span class="menu-sub-text">({{vm.getShichiCommentNum()==null?0:vm.getShichiCommentNum()}})</span>
+          </span>
+        </div>
+        <div ng-show="false">
           <div class="list">
             <div ng-show="ite.Comment.is_shichi_tuan_comment == '1'" class="item evaluate" ng-repeat="ite in vm.comment">
               <div>
@@ -147,37 +153,55 @@
             </div>
           </div>
         </div>
-        <span class="item menu-text" ng-click="vm.menuClick(2)">
-          口碑评价
-          <span class="menu-sub-text">({{vm.getEvaluateCommentNum()==null?0:vm.getEvaluateCommentNum()}})</span>
-        </span>
-        <div class="productDetailEvaluate" ng-show="vm.isShowMenuContents[2]">
-          <div class="list">
-            <div ng-show="ite.Comment.is_shichi_tuan_comment != '1'" class="item evaluate" ng-repeat="ite in vm.comment">
-              <div>
-                <span ng-show="ite.Comment.userPhoto != null" class="user-image" style="background: url('{{ite.Comment.userPhoto}}');background-size:contain;"></span>
-                <span ng-show="ite.Comment.userPhoto == null" class="app-icon icon-user user-image"></span>
-                <span >{{ite.Comment.username}}</span>
-                <span class="create-time">{{ite.Comment.created}}</span>
-              </div>
-              <div class="stars">
-                <span class="app-icon {{vm.isShowStar(ite,0)?'icon-star':'icon-star-gray'}}"></span>
-                <span class="app-icon {{vm.isShowStar(ite,1)?'icon-star':'icon-star-gray'}}"></span>
-                <span class="app-icon {{vm.isShowStar(ite,2)?'icon-star':'icon-star-gray'}}"></span>
-                <span class="app-icon {{vm.isShowStar(ite,3)?'icon-star':'icon-star-gray'}}"></span>
-                <span class="app-icon {{vm.isShowStar(ite,4)?'icon-star':'icon-star-gray'}}"></span>
-              </div>
-              <div>
-                <span class="text">
-                  {{ite.Comment.body}}
-                </span>
-              </div>
-              <div>
-                <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="evaluate-image"/>
-              </div>
-              <span ng-show="false" class="buy-time">
-                购买时间：{{ite.Comment.created}}
+
+
+<!--         <div ng-click="vm.menuClick(1)" class="item item-icon-right  menu-item ">
+          <i class=" icon ion-ios7-arrow-right"></i>
+          <span class="menu-text" >
+            试吃评价
+            <span class="menu-sub-text">({{vm.getShichiCommentNum()==null?0:vm.getShichiCommentNum()}})</span>
+          </span>
+        </div> -->
+        <div ng-click="vm.menuClick(2)" class="item item-icon-right  menu-item menu-evaluate">
+          <i class=" icon ion-ios7-arrow-right"></i>
+          <span class="menu-text" >
+            口碑评价
+            <span class="menu-sub-text">({{vm.getEvaluateCommentNum()==null?0:vm.getEvaluateCommentNum()}})</span>
+          </span>
+        </div>
+
+        <div class="list">
+          <div  ng-show="$index<3" class="item evaluate" ng-repeat="ite in vm.getEvaluateComment()">
+            <hr class="hr"/>
+            <div> 
+              <span ng-show="ite.Comment.userPhoto != null" class="user-image"   style="background: url('{{ite.Comment.userPhoto}}');background-size:contain;"></span>
+              <span ng-show="ite.Comment.userPhoto == null" class="app-icon icon-user user-image"></span>
+              <span >{{ite.Comment.username}}</span>
+              <span class="create-time">{{ite.Comment.created}}</span>
+            </div>
+            <div class="stars">
+              <span class="app-icon {{vm.isShowStar(ite,0)?'icon-star':'icon-star-gray'}}"></span>
+              <span class="app-icon {{vm.isShowStar(ite,1)?'icon-star':'icon-star-gray'}}"></span>
+              <span class="app-icon {{vm.isShowStar(ite,2)?'icon-star':'icon-star-gray'}}"></span>
+              <span class="app-icon {{vm.isShowStar(ite,3)?'icon-star':'icon-star-gray'}}"></span>
+              <span class="app-icon {{vm.isShowStar(ite,4)?'icon-star':'icon-star-gray'}}"></span>
+            </div>
+            <div>
+              <span class="text">
+                {{ite.Comment.body}}
               </span>
+            </div>
+            <div>
+              <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="evaluate-image"/>
+            </div>
+            <span ng-show="false" class="buy-time">
+              购买时间：{{ite.Comment.created}}
+            </span>
+          </div>
+          <div ng-show="vm.getEvaluateCommentNum()>3" class="item evaluate">
+            <hr class="hr"/>
+            <div class="all-comment">
+              查看全部评价
             </div>
           </div>
           <div class="list make-comment">
@@ -216,19 +240,20 @@
     </div>
   </ion-content>
   <ion-footer-bar class="footer footer-bar">
-    <span ng-click="vm.addToCart();" ui-sref="app.cart" class="footer-buy-now">
+    <span  ng-click="vm.showTabs();vm.addToCart();" ui-sref="app.cart" class="footer-buy-now">
       立即购买
     </span>
     <span ng-click="vm.addToCart();" class="footer-add-cart">
       加入购物车
     </span>
-    <span class="footer-cart">
+    <div ng-click="vm.showTabs();" ui-sref="app.cart"  class="footer-cart">
+      <span class="badge">{{cart.cartItems.length}}</span>
       <span class="footer-cart-image app-icon icon-cart">
       </span>
       <br/>
-      <span class="footer-cart-text">
+      <div  class="footer-cart-text">
         购物车
       </span>
-    </span>
+    </div>
   </ion-footer-bar>
 </ion-view>
