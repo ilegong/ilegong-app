@@ -11,6 +11,9 @@
     }
     .content-tab-active{
       color:#29ac0e !important  ;
+      span{
+        color:#29ac0e !important;
+      }
     }
     .tab-border{
       border-right:1px #bbbbbb solid;
@@ -48,7 +51,11 @@
       .hr{
         color:#dddddd;
         margin-bottom:0.5em;
-        margin-top:-1.1em;
+        margin-top:-1em;
+        border-bottom: 1px solid;
+        border-left: none;
+        border-right: none;
+        border-top: none;
       }
       .user-image{
         width: 1.667em;

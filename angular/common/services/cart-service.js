@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service('Carts', Carts)
   
-  function Carts($q,$log,Base,software,Users){
+  function Carts($rootScope,$q,$log,Base,software,Users){
     var self = this;
     return{
       getCartItems:getCartItems,
@@ -64,9 +64,12 @@
       return defer.promise;
     }
     function init(){
-      if(Users.isLoggedIn)
+      $log.log('token!!!');
+      $log.log(Users.getTokenLocally());
+      Users.getToken().then(function(token){
         getCartItems().then(function(result){
           $rootScope.updateCart(result);
+        })
       })
     }
   }
