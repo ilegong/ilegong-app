@@ -381,4 +381,15 @@ a{
   width: 5em;
 }
 
+// item-image-small
+.item-image-small-left {
+
+}
+.item-image-small-left > img:first-child, .item-image-small-left .item-image {
+  max-width: 1.667em;
+  max-height: 1.667em;
+  height: 1.667em;
+  width: 1.667em;
+  border-radius:6px;
+}
 

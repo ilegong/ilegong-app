@@ -164,8 +164,8 @@
         <div class="list">
           <div  ng-show="$index<3" class="item evaluate" ng-repeat="ite in vm.getEvaluateComment()">
             <hr class="hr"/>
-            <div> 
-              <span ng-show="ite.Comment.userPhoto != null" class="user-image"   style="background: url('{{ite.Comment.userPhoto}}');background-size:contain;"></span>
+            <div class="item-image-small-left"> 
+              <img ng-show="ite.Comment.userPhoto != null" class="item-image user-image"   style="background: url('{{ite.Comment.userPhoto}}');background-size:contain;">
               <span ng-show="ite.Comment.userPhoto == null" class="app-icon icon-user user-image"></span>
               <span >{{ite.Comment.username}}</span>
               <span class="create-time">{{ite.Comment.created}}</span>

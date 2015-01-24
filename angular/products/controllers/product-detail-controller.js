@@ -30,7 +30,9 @@
       var id = $stateParams.id;
       Products.getProduct(id).then(function(data){
         vm.product = data.product;
-        vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
+        if(Object.prototype.toString.call(vm.product.Product.specs) === "[object String]"){
+          vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
+        }
         vm.recommends = data.recommends;
         vm.brand = data.brand;
         $log.log(vm.product);
