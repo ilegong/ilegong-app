@@ -95,7 +95,7 @@
         <h1 class="total-price-price text-energized">{{vm.getTotalPrice() | currency:"￥"}}</h1>
       </div>
       <div class="buttons buttons">
-        <button class="button button-energized jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong><button>
+        <div class="button button-energized jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
       </div>
     </div>
   </ion-footer-bar>

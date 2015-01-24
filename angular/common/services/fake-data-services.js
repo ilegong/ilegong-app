@@ -6,8 +6,8 @@
 
   function FakeData(){
     var getData = {
-      '/categories/mobileHome.json': mobileHomeJson,
-      '/categories/tag/shuiguoganguo.json': shuiguoganguoJson,
+      '/api_orders/home.json': homeJson,
+      '/categories/tag/': shuiguoganguoJson,
       '/api_orders/mine.json' : ordersJson,
       '/apiOrders/order_detail/\\d+.json': orderDetail,
       '/myDetail': myDetail,

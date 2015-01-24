@@ -16,7 +16,7 @@
     }
 
     function list(){
-      return Base.get('/categories/mobileHome.json');
+      return Base.get('/api_orders/home.json');
     }
     function getProduct(id){
       var defer = $q.defer();
@@ -38,6 +38,7 @@
       $log.log('posting comment!!!');
       Base.post('/api_orders/comment_add.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
         $log.log('success!!!');
+        $log.log(result);
         defer.resolve(result);
         //$log.log(result);
       },function(err){defer.reject(err);$log.log('error!!!');});

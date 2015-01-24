@@ -16,8 +16,12 @@
       vm.date = (new Date()).valueOf();
       Products.list().then(function(data){
         vm.bannerItems = data.bannerItems;
-        vm.brands = data.brands;
-        vm.tagsWithProducts = data.tagsWithProducts;
+        vm.tryingItems = data.tryingItems;
+        vm.specTagItems = data.specTagItems;
+        vm.mainTagItems = data.mainTagItems;
+        vm.hotItems = data.hotItems;
+        //vm.brands = data.brands;
+        //vm.tagsWithProducts = data.tagsWithProducts;
       });
     }
   }

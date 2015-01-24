@@ -3,7 +3,7 @@
 
   angular
   .module('module.services', ['LocalForageModule'])
-  .value('software', {fakeData: true , timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData:true, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, software, FakeData){
@@ -47,6 +47,8 @@
       if(software.fakeData){
         return deferred(FakeData.post(url));
       }
+
+      $log.log("post"+url);
       var defer = $q.defer();
       return $http.post(self.getUrl(url), data)        
         .success(function(data, status, headers, config) {
@@ -86,7 +88,8 @@
     function getUrl(url){
       $log.log('get ' + software.server.address + url);
       return software.server.address + url;
-    }    function deferred(data){
+    }
+    function deferred(data){
       var defer = $q.defer();
       defer.resolve(data);
       return defer.promise;

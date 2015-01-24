@@ -8,7 +8,61 @@
         </a>
       </ion-slide>
     </ion-slide-box>
-    <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
+
+    <div class="index_pt">
+      <div class="price">
+        <span>
+          ¥
+        </span>
+        <strong>
+          12.00
+        </strong>
+        起
+      </div>
+      <ul class="clearfix">
+        <li class="fl">
+          <a ui-sref="app.category-detail({slug:vm.specTagItems[0].slug})" style="display:block;">
+            <img src="http://tongshijia.com/{{vm.specTagItems[0].img}}" />
+          </a>
+        </li>
+        <li class="fl">
+          <a ui-sref="app.category-detail({slug:vm.specTagItems[1].slug})">
+            <img src="http://tongshijia.com/{{vm.specTagItems[1].img}}" />
+          </a>
+          <br />
+          <a ui-sref="app.category-detail({slug:vm.specTagItems[2].slug})">
+            <img src="http://tongshijia.com/{{vm.specTagItems[2].img}}" />
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="index_class_title">
+      朋友的推荐
+    </div>
+    <div class="index_class">
+      <ul class="clearfix" ng-repeat="mainItem in vm.mainTagItems" ng-show="$index % 2 == 0">
+        <li class="fl">
+          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
+            <img src="http://tongshijia.com/{{vm.mainTagItems[$index].img}}"/>
+          </a>
+        </li>
+        <li class="fr" ng-show="$index + 1 < vm.mainTagItems.length">
+          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
+            <img src="http://tongshijia.com/{{vm.mainTagItems[$index + 1].img}}"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="index_bao_title">
+      朋友说的爆款
+    </div>
+    <div class="index_bao">
+      <a href="hotItem" ng-repeat="hotItem in vm.hotItems">
+        <img src="http://tongshijia.com/{{hotItem.img}}" />
+      </a>
+    </div>
+
+<!--     <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
       <div class="col col-33 category">
         <a ui-sref="app.category-detail({slug:tagWithProducts.ProductTag.slug})">
           <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"></img>
@@ -25,7 +79,7 @@
           <img class="product-image" src="{{product.coverimg}}"/>  
         </a>
       </div>
-    </div>
+    </div> -->
     <ul ng-show='true'>
       <li ng-repeat='message in messages track by $index'>{{message}}</li>
     </ul>

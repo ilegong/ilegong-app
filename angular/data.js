@@ -1,61 +1,87 @@
-var mobileHomeJson = {  
-  "brands":{  
-    "8":{  
-       "Brand":{  
-          "id":"8",
-          "name":"郑州民政局-段赵明",
-          "created":"2014-01-27 09:52:28",
-          "slug":"",
-          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201401\/thumb_m\/2eb8846d77e_0127.jpg"
-       }
-    }
-  },
-  "tagsWithProducts":[  
-    {  
-      "ProductTag":{
-        "id":"3",
-        "name":"\u65b0\u9c9c\u6c34\u679c",
-        "slug":"shuiguoganguo",
-        "priority":"900",
-        "show_in_home":"1",
-        "published":true,
-        "created":null,
-        "size_in_home":"8",
-        "coverimg":"\/img\/class\/classn3.png"
-      },
-      "Products":[  
-        {
-          "id":"302",
-          "name":"\u5e73\u548c\u742f\u6eaa\u7ea2\u5fc3\u871c\u67da",
-          "created":"2014-11-26 12:31:00",
-          "brand_id":"8",
-          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/a293b157a39_1126.jpg",
-          "promote_name":"\u4ec5\u9650\u5317\u4eac\u5929\u6d25\u6cb3\u5317\u5730\u533a\uff0c\u665a\u4e94\u70b9\u524d\u4e0b\u5355\u7b2c\u4e8c\u5929\u5230\u8d27\u3002\u516c\u53f8\u5730\u5740\u4e70\u5bb6\u6211\u4eec\u5c06\u5728\u5de5\u4f5c\u65e5\u914d\u9001\uff0c\u907f\u514d\u653e\u7f6e\u65f6\u95f4\u8fc7\u957f\u3002",
-          "comment_nums":"2",
-          "price":"35",
-          "original_price":null,
-          "slug":"hong_xin_you_zi"
-        },
-        {  
-          "id":"201",
-          "name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b45\u65a4",
-          "created":"2014-10-13 17:54:00",
-          "brand_id":"8",
-          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/03ca7900316_1104.jpg",
-          "promote_name":"",
-          "comment_nums":"34",
-          "price":"55",
-          "original_price":"105",
-          "slug":"he_nan_xing_yang_he_yin_ruan_zi_shi_liu_5jin_6_7liang"
-        }
-      ]
+var homeJson = {
+  "bannerItems": [
+    {
+      "img": "/img/banner/spring-weixin.jpg", 
+      "url": "/categories/spring"
+    }, 
+    {
+      "img": "/img/banner/banner_cao_mei_cai_zhai.jpg", 
+      "url": "/products/20150119/xing_shou_xiu_cao_mei_yuan_cai_zhai_2jin.html"
     }
   ], 
-  "sub_title":null, 
-  "bannerItems":[
-    {"img":"\/img\/banner\/banner_songzi.jpg","url":"\/products\/20141117\/dong_bei_hong_song_zi_1jin_zhuang.html"},
-    {"img":"\/img\/banner\/banner_dami.jpg","url":"\/products\/20141101\/wu_chang_dao_hua_xiang_ti_qian_yu_shou_500jin_zhi_xian_bei_jing.html"},
-    {"img":"\/img\/banner\/banner_huizao.jpg","url":"\/products\/20141117\/xin_jiang_hui_zao.html"},{"img":"\/img\/banner\/banner_shiliu.jpg","url":"\/products\/20141013\/he_nan_xing_yang_he_yin_ruan_zi_shi_liu_8liang.html"}
+  "tryingItems": [ ], 
+  "specTagItems": [
+    {
+      "id": 13, 
+      "slug": "chao-zhi-gou", 
+      "img": "/img/mobile/index/p1.jpg"
+    }, 
+    {
+      "id": 14, 
+      "slug": "xia-wu-cha", 
+      "img": "/img/mobile/index/p2.jpg"
+    }, 
+    {
+      "id": 15, 
+      "slug": "hui-jia-chi-fang", 
+      "img": "/img/mobile/index/p3.jpg"
+    }
+  ], 
+  "mainTagItems": [
+    {
+      "id": 3, 
+      "slug": "shuiguoganguo", 
+      "img": "/img/mobile/index/c1.jpg"
+    }, 
+    {
+      "id": 5, 
+      "slug": "xiaochilingshi", 
+      "img": "/img/mobile/index/c2.jpg"
+    }, 
+    {
+      "id": 8, 
+      "slug": "dangaotiandian", 
+      "img": "/img/mobile/index/c3.jpg"
+    }, 
+    {
+      "id": 12, 
+      "slug": "chu-fang-tiao-wei", 
+      "img": "/img/mobile/index/c4.jpg"
+    }, 
+    {
+      "id": 9, 
+      "slug": "lianyoumimian", 
+      "img": "/img/mobile/index/c5.jpg"
+    }, 
+    {
+      "id": 6, 
+      "slug": "jiushuichayin", 
+      "img": "/img/mobile/index/c6.jpg"
+    }, 
+    {
+      "id": 4, 
+      "slug": "liangyou", 
+      "img": "/img/mobile/index/c7.jpg"
+    }, 
+    {
+      "id": 10, 
+      "slug": "shuichanhaixian", 
+      "img": "/img/mobile/index/c8.jpg"
+    }
+  ], 
+  "hotItems": [
+    {
+      "img": "/img/mobile/index/d3.jpg", 
+      "url": "/products/20150120/you_ji_hong_yan_cao_mei_tuan_gou.html"
+    }, 
+    {
+      "img": "/img/mobile/index/d1.jpg", 
+      "url": "/products/20141101/wei_wei_an_shui_guo_dan_gao.html"
+    }, 
+    {
+      "img": "/img/mobile/index/d2.jpg", 
+      "url": "/products/20141204/fu_ping_te_ji_jian_shi_bing.html"
+    }
   ]
 };
 
