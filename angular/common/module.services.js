@@ -4,7 +4,7 @@
   angular
   .module('module.services', ['LocalForageModule'])
 
-  .value('software', {fakeData: false , timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
+  .value('software', {fakeData: true , timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: ''}, server: {address: 'http://www.tongshijia.com'}})
 
   .service('Base', Base)
   /* @ngInject */

@@ -4,7 +4,7 @@
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems">
         <a ui-sref="app.product-detail.intro({id: bannerItem.id})">
-          <img src="http://51daifan.sinaapp.com/{{bannerItem.img}}"/>
+          <img src="{{bannerItem.img}}"/>
         </a>
       </ion-slide>
     </ion-slide-box>
@@ -22,16 +22,16 @@
       <ul class="clearfix">
         <li class="fl">
           <a ui-sref="app.category-detail({slug:vm.specTagItems[0].slug})" style="display:block;">
-            <img src="http://tongshijia.com/{{vm.specTagItems[0].img}}" />
+            <img src="{{vm.specTagItems[0].img}}" />
           </a>
         </li>
         <li class="fl">
           <a ui-sref="app.category-detail({slug:vm.specTagItems[1].slug})">
-            <img src="http://tongshijia.com/{{vm.specTagItems[1].img}}" />
+            <img src="{{vm.specTagItems[1].img}}" />
           </a>
           <br />
           <a ui-sref="app.category-detail({slug:vm.specTagItems[2].slug})">
-            <img src="http://tongshijia.com/{{vm.specTagItems[2].img}}" />
+            <img src="{{vm.specTagItems[2].img}}" />
           </a>
         </li>
       </ul>
@@ -43,12 +43,12 @@
       <ul class="clearfix" ng-repeat="mainItem in vm.mainTagItems" ng-show="$index % 2 == 0">
         <li class="fl">
           <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
-            <img src="http://tongshijia.com/{{vm.mainTagItems[$index].img}}"/>
+            <img src="{{vm.mainTagItems[$index].img}}"/>
           </a>
         </li>
         <li class="fr" ng-show="$index + 1 < vm.mainTagItems.length">
           <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
-            <img src="http://tongshijia.com/{{vm.mainTagItems[$index + 1].img}}"/>
+            <img src="{{vm.mainTagItems[$index + 1].img}}"/>
           </a>
         </li>
       </ul>
@@ -58,7 +58,7 @@
     </div>
     <div class="index_bao">
       <a href="hotItem" ng-repeat="hotItem in vm.hotItems">
-        <img src="http://tongshijia.com/{{hotItem.img}}" />
+        <img src="{{hotItem.img}}" />
       </a>
     </div>
 
