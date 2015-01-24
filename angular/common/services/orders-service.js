@@ -51,7 +51,7 @@
       var defer =  $q.defer();
       Base.post('/api_orders/balance.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
         if(result.data.success){
-          defer.resolve(result.data.order_ids[0]);
+          defer.resolve(result.data.order_ids);
         }
         else{
           defer.reject(result);

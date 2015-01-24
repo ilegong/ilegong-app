@@ -60,7 +60,7 @@
       return fee;
     }
     function countOfProducts(){
-      
+
     }
     function changeAddress(){
       $state.go('app.order-addresses',{state:1});
@@ -74,9 +74,14 @@
         remarks[brand.Brand.id] = brand.Brand.remark;
       });
       $log.log("submit order for products " + vm.pidList);
-      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderId){
-        $log.log("submit order successfully: ").log(orderId);
-        $state.go("app.cart-orders", {state: 0});
+      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderIds){
+        $log.log("submit order successfully: ").log(orderIds);
+        if(orderIds.length > 1){
+          $state.go("app.cart-orders", {state: 0});
+        }
+        else{
+          $state.go("app.cart-order-detail", {id: orderIds[0]});
+        }
       }, function(e){
         $log.log("submit order failed: ").log(e);
       });
