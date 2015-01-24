@@ -10,6 +10,7 @@
     vm.getPriceOfProduct = getPriceOfProduct;
     vm.getPriceOfBrand = getPriceOfBrand;
     vm.getShipFeeOfBrand = getShipFeeOfBrand;
+    vm.countOfProducts = countOfProducts;
     vm.changeAddress = changeAddress;
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
@@ -57,6 +58,9 @@
     function getShipFeeOfBrand(brandId){
       var fee =  _.find(vm.shipFees, function(fee, bid){return bid == brandId});
       return fee;
+    }
+    function countOfProducts(){
+      
     }
     function changeAddress(){
       $state.go('app.order-addresses',{state:1});
