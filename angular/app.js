@@ -142,6 +142,7 @@
   }
 
   function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, software, Orders) {
+    $rootScope.software = software;
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
