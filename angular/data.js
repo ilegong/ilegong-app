@@ -2647,7 +2647,7 @@ var CartInfo = {
         "notice":""
       }
     }],
-    "shipFees":{"121":0},
+    "shipFees":{"121":15},
     "reduced":5
   }
 }

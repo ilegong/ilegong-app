@@ -34,14 +34,14 @@
           小计：<span class="text-energized">{{vm.getPriceOfProduct(product) | currency:'￥'}}</span>
         </div>
       </div>
-      <div class="item item-text-large item-icon-right">
+      <div class="item item-text-large item-icon-right" ng-show="false">
         <span class="text">商品优惠</span>
         <i class="icon ion-ios7-arrow-right"></i>
         <span>请选择要使用的优惠券</span>
       </div>
       <div class="item item-text-large">
         <span class="text">运费</span>
-        <span>包邮</span>
+        <span>{{vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'}}</span>
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee; height: 3em;">
@@ -49,37 +49,20 @@
         </label>
       </div>
       <div class="item">
-        <span class="fr">共一件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
+        <span class="text-muted fr">共一件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
       </div>
     </div>
 
-    <div class="item-divider"></div>
-    <div class="item item-checkbox item-checkbox-right">
-     <label class="checkbox">
-       <input type="checkbox">
-     </label>
-     应用优惠码
-    </div>
-    </div>
-    <div class="coupon">
-      <span>
-        <textarea placeholder="使用优惠码" ng-model="vm.couponCodeTemp"></textarea>
-        <a class="button button-assertive"  ng-click="vm.confirmCouponCode();">
-        应用
-        </a>
-      </span>
-    </div>
-
-    <div class="bottom_div">
-      <div>
-        已优惠：{{vm.reduced | currency:'￥'}}
-      </div>
-      <div>
-        运费：{{vm.totalShipFees | currency:'￥'}}
-      </div>
-      <div class="total_price">
-        总价（含运费）：{{vm.totalPrice | currency:'￥'}}
-      </div>
+    <div class="item-divider" ng-show="false"></div>
+    <div class="item item-checkbox item-checkbox-right" ng-show="false">
+      <label class="checkbox">
+        <input type="checkbox">
+      </label>
+      应用优惠码
+      <textarea placeholder="使用优惠码" ng-model="vm.couponCodeTemp"></textarea>
+      <a class="button button-assertive"  ng-click="vm.confirmCouponCode();">
+      应用
+      </a>
     </div>
   </ion-content>
 

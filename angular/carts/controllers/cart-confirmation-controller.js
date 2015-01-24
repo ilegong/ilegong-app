@@ -9,6 +9,7 @@
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
     vm.getPriceOfBrand = getPriceOfBrand;
+    vm.getShipFeeOfBrand = getShipFeeOfBrand;
     vm.changeAddress = changeAddress;
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
@@ -52,6 +53,10 @@
     }
     function getPriceOfBrand(brandItem){
       return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0);
+    }
+    function getShipFeeOfBrand(brandId){
+      var fee =  _.find(vm.shipFees, function(fee, bid){return bid == brandId});
+      return fee;
     }
     function changeAddress(){
       $state.go('app.order-addresses',{state:1});
