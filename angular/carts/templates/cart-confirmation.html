@@ -31,18 +31,13 @@
           规格：{{product.spec}}
         </div>
         <div class="text-sub-muted">
-          小计：<span class="text-energized">{{vm.getProductPrice(product) | currency:'￥'}}</span>
+          小计：<span class="text-energized">{{vm.getPriceOfProduct(product) | currency:'￥'}}</span>
         </div>
       </div>
       <div class="item item-text-large item-icon-right">
         <span class="text">商品优惠</span>
         <i class="icon ion-ios7-arrow-right"></i>
         <span>请选择要使用的优惠券</span>
-      </div>
-      <div class="item item-text-large item-icon-right">
-        <span class="text">店铺优惠</span>
-        <i class="icon ion-ios7-arrow-right"></i>
-        <span>已省80元</span>
       </div>
       <div class="item item-text-large">
         <span class="text">运费</span>
@@ -56,6 +51,15 @@
       <div class="item">
         <span class="fr">共一件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
       </div>
+    </div>
+
+    <div class="item-divider"></div>
+    <div class="item item-checkbox item-checkbox-right">
+     <label class="checkbox">
+       <input type="checkbox">
+     </label>
+     应用优惠码
+    </div>
     </div>
     <div class="coupon">
       <span>
@@ -76,19 +80,16 @@
       <div class="total_price">
         总价（含运费）：{{vm.totalPrice | currency:'￥'}}
       </div>
-      <a class="button button-assertive" ng-click="vm.submitOrder();">
-        提交订单
-      </a>
     </div>
   </ion-content>
 
   <ion-footer-bar ng-show="vm.cartItems.length > 0">
     <div style="width: 100%;">
       <span class="total-price">
-        共6件，实付款<span class="text-energized">{{vm.getTotalPrice() | currency:"￥"}}</span>
+        共6件，实付款<span class="text-energized">￥<span style="font-size: 1.3em;">{{vm.totalPrice | currency:''}}</span></span>
       </span>
       <div class="buttons fr">
-        <button class="button button-energized" ng-click="vm.confirmCart()">提交订单</button>
+        <button class="button button-energized" ng-click="vm.submitOrder()">提交订单</button>
       </div>
     </div>
   </ion-footer-bar>

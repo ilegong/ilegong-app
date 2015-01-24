@@ -28,6 +28,7 @@
       vm.defaultAddress = $rootScope.getDefaultAddress();
       
       Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
+        $log.log("get cart info successfully: ").log(result);
         vm.brands = result.brands;
         vm.shipFees = result.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
