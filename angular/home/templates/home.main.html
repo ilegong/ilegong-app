@@ -1,5 +1,4 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
-
   <ion-content class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems">
@@ -40,18 +39,18 @@
       朋友的推荐
     </div>
     <div class="index_class">
-      <ul class="clearfix" ng-repeat="mainItem in vm.mainTagItems" ng-show="$index % 2 == 0">
-        <li class="fl">
+      <div class="row"  ng-repeat="mainItem in vm.mainTagItems" ng-show="$index % 2 == 0">
+        <div class="col main-tag-col-left" >
           <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
-            <img src="{{vm.mainTagItems[$index].img}}"/>
+            <img  class="main-tag-image" src="{{vm.mainTagItems[$index].img}}"/>
           </a>
-        </li>
-        <li class="fr" ng-show="$index + 1 < vm.mainTagItems.length">
+        </div>
+        <div class="col" ng-show="$index + 1 < vm.mainTagItems.length">
           <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
-            <img src="{{vm.mainTagItems[$index + 1].img}}"/>
+            <img class="main-tag-image"  src="{{vm.mainTagItems[$index + 1].img}}"/>
           </a>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     <div class="index_bao_title">
       朋友说的爆款
@@ -61,25 +60,6 @@
         <img src="{{hotItem.img}}" />
       </a>
     </div>
-
-<!--     <div class="row" ng-repeat="tagWithProducts in vm.tagsWithProducts">
-      <div class="col col-33 category">
-        <a ui-sref="app.category-detail({slug:tagWithProducts.ProductTag.slug})">
-          <img src="http://www.tongshijia.com/{{tagWithProducts.ProductTag.coverimg}}"></img>
-        </a>
-      </div>
-      <div class="col col-33 product" ng-repeat="product in tagWithProducts.Products.slice(0, 2)" ng-init="brand=vm.brands[product.brand_id].Brand">
-        <a ui-sref="app.product-detail.intro({id: product.id,from: -1})">
-          <span class="product-name">
-            {{product.name}}
-          </span>
-          <div class="brand-name">
-            {{brand.name}}
-          </div>
-          <img class="product-image" src="{{product.coverimg}}"/>  
-        </a>
-      </div>
-    </div> -->
     <ul ng-show='true'>
       <li ng-repeat='message in messages track by $index'>{{message}}</li>
     </ul>
