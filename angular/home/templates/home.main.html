@@ -1,8 +1,8 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
   <ion-content class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide ng-repeat="bannerItem in vm.bannerItems">
-        <a ui-sref="app.product-detail.intro({id: bannerItem.id})">
+      <ion-slide ng-repeat="bannerItem in vm.getValidBannerItems()" >
+        <a ui-sref="app.product-detail({id:bannerItem.id,from:-1})">
           <img src="{{bannerItem.img}}"/>
         </a>
       </ion-slide>
@@ -56,7 +56,7 @@
       朋友说的爆款
     </div>
     <div class="index_bao">
-      <a href="hotItem" ng-repeat="hotItem in vm.hotItems">
+      <a ui-sref="app.product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems">
         <img src="{{hotItem.img}}" />
       </a>
     </div>

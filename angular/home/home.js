@@ -8,6 +8,7 @@
   /* @ngInject */
   function HomeCtrl(Users,$rootScope, $scope, $http, $log, Products){
     var vm = this;
+    vm.getValidBannerItems = function(){return _.filter(vm.bannerItems,function(item){return item.id != null})}
     active();
 
 
