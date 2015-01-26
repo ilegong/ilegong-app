@@ -10,8 +10,8 @@
     </div>
   </ion-header-bar>
 
-<<<<<<< HEAD
   <ion-content ng-click="vm.cancelProductDelete();" style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
+    <div ng-repeat="brand in vm.brands"  ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
       <div class="item item-icon-left item-avatar">
         <img src="{{brand.Brand.coverimg}}"></img>
         <i class="icon pys-350 {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(vm.editMode,brand.Brand.id)" ng-show="!vm.editMode">
@@ -20,40 +20,41 @@
           {{brand.Brand.name}}
         </span>
       </div>
-      <div class="item item-icon-left item-thumbnail-left" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
-          <img src="{{cartItem.Cart.coverimg}}"></img>
-          <i class="icon pys-350 {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}" ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
-            </span>
-          </i>
-          <span class="product-content ">
-            <span class="product-title">
-              {{cartItem.Cart.name}}
-            </span>
-            <span class="text-sub" ng-show="!cartItem['showEdit']">
-              subtitle
-            </span>
-            <span class="number-span" ng-show="cartItem['showEdit']">
-              <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
-              <span class="count">
-                <input  ng-model="cartItem.Cart.num"/>
-              </span>
-              <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
-            </span>
-          </span>
-          <span class="product-rest col">
-            <span class="product-price">
-              {{cartItem.Cart.price | currency:"￥"}}
-            </span>
-            <span class="product-num">
-              × {{cartItem.Cart.num}}
-            </span>
-            <span  class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
-            </span>
-          </span>
 
-          <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
-            删除
+      <div class="item item-icon-left item-thumbnail-left" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
+        <img src="{{cartItem.Cart.coverimg}}"></img>
+        <i class="icon pys-350 {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}" ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
           </span>
+        </i>
+        <span class="product-content">
+          <div class="text">
+            {{cartItem.Cart.name}}
+          </div>
+          <span class="text-sub" ng-show="!cartItem['showEdit']">
+            subtitle
+          </span>
+          <span class="number-span" ng-show="cartItem['showEdit']">
+            <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
+            <span class="count">
+              <input  ng-model="cartItem.Cart.num"/>
+            </span>
+            <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
+          </span>
+        </span>
+        <span class="product-rest col">
+          <span class="product-price">
+            {{cartItem.Cart.price | currency:"￥"}}
+          </span>
+          <span class="product-num">
+            × {{cartItem.Cart.num}}
+          </span>
+          <span  class="icon {{cartItem['showEdit']?'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem['showEdit'] = !cartItem['showEdit'];">
+          </span>
+        </span>
+
+        <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
+          删除
+        </span>
       </div>
       <div class="item-divider"></div>
     </div>
@@ -70,17 +71,15 @@
   
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="footer-bar-container">
-      <div class="item item-icon-left" style="display: inline-block;">
-        <span class="circle icon {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
-        <div class="total-price">
-          <div class="total-price">
-            合计
-          </div>
-          <div class="text-sub">
-            不含运费
-          </div>
+      <div class="price-total fl" style="width: 55%;">
+        <span class="icon pys-350 {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
+        <div class="fl">
+          <div>合计</div>
+          <div class="text-sub text-muted">不含运费</div>
         </div>
-        <h1 class="total-price-price text-energized">{{vm.getTotalPrice() | currency:"￥"}}</h1>
+        <div class="text-energized fr" style="padding-top: 0.5em;">
+          ￥<span class="text-large">{{vm.getTotalPrice() | currency:""}}</span>
+        </div>
       </div>
       <div class="buttons buttons fr">
         <div class="button button-energized" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
