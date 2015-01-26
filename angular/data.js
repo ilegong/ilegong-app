@@ -2013,7 +2013,7 @@ var orderDetail = {
       "creator":"401180",
       "lastupdator":"0",
       "remoteurl":"",
-      "status":"2",
+      "status":"0",
       "published":"1",
       "deleted":false,
       "created":"2015-01-22 15:20:52",

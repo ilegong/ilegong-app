@@ -106,7 +106,7 @@
       return _.filter($rootScope.cart.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
     }
     function confirmCart(){
-      if(vm.isLoggedIn()){
+      if(vm.isLoggedIn){
         $state.go('app.cart-confirmation');
       }
       else{

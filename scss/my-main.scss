@@ -9,10 +9,8 @@
     .account{
       height: 8.8em;
       .avatar{
-        background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-        background-size: 28.5714285714em 28.5714285714em;
+        @extend .pys-400;
         background-position: 0 -8.57142857143em;
-        display: inline-block;
         height: 5em;
         width: 5em;
       }

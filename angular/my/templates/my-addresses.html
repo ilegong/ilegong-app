@@ -5,7 +5,7 @@
 	<ion-content class="my-addresses list">
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
       <span ng-click="vm.setDefaultAddress(address)">
-        <i class="icon pys-icon" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>
+        <i class="icon pys-400" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>
         <div class="name">
           {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
         </div>
@@ -13,9 +13,9 @@
           {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
         </div>  
       </span>
-      <i class="icon pys-icon ion-edit" ng-click="vm.editAddress(address)"></i>
+      <i class="icon pys-400 ion-edit" ng-click="vm.editAddress(address)"></i>
     </div>
-    <div class="no-content-container" ng-show="vm.addresses.length == 0">
+    <div class="centered-container" ng-show="vm.addresses.length == 0">
       <span class="no-content no-address">
       </span>
       <span class="message">

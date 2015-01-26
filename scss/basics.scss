@@ -166,20 +166,18 @@ a{
   direction: inherit;
   padding: 1.5em 3em 1.5em 0;
 }
-.item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon, .icon-left .icon.pys-icon, .icon-right .icon.pys-icon {
+.item-icon-left .icon.pys-400, .item-icon-right .icon.pys-400, .icon-left .icon.pys-400, .icon-right .icon.pys-400 {
+  @extend .pys-400;
   font-size: 14px;
-  background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-  display: inline-block;
-  background-size: 28.5714285714em 28.5714285714em;
   width: 2.28571428571em;
   height: 2.28571428571em;
   position: absolute;
   top: 10px;
 }
-.item-icon-left .icon.pys-icon, .icon-left .icon.pys-icon {
+.item-icon-left .icon.pys-400, .icon-left .icon.pys-400 {
   left: 1em;
 }
-.item-icon-right .icon.pys-icon, .icon-right .icon.pys-icon {
+.item-icon-right .icon.pys-400, .icon-right .icon.pys-400 {
   right: 1em;
 }
 .item-text{
@@ -202,10 +200,10 @@ a{
 
 // background images
 .pys-bg{
-  background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+  background:url($pys_icon) 0 0 no-repeat;
   display: inline-block;
 }
-.pys-bg-400{
+.pys-400{
   @extend .pys-bg;
   background-size: 28.5714285714em 28.5714285714em;
 }
@@ -254,32 +252,30 @@ a{
   background-position: -10em -3.34em;
 }
 .pys-350.icon-cart{
-  width:5.505em;
-  height:3.84em;
   background-position:-17.5em -3.34em;
 }
-.icon.pys-icon.icon-my-order{
+.icon.pys-400.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
 }
-.icon.pys-icon.icon-my-coupon{
+.icon.pys-400.icon-my-coupon{
   background-position: -12.380952381em -8.57142857143em;
 }
-.icon.pys-icon.icon-my-offer{
+.icon.pys-400.icon-my-offer{
   background-position: -15.2380952381em -8.57142857143em;
 }
-.icon.pys-icon.icon-my-address{
+.icon.pys-400.icon-my-address{
   background-position: -18.0952380952em -8.57142857143em;
 }
-.icon.pys-icon.icon-unchecked{
+.icon.pys-400.icon-unchecked{
   background-position: -21.9047619048em 0;
 }
-.icon.pys-icon.icon-checked{
+.icon.pys-400.icon-checked{
   background-position: -24.2857142857em 0;
 }
-.icon.pys-icon.icon-edit{
+.icon.pys-400.icon-edit{
   background-position: -17.8571428571em 0;
 }
-.icon.pys-icon.icon-delete{
+.icon.pys-400.icon-delete{
   background-position: -22.8571428571em -8.57142857143em;
   width: 2.21428571429em;
   height: 2.35714285714em;
@@ -290,28 +286,26 @@ a{
   line-height: 14px;
   padding-top: 0.2143em;
   .icon{
-    background: url($pyshuo_icon) 0 0 no-repeat;
+    @extend .pys-350;
     font-size: 14px;
-    width: 1.9167em;
+    width: 1.91666666667em;
     height: 1.8em;
-    background-size: 25em 25em;
-    display: inline-block;
     vertical-align: text-bottom;
   }
   .icon.icon-home {
-    background-position: 0 -2.083em;
+    background-position: 0 -5.41666666667em;
   }
   .icon.icon-stores {
-    background-position: -4.167em -2.083em;
+    background-position: -2.16666666667em -5.41666666667em;
   }
   .icon.icon-tryings {
-    background-position: -6.25em -2.083em;
+    background-position: -4.25em -5.41666666667em;
   }
   .icon.icon-cart {
-    background-position: -2.083em -2.083em;
+    background-position: -10.7083333333em 0;
   }
   .icon.icon-my {
-    background-position: -8.333em -2.083em;
+    background-position: -6.5em -5.41666666667em;
   }
   .icon.icon-pyshuo{
     background-position: -13em -4.5em;
@@ -321,6 +315,28 @@ a{
   }
   .tab-title{
     display: block;
+  }
+}
+
+.tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
+  color: #29ac0e;
+  .icon.icon-home {
+    background-position: 0 -3.33333333333em;
+  }
+  .icon.icon-stores {
+    background-position: -2.16666666667em -3.33333333333em;
+  }
+  .icon.icon-tryings {
+    background-position: -4.25em -3.33333333333em;
+  }
+  .icon.icon-cart {
+    background-position: -12.7916666667em 0;
+  }
+  .icon.icon-my {
+    background-position: -6.5em -3.33333333333em;
+  }
+  .icon.icon-store-intro{
+    background-position: -6.25em 0;
   }
 }
 
@@ -361,43 +377,19 @@ a{
   }
 }
 
-.tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
-  color: #29ac0e;
-  .icon.icon-home {
-    background-position: 0 0;
-  }
-  .icon.icon-stores {
-    background-position: -4.167em 0;
-  }
-  .icon.icon-tryings {
-    background-position: -6.25em 0;
-  }
-  .icon.icon-shopping-carts {
-    background-position: -2.083em 0;
-  }
-  .icon.icon-my {
-    background-position: -8.333em 0;
-  }
-  .icon.icon-store-intro{
-    background-position: -6.25em 0;
-  }
-}
-
 .slider .slider-slides .slider-slide a img {
   height: 12em;
   width: 100%;
 }
 
-.no-content-containerf{
+.centered-container{
   text-align: center;
   .message{
     display: block;
     margin-bottom: 1em;
   }
   .no-content{
-    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-    background-size: 28.5714285714em 28.5714285714em;
-    display: inline-block;
+    @extend .pys-400;
     margin-top: 50%;
     margin-bottom: 0.5em;
   }
