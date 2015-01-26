@@ -333,31 +333,8 @@ a{
 
 // badge
 .badge{
-  padding: 0 4px;
-  height: 1em;
   line-height: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  color: #FFF;
-  font-family: Arial;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  background: #ff483a;
-  position: absolute;
-  top: 4px;
-  right: 5px;
-  z-index: 3;
-}
-.as_badge{
   padding: 0 4px;
-  height: 1em;
-  line-height: 1em;
-  border-radius: 0.5em;
-  text-align: center;
-  color: #FFF;
-  font-family: Arial;
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-  background: #ff483a;
-  z-index: 3;
 }
 
 .card{
