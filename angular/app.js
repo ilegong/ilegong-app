@@ -151,7 +151,6 @@
     $rootScope.alert = {message: ''};
     $rootScope.productDetailComment = $rootScope.productDetailComment || {data:[],flag:0};
     Users.init();
-
     Carts.init();
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});

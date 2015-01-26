@@ -18,7 +18,7 @@
     vm.checkAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = true;})};
     vm.uncheckAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = false;})};;
     vm.getCheckedNumber = function(){return _.filter($rootScope.cart.cartItems,function(item){return item.checked;}).length;};
-    vm.isLoggedIn = function(){return !_.isEmpty($rootScope.user.token);};
+   // vm.isLoggedIn = function(){return !_.isEmpty($rootScope.user.token);};
     vm.toLoginPage = function(){$state.go('app.cart-account-login')}; vm.toHomePage = function(){$state.go('app.home');};
     vm.brandChecked = brandChecked;
     vm.toggleBrand = toggleBrand;
@@ -34,11 +34,15 @@
       Addresses.list().then(function(addresses){
         $rootScope.addresses = addresses;
       });
+      vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
         vm.cartItems = newCartItems;
       });
       $scope.$watch('cart.brands', function(newBrands, oldBrands) {
         vm.brands = newBrands;
+      });
+      $scope.$watch('user.token',function(newToken,oldToken){
+        vm.isLoggedIn = !_.isEmpty(newToken);
       });
     }
     function cancelProductDelete(){
