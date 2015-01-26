@@ -5,71 +5,6 @@
     color:white;
     font-weight:bold;
   }
-  .icon{
-    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-    background-size: 25em 25em;
-  }
-  .icon-edit{
-    width:1.2em;
-    height:1.2em;
-    background-position: -15.625em 0;
-  }
-  .icon-save{
-    width:1.167em;
-    height:1em;
-    background-position: -17.5em 0;
-  }
-  .icon-circle{
-    width:1.75em;
-    height:1.75em;
-    background-position: -19.16em 0;
-  }
-  .icon-circle-checked{
-    width:1.75em;
-    height:1.75em;
-    background-position: -21.25em 0;
-  }
-  .icon-delete{
-    width:1.75em;
-    height:1.75em;
-    background-position: -23.33em 0;
-  }
-  .icon-add{
-    width:2.126em;
-    height:2.126em;
-    background-position: -13em -3.34em;
-  }
-  .icon-reduce{
-    width:2.126em;
-    height:2.126em;
-    background-position: -10em -3.34em;
-  }
-  .icon-cart{
-    width:5.505em;
-    height:3.84em;
-    background-position:-17.5em -3.34em;
-  }
-  .delete-icon{
-    display:inline-block; 
-    margin-top: 1.25em;
-  }
-  .circle-checked-icon{
-    display:inline-block;
-    margin-top:1.25em;
-  }
-  .circle-icon{
-    display:inline-block;
-    margin-top: 1.25em;
-  }
-  .add-icon{
-    display:inline-block;
-  }
-  .reduce-icon{
-    display:inline-block;
-  }
-  .product-img{
-    display:inline-block;
-  }
   .product-content{
     display:inline-block;
     width:54%;
@@ -121,21 +56,17 @@
     display:inline-block;
     width:5em;
   }
+  .brand-image{
+    width:100%;
+    padding-top:0.025em;
+    border-radius:7px;
+    height:26px;
+  }
   .brand{
-    background:ivory;
     .brand-name{
       font-size:20px;
       color:#444444;
       margin-top:3px;
-    }
-    .brand-image{
-      width:100%;
-      padding-top:0.025em;
-      border-radius:7px;
-      height:26px;
-    }
-    .brand-circle{
-      margin-top:2px;
     }
     .item-circle{
       margin-left:6px;
@@ -152,10 +83,6 @@
       border-top:none;
       border-bottom:1px solid lightgray;
     }
-    .item-row{
-      height:6em;
-    }
-
   }
   .login-text{
     margin-top:-1em;
@@ -167,8 +94,6 @@
     border-radiux:7px;
     margin-top:-6px;
     margin-bottom:0.8em;
-
-
   }
   .number-span{
       border-collapse: separate;
@@ -229,30 +154,8 @@
       margin-top:-5px;
       width:7em;
     }
-    .buttons{
-      margin-left:-10px;
-      .jiesuan{
-        color:white;
-        margin-left:3.7em;
-        border:none;
-        width:6em;
-        border-radius:0;
-        margin-top:-10px;
-        margin-bottom:-10px;
-        font-weight: bold;
-        font-size:1.14em;
-        padding-top:0.5em;
-      }    
-    }
-
-
-    .footer-bar-row{
-      padding-right:0;
-    }
   }
   .item{
-
-    text-align: center;
     .img{
       width:100%;
     }

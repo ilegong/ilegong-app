@@ -10,35 +10,26 @@
     </div>
   </ion-header-bar>
 
-  <ion-content ng-click="vm.cancelProductDelete();" class=" padding " style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
-    <div class="list brand" ng-repeat="brand in vm.brands"  ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
-      <div class="row ">
-        <span class="col col-10">
-          <span class="brand-circle icon {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(vm.editMode,brand.Brand.id)" ng-show="!vm.editMode">
-          </span>          
-        </span>
-        <span class="col col-10">
-          <img class="brand-image" src="{{brand.Brand.coverimg}}"></img>
-        </span>
-        <span class="col brand-name">
+<<<<<<< HEAD
+  <ion-content ng-click="vm.cancelProductDelete();" style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
+      <div class="item item-icon-left item-avatar">
+        <img src="{{brand.Brand.coverimg}}"></img>
+        <i class="icon pys-350 {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(vm.editMode,brand.Brand.id)" ng-show="!vm.editMode">
+        </i>          
+        <span>
           {{brand.Brand.name}}
         </span>
       </div>
-      <hr class="brand-hr"/>
-      <div ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
-        <div class="row item-row">
-          <span ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
-            <span class="item-circle icon {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}">
+      <div class="item item-icon-left item-thumbnail-left" ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-init="cartItem['deleteMode'] = false;cartItem['showEdit']=false;" >
+          <img src="{{cartItem.Cart.coverimg}}"></img>
+          <i class="icon pys-350 {{vm.editMode?'icon-delete delete-icon':(cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon')}}" ng-show="!vm.editMode || !cartItem['deleteMode']" ng-click="vm.toggleCartItem(vm.editMode,cartItem,$event);">
             </span>
-          </span>
-          <span class="product-img col col-20">
-            <img class="item-image" src="{{cartItem.Cart.coverimg}}"></img>
-          </span>
+          </i>
           <span class="product-content ">
             <span class="product-title">
               {{cartItem.Cart.name}}
             </span>
-            <span class="product-subtitle" ng-show="!cartItem['showEdit']">
+            <span class="text-sub" ng-show="!cartItem['showEdit']">
               subtitle
             </span>
             <span class="number-span" ng-show="cartItem['showEdit']">
@@ -63,9 +54,8 @@
           <span ng-show="vm.editMode && cartItem['deleteMode']"class="product-delete" ng-click="vm.deleteCartItem(cartItem);$event.stopPropagation();">
             删除
           </span>
-        </div>
-        <hr class="item-hr" />
       </div>
+      <div class="item-divider"></div>
     </div>
 
     <div class="no-content-container" ng-show="vm.brands.length == 0">
@@ -79,23 +69,21 @@
   </ion-content>
   
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
-    <div class="row footer-bar-row">
-      <div class="col col-10">
-        <div class="circle icon {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></div>
-      </div>
-      <div class="total-price col col-25">
+    <div class="footer-bar-container">
+      <div class="item item-icon-left" style="display: inline-block;">
+        <span class="circle icon {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
         <div class="total-price">
-          合计
+          <div class="total-price">
+            合计
+          </div>
+          <div class="text-sub">
+            不含运费
+          </div>
         </div>
-        <div>
-          不含运费
-        </div>
-      </div>
-      <div class="col col-25">
         <h1 class="total-price-price text-energized">{{vm.getTotalPrice() | currency:"￥"}}</h1>
       </div>
-      <div class="buttons buttons">
-        <div class="button button-energized jiesuan" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
+      <div class="buttons buttons fr">
+        <div class="button button-energized" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
       </div>
     </div>
   </ion-footer-bar>

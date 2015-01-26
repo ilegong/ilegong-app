@@ -69,9 +69,13 @@ a{
   @extend .text;
   color: $muted;
 }
+.text-sub {
+  @extend .text;
+  font-size: 0.9em;
+}
 .text-sub-muted {
   @extend .text-muted;
-  font-size: 0.9em;
+  @extend .text-sub;
 }
 .text-energized{
   color: $energized;
@@ -142,10 +146,14 @@ a{
   padding: 0.75em;
 }
 .item-icon-right {
-  padding-right: 3.85714285714em;
+  padding-right: 4em;
 }
 .item-icon-left {
-  padding-left: 3.85714285714em;
+  padding-left: 4em;
+}
+.item-icon-left .icon, .item-icon-right .icon{
+  font-size: 14px;
+  top: 1em;
 }
 .item-divider{
   min-height: 1.57142857143em;
@@ -198,14 +206,54 @@ a{
   @extend .pys-bg;
   background-size: 28.5714285714em 28.5714285714em;
 }
-.pys-bg-350{
+.pys-350{
   @extend .pys-bg;
   background-size: 25em 25em;
 }
-.pys-bg-350.bg-cart {
+.pys-350.bg-cart {
   background-position:-10.84em 0;
   width:2.09em;
   height:1.55em;
+}
+.pys-350.icon-edit{
+  width:1.2em;
+  height:1.2em;
+  background-position: -15.625em 0;
+}
+.pys-350.icon-save{
+  width:1.167em;
+  height:1em;
+  background-position: -17.5em 0;
+}
+.pys-350.icon-circle{
+  width:1.75em;
+  height:1.75em;
+  background-position: -19.16em 0;
+}
+.pys-350.icon-circle-checked{
+  width:1.75em;
+  height:1.75em;
+  background-position: -21.25em 0;
+}
+.pys-350.icon-delete{
+  width:1.75em;
+  height:1.75em;
+  background-position: -23.33em 0;
+}
+.pys-350.icon-add{
+  width:2.126em;
+  height:2.126em;
+  background-position: -13em -3.34em;
+}
+.pys-350.icon-reduce{
+  width:2.126em;
+  height:2.126em;
+  background-position: -10em -3.34em;
+}
+.pys-350.icon-cart{
+  width:5.505em;
+  height:3.84em;
+  background-position:-17.5em -3.34em;
 }
 .icon.pys-icon.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
@@ -379,13 +427,16 @@ a{
   padding-bottom: 1em;
   min-height: 4em;
 }
+.item-icon-left.item-avatar, .item-icon-left.item-avatar-left {
+  padding-left: 8em;
+}
 .item-avatar-right {
   padding-right: 4em;
   padding-top: 1em;
   padding-bottom: 1em;
   min-height: 4em;
 }
-.item-avatar > img:first-child, .item-avatar .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image {
+.item-avatar > img:first-child, .item-avatar-left > img:first-child{
   top: 0.5em;
   left: 0.5em;
   max-width: 3em;
@@ -394,7 +445,10 @@ a{
   width: 3em;
   border-radius: 0.5em;
 }
-.item-avatar-right > img:first-child, .item-avatar-right .item-image {
+.item-icon-left.item-avatar > img:first-child, .item-icon-left.item-avatar-left > img:first-child{
+  left: 4.0em;
+}
+.item-avatar-right > img:first-child {
   top: 0.5em;
   right: 0.5em;
   max-width: 3em;
@@ -408,6 +462,9 @@ a{
   padding-bottom: 1em;
   min-height: 6.4em;
 }
+.item-icon-left.item-thumbnail-left {
+  padding-left: 10.4em;
+}
 .item-thumbnail-left > img:first-child, .item-thumbnail-left .item-image {
   top: 0.7em;
   left: 0.7em;
@@ -415,6 +472,9 @@ a{
   max-height: 5em;
   height: 5em;
   width: 5em;
+}
+.item-icon-left.item-thumbnail-left > img:first-child {
+  left: 4.0em;
 }
 
 // item-image-small
