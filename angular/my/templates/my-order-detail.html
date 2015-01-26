@@ -48,20 +48,22 @@
     </div>
   </ion-content>
   <ion-footer-bar>
-    <span class="title pl">
-     合计：<span class="text-energized">{{vm.totalPrice | currency:'￥'}}</span>
-    </span>
-    <div class="buttons" ng-click="doSomething()">
-      <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0">取消订单</a>
-      <a class="button button-energized" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0">支付</a>
+    <div class="footer-bar-container">
+      <span class="title pl">
+       合计：<span class="text-energized">{{vm.totalPrice | currency:'￥'}}</span>
+      </span>
+      <div class="buttons fr">
+        <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0">取消订单</a>
+        <a class="button button-energized" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0">支付</a>
 
-      <a class="button" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
+        <a class="button" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
 
-      <a class="button button-energized" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？">确认收货</a>
+        <a class="button button-energized" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
-      <a class="button" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)">评价</a>
+        <a class="button" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)">评价</a>
 
-      <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="app.my-order-detail({id: order.Order.id})">支付</a>
+        <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="app.my-order-detail({id: order.Order.id})">支付</a>
+      </div>
     </div>
   </ion-footer-bar>
 </ion-view>

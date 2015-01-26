@@ -29,11 +29,18 @@
       border-bottom:none;
     }
   }
-  .cart-container{
-    text-align: center;
+  .centered-container{
+    padding-right: 0.5em;
+    .pys-350.icon-footer-cart {
+      background-position: -10.7083333333em 0;
+      width: 1.91666666667em;
+      height: 1.8em;
+    }
+
     .footer-cart-text{
       font-size:0.5em;
       display: block;
+      margin-top: -0.5em;
     }
   }
 

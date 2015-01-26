@@ -122,14 +122,14 @@ a{
 }
 .bar-footer{
   height: 3.8em;
-  padding: 0.5em 0;
+  padding: 0.5em 0 0.5em 0.5em;
   .footer-bar-container{
     width: 100%;
     .buttons{
       display: inline-block;
       .button{
         font-weight: bold;
-        width: 9.4em;
+        width: 8.4em;
         height: 3em;
         line-height: 3em;
       }
@@ -251,9 +251,6 @@ a{
   height:2.126em;
   background-position: -10em -3.34em;
 }
-.pys-350.icon-cart{
-  background-position:-17.5em -3.34em;
-}
 .icon.pys-400.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
 }
@@ -281,7 +278,7 @@ a{
   height: 2.35714285714em;
 }
 
-.tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item{
+.tab-item{
   font-size: 14px;
   line-height: 14px;
   padding-top: 0.2143em;
@@ -292,51 +289,45 @@ a{
     height: 1.8em;
     vertical-align: text-bottom;
   }
-  .icon.icon-home {
-    background-position: 0 -5.41666666667em;
-  }
-  .icon.icon-stores {
-    background-position: -2.16666666667em -5.41666666667em;
-  }
-  .icon.icon-tryings {
-    background-position: -4.25em -5.41666666667em;
-  }
-  .icon.icon-cart {
-    background-position: -10.7083333333em 0;
-  }
-  .icon.icon-my {
-    background-position: -6.5em -5.41666666667em;
-  }
-  .icon.icon-pyshuo{
-    background-position: -13em -4.5em;
-  }
-  .icon.icon-store-intro{
-    background-position: -6.25em -2.083em;
-  }
   .tab-title{
     display: block;
   }
 }
+.pys-350.icon-home {
+  background-position: 0 -5.41666666667em;
+}
+.pys-350.icon-stores {
+  background-position: -2.16666666667em -5.41666666667em;
+}
+.pys-350.icon-tryings {
+  background-position: -4.25em -5.41666666667em;
+}
+.pys-350.icon-cart {
+  background-position: -10.7083333333em 0;
+}
+.pys-350.icon-my {
+  background-position: -6.5em -5.41666666667em;
+}
+.pys-350.icon-pyshuo{
+  background-position: -13em -4.5em;
+}
 
-.tabs-icon-top > .tabs .tab-item.tab-item-active, .tabs-icon-top.tabs .tab-item.tab-item-active, .tabs-icon-bottom > .tabs .tab-item.tab-item-active, .tabs-icon-bottom.tabs .tab-item.tab-item-active {
+.tab-item-active {
   color: #29ac0e;
-  .icon.icon-home {
+  .pys-350.icon-home {
     background-position: 0 -3.33333333333em;
   }
-  .icon.icon-stores {
+  .pys-350.icon-stores {
     background-position: -2.16666666667em -3.33333333333em;
   }
-  .icon.icon-tryings {
+  .pys-350.icon-tryings {
     background-position: -4.25em -3.33333333333em;
   }
-  .icon.icon-cart {
+  .pys-350.icon-cart {
     background-position: -12.7916666667em 0;
   }
-  .icon.icon-my {
+  .pys-350.icon-my {
     background-position: -6.5em -3.33333333333em;
-  }
-  .icon.icon-store-intro{
-    background-position: -6.25em 0;
   }
 }
 
