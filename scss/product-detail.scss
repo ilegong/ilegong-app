@@ -1,24 +1,8 @@
  @import "variables";
 
 .product-detail{
-  color:#666666;
-  hr{
-    border-bottom:1px solid;
-    border-left:none;
-    border-right:none;
-    border-top:none;
-  }
   .ion-content{
     margin-bottom:1.6em;
-  }
-  .main{
-    background:white;
-    margin-left:-0.7em;
-    margin-right:-0.7em;
-    margin-bottom:0.8em;
-    .above-first-hr{
-      margin:1em;
-    }
   }
   .post-service{
     background:white;
@@ -45,59 +29,14 @@
       border-bottom:none;
     }
   }
+  .cart-container{
+    text-align: center;
+    .footer-cart-text{
+      font-size:0.5em;
+      display: block;
+    }
+  }
 
-  .content{
-    margin-bottom:2em;
-  }
-  .app-icon{
-    background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
-    background-size: 25em 25em;
-  }
-  .icon-cart{
-    width:2.09em;
-    height:1.55em;
-    background-position:-10.84em 0;
-  }
-  .footer{
-    height:3em;
-    font-size:1.5em;
-    color:white;
-    font-weight:bold;
-  }
-  .footer-buy-now{
-    color:white;
-    background:#ffa200;
-    border-radius:7px;
-    padding:0.7em;
-    margin-left:0.5em;
-    width:6.4em;
-    text-align:center;
-  }
-  .footer-add-cart{
-    color:white;
-    background:red;
-    border-radius:7px;
-    padding:0.7em;
-    margin-left:0.8em;
-    width:6.4em;
-    text-align:center;
-  }
-  .footer-cart{
-    margin-left:2em;
-    margin-top:0.1em;
-
-  }
-  .footer-cart-text{
-    color:#666666;
-    font-weight:normal;
-    font-size:0.5em;
-    width:4em;
-    margin-left:0.3em;
-  }
-  .footer-cart-image{
-    display:inline-block;
-    margin-bottom:-0.3em;
-  }
   .product-intro{
     background:white;
     padding-left:20px;
@@ -126,9 +65,6 @@
   .imageWidthFull{
     width:100%;
   }
-  .nameFont{
-    font-size:1.5em;
-  }
   .price-symbol{
     color:#ffa200;
     margin-right:-0.3em;
@@ -145,9 +81,6 @@
   .comment-count{
     float:right;
     font-size:1.25em;
-  }
-  .product-name-margin-top{
-    margin-top:11px;
   }
   .left-title{
     font-size:1.25em;

@@ -31,24 +31,32 @@ a{
 .input-label{
   padding: 0.5em 0.71428571428em 0.5em 0;
 }
+
 // button related
 .button{
   font-size: 14px;
+  border-radius: 5px;
 }
-.btn-warning {
-  color: #fff;
-  background-color: #dd5600;
-  border-color: #dd5600;
-}
-
-// bar
-.bar .button{
-  width: 6.28571428571em;
+.button.button-light, .button.button-stable, .button.button-positive, .button.button-calm, .button.button-balanced, .button.button-energized, .button.button-assertive, .button.button-royal,.button.button-dark {
+  color: #ffffff;
+  border-color: #dddddd;
 }
 
+.button.icon-left{
+  padding-left: 3em;
+}
+.button.icon-right {
+  padding-right: 54px;
+}
+
+// pane
 .pane-secondary {
   margin-top: 50px;
   padding-top: 15px;
+}
+
+.pane, .view {
+  background-color: #f5f5f5;
 }
 
 // text
@@ -72,6 +80,7 @@ a{
   color: $balanced;
 }
 
+// show alert message
 .alert-container{
   text-align: center;
   position: absolute;
@@ -92,38 +101,42 @@ a{
     background-color: #505050;
   }
 }
-.item-select select {
-  width: 100%;
-  direction: inherit;
-  padding: 1.5em 3em 1.5em 0;
-}
 
 .padding .row{
   padding: 5px 0;
 }
+
+// bar
+.bar .button{
+  width: 6.28571428571em;
+}
 .bar.bar-light, .bar.bar-stable, .bar.bar-positive, .bar.bar-calm, .bar.bar-balanced, .bar.bar-energized, .bar.bar-assertive, .bar.bar-royal ,bar,bar-dark {
   border-color: #dddddd;
 }
-.button{
-  border-radius: 5px;
+.bar-footer{
+  height: 3.8em;
+  padding: 0.5em;
+  .footer-bar-container{
+    width: 100%;
+    .buttons{
+      display: inline-block;
+      .button{
+        font-weight: bold;
+        width: 9.4em;
+        height: 3em;
+        line-height: 3em;
+      }
+    }
+  }
 }
-.button.button-light, .button.button-stable, .button.button-positive, .button.button-calm, .button.button-balanced, .button.button-energized, .button.button-assertive, .button.button-royal,.button.button-dark {
-  color: #ffffff;
-  border-color: #dddddd;
-}
-
-.button.icon-left{
-  padding-left: 3em;
-}
-.button.icon-right {
-  padding-right: 54px;
-}
-
 
 // item
 .item {
   font-size: 14px;
   padding: 1em;
+  .title{
+    font-size: 1.5em;
+  }
 }
 .item.item-input-inset {
   padding: 0.75em;
@@ -137,10 +150,11 @@ a{
 .item-divider{
   min-height: 1.57142857143em;
 }
-.pane, .view {
-  background-color: #f5f5f5;
+.item-select select {
+  width: 100%;
+  direction: inherit;
+  padding: 1.5em 3em 1.5em 0;
 }
-
 .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon, .icon-left .icon.pys-icon, .icon-right .icon.pys-icon {
   font-size: 14px;
   background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
@@ -157,16 +171,17 @@ a{
 .item-icon-right .icon.pys-icon, .icon-right .icon.pys-icon {
   right: 1em;
 }
-
-.item-text-medium {
-  padding-left: 4em;
+.item-text{
   padding-top: 1em;
   padding-bottom: 1em;
 }
+.item-text-medium {
+  @extend .item-text;
+  padding-left: 4em;
+}
 .item-text-large {
+  @extend .item-text;
   padding-left: 6.4em;
-  padding-top: 1em;
-  padding-bottom: 1em;
 }
 .item-text-medium > .text:first-child, .item-text-large > .text:first-child {
   position: absolute;
@@ -174,6 +189,24 @@ a{
   left: 1em;
 }
 
+// background images
+.pys-bg{
+  background:url('http://www.tongshijia.com/img/app/iconpyshuo.png') 0 0 no-repeat;
+  display: inline-block;
+}
+.pys-bg-400{
+  @extend .pys-bg;
+  background-size: 28.5714285714em 28.5714285714em;
+}
+.pys-bg-350{
+  @extend .pys-bg;
+  background-size: 25em 25em;
+}
+.pys-bg-350.bg-cart {
+  background-position:-10.84em 0;
+  width:2.09em;
+  height:1.55em;
+}
 .icon.pys-icon.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
 }
@@ -240,6 +273,7 @@ a{
   }
 }
 
+// badge
 .badge{
   padding: 0 4px;
   height: 1em;
@@ -303,7 +337,7 @@ a{
   width: 100%;
 }
 
-.no-content-container{
+.no-content-containerf{
   text-align: center;
   .message{
     display: block;
@@ -340,10 +374,10 @@ a{
 
 // item-avatar general
 .item-avatar, .item-avatar-left {
-  padding-left: 3.85714285714em;
+  padding-left: 4em;
   padding-top: 1em;
   padding-bottom: 1em;
-  min-height: 3.85714285714em;
+  min-height: 4em;
 }
 .item-avatar-right {
   padding-right: 4em;
