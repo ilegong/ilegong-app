@@ -11,24 +11,6 @@
     margin-bottom:0.8em;
     margin-top:-0.8em;
   }
-  .menu-{
-    .menu-text{
-      font-size:1.5em;
-      margin-left:-0.7em;
-      margin-right:-0.7em;
-      padding-left:19px;
-    }
-    .menu-sub-text{
-      font-size:0.6em;
-    }
-    .menu-item{
-      margin-left:-0.7em;
-      margin-right:-0.7em;
-    }
-    .menu-evaluate{
-      border-bottom:none;
-    }
-  }
   .centered-container{
     padding-right: 0.5em;
     .pys-350.icon-footer-cart {
@@ -89,37 +71,17 @@
     float:right;
     font-size:1.25em;
   }
-  .left-title{
-    font-size:1.25em;
-    padding-left:13px;
-    padding-top:3px;
-  }
-  .brand-image{
-    height:38px;
-    margin-top:-7px;
-    margin-bottom:-10px;
-    width:38px;
-    border-radius:7px;
-  }
-  .brand-name{
-    margin-left:6px;
-    font-size:1.375em;
-    color:#ffa200;
-  }
-  .specs-item{
+  .specs{
     padding:0.4em;
-    font-weight:bold;
     display:inline-block;
     margin-bottom:0.9em;
     margin-right:0.4em;
-  }
-  .specs-item-checked{
-    border:1px green solid;
-    color:green;
-  }
-  .specs-item-unchecked{
     border:1px #cccccc solid;
     color:#cccccc;
+  }
+  .specs.checked{
+    border:1px green solid;
+    color:green;
   }
   .promotion-text{
     margin-top:4px;
@@ -161,33 +123,6 @@
       margin-left:-4px;
       height:33px;
     }
-    .icon-reduce{
-      width:2.45em;
-      height:2.39em;
-      background-position:-5.02em -0.24em;
-    }
-    .icon-add{
-      width:2.55em;
-      height:2.39em;
-      background-position:-7.98em -0.24em;
-    }
-  }
-  .numBox{
-    width:10%;
-  }
-  .brandImg{
-    width:20%;
-  }
-  .buttonHeight{
-    height:30px;
-  }
-  .tabButton{
-    width:50%;
-    margin-left:5px;
-  }
-  .brand-button{
-    margin-left:-0.7em;
-    margin-right:-0.7em;
   }
   .stars{
     margin-top: 0.4em;

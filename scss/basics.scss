@@ -144,6 +144,15 @@ a{
   .title{
     font-size: 1.5em;
   }
+  .item-label{
+    padding-right: 1em;
+    float:left;
+  }
+  .item-value{
+    display: block; 
+    overflow: hidden;
+    white-space: normal;
+  }
 }
 .item.item-input-inset {
   padding: 0.75em;
@@ -251,6 +260,7 @@ a{
   height:2.126em;
   background-position: -10em -3.34em;
 }
+
 .icon.pys-400.icon-my-order{
   background-position: -6.6666666666em -8.57142857143em;
 }
@@ -335,6 +345,11 @@ a{
 .badge{
   line-height: 1em;
   padding: 0 4px;
+}
+.badge.badge-right-top{
+  position: absolute;
+  top: 4px;
+  right: 5px;
 }
 
 .card{
@@ -451,4 +466,3 @@ a{
   width: 1.667em;
   border-radius:6px;
 }
-
