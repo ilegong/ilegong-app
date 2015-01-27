@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service('Addresses', Addresses)
 
-  function Addresses($log,$q,Base,software,Users){
+  function Addresses($log,$q,Base,config,Users){
     var self = this;
     return{
       list:list,

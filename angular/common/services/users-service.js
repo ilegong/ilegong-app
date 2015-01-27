@@ -5,7 +5,7 @@
   .service('Users', Users)
 
   /* @ngInject */
-  function Users($rootScope,$log, $q, software, Base){
+  function Users($rootScope,$log, $q, config, Base){
     var self = this;
     self.token = null;
     self.user = null;
@@ -71,14 +71,14 @@
 
     function login(username, password){
       var defer = $q.defer();
-      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + software.app.client_id).then(function(token) {
+      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + config.app.client_id).then(function(token) {
           self.onGetTokenSuccessfully(token, defer);
         }, function(e){defer.reject(e)});
       return defer.promise; 
     }
     function refreshToken(refreshToken){
       var defer = $q.defer();
-      Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+software.app.client_id).then(function(token){
+      Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
         self.onGetTokenSuccessfully(token, defer);
       },function(error){defer.reject(error)})
       return defer.promise;
@@ -136,14 +136,14 @@
     function register(mobile, password, smsCode){
       var defer = $q.defer();
       var data = {
-        client_id: software.app.client_id, 
+        client_id: config.app.client_id, 
         mobile: mobile, 
         password: password, 
         code: smsCode, 
         device_uuid: Base.getDevice().uuid
       }
       var nickname = "用户" + mobile.substring(7)
-      Base.get('/oauth/register?client_id=' + software.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
+      Base.get('/oauth/register?client_id=' + config.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
         self.onGetTokenSuccessfully(token, defer);
       }, function(e){defer.reject(e)});
       return defer.promise;

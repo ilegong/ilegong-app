@@ -3,10 +3,10 @@
 
   angular
   .module('module.services', ['LocalForageModule'])
-  .value('software', {fakeData: false, showLog: true, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: '', hotline: '13712454589'}, server: {address: 'http://www.tongshijia.com'}})
+  .value('config', {fakeData: true, showLog: true, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: '', hotline: '13712454589'}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, $window, software, FakeData){
+  function Base($http, $q, $log, $localForage, $window, config, FakeData){
     var self = this;
     self.getUrl = getUrl;
     $window.device = $window.device || {};
@@ -22,7 +22,7 @@
     }
 
     function get(url){
-      if(software.fakeData){
+      if(config.fakeData){
         $log.log(url).log(FakeData.get(url));
         return deferred(FakeData.get(url));
       }
@@ -44,7 +44,7 @@
       return defer.promise;
     }
     function post(url, data){
-      if(software.fakeData){
+      if(config.fakeData){
         return deferred(FakeData.post(url));
       }
 
@@ -67,27 +67,27 @@
     }
 
     function getLocal(key){
-      if(software.fakeData){
+      if(config.fakeData){
         return deferred(FakeData.getLocal(key));
       }
       return $localForage.getItem(key);
     }
 
     function setLocal(key, value){
-      if(software.fakeData){
+      if(config.fakeData){
         return deferred(value);
       }
       return $localForage.setItem(key, value);
     }
     function removeLocal(key){
-      if(software.fakeData){
+      if(config.fakeData){
         return deferred(key);
       }
       return $localForage.removeItem(key);
     }
     function getUrl(url){
-      $log.log('get ' + software.server.address + url);
-      return software.server.address + url;
+      $log.log('get ' + config.server.address + url);
+      return config.server.address + url;
     }
     function deferred(data){
       var defer = $q.defer();
@@ -95,7 +95,7 @@
       return defer.promise;
     }
     function getLocalSync(key){
-      if(software.fakeData){
+      if(config.fakeData){
         return FakeData.getLocal(key);
       }
       else{

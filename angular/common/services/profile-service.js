@@ -3,7 +3,7 @@
   angular.module('module.services')
   .service('Profile', Profile)
 
-  function Profile($q,$log,Base,software,Users){
+  function Profile($q,$log,Base,config,Users){
     var self = this;
     self.PROFILE_STATUS = [
       {state: 'image', desc: '头像'}, 

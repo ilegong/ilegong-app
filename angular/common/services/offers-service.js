@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service("Offers", Offers)
 
-  function Offers($q,$log,Base,software,Users){
+  function Offers($q,$log,Base,config,Users){
     var self = this;
     self.OFFER_STATUS = [
       {value: 'NEW', state:0, desc:'新的'},

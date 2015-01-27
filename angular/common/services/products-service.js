@@ -5,7 +5,7 @@
   .service('Products', Products)
 
   /* @ngInject */
-  function Products($q,$log, Base,software,Users){
+  function Products($q,$log, Base,config,Users){
     var self = this;
     return {
       list: list,

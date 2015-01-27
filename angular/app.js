@@ -143,8 +143,8 @@
     $ionicConfigProvider.navBar.alignTitle('center')
   }
 
-  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, software, Orders) {
-    $rootScope.software = software;
+  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, config, Orders) {
+    $rootScope.config = config;
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
@@ -177,7 +177,7 @@
       $rootScope.alert.message = message;
       $timeout(function(){
         $rootScope.alert.message = "";
-      }, software.timeout);
+      }, config.timeout);
     }
   }
 })(window, window.angular);

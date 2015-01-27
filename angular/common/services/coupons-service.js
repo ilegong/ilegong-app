@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service("Coupons", Coupons)
   
-  function Coupons($q,$log,Base,software,Users){
+  function Coupons($q,$log,Base,config,Users){
     var self = this;
     return{
       getCoupons: getCoupons

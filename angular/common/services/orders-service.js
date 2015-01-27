@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service('Orders', Orders)
 
-  function Orders($log,$q,Base,software,Users){
+  function Orders($log,$q,Base,config,Users){
     var self = this;
     self.ORDER_STATES = [
       {state:-1, value: 'ALL', name:'全部', pending: false},

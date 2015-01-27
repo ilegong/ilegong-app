@@ -4,7 +4,7 @@
   angular.module('module.services')
   .service('Carts', Carts)
   
-  function Carts($rootScope,$q,$log,Base,software,Users){
+  function Carts($rootScope,$q,$log,Base,config,Users){
     var self = this;
     return{
       getCartItems:getCartItems,

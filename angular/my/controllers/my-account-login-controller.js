@@ -5,7 +5,7 @@
   .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
 
   /* @ngInject */
-  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, software, Users){
+  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, config, Users){
     var vm = this;
     vm.login = login;
     vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
