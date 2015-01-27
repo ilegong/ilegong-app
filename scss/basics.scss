@@ -163,10 +163,6 @@ a{
 .item-icon-left {
   padding-left: 4em;
 }
-.item-icon-left .icon, .item-icon-right .icon{
-  font-size: 14px;
-  top: 1em;
-}
 .item-divider{
   min-height: 1.57142857143em;
 }
@@ -175,13 +171,19 @@ a{
   direction: inherit;
   padding: 1.5em 3em 1.5em 0;
 }
+.item-icon-left .icon.pys-350, .item-icon-right .icon.pys-350, .icon-left .icon.pys-350, .icon-right .icon.pys-350 {
+  @extend .pys-350;
+  font-size: 14px;
+  position: absolute;
+  top: 1em;
+}
 .item-icon-left .icon.pys-400, .item-icon-right .icon.pys-400, .icon-left .icon.pys-400, .icon-right .icon.pys-400 {
   @extend .pys-400;
   font-size: 14px;
   width: 2.28571428571em;
   height: 2.28571428571em;
   position: absolute;
-  top: 10px;
+  top: 1em;
 }
 .item-icon-left .icon.pys-400, .icon-left .icon.pys-400 {
   left: 1em;
@@ -439,6 +441,10 @@ a{
   padding-top: 1em;
   padding-bottom: 1em;
   min-height: 6.4em;
+}
+.item-thumbnail-left .icon.pys-400, .item-thumbnail-left .icon.pys-350 {
+  font-size: 14px;
+  top: 2.325em;
 }
 .item-icon-left.item-thumbnail-left {
   padding-left: 10.4em;
