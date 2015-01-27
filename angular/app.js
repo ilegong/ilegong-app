@@ -145,7 +145,7 @@
     $ionicConfigProvider.navBar.alignTitle('center')
   }
 
-  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, config, Orders) {
+  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, $ionicPopup, config, Orders) {
     $rootScope.config = config;
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
@@ -180,6 +180,17 @@
       $timeout(function(){
         $rootScope.alert.message = "";
       }, config.timeout);
+    }
+    $rootScope.ensureLogin = function(){
+      var defer = $q.defer();
+      var isLoggedIn = !_.isEmpty($rootScope.user.token);
+      if(isLoggedIn){
+        defer.resolve(true);
+      }
+      else{
+        defer.reject(true);
+      }
+      return defer.promise;
     }
   }
 })(window, window.angular);

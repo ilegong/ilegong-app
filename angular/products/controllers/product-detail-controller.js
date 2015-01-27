@@ -23,7 +23,6 @@
     activate();
     
     function activate(){
-      vm.isShowMenuContents = [true,false,false];
       vm.showProductIntro = false;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
@@ -31,19 +30,17 @@
       vm.from = $stateParams.from;
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
-        if(Object.prototype.toString.call(vm.product.Product.specs) === "[object String]"){
+        if(typeof(vm.product.Product.specs) === "string"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
         }
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
-        $log.log(vm.product);
       }, function(e){$log.log(e)});
       Products.getProductContent(vm.id).then(function(data){
         vm.content = data.content;
       }, function(e){$log.log(e)});
       Products.getProductComment(vm.id).then(function(data){
         vm.comment = data;
-        $rootScope.productDetailComment.data = data;
       }, function(e){$log.log(e)});
     }
 
@@ -78,8 +75,7 @@
     }
 
     $scope.buttonReduceClick = function(){
-      if(vm.count > 1)
-        vm.count=Number(vm.count)-1;
+      vm.count= Math.max(Number(vm.count)-1, 1);
     };
     $scope.buttonAddClick = function() {
       vm.count=Number(vm.count)+1;
@@ -90,59 +86,24 @@
       });
     }
     vm.addToCart = function(toCart){
-      tryToLogin().then(function(res){
-        if(res == 'toLogin'){
-          $state.go('app.product-detail-account-login');
-        }
-        else if(res == 'cancelLogin'){
-
-        }
-        else if(res == 'isLoggedIn'){
-          Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
-            Carts.getCartItems().then(function(result){
-              $rootScope.updateCart(result);
-              if(toCart){
-                vm.showTabs();
-                $state.go('app.cart');
-              }
-              else{
-                $log.log("add product " + $stateParams.id + " to cart");
-                $rootScope.alertMessage('商品添加成功。');
-              }
-            });
-          }, function(e){$log.log("add to cart failed: ").log(e)});
-        }
+      $rootScope.ensureLogin().then(function(){
+        Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
+          Carts.getCartItems().then(function(result){
+            $rootScope.updateCart(result);
+            if(toCart){
+              vm.showTabs();
+              $state.go('app.cart');
+            }
+            else{
+              $rootScope.alertMessage('商品添加成功。');
+            }
+          });
+        }, function(e){$log.log("add to cart failed: ").log(e)});
+      }, function(toLogin){
+        $state.go('app.product-detail-account-login');
       });
     }
-    function tryToLogin(){
-      vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
-      if(!vm.isLoggedIn){
-        return $ionicPopup.show(
-        {
-          title:'确认登录',
-          subTitle:'您尚未登录，是否立刻登录？',
-          buttons:[
-            {
-              text:'否',
-              onTap:function(e){
-                return 'cancelLogin';
-              }
-            },
-            {
-              text:'是',
-              onTap:function(e){
-                return 'toLogin';
-              }
-            }
-          ]
-        });
-      }
-      else{
-        var defer = $q.defer();
-        defer.resolve('isLoggedIn');
-        return defer.promise;
-      }
-    }
+    
   }
 })(window, window.angular);
 
