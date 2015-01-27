@@ -73,35 +73,7 @@
       height:33px;
     }
   }
-  .stars{
-    margin-top: 0.4em;
-    .icon-star{
-      background-position:-2.084em 0;
-      width:1em;
-      height:1em;
-    }
-    .icon-star-gray{
-      background-position:-3.5em 0;
-      width:1em;
-      height:1em;      
-    }
-    span{
-      display:inline-block;
-    }
-  }
-
   .evaluate{
-    border-top:none;
-    border-bottom:none;
-    margin-left:-0.7em;
-    margin-right:-0.7em;
-    padding-left:19px;
-    padding-right:19px;
-    .hr{
-      color:#dddddd;
-      margin-bottom:0.5em;
-      margin-top:-1em;
-    }
     .user-image{
       width: 1.667em;
       height: 1.667em;
@@ -113,14 +85,6 @@
       background-position:0 0;
       width:1.667em;
       height:1.667em;
-    }
-    .create-time{
-      float: right;
-      margin-top: 0.5em;
-    }
-    .buy-time{
-      float:right;
-      margin-top:1em;
     }
     .evaluate-image{
       width:25%;

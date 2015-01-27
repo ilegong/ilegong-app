@@ -52,10 +52,13 @@
         <span class="icon pys-350 icon-add count-add" ng-click="buttonAddClick()"></span>
       </span>
     </div>
+    
+    <div class="item-divider"></div>
+
     <a class="item item-avatar item-icon-right" ui-sref="store.home({storeId:vm.brand.Brand.id})" >
       <img src="{{vm.brand.Brand.coverimg}}"/>
       <i class=" icon ion-ios7-arrow-right"></i>
-      <span class="brand-name">
+      <span style="line-height: 2em;">
         进入{{vm.brand.Brand.name}}的店铺
       </span>
     </a>
@@ -75,6 +78,9 @@
         本商品由{{vm.brand.Brand.name}}提供，朋友说提供售后服务，服务热线：{{config.app.hotline}}
       </span>
     </div>
+    
+    <div class="item-divider"></div>
+    
     <div class="item item-icon-right" ng-click="vm.showProductIntro = !vm.showProductIntro">
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
@@ -98,43 +104,36 @@
       </span>
     </div>
 
-    <div class="list menu-">
-      <div class="list">
-        <div  ng-show="$index<3" class="item evaluate" ng-repeat="ite in vm.getReputationComments()">
-          <hr class="hr"/>
-          <div class="item-image-small-left">
-            <img ng-show="ite.Comment.userPhoto != null" class="item-image user-image"   style="background: url('{{ite.Comment.userPhoto}}');background-size:contain;">
-            <span ng-show="ite.Comment.userPhoto == null" class="app-icon icon-user user-image"></span>
-            <span >{{ite.Comment.username}}</span>
-            <span class="create-time">{{ite.Comment.created}}</span>
-          </div>
-          <div class="stars">
-            <span class="app-icon {{vm.isShowStar(ite,0)?'icon-star':'icon-star-gray'}}"></span>
-            <span class="app-icon {{vm.isShowStar(ite,1)?'icon-star':'icon-star-gray'}}"></span>
-            <span class="app-icon {{vm.isShowStar(ite,2)?'icon-star':'icon-star-gray'}}"></span>
-            <span class="app-icon {{vm.isShowStar(ite,3)?'icon-star':'icon-star-gray'}}"></span>
-            <span class="app-icon {{vm.isShowStar(ite,4)?'icon-star':'icon-star-gray'}}"></span>
-          </div>
-          <div>
-            <span class="text">
-              {{ite.Comment.body}}
-            </span>
-          </div>
-          <div>
-            <img ng-repeat="img in ite.Comment.images" src="{{img}}" class="evaluate-image"/>
-          </div>
-          <span ng-show="false" class="buy-time">
-            购买时间：{{ite.Comment.created}}
-          </span>
-        </div>
-        <div ng-show="vm.getReputationComments().length > 3" class="item evaluate">
-          <hr class="hr"/>
-          <div class="all-comment">
-            查看全部评价
-          </div>
-        </div>
+    <div ng-show="$index<3" class="item evaluate" ng-repeat="c in vm.getReputationComments()" ng-init="comment = c.Comment">
+      <p class="item-image-small-left">
+        <img ng-show="comment.userPhoto != null" class="item-image user-image"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
+        <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
+        <span >{{comment.username}}</span>
+        <span class="fr text-muted">{{comment.created}}</span>
+      </p>
+      <p>
+        <span class="pys-350 {{comment.rating > 0 ?'icon-star':'icon-star-gray'}}"></span>
+        <span class="pys-350 {{comment.rating > 1 ?'icon-star':'icon-star-gray'}}"></span>
+        <span class="pys-350 {{comment.rating > 2 ?'icon-star':'icon-star-gray'}}"></span>
+        <span class="pys-350 {{comment.rating > 3 ?'icon-star':'icon-star-gray'}}"></span>
+        <span class="pys-350 {{comment.rating > 4 ?'icon-star':'icon-star-gray'}}"></span>
+      </p>
+      <p style="white-space: normal;">
+        {{comment.body}}
+      </p>
+      <div>
+        <img ng-repeat="img in comment.images" src="{{img}}" class="evaluate-image"/>
+      </div>
+      <span ng-show="true" class="text-muted fr">
+        购买时间：{{comment.created}}
+      </span>
+    </div>
+    <div ng-show="vm.getReputationComments().length > 3" class="item evaluate">
+      <div class="all-comment">
+        查看全部评价
       </div>
     </div>
+
     <div class='list'>
       <div class="row" ng-repeat="item in vm.recommends" ng-if="$index % 2 == 0">
         <div class='card col col-50' ng-repeat="itemt in vm.recommends.slice($index, $index+2)" >
