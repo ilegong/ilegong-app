@@ -13,8 +13,8 @@
     vm.confirmComment = confirmComment;
     vm.menuClick = menuClick;
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
-    vm.getShichiCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'num':'notshow'})['num']}
-    vm.getEvaluateCommentNum = function(){return _.countBy(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'?'notshow':'num'})['num']}
+    vm.getShichiCommentNum = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'}).length};
+    vm.getEvaluateCommentNum = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'}).length};
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;

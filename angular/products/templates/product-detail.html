@@ -1,36 +1,28 @@
 <ion-view class="product-detail" title="商品详情" hide-tabs>
   <ion-content class="ion-content">
-    <div class="product-image">
-      <img src="{{vm.product.Product.coverimg}}" class="imageWidthFull"/>
-    </div>
+    <img src="{{vm.product.Product.coverimg}}" class="full"/>
     <div class="item">
-      <div>
-        <div class="title">
-          {{vm.product.Product.name}}
-        </div>
-        <p/>
-        <span>
-          {{vm.product.Product.promote_name}}
+      <p class="text-large">
+        {{vm.product.Product.name}}
+      </p>
+      <p class="text-sub">
+        {{vm.product.Product.promote_name}}
+      </p>
+      <p>
+        <span class="text-energized">
+          ￥<span class="text-large">{{vm.product.Product.price | currency:''}}</span>
         </span>
-      </div>
-      <span>
-        <span class="price-symbol">
-          ￥
+        <span class="text-sub" ng-show="{{vm.product.Product.original_price != 0}}">
+          <s>{{vm.product.Product.original_price | currency:"￥"}}</s>
         </span>
-        <span class="price">
-          {{vm.product.Product.price | currency:''}}
-        </span>
-        <span class="originalPrice" ng-show="{{vm.product.Product.original_price != 0}}">
-          {{vm.product.Product.original_price | currency:"￥"}}
-        </span>
-        <span class="comment-count">
-          口碑评价({{vm.getEvaluateCommentNum()==null?0:vm.getEvaluateCommentNum()}})
+        <span class="fr">
+          口碑评价({{vm.getEvaluateCommentNum()}})
         </span>
         <p/>
-        <span ng-show="false" class="suggest">
-          t_好友。。。推荐了该产品
-        </span>
-      </span>
+      </p>
+      <p ng-show="false">
+        好友。。。推荐了该产品
+      </p>
     </div>
     <div class="item">
       <span class="item-label">

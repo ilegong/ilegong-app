@@ -61,17 +61,17 @@ a{
 
 // text
 .text{
-  text-overflow:ellipsis;
-  overflow:hidden;
-  white-space:nowrap;
+  text-overflow:ellipsis !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
 }
 .text-muted {
   @extend .text;
-  color: $muted;
+  color: $muted !important;
 }
 .text-sub {
   @extend .text;
-  font-size: 0.9em;
+  font-size: 0.9em !important;
 }
 .text-sub-muted {
   @extend .text-muted;
@@ -147,6 +147,7 @@ a{
   .item-label{
     padding-right: 1em;
     float:left;
+    width: 3.5em;
   }
   .item-value{
     display: block; 
@@ -209,6 +210,10 @@ a{
   left: 1em;
 }
 
+// images
+img.full{
+  width: 100%;
+}
 // background images
 .pys-bg{
   background:url($pys_icon) 0 0 no-repeat;
