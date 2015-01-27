@@ -133,37 +133,6 @@
             查看全部评价
           </div>
         </div>
-        <div class="list make-comment">
-          <div class="list">
-            <div class="row stars" >
-              <span ng-click="vm.commentT.rating=1;" class="app-icon star {{vm.isShowMakeCommentStar(0)?'icon-star':'icon-star-gray'}} "></span>
-              <span ng-click="vm.commentT.rating=2;" class="app-icon star {{vm.isShowMakeCommentStar(1)?'icon-star':'icon-star-gray'}}"></span>
-              <span ng-click="vm.commentT.rating=3;" class="app-icon star {{vm.isShowMakeCommentStar(2)?'icon-star':'icon-star-gray'}}"></span>
-              <span ng-click="vm.commentT.rating=4;" class="app-icon star {{vm.isShowMakeCommentStar(3)?'icon-star':'icon-star-gray'}}"></span>
-              <span ng-click="vm.commentT.rating=5;" class="app-icon star {{vm.isShowMakeCommentStar(4)?'icon-star':'icon-star-gray'}}"></span>
-            </div>
-            <div>
-              <div>
-                <span class="input-label">请输入评价：</span>
-                <textarea ng-model="vm.commentT.text" class="textbox"></textarea>
-              </div>
-                <p/>
-              <div>
-                <button class="button button-energized">
-                  添加图片
-                </button>
-                <div>
-                  ImageArea
-                </div>
-                <div align="right">
-                  <div ng-click="vm.confirmComment()" class="button button-energized" >
-                    提交评论
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
     <div class='list'>
@@ -186,12 +155,12 @@
   </ion-content>
   <ion-footer-bar class="footer footer-bar">
     <div class="footer-bar-container">
-      <div class="buttons">
+      <div class="buttons fl">
         <span  ng-click="vm.showTabs();vm.addToCart();" ui-sref="app.cart" class="button button-energized">
-          立即购买
+          <strong>立即购买</strong>
         </span>
         <span ng-click="vm.addToCart();" class="button button-assertive">
-          加入购物车
+          <strong>加入购物车</strong>
         </span>
       </div>
       <div ng-click="vm.showTabs();" ui-sref="app.cart"  class="centered-container fr">

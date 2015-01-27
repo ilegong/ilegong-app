@@ -4,7 +4,7 @@
   angular.module('module.my')
   .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
 
-  function MyOrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, Orders, Users) {
+  function MyOrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, config, Orders, Users) {
     var vm = this;
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.cancelOrder = cancelOrder;
@@ -15,7 +15,7 @@
     vm.onAliPayLoadStop = onAliPayLoadStop;
     vm.onAliPayFinished = onAliPayFinished;
     vm.toProductDetailPage = toProductDetailPage;
-    vm.showCall = showCall;
+    vm.callHotline = callHotline;
     activate();
     
     function activate() {
@@ -34,18 +34,16 @@
         vm.store = data.store;
       });
     }
-    function showCall(){
+    function callHotline(){
      var hideSheet = $ionicActionSheet.show({
        buttons: [
-         { text: '<b>13693655401</b>' }
+         { text: "<b>" + config.app.hotline + "</b>" }
        ],
        titleText: '<b>朋友说竭诚为您服务</b><p/>服务时间周一至周六9:00 - 18:00',
        cancelText: '取消',
-       cancel: function() {
-
-          },
+       cancel: function() {},
        buttonClicked: function(index) {
-          window.open('tel:'+13693655401);
+          window.open('tel:' + config.app.hotline);
          return true;
        }
      });

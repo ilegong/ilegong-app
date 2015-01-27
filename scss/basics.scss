@@ -33,9 +33,12 @@ a{
 }
 
 // button related
-.button{
+.button, .bar .button, .bar .buttons .button{
   font-size: 14px;
   border-radius: 5px;
+  width: 8.4em;
+  height: 3em;
+  line-height: 3em;
 }
 .button.button-light, .button.button-stable, .button.button-positive, .button.button-calm, .button.button-balanced, .button.button-energized, .button.button-assertive, .button.button-royal,.button.button-dark {
   color: #ffffff;
@@ -114,26 +117,14 @@ a{
 }
 
 // bar
-.bar .button{
-  width: 6.28571428571em;
-}
 .bar.bar-light, .bar.bar-stable, .bar.bar-positive, .bar.bar-calm, .bar.bar-balanced, .bar.bar-energized, .bar.bar-assertive, .bar.bar-royal ,bar,bar-dark {
   border-color: #dddddd;
 }
 .bar-footer{
   height: 3.8em;
-  padding: 0.5em 0 0.5em 0.5em;
+  padding: 0.5em;
   .footer-bar-container{
     width: 100%;
-    .buttons{
-      display: inline-block;
-      .button{
-        font-weight: bold;
-        width: 8.4em;
-        height: 3em;
-        line-height: 3em;
-      }
-    }
     .bar-row{
       line-height: 34px;
     }
