@@ -490,3 +490,11 @@ img.full{
   width: 1.667em;
   border-radius:6px;
 }
+
+// ion-item
+ion-item.item {
+  padding: 0;
+  .item-content{
+    padding: 0;
+  }
+}
