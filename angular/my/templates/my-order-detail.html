@@ -16,7 +16,7 @@
       <img src="{{vm.store.coverimg}}" style="top: 1em;"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="fl" style="height: 3em; line-height: 3em;">{{vm.store.name}}</div>
-      <div class="button button-outline button-balanced fr" ng-click="vm.callHotline()" >
+      <div class="button pys-button button-outline button-balanced fr" ng-click="vm.callHotline()" >
         服务电话
       </div>
     </a>
@@ -55,7 +55,7 @@
       <span class="bar-row fl">
         合计：<span class="text-energized">￥<span class="text-large">{{vm.totalPrice | currency:''}}</span></span>
       </span>
-      <div class="buttons fr">
+      <div class="buttons pys-buttons fr">
         <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0"><strong>取消订单</strong></a>
         <a class="button button-energized" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0"><strong>支付</strong></a>
 

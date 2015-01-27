@@ -33,7 +33,7 @@ a{
 }
 
 // button related
-.button, .bar .button, .bar .buttons .button{
+.buttons.pys-buttons .button, .button.pys-button{
   font-size: 14px;
   border-radius: 5px;
   width: 8.4em;
@@ -425,7 +425,7 @@ img.full{
   padding-bottom: 1em;
   min-height: 4em;
 }
-.item-avatar > img:first-child, .item-avatar-left > img:first-child{
+.item-avatar > img:first-child, .item-avatar .item-image, .item-avatar-left > img:first-child, .item-avatar-left .item-image {
   top: 0.5em;
   left: 0.5em;
   max-width: 3em;

@@ -5,12 +5,12 @@
     <div class="list order" ng-repeat="order in vm.orders" ng-show="vm.orders.length > 0" ng-init="brand=vm.brands[order.Order.brand_id].Brand; products=vm.order_carts[order.Order.id];">
       <a class="item item-avatar brand" ui-sref="store.home({storeId: brand.id})">
         <img src="{{brand.coverimg}}"/>
-        <h2 class="brand-name">{{brand.name}}({{carts.length}})</h2>
-        <span class="text-energized fr">
+        <h2 class="fl" style="line-height: 2em;">{{brand.name}}({{products.length}})</h2>
+        <span class="text-energized fr" style="line-height: 2em;">
           {{vm.getOrderState(order).status}}
         </span>
       </a>
-      <a class="item item-avatar item-thumbnail-left product" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
+      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
         <img src='{{product.Cart.coverimg}}'/>
         <div class="product-name">{{product.Cart.name}}</div>
         <div class="product-fee text-muted">
@@ -20,11 +20,11 @@
          {{9999 | currency:'￥'}}
         </div>
       </a>  
-      <div class="item summary">
-        <span class="total-price">
+      <div class="item">
+        <span class="total-price" style="line-height: 3em;">
           实付:<span class="text-energized">{{order.Order.total_price | currency:'￥'}}</span>
         </span>
-        <span class="buttons fr">
+        <span class="buttons pys-buttons fr">
           <a class="button" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
           <a class="button button-balanced button-outline" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
