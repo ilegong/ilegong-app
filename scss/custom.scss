@@ -1,4 +1,4 @@
-@import "variables", "basics", "home-main", "cart-main", "cart-confirmation", "my-main", "my-orders", "my-coupons.scss", "product-detail","product-detail-comments";
+@import "variables", "basics", "home-main", "cart-main", "cart-confirmation", "my-main", "my-orders", "my-coupons.scss", "product-detail","product-detail-comments", "store-main";
 
 .category{
   .card.product{ 
@@ -49,19 +49,6 @@
       }
     }
   } 
-}
-
-.stores{
-  .store.card{
-    padding: 0 5px;
-    margin: 0 0 1em 0;
-    .item-image{
-      min-height: 12em;
-    }
-    .store-name{
-      padding: 4px 6px;
-    }
-  }
 }
 
 .store{
