@@ -3,7 +3,6 @@
 
   angular.module('module.cart')
   .controller('CartMainCtrl', CartMainCtrl)
-
   function CartMainCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders,Users){
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;

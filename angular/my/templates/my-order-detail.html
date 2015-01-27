@@ -16,7 +16,11 @@
       <img src="{{vm.store.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div>{{vm.store.name}}</div>
+
     </a>
+          <div style=" height:3em; float:right;" ng-click="vm.showCall()" >
+        服务电话
+      </div>
     <div class="item">
       订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
     </div>
