@@ -156,10 +156,10 @@
   <ion-footer-bar class="footer footer-bar">
     <div class="footer-bar-container">
       <div class="buttons fl">
-        <span  ng-click="vm.showTabs();vm.addToCart();" ui-sref="app.cart" class="button button-energized">
+        <span  ng-click="vm.addToCart(true);" ui-sref="app.cart" class="button button-energized">
           <strong>立即购买</strong>
         </span>
-        <span ng-click="vm.addToCart();" class="button button-assertive">
+        <span ng-click="vm.addToCart(false);" class="button button-assertive">
           <strong>加入购物车</strong>
         </span>
       </div>

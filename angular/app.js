@@ -52,6 +52,8 @@
       .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
       .state('app.product-detail-comments',{url:'/products/:id/:from/comments/:type',views:{'app-home':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
+      .state('app.product-detail-account-login', {url: '/account-login', views: {'app-home': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
+      
 
       .state('app.product-detail-o', {url: '/products-o/:id/:from', views: {'app-my': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})

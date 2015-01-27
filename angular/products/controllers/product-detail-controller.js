@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($state,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
+  function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
     var vm = this;
     vm.count=1;
     vm.from = $stateParams.from;
@@ -89,13 +89,59 @@
         activate();
       });
     }
-    vm.addToCart = function(){
-      $log.log("add product " + $stateParams.id + " to cart");
-      Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
-        Carts.getCartItems().then(function(result){
-          $rootScope.updateCart(result);
+    vm.addToCart = function(toCart){
+      tryToLogin().then(function(res){
+        if(res == 'toLogin'){
+          $state.go('app.product-detail-account-login');
+        }
+        else if(res == 'cancelLogin'){
+
+        }
+        else if(res == 'isLoggedIn'){
+          Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
+            Carts.getCartItems().then(function(result){
+              $rootScope.updateCart(result);
+              if(toCart){
+                vm.showTabs();
+                $state.go('app.cart');
+              }
+              else{
+                $log.log("add product " + $stateParams.id + " to cart");
+                $rootScope.alertMessage('商品添加成功。');
+              }
+            });
+          }, function(e){$log.log("add to cart failed: ").log(e)});
+        }
+      });
+    }
+    function tryToLogin(){
+      vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
+      if(!vm.isLoggedIn){
+        return $ionicPopup.show(
+        {
+          title:'确认登录',
+          subTitle:'您尚未登录，是否立刻登录？',
+          buttons:[
+            {
+              text:'否',
+              onTap:function(e){
+                return 'cancelLogin';
+              }
+            },
+            {
+              text:'是',
+              onTap:function(e){
+                return 'toLogin';
+              }
+            }
+          ]
         });
-      }, function(e){$log.log("add to cart failed: ").log(e)});
+      }
+      else{
+        var defer = $q.defer();
+        defer.resolve('isLoggedIn');
+        return defer.promise;
+      }
     }
   }
 })(window, window.angular);
