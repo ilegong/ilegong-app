@@ -59,8 +59,8 @@
       var fee =  _.find(vm.shipFees, function(fee, bid){return bid == brandId});
       return fee;
     }
-    function countOfProducts(){
-
+    function countOfProducts(brandItem){
+      return _.size(brandItem.items);
     }
     function changeAddress(){
       $state.go('app.order-addresses',{state:1});

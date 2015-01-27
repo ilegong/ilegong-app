@@ -71,15 +71,15 @@
   
   <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="footer-bar-container">
-      <div class="price-total fl" style="width: 55%;">
+      <div class="price-total fl">
         <span class="icon pys-350 {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
-        <div class="fl">
+        <div class="fl padding-right">
           <div>合计</div>
-          <div class="text-sub text-muted">不含运费</div>
+          <div class="text-sub-muted">不含运费</div>
         </div>
-        <div class="text-energized fr" style="padding-top: 0.5em;">
+        <span class="text-energized bar-row fr">
           ￥<span class="text-large">{{vm.getTotalPrice() | currency:""}}</span>
-        </div>
+        </span>
       </div>
       <div class="buttons buttons fr">
         <div class="button button-energized" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
