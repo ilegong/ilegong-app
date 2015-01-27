@@ -56,6 +56,7 @@
       .state('app.product-detail-o', {url: '/products-o/:id/:from', views: {'app-my': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+      .state('app.product-detail-comments-o',{url:'/products/:id/:from/comments/:type',views:{'app-my':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
       .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
@@ -72,6 +73,7 @@
       .state('store.product-detail', {url: '/products/:id/:from', views: {'store-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
       .state('store.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
       .state('store.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+      .state('store.product-detail-comments',{url:'/products/:id/:from/comments/:type',views:{'store-home':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
 
     $urlRouterProvider.otherwise('/app/home');
   }

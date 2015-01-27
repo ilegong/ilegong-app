@@ -14,6 +14,7 @@
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;
     vm.onAliPayFinished = onAliPayFinished;
+    vm.toProductDetailPage = toProductDetailPage;
     activate();
     
     function activate() {
@@ -31,6 +32,9 @@
         vm.products = data.products;
         vm.store = data.store;
       });
+    }
+    function toProductDetailPage(item){
+      $state.go("app.product-detail-o",{id:item.Cart.product_id,from:-2});
     }
     function cancelOrder(order){
       // if(order.Order.status != 0){

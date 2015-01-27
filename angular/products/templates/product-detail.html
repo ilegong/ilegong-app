@@ -15,16 +15,16 @@
         <span class="text-sub" ng-show="{{vm.product.Product.original_price != 0}}">
           <s>{{vm.product.Product.original_price | currency:"￥"}}</s>
         </span>
-        <a class="fr" ui-sref="app.product-detail-comments({id: vm.id, from: vm.from, type: 0})">
+        <a class="fr" ng-click="vm.toReputationCommentsPage();">
           口碑评价({{vm.getReputationComments().length}})
         </a>
         <p/>
       </p>
-      <p ng-show="false">
-        好友。。。推荐了该产品
+      <p ng-show="false" ng-reason="api不支持">
+        好友***推荐了该产品
       </p>
     </div>
-    <div class="item">
+    <div class="item" ng-reason="api不支持" ng-show="false">
       <span class="item-label">
         促销：
       </span>
@@ -83,14 +83,14 @@
     </div>
     <div ng-show="vm.showProductIntro" class="item product-intro" ng-bind-html="vm.content.Product.content">
     </div>
-    <div class="item item-icon-right" ui-sref="app.product-detail-comments({id: vm.id, from: vm.from, type: 1})">
+    <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();">
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         试吃评价
         <span class="text-sub">({{vm.getTryingComments().length}})</span>
       </span>
     </div>
-    <div class="item item-icon-right" ui-sref="app.product-detail-comments({id: vm.id, from: vm.from, type: 0})">
+    <div class="item item-icon-right" ng-click="vm.toReputationCommentsPage();">
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         口碑评价

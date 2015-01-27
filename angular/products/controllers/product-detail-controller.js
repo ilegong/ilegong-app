@@ -11,7 +11,6 @@
     vm.from = $stateParams.from;
     vm.rating = 5;
     vm.confirmComment = confirmComment;
-    vm.menuClick = menuClick;
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
@@ -19,6 +18,8 @@
     vm.showTabs = function(){$rootScope.hideTabs = false;}
     vm.getReputationComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
     vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
+    vm.toTryingCommentsPage = toTryingCommentsPage;
+    vm.toReputationCommentsPage = toReputationCommentsPage;
     activate();
     
     function activate(){
@@ -51,14 +52,31 @@
       vm.specsChecks[group][name].value = true;
       vm.currentSpecs = _.find(_.pairs(vm.product.Product.specs.map),function(item){return item[1].name == name})[0];
     } 
-    function menuClick(index){
-      vm.isShowMenuContents[index] = !vm.isShowMenuContents[index];
-      if(index >=1 ){
-        var t = index ==1?1:0;
-        $rootScope.productDetailComment.flag = t;
-        $state.go("app.product-detail-comments");
+
+
+    function toTryingCommentsPage(){
+      if(vm.from == -1){//from main
+        $state.go("app.product-detail-comments",{id: vm.id, from: vm.from, type: 1});
+      }
+      else if(vm.from == -2){//from order-detail
+        $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 1})
+      }
+      else if(vm.from >=0){//from store-main
+        $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 1})
       }
     }
+    function toReputationCommentsPage(){
+      if(vm.from == -1){//from main
+        $state.go("app.product-detail-comments",{id: vm.id, from: vm.from, type: 0});
+      }
+      else if(vm.from == -2){//from order-detail
+        $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 0})
+      }
+      else if(vm.from >=0){//from store-main
+        $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 0})
+      }
+    }
+
     $scope.buttonReduceClick = function(){
       if(vm.count > 1)
         vm.count=Number(vm.count)-1;
@@ -66,30 +84,6 @@
     $scope.buttonAddClick = function() {
       vm.count=Number(vm.count)+1;
     };
-    $scope.getRankText = function(rank) {
-      if(rank==5)
-        return '好评';
-      if(rank==4)
-        return '四分';
-      if(rank==3)
-        return '中评';
-      if(rank==2)
-        return '两分';
-      if(rank==1)
-        return '差评';
-    }
-    $scope.getRankColor = function(rank) {
-      if(rank==5)
-        return 'green';
-      if(rank==4)
-        return 'gray';
-      if(rank==3)
-        return 'gray';
-      if(rank==2)
-        return 'red';
-      if(rank==1)
-        return 'red';
-    }
     function confirmComment(){
       Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null).then(function(data){
         activate();
