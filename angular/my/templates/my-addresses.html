@@ -3,6 +3,8 @@
     <button  class='button button-clear' ng-click="vm.addAddress()">{{'新建'}}</button>
   </ion-nav-buttons>
 	<ion-content class="my-addresses list">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
+    </ion-refresher>
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
       <span ng-click="vm.setDefaultAddress(address)">
         <i class="icon pys-400" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>

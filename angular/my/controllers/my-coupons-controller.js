@@ -8,7 +8,7 @@
     var vm = this;
     vm.getBrand = getBrand;
     vm.getCouponStatus = getCouponStatus;
-
+    vm.doRefresh = doRefresh;
     activate();
 
     function activate() {
@@ -28,6 +28,19 @@
     }
     function getBrand(brandId){
       return _.find(vm.brands, function(brand){return brand.Brand.id == brandId});
+    }
+    function doRefresh(){
+      Coupons.getCoupons().then(function(data){
+        _.each(data.coupons, function(coupon){
+          coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
+          coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
+        });
+        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
+        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
+        vm.brands = _.map(data.brands, function(brand){return brand});
+      });
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$apply();
     }
     function getCouponStatus(coupon){
       if(_.isEmpty(coupon)){

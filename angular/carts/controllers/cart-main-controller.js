@@ -18,14 +18,14 @@
     vm.checkAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = true;})};
     vm.uncheckAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = false;})};;
     vm.getCheckedNumber = function(){return _.filter($rootScope.cart.cartItems,function(item){return item.checked;}).length;};
-   // vm.isLoggedIn = function(){return !_.isEmpty($rootScope.user.token);};
     vm.toLoginPage = function(){$state.go('app.cart-account-login')}; vm.toHomePage = function(){$state.go('app.home');};
     vm.brandChecked = brandChecked;
     vm.toggleBrand = toggleBrand;
+    vm.doRefresh = doRefresh;
     activate();
 
     function activate(){
-      vm.editMode = false;
+
       vm.cartItems = $rootScope.cart.cartItems;
       vm.brands = $rootScope.cart.brands;
       Carts.getCartItems().then(function(result){
@@ -50,33 +50,34 @@
         cartItem['deleteMode'] = false;
       })
     }
+    function doRefresh(){
+      Carts.getCartItems().then(function(result){
+        $rootScope.updateCart(result);
+      });
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$apply();
+    }
     function brandChecked(id) {
       return _.all(vm.getCartItemsOfBrand(id),function(cartItem){
         return cartItem.checked;
       });
     }
-    function toggleBrand(editMode,brandId){
-      if(!editMode){
-        if(!vm.brandChecked(brandId)){
-          _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-            cartItem['checked'] = true;
-          });
-        }
-        else{
-          _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-            cartItem['checked'] = false;
-          });
-        }
-      }
-    }
-    function toggleCartItem(editMode,product,e){
-      if(editMode){
-        product['deleteMode'] = !product['deleteMode'];
-        e.stopPropagation();
+    function toggleBrand(brandId){
+      if(!vm.brandChecked(brandId)){
+        _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
+          cartItem['checked'] = true;
+        });
       }
       else{
-        product['checked'] = !product['checked'];
+        _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
+          cartItem['checked'] = false;
+        });
       }
+    }
+    function toggleCartItem(product,e){
+
+      product['checked'] = !product['checked'];
+      
     }
     function getTotalPrice(){
       return _.reduce(_.filter(vm.cartItems, function(cartItem){return cartItem.checked}), function(memo, cartItem){

@@ -62,8 +62,10 @@
 
         <a class="button" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)">评价</a>
 
+
         <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="app.my-order-detail({id: order.Order.id})">支付</a>
       </div>
+
     </div>
   </ion-footer-bar>
 </ion-view>

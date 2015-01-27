@@ -62,22 +62,27 @@
       });
     }
     function aliPay(){
+      $log.log('pay begin');
       Users.aliPay(vm.orderId).then(function(inAppBrowser){
         vm.inAppBrowser = inAppBrowser;
         _.each(vm.inAppBrowserEvents, function(callback, event){
           vm.inAppBrowser.addEventListener(event, callback);  
         });
+        $log.log(vm.inAppBrowser);
       }, function(e){$log.log(e)});
     }
     function onAliPayLoadStart(e){
+      $log.log('onStart');
     }
     function onAliPayLoadStop(e){
+      $log.log('onStop');
       if(e.url.match("/ali_pay/wap_return_back_app")){
         $log.log("will close in app browser...");
         vm.inAppBrowser.close();
       }
     }
     function onAliPayFinished(e){
+      $log.log('onFinished');
       _.each(vm.inAppBrowserEvents, function(callback, event){
         try{
           vm.inAppBrowser.removeEventListener(event, callback);  

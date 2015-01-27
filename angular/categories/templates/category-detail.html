@@ -1,5 +1,7 @@
 <ion-view title="{{vm.sub_title}}" hide-tabs>
   <ion-content class='padding category'>
+    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
+    </ion-refresher>
     <div class='list'>
       <div class="row" ng-repeat="product in vm.products" ng-if="$index % 2 == 0">
         <div class='product card col col-50' ng-repeat="product in vm.products.slice($index, $index+2)" ng-init="brand=vm.brands[product.brand_id].Brand">

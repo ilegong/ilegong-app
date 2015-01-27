@@ -10,6 +10,7 @@
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
+    vm.doRefresh = doRefresh;
     activate();
     
     function activate() {
@@ -24,7 +25,13 @@
         vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
       });
     }
-
+    function doRefresh(){
+      Orders.list().then(function(data){
+        $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
+      });
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$apply();
+    }
     vm.remove = function(id){
       Orders.remove(id).then(function(result){
         activate();

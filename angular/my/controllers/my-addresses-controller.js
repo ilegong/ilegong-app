@@ -11,6 +11,7 @@
     vm.addAddress = function(){$state.go('app.my-address-edit', {editId:-1})};
     vm.editAddress = editAddress;
     vm.isFromOrder = function(){return vm.state == 1};
+    vm.doRefresh = doRefresh;
     activate();
 
     function activate() {
@@ -25,6 +26,13 @@
         vm.defaultAddress = $rootScope.getDefaultAddress();
       });
     }
+    function doRefresh(){
+      Addresses.list().then(function(addresses){
+        $rootScope.addresses = addresses;
+      });
+      $scope.$broadcast('scroll.refreshComplete');
+      $scope.$apply();
+    } 
     function editAddress(addr){
       if(vm.isFromOrder()){
         $state.go('app.order-address-edit',{editId: addr.OrderConsignees.id});

@@ -149,11 +149,17 @@
       return defer.promise;
     }
     function aliPay(orderId){
+      $log.log('user.aliPay begin');
       var defer = $q.defer();
       getUser().then(function(user){
-        var userId = user.my_profile.User.id
+        var userId = user.my_profile.User.id;
+
         var url = "http://www.tongshijia.com/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId;
+        $log.log(url);
+        $log.log('opening window');
         var ref = window.open(url, '_blank', 'location=no');
+        $log.log('open ref');
+        $log.log(ref);
         defer.resolve(ref);
       }, function(e){defer.reject(e)});
       return defer.promise;
