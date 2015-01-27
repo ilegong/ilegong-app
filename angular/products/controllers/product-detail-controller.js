@@ -13,22 +13,22 @@
     vm.confirmComment = confirmComment;
     vm.menuClick = menuClick;
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
-    vm.getShichiCommentNum = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'}).length};
-    vm.getEvaluateCommentNum = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'}).length};
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;
     vm.showTabs = function(){$rootScope.hideTabs = false;}
-    vm.getEvaluateComment = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
-    vm.getShichiComment = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
+    vm.getReputationComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
+    vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     activate();
     
     function activate(){
       vm.isShowMenuContents = [true,false,false];
+      vm.showProductIntro = true;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
-      var id = $stateParams.id;
-      Products.getProduct(id).then(function(data){
+      vm.id = $stateParams.id;
+      vm.from = $stateParams.from;
+      Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(Object.prototype.toString.call(vm.product.Product.specs) === "[object String]"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
@@ -37,10 +37,10 @@
         vm.brand = data.brand;
         $log.log(vm.product);
       }, function(e){$log.log(e)});
-      Products.getProductContent(id).then(function(data){
+      Products.getProductContent(vm.id).then(function(data){
         vm.content = data.content;
       }, function(e){$log.log(e)});
-      Products.getProductComment(id).then(function(data){
+      Products.getProductComment(vm.id).then(function(data){
         vm.comment = data;
         $rootScope.productDetailComment.data = data;
       }, function(e){$log.log(e)});
@@ -56,7 +56,7 @@
       if(index >=1 ){
         var t = index ==1?1:0;
         $rootScope.productDetailComment.flag = t;
-        $state.go("app.product-detail-comment");
+        $state.go("app.product-detail-comments");
       }
     }
     $scope.buttonReduceClick = function(){
@@ -90,11 +90,6 @@
       if(rank==1)
         return 'red';
     }
-    // $scope.click = function(){
-    //   navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-    //     destinationType: Camera.DestinationType.DATA_URL
-    //   });
-    // }
     function confirmComment(){
       Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null).then(function(data){
         activate();

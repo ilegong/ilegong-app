@@ -1,0 +1,47 @@
+<ion-view class="product-detail-comments" title="商品评价" hide-tabs>     
+  <div class="tabs-top tabs-color-light ">
+    <div class="tabs content-tabs" >
+      <a class="tab-border tab-item content-tab {{vm.type == 0 ? 'content-tab-active':''}}" ng-click="vm.type = 1">
+        口碑评价
+        <span class="small">
+          ({{vm.getReputationComments().length}})
+        </span>
+      </a>
+      <a class="tab-item content-tab {{vm.type == 1 ?'content-tab-active':''}}" ng-click="vm.type = 0">
+        试吃评价
+        <span class="small">
+          ({{vm.geTyingComments().length}})
+        </span>
+      </a>
+    </div>
+  </div>
+  <ion-content class="content">
+    <div  class="item evaluate" ng-repeat="comment in vm.comments | filter: {is_shichi_tuan_comment: '1'}">
+      <hr ng-hide="$index==0" class="hr"/>
+      <div class="item-image-small-left"> 
+        <img ng-show="comment.userPhoto != null" class="item-image user-image"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
+        <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
+        <span >{{comment.username}}</span>
+        <span class="create-time">{{comment.created}}</span>
+      </div>
+      <div class="stars">
+        <span class="icon pys-350 {{comment.rating > 0 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{comment.rating > 1 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{comment.rating > 2 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{comment.rating > 3 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{comment.rating > 4 ? 'icon-star':'icon-star-gray'}}"></span>
+      </div>
+      <div>
+        <span class="text">
+          {{comment.body}}
+        </span>
+      </div>
+      <div>
+        <img ng-repeat="img in comment.images" src="{{img}}" class="evaluate-image"/>
+      </div>
+      <span ng-show="false" class="buy-time">
+        购买时间：{{comment.created}}
+      </span>
+    </div>
+  </ion-content>
+</ion-view>
