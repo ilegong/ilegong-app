@@ -134,7 +134,8 @@
       </div>
     </div>
 
-    <div class='list'>
+    <div class='item'>
+      相关商品推荐
       <div class="row" ng-repeat="item in vm.recommends" ng-if="$index % 2 == 0">
         <div class='card col col-50' ng-repeat="itemt in vm.recommends.slice($index, $index+2)" >
           <a ui-sref="app.product-detail({from: vm.from, id: itemt[1].id})">
