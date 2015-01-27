@@ -34,7 +34,7 @@
         if(Object.prototype.toString.call(vm.product.Product.specs) === "[object String]"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
         }
-        vm.recommends = data.recommends;
+        vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
         $log.log(vm.product);
       }, function(e){$log.log(e)});

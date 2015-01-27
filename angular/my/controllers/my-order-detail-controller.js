@@ -35,8 +35,6 @@
       });
     }
     function showCall(){
-
-     // Show the action sheet
      var hideSheet = $ionicActionSheet.show({
        buttons: [
          { text: '<b>13693655401</b>' }
@@ -51,8 +49,6 @@
          return true;
        }
      });
-
-     // For example's sake, hide the sheet after two seconds
      $timeout(function() {
        hideSheet();
      }, 2000);
