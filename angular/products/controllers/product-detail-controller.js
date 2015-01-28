@@ -93,6 +93,12 @@
       });
     }
     vm.addToCart = function(toCart){
+      var re = /^[1-9]+[0-9]*]*$/;
+      if (!re.test(vm.count))  
+      {  
+        $rootScope.alertMessage("购买数量请输入正整数");    
+        return;
+      }
       $rootScope.ensureLogin().then(function(){
         Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
           Carts.getCartItems().then(function(result){
