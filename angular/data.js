@@ -2449,7 +2449,7 @@ var tryingsJson = {
   ]
 };
 
-var article = "<div class='ui-contain col-md-9'><h2 class='Content-title'>四期试吃团报道</h2><div class='Content-body'><p>嗨，亲们四期试吃团员前来报道！想看看本期有那些美女、帅哥吃货么，赶紧围观！</p></div></div>";
+var article = "<div class='ui-contain col-md-9'><h2 class='Content-title'>四期试吃团报道</h2><div class='Content-body'><p>嗨，亲们四期试吃团员前来报道！想看看本期有那些美女、帅哥吃货么，赶紧围观！</p></div><p><img src=\"https://mmbiz.qlogo.cn/mmbiz/UuGM2hE8WNETwbHO403a2yQddrpAIxic11HXl57YfFtRqY6Oxtib3gFrKgqMcAXgFS0rXpBbftH4bBksgdCgkibZQ/0\" style=\"max-width: 100%; height: auto !important; display: inline;\"></p></div>";
 
 var allProvince = {"110100":"\u5317\u4eac","120100":"\u5929\u6d25","130000":"\u6cb3\u5317","140000":"\u5c71\u897f","150000":"\u5185\u8499\u53e4","210000":"\u8fbd\u5b81","220000":"\u5409\u6797","230000":"\u9ed1\u9f99\u6c5f","310100":"\u4e0a\u6d77","320000":"\u6c5f\u82cf","330000":"\u6d59\u6c5f","340000":"\u5b89\u5fbd","350000":"\u798f\u5efa","360000":"\u6c5f\u897f","370000":"\u5c71\u4e1c","410000":"\u6cb3\u5357","420000":"\u6e56\u5317","430000":"\u6e56\u5357","440000":"\u5e7f\u4e1c","450000":"\u5e7f\u897f","460000":"\u6d77\u5357","500100":"\u91cd\u5e86","510000":"\u56db\u5ddd","520000":"\u8d35\u5dde","530000":"\u4e91\u5357","540000":"\u897f\u85cf","610000":"\u9655\u897f","620000":"\u7518\u8083","630000":"\u9752\u6d77","640000":"\u5b81\u590f","650000":"\u65b0\u7586","710000":"\u53f0\u6e7e","810000":"\u9999\u6e2f","820000":"\u6fb3\u95e8"}
 var cities = {
