@@ -143,6 +143,7 @@
   function configApp($ionicConfigProvider){
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center')
+    $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
   function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, $ionicPopup, config, Orders) {

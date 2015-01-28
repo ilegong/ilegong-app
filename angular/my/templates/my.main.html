@@ -15,7 +15,7 @@
         </span>
         <span class="col"></span>
       </div>
-      <div class="orders row">
+      <div class="orders row" style="padding: 0">
         <div class="bg"></div>
         <div class="order col" ng-click="vm.toOrders(pendingState.orderState.state);" ng-repeat="pendingState in vm.pendingStates">
           <span ng-class="{'badge badge-assertive': pendingState.orders.length > 0}">{{pendingState.orders.length}}</span> <br/>
