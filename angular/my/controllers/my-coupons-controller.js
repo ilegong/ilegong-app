@@ -4,11 +4,12 @@
   angular.module('module.my')
   .controller('MyCouponsCtrl',MyCouponsCtrl)
   
-  function MyCouponsCtrl($scope, $rootScope, $log, Coupons) {
+  function MyCouponsCtrl($state,$scope, $rootScope, $log, Coupons) {
     var vm = this;
     vm.getBrand = getBrand;
     vm.getCouponStatus = getCouponStatus;
     vm.doRefresh = doRefresh;
+    vm.useCoupons = useCoupons;
     activate();
 
     function activate() {
@@ -26,6 +27,29 @@
         vm.brands = _.map(data.brands, function(brand){return brand});
       })
     }
+    function isNumberInvalid(num){
+      if(num == null || num == 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    function useCoupons(coupon,brand){
+      if(!isNumberInvalid(coupon.Coupon.brand_id)){
+        $state.go('store.home',{storeId: brand.Brand.id});
+      }
+      else if(!isNumberInvalid(coupon.Coupon.product_list)){
+        $state.go('app.product-detail-o',{id:coupon.Coupon.product_list[0],from:-2});
+      }
+      else if(!isNumberInvalid(coupon.Coupon.category_id) && false){ //  去专场，咱不实现
+
+      }
+      else{
+        $state.go('app.home');
+      }
+    }
+
     function getBrand(brandId){
       return _.find(vm.brands, function(brand){return brand.Brand.id == brandId});
     }

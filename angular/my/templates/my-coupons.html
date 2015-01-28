@@ -3,7 +3,7 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)">
-      <a class="coupon-info col col-67" ui-sref="store.home({storeId: brand.Brand.id})">
+      <a class="coupon-info col col-67" ng-click="vm.useCoupons(item,brand);" >
         <p class="coupon-name">
           {{item.Coupon.name}}
         </p>
