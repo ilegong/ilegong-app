@@ -1,49 +1,32 @@
 @import "variables";
 
 .home{
-
-
-*{ padding:0; margin:0; font-family:"微软雅黑";}
-body{ min-width:320px; font-size:14px;}
-ul li{ list-style:none;}
-.fl{ float:left;}
-.fr{ float:right;}
-.clearfix{ zoom:1;}
-.clearfix:after{ content:".";display:block;height:0;clear:both; visibility:hidden;}
-
-.radius10{
-  -moz-border-radius: 0.417em;/* Gecko browsers */-webkit-border-radius: 0.417em;/* Webkit browsers */border-radius:0.417em;/* W3C syntax */
-}
-.border_b{ border-bottom:1px #dddddd solid;}
-.gray{ color:#999999;}
-
-.main-tag-col-left{
-  margin-right:0.3em;
-  margin-bottom:0.3em;
-}
-.main-tag-image{
-  width:100%;
-}
-
-/*首页*/
-.index_banner img{ width:100%;}
-.index_pt{ position:relative; margin-top:0.5em; border-top:1px #dddddd solid; border-bottom:1px #dddddd solid; background-color:#ffffff; text-align:center;}
-.index_pt .price{ position:absolute; font-size:1em; color:#999999; top:5em; left:0.8em;}
-.index_pt .price span{ color:#dc0029; font-size:0.8em;}
-.index_pt .price strong{ color:#dc0029;}
-.index_pt ul li{ width:50%;}
-.index_pt ul li img{ width:100%;}
-.index_class_title{ font-size:1.2em; color:#666666; padding:0.5em 0 0.2em 0.417em;}
-.index_class{ padding:0 0.417em;}
-.index_class ul{ padding-bottom:0.2em;}
-.index_class ul img{ width:12.667em; height:4.583em;}
-.index_bao_title{ font-size:1.2em; color:#666666; padding:0.1em 0 0.2em 0.417em;}
-.index_bao{ padding:0 0.417em;}
-.index_bao a{ display:block; padding-bottom:0.6em;}
-.index_bao a img{ width:100%;}
-
-
-/*二级分类页面*/
-.bannerlist a{ display:block; padding-bottom:0.8em;}
-.bannerlist a img{ width:100%;}
+  .row{
+    .col{
+      padding: 0;
+    }
+  }
+  .promotion{ 
+    position:relative; 
+    margin-top:0.5em; 
+    border-top:1px #dddddd solid; 
+    border-bottom:1px #dddddd solid; 
+    background-color:#ffffff; 
+    text-align:center;
+    .price{ 
+      position:absolute; 
+      top:5em; 
+      left:0.8em;
+    }
+  }
+  .recommends{ 
+    .row{
+      .col:first-child{
+        margin-right: 0.5em;
+      }
+    }
+    .row:first-child{
+      padding-top: 0;
+    }
+  }
 }

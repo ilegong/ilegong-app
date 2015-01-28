@@ -1,63 +1,62 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
   <ion-content class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide ng-repeat="bannerItem in vm.getValidBannerItems()" >
+      <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
         <a ui-sref="app.product-detail({id:bannerItem.id,from:-1})">
-          <img src="{{bannerItem.img}}"/>
+          <img ng-src="{{bannerItem.img}}"/>
         </a>
       </ion-slide>
     </ion-slide-box>
 
-    <div class="index_pt">
+    <div class="promotion">
       <div class="price">
-        <span>
-          ¥
+        <span class="text-assertive text-sub">
+          ¥<strong>12.00</strong>
         </span>
-        <strong>
-          12.00
-        </strong>
-        起
+        <span class="text-muted">起</span>
       </div>
-      <ul class="clearfix">
-        <li class="fl">
-          <a ui-sref="app.category-detail({slug:vm.specTagItems[0].slug})" style="display:block;">
-            <img src="{{vm.specTagItems[0].img}}" />
+      <div class="row">
+        <div class="col">
+          <a class="" ui-sref="app.category-detail({slug:vm.specTagItems[0].slug})" style="display:block;">
+            <img src="{{vm.specTagItems[0].img}}" class="full" />
           </a>
-        </li>
-        <li class="fl">
+        </div>
+        <div class="col">
           <a ui-sref="app.category-detail({slug:vm.specTagItems[1].slug})">
-            <img src="{{vm.specTagItems[1].img}}" />
+            <img src="{{vm.specTagItems[1].img}}" class="full" />
           </a>
           <br />
           <a ui-sref="app.category-detail({slug:vm.specTagItems[2].slug})">
-            <img src="{{vm.specTagItems[2].img}}" />
-          </a>
-        </li>
-      </ul>
-    </div>
-    <div class="index_class_title">
-      朋友的推荐
-    </div>
-    <div class="index_class">
-      <div class="row"  ng-repeat="mainItem in vm.mainTagItems" ng-show="$index % 2 == 0">
-        <div class="col main-tag-col-left" >
-          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
-            <img  class="main-tag-image" src="{{vm.mainTagItems[$index].img}}"/>
-          </a>
-        </div>
-        <div class="col" ng-show="$index + 1 < vm.mainTagItems.length">
-          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
-            <img class="main-tag-image"  src="{{vm.mainTagItems[$index + 1].img}}"/>
+            <img src="{{vm.specTagItems[2].img}}" class="full" />
           </a>
         </div>
       </div>
     </div>
-    <div class="index_bao_title">
-      朋友说的爆款
+    
+    <div class="recommends padding" style="padding-bottom: 0;">
+      <h4>
+        朋友的推荐
+      </h4>
+      <div class="row"  ng-repeat="mainItem in vm.mainTagItems" ng-if="$index % 2 == 0">
+        <div class="col">
+          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
+            <img class="full" src="{{vm.mainTagItems[$index].img}}"/>
+          </a>
+        </div>
+        <div class="col" ng-if="$index + 1 < vm.mainTagItems.length">
+          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
+            <img class="full" src="{{vm.mainTagItems[$index + 1].img}}"/>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="index_bao">
+
+    <div class="hot-items padding" style="padding-top: 0;">
+      <h4>
+        朋友说的爆款
+      </h4>
       <a ui-sref="app.product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems">
-        <img src="{{hotItem.img}}" />
+        <img class="full" src="{{hotItem.img}}" />
       </a>
     </div>
     <ul ng-show='config.showLog'>

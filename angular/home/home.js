@@ -8,15 +8,11 @@
   /* @ngInject */
   function HomeCtrl(Users,$rootScope, $scope, $http, $log, Products){
     var vm = this;
-    vm.getValidBannerItems = function(){return _.filter(vm.bannerItems,function(item){return item.id != null})}
     active();
 
-
     function active(){
-
-      vm.date = (new Date()).valueOf();
       Products.list().then(function(data){
-        vm.bannerItems = data.bannerItems;
+        vm.bannerItems = _.filter(data.bannerItems, function(item){return item.id != null});
         vm.tryingItems = data.tryingItems;
         vm.specTagItems = data.specTagItems;
         vm.mainTagItems = data.mainTagItems;
