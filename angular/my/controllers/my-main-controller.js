@@ -10,6 +10,10 @@
     vm.profileClick = profileClick;
     vm.getPendingStates = getPendingStates;
     vm.countOfOrders = function(state){return _.filter(vm.orders, function(order){return Orders.isOfStates(order, state)}).length};
+    vm.toOrders = toOrders;
+    vm.toCoupons = toCoupons;
+    vm.toOffer = toOffer;
+    vm.toAddresses = toAddresses;
     activate();
 
     function activate() {
@@ -44,6 +48,38 @@
       $rootScope.$on("orderStateChanged", function(event, order){
         vm.pendingStates = vm.getPendingStates($rootScope.orders.orders);
       });
+    }
+
+    function toOrders(p_state){
+      $rootScope.ensureLogin().then(function(){
+        $state.go('app.my-orders',{state: p_state});
+      }, function(toLogin){
+        $state.go('app.my-account-login');
+      });
+    }
+
+    function toCoupons(){
+      $rootScope.ensureLogin().then(function(){
+        $state.go('app.my-coupons');
+      }, function(toLogin){
+        $state.go('app.my-account-login');
+      });      
+    }
+
+    function toOffer(){
+      $rootScope.ensureLogin().then(function(){
+        $state.go('app.my-offers');
+      }, function(toLogin){
+        $state.go('app.my-account-login');
+      });  
+    }
+
+    function toAddresses(){
+      $rootScope.ensureLogin().then(function(){
+        $state.go('app.my-addresses',{state:0,addrId:0});
+      }, function(toLogin){
+        $state.go('app.my-account-login');
+      });        
     }
 
     function getPendingStates(orders){

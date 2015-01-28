@@ -102,8 +102,7 @@
       }, function(toLogin){
         $state.go('app.product-detail-account-login');
       });
-    }
-    
+    } 
   }
 })(window, window.angular);
 
