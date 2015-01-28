@@ -20,6 +20,7 @@
     vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     vm.toTryingCommentsPage = toTryingCommentsPage;
     vm.toReputationCommentsPage = toReputationCommentsPage;
+    vm.toBrand = toBrand;
     activate();
     
     function activate(){
@@ -42,6 +43,12 @@
       Products.getProductComment(vm.id).then(function(data){
         vm.comment = data;
       }, function(e){$log.log(e)});
+    }
+
+    function toBrand(){
+      vm.showTabs();
+      $state.go("store.home",{storeId:vm.brand.Brand.id});
+
     }
 
     function specsClick(group,name){
