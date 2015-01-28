@@ -6,7 +6,7 @@
 
   /* @ngInject */
   function StoreIntroCtrl($rootScope, $scope, $stateParams, $sce, Stores){
-    var vm = this;
+    var vm = this; 
     activate();
     function activate(){
       Stores.getStoreIntro($stateParams.storeId).then(function(data){
