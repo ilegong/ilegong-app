@@ -16,6 +16,7 @@
     vm.onAliPayFinished = onAliPayFinished;
     vm.toProductDetailPage = toProductDetailPage;
     vm.callHotline = callHotline;
+    vm.toStoreHomePage = toStoreHomePage;
     activate();
     
     function activate() {
@@ -49,7 +50,10 @@
      });
      $timeout(function() {
        hideSheet();
-     }, 2000);
+     }, 5000);
+    }
+    function toStoreHomePage(storeId){
+      $state.go("store.home", {storeId: storeId});
     }
     function toProductDetailPage(item){
       $state.go("app.product-detail-o",{id:item.Cart.product_id,from:-2});

@@ -12,11 +12,11 @@
         {{vm.order.Order.consignee_mobilephone}}
       </span>
     </div>
-    <a class="item item-avatar item-icon-right" ui-sref="store.home({storeId: vm.store.id})">
+    <a class="item item-avatar item-icon-right" ng-click="vm.toStoreHomePage(vm.store.id)">
       <img src="{{vm.store.coverimg}}" style="top: 1em;"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="fl" style="height: 3em; line-height: 3em;">{{vm.store.name}}</div>
-      <div class="button pys-button button-outline button-balanced fr" ng-click="vm.callHotline()" >
+      <div class="button pys-button button-outline button-balanced fr" ng-click="vm.callHotline(); $event.stopPropagation();" >
         服务电话
       </div>
     </a>
