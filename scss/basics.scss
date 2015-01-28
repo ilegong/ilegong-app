@@ -489,3 +489,22 @@ ion-item.item {
     padding: 0;
   }
 }
+
+.popup-container {
+  .popup{
+    background-color: white;
+    .popup-head {
+      border-bottom: 1px solid $border_color;
+    }
+    .popup-buttons{
+      padding: 0;
+      .button{
+        color: $balanced;
+        border: 0;
+        background-color: white;
+        border-right: 1px solid $border_color;
+        margin: 0;
+      }
+    }
+  }
+}

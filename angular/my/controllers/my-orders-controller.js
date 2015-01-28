@@ -10,6 +10,7 @@
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
+    vm.addRemark = addRemark;
     vm.doRefresh = doRefresh;
     activate();
     
@@ -50,7 +51,7 @@
     }
     function viewLogistics(id){
     }
-    function addRemark(id){
+    function addRemark(order){
     }
     function remindSendingGoods(order){
       order.reminded = true;

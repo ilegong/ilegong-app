@@ -1,0 +1,14 @@
+@import "variables";
+
+.my-addresses{
+  .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
+    top: 1.42857142857em;
+  }
+  .address{
+    .name, .detail{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+}

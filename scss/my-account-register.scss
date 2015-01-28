@@ -1,0 +1,27 @@
+@import "variables";
+
+.my-account-register{
+  .item.item-row{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+
+    .sms-code{
+      color: #fff;
+      background-color: #dd5600;
+      border-color: #dd5600;
+    }
+    .sms-code.disabled{
+      color: #7F7F7F;
+      background-color: #C0C0C0;
+      border-color: #C0C0C0;
+    }
+    #captchaImage{
+      padding: 0;
+    }
+  }
+}
