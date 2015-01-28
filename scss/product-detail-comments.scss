@@ -1,84 +1,21 @@
 .product-detail-comments{
-  .content-tabs{
-    border-bottom:1px #bbbbbb solid;
-    background:#e8e8e8;
-    .content-tab{
-      color:#666666;
-      font-size:1.3em;
-      .small{
-        font-size:0.7em;
-      }
+  .tabs{
+    border-bottom:1px $border_color solid;
+    .tab-item{
+      line-height: 3em;
     }
-    .content-tab-active{
-      color:#29ac0e !important  ;
-      span{
-        color:#29ac0e !important;
-      }
-    }
-    .tab-border{
+    .tab-item:first-child{
       border-right:1px #bbbbbb solid;
     }
-  }
-  .content{
-    margin-left:-0.7em;
-    margin-right:-0.7em;
-    padding-top:2.8em;
-    .evaluate{
-      border-top:none;
-      border-bottom:none;
-      padding-left:20px;
-      padding-right:20px;
-      .stars{
-        margin-top: 0.4em;
-        span{
-          display:inline-block;
-        }
-      }
-      .hr{
-        color:#dddddd;
-        margin-bottom:0.5em;
-        margin-top:-1em;
-        border-bottom: 1px solid;
-        border-left: none;
-        border-right: none;
-        border-top: none;
-      }
-      .user-image{
-        width: 1.667em;
-        height: 1.667em;
-        border-radius: 6px;
-        display: inline-block;
-        margin-bottom: -0.5em;
-      }
-      .icon-user{
-        background-position:0 0;
-        width:1.667em;
-        height:1.667em;
-      }
-      .create-time{
-        float: right;
-        margin-top: 0.5em;
-      }
-      .buy-time{
-        float:right;
-        margin-top:1em;
-      }
-      .evaluate-image{
-        width:25%;
-        margin-right:1em;
-      }
-      .text{
-        white-space:normal;
-        font-size:1.05em;
-        color:#666666;
-      }
-      .all-comment{
-        text-align:center;
-        font-weight:bold;
-        padding-top:0.5em;
+    .tab-item-active{
+      color: $balanced !important;
+      span{
+        color: $balanced !important;
       }
     }
   }
-
-
+  .comment-image {
+    width: 33%;
+    padding-right: 0.5em;
+  }
 }
