@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts,Coupons){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -15,6 +15,10 @@
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
+    vm.isSiteCoupons = isSiteCoupons;
+    vm.setSiteCoupon = setSiteCoupon;
+    vm.showProductCoupon = showProductCoupon;
+    vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     activate();
 
     function activate(){
@@ -28,7 +32,7 @@
       vm.brands = $rootScope.cart.brands;
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
       vm.defaultAddress = $rootScope.getDefaultAddress();
-      
+      vm.showProductCoupon = showProductCoupon;
       Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
         $log.log("get cart info successfully: ").log(result);
         vm.brands = result.brands;
@@ -45,7 +49,71 @@
       $scope.$watch("addresses", function(newAddress, oldAddress){
         vm.defaultAddress = $rootScope.getDefaultAddress();
       })
+
+
+      vm.validCoupons = [];
+      vm.invalidCoupons = [];
+      vm.showInvalidCoupons = false;
+      vm.currentDate = new Date();
+      Coupons.getCoupons().then(function(data){
+        _.each(data.coupons, function(coupon){
+          coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
+          coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
+        });
+        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
+        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
+        vm.brands = _.map(data.brands, function(brand){return brand});
+      })
     }
+    function setBrandOrProductCoupon(coupon,brand,products){
+      if(coupon.isChecked){//checked
+      if(brand.coupons.length >= _.pairs(products).length){
+        coupon.isChecked = false;
+        return;
+      }
+      brand.coupons.push(coupon);
+      }
+      else{//unchecked
+        brand.coupons = _.filter(brand.coupons,function(coupon_t){
+          return coupon_t != coupon;
+        })
+      }
+
+
+    }
+    function showProductCoupon(products,coupon){
+
+      if(!isNumberInvalid(coupon.Coupon.product_list)){
+        for(var product in products){
+          for(var coupon_pid_index in coupon.Coupon.product_list){
+            if(coupon.Coupon.product_list[coupon_pid_index] == products[product].pid){
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+      return false;
+
+    }
+    function setSiteCoupon(coupon){
+      if(vm.siteCoupon != null){
+        vm.siteCoupon.isChecked = false;
+      }
+      vm.siteCoupon = coupon;
+    }
+    function isNumberInvalid(num){
+      if(num == null || num == 0){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    function isSiteCoupons(coupon){
+      return isNumberInvalid(coupon.Coupon.brand_id) && isNumberInvalid(coupon.Coupon.product_list) && isNumberInvalid(coupon.Coupon.category_id);
+    }
+
     function getBrandById(id){
       return _.find(vm.brands, function(brand){return brand.Brand.id == id});
     }
@@ -69,6 +137,11 @@
       vm.couponCode = vm.couponCodeTemp;
     }
     function submitOrder(){
+      var usedCoupons = _.filter(vm.validCoupons,function(coupon){
+        return coupon.isChecked == true;
+      })
+      console.log('used coupons:',usedCoupons);
+
       var remarks = {};
       _.each(vm.brands, function(brand){
         remarks[brand.Brand.id] = brand.Brand.remark;

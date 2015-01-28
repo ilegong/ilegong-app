@@ -48,10 +48,17 @@
           <input type="text" style="padding-left: 1em;" placeholder="给卖家留言：">
         </label>
       </div>
+      <span ng-init="brand.coupons = [];"></span>
+
+      <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if=" vm.showProductCoupon(item.items,coupon);" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setBrandOrProductCoupon(coupon,brand,item.items)" >asdasdad{{coupon.isChecked}}</ion-checkbox>
+      <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="coupon.Coupon.brand_id == brand.Brand.id" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setBrandOrProductCoupon(coupon,brand,item.items)" >asdasdad{{coupon.isChecked}}</ion-checkbox>
+
       <div class="item">
         <span class="text-muted fr">共{{vm.countOfProducts(item)}}件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
       </div>
     </div>
+
+    <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="vm.isSiteCoupons(coupon)" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setSiteCoupon(coupon);">asdasdad{{coupon.isChecked}}</ion-checkbox>
 
     <div class="item-divider" ng-show="false"></div>
     <div class="item item-checkbox item-checkbox-right" ng-show="false">
