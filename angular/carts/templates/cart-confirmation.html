@@ -75,9 +75,11 @@
 
   <ion-footer-bar ng-show="vm.cartItems.length > 0">
     <div class="footer-bar-container">
-      <span class="bar-row fl">
+      <span class="bar-row fl" style="width: 60%;">
         共{{vm.pidList.length}}件，实付款
-        <span class="text-energized">￥<span class="text-large">{{vm.totalPrice | currency:''}}</span></span>
+        <span class="text-energized">
+          ￥<span class="text-large">{{vm.totalPrice | currency:''}}</span>
+        </span>
       </span>
       <div class="buttons pys-buttons fr">
         <button class="button button-energized" ng-click="vm.submitOrder()">

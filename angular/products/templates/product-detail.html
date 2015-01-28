@@ -155,14 +155,12 @@
   </ion-content>
   <ion-footer-bar class="footer footer-bar">
     <div class="footer-bar-container">
-      <div class="buttons pys-buttons fl">
-        <span  ng-click="vm.addToCart(true);" class="button button-energized">
-          <strong>立即购买</strong>
-        </span>
-        <span ng-click="vm.addToCart(false);" class="button button-assertive">
-          <strong>加入购物车</strong>
-        </span>
-      </div>
+      <span ng-click="vm.addToCart(true);" class="button pys-button button-energized fl" style="margin-right: 0.5em;">
+        <strong>立即购买</strong>
+      </span>
+      <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive fl" style="margin-right: 0.5em;">
+        <strong>加入购物车</strong>
+      </span>
       <div ng-click="vm.showTabs();" ui-sref="app.cart"  class="centered-container fr">
         <span ng-hide="cart.cartItems.length == 0" class="badge badge-right-top badge-balanced">{{cart.cartItems.length}}</span>
         <span class="pys-350 icon-footer-cart">
