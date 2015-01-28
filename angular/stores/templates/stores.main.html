@@ -1,11 +1,11 @@
 <ion-view title="朋友说" hide-back-button='true'>
   <ion-content class='stores'>
-    <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'150px'">
-      <div class="store">
+    <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'208px'">
+      <div class="store" style="margin-right: 10px;">
         <a ui-sref="store.home({storeId: store.Brand.id})">
           <img src="{{store.Brand.coverimg}}" alt="">
         </a>  
-        <div class="tl">
+        <div class="text tc" style="line-height: 2em;">
           <a ui-sref="store.home({storeId: store.Brand.id})">{{store.Brand.name}}</a>
         </div>
       </div>
