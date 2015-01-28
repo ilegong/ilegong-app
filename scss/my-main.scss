@@ -41,20 +41,11 @@
       }
     }
   }
-  .item.head{
-    display: block;
-    text-decoration: none;
-    color: #29ac0e;
-    font-size: 1.25em;
-    outline: none;
-    img{
-      display: block;
-      width: 2.708em;
-      height: 2.708em;    
-    }
-    .name{
-      padding-left: 0.833em;
-      line-height: 2.708em;
+  .details{
+    .item{
+      .icon.pys-400{
+        top: 0.5em;
+      }
     }
   }
 }
