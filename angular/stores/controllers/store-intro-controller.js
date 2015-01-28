@@ -8,7 +8,6 @@
   function StoreIntroCtrl($rootScope, $scope, $stateParams, $sce, Stores){
     var vm = this;
     activate();
-    
     function activate(){
       Stores.getStoreIntro($stateParams.storeId).then(function(data){
         vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
