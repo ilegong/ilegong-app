@@ -385,9 +385,13 @@ img.full{
   }
 }
 
-.slider .slider-slides .slider-slide a img {
-  height: 12em;
-  width: 100%;
+.slider {
+  .slider-slides {
+    .slider-slide a img {
+      height: 12em;
+      width: 100%;
+    }
+  }
 }
 
 .centered-container{

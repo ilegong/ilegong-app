@@ -25,7 +25,7 @@
   function configStates($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
-      .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeCtrl as vm'}}})
+      .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeMainCtrl as vm'}}})
 
       .state('app.category-detail', {url: '/categories/:slug',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
       

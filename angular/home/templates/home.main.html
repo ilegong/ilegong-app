@@ -1,6 +1,6 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
   <ion-content class="home">
-    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
         <a ui-sref="app.product-detail({id:bannerItem.id,from:-1})">
           <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"/>
