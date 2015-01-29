@@ -26,20 +26,26 @@
     }
 
     function init(){
-      $rootScope.user ={token:{},user:{}};
+      var defer = $q.defer();
       Base.getLocal('token').then(function(token){
-        $rootScope.user.token = token || {};
-        if(  !_.isEmpty($rootScope.user.token)){
+        if(!_.isEmpty(token)){
+          $rootScope.user.token = token;
           if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
             Base.getLocal('user').then(function(user){
               $rootScope.user.user = user;
             });
+            $rootScope.onUserInited(token);
+            defer.resolve(token);
           }
           else{
-            refreshToken(token.refresh_token);
+            refreshToken(token.refresh_token, defer);
           }
         }
-      });
+        else{
+          defer.reject('token not found locally');
+        }
+      }, function(e){defer.reject(e)});
+      return defer.promise;
     }
     function getToken(){
       var defer = $q.defer();
@@ -76,12 +82,10 @@
         }, function(e){defer.reject(e)});
       return defer.promise; 
     }
-    function refreshToken(refreshToken){
-      var defer = $q.defer();
+    function refreshToken(refreshToken, defer){
       Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
         self.onGetTokenSuccessfully(token, defer);
       },function(error){defer.reject(error)})
-      return defer.promise;
     }
     function logout(){
       $rootScope.user = {token:{},user:{}};
@@ -89,14 +93,14 @@
     }
 
     function onGetTokenSuccessfully(token, defer){
-      $rootScope.user.token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
+      $rootScope.user.token.expires_at = token.expires_in + ((new Date()).valueOf())/1000;
       Base.setLocal('token', $rootScope.user.token);
       Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
-        $log.log("get user successfully: ").log(user);
         $rootScope.user.user = user;
         Base.setLocal('user', $rootScope.user.user);
         defer.resolve($rootScope.user.token);
       }, function(error){defer.reject(error)});
+      $rootScope.onUserInited(token);
     }
 
     function getCaptchaImageUrl(){

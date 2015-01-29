@@ -149,7 +149,7 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl(Carts,Users,$q,$scope,$rootScope, $timeout, $ionicPopup, config, Orders) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Orders, Carts, Users, Addresses) {
     $rootScope.config = config;
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
@@ -158,8 +158,20 @@
     $rootScope.user = $rootScope.user || {token:{}, user:{}}
     $rootScope.alert = {message: ''};
     $rootScope.productDetailComment = $rootScope.productDetailComment || {data:[],flag:0};
-    Users.init();
-    Carts.init();
+    $log.log('to init user');
+    Users.init().then(function(token){
+      $log.log("user inited")
+    });
+
+    $rootScope.onUserInited = function(token){
+      $log.log("on user inited");
+      Carts.getCartItems().then(function(result){
+        $rootScope.updateCart(result);
+      });
+      Addresses.list().then(function(addresses){
+        $rootScope.addresses = addresses;
+      });
+    }
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       $rootScope.cart.brands = result.brands;

@@ -23,15 +23,9 @@
     activate();
 
     function activate(){
+      vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       vm.cartItems = $rootScope.cart.cartItems;
       vm.brands = $rootScope.cart.brands;
-      Carts.getCartItems().then(function(result){
-        $rootScope.updateCart(result);
-      })
-      Addresses.list().then(function(addresses){
-        $rootScope.addresses = addresses;
-      });
-      vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
         vm.cartItems = _.map(newCartItems, function(cartItem){cartItem.editMode = false; return cartItem});
       });
