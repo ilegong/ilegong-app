@@ -5,15 +5,14 @@
   .controller('TryingDetailCtrl', TryingDetailCtrl)
 
   /* @ngInject */
-  function TryingDetailCtrl($rootScope, $scope, $stateParams, Tryings){
+  function TryingDetailCtrl($rootScope, $scope, $stateParams, $ionicNavBarDelegate, Tryings){
     var vm = this;
     activate();
 
     function activate(){
       vm.articleId = $stateParams.id;
-      vm.article = ""
-      Tryings.getArticle(vm.articleId).then(function(result){
-        vm.article = result;
+      Tryings.getArticle(vm.articleId).then(function(article){
+        vm.article = article.Article;
       });
     }
   }

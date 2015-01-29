@@ -13,7 +13,7 @@
       '/myDetail': myDetail,
       '/api_orders/store_list.json': storeListJson,
       '/shichituan.json': tryingsJson,
-      '/articles/view/': article, 
+      '/api_orders/articles/': articleJson, 
       '/Locations/get_province.json':allProvince,
       "/api_orders/product_detail/\\d+.json": productDetail,
       "/apiOrders/store_content/\\d+.json": brandJson,

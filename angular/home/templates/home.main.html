@@ -3,7 +3,7 @@
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
         <a ui-sref="app.product-detail({id:bannerItem.id,from:-1})">
-          <img ng-src="{{bannerItem.img}}"/>
+          <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"/>
         </a>
       </ion-slide>
     </ion-slide-box>

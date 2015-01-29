@@ -64,8 +64,6 @@
       return defer.promise;
     }
     function init(){
-      $log.log('token!!!');
-      $log.log(Users.getTokenLocally());
       Users.getToken().then(function(token){
         getCartItems().then(function(result){
           $rootScope.updateCart(result);

@@ -18,7 +18,7 @@
     }
 
     function getArticle(articleId){
-      return Base.get("/articles/view/" + articleId + ".html");
+      return Base.get("/api_orders/articles/" + articleId + ".json");
     }
   }
 })(window, window.angular);
