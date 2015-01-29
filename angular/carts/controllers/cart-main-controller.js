@@ -13,18 +13,16 @@
     vm.getCartItemsOfBrand = getCartItemsOfBrand;
     vm.toggleCartItem = toggleCartItem;
     vm.getTotalPrice = getTotalPrice;
-    vm.cancelProductDelete = cancelProductDelete;
     vm.checkAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = true;})};
     vm.uncheckAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = false;})};;
     vm.getCheckedNumber = function(){return _.filter($rootScope.cart.cartItems,function(item){return item.checked;}).length;};
     vm.toLoginPage = function(){$state.go('app.cart-account-login')}; vm.toHomePage = function(){$state.go('app.home');};
-    vm.brandChecked = brandChecked;
+    vm.brandChecked = function(id) {return _.all(vm.getCartItemsOfBrand(id),function(cartItem){return cartItem.checked;});};
     vm.toggleBrand = toggleBrand;
     vm.doRefresh = doRefresh;
     activate();
 
     function activate(){
-
       vm.cartItems = $rootScope.cart.cartItems;
       vm.brands = $rootScope.cart.brands;
       Carts.getCartItems().then(function(result){
@@ -35,7 +33,7 @@
       });
       vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       $scope.$watch('cart.cartItems', function(newCartItems, oldCartItems) {
-        vm.cartItems = newCartItems;
+        vm.cartItems = _.map(newCartItems, function(cartItem){cartItem.editMode = false; return cartItem});
       });
       $scope.$watch('cart.brands', function(newBrands, oldBrands) {
         vm.brands = newBrands;
@@ -44,11 +42,7 @@
         vm.isLoggedIn = !_.isEmpty(newToken);
       });
     }
-    function cancelProductDelete(){
-      _.map(vm.cartItems,function(cartItem){
-        cartItem['deleteMode'] = false;
-      })
-    }
+    
     function doRefresh(){
       Carts.getCartItems().then(function(result){
         $rootScope.updateCart(result);
@@ -56,11 +50,7 @@
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }
-    function brandChecked(id) {
-      return _.all(vm.getCartItemsOfBrand(id),function(cartItem){
-        return cartItem.checked;
-      });
-    }
+    
     function toggleBrand(brandId){
       if(!vm.brandChecked(brandId)){
         _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
