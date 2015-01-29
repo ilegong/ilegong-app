@@ -1,0 +1,26 @@
+<ion-view title="性别" hide-tabs>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-click="vm.saveProfile()">保存</button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div>
+      <div class="list">
+        <label class="item item-radio">
+          <input type="radio" name="sex" ng-checked="vm.sex == 1" ng-model="vm.sex" ng-value="1">
+          <div class="item-content">
+            男
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+        <label class="item item-radio">
+          <input type="radio" name="sex" ng-checked="vm.sex == 0" ng-model="vm.sex"  ng-value="0">
+          <div class="item-content">
+            女
+          </div>
+          <i class="radio-icon ion-checkmark"></i>
+        </label>
+      </div>
+    </div>
+ </ion-content>
+</ion-view>
+

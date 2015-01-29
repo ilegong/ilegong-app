@@ -1,0 +1,13 @@
+<ion-view title="昵称" hide-tabs>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-disabled="!vm.isNickNameValid()" ng-click="vm.saveProfile()">保存</button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div>
+      <label class="item item-input">
+        <input type="text" placeholder="请输入昵称" ng-model="vm.nickname">
+      </label>
+    </div>
+ </ion-content>
+</ion-view>
+

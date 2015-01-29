@@ -1,0 +1,13 @@
+<ion-view title="邮箱" hide-tabs>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-disabled="!vm.isEmailValid(vm.email)" ng-click="vm.saveProfile()">保存</button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div>
+      <label class="item item-input">
+        <input type="text" placeholder="请输入邮箱" ng-model="vm.email" ng-blur="vm.verifyEmail()">
+      </label>
+    </div>
+ </ion-content>
+</ion-view>
+

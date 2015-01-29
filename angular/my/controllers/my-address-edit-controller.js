@@ -4,7 +4,7 @@
   angular.module('module.my')
   .controller('MyAddressEditCtrl',MyAddressEditCtrl)
 
-  function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams,Addresses, Orders){
+  function MyAddressEditCtrl($ionicHistory,$log,$scope,$rootScope,$stateParams, Base, Addresses, Orders){
     var vm = this;
     vm.addAddress = addAddress;
     vm.editAddress = editAddress;
@@ -63,18 +63,12 @@
     }
     function verifyMobilePhone(){
       var t = vm.address.OrderConsignees;
-      if(!vm.isMobilePhoneValid(t.mobilephone)){
+      if(!Base.isMobilePhoneValid(t.mobilephone)){
         $rootScope.alertMessage("手机号输入错误");
       }
       else{
         $rootScope.alert.message = "";
       }
-    }
-    function isMobilePhoneValid(mobilePhone){
-      if(_.isEmpty(mobilePhone)){
-        return false;
-      }
-      return /^1[3-8][0-9]\d{8}$/.test(mobilePhone.replace(/-/g, ""));
     }
     function readyToSave(){
       var t = vm.address.OrderConsignees;

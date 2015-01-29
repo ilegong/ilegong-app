@@ -1,0 +1,12 @@
+<ion-view title="手机" hide-tabs>
+  <ion-nav-buttons side="right">
+    <button class="button button-clear" ng-disabled="!vm.isMobilePhoneValid(vm.mobilephone)" ng-click="vm.saveProfile()">保存</button>
+  </ion-nav-buttons>
+  <ion-content >
+    <div>
+      <label class="item item-input">
+        <input type="text" placeholder="请输入11位手机号" ng-model="vm.mobilephone" ng-blur="vm.verifyMobilePhone()">
+      </label>
+    </div>
+ </ion-content>
+</ion-view>
