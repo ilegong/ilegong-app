@@ -11,12 +11,12 @@
     activate();
 
     function activate(){
-      vm.nickname = _.isEmpty($rootScope.user.user) ? '' : $rootScope.user.user.my_profile.User.nickname;
+      vm.nickname = _.isEmpty($rootScope.user.profile) ? '' : $rootScope.user.profile.User.nickname;
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.user.my_profile.User, {nickname: vm.nickname})).then(function(){
-        $rootScope.user.user.my_profile.User.nickname = vm.nickname;
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {nickname: vm.nickname})).then(function(){
+        $rootScope.user.profile.User.nickname = vm.nickname;
         $state.go("app.my-profile");
       }, function(e){
       }); 

@@ -12,12 +12,12 @@
     activate();
 
     function activate(){
-      vm.mobilephone = _.isEmpty($rootScope.user.user) ? '' : $rootScope.user.user.my_profile.User.mobilephone;
+      vm.mobilephone = _.isEmpty($rootScope.user.profile) ? '' : $rootScope.user.profile.User.mobilephone;
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.user.my_profile.User, {mobilepone: vm.mobilephone})).then(function(){
-        $rootScope.user.user.my_profile.User.mobilephone = vm.mobilephone;
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {mobilepone: vm.mobilephone})).then(function(){
+        $rootScope.user.profile.User.mobilephone = vm.mobilephone;
         $state.go("app.my-profile");
       }, function(e){
       }); 

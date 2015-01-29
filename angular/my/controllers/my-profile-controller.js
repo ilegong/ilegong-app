@@ -5,25 +5,22 @@
   .controller('MyProfileCtrl', MyProfileCtrl)
 
   /* @ngInject */
-  function MyProfileCtrl($scope, $rootScope, $log, $state, Users){
+  function MyProfileCtrl($scope, $rootScope, $log, $state, Base){
     var vm = this;
     vm.logout = logout;
     activate();
 
     function activate() {
-      Users.getUser().then(function(user){
-        vm.user = user.my_profile.User;
-        vm.trying = user.my_profile.Shichituan;
-      });
-      $scope.$watch('user.user', function(newUser, oldUser) {
-        $log.log("user has changed to :").log(newUser);
-        vm.user = newUser.my_profile.User;
+      vm.user = $rootScope.user.profile.User;
+      $scope.$watch('user.profile', function(newProfile, oldProfile) {
+        vm.user = newProfile.User;
       });
     }
 
     function logout(){
-      Users.logout().then(function(){
-        $state.go('app.my');
+      Base.removeLocal('token').then(function(){
+        $rootScope.onUserLoggedOut();
+        $state.go("app.my");
       });
     }
   }

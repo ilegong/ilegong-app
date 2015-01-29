@@ -149,28 +149,36 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Orders, Carts, Users, Addresses) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Orders, Carts, Users, Addresses, Profile) {
     $rootScope.config = config;
     $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
     $rootScope.addresses = $rootScope.addresses || [];
     $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
     $rootScope.myMain = $rootScope.myMain || {defer:{}};
-    $rootScope.user = $rootScope.user || {token:{}, user:{}}
+    $rootScope.user = $rootScope.user || {token:{}, profile:{}};
     $rootScope.alert = {message: ''};
     $rootScope.productDetailComment = $rootScope.productDetailComment || {data:[],flag:0};
-    $log.log('to init user');
-    Users.init().then(function(token){
-      $log.log("user inited")
-    });
+    Users.init();
 
-    $rootScope.onUserInited = function(token){
-      $log.log("on user inited");
+    $rootScope.onUserLoggedIn = function(token){
+      Profile.getProfile().then(function(profile){
+        $rootScope.user.profile = profile;
+      });
       Carts.getCartItems().then(function(result){
         $rootScope.updateCart(result);
       });
       Addresses.list().then(function(addresses){
         $rootScope.addresses = addresses;
       });
+      Orders.list().then(function(data){
+        $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
+      });
+    }
+    $rootScope.onUserLoggedOut = function(){
+      $rootScope.user = {token:{}, profile:{}};
+      $rootScope.orders = {orders: [], brands: [], order_carts:[], ship_type: {}};
+      $rootScope.cart = {cartItems:[], brands:[]};
+      $rootScope.addresses = [];
     }
     $rootScope.updateCart = function(result){
       $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});

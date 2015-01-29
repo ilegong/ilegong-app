@@ -10,20 +10,20 @@
     activate();
 
     function activate(){
-      if(_.isEmpty($rootScope.user.user)){
+      if(_.isEmpty($rootScope.user.profile)){
         vm.sex = 1;
       }
-      else if(typeof($rootScope.user.user.my_profile.User.sex) != 'number'){
+      else if(typeof($rootScope.user.profile.User.sex) != 'number'){
         vm.sex = 1;
       }
       else{
-        vm.sex = $rootScope.user.user.my_profile.User.sex;
+        vm.sex = $rootScope.user.profile.User.sex;
       }
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.user.my_profile.User, {sex: vm.sex})).then(function(){
-        $rootScope.user.user.my_profile.User.sex = vm.sex;
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {sex: vm.sex})).then(function(){
+        $rootScope.user.profile.User.sex = vm.sex;
         $state.go("app.my-profile");
       }, function(e){
       }); 

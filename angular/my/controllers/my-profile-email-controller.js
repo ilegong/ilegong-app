@@ -12,12 +12,12 @@
     activate();
 
     function activate(){
-      vm.email = _.isEmpty($rootScope.user.user) ? '' : $rootScope.user.user.my_profile.User.email;
+      vm.email = _.isEmpty($rootScope.user.profile) ? '' : $rootScope.user.profile.User.email;
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.user.my_profile.User, {email: vm.email})).then(function(){
-        $rootScope.user.user.my_profile.User.email = vm.email;
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {email: vm.email})).then(function(){
+        $rootScope.user.profile.User.email = vm.email;
         $state.go("app.my-profile");
       }, function(e){
       }); 

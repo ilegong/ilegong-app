@@ -19,7 +19,6 @@
       getSmsCode: getSmsCode, 
       register: register, 
       login: login, 
-      logout: logout, 
       aliPay: aliPay,
       getTokenLocally:getTokenLocally,
       refreshToken:refreshToken
@@ -31,8 +30,8 @@
         if(!_.isEmpty(token)){
           $rootScope.user.token = token;
           if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
-            Base.getLocal('user').then(function(user){
-              $rootScope.user.user = user;
+            Base.getLocal('profile').then(function(profile){
+              $rootScope.user.profile = profile;
             });
             $rootScope.onUserInited(token);
             defer.resolve(token);
@@ -64,7 +63,7 @@
     }
     function getUser(){
       var defer = $q.defer();
-      Base.getLocal('user').then(function(user){
+      Base.getLocal('profile').then(function(user){
         if(!_.isEmpty(user)){
           defer.resolve(user);
         }
@@ -87,20 +86,10 @@
         self.onGetTokenSuccessfully(token, defer);
       },function(error){defer.reject(error)})
     }
-    function logout(){
-      $rootScope.user = {token:{},user:{}};
-      return $q.all(Base.removeLocal('token'), Base.removeLocal('user'));
-    }
-
     function onGetTokenSuccessfully(token, defer){
       $rootScope.user.token.expires_at = token.expires_in + ((new Date()).valueOf())/1000;
       Base.setLocal('token', $rootScope.user.token);
-      Base.get('/api_orders/my_profile.json?access_token=' + $rootScope.user.token.access_token).then(function(user){
-        $rootScope.user.user = user;
-        Base.setLocal('user', $rootScope.user.user);
-        defer.resolve($rootScope.user.token);
-      }, function(error){defer.reject(error)});
-      $rootScope.onUserInited(token);
+      $rootScope.onUserLoggedIn(token);
     }
 
     function getCaptchaImageUrl(){
@@ -153,19 +142,11 @@
       return defer.promise;
     }
     function aliPay(orderId){
-      $log.log('user.aliPay begin');
       var defer = $q.defer();
-      getUser().then(function(user){
-        var userId = user.my_profile.User.id;
-
-        var url = "http://www.tongshijia.com/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId;
-        $log.log(url);
-        $log.log('opening window');
-        var ref = window.open(url, '_blank', 'location=no');
-        $log.log('open ref');
-        $log.log(ref);
-        defer.resolve(ref);
-      }, function(e){defer.reject(e)});
+      var userId = $rootScope.user.profile.User.id;
+      var url = "http://www.tongshijia.com/ali_pay/wap_to_alipay/" + orderId + "?from=app&uid=" + userId;
+      var ref = window.open(url, '_blank', 'location=no');
+      defer.resolve(ref);
       return defer.promise;
     }
   }
