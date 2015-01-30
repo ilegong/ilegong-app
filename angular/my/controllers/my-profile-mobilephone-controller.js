@@ -16,7 +16,11 @@
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.profile.User, {mobilepone: vm.mobilephone})).then(function(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {mobilepone: vm.mobilephone}), $rootScope.user.token.access_token).then(function(){
         $rootScope.user.profile.User.mobilephone = vm.mobilephone;
         $state.go("app.my-profile");
       }, function(e){

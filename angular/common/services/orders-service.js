@@ -29,9 +29,9 @@
       getOrderDetail: getOrderDetail 
     }
 
-    function list(){
+    function list(accessToken){
       var defer = $q.defer();   
-      Base.get('/api_orders/mine.json?access_token='+Users.getTokenLocally().access_token).then(function(item){
+      Base.get('/api_orders/mine.json?access_token=' + accessToken).then(function(item){
         defer.resolve(item);
       });
       return defer.promise;
@@ -46,10 +46,10 @@
       }
       return state == states;
     }
-    function submitOrder(pid_list,addressId,coupon_code,remarks){
+    function submitOrder(pid_list,addressId,coupon_code,remarks, accessToken){
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
       var defer =  $q.defer();
-      Base.post('/api_orders/balance.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
+      Base.post('/api_orders/balance.json?access_token=' + accessToken,json).then(function(result){
         if(result.data.success){
           defer.resolve(result.data.order_ids);
         }
@@ -59,30 +59,30 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function cancelOrder(id){
+    function cancelOrder(id, accessToken){
       var defer = $q.defer();
-      Base.get('/api_orders/confirm_undo/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
+      Base.get('/api_orders/confirm_undo/'+id+'.json?access_token=' + accessToken).then(function(result){
         defer.resolve(result);
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function remove(id){
+    function remove(id, accessToken){
       var defer = $q.defer()      
-      Base.get('/api_orders/confirm_remove/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
+      Base.get('/api_orders/confirm_remove/'+id+'.json?access_token=' + accessToken).then(function(result){
         defer.resolve(result);
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function confirmReceivingGoods(id){
+    function confirmReceivingGoods(id, accessToken){
       var defer = $q.defer();
-      Base.get('/api_orders/confirm_receive/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(result){
+      Base.get('/api_orders/confirm_receive/'+id+'.json?access_token=' + accessToken).then(function(result){
         defer.resolve(result);
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function getOrderDetail(orderId){
+    function getOrderDetail(orderId, accessToken){
       var defer = $q.defer();
-      Base.get('/apiOrders/order_detail/' + orderId + '.json?access_token='+Users.getTokenLocally().access_token).then(function(item){
+      Base.get('/apiOrders/order_detail/' + orderId + '.json?access_token=' + accessToken).then(function(item){
         defer.resolve(item);
       }, function(e){defer.reject(e)});
       return defer.promise;

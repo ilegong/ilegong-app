@@ -9,8 +9,8 @@
     return{
       getCoupons: getCoupons
     }
-    function getCoupons() {
-      return Base.get('/api_orders/my_coupons.json?access_token='+Users.getTokenLocally().access_token);
+    function getCoupons(accessToken) {
+      return Base.get('/api_orders/my_coupons.json?access_token=' + accessToken);
     }
   }
 })(window, window.angular);

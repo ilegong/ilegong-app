@@ -28,8 +28,8 @@
         return;
       }      
 
-      Addresses.getAddressById(vm.addressId).then(function(address){
-        vm.address = address;
+      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
+        vm.address = _.find(addresses, function(address){return address.OrderConsignees.id == vm.addressId});
         vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
 
         var orderConsignees = vm.address.OrderConsignees;        
@@ -75,25 +75,37 @@
       return !_.isEmpty(t.name) && !_.isEmpty(t.address) && vm.isMobilePhoneValid(t.mobilephone) && !_.isEmpty(vm.province) && !_.isEmpty(vm.city) && !_.isEmpty(vm.county);
     }
     function editAddress(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       var t = vm.address.OrderConsignees;
-      Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone).then(function(result){
+      Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated();
       });
     }
     function addAddress(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       var t = vm.address.OrderConsignees;
-      Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone).then(function(result){
+      Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated();
       });
     }
     function deleteAddress(addressId){
-      Addresses.deleteAddress(addressId).then(function(data){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Addresses.deleteAddress(addressId, $rootScope.user.token.access_token).then(function(data){
         $rootScope.alertMessage("已删除该收货地址");
         vm.onAddressUpdated();
       });
     }
     function onAddressUpdated(){
-      Addresses.list().then(function(addresses){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
         $rootScope.addresses = addresses;
         $ionicHistory.goBack();
       });

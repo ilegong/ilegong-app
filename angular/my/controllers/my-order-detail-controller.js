@@ -22,7 +22,7 @@
     function activate() {
       vm.orderId = $stateParams.id;
       vm.inAppBrowserEvents = {'loadstart': vm.onAliPayLoadStart, 'loadstop': vm.onAliPayLoadStop, 'exit': vm.onAliPayFinished}
-      Orders.getOrderDetail(vm.orderId).then(function(data) {
+      Orders.getOrderDetail(vm.orderId, $rootScope.user.token.access_token).then(function(data) {
         vm.order = data.order;
         vm.orderState = Orders.getOrderState(vm.order.Order.status);
         vm.cartItems = data.carts;
@@ -59,12 +59,11 @@
       $state.go("app.product-detail-o",{id:item.Cart.product_id,from:-2});
     }
     function cancelOrder(order){
-      // if(order.Order.status != 0){
-      //   $log.log("cannot cancel order " +  order.Order.id + " with state " + order.Order.status);
-      //   return;
-      // }
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       var orderId =  order.Order.id;
-      Orders.cancelOrder(orderId).then(function(result){
+      Orders.cancelOrder(orderId, $rootScope.user.token.access_token).then(function(result){
         $rootScope.updateOrderState(orderId, 10);
         $rootScope.alertMessage("订单已取消");
         $ionicHistory.goBack();
@@ -77,12 +76,15 @@
       }, 500);
     }
     function confirmReceivingGoods(order){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       if(order.Order.status != 2){
         $log.log("cannot confirm receiving goods for order " +  order.Order.id + " with state " + order.Order.status);
         return;
       }
       var orderId = order.Order.id;
-      Orders.confirmReceivingGoods(orderId).then(function(result){
+      Orders.confirmReceivingGoods(orderId, $rootScope.user.token.access_token).then(function(result){
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
       });

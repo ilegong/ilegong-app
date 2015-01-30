@@ -33,7 +33,7 @@
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
       vm.defaultAddress = $rootScope.getDefaultAddress();
       vm.showProductCoupon = showProductCoupon;
-      Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode).then(function(result){
+      Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
         $log.log("get cart info successfully: ").log(result);
         vm.brands = result.brands;
         vm.shipFees = result.shipFees; 
@@ -50,12 +50,11 @@
         vm.defaultAddress = $rootScope.getDefaultAddress();
       })
 
-
       vm.validCoupons = [];
       vm.invalidCoupons = [];
       vm.showInvalidCoupons = false;
       vm.currentDate = new Date();
-      Coupons.getCoupons().then(function(data){
+      Coupons.getCoupons($rootScope.user.token.access_token).then(function(data){
         _.each(data.coupons, function(coupon){
           coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
           coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
@@ -137,17 +136,19 @@
       vm.couponCode = vm.couponCodeTemp;
     }
     function submitOrder(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
       var usedCoupons = _.filter(vm.validCoupons,function(coupon){
         return coupon.isChecked == true;
       })
-      console.log('used coupons:',usedCoupons);
 
       var remarks = {};
       _.each(vm.brands, function(brand){
         remarks[brand.Brand.id] = brand.Brand.remark;
       });
-      $log.log("submit order for products " + vm.pidList);
-      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id,vm.couponCode,remarks).then(function(orderIds){
+      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $log.log("submit order successfully: ").log(orderIds);
         if(orderIds.length > 1){
           $state.go("app.cart-orders", {state: 0});

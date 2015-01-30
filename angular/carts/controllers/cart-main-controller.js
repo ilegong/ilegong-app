@@ -38,7 +38,7 @@
     }
     
     function doRefresh(){
-      Carts.getCartItems().then(function(result){
+      Carts.getCartItems($rootScope.user.token.access_token).then(function(result){
         $rootScope.updateCart(result);
       });
       $scope.$broadcast('scroll.refreshComplete');
@@ -68,21 +68,30 @@
       }, 0);
     }
     function reduceCartItemNum(cart) {
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       var originalNum = cart.num;
       cart.num = Math.max(cart.num - 1, 0);
-      Carts.editNum(cart.id,cart.num).then(function(result){}, function(e){
+      Carts.editNum(cart.id,cart.num, $rootScope.user.token.access_token).then(function(result){}, function(e){
         cart.num = originalNum;
       });
     };
     function addCartItemNum(cart){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       var original = cart.num;
       cart.num=Number(cart.num) +1;
-      Carts.editNum(cart.id,cart.num).then(function(result){}, function(e){
+      Carts.editNum(cart.id,cart.num, $rootScope.user.token.access_token).then(function(result){}, function(e){
         cart.num = original;
       });
     };
     function deleteCartItem(cartItem){
-      Carts.deleteCartItem(cartItem.Cart.id).then(function(result){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Carts.deleteCartItem(cartItem.Cart.id, $rootScope.user.token.access_token).then(function(result){
         $rootScope.cart.cartItems = _.filter($rootScope.cart.cartItems, function(cartItemm){return cartItemm.Cart.id != cartItem.Cart.id});
       }, function(e){$log.log("delete cart item failed: ").log(e)});
     }

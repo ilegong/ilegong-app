@@ -7,47 +7,14 @@
   /* @ngInject */
   function Users($rootScope,$log, $q, config, Base){
     var self = this;
-    self.token = null;
-    self.user = null;
     return {
-      getToken: getToken,
-      getUser: getUser,
       getCaptchaImageUrl: getCaptchaImageUrl, 
       verifyCaptchaCode: verifyCaptchaCode, 
       getSmsCode: getSmsCode, 
       register: register, 
       login: login, 
       aliPay: aliPay,
-      getTokenLocally:getTokenLocally,
       refreshToken:refreshToken
-    }
-
-    function getToken(){
-      var defer = $q.defer();
-      Base.getLocal('token').then(function(token){
-        if(!_.isEmpty(token)){
-          defer.resolve(token);
-        }
-        else{
-          defer.reject("no local token found");
-        }
-      }, function(e){defer.reject(e);});
-      return defer.promise;
-    }
-    function getTokenLocally(){
-      return $rootScope.user.token;
-    }
-    function getUser(){
-      var defer = $q.defer();
-      Base.getLocal('profile').then(function(user){
-        if(!_.isEmpty(user)){
-          defer.resolve(user);
-        }
-        else{
-          defer.reject("no local user found");
-        }
-      }, function(e){defer.reject(e);});
-      return defer.promise;
     }
 
     function login(username, password){

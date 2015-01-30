@@ -27,24 +27,31 @@
       });
     }
     function doRefresh(){
-      Orders.list().then(function(data){
+      Orders.list($rootScope.user.token.access_token).then(function(data){
         $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
       });
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }
     vm.remove = function(id){
-      Orders.remove(id).then(function(result){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
+      Orders.remove(id, $rootScope.user.token.access_token).then(function(result){
         activate();
       });
     }
     function confirmReceivingGoods(order){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
       if(order.Order.status != 2){
         $log.log("cannot confirm receiving goods for order " +  order.Order.id + " with state " + order.Order.status);
         return;
       }
       var orderId = order.Order.id;
-      Orders.confirmReceivingGoods(orderId).then(function(result){
+      Orders.confirmReceivingGoods(orderId, $rootScope.user.token.access_token).then(function(result){
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
       });

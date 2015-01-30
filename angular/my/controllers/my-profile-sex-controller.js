@@ -22,7 +22,10 @@
     }
 
     function saveProfile(){
-      Profile.editProfile(_.extend($rootScope.user.profile.User, {sex: vm.sex})).then(function(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Profile.editProfile(_.extend($rootScope.user.profile.User, {sex: vm.sex}), $rootScope.user.token.access_token).then(function(){
         $rootScope.user.profile.User.sex = vm.sex;
         $state.go("app.my-profile");
       }, function(e){

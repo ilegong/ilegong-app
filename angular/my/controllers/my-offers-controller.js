@@ -10,7 +10,7 @@
     vm.getOfferDesc = function(offer){return Offers.getOfferStatus(offer).desc};
     activate();
     function activate() {
-      Offers.list().then(function(data){
+      Offers.list($rootScope.user.token.access_token).then(function(data){
         vm.sharedOffers = data.sharedOffers;
         vm.expiredIds = data.expiredIds;
         vm.soldOuts = data.soldOuts;

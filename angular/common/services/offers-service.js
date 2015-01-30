@@ -17,9 +17,9 @@
       getOfferStatus: getOfferStatus, 
       isOfStates: isOfStates
     }
-    function list(){
+    function list(accessToken){
       var defer = $q.defer();
-      Base.get('/api_orders/my_offers.json?access_token=' + Users.getTokenLocally().access_token).then(function(item){
+      Base.get('/api_orders/my_offers.json?access_token=' + accessToken).then(function(item){
         defer.resolve(item);    
       }, function(e){defer.reject(e)});
       return defer.promise;

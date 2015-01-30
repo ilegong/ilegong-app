@@ -18,16 +18,16 @@
       vm.state = $stateParams.state;
       vm.addresses = $rootScope.addresses;
       vm.defaultAddress = $rootScope.getDefaultAddress();
-      Addresses.list().then(function(addresses){
-        $rootScope.addresses = addresses;
-      });
       $scope.$watch('addresses', function(newAddresses, oldAddresses){
         vm.addresses = newAddresses;
         vm.defaultAddress = $rootScope.getDefaultAddress();
       });
     }
     function doRefresh(){
-      Addresses.list().then(function(addresses){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
         $rootScope.addresses = addresses;
       });
       $scope.$broadcast('scroll.refreshComplete');
@@ -46,7 +46,10 @@
     }
 
     function setDefaultAddress(defaultAddress){
-      Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id).then(function(result){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id, $rootScope.user.token.access_token).then(function(result){
         _.each($rootScope.addresses, function(address){
           address.OrderConsignees.status = (defaultAddress.OrderConsignees.id == address.OrderConsignees.id) ? 1 : 0;
         });

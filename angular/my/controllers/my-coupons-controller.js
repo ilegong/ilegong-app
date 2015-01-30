@@ -17,7 +17,7 @@
       vm.invalidCoupons = [];
       vm.showInvalidCoupons = false;
       vm.currentDate = new Date();
-      Coupons.getCoupons().then(function(data){
+      Coupons.getCoupons($rootScope.user.token.access_token).then(function(data){
         _.each(data.coupons, function(coupon){
           coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
           coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
@@ -54,7 +54,7 @@
       return _.find(vm.brands, function(brand){return brand.Brand.id == brandId});
     }
     function doRefresh(){
-      Coupons.getCoupons().then(function(data){
+      Coupons.getCoupons($rootScope.user.token.access_token).then(function(data){
         _.each(data.coupons, function(coupon){
           coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
           coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);

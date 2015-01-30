@@ -88,7 +88,10 @@
       vm.count=Number(vm.count)+1;
     };
     function confirmComment(){
-      Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null).then(function(data){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null, $rootScope.user.token.access_token).then(function(data){
         activate();
       });
     }
@@ -99,22 +102,22 @@
         $rootScope.alertMessage("购买数量请输入正整数");    
         return;
       }
-      $rootScope.ensureLogin().then(function(){
-        Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0).then(function(result){
-          Carts.getCartItems().then(function(result){
-            $rootScope.updateCart(result);
-            if(toCart){
-              vm.showTabs();
-              $state.go('app.cart');
-            }
-            else{
-              $rootScope.alertMessage('商品添加成功。');
-            }
-          });
-        }, function(e){$log.log("add to cart failed: ").log(e)});
-      }, function(toLogin){
-        $state.go('app.product-detail-account-login');
-      });
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.product-detail-account-login');
+      }
+
+      Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+        Carts.getCartItems().then(function(result){
+          $rootScope.updateCart(result);
+          if(toCart){
+            vm.showTabs();
+            $state.go('app.cart');
+          }
+          else{
+            $rootScope.alertMessage('商品添加成功。');
+          }
+        });
+      }, function(e){$log.log("add to cart failed: ").log(e)});
     } 
   }
 })(window, window.angular);

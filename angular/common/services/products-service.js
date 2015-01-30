@@ -20,7 +20,7 @@
     }
     function getProduct(id){
       var defer = $q.defer();
-      Base.get('/api_orders/product_detail/'+id+'.json?access_token='+Users.getTokenLocally().access_token).then(function(product){
+      Base.get('/api_orders/product_detail/'+id+'.json').then(function(product){
         defer.resolve(product);
       }, function(e){defer.reject(e)});
       return defer.promise;
@@ -31,12 +31,12 @@
     function getProductComment(id){
       return Base.get('/comments/getlist/Product/'+id+'.json')
     }
-    function makeComment(id,rating,body,pictures){
+    function makeComment(id,rating,body,pictures, accessToken){
 
       var defer = $q.defer();
       var json = {'data_id':""+id,'type':'Product','rating':""+rating,'body':body,'pictures':pictures};
       $log.log('posting comment!!!');
-      Base.post('/api_orders/comment_add.json?access_token='+Users.getTokenLocally().access_token,json).then(function(result){
+      Base.post('/api_orders/comment_add.json?access_token=' + accessToken,json).then(function(result){
         $log.log('success!!!');
         $log.log(result);
         defer.resolve(result);
