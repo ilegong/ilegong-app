@@ -6,12 +6,15 @@
     padding: 0;
     width: 50%;
     float: left;
+    background-color: #fff;
     img{
       width: 100%;
       display: block;
+      padding-bottom: 0.5em;
     }
     .store{
       border: 1px solid $border_color;
+      margin-right: 10px;
     }
   }
   .store-container + .store-container{

@@ -79,8 +79,16 @@ a{
   @extend .text;
   font-size: 0.9em !important;
 }
+.text-tiny {
+  @extend .text;
+  font-size: 0.7em !important;
+}
 .text-sub-muted {
   @extend .text-muted;
+  @extend .text-sub;
+}
+.text-sub-energized {
+  @extend .text-energized;
   @extend .text-sub;
 }
 .text-large{
@@ -211,6 +219,9 @@ a{
 }
 
 // images
+.radius-10{
+  border-radius: 0.5em;
+}
 img.full{
   width: 100%;
 }
@@ -524,5 +535,15 @@ ion-item.item {
         margin: 0;
       }
     }
+  }
+}
+
+//
+.elements{
+  display: block;
+  overflow: hidden;
+  white-space: normal;
+  .element-container{
+    display: inline-block;
   }
 }

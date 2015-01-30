@@ -1,7 +1,7 @@
 <ion-view title="朋友说" hide-back-button='true'>
-  <ion-content class='stores'>
+  <ion-content class='stores padding'>
     <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'208px'">
-      <div class="store" style="margin-right: 10px;">
+      <div class="store">
         <a ui-sref="store.home({storeId: store.Brand.id})">
           <img src="{{store.Brand.coverimg}}" alt="">
         </a>  

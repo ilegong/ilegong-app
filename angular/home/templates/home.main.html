@@ -37,15 +37,10 @@
       <h4>
         朋友的推荐
       </h4>
-      <div class="row"  ng-repeat="mainItem in vm.mainTagItems" ng-if="$index % 2 == 0">
-        <div class="col">
-          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index].slug})">
-            <img class="full" src="{{vm.mainTagItems[$index].img}}"/>
-          </a>
-        </div>
-        <div class="col" ng-if="$index + 1 < vm.mainTagItems.length">
-          <a ui-sref="app.category-detail({slug:vm.mainTagItems[$index + 1].slug})">
-            <img class="full" src="{{vm.mainTagItems[$index + 1].img}}"/>
+      <div class="row"  ng-repeat="mi in vm.mainTagItems" ng-if="$index % 2 == 0">
+        <div class="col" ng-repeat="mainItem in vm.mainTagItems.slice($index, $index+2)">
+          <a ui-sref="app.category-detail({slug:mainItem.slug, name: mainItem.name})">
+            <img class="full" src="{{mainItem.img}}"/>
           </a>
         </div>
       </div>

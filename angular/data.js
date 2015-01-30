@@ -19,14 +19,14 @@ var homeJson = {
   {"id":15,"slug":"hui-jia-chi-fang","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p3.jpg"}
   ],
   "mainTagItems":[
-  {"id":3,"slug":"shuiguoganguo","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c1.jpg"},
-  {"id":5,"slug":"xiaochilingshi","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c2.jpg"},
-  {"id":8,"slug":"dangaotiandian","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c3.jpg"},
-  {"id":12,"slug":"chu-fang-tiao-wei","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c4.jpg"},
-  {"id":9,"slug":"lianyoumimian","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c5.jpg"},
-  {"id":6,"slug":"jiushuichayin","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c6.jpg"},
-  {"id":4,"slug":"liangyou","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c7.jpg"},
-  {"id":10,"slug":"shuichanhaixian","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c8.jpg"}
+  {"id":3,"slug":"shuiguoganguo", name: '水果干果', "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c1.jpg"},
+  {"id":5,"slug":"xiaochilingshi", name: '小吃零食',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c2.jpg"},
+  {"id":8,"slug":"dangaotiandian", name: '蛋糕甜点',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c3.jpg"},
+  {"id":12,"slug":"chu-fang-tiao-wei", name: '厨房调味',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c4.jpg"},
+  {"id":9,"slug":"lianyoumimian", name: '粮油米面',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c5.jpg"},
+  {"id":6,"slug":"jiushuichayin", name: '酒水茶饮',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c6.jpg"},
+  {"id":4,"slug":"liangyou", name: '粮油',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c7.jpg"},
+  {"id":10,"slug":"shuichanhaixian", name: '水产海鲜',"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c8.jpg"}
   ],
   "hotItems":[
   {"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/d3.jpg","id":705},
