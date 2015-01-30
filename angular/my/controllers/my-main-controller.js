@@ -70,10 +70,6 @@
       });
     }
     function profileClick(){
-      $rootScope.myMain.defer = $q.defer();
-      $rootScope.myMain.defer.promise.then(function(result){
-        activate();
-      })
       if(vm.loggedIn){
         $state.go("app.my-profile");
       }

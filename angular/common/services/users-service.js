@@ -9,9 +9,7 @@
     var self = this;
     self.token = null;
     self.user = null;
-    self.onGetTokenSuccessfully = onGetTokenSuccessfully;
     return {
-      init: init,
       getToken: getToken,
       getUser: getUser,
       getCaptchaImageUrl: getCaptchaImageUrl, 
@@ -24,28 +22,6 @@
       refreshToken:refreshToken
     }
 
-    function init(){
-      var defer = $q.defer();
-      Base.getLocal('token').then(function(token){
-        if(!_.isEmpty(token)){
-          $rootScope.user.token = token;
-          if($rootScope.user.token.expires_at >= (((new Date()).valueOf())/1000)){
-            Base.getLocal('profile').then(function(profile){
-              $rootScope.user.profile = profile;
-            });
-            $rootScope.onUserInited(token);
-            defer.resolve(token);
-          }
-          else{
-            refreshToken(token.refresh_token, defer);
-          }
-        }
-        else{
-          defer.reject('token not found locally');
-        }
-      }, function(e){defer.reject(e)});
-      return defer.promise;
-    }
     function getToken(){
       var defer = $q.defer();
       Base.getLocal('token').then(function(token){
@@ -75,23 +51,17 @@
     }
 
     function login(username, password){
-      var defer = $q.defer();
-      Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + config.app.client_id).then(function(token) {
-          self.onGetTokenSuccessfully(token, defer);
-        }, function(e){defer.reject(e)});
-      return defer.promise; 
+      return Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + config.app.client_id).then(function(token) {
+        $rootScope.onUserLoggedIn(token, true);
+        return $rootScope.user.token;
+      });
     }
-    function refreshToken(refreshToken, defer){
-      Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
-        self.onGetTokenSuccessfully(token, defer);
-      },function(error){defer.reject(error)})
+    function refreshToken(refreshToken){
+      return Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
+        $rootScope.onUserLoggedIn(token, true);
+        return $rootScope.user.token;
+      })
     }
-    function onGetTokenSuccessfully(token, defer){
-      $rootScope.user.token.expires_at = token.expires_in + ((new Date()).valueOf())/1000;
-      Base.setLocal('token', $rootScope.user.token);
-      $rootScope.onUserLoggedIn(token);
-    }
-
     function getCaptchaImageUrl(){
       return Base.getUrl("/check/captcha?type=app&device_uuid=" + Base.getDevice().uuid);
     }
@@ -127,7 +97,6 @@
     }
 
     function register(mobile, password, smsCode){
-      var defer = $q.defer();
       var data = {
         client_id: config.app.client_id, 
         mobile: mobile, 
@@ -136,10 +105,10 @@
         device_uuid: Base.getDevice().uuid
       }
       var nickname = "用户" + mobile.substring(7)
-      Base.get('/oauth/register?client_id=' + config.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
-        self.onGetTokenSuccessfully(token, defer);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/oauth/register?client_id=' + config.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
+        $rootScope.onUserLoggedIn(token, true);
+        return $rootScope.user.token;
+      });
     }
     function aliPay(orderId){
       var defer = $q.defer();

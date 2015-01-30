@@ -149,18 +149,42 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Orders, Carts, Users, Addresses, Profile) {
-    $rootScope.config = config;
-    $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
-    $rootScope.addresses = $rootScope.addresses || [];
-    $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
-    $rootScope.myMain = $rootScope.myMain || {defer:{}};
-    $rootScope.user = $rootScope.user || {token:{}, profile:{}};
-    $rootScope.alert = {message: ''};
-    $rootScope.productDetailComment = $rootScope.productDetailComment || {data:[],flag:0};
-    Users.init();
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Base, Orders, Carts, Users, Addresses, Profile) {
+    var vm = this;
+    activate();
 
-    $rootScope.onUserLoggedIn = function(token){
+    function activate(){
+      $rootScope.config = config;
+      $rootScope.user = $rootScope.user || {token:{}, profile:{}};
+      $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
+      $rootScope.addresses = $rootScope.addresses || [];
+      $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
+      $rootScope.alert = {message: ''};
+
+      Base.getLocal('token').then(function(token){
+        if(_.isEmpty(token)){
+          return;
+        }
+
+        var isExpired = token.expires_at <= (((new Date()).valueOf())/1000);
+        if(isExpired){
+          return Users.refreshToken(token.refresh_token);
+        }
+
+        $rootScope.user.token = token;
+        Base.getLocal('profile').then(function(profile){
+          $rootScope.user.profile = profile;
+        });
+        $rootScope.onUserLoggedIn(token, false);
+      }, function(e){});
+    }
+    $rootScope.onUserLoggedIn = function(token, shouldRefreshToken){
+      if(shouldRefreshToken){
+        token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
+        Base.setLocal('token', $rootScope.user.token);
+      }
+      $rootScope.user.token = token;
+
       Profile.getProfile().then(function(profile){
         $rootScope.user.profile = profile;
       });
