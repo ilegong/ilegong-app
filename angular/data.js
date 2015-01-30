@@ -2669,7 +2669,8 @@ var CartInfo = {
               "price":"58",
               "name":"\u9ed4\u9633\u4e07\u6a59\uff08\u51b0\u7cd6\u6a59\uff095\u65a4\u88c5",
               "used_coupons":"", 
-              "spec": "Hiya"
+              "spec": "Hiya", 
+              "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201412/thumb_s/49c3c73c713_1209.jpg"
             }
           },
           "used_coupons":null
