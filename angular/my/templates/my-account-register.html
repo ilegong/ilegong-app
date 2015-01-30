@@ -29,14 +29,12 @@
         <input type="password" ng-model='vm.user.password' placeholder="密码">
       </label>
     </div>
-    <div class="card" ng-show="vm.user.registerFailed">
-      <span class="item item-icon-left alert-error">
-        <i class="icon ion-close"></i>
-        注册失败
-      </span>
-    </div>
     <div class="padding">
       <button class="button button-block button-positive" ng-disabled="!vm.shouldEnableRegisterButton()" ng-click="vm.register()">注册</button>
     </div>
+    <ul class="padding">
+      <li>{{vm.user}}</li>
+      <li></li>
+    </ul>
   </ion-content>
 </ion-view>

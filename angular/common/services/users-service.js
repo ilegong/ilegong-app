@@ -74,7 +74,6 @@
       var nickname = "用户" + mobile.substring(7)
       return Base.get('/oauth/register?client_id=' + config.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
         $rootScope.onUserLoggedIn(token, true);
-        return $rootScope.user.token;
       });
     }
     function aliPay(orderId){
