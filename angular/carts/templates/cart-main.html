@@ -9,7 +9,7 @@
   <ion-content style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div ng-repeat="brand in vm.brands"  ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
+    <div ng-repeat="brand in vm.brands" ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
       <div class="item item-icon-left item-avatar">
         <img src="{{brand.Brand.coverimg}}"></img>
         <i class="icon pys-350 {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand.Brand.id)" ng-show="!vm.editMode">
@@ -25,7 +25,7 @@
           </ion-option-button>
           <div class="item-icon-left item-thumbnail-left">
             <img src="{{cartItem.Cart.coverimg}}"></img>
-            <i class="icon pys-350 {{cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}"   ng-click="vm.toggleCartItem(cartItem,$event);">
+            <i class="icon pys-350 {{cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleCartItem(cartItem,$event);">
               </span>
             </i>
             <span class="product-content">
