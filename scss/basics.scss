@@ -543,7 +543,18 @@ ion-item.item {
   display: block;
   overflow: hidden;
   white-space: normal;
+  padding-left: 10px;
   .element-container{
     display: inline-block;
+    width: 50%;
+    background-color: #fff;
+    margin-top: 10px;
+    .element{
+      margin-right: 10px;
+      border: 1px solid $border_color;
+      a{
+        color: $grey;
+      }
+    }
   }
 }
