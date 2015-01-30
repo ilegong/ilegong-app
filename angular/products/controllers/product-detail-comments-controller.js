@@ -7,9 +7,8 @@
   /* @ngInject */
   function ProductDetailCommentsCtrl($log, $rootScope, $scope, $stateParams,Products){
     var vm = this;
-    vm.getReputationComments = function(){return _.filter(vm.comments,function(comment){return comment.is_shichi_tuan_comment != '1'})}
-    vm.geTyingComments = function(){return _.filter(vm.comments,function(comment){return comment.is_shichi_tuan_comment == '1'})}
     vm.isShowStar = function(comment, starIndex){return comment.rating > starIndex}  
+    vm.getComments = function(type){return _.filter(vm.comments,function(comment){return comment.is_shichi_tuan_comment == type})};
 
     activate();
     function activate(){

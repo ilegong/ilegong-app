@@ -2395,7 +2395,7 @@ var productComment = [
       "comment_type": null, 
       "updated": "2014-12-23 14:27:42", 
       "created": "2014-12-23 14:27:42", 
-      "is_shichi_tuan_comment": "0", 
+      "is_shichi_tuan_comment": "1", 
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
       "userPhoto": "http://wx.qlogo.cn/mmopen/v6XbW38nFORka8CbQfeEOdfvQ1tITW74gaExJg39pCGzFD6uR2jL7oUbHzlX6iacFldSsKanGow152VnvkfErpzpZbdE9gBj0/0"
@@ -2417,7 +2417,7 @@ var productComment = [
       "comment_type": null, 
       "updated": "2014-12-23 09:33:21", 
       "created": "2014-12-23 09:33:21", 
-      "is_shichi_tuan_comment": "0", 
+      "is_shichi_tuan_comment": "1", 
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
       "userPhoto": "http://wx.qlogo.cn/mmopen/ajNVdqHZLLBhL2eY0PzYkppMHC2RwDQc1gicCLlDCZrNqTrEaFstO5ZrOFBpFrh700ibibticBmibbdHqmcgxl3dT0Q/0"

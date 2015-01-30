@@ -4,19 +4,19 @@
       <a class="tab-item {{vm.type == 0 ? 'tab-item-active':''}}" ng-click="vm.type = 0">
         <span class="text-large">口碑评价</span>
         <span class="text-sub">
-          ({{vm.getReputationComments().length}})
+          ({{vm.getComments(0).length}})
         </span>
       </a>
       <a class="tab-item {{vm.type == 1 ?'tab-item-active':''}}" ng-click="vm.type = 1">
         <span class="text-large">试吃评价</span>
         <span class="text-sub">
-          ({{vm.geTyingComments().length}})
+          ({{vm.getComments(1).length}})
         </span>
       </a>
     </div>
   </div>
   <ion-content class="content has-tabs-top">
-    <div class="item" ng-repeat="comment in vm.comments | filter: {is_shichi_tuan_comment: vm.type == 1?1:0}">
+    <div class="item" ng-repeat="comment in vm.getComments(vm.type)">
       <p class="item-image-small-left"> 
         <img ng-show="comment.userPhoto != null" class="item-image user-image"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
         <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
@@ -39,6 +39,10 @@
       <span class="text-muted fr">
         购买时间：{{comment.created}}
       </span>
+    </div>
+
+    <div class="centered-container padding">
+      <span class="text-large">暂时木有评价哦</span>
     </div>
   </ion-content>
 </ion-view>
