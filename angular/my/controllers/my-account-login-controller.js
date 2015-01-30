@@ -8,6 +8,7 @@
   function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, config, Users){
     var vm = this;
     vm.login = login;
+    vm.resetPassword = resetPassword;
     vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
 
     activate();
@@ -23,6 +24,9 @@
       }, function(error){
         $rootScope.alertMessage("您输入的账户和密码不匹配！");
       })
+    }
+    function resetPassword(){
+      vm.password = "";
     }
   }
 })(window, window.angular);
