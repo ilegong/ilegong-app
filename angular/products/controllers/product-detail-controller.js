@@ -21,6 +21,8 @@
     vm.toTryingCommentsPage = toTryingCommentsPage;
     vm.toReputationCommentsPage = toReputationCommentsPage;
     vm.toBrand = toBrand;
+    vm.addToCart = addToCart;
+    vm.readyToBuy = readyToBuy;
     activate();
     
     function activate(){
@@ -95,13 +97,19 @@
         activate();
       });
     }
-    vm.addToCart = function(toCart){
-      var re = /^[1-9]+[0-9]*]*$/;
-      if (!re.test(vm.count))  
-      {  
-        $rootScope.alertMessage("购买数量请输入正整数");    
-        return;
+    function readyToBuy(){
+      if(Number(vm.count) !== vm.count && vm.count %1 !==0){
+        return false;
       }
+      if(!_.isEmpty(vm.product)){
+        var hasSpecs = !_.isEmpty(vm.product.Product.specs) && !_.isEmpty(vm.product.Product.specs.choices)
+        if(hasSpecs && vm.currentSpecs == 0){
+          return false;
+        }
+      }
+      return true;
+    }
+    function addToCart(toCart){
       if(!$rootScope.user.loggedIn){
         return $state.go('app.product-detail-account-login');
       }

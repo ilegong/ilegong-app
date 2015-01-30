@@ -155,10 +155,10 @@
   </ion-content>
   <ion-footer-bar class="footer footer-bar">
     <div class="footer-bar-container">
-      <span ng-click="vm.addToCart(true);" class="button pys-button button-energized fl" style="margin-right: 0.5em;">
+      <span ng-click="vm.addToCart(true);" class="button pys-button button-energized fl" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
         <strong>立即购买</strong>
       </span>
-      <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive fl" style="margin-right: 0.5em;">
+      <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive fl" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
         <strong>加入购物车</strong>
       </span>
       <div ng-click="vm.showTabs();" ui-sref="app.cart"  class="centered-container fr">
