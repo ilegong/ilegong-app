@@ -30,11 +30,7 @@
     }
 
     function list(accessToken){
-      var defer = $q.defer();   
-      Base.get('/api_orders/mine.json?access_token=' + accessToken).then(function(item){
-        defer.resolve(item);
-      });
-      return defer.promise;
+      return Base.get('/api_orders/mine.json?access_token=' + accessToken);
     }
     function isOfStates(order, states){
       if(states == -1){
@@ -60,32 +56,16 @@
       return defer.promise;
     }
     function cancelOrder(id, accessToken){
-      var defer = $q.defer();
-      Base.get('/api_orders/confirm_undo/'+id+'.json?access_token=' + accessToken).then(function(result){
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/confirm_undo/'+id+'.json?access_token=' + accessToken);
     }
     function remove(id, accessToken){
-      var defer = $q.defer()      
-      Base.get('/api_orders/confirm_remove/'+id+'.json?access_token=' + accessToken).then(function(result){
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/confirm_remove/'+id+'.json?access_token=' + accessToken);
     }
     function confirmReceivingGoods(id, accessToken){
-      var defer = $q.defer();
-      Base.get('/api_orders/confirm_receive/'+id+'.json?access_token=' + accessToken).then(function(result){
-        defer.resolve(result);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/api_orders/confirm_receive/'+id+'.json?access_token=' + accessToken);
     }
     function getOrderDetail(orderId, accessToken){
-      var defer = $q.defer();
-      Base.get('/apiOrders/order_detail/' + orderId + '.json?access_token=' + accessToken).then(function(item){
-        defer.resolve(item);
-      }, function(e){defer.reject(e)});
-      return defer.promise;
+      return Base.get('/apiOrders/order_detail/' + orderId + '.json?access_token=' + accessToken);
     }
   }
 })(window, window.angular);
