@@ -32,7 +32,7 @@
         暂无红包___Fix me
       </span>
     </div>
-    <div class="item">
+    <div class="item" ng-show="vm.hasSpecs()">
       <span class="item-label">规格:</span>
       <span class="item-value" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
         <span class="specs" ng-class="{checked: vm.specsChecks[ite_name][ite].value}" ng-repeat="ite in ite_content" ng-init="vm.specsChecks[ite_name][ite] = {value:false}" ng-click="vm.specsClick(ite_name,ite);">
@@ -128,11 +128,11 @@
         购买时间：{{comment.created}}
       </span>
     </div>
-    <div ng-show="vm.getReputationComments().length > 3" class="item evaluate">
+    <a ng-show="vm.getReputationComments().length > 3" class="item evaluate" ng-click="vm.toReputationCommentsPage()">
       <div class="all-comment">
         查看全部评价
       </div>
-    </div>
+    </a>
 
     <div class='item'>
       相关商品推荐

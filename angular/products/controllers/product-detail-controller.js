@@ -15,6 +15,7 @@
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;
+    vm.hasSpecs = hasSpecs;
     vm.showTabs = function(){$rootScope.hideTabs = false;}
     vm.getReputationComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
     vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
@@ -58,7 +59,12 @@
       vm.specsChecks[group][name].value = true;
       vm.currentSpecs = _.find(_.pairs(vm.product.Product.specs.map),function(item){return item[1].name == name})[0];
     } 
-
+    function hasSpecs(){
+      if(_.isEmpty(vm.product)){
+        return false;
+      }
+      return !_.isEmpty(vm.product.Product.specs) && !_.isEmpty(vm.product.Product.specs.choices);
+    }
 
     function toTryingCommentsPage(){
       if(vm.from == -1){//from main
@@ -101,11 +107,8 @@
       if(Number(vm.count) !== vm.count && vm.count %1 !==0){
         return false;
       }
-      if(!_.isEmpty(vm.product)){
-        var hasSpecs = !_.isEmpty(vm.product.Product.specs) && !_.isEmpty(vm.product.Product.specs.choices)
-        if(hasSpecs && vm.currentSpecs == 0){
-          return false;
-        }
+      if(vm.hasSpecs() && vm.currentSpecs == 0){
+        return false;
       }
       return true;
     }
