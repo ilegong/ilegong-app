@@ -23,6 +23,9 @@
     activate();
 
     function activate(){
+      vm.confirmErrors = {
+        'invalid_address': '请设置默认收货地址'
+      };
       vm.cart = $rootScope.cart;
       vm.cartItems = $rootScope.cart.cartItems;
       
@@ -34,7 +37,9 @@
       vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
       vm.defaultAddress = $rootScope.getDefaultAddress();
       vm.showProductCoupon = showProductCoupon;
-      Carts.getCartInfo(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
+
+      var consigneeId = _.isEmpty(vm.defaultAddress) ? '' : vm.defaultAddress.OrderConsignees.id;
+      Carts.getCartInfo(vm.pidList, consigneeId, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
         $log.log("get cart info successfully: ").log(result);
         vm.brands = result.brands;
         vm.shipFees = result.shipFees; 
@@ -46,6 +51,10 @@
         if(_.isEmpty(vm.cart.pidList)){
           $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
         }
+      }, function(e){
+        $log.log("get cart info error: ").log(e);
+        $ionicHistory.goBack();
+        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
       });
       $scope.$watch("addresses", function(newAddress, oldAddress){
         vm.defaultAddress = $rootScope.getDefaultAddress();

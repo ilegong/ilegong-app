@@ -2,7 +2,7 @@
   <ion-header-bar align-title="left" class="bar-subheader padding" ng-show="!vm.isLoggedIn" > 
     <div class="row">
       <div class="col col-75 login-text">温馨提示：登陆后您可以同步电脑，微信与APP购物车中的商品。</div>
-      <button class="button login-button" ng-click="vm.toLoginPage()">马上登陆</button>
+      <button class="button login-button" ui-sref="app.cart-account-login">马上登陆</button>
     </div>
   </ion-header-bar>
 
@@ -65,7 +65,7 @@
       <span class="message">
         购物车还是空的，去选点好吃的吧！
       </span>
-      <a class="button button-energized" ng-click="vm.toHomePage()">去逛逛</a>
+      <a class="button button-energized" ui-sref="app.home">去逛逛</a>
     </div>
   </ion-content>
   

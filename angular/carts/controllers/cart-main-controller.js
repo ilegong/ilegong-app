@@ -17,7 +17,6 @@
     vm.checkAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = true;})};
     vm.uncheckAllCartItems = function(){_.each($rootScope.cart.cartItems,function(cartItem){cartItem.checked = false;})};;
     vm.getCheckedNumber = function(){return _.filter($rootScope.cart.cartItems,function(item){return item.checked;}).length;};
-    vm.toLoginPage = function(){$state.go('app.cart-account-login')}; vm.toHomePage = function(){$state.go('app.home');};
     vm.brandChecked = function(id) {return _.all(vm.getCartItemsOfBrand(id),function(cartItem){return cartItem.checked;});};
     vm.toggleBrand = toggleBrand;
     vm.doRefresh = doRefresh;
@@ -109,7 +108,7 @@
         $state.go('app.cart-confirmation');
       }
       else{
-        vm.toLoginPage();
+        $state.go('app.cart-account-login');
       }
     }
   }

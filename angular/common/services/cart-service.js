@@ -17,7 +17,12 @@
       var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
       var defer = $q.defer();
       Base.post('/api_orders/cart_info.json?access_token=' + accessToken, json).then(function(result) {
-        defer.resolve(result.data);
+        if(result.data.success){
+          defer.resolve(result.data);  
+        }
+        else{
+          defer.reject(result.data);
+        }
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
