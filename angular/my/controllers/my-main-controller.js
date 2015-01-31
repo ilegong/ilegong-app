@@ -17,11 +17,11 @@
     activate();
 
     function activate() {
-      vm.loggedIn = !_.isEmpty($rootScope.user.token);
+      vm.loggedIn = $rootScope.user.loggedIn;
       vm.user = $rootScope.user.profile.User;
       vm.pendingStates = vm.getPendingStates([]);
-      $scope.$watch('user.token', function(newToken, oldToken) {
-        vm.loggedIn = !_.isEmpty($rootScope.user.token);
+      $scope.$watch('user.loggedIn', function(newToken, oldToken) {
+        vm.loggedIn = $rootScope.user.loggedIn;
       });
       $scope.$watch('orders.orders', function(newOrders, oldOrders) {
         vm.pendingStates = vm.getPendingStates(newOrders);
@@ -32,35 +32,34 @@
     }
 
     function toOrders(p_state){
-      $rootScope.ensureLogin().then(function(){
-        $state.go('app.my-orders',{state: p_state});
-      }, function(toLogin){
-        $state.go('app.my-account-login');
-      });
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+      $state.go('app.my-orders',{state: p_state});
     }
 
     function toCoupons(){
-      $rootScope.ensureLogin().then(function(){
-        $state.go('app.my-coupons');
-      }, function(toLogin){
-        $state.go('app.my-account-login');
-      });      
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
+      $state.go('app.my-coupons');
     }
 
     function toOffer(){
-      $rootScope.ensureLogin().then(function(){
-        $state.go('app.my-offers');
-      }, function(toLogin){
-        $state.go('app.my-account-login');
-      });  
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
+      $state.go('app.my-offers');
     }
 
     function toAddresses(){
-      $rootScope.ensureLogin().then(function(){
-        $state.go('app.my-addresses',{state:0,addrId:0});
-      }, function(toLogin){
-        $state.go('app.my-account-login');
-      });        
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
+      }
+
+      $state.go('app.my-addresses',{state:0,addrId:0});
     }
 
     function getPendingStates(orders){
@@ -70,12 +69,11 @@
       });
     }
     function profileClick(){
-      if(vm.loggedIn){
-        $state.go("app.my-profile");
+      if(!$rootScope.user.loggedIn){
+        return $state.go('app.my-account-login');
       }
-      else{
-        $state.go("app.my-account-login");
-      }
+
+      $state.go("app.my-profile");
     }
   } 
 })(window, window.angular);

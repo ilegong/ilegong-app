@@ -149,7 +149,7 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Base, Orders, Carts, Users, Addresses, Profile) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Base, Orders, Carts, Users, Addresses, Profile, Stores) {
     var vm = this;
     activate();
 
@@ -159,6 +159,7 @@
       $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
       $rootScope.addresses = $rootScope.addresses || [];
       $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
+      $rootScope.brands = [];
       $rootScope.alert = {message: ''};
 
       Base.getLocal('token').then(function(token){
@@ -177,6 +178,10 @@
         });
         $rootScope.onUserLoggedIn(token, false);
       }, function(e){});
+
+      Stores.list().then(function(data){
+        $rootScope.brands = data.brands;
+      });
     }
     $rootScope.onUserLoggedIn = function(token, shouldRefreshToken){
       if(shouldRefreshToken){
