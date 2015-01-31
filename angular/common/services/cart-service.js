@@ -13,8 +13,8 @@
       editNum:editNum, 
       getCartInfo: getCartInfo
     }
-    function getCartInfo(pid_list,addressId,coupon_code, accessToken){
-      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code};
+    function getCartInfo(pid_list, coupon_code, accessToken){
+      var json = {"pid_list":pid_list, "coupon_code":coupon_code};
       var defer = $q.defer();
       Base.post('/api_orders/cart_info.json?access_token=' + accessToken, json).then(function(result) {
         if(result.data.success){

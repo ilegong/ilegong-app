@@ -23,22 +23,19 @@
       vm.province = vm.city = vm.county = {};
       Addresses.getProvinces().then(function(provinces){
         vm.provinces = provinces;
+        vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
       });
       if(vm.addressId < 0){
         return;
       }      
 
-      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
-        vm.address = _.find(addresses, function(address){return address.OrderConsignees.id == vm.addressId});
-        vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
-
-        var orderConsignees = vm.address.OrderConsignees;        
-        Addresses.getAddress(orderConsignees.province_id, orderConsignees.city_id, orderConsignees.county_id).then(function(data){
-          vm.cities = data.city_list;
-          vm.city = _.find(vm.cities, function(city){return city.id == vm.address.OrderConsignees.city_id});
-          vm.counties = data.county_list;
-          vm.county = _.find(vm.counties, function(county){return county.id == vm.address.OrderConsignees.county_id});
-        });
+      vm.address = _.find($rootScope.addresses, function(address){return address.OrderConsignees.id == vm.addressId});
+      var orderConsignees = vm.address.OrderConsignees;        
+      Addresses.getAddress(orderConsignees.province_id, orderConsignees.city_id, orderConsignees.county_id, $rootScope.user.token.access_token).then(function(data){
+        vm.cities = data.city_list;
+        vm.city = _.find(vm.cities, function(city){return city.id == vm.address.OrderConsignees.city_id});
+        vm.counties = data.county_list;
+        vm.county = _.find(vm.counties, function(county){return county.id == vm.address.OrderConsignees.county_id});
       });
     }
     function onProvinceChanged(province){
@@ -80,7 +77,7 @@
       }
       var t = vm.address.OrderConsignees;
       Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
-        vm.onAddressUpdated();
+        vm.onAddressUpdated($rootScope.user.token.access_token);
       });
     }
     function addAddress(){
@@ -89,7 +86,7 @@
       }
       var t = vm.address.OrderConsignees;
       Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
-        vm.onAddressUpdated();
+        vm.onAddressUpdated($rootScope.user.token.access_token);
       });
     }
     function deleteAddress(addressId){
@@ -98,12 +95,11 @@
       }
       Addresses.deleteAddress(addressId, $rootScope.user.token.access_token).then(function(data){
         $rootScope.alertMessage("已删除该收货地址");
-        vm.onAddressUpdated();
+        vm.onAddressUpdated($rootScope.user.token.access_token);
       });
     }
-    function onAddressUpdated(){
-      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
-        $rootScope.addresses = addresses;
+    function onAddressUpdated(accessToken){
+      $rootScope.reloadAddresses(accessToken).then(function(){
         $ionicHistory.goBack();
       });
     }

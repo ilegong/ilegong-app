@@ -154,6 +154,7 @@
     activate();
 
     function activate(){
+      $rootScope._ = window._;
       $rootScope.config = config;
       $rootScope.user = $rootScope.user || {token:{}, profile:{}, loggedIn: false};
       $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
@@ -194,12 +195,8 @@
       Profile.getProfile(token.access_token).then(function(profile){
         $rootScope.user.profile = profile;
       });
-      Carts.getCartItems(token.access_token).then(function(result){
-        $rootScope.updateCart(result);
-      });
-      Addresses.list(token.access_token).then(function(addresses){
-        $rootScope.addresses = addresses;
-      });
+      $rootScope.reloadCart(token.access_token);
+      $rootScope.reloadAddresses(token.access_token);
       Orders.list(token.access_token).then(function(data){
         $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
       });
@@ -210,16 +207,24 @@
       $rootScope.cart = {cartItems:[], brands:[]};
       $rootScope.addresses = [];
     }
-    $rootScope.updateCart = function(result){
-      $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-      $rootScope.cart.brands = result.brands;
+    $rootScope.reloadCart = function(accessToken){
+      return Carts.getCartItems(accessToken).then(function(result){
+        $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+        $rootScope.cart.brands = result.brands;
+      });
+    }
+    $rootScope.reloadAddresses = function(accessToken){
+      return Addresses.list(accessToken).then(function(addresses){
+        $rootScope.addresses = addresses;
+        $rootScope.$broadcast('addressChanged', addresses);
+      });
     }
     $rootScope.getDefaultAddress = function(){
       var defaultAddress =  _.find($rootScope.addresses, function(address){return address.OrderConsignees.status == 1});
       if(_.isEmpty(defaultAddress) && $rootScope.addresses.length > 0){
         defaultAddress = $rootScope.addresses[0];
       }
-      return defaultAddress || {OrderConsignees: {}};
+      return defaultAddress || {};
     }
     $rootScope.updateOrderState = function(orderId, state){
       var order = _.find($rootScope.orders.orders, function(order){return order.Order.id == orderId});

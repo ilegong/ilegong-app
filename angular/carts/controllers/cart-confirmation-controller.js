@@ -38,9 +38,7 @@
       vm.defaultAddress = $rootScope.getDefaultAddress();
       vm.showProductCoupon = showProductCoupon;
 
-      var consigneeId = _.isEmpty(vm.defaultAddress) ? '' : vm.defaultAddress.OrderConsignees.id;
-      Carts.getCartInfo(vm.pidList, consigneeId, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
-        $log.log("get cart info successfully: ").log(result);
+      Carts.getCartInfo(vm.pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
         vm.brands = result.brands;
         vm.shipFees = result.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
@@ -51,14 +49,17 @@
         if(_.isEmpty(vm.cart.pidList)){
           $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
         }
+
+        $rootScope.reloadCart($rootScope.user.token.access_token);
       }, function(e){
         $log.log("get cart info error: ").log(e);
         $ionicHistory.goBack();
         $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
       });
-      $scope.$watch("addresses", function(newAddress, oldAddress){
+      $rootScope.$on("addressChanged", function(event, addresses){
         vm.defaultAddress = $rootScope.getDefaultAddress();
-      })
+        $log.log('default address changed to: ').log(vm.defaultAddress);
+      });
 
       vm.validCoupons = [];
       vm.invalidCoupons = [];
@@ -87,11 +88,8 @@
           return coupon_t != coupon;
         })
       }
-
-
     }
     function showProductCoupon(products,coupon){
-
       if(!isNumberInvalid(coupon.Coupon.product_list)){
         for(var product in products){
           for(var coupon_pid_index in coupon.Coupon.product_list){
@@ -103,7 +101,6 @@
         return false;
       }
       return false;
-
     }
     function setSiteCoupon(coupon){
       if(vm.siteCoupon != null){

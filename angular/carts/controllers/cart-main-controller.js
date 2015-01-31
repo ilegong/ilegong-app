@@ -38,9 +38,7 @@
     }
     
     function doRefresh(){
-      Carts.getCartItems($rootScope.user.token.access_token).then(function(result){
-        $rootScope.updateCart(result);
-      });
+      $rootScope.reloadCart();
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }

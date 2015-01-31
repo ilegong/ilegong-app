@@ -18,9 +18,10 @@
       vm.state = $stateParams.state;
       vm.addresses = $rootScope.addresses;
       vm.defaultAddress = $rootScope.getDefaultAddress();
-      $scope.$watch('addresses', function(newAddresses, oldAddresses){
-        vm.addresses = newAddresses;
+      $rootScope.$on("addressChanged", function(event, addresses){
+        vm.addresses = $rootScope.addresses;
         vm.defaultAddress = $rootScope.getDefaultAddress();
+        $log.log('default address changed to: ').log(vm.defaultAddress);
       });
     }
     function doRefresh(){
@@ -42,6 +43,9 @@
       }
     }
     function isChecked(address){
+      if(_.isEmpty(vm.defaultAddress)){
+        return false;
+      }
       return address.OrderConsignees.id == vm.defaultAddress.OrderConsignees.id;
     }
 
@@ -50,13 +54,12 @@
         return $state.go('app.my-account-login');
       }
       Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id, $rootScope.user.token.access_token).then(function(result){
-        _.each($rootScope.addresses, function(address){
-          address.OrderConsignees.status = (defaultAddress.OrderConsignees.id == address.OrderConsignees.id) ? 1 : 0;
-        });
-        $rootScope.alertMessage("已修改默认收货地址");
-        vm.defaultAddress = defaultAddress;
+        $rootScope.reloadAddresses($rootScope.user.token.access_token);
         if(vm.isFromOrder()){
           $ionicHistory.goBack();
+        }
+        else{
+          $rootScope.alertMessage("已修改默认收货地址");
         }
       });
     }

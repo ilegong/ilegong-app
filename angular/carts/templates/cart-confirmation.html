@@ -11,7 +11,9 @@
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
         </div>
       </div>
-      <div ng-show="_.isEmpty(vm.defaultAddress)">请选择地址</div>
+      <div ng-show="_.isEmpty(vm.defaultAddress)" style="line-height: 2em;">
+        <div>请选择地址</div>
+      </div>
     </div>
     <div ng-repeat="item in vm.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>

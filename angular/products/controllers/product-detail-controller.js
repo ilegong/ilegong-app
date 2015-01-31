@@ -118,16 +118,14 @@
       }
 
       Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
-        Carts.getCartItems().then(function(result){
-          $rootScope.updateCart(result);
-          if(toCart){
-            vm.showTabs();
-            $state.go('app.cart');
-          }
-          else{
-            $rootScope.alertMessage('商品添加成功。');
-          }
-        });
+        $rootScope.reloadCart($rootScope.user.token.access_token);
+        if(toCart){
+          vm.showTabs();
+          $state.go('app.cart');
+        }
+        else{
+          $rootScope.alertMessage('商品添加成功。');
+        }
       }, function(e){$log.log("add to cart failed: ").log(e)});
     } 
   }
