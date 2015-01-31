@@ -63,7 +63,7 @@
     }
     function verifyMobilePhone(){
       var t = vm.address.OrderConsignees;
-      if(!Base.isMobilePhoneValid(t.mobilephone)){
+      if(!vm.isMobilePhoneValid(t.mobilephone)){
         $rootScope.alertMessage("手机号输入错误");
       }
       else{
@@ -102,13 +102,16 @@
       });
     }
     function onAddressUpdated(){
-      if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
-      }
       Addresses.list($rootScope.user.token.access_token).then(function(addresses){
         $rootScope.addresses = addresses;
         $ionicHistory.goBack();
       });
+    }
+    function isMobilePhoneValid(mobilePhone){
+      if(_.isEmpty(mobilePhone)){
+        return false;
+      }
+      return /^1[3-8][0-9]\d{8}$/.test(mobilePhone.replace(/-/g, ""));
     }
   }   
 })(window, window.angular);

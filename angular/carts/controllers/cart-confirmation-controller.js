@@ -19,6 +19,7 @@
     vm.setSiteCoupon = setSiteCoupon;
     vm.showProductCoupon = showProductCoupon;
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
+    vm.readyToSubmitOrder = readyToSubmitOrder;
     activate();
 
     function activate(){
@@ -134,6 +135,15 @@
     }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;
+    }
+    function readyToSubmitOrder(){
+      if(_.isEmpty(vm.defaultAddress)){
+        return false;
+      }
+      if(_.isEmpty(vm.pidList)){
+        return false;
+      }
+      return true;
     }
     function submitOrder(){
       if(!$rootScope.user.loggedIn){

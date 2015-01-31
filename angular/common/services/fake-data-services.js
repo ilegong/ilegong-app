@@ -23,7 +23,7 @@
       "/Locations/get_city.json": cities,
       "/Locations/get_county.json": counties,
       "/Locations/get_address.json": Address,
-      "/api_orders/order_consignees.json": [],
+      "/api_orders/order_consignees.json": Addresses,
       "/ApiOrders/list_cart.json":Carts,
       "/api_orders/cart_edit_num/\\d+/\\d+.json":CartsEditNumResult,
       "/check/verify": {success: true},
