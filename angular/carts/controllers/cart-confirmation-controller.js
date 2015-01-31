@@ -139,7 +139,7 @@
       if(_.isEmpty(vm.defaultAddress)){
         return false;
       }
-      if(_.isEmpty(vm.confirmedBrandItems())){
+      if(_.isEmpty(vm.confirmedBrandItems)){
         return false;
       }
       return true;

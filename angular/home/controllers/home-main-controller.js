@@ -6,12 +6,12 @@
   .controller('HomeMainCtrl', HomeMainCtrl)
   
   /* @ngInject */
-  function HomeMainCtrl(Users,$rootScope, $scope, $http, $log, $timeout, $ionicSlideBoxDelegate, Products){
+  function HomeMainCtrl(Users,$rootScope, $scope, $http, $log, $timeout, $ionicSlideBoxDelegate, Base){
     var vm = this;
     active();
 
     function active(){
-      Products.list().then(function(data){
+      Base.get('/api_orders/home.json').then(function(data){
         vm.bannerItems = _.filter(data.bannerItems, function(item){return item.id != null});
         vm.tryingItems = data.tryingItems;
         vm.specTagItems = data.specTagItems;

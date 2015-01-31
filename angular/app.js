@@ -177,7 +177,6 @@
         });
         $rootScope.onUserLoggedIn(token, false);
       }, function(e){});
-
       Stores.list().then(function(data){
         $rootScope.brands = data.brands;
       });
@@ -188,7 +187,7 @@
     $rootScope.onUserLoggedIn = function(token, shouldRefreshToken){
       if(shouldRefreshToken){
         token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
-        Base.setLocal('token', $rootScope.user.token);
+        Base.setLocal('token', token);
       }
       $rootScope.user.token = token;
       $rootScope.user.loggedIn = true;

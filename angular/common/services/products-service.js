@@ -8,16 +8,12 @@
   function Products($q,$log, Base,config,Users){
     var self = this;
     return {
-      list: list,
       getProduct:getProduct,
       getProductContent:getProductContent,
       getProductComment:getProductComment,
       makeComment:makeComment
     }
 
-    function list(){
-      return Base.get('/api_orders/home.json');
-    }
     function getProduct(id){
       var defer = $q.defer();
       Base.get('/api_orders/product_detail/'+id+'.json').then(function(product){

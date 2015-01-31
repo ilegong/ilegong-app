@@ -3,7 +3,7 @@
     <div class="item item-text-medium item-icon-right" ng-click="vm.changeAddress()">
       <span class="text text-balanced" style="font-size: 1.3em; left: 0.5em;">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
-      <div ng-show="!_.isEmpty(vm.defaultAddress)"> 
+      <div ng-if="!_.isEmpty(vm.defaultAddress)"> 
         <div class="detail">
           {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
         </div>  
@@ -11,7 +11,7 @@
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
         </div>
       </div>
-      <div ng-show="_.isEmpty(vm.defaultAddress)" style="line-height: 2em;">
+      <div ng-if="_.isEmpty(vm.defaultAddress)" style="line-height: 2em;">
         <div>请选择地址</div>
       </div>
     </div>
