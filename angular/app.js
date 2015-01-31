@@ -157,7 +157,6 @@
       $rootScope._ = window._;
       $rootScope.config = config;
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
-      $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
       $rootScope.brands = [];
       $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
@@ -199,9 +198,7 @@
       });
       $rootScope.reloadCart(token.access_token);
       $rootScope.reloadAddresses(token.access_token);
-      Orders.list(token.access_token).then(function(data){
-        $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
-      });
+      $rootScope.reloadOrders(token.access_token);
     }
     $rootScope.onUserLoggedOut = function(){
       $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
@@ -217,6 +214,13 @@
         $rootScope.$broadcast('addressChanged', addresses);
       });
     }
+    $rootScope.reloadOrders = function(accessToken){
+      return Orders.list(accessToken).then(function(data){
+        $rootScope.user.orders = data.orders;
+        $rootScope.user.order_carts = data.order_carts;
+        $rootScope.user.ship_type = data.ship_type;
+      });
+    }
     $rootScope.getDefaultAddress = function(){
       var defaultAddress =  _.find($rootScope.user.addresses, function(address){return address.OrderConsignees.status == 1});
       if(_.isEmpty(defaultAddress) && $rootScope.user.addresses.length > 0){
@@ -225,7 +229,7 @@
       return defaultAddress || {};
     }
     $rootScope.updateOrderState = function(orderId, state){
-      var order = _.find($rootScope.orders.orders, function(order){return order.Order.id == orderId});
+      var order = _.find($rootScope.user.orders, function(order){return order.Order.id == orderId});
       if(_.isEmpty(order)){
         return;
       }

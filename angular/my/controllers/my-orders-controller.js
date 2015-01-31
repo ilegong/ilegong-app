@@ -17,19 +17,17 @@
     function activate() {
       vm.state =$stateParams.state;
       vm.orderStateName = Orders.getOrderState(vm.state).name;
-      vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
-      vm.brands = $rootScope.orders.brands;
-      vm.order_carts = $rootScope.orders.order_carts;
-      vm.ship_type = $rootScope.orders.ship_type;
+      vm.orders = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, vm.state)});
+      vm.brands = $rootScope.brands;
+      vm.order_carts = $rootScope.user.order_carts;
+      vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){
         $log.log("order " + order.Order.id + " state changed to " + order.Order.status);
-        vm.orders = _.filter($rootScope.orders.orders, function(order){return Orders.isOfStates(order, vm.state)});
+        vm.orders = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, vm.state)});
       });
     }
     function doRefresh(){
-      Orders.list($rootScope.user.token.access_token).then(function(data){
-        $rootScope.orders = {orders: data.orders, brands: data.brands, order_carts: data.order_carts, ship_type: data.ship_type};
-      });
+      $rootScope.reloadOrders($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }

@@ -9,7 +9,6 @@
     var vm = this;
     vm.profileClick = profileClick;
     vm.getPendingStates = getPendingStates;
-    vm.countOfOrders = function(state){return _.filter(vm.orders, function(order){return Orders.isOfStates(order, state)}).length};
     vm.toOrders = toOrders;
     vm.toCoupons = toCoupons;
     vm.toOffer = toOffer;
@@ -23,11 +22,11 @@
       $scope.$watch('user.loggedIn', function(newToken, oldToken) {
         vm.loggedIn = $rootScope.user.loggedIn;
       });
-      $scope.$watch('orders.orders', function(newOrders, oldOrders) {
-        vm.pendingStates = vm.getPendingStates(newOrders);
+      $scope.$watch('user.orders', function(newOrders, oldOrders) {
+        vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
       $rootScope.$on("orderStateChanged", function(event, order){
-        vm.pendingStates = vm.getPendingStates($rootScope.orders.orders);
+        vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
     }
 
