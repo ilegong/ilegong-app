@@ -3,7 +3,7 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="element-container" ng-repeat="product in vm.products">
-      <div class='product'>
+      <div class='element'>
         <a ui-sref="app.product-detail.intro({id: product.id,from:-1})">
           <img class="product-image" title="{{product.title}}" src="{{product.coverimg}}">
           <div class='product-name'>

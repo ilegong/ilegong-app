@@ -1,14 +1,8 @@
 @import "variables";
 
 .category{
-  padding-left: 10px;
   .element-container{
-    width: 50%;
-    margin-top: 10px;
-    .product{
-      border: 1px solid $border_color;
-      background-color: #fff;
-      margin-right: 10px;
+    .element{
       a{
         color: $grey;
         .product-name{
