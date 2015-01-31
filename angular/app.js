@@ -193,15 +193,18 @@
       $rootScope.user.token = token;
       $rootScope.user.loggedIn = true;
 
-      Profile.getProfile(token.access_token).then(function(profile){
-        $rootScope.user.profile = profile;
-      });
+      $rootScope.reloadProfile(token.access_token);
       $rootScope.reloadCart(token.access_token);
       $rootScope.reloadAddresses(token.access_token);
       $rootScope.reloadOrders(token.access_token);
     }
     $rootScope.onUserLoggedOut = function(){
       $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
+    }
+    $rootScope.reloadProfile = function(accessToken){
+      Profile.getProfile(accessToken).then(function(profile){
+        $rootScope.user.profile = profile;
+      });
     }
     $rootScope.reloadCart = function(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
@@ -241,17 +244,6 @@
       $timeout(function(){
         $rootScope.alert.message = "";
       }, config.timeout);
-    }
-    $rootScope.ensureLogin = function(){
-      var defer = $q.defer();
-      var isLoggedIn = !_.isEmpty($rootScope.user.token);
-      if(isLoggedIn){
-        defer.resolve(true);
-      }
-      else{
-        defer.reject(true);
-      }
-      return defer.promise;
     }
   }
 })(window, window.angular);
