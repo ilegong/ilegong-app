@@ -15,7 +15,7 @@
         <div>请选择地址</div>
       </div>
     </div>
-    <div ng-repeat="item in vm.cart.brandItems" ng-init="brand=vm.getBrandById(item.id);">
+    <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
       <div class="item item-avatar">
         <img src="{{brand.Brand.coverimg}}"/>
@@ -47,7 +47,7 @@
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee; height: 3em;">
-          <input type="text" style="padding-left: 1em;" placeholder="给卖家留言：">
+          <input type="text" style="padding-left: 1em;" placeholder="给卖家留言：" ng-model="item.remark">
         </label>
       </div>
       <span ng-init="brand.coupons = [];"></span>
@@ -73,12 +73,17 @@
       应用
       </a>
     </div>
+    <div>
+      {{vm.defaultAddress}}<br/>
+      {{vm.getPidList().length}}<br/>
+      {{vm.readyToSubmitOrder()}}
+    </div>
   </ion-content>
 
-  <ion-footer-bar ng-show="vm.cartItems.length > 0">
+  <ion-footer-bar>
     <div class="footer-bar-container">
       <span class="bar-row fl" style="width: 60%;">
-        共{{vm.pidList.length}}件，实付款
+        共{{vm.getPidList().length}}件，实付款
         <span class="text-energized">
           ￥<span class="text-large">{{vm.totalPrice | currency:''}}</span>
         </span>

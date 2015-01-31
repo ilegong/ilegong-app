@@ -19,6 +19,7 @@
     vm.setSiteCoupon = setSiteCoupon;
     vm.showProductCoupon = showProductCoupon;
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
+    vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
     activate();
 
@@ -26,30 +27,21 @@
       vm.confirmErrors = {
         'invalid_address': '请设置默认收货地址'
       };
-      vm.cart = $rootScope.cart;
-      vm.cartItems = $rootScope.cart.cartItems;
-      
-      vm.couponCode = $rootScope.cart.couponCode;
-      Addresses.getProvinces().then(function(provinces){
-        vm.provinces = provinces;
-      });
-      vm.brands = $rootScope.cart.brands;
-      vm.pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      vm.confirmedBrandItems = {};
+      vm.couponCode = '';
+      vm.provinces = $rootScope.provinces;
+      vm.brands = $rootScope.brands;
       vm.defaultAddress = $rootScope.getDefaultAddress();
       vm.showProductCoupon = showProductCoupon;
 
-      Carts.getCartInfo(vm.pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
-        vm.brands = result.brands;
+      var pidList = _.map(_.filter($rootScope.user.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      Carts.getCartInfo(pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
+        vm.confirmedBrandItems = result.cart.brandItems;
+        $log.log('get cart info successfully:').log(result.cart);
         vm.shipFees = result.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = result.reduced;
         vm.totalPrice = result.total_price;
-        vm.cart = result.cart;
-        vm.pidList = _.flatten(_.map(result.cart.brandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
-        if(_.isEmpty(vm.cart.pidList)){
-          $log.log("get empty pid list when confirm cart info:").log(result.cart.brandItems);
-        }
-
         $rootScope.reloadCart($rootScope.user.token.access_token);
       }, function(e){
         $log.log("get cart info error: ").log(e);
@@ -58,7 +50,6 @@
       });
       $rootScope.$on("addressChanged", function(event, addresses){
         vm.defaultAddress = $rootScope.getDefaultAddress();
-        $log.log('default address changed to: ').log(vm.defaultAddress);
       });
 
       vm.validCoupons = [];
@@ -72,7 +63,6 @@
         });
         vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
         vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
-        vm.brands = _.map(data.brands, function(brand){return brand});
       })
     }
     function setBrandOrProductCoupon(coupon,brand,products){
@@ -142,11 +132,14 @@
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;
     }
+    function getPidList(){
+      return _.flatten(_.map(vm.confirmedBrandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
+    }
     function readyToSubmitOrder(){
       if(_.isEmpty(vm.defaultAddress)){
         return false;
       }
-      if(_.isEmpty(vm.pidList)){
+      if(_.isEmpty(vm.confirmedBrandItems())){
         return false;
       }
       return true;
@@ -161,10 +154,10 @@
       })
 
       var remarks = {};
-      _.each(vm.brands, function(brand){
-        remarks[brand.Brand.id] = brand.Brand.remark;
+      _.each(vm.confirmedBrandItems, function(brandItem){
+        remarks[brandItem.id] = brandItem.remark;
       });
-      Orders.submitOrder(vm.pidList, vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
+      Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $log.log("submit order successfully: ").log(orderIds);
         if(orderIds.length > 1){
           $state.go("app.cart-orders", {state: 0});

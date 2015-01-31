@@ -50,7 +50,7 @@ var shuiguoganguoJson = {
        "id":"302",
        "name":"\u5e73\u548c\u742f\u6eaa\u7ea2\u5fc3\u871c\u67da",
        "created":"2014-11-26 12:31:00",
-       "brand_id":"41",
+       "brand_id":"121",
        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/a293b157a39_1126.jpg",
        "promote_name":"\u4ec5\u9650\u5317\u4eac\u5929\u6d25\u6cb3\u5317\u5730\u533a\uff0c\u665a\u4e94\u70b9\u524d\u4e0b\u5355\u7b2c\u4e8c\u5929\u5230\u8d27\u3002\u516c\u53f8\u5730\u5740\u4e70\u5bb6\u6211\u4eec\u5c06\u5728\u5de5\u4f5c\u65e5\u914d\u9001\uff0c\u907f\u514d\u653e\u7f6e\u65f6\u95f4\u8fc7\u957f\u3002",
        "comment_nums":"2",
@@ -62,7 +62,7 @@ var shuiguoganguoJson = {
        "id":"201",
        "name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b45\u65a4",
        "created":"2014-10-13 17:54:00",
-       "brand_id":"41",
+       "brand_id":"121",
        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/03ca7900316_1104.jpg",
        "promote_name":"",
        "comment_nums":"34",
@@ -74,7 +74,7 @@ var shuiguoganguoJson = {
        "id":"318",
        "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
        "created":"2014-12-02 16:22:00",
-       "brand_id":"41",
+       "brand_id":"122",
        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
        "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
        "comment_nums":"1",
@@ -143,7 +143,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "100", 
+        "brand_id": "121", 
         "ship_code": null, 
         "total_all_price": "150", 
         "pay_time": null, 
@@ -178,7 +178,7 @@ var ordersJson = {
         "ship_type": "105", 
         "ship_fee": "10.00", 
         "remark": "", 
-        "brand_id": "31", 
+        "brand_id": "122", 
         "ship_code": "5180235877801", 
         "total_all_price": "75", 
         "pay_time": "2014-11-11 20:36:07", 
@@ -213,7 +213,7 @@ var ordersJson = {
         "ship_type": "103", 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "34", 
+        "brand_id": "122", 
         "ship_code": "1900930011998", 
         "total_all_price": "28.99", 
         "pay_time": "2014-11-19 11:56:52", 
@@ -248,7 +248,7 @@ var ordersJson = {
         "ship_type": "109", 
         "ship_fee": "10.00", 
         "remark": "", 
-        "brand_id": "100", 
+        "brand_id": "122", 
         "ship_code": "718647115599", 
         "total_all_price": "118", 
         "pay_time": "2014-11-11 20:37:03", 
@@ -283,7 +283,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "31", 
+        "brand_id": "122", 
         "ship_code": "", 
         "total_all_price": "2.99", 
         "pay_time": "2014-10-31 00:58:45", 
@@ -318,7 +318,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "34", 
+        "brand_id": "122", 
         "ship_code": "", 
         "total_all_price": "0.1", 
         "pay_time": "2014-10-16 17:05:49", 
@@ -353,7 +353,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "100", 
+        "brand_id": "123", 
         "ship_code": null, 
         "total_all_price": "60", 
         "pay_time": null, 
@@ -388,7 +388,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": "", 
-        "brand_id": "34", 
+        "brand_id": "123", 
         "ship_code": null, 
         "total_all_price": "49.9", 
         "pay_time": null, 
@@ -423,7 +423,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": null, 
-        "brand_id": "34", 
+        "brand_id": "123", 
         "ship_code": null, 
         "total_all_price": "0.1", 
         "pay_time": null, 
@@ -458,7 +458,7 @@ var ordersJson = {
         "ship_type": null, 
         "ship_fee": "0.00", 
         "remark": null, 
-        "brand_id": "31", 
+        "brand_id": "123", 
         "ship_code": null, 
         "total_all_price": "0.1", 
         "pay_time": null, 
@@ -2061,7 +2061,7 @@ var orderDetail = {
       "consignee_email":null,"consignee_postcode":null,
       "invoice_id":null,"total_price":"29.00",
       "ship_type":null,"ship_fee":"0.00","remark":"",
-      "brand_id":"92",
+      "brand_id":"123",
       "ship_code":null,
       "total_all_price":"29",
       "pay_time":null,
@@ -2145,7 +2145,7 @@ var orderDetail2 = {
       "ship_type": "103", 
       "ship_fee": "0.02", 
       "remark": "", 
-      "brand_id": "37", 
+      "brand_id": "123", 
       "ship_code": "1900930011998", 
       "total_all_price": "28.99", 
       "pay_time": "2014-11-19 11:56:52", 
@@ -2242,7 +2242,7 @@ var productDetail = {
          "created":"2014-11-24 11:24:00",
          "updated":"2014-12-05 12:36:05",
          "published":true,
-         "brand_id":"87",
+         "brand_id":"123",
          "photo":"",
          "cate_id":"114",
          "end_time":"2015-11-24 11:24:00",
@@ -2259,7 +2259,7 @@ var productDetail = {
          "id":"274",
          "name":"\u65b0\u7586\u7279\u4ea7\u575a\u679c\u624b\u7ed8\u793c\u76d26\u888b\u88c5",
          "created":"2014-11-18 14:18:00",
-         "brand_id":"37",
+         "brand_id":"123",
          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/77fae9b1721_1118.jpg",
          "promote_name":"\u5305\u90ae",
          "comment_nums":"0",
@@ -2271,7 +2271,7 @@ var productDetail = {
          "id":"144",
          "name":"nancy\u5bb6\u4e61\u5927\u67b8\u675e",
          "created":"2014-09-02 08:17:00",
-         "brand_id":"35",
+         "brand_id":"121",
          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/e290ad8a984_1101.jpg",
          "promote_name":"",
          "comment_nums":"9",
@@ -2283,7 +2283,7 @@ var productDetail = {
          "id":"202",
          "name":"\u6cb3\u5357\u6cb3\u9634\u8f6f\u7c7d\u77f3\u69b410\u65a4\u88c5",
          "created":"2014-10-13 19:32:00",
-         "brand_id":"57",
+         "brand_id":"121",
          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/27447802fd3_1101.jpg",
          "promote_name":"",
          "comment_nums":"9",
@@ -2295,7 +2295,7 @@ var productDetail = {
          "id":"269",
          "name":"\u641c\u72d0\u6f58\u5a77\u5bb6\u7684\u5580\u4ec0\u7070\u67a3\u541b",
          "created":"2014-11-17 20:35:00",
-         "brand_id":"10",
+         "brand_id":"121",
          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/4114dd5ab71_1119.jpg",
          "promote_name":"\uff082\u65a4\u5305\u90ae\uff09",
          "comment_nums":"6",
@@ -2306,7 +2306,7 @@ var productDetail = {
    },
    "brand":{  
       "Brand":{  
-         "id":"87",
+         "id":"121",
          "name":"\u5c71\u897f\u6838\u6843-\u5218\u5bcc\u660e",
          "creator":"9134",
          "lastupdator":"0",
@@ -2440,7 +2440,7 @@ var storeListJson = {"brands":[
       "name":"西域美农专门专门专门点点点",
       "slug":"xiang_tian_bing_tang_cheng_eva",
       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/83255d8fc4e_1206.jpg",
-      "id":"123"
+      "id":"122"
     }
   },
   {  
@@ -2449,7 +2449,7 @@ var storeListJson = {"brands":[
       "name":"\u5357\u4e30\u871c\u6a58-\u5434\u6e05\u4e91",
       "slug":"nan_feng_mi_ju_wu_qing_yun",
       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/e12f444f1d7_1206.png",
-      "id":"122"
+      "id":"123"
     }
   }
 ]};
@@ -2523,13 +2523,13 @@ var counties = {
 var Offers = {
   "sharedOffers":[
     {"SharedOffer":{"id":"12106","total_number":"6500","uid":"146","start":"2014-12-10 20:58:44","status":"2","valid_days":"7","brand_id":"121","name":"\u9ed4\u9633\u51b0\u7cd6\u6a59\u7ea2\u5305"}},
-    {"SharedOffer":{"id":"12099","total_number":"521","uid":"146","start":"2014-12-10 19:42:56","status":"3","valid_days":"7","brand_id":"83","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
-    {"SharedOffer":{"id":"11989","total_number":"1180","uid":"146","start":"2014-12-04 14:07:32","status":"0","valid_days":"7","brand_id":"83","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
-    {"SharedOffer":{"id":"43","total_number":"40000","uid":"146","start":"2014-11-19 22:05:33","status":"1","valid_days":"7","brand_id":"83","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
-    {"SharedOffer":{"id":"34","total_number":"1000","uid":"146","start":"2014-11-19 21:45:08","status":"1","valid_days":"7","brand_id":"43","name":"\u5c71\u664b\u5e84\u56ed"}},
-    {"SharedOffer":{"id":"21","total_number":"1000","uid":"146","start":"2014-11-19 19:02:46","status":"2","valid_days":"7","brand_id":"88","name":"\u963f\u91cc\u5df4\u5df4\u2014\u674e\u745e"}},
-    {"SharedOffer":{"id":"15","total_number":"580","uid":"146","start":"2014-11-19 11:56:57","status":"3","valid_days":"7","brand_id":"37","name":"\u897f\u57df\u7f8e\u519c"}},
-    {"SharedOffer":{"id":"1","total_number":"450","uid":"146","start":"2014-11-17 18:16:40","status":"2","valid_days":"7","brand_id":"43","name":"\u5c71\u664b\u5e84\u56ed"}}
+    {"SharedOffer":{"id":"12099","total_number":"521","uid":"146","start":"2014-12-10 19:42:56","status":"3","valid_days":"7","brand_id":"122","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
+    {"SharedOffer":{"id":"11989","total_number":"1180","uid":"146","start":"2014-12-04 14:07:32","status":"0","valid_days":"7","brand_id":"122","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
+    {"SharedOffer":{"id":"43","total_number":"40000","uid":"146","start":"2014-11-19 22:05:33","status":"1","valid_days":"7","brand_id":"122","name":"\u9655\u897f\u7709\u53bf\u7315\u7334\u6843"}},
+    {"SharedOffer":{"id":"34","total_number":"1000","uid":"146","start":"2014-11-19 21:45:08","status":"1","valid_days":"7","brand_id":"123","name":"\u5c71\u664b\u5e84\u56ed"}},
+    {"SharedOffer":{"id":"21","total_number":"1000","uid":"146","start":"2014-11-19 19:02:46","status":"2","valid_days":"7","brand_id":"123","name":"\u963f\u91cc\u5df4\u5df4\u2014\u674e\u745e"}},
+    {"SharedOffer":{"id":"15","total_number":"580","uid":"146","start":"2014-11-19 11:56:57","status":"3","valid_days":"7","brand_id":"123","name":"\u897f\u57df\u7f8e\u519c"}},
+    {"SharedOffer":{"id":"1","total_number":"450","uid":"146","start":"2014-11-17 18:16:40","status":"2","valid_days":"7","brand_id":"123","name":"\u5c71\u664b\u5e84\u56ed"}}
   ],
   "expiredIds":["11989","43","34","21","15","1"],
   "soldOuts":["12106"],
@@ -2560,9 +2560,9 @@ var Address = {
 var Carts = {
   "total_price":169,
   "carts":[
-    {"Cart":{"id":"23243","name":"\u5bc6\u4e91\u9ec4\u5fc3\u9c9c\u756a\u85af","product_id":"308","num":"1","price":"12","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg","used_coupons":"","brand_id":"106"}},
-    {"Cart":{"id":"23248","name":"\u963f\u514b\u82cf\u51b0\u7cd6\u5fc3\u82f9\u679c\u793c\u54c1\u88c5","product_id":"449","num":"1","price":"79","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/da546a7b1c5_1212.jpg","used_coupons":"","brand_id":"45"}},
-    {"Cart":{"id":"23249","name":"\u5e93\u5c14\u52d2\u7279\u7ea7\u9999\u68a8","product_id":"163","num":"2","price":"39","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_s\/42ae1c05a0d_0923.jpg","used_coupons":"","brand_id":"45"}}
+    {"Cart":{"id":"23243","name":"\u5bc6\u4e91\u9ec4\u5fc3\u9c9c\u756a\u85af","product_id":"308","num":"1","price":"12","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg","used_coupons":"","brand_id":"121"}},
+    {"Cart":{"id":"23248","name":"\u963f\u514b\u82cf\u51b0\u7cd6\u5fc3\u82f9\u679c\u793c\u54c1\u88c5","product_id":"449","num":"1","price":"79","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/da546a7b1c5_1212.jpg","used_coupons":"","brand_id":"122"}},
+    {"Cart":{"id":"23249","name":"\u5e93\u5c14\u52d2\u7279\u7ea7\u9999\u68a8","product_id":"163","num":"2","price":"39","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_s\/42ae1c05a0d_0923.jpg","used_coupons":"","brand_id":"122"}}
   ],
   "brands":[
     {"Brand":{"id":"45","name":"\u4e94\u5408\u6606\u57df-\u80e1\u4f20\u5fb7","slug":"wu_gu_kun_yu_xin_jiang_xiang_li","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_m\/28ca76eccee_0923.jpg","weixin_id":"18506933386","notice":"\u65b0\u7586\u6700\u4f73\u539f\u4ea7\u5730\u539f\u751f\u6001\u6709\u673a\u519c\u4ea7\u54c1\uff0c\u575a\u6301\u6700\u65b0\u7586\u6700\u597d\uff0c\u7528\u5fc3\u670d\u52a1\u3002"}},
@@ -2573,11 +2573,11 @@ var Carts = {
 var Coupons = {
   "coupons":[
     {"Coupon":{"id":"17652","name":"\u9ed4\u9633\u51b0\u7cd6\u6a5958\u5143\u5238","brand_id":"121","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-26 11:20:44","valid_end":"2024-12-18 23:59:59","reduced_price":"5800","type":"2", "least_price": "0"},"CouponItem":{"id":"32704","code":"","bind_user":"146","coupon_id":"17652","cart_item_id":"0","status":"1","created":"2014-12-13 15:57:58","applied_order":"0","applied_time":null,"source":"qinyBTC1412_25738_1"}},
-    {"Coupon":{"id":"17872","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","brand_id":"0","product_list":[365],"category_id":"0","status":"1","valid_begin":"2014-12-10 20:59:32","valid_end":"2024-12-17 20:59:32","reduced_price":"890","type":"2", "least_price": "32"},"CouponItem":{"id":"31288","code":"","bind_user":"146","coupon_id":"17872","cart_item_id":"0","status":"1","created":"2014-12-10 20:59:32","applied_order":"0","applied_time":null,"source":"shared_offer12106"}},
-    {"Coupon":{"id":"17854","name":"\u7709\u53bf\u7315\u7334\u6843-\u5f20\u6167\u654f","brand_id":"0","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 19:42:59","valid_end":"2024-12-17 19:42:59","reduced_price":"201","type":"2", "least_price": "58.88"},"CouponItem":{"id":"31156","code":"","bind_user":"146","coupon_id":"17854","cart_item_id":"0","status":"1","created":"2014-12-10 19:42:59","applied_order":"0","applied_time":null,"source":"shared_offer12099"}},
-    {"Coupon":{"id":"17829","name":"\u751f\u6d3b\u901f\u9012\u8054\u76df-\u9093\u5f6c","brand_id":"0","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 18:11:42","valid_end":"2024-12-17 18:11:42","reduced_price":"461","type":"2", "least_price": "0"},"CouponItem":{"id":"31044","code":"","bind_user":"146","coupon_id":"17829","cart_item_id":"0","status":"1","created":"2014-12-10 18:11:42","applied_order":"0","applied_time":null,"source":"shared_offer12098"}},
-    {"Coupon":{"id":"17722","name":"\u9ed4\u9633\u51b0\u7cd6\u6a595\u5143\u5238","brand_id":"121","product_list":"0","category_id":"0","status":"2","valid_begin":"2014-11-26 11:20:44","valid_end":"2014-12-18 23:59:59","reduced_price":"500","type":"2", "least_price": "0"},"CouponItem":{"id":"31036","code":"","bind_user":"146","coupon_id":"17722","cart_item_id":"0","status":"1","created":"2014-12-10 17:50:08","applied_order":"0","applied_time":null,"source":"qinyBTC1412_24291_1"}},
-    {"Coupon":{"id":"732","name":"\u90d1\u5dde\u6c11\u653f\u5c40-\u6bb5\u8d75\u660e","brand_id":"57","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-20 10:38:58","valid_end":"2014-11-27 10:38:58","reduced_price":"293","type":"2", "least_price": "0"},"CouponItem":{"id":"13112","code":"","bind_user":"146","coupon_id":"732","cart_item_id":"0","status":"1","created":"2014-11-20 10:38:58","applied_order":"0","applied_time":null,"source":"shared_offer39"}}
+    {"Coupon":{"id":"17872","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","brand_id":"122","product_list":[365],"category_id":"0","status":"1","valid_begin":"2014-12-10 20:59:32","valid_end":"2024-12-17 20:59:32","reduced_price":"890","type":"2", "least_price": "32"},"CouponItem":{"id":"31288","code":"","bind_user":"146","coupon_id":"17872","cart_item_id":"0","status":"1","created":"2014-12-10 20:59:32","applied_order":"0","applied_time":null,"source":"shared_offer12106"}},
+    {"Coupon":{"id":"17854","name":"\u7709\u53bf\u7315\u7334\u6843-\u5f20\u6167\u654f","brand_id":"122","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 19:42:59","valid_end":"2024-12-17 19:42:59","reduced_price":"201","type":"2", "least_price": "58.88"},"CouponItem":{"id":"31156","code":"","bind_user":"146","coupon_id":"17854","cart_item_id":"0","status":"1","created":"2014-12-10 19:42:59","applied_order":"0","applied_time":null,"source":"shared_offer12099"}},
+    {"Coupon":{"id":"17829","name":"\u751f\u6d3b\u901f\u9012\u8054\u76df-\u9093\u5f6c","brand_id":"123","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 18:11:42","valid_end":"2024-12-17 18:11:42","reduced_price":"461","type":"2", "least_price": "0"},"CouponItem":{"id":"31044","code":"","bind_user":"146","coupon_id":"17829","cart_item_id":"0","status":"1","created":"2014-12-10 18:11:42","applied_order":"0","applied_time":null,"source":"shared_offer12098"}},
+    {"Coupon":{"id":"17722","name":"\u9ed4\u9633\u51b0\u7cd6\u6a595\u5143\u5238","brand_id":"123","product_list":"0","category_id":"0","status":"2","valid_begin":"2014-11-26 11:20:44","valid_end":"2014-12-18 23:59:59","reduced_price":"500","type":"2", "least_price": "0"},"CouponItem":{"id":"31036","code":"","bind_user":"146","coupon_id":"17722","cart_item_id":"0","status":"1","created":"2014-12-10 17:50:08","applied_order":"0","applied_time":null,"source":"qinyBTC1412_24291_1"}},
+    {"Coupon":{"id":"732","name":"\u90d1\u5dde\u6c11\u653f\u5c40-\u6bb5\u8d75\u660e","brand_id":"123","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-20 10:38:58","valid_end":"2014-11-27 10:38:58","reduced_price":"293","type":"2", "least_price": "0"},"CouponItem":{"id":"13112","code":"","bind_user":"146","coupon_id":"732","cart_item_id":"0","status":"1","created":"2014-11-20 10:38:58","applied_order":"0","applied_time":null,"source":"shared_offer39"}}
   ],
   "brands":{
     "37":{"Brand":{"id":"37","name":"\u897f\u57df\u7f8e\u519c-\u674e\u6625\u671b","slug":"xi_yu_mei_nong_li_chun_wang","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_m\/56653661417_0908.jpg","weixin_id":"","notice":""}},

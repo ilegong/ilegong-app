@@ -156,11 +156,10 @@
     function activate(){
       $rootScope._ = window._;
       $rootScope.config = config;
-      $rootScope.user = $rootScope.user || {token:{}, profile:{}, loggedIn: false};
-      $rootScope.cart = $rootScope.cart || {cartItems:[], brands:[]};
-      $rootScope.addresses = $rootScope.addresses || [];
+      $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
       $rootScope.orders = {orders: [], brands: [], order_carts: [], ship_type: {}};
       $rootScope.brands = [];
+      $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
 
       Base.getLocal('token').then(function(token){
@@ -183,6 +182,9 @@
       Stores.list().then(function(data){
         $rootScope.brands = data.brands;
       });
+      Addresses.getProvinces().then(function(provinces){
+        $rootScope.provinces = provinces;
+      });
     }
     $rootScope.onUserLoggedIn = function(token, shouldRefreshToken){
       if(shouldRefreshToken){
@@ -202,27 +204,23 @@
       });
     }
     $rootScope.onUserLoggedOut = function(){
-      $rootScope.user = {token:{}, profile:{}, loggedIn: false};
-      $rootScope.orders = {orders: [], brands: [], order_carts:[], ship_type: {}};
-      $rootScope.cart = {cartItems:[], brands:[]};
-      $rootScope.addresses = [];
+      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
     }
     $rootScope.reloadCart = function(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
-        $rootScope.cart.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        $rootScope.cart.brands = result.brands;
+        $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       });
     }
     $rootScope.reloadAddresses = function(accessToken){
       return Addresses.list(accessToken).then(function(addresses){
-        $rootScope.addresses = addresses;
+        $rootScope.user.addresses = addresses;
         $rootScope.$broadcast('addressChanged', addresses);
       });
     }
     $rootScope.getDefaultAddress = function(){
-      var defaultAddress =  _.find($rootScope.addresses, function(address){return address.OrderConsignees.status == 1});
-      if(_.isEmpty(defaultAddress) && $rootScope.addresses.length > 0){
-        defaultAddress = $rootScope.addresses[0];
+      var defaultAddress =  _.find($rootScope.user.addresses, function(address){return address.OrderConsignees.status == 1});
+      if(_.isEmpty(defaultAddress) && $rootScope.user.addresses.length > 0){
+        defaultAddress = $rootScope.user.addresses[0];
       }
       return defaultAddress || {};
     }

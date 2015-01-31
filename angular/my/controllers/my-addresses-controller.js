@@ -16,10 +16,10 @@
 
     function activate() {
       vm.state = $stateParams.state;
-      vm.addresses = $rootScope.addresses;
+      vm.addresses = $rootScope.user.addresses;
       vm.defaultAddress = $rootScope.getDefaultAddress();
       $rootScope.$on("addressChanged", function(event, addresses){
-        vm.addresses = $rootScope.addresses;
+        vm.addresses = $rootScope.user.addresses;
         vm.defaultAddress = $rootScope.getDefaultAddress();
         $log.log('default address changed to: ').log(vm.defaultAddress);
       });
@@ -28,9 +28,7 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('app.my-account-login');
       }
-      Addresses.list($rootScope.user.token.access_token).then(function(addresses){
-        $rootScope.addresses = addresses;
-      });
+      reloadAddresses($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     } 
