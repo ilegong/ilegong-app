@@ -142,7 +142,7 @@
         <div class='element'>
           <a ui-sref="app.product-detail({from: vm.from, id: recommend[1].id})">
             <img title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
-            <span class="text" style="padding: 0 0.5em;"><strong>{{recommend[1].name}}</strong></span>
+            <div class="text" style="padding: 0 0.5em;">{{recommend[1].name}}</div>
           </a>
           <div class="text-muted" style="padding-left: 0.5em;"><strong>¥{{recommend[1].price | currency:''}}</strong></div>
         </div>
