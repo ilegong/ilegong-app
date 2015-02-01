@@ -52,13 +52,14 @@
         return $state.go('app.my-account-login');
       }
       Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id, $rootScope.user.token.access_token).then(function(result){
-        $rootScope.reloadAddresses($rootScope.user.token.access_token);
-        if(vm.isFromOrder()){
-          $ionicHistory.goBack();
-        }
-        else{
-          $rootScope.alertMessage("已修改默认收货地址");
-        }
+        $rootScope.reloadAddresses($rootScope.user.token.access_token).then(function(){
+          if(vm.isFromOrder()){
+            $ionicHistory.goBack();
+          }
+          else{
+            $rootScope.alertMessage("已修改默认收货地址");
+          }
+        });
       });
     }
   }  
