@@ -17,11 +17,11 @@
     </div>
     <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
-      <div class="item item-avatar">
+      <div class="item item-avatar" ng-click="vm.toBrandPage(brand);">
         <img src="{{brand.Brand.coverimg}}"/>
         <div>{{brand.Brand.name}}</div>
       </div>
-      <div class="item item-thumbnail-left" ng-repeat="product in item.items">
+      <div class="item item-thumbnail-left" ng-repeat="product in item.items" ng-click="vm.toProductPage(product);">
         <img src="{{product.coverimg}}"/>
         <div>
           {{product.name}}
