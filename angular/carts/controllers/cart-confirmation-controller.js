@@ -117,11 +117,11 @@
       return product.price * product.num;
     }
     function getPriceOfBrand(brandItem){
-      return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0);
+      return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0)
+       + vm.getShipFeeOfBrand(brandItem.id);
     }
     function getShipFeeOfBrand(brandId){
-      var fee =  _.find(vm.shipFees, function(fee, bid){return bid == brandId});
-      return fee;
+      return _.find(vm.shipFees, function(fee, bid){return bid == brandId});
     }
     function countOfProducts(brandItem){
       return _.size(brandItem.items);
