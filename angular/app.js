@@ -63,6 +63,11 @@
       .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
       .state('app.product-detail-comments-o',{url:'/products/:id/:from/comments/:type',views:{'app-my':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
 
+      .state('app.product-detail-cm', {url: '/products-cm/:id/:from', views: {'app-cart': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
+      .state('app.product-detail-cm.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
+      .state('app.product-detail-cm.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
+      .state('app.product-detail-comments-cm',{url:'/products/:id/:from/comments/:type',views:{'app-my':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
+
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
       .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
       .state('app.order-addresses',{url:'/order-addresses/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})

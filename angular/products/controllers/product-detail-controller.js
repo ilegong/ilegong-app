@@ -16,7 +16,6 @@
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;
     vm.hasSpecs = hasSpecs;
-    vm.showTabs = function(){$rootScope.hideTabs = false;}
     vm.getReputationComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
     vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     vm.toTryingCommentsPage = toTryingCommentsPage;
@@ -33,7 +32,6 @@
       vm.id = $stateParams.id;
       vm.from = $stateParams.from;
       vm.cartItems = $rootScope.user.cartItems;
-      $log.log('cart items:').log(vm.cartItems);
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
@@ -78,6 +76,9 @@
       else if(vm.from == -2){//from order-detail
         $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 1})
       }
+      else if(vm.from == -3){//from cart-main
+        $state.go("app.product-detail-comments-cm",{id: vm.id, from: vm.from, type: 1})
+      }
       else if(vm.from >=0){//from store-main
         $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 1})
       }
@@ -88,6 +89,9 @@
       }
       else if(vm.from == -2){//from order-detail
         $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 0})
+      }
+      else if(vm.from == -3){//from cart-main
+        $state.go("app.product-detail-comments-cm",{id: vm.id, from: vm.from, type: 0})
       }
       else if(vm.from >=0){//from store-main
         $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 0})

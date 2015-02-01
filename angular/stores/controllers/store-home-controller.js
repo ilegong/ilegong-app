@@ -11,7 +11,6 @@
     activate();
 
     function activate(){
-      $rootScope.hideTabs = false;
     }
   }
 })(window, window.angular);

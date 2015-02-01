@@ -20,6 +20,8 @@
     vm.brandChecked = function(id) {return _.all(vm.getCartItemsOfBrand(id),function(cartItem){return cartItem.checked;});};
     vm.toggleBrand = toggleBrand;
     vm.getBrandsOfCartItems = getBrandsOfCartItems;
+    vm.toBrandPage = function(brand){$state.go("store.home", {storeId: brand.Brand.id})};
+    vm.toProductPage = function(product){$state.go("app.product-detail-cm.intro", {id: product.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
 
@@ -54,9 +56,8 @@
         });
       }
     }
-    function toggleCartItem(product,e){
+    function toggleCartItem(product){
       product['checked'] = !product['checked'];
-      
     }
     function getPriceOfBrand(brandId){
       var checkedCartItems = _.filter(vm.getCartItemsOfBrand(brandId), function(cartItem){return cartItem.checked});
