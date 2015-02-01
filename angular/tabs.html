@@ -4,7 +4,7 @@
   navigation history that also transitions its views in and out.
 -->
 
-<ion-tabs class="tabs-icon-top tabs-bottom" ng-class="{'tabs-item-hide': hideTabs}">
+<ion-tabs class="tabs-icon-top tabs-bottom" ng-class="{'tabs-item-hide': hideTabs.length > 0 && hideTabs[hideTabs.length -1]}">
   <!-- Dashboard Tab -->
   <ion-tab title="首页" icon="pys-350 icon-home" href="#/app/home">
     <ion-nav-view name="app-home"></ion-nav-view>
@@ -31,6 +31,3 @@
     <ion-nav-view name="app-my"></ion-nav-view>
   </ion-tab>
 </ion-tabs>
-
-
-

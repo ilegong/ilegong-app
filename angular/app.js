@@ -155,6 +155,7 @@
 
     function activate(){
       $rootScope._ = window._;
+      $rootScope.hideTabs = [];
       $rootScope.config = config;
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
       $rootScope.brands = [];

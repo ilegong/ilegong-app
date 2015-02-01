@@ -10,9 +10,9 @@
     return {
       restrict: 'A',
       link: function($scope, $el) {
-        $rootScope.hideTabs = true;
+        $rootScope.hideTabs.push(true);
         $scope.$on('$destroy', function() {
-          $rootScope.hideTabs = false;
+          $rootScope.hideTabs.pop();
         });
       }
     };
@@ -21,14 +21,10 @@
     return {
       restrict: 'A',
       link: function($scope, $el) {
-        // $log.log("on enter, change from " +  $rootScope.hideTabs);
-        // $rootScope.hideTabs = false;
-        // $log.log(" to " + $rootScope.hideTabs);
-        // $scope.$on('$destroy', function() {
-        //   // $log.log("on destroy, change from " + $rootScope.hideTabs);
-        //   // $rootScope.hideTabs = false;
-        //   // $log.log(" to " + $rootScope.hideTabs);
-        // });
+        $rootScope.hideTabs.push(false);
+        $scope.$on('$destroy', function() {
+          $rootScope.hideTabs.pop();
+        });
       }
     };
   }
