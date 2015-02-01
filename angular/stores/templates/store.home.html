@@ -1,4 +1,10 @@
-<ion-view title="{{app.store.info.name}}" hide-tabs>
+<ion-view title="{{app.store.info.name}}" show-tabs>
+  <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ui-sref="app.stores">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
+
   <ion-content class='store'>
     <div class='list'>
       <div class="row" ng-repeat="p in app.store.products" ng-if="$index % 2 == 0">

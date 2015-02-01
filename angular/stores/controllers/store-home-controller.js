@@ -5,7 +5,7 @@
   .controller('StoreHomeCtrl', StoreHomeCtrl)
 
   /* @ngInject */
-  function StoreHomeCtrl($rootScope, $scope, $stateParams, Stores){
+  function StoreHomeCtrl($rootScope, $scope, $stateParams, $state, $ionicHistory, $log,Stores){
     var vm = this;
     vm.storeId = $stateParams.storeId;
     activate();
