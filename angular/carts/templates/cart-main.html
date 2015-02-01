@@ -69,7 +69,7 @@
     </div>
   </ion-content>
   
-  <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar has-tabs">
+  <ion-footer-bar ng-show="vm.cartItems.length > 0" class="footer-bar">
     <div class="footer-bar-container">
       <div class="price-total fl">
         <span class="icon pys-350 {{vm.getCheckedNumber() == vm.cartItems.length?'icon-circle-checked':'icon-circle'}}" ng-click="vm.getCheckedNumber() == vm.cartItems.length?vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
