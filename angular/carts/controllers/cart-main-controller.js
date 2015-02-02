@@ -5,6 +5,7 @@
   .controller('CartMainCtrl', CartMainCtrl)
   function CartMainCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders,Users){
     var vm = this;
+    vm.verifyCartNum = verifyCartNum;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
     vm.deleteCartItem = deleteCartItem;
@@ -21,7 +22,7 @@
     vm.toggleBrand = toggleBrand;
     vm.getBrandsOfCartItems = getBrandsOfCartItems;
     vm.toBrandPage = function(brand){$state.go("store.home", {storeId: brand.Brand.id})};
-    vm.toProductPage = function(cartItem){$state.go("app.product-detail-cm.intro", {id: cartItem.Cart.product_id, from:-3})};
+    vm.toProductPage = function(cartItem){if(cartItem.editMode){return;}; $state.go("app.product-detail-cm.intro", {id: cartItem.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
 
@@ -73,6 +74,14 @@
     function getBrandsOfCartItems(cartItems){
       var brandIds = _.map(cartItems, function(cartItem){return cartItem.Cart.brand_id});
       return _.filter($rootScope.brands, function(brand){return _.contains(brandIds, brand.Brand.id)});
+    }
+    function verifyCartNum(cartItem){
+      if(cartItem.Cart.num < 0){
+        cartItem.Cart.num = 0;
+      }
+      else if(cartItem.Cart.num > 9999){
+        cartItem.Cart.num = 9999;
+      }
     }
     function reduceCartItemNum(cart) {
       if(!$rootScope.user.loggedIn){

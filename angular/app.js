@@ -156,7 +156,12 @@
   }
 
   function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores) {
-    var app = this;
+    var app = $scope;
+    app.toHomePage = toHomePage;
+    app.toStoresPage = toStoresPage;
+    app.toTryingsPage = toTryingsPage;
+    app.toCartPage = toCartPage;
+    app.toMyPage = toMyPage;
     activate();
 
     function activate(){
@@ -251,23 +256,23 @@
         $rootScope.alert.message = "";
       }, config.timeout);
     }
-    $rootScope.toHomePage = function(){
+    function toHomePage(){
       $rootScope.hideTabs = [];
       $state.go('app.home');
     }
-    $rootScope.toStoresPage = function(){
+    function toStoresPage(){
       $rootScope.hideTabs = [];
       $state.go('app.stores');
     }
-    $rootScope.toTryingsPage = function(){
+    function toTryingsPage(){
       $rootScope.hideTabs = [];
       $state.go('app.tryings');
     }
-    $rootScope.toCartPage = function(){
+    function toCartPage(){
       $rootScope.hideTabs = [];
       $state.go('app.cart');
     }
-    $rootScope.toMyPage = function(){
+    function toMyPage(){
       $rootScope.hideTabs = [];
       $state.go('app.my');
     }

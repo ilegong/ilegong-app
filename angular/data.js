@@ -2560,7 +2560,15 @@ var Address = {
 var Carts = {
   "total_price":169,
   "carts":[
-    {"Cart":{"id":"23243","name":"\u5bc6\u4e91\u9ec4\u5fc3\u9c9c\u756a\u85af","product_id":"308","num":"1","price":"12","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg","used_coupons":"","brand_id":"121"}},
+    {"Cart":{
+      "id":"23243",
+      "name":"\u5bc6\u4e91\u9ec4\u5fc3\u9c9c\u756a\u85af",
+      "product_id":"308",
+      "num":"1",
+      "price":"12",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg",
+      "used_coupons":"",
+      "brand_id":"121"}},
     {"Cart":{"id":"23248","name":"\u963f\u514b\u82cf\u51b0\u7cd6\u5fc3\u82f9\u679c\u793c\u54c1\u88c5","product_id":"449","num":"1","price":"79","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/da546a7b1c5_1212.jpg","used_coupons":"","brand_id":"122"}},
     {"Cart":{"id":"23249","name":"\u5e93\u5c14\u52d2\u7279\u7ea7\u9999\u68a8","product_id":"163","num":"2","price":"39","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_s\/42ae1c05a0d_0923.jpg","used_coupons":"","brand_id":"122"}}
   ],

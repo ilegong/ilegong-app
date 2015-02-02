@@ -38,7 +38,7 @@
               <span class="number-span" ng-show="cartItem.editMode">
                 <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
                 <span class="count">
-                  <input ng-model="cartItem.Cart.num"/>
+                  <input ng-model="cartItem.Cart.num" ng-change="vm.verifyCartNum(cartItem)"/>
                 </span>
                 <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
               </span>
@@ -48,9 +48,9 @@
                 {{cartItem.Cart.price | currency:"￥"}}
               </span>
               <span class="product-num">
-                × {{cartItem.Cart.num}}
+                ×{{cartItem.Cart.num}}
               </span>
-              <span  class="icon {{cartItem.editMode ? 'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem.editMode = !cartItem.editMode;">
+              <span class="pys-350 {{cartItem.editMode ? 'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem.editMode = !cartItem.editMode; $event.stopPropagation()">
               </span>
             </span>
           </div>
