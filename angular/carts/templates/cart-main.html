@@ -32,8 +32,8 @@
               <div class="text">
                 {{cartItem.Cart.name}}
               </div>
-              <span class="text-sub" ng-show="!cartItem.editMode">
-                subtitle
+              <span class="text-sub" ng-show="!cartItem.editMode && !_.isEmpty(cartItem.spec)">
+                {{cartItem.spec}}
               </span>
               <span class="number-span" ng-show="cartItem.editMode">
                 <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
@@ -43,7 +43,7 @@
                 <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
               </span>
             </span>
-            <span class="product-rest col">
+            <span class="product-rest">
               <span class="product-price">
                 {{cartItem.Cart.price | currency:"￥"}}
               </span>
