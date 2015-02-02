@@ -11,10 +11,10 @@
       restrict: 'A',
       link: function($scope, $el) {
         $rootScope.hideTabs.push(true);
-        $log.log('hideTabs in: ').log($rootScope.hideTabs);
+        $log.log('hideTabs in: ' + $rootScope.hideTabs);
         $scope.$on('$destroy', function() {
           $rootScope.hideTabs.pop();
-          $log.log('hideTabs out: ').log($rootScope.hideTabs);
+          $log.log('hideTabs out: ' + $rootScope.hideTabs);
         });
       }
     };
@@ -24,10 +24,10 @@
       restrict: 'A',
       link: function($scope, $el) {
         $rootScope.hideTabs.push(false);
-        $log.log('showTabs in: ').log($rootScope.hideTabs);
+        $log.log('showTabs in: ' + $rootScope.hideTabs);
         $scope.$on('$destroy', function() {
           $rootScope.hideTabs.pop();
-          $log.log('showTabs out: ').log($rootScope.hideTabs);
+          $log.log('showTabs out: ' + $rootScope.hideTabs);
         });
       }
     };

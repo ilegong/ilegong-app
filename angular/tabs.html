@@ -6,28 +6,28 @@
 
 <ion-tabs class="tabs-icon-top tabs-bottom" ng-class="{'tabs-item-hide': hideTabs.length > 0 && hideTabs[hideTabs.length -1]}">
   <!-- Dashboard Tab -->
-  <ion-tab title="首页" icon="pys-350 icon-home" href="#/app/home">
+  <ion-tab title="首页" icon="pys-350 icon-home" ng-click="toHomePage()">
     <ion-nav-view name="app-home"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="分享圈" icon="pys-350 icon-stores" href="#/app/stores">
+  <ion-tab title="分享圈" icon="pys-350 icon-stores" ng-click="toStoresPage()">
     <ion-nav-view name="app-stores"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="试吃团" icon="pys-350 icon-tryings" href="#/app/tryings">
+  <ion-tab title="试吃团" icon="pys-350 icon-tryings" ng-click="toTryingsPage()">
     <ion-nav-view name="app-tryings"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
 
-  <ion-tab title="购物车" badge="user.cartItems.length" badge-style="badge badge-balanced" icon="pys-350 icon-cart" href="#/app/cart">
+  <ion-tab title="购物车" badge="user.cartItems.length" badge-style="badge badge-balanced" icon="pys-350 icon-cart" ng-click="toCartPage()">
     <ion-nav-view name="app-cart"></ion-nav-view>
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="我的" icon="pys-350 icon-my" href="#/app/my">
+  <ion-tab title="我的" icon="pys-350 icon-my" ng-click="toMyPage()">
     <ion-nav-view name="app-my"></ion-nav-view>
   </ion-tab>
 </ion-tabs>

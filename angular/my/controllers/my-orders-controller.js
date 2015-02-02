@@ -7,6 +7,7 @@
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
     vm.getOrderState = function(order){return Orders.getOrderState(order.Order.status)};
+    vm.getBrand = function(brandId){return _.find(vm.brands, function(brand){return brand.Brand.id == brandId})};
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
@@ -19,6 +20,7 @@
       vm.orderStateName = Orders.getOrderState(vm.state).name;
       vm.orders = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, vm.state)});
       vm.brands = $rootScope.brands;
+      $log.log('all brands:').log(vm.brands);
       vm.order_carts = $rootScope.user.order_carts;
       vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){

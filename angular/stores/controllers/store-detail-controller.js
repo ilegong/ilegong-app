@@ -6,13 +6,13 @@
 
   /* @ngInject */
   function StoreDetailCtrl($rootScope, $scope, $stateParams, Stores){
-    var app = this;
+    var vm = this;
     activate();
     
     function activate(){
-      app.storeId = $stateParams.storeId;
-      Stores.getStore(app.storeId).then(function(data){
-        app.store = data.content;
+      vm.storeId = $stateParams.storeId;
+      Stores.getStore(vm.storeId).then(function(data){
+        vm.store = data.content;
       });
     }
   }

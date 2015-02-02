@@ -77,6 +77,7 @@
       .state('app.cart-account-login', {url: '/cart-account-login', views: {'app-cart': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
+
       .state('store', {url: '/stores/:storeId', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
@@ -154,8 +155,8 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, config, Base, Orders, Carts, Users, Addresses, Profile, Stores) {
-    var vm = this;
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores) {
+    var app = this;
     activate();
 
     function activate(){
@@ -249,6 +250,26 @@
       $timeout(function(){
         $rootScope.alert.message = "";
       }, config.timeout);
+    }
+    $rootScope.toHomePage = function(){
+      $rootScope.hideTabs = [];
+      $state.go('app.home');
+    }
+    $rootScope.toStoresPage = function(){
+      $rootScope.hideTabs = [];
+      $state.go('app.stores');
+    }
+    $rootScope.toTryingsPage = function(){
+      $rootScope.hideTabs = [];
+      $state.go('app.tryings');
+    }
+    $rootScope.toCartPage = function(){
+      $rootScope.hideTabs = [];
+      $state.go('app.cart');
+    }
+    $rootScope.toMyPage = function(){
+      $rootScope.hideTabs = [];
+      $state.go('app.my');
     }
   }
 })(window, window.angular);

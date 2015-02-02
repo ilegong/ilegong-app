@@ -20,7 +20,6 @@
     vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     vm.toTryingCommentsPage = toTryingCommentsPage;
     vm.toReputationCommentsPage = toReputationCommentsPage;
-    vm.toBrand = toBrand;
     vm.addToCart = addToCart;
     vm.readyToBuy = readyToBuy;
     activate();
@@ -50,11 +49,6 @@
       $scope.$watch('user.cartItems', function(newCartItems, oldCartItems){
         vm.cartItems = $rootScope.user.cartItems;
       })
-    }
-
-    function toBrand(){
-      vm.showTabs();
-      $state.go("store.home",{storeId:vm.brand.Brand.id});
     }
 
     function specsClick(group,name){
@@ -129,7 +123,6 @@
       Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
         $rootScope.reloadCart($rootScope.user.token.access_token);
         if(toCart){
-          vm.showTabs();
           $state.go('app.cart');
         }
         else{

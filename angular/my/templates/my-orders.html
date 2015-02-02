@@ -2,10 +2,10 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="list order" ng-repeat="order in vm.orders" ng-show="vm.orders.length > 0" ng-init="brand=vm.brands[order.Order.brand_id].Brand; products=vm.order_carts[order.Order.id];">
-      <a class="item item-avatar brand" ui-sref="store.home({storeId: brand.id})">
-        <img src="{{brand.coverimg}}"/>
-        <h2 class="fl" style="line-height: 2em;">{{brand.name}}({{products.length}})</h2>
+    <div class="list order" ng-repeat="order in vm.orders" ng-show="vm.orders.length > 0" ng-init="brand=vm.getBrand(order.Order.brand_id); products=vm.order_carts[order.Order.id];">
+      <a class="item item-avatar brand" ui-sref="store.home({storeId: brand.Brand.id})">
+        <img src="{{brand.Brand.coverimg}}"/>
+        <h2 class="fl" style="line-height: 2em; max-width: 80%;">{{brand.Brand.name}}({{products.length}})</h2>
         <span class="text-energized fr" style="line-height: 2em;">
           {{vm.getOrderState(order).status}}
         </span>
