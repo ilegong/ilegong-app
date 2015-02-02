@@ -32,8 +32,8 @@
               <div class="text">
                 {{cartItem.Cart.name}}
               </div>
-              <span class="text-sub" ng-show="!cartItem.editMode && !_.isEmpty(cartItem.spec)">
-                {{cartItem.spec}}
+              <span class="text-sub-muted" ng-show="!cartItem.editMode && !_.isEmpty(cartItem.Cart.spec)">
+                {{cartItem.Cart.spec}}
               </span>
               <span class="number-span" ng-show="cartItem.editMode">
                 <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>

@@ -2568,9 +2568,26 @@ var Carts = {
       "price":"12",
       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg",
       "used_coupons":"",
+      "spec": '榴莲', 
       "brand_id":"121"}},
-    {"Cart":{"id":"23248","name":"\u963f\u514b\u82cf\u51b0\u7cd6\u5fc3\u82f9\u679c\u793c\u54c1\u88c5","product_id":"449","num":"1","price":"79","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/da546a7b1c5_1212.jpg","used_coupons":"","brand_id":"122"}},
-    {"Cart":{"id":"23249","name":"\u5e93\u5c14\u52d2\u7279\u7ea7\u9999\u68a8","product_id":"163","num":"2","price":"39","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_s\/42ae1c05a0d_0923.jpg","used_coupons":"","brand_id":"122"}}
+    {"Cart":{
+      "id":"23248",
+      "name":"\u963f\u514b\u82cf\u51b0\u7cd6\u5fc3\u82f9\u679c\u793c\u54c1\u88c5",
+      "product_id":"449",
+      "num":"1",
+      "price":"79",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/da546a7b1c5_1212.jpg",
+      "used_coupons":"",
+      "brand_id":"122"}},
+    {"Cart":{
+      "id":"23249",
+      "name":"\u5e93\u5c14\u52d2\u7279\u7ea7\u9999\u68a8",
+      "product_id":"163",
+      "num":"2",
+      "price":"39",
+      "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_s\/42ae1c05a0d_0923.jpg",
+      "used_coupons":"",
+      "brand_id":"122"}}
   ],
   "brands":[
     {"Brand":{"id":"45","name":"\u4e94\u5408\u6606\u57df-\u80e1\u4f20\u5fb7","slug":"wu_gu_kun_yu_xin_jiang_xiang_li","coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201409\/thumb_m\/28ca76eccee_0923.jpg","weixin_id":"18506933386","notice":"\u65b0\u7586\u6700\u4f73\u539f\u4ea7\u5730\u539f\u751f\u6001\u6709\u673a\u519c\u4ea7\u54c1\uff0c\u575a\u6301\u6700\u65b0\u7586\u6700\u597d\uff0c\u7528\u5fc3\u670d\u52a1\u3002"}},

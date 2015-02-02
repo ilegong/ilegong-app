@@ -29,6 +29,7 @@
     function getCartItems(accessToken){
       var defer = $q.defer();
       Base.get('/ApiOrders/list_cart.json?access_token=' + accessToken).then(function(list){
+        $log.log('get cart items:').log(list);
         defer.resolve(list);
       }, function(e){defer.reject(e)})
       return defer.promise;
