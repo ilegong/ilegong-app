@@ -12,11 +12,11 @@
       </a>
       <a class="item item-avatar item-thumbnail-left" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
         <img src='{{product.Cart.coverimg}}'/>
-        <div class="product-name">{{product.Cart.name}}</div>
-        <div class="product-fee text-muted">
+        <div class="text">{{product.Cart.name}}</div>
+        <div class="text-muted">
           {{product.Cart.price | currency:'￥'}} × {{product.Cart.num}}
         </div>
-        <div class="delivery-fee text-muted">
+        <div class="text-muted">
          {{9999 | currency:'￥'}}
         </div>
       </a>  
