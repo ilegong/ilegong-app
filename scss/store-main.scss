@@ -5,7 +5,6 @@
     width: 50%;
     margin-top: 10px;
     img{
-      width: 100%;
       display: block;
       max-height: 171px;
     }
@@ -14,8 +13,5 @@
       border: 1px solid $border_color;
       margin-right: 10px;
     }
-  }
-  .store-container + .store-container{
-    padding-left: 0;
   }
 }
