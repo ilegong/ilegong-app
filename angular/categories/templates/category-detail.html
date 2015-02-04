@@ -2,25 +2,17 @@
   <ion-content class='category elements'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="element-container" ng-repeat="product in vm.products">
+    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="'224px'" collection-item-width="'50%'" ng-click="vm.toProductDetailPage(product)">
       <div class='element'>
-        <a ui-sref="app.product-detail.intro({id: product.id,from:-1})">
-          <img class="product-image" title="{{product.title}}" src="{{product.coverimg}}">
-          <div class='product-name'>
-            {{product.name}}
-          </div>
-        </a>
+        <img class="product-image full" title="{{product.title}}" src="{{product.coverimg}}">
+        <div class='text-padding'>
+          {{product.name}}
+        </div>
         <div class='image-left'>
-          <a ui-sref="store.home({storeId: product.brand_id})">
-            <img class="radius-10" src="{{vm.brands[product.brand_id].Brand.coverimg}}">
-          </a>
-          <a ui-sref="app.product-detail.intro({id: product.id,from:-1})">
-            <div class='text-sub-muted brand-name'>{{vm.brands[product.brand_id].Brand.name}}</div>
-          </a>
-          <div class='prices'>
-            <span class='text-sub-energized price-current'>¥{{product.price}}</span>
-            <span class="text-tiny text-muted price-original" ng-show="product.original_price"><s>¥{{product.original_price}}</s></span>
-          </div>
+          <img class="radius-10" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({storeId: product.brand_id})" ng-click="$event.stopPropagation()">
+          <div class='text-sub-muted brand-name'>{{product.brand.Brand.name}}</div>
+          <span class='text-sub-energized'>¥{{product.price}}</span>
+          <s class="text-tiny text-muted" ng-show="product.original_price">¥{{product.original_price}}</s>
         </div>
       </div>
     </div>

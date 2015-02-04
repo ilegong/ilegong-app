@@ -71,6 +71,10 @@ a{
   overflow:hidden !important;
   white-space:nowrap !important;
 }
+.text-padding{
+  @extsend .text;
+  padding: 0 0.5em;
+}
 .text-muted {
   @extend .text;
   color: $muted !important;

@@ -3,16 +3,8 @@
 .category{
   .element-container{
     .element{
-      a{
-        color: $grey;
-        .product-name{
-          padding: 0.1em 0.5em;
-        }
-        .product-image{
-          width: 100%;
-          display: block;
-          padding-bottom: 0.5em;
-        }
+      .product-image{
+        max-height: 150px;
       }
       .image-left{
         position: relative;
