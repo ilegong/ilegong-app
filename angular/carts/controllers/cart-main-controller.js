@@ -5,9 +5,9 @@
   .controller('CartMainCtrl', CartMainCtrl)
   function CartMainCtrl($state,$q,$log,$scope,$rootScope,Carts,Addresses,Orders,Users){
     var vm = this;
-    vm.verifyCartNum = verifyCartNum;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
+    vm.clickSaveOrEditBtn = clickSaveOrEditBtn;
     vm.deleteCartItem = deleteCartItem;
     vm.readyToConfirm = function(){return _.any(vm.cartItems, function(cartItem){return cartItem.checked})};
     vm.confirmCart = confirmCart;
@@ -75,14 +75,6 @@
       var brandIds = _.map(cartItems, function(cartItem){return cartItem.Cart.brand_id});
       return _.filter($rootScope.brands, function(brand){return _.contains(brandIds, brand.Brand.id)});
     }
-    function verifyCartNum(cartItem){
-      if(cartItem.Cart.num < 0){
-        cartItem.Cart.num = 0;
-      }
-      else if(cartItem.Cart.num > 9999){
-        cartItem.Cart.num = 9999;
-      }
-    }
     function reduceCartItemNum(cart) {
       if(!$rootScope.user.loggedIn){
         return $state.go('app.my-account-login');
@@ -98,11 +90,14 @@
         return $state.go('app.my-account-login');
       }
       var original = cart.num;
-      cart.num=Number(cart.num) +1;
+      cart.num = Math.min(Number(cart.num) +1, 9999);
       Carts.editNum(cart.id,cart.num, $rootScope.user.token.access_token).then(function(result){}, function(e){
         cart.num = original;
       });
     };
+    function clickSaveOrEditBtn(cartItem){
+      cartItem.editMode = !cartItem.editMode;
+    }
     function deleteCartItem(cartItem){
       if(!$rootScope.user.loggedIn){
         return $state.go('app.my-account-login');

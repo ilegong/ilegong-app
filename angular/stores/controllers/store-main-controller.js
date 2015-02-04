@@ -12,10 +12,12 @@
     function activate(){
       vm.stores = $rootScope.brands;
       if(_.isEmpty($rootScope.brands)){
-        $rootScope.updateBrands();
+        Stores.list().then(function(data){
+          $rootScope.brands = data.brands;
+        });
       }
       $scope.$watch('brands', function(newBrands, oldBrands){
-          vm.stores = newBrands;
+        vm.stores = newBrands;
       });
     }
   }

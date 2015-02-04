@@ -21,7 +21,7 @@
         <p/>
       </p>
       <p ng-show="false" ng-reason="api不支持">
-        好友***推荐了该产品
+        您有0个好友推荐了该产品
       </p>
     </div>
     <div class="item" ng-reason="api不支持" ng-show="false">
@@ -29,7 +29,7 @@
         促销：
       </span>
       <span class="item-value">
-        暂无红包___Fix me
+        暂无红包
       </span>
     </div>
     <div class="item" ng-show="vm.hasSpecs()">
@@ -45,11 +45,11 @@
         数量：
       </span>
       <span class="number-span" style="width:75%;">
-        <span class="icon pys-350 icon-reduce count-reduce " ng-click="buttonReduceClick()"></span>
+        <span class="icon pys-350 icon-reduce count-reduce " ng-click="vm.reduceCartItemNum()"></span>
         <span class="count">
-          <input ng-model="vm.count">
+          <input disabled="disabled" ng-model="vm.count" style="background-color: #fff">
         </span>
-        <span class="icon pys-350 icon-add count-add" ng-click="buttonAddClick()"></span>
+        <span class="icon pys-350 icon-add count-add" ng-click="vm.addCartItemNum()"></span>
       </span>
     </div>
     

@@ -36,11 +36,11 @@
                 {{cartItem.Cart.spec}}
               </span>
               <span class="number-span" ng-show="cartItem.editMode">
-                <span class="icon icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
+                <span class="pys-350 icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
                 <span class="count">
-                  <input ng-model="cartItem.Cart.num" ng-change="vm.verifyCartNum(cartItem)"/>
+                  <input disabled="disabled" ng-model="cartItem.Cart.num" style="background-color: #fff"/>
                 </span>
-                <span class="icon icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
+                <span class="pys-350 icon-add count-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
               </span>
             </span>
             <span class="product-rest">
@@ -50,7 +50,7 @@
               <span class="product-num">
                 ×{{cartItem.Cart.num}}
               </span>
-              <span class="pys-350 {{cartItem.editMode ? 'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="cartItem.editMode = !cartItem.editMode; $event.stopPropagation()">
+              <span class="pys-350 {{cartItem.editMode ? 'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="vm.clickSaveOrEditBtn(cartItem); $event.stopPropagation()">
               </span>
             </span>
           </div>

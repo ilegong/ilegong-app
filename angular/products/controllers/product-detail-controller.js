@@ -7,9 +7,8 @@
   /* @ngInject */
   function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
     var vm = this;
-    vm.count=1;
-    vm.from = $stateParams.from;
-    vm.rating = 5;
+    vm.reduceCartItemNum = reduceCartItemNum;
+    vm.addCartItemNum = addCartItemNum;
     vm.confirmComment = confirmComment;
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
     vm.commentT = {rating:5,text:'',images:[]};
@@ -25,6 +24,9 @@
     activate();
     
     function activate(){
+      vm.count=1;
+      vm.from = $stateParams.from;
+      vm.rating = 5;
       vm.showProductIntro = false;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
@@ -92,11 +94,11 @@
       }
     }
 
-    $scope.buttonReduceClick = function(){
-      vm.count= Math.max(Number(vm.count)-1, 1);
+    function reduceCartItemNum(){
+      vm.count= Math.max(vm.count - 1, 1);
     };
-    $scope.buttonAddClick = function() {
-      vm.count=Number(vm.count)+1;
+    function addCartItemNum() {
+      vm.count = Math.min(vm.count + 1, 9999);
     };
     function confirmComment(){
       if(!$rootScope.user.loggedIn){

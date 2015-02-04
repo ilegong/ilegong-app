@@ -72,7 +72,7 @@ a{
   white-space:nowrap !important;
 }
 .text-padding{
-  @extsend .text;
+  @extend .text;
   padding: 0 0.5em;
 }
 .text-muted {

@@ -105,8 +105,10 @@
     function onAliPayLoadStop(e){
       $log.log('onStop');
       if(e.url.match("/ali_pay/wap_return_back_app")){
-        $log.log("will close in app browser...");
+        $log.log("onAliPayLoadStop, will close in app browser...");
         vm.inAppBrowser.close();
+      }else{
+        $log.log("onAliPayLoadStop for url: " + e.url);
       }
     }
     function onAliPayFinished(e){
