@@ -33,7 +33,7 @@ var homeJson = {
   {"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/d1.jpg","id":230},
   {"img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/d2.jpg","id":331}]
 };
-var shuiguoganguoJson = {  
+var categoriesJson = {  
   "brands":{
     "41":{  
        "Brand":{  
@@ -48,7 +48,7 @@ var shuiguoganguoJson = {
   "data_list":[ 
     {  
        "id":"302",
-       "name":"\u5e73\u548c\u742f\u6eaa\u7ea2\u5fc3\u871c\u67da",
+       "name":"习大大老家富平霜降特级尖柿饼500g装",
        "created":"2014-11-26 12:31:00",
        "brand_id":"121",
        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/a293b157a39_1126.jpg",

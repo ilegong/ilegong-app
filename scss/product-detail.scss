@@ -48,14 +48,14 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    span.count-reduce{
+    span.icon-reduce{
       border-right: 0;
       border-bottom-right-radius: 0;
       border-top-right-radius: 0;
       margin-bottom:-12px;
       padding-bottom:31px;
     }
-    span.count-add{
+    span.icon-add{
       border-left: 0;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
@@ -92,11 +92,6 @@
     }
     .text{
       white-space:normal;
-    }
-    .all-comment{
-      text-align:center;
-      font-weight:bold;
-      padding-top:0.5em;
     }
   }
   .make-comment{

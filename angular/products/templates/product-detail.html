@@ -12,13 +12,10 @@
         <span class="text-energized">
           ￥<span class="text-large">{{vm.product.Product.price | currency:''}}</span>
         </span>
-        <span class="text-sub" ng-show="{{vm.product.Product.original_price != 0}}">
-          <s>{{vm.product.Product.original_price | currency:"￥"}}</s>
-        </span>
+        <s class="text-sub" ng-show="{{vm.product.Product.original_price != 0}}">{{vm.product.Product.original_price | currency:"￥"}}</s>
         <a class="fr" ng-click="vm.toReputationCommentsPage();">
           口碑评价({{vm.getReputationComments().length}})
         </a>
-        <p/>
       </p>
       <p ng-show="false" ng-reason="api不支持">
         您有0个好友推荐了该产品
@@ -45,11 +42,9 @@
         数量：
       </span>
       <span class="number-span" style="width:75%;">
-        <span class="icon pys-350 icon-reduce count-reduce " ng-click="vm.reduceCartItemNum()"></span>
-        <span class="count">
-          <input disabled="disabled" ng-model="vm.count" style="background-color: #fff">
-        </span>
-        <span class="icon pys-350 icon-add count-add" ng-click="vm.addCartItemNum()"></span>
+        <span class="pys-350 icon-reduce" ng-click="vm.reduceCartItemNum()"></span>
+        <input class="count" disabled="disabled" ng-model="vm.count" style="background-color: #fff">
+        <span class="pys-350 icon-add" ng-click="vm.addCartItemNum()"></span>
       </span>
     </div>
     
@@ -58,9 +53,9 @@
     <a class="item item-avatar item-icon-right" ui-sref="store.home({storeId:vm.brand.Brand.id})">
       <img src="{{vm.brand.Brand.coverimg}}"/>
       <i class=" icon ion-ios7-arrow-right"></i>
-      <span style="line-height: 2em;">
+      <div class="text" style="line-height: 2em;">
         进入{{vm.brand.Brand.name}}的店铺
-      </span>
+      </div>
     </a>
     <div class="item">
       <span class="item-label">
@@ -129,8 +124,8 @@
       </span>
     </div>
     <a ng-show="vm.getReputationComments().length > 3" class="item evaluate" ng-click="vm.toReputationCommentsPage()">
-      <div class="all-comment">
-        查看全部评价
+      <div class="tc">
+        <strong>查看全部评价</strong>
       </div>
     </a>
 

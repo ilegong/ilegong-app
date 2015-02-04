@@ -4,10 +4,10 @@
       <span class="text text-balanced" style="font-size: 1.3em; left: 0.5em;">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)"> 
-        <div class="detail">
+        <div class="text">
           {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
         </div>  
-        <div class="name">
+        <div class="text">
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
         </div>
       </div>
@@ -19,11 +19,11 @@
       <div class="item-divider"></div>
       <div class="item item-avatar" ng-click="vm.toBrandPage(brand);">
         <img src="{{brand.Brand.coverimg}}"/>
-        <div>{{brand.Brand.name}}</div>
+        <div class="text">{{brand.Brand.name}}</div>
       </div>
       <div class="item item-thumbnail-left" ng-repeat="product in item.items" ng-click="vm.toProductPage(product);">
         <img src="{{product.coverimg}}"/>
-        <div>
+        <div class="text">
           {{product.name}}
         </div>
         <div class="text-sub-muted">
