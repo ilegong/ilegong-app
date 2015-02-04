@@ -2427,6 +2427,15 @@ var productComment = [
 var storeListJson = {"brands":[  
   {  
     "Brand":{  
+      "creator":"562304",
+      "name":"扑吃",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201412/thumb_m/0fcc4db74f2_1229.jpg",
+      "id":"125"
+    }
+  },
+  {  
+    "Brand":{  
       "creator":"819",
       "name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73",
       "slug":"qian_yang_wan_cheng",
@@ -2450,6 +2459,42 @@ var storeListJson = {"brands":[
       "slug":"nan_feng_mi_ju_wu_qing_yun",
       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/e12f444f1d7_1206.png",
       "id":"123"
+    }
+  },
+  {  
+    "Brand":{  
+      "creator":"562304",
+      "name":"獐子岛",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201501/thumb_m/cbf120b697a_0122.jpg",
+      "id":"124"
+    }
+  },
+  {  
+    "Brand":{  
+      "creator":"562304",
+      "name":"新疆天山雪枣-冯攀",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201412/thumb_m/d720fde7f72_1211.png",
+      "id":"126"
+    }
+  }, 
+  {  
+    "Brand":{  
+      "creator":"562305",
+      "name":"test1",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201501/thumb_m/cbf120b697a_0122.jpg",
+      "id":"127"
+    }
+  },
+  {  
+    "Brand":{  
+      "creator":"562306",
+      "name":"test2",
+      "slug":"nan_feng_mi_ju_wu_qing_yun",
+      "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201412/thumb_m/d720fde7f72_1211.png",
+      "id":"128"
     }
   }
 ]};

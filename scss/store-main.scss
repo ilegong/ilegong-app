@@ -2,17 +2,15 @@
 
 .stores{
   .store-container{
-    overflow: hidden;
-    padding: 0;
     width: 50%;
-    float: left;
-    background-color: #fff;
+    margin-top: 10px;
     img{
       width: 100%;
       display: block;
-      padding-bottom: 0.5em;
+      max-height: 171px;
     }
     .store{
+      display: block;
       border: 1px solid $border_color;
       margin-right: 10px;
     }
