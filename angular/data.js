@@ -2365,7 +2365,7 @@ var productComment = [
       "user_id": "265060", 
       "username": "安&安", 
       "title": null, 
-      "body": "来晚了,第一次收到货包装散了松子没剩几个,和卖家联系后又给补发了一份,良心卖家,给赞", 
+      "body": "", 
       "rating": "5", 
       "status": true, 
       "notify": false, 
