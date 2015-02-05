@@ -8,12 +8,12 @@
   function MyIlegongCtrl($rootScope, $scope, config){
     var vm = this;
     vm.count = 0;
-    vm.toggleLog = toggleLog;
+    vm.showDevelopmentMode = showDevelopmentMode;
 
-    function toggleLog(){
+    function showDevelopmentMode(){
       vm.count = vm.count + 1;
       if(vm.count > 4){
-        config.showLog = !config.showLog;
+        config.developmentMode = !config.developmentMode;
         vm.count = 0;
         $rootScope.alertMessage('显示开发者选项');
       }

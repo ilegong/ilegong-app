@@ -38,7 +38,8 @@
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
-      .state('app.my-log', {url: '/my/log', views: {'app-my': {templateUrl: 'my-log.html',controller: 'MyLogCtrl as vm'}}})
+      .state('app.my-messages', {url: '/my/messages', views: {'app-my': {templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'}}})
+      .state('app.my-message', {url: '/my/messages/:id', views: {'app-my': {templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'}}})
       .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
       .state('app.my-profile-mobilephone',{url:'/my-profile-mobilephone',views:{'app-my':{templateUrl:'my-profile-mobilephone.html',controller:'MyProfileMobilePhoneCtrl as vm'}}})
       .state('app.my-profile-email',{url:'/my-profile-email',views:{'app-my':{templateUrl:'my-profile-email.html',controller:'MyProfileEmailCtrl as vm'}}})
@@ -145,6 +146,9 @@
 
     function activate(){
       $rootScope.config = config;
+      if(cordova && cordova.plugins.version) {
+        $rootScope.config.app = _.extend($rootScope.config.app, {version: cordova.plugins.version.getAppVersion()});
+      }
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};

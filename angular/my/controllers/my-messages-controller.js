@@ -2,18 +2,18 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyLogCtrl', MyLogCtrl)
+  .controller('MyMessagesCtrl', MyMessagesCtrl)
 
   /* @ngInject */
-  function MyLogCtrl($rootScope, $scope, config){
+  function MyMessagesCtrl($rootScope, $scope, config){
     var vm = this;
     vm.clearLogs = clearLogs;
     activate();
     
     function activate(){
-      vm.logs = $rootScope.messages;
+      vm.messages = $rootScope.messages;
       $scope.$watch('messages', function(){
-        vm.logs = $rootScope.messages;
+        vm.messages = $rootScope.messages;
       });
     }
     function clearLogs(){

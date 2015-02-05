@@ -18,7 +18,7 @@
     function activate() {
       vm.loggedIn = $rootScope.user.loggedIn;
       vm.user = $rootScope.user.profile.User;
-      vm.showLog = $rootScope.config.showLog;
+      vm.developmentMode = $rootScope.config.developmentMode;
       vm.pendingStates = vm.getPendingStates([]);
       $scope.$watch('user.loggedIn', function(newToken, oldToken) {
         vm.loggedIn = $rootScope.user.loggedIn;
@@ -26,8 +26,8 @@
       $scope.$watch('user.orders', function(newOrders, oldOrders) {
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
-      $scope.$watch('config.showLog', function() {
-        vm.showLog = $rootScope.config.showLog;
+      $scope.$watch('config.developmentMode', function() {
+        vm.developmentMode = $rootScope.config.developmentMode;
       });
       $rootScope.$on("orderStateChanged", function(event, order){
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);

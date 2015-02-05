@@ -4,8 +4,22 @@
     <br><br>
     [朋友说]是朋友同事间互相分享自家特产的平台。<br>我们创业团队来自于腾讯、搜狐和去哪儿。
     <br><br>
-    商务电话: <a href="tel:{{config.app.bizline}}">{{config.app.bizline}}</a>
-    <br>
-    <span ng-click="vm.toggleLog()">客服电话</span>: <a href="tel:{{config.app.hotline}}">{{config.app.hotline}}</a>
+    <div class="item">
+      商务电话: 
+      <a href="tel:{{config.app.bizline}}" class="item-note">{{config.app.bizline}}</a>  
+    </div>
+    
+    <div class="item">
+      客服电话
+      <a href="tel:{{config.app.hotline}}" class="item-note">{{config.app.hotline}}</a>  
+    </div>
+
+    <div class="item-divider"></div>
+    <div class="item" ng-click="vm.showDevelopmentMode()">
+      版本号
+      <span class="item-note">{{config.app.version}}</span>
+    </div>
+    
+    
  </ion-content>
 </ion-view>

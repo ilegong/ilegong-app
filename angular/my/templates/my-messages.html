@@ -3,10 +3,8 @@
     <button class="button button-clear" ng-click="vm.clearLogs();">清除日志</button>
   </ion-nav-buttons>
   <ion-content class="padding">
-    <ul ng-show='config.showLog'>
-      <li class="item" ng-repeat='message in messages track by $index'>
-        <textarea placeholder="Comments">{{message}}</textarea>
-      </li>
-    </ul>
+    <span class="item" ng-repeat='message in messages track by $index' ui-sref="app.my-message({id: $index})">
+      {{message}}
+    </span>
  </ion-content>
 </ion-view>

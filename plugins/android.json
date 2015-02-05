@@ -37,6 +37,9 @@
         },
         "org.apache.cordova.inappbrowser": {
             "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+        },
+        "org.binarypark.cordova.plugins.version": {
+            "PACKAGE_NAME": "com.ilegong.pys"
         }
     },
     "dependent_plugins": {}
