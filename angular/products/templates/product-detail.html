@@ -120,14 +120,11 @@
         <span class="pys-350 {{comment.rating > 4 ?'icon-star':'icon-star-gray'}}"></span>
       </p>
       <p style="white-space: normal;">
-        {{comment.body || '这家伙太懒，什么都没写'}}
+        {{comment.body || '这家伙很懒，什么都没写'}}
       </p>
       <div>
         <img ng-repeat="img in comment.images" src="{{img}}" class="evaluate-image"/>
       </div>
-      <span ng-show="false" class="text-muted fr">
-        购买时间：{{comment.created}}
-      </span>
     </div>
     <a ng-show="vm.getReputationComments().length > 3" class="item evaluate" ng-click="vm.toReputationCommentsPage()">
       <div class="tc">

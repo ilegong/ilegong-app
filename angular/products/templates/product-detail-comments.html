@@ -31,14 +31,11 @@
         <span class="icon pys-350 {{comment.rating > 4 ? 'icon-star':'icon-star-gray'}}"></span>
       </p>
       <p style="white-space: normal;">
-        {{comment.body || '这家伙太懒，什么都没写'}}
+        {{comment.body || '这家伙很懒，什么都没写'}}
       </p>
       <div style="white-space: normal;">
         <img ng-repeat="img in comment.images" src="{{img}}" class="comment-image"/>
       </div>
-      <span class="text-muted fr" ng-show="false">
-        购买时间：{{comment.created}}
-      </span>
     </div>
 
     <div class="centered-container padding" ng-show="vm.getComments(vm.type).length == 0">
