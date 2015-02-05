@@ -1,4 +1,9 @@
-<ion-view title="账号" hide-tabs>
+<ion-view title="账号" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-nav-buttons side="right">
     <button class="button button-clear button-positive" ui-sref="account-login">登录</button>
   </ion-nav-buttons>
