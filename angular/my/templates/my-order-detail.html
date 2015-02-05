@@ -1,4 +1,9 @@
-<ion-view title="订单详情" class="order-detail" hide-tabs>
+<ion-view title="订单详情" class="order-detail" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content class="list">
     <div class="item">
       <div>收货地址</div> 

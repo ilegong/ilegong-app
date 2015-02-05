@@ -1,4 +1,9 @@
-<ion-view title="{{vm.orderStateName}}订单" hide-tabs>
+<ion-view title="{{vm.orderStateName}}订单" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
@@ -10,7 +15,7 @@
           {{vm.getOrderState(order).status}}
         </span>
       </a>
-      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in products" ui-sref="app.my-order-detail({id: order.Order.id})">
+      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in products" ui-sref="order-detail({id: order.Order.id})">
         <img src='{{product.Cart.coverimg}}'/>
         <div class="text">{{product.Cart.name}}</div>
         <div class="text-muted">
@@ -32,7 +37,7 @@
 
           <a class="button" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
 
-          <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="app.my-order-detail({id: order.Order.id})">支付</a>
+          <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
         </span>
       </div>
       </div>

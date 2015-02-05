@@ -34,7 +34,7 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
-      $state.go('app.my-orders',{state: p_state});
+      $state.go('orders',{state: p_state});
     }
 
     function toCoupons(){

@@ -83,10 +83,10 @@
         $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0});
       }
       else if(vm.from == -2){//from order-detail
-        $state.go("product-detail-comments-o",{id: vm.id, from: vm.from, type: 0})
+        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
       }
       else if(vm.from == -3){//from cart-main
-        $state.go("product-detail-comments-cm",{id: vm.id, from: vm.from, type: 0})
+        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
       }
       else if(vm.from >=0){//from store-main
         $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})

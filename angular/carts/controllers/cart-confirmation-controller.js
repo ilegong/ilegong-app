@@ -162,10 +162,10 @@
       Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $log.log("submit order successfully: ").log(orderIds);
         if(orderIds.length > 1){
-          $state.go("app.cart-orders", {state: 0});
+          $state.go("orders", {state: 0});
         }
         else{
-          $state.go("app.cart-order-detail", {id: orderIds[0]});
+          $state.go("order-detail", {id: orderIds[0]});
         }
       }, function(e){
         $log.log("submit order failed: ").log(e);
