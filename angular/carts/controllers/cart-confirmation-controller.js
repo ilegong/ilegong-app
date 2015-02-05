@@ -129,7 +129,7 @@
       return _.size(brandItem.items);
     }
     function changeAddress(){
-      $state.go('app.order-addresses',{state:1});
+      $state.go('addresses',{state:1});
     }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;

@@ -58,7 +58,7 @@
         return $state.go('account-login');
       }
 
-      $state.go('app.my-addresses',{state:0,addrId:0});
+      $state.go('addresses',{state:0,addrId:0});
     }
 
     function getPendingStates(orders){

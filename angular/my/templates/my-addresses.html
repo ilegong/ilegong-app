@@ -1,4 +1,9 @@
-<ion-view title="收货地址" hide-tabs>
+<ion-view title="收货地址" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
   <ion-nav-buttons side='right'>
     <button  class='button button-clear' ng-click="vm.addAddress()">{{'新建'}}</button>
   </ion-nav-buttons>
@@ -15,7 +20,7 @@
           {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
         </div>  
       </span>
-      <i class="icon pys-400 ion-edit" ng-click="vm.editAddress(address)"></i>
+      <i class="icon pys-400 ion-edit" ui-sref="address-edit({editId: address.OrderConsignees.id})"></i>
     </div>
     <div class="centered-container" ng-show="vm.addresses.length == 0">
       <span class="no-content no-address">

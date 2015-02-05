@@ -8,8 +8,7 @@
     var vm = this;
     vm.isChecked = isChecked;
     vm.setDefaultAddress = setDefaultAddress;
-    vm.addAddress = function(){$state.go('app.my-address-edit', {editId:-1})};
-    vm.editAddress = editAddress;
+    vm.addAddress = function(){$state.go('address-edit', {editId:-1})};
     vm.isFromOrder = function(){return vm.state == 1};
     vm.doRefresh = doRefresh;
     activate();
@@ -32,14 +31,6 @@
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     } 
-    function editAddress(addr){
-      if(vm.isFromOrder()){
-        $state.go('app.order-address-edit',{editId: addr.OrderConsignees.id});
-      }
-      else{
-        $state.go('app.my-address-edit',{editId: addr.OrderConsignees.id});
-      }
-    }
     function isChecked(address){
       if(_.isEmpty(vm.defaultAddress)){
         return false;

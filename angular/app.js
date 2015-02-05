@@ -33,9 +33,6 @@
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
-      .state('app.my-addresses',{url:'/my-addresses/:state',views:{'app-my':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
-      .state('app.my-address-edit',{url:'/my-address-edit/:editId',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
-      .state('app.my-address-add',{url:'/my-address-add',views:{'app-my':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
 
       .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
       .state('app.my-profile-mobilephone',{url:'/my-profile-mobilephone',views:{'app-my':{templateUrl:'my-profile-mobilephone.html',controller:'MyProfileMobilePhoneCtrl as vm'}}})
@@ -50,8 +47,6 @@
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
       .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
-      .state('app.order-addresses',{url:'/order-addresses/:state/:addrId',views:{'app-cart':{templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'}}})
-      .state('app.order-address-edit',{url:'/order-address-edit/:editId',views:{'app-cart':{templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'}}})
       .state('app.cart-order-detail',{url:'/cart-order-detail/:id',views:{'app-cart':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
       .state('app.cart-orders',{url:'/cart-orders/:state',views:{'app-cart':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
 
@@ -62,6 +57,9 @@
 
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
       .state('account-register', {url: '/account-register', templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'})
+
+      .state('addresses',{url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
+      .state('address-edit',{url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
 
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
 

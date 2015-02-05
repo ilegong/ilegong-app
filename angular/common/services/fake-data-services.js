@@ -48,7 +48,7 @@
       "/api_orders/comment_add.json":commentAddJson
     };
     var getLocalData = {
-       'token': {},
+       'token': tokenJson,
        "user": myProfileJson
     }
     return {
