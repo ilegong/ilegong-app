@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.ilegongapp346848" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ilegong.pys" version="0.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>朋友说</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Ilegong app
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="zxq@ilegong.com" href="http://www.tongshijia.com/">
+      Ilegong
     </author>
   <content src="index.html"/>
   <access origin="*"/>

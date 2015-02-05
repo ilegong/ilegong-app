@@ -1,6 +1,6 @@
 // Ionic Starter App
 
-(function(window, angular){
+(function(window, angular, cordova){
   angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
   .run(initApp)
   .config(configStates)
@@ -13,7 +13,7 @@
 
   function initApp($ionicPlatform, $log, Users) {
     $ionicPlatform.ready(function() {
-      if(window.cordova && window.cordova.plugins.Keyboard) {
+      if(cordova && cordova.plugins.Keyboard) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
       }
       if(window.StatusBar) {
@@ -144,9 +144,9 @@
     activate();
 
     function activate(){
+      $rootScope.config = config;
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
-      $rootScope.config = config;
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
       $rootScope.brands = [];
       $rootScope.provinces = [];
@@ -256,5 +256,5 @@
       $state.go('app.my');
     }
   }
-})(window, window.angular);
+})(window, window.angular, window.cordova);
 

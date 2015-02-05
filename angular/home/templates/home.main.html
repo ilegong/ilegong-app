@@ -42,8 +42,5 @@
     <div class="hot-items padding" style="padding-top: 0;">
       <img class="full" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems"/>
     </div>
-    <ul ng-show='config.showLog'>
-      <li ng-repeat='message in messages track by $index'>{{message}}</li>
-    </ul>
   </ion-content>
 </ion-view>
