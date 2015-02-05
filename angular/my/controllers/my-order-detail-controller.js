@@ -52,8 +52,8 @@
        hideSheet();
      }, 5000);
     }
-    function toStoreHomePage(storeId){
-      $state.go("store.home", {storeId: storeId});
+    function toStoreHomePage(store){
+      $state.go("store.home", {storeId: storeId, name: store.name});
     }
     function toProductDetailPage(item){
       $state.go("product-detail",{id:item.Cart.product_id,from:-2});

@@ -12,6 +12,11 @@
 
     function activate(){
       vm.storeId = $stateParams.storeId;
+      vm.storeName = $stateParams.name;
+      Stores.getStore(vm.storeId).then(function(store){
+        vm.store = store.content.info;
+        vm.products = store.content.products;
+      });
     }
 
     function goBack(){

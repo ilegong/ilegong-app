@@ -18,9 +18,6 @@
       return Base.get('/api_orders/store_list.json');
     }
     function getStore(id){
-      Base.get('/apiOrders/store_content/' + id + '.json').then(function(data){
-        console.log(data);
-      })
       return Base.get('/apiOrders/store_content/' + id + '.json');
     }
     function getStoreIntro(id){

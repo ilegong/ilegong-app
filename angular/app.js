@@ -61,7 +61,7 @@
       .state('orders',{url:'/orders/:state', templateUrl:'my-orders.html', controller:'MyOrdersCtrl as vm'})
       .state('order-detail',{url:'/order/:id', templateUrl:'my-order-detail.html', controller:'MyOrderDetailCtrl as vm'})
 
-      .state('store', {url: '/stores/:storeId', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
+      .state('store', {url: '/stores/:storeId/:name', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
 

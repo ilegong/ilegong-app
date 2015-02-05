@@ -37,7 +37,7 @@
     }
     function useCoupons(coupon,brand){
       if(!isNumberInvalid(coupon.Coupon.brand_id)){
-        $state.go('store.home',{storeId: brand.Brand.id});
+        $state.go('store.home',{storeId: brand.Brand.id, name: brand.Brand.name});
       }
       else if(!isNumberInvalid(coupon.Coupon.product_list)){
         $state.go('product-detail',{id:coupon.Coupon.product_list[0],from:-2});

@@ -8,7 +8,14 @@
   function MyLogCtrl($rootScope, $scope, config){
     var vm = this;
     vm.clearLogs = clearLogs;
-
+    activate();
+    
+    function activate(){
+      vm.logs = $rootScope.messages;
+      $scope.$watch('messages', function(){
+        vm.logs = $rootScope.messages;
+      });
+    }
     function clearLogs(){
       $rootScope.messages = [];
     }
