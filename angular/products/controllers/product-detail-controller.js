@@ -25,13 +25,12 @@
     
     function activate(){
       vm.count=1;
+      vm.id = $stateParams.id;
       vm.from = $stateParams.from;
       vm.rating = 5;
       vm.showProductIntro = false;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
-      vm.id = $stateParams.id;
-      vm.from = $stateParams.from;
       vm.cartItems = $rootScope.user.cartItems;
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
