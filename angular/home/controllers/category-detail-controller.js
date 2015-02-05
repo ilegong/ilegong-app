@@ -1,10 +1,10 @@
 (function (window, angular) {
   "use strict";
 
-  angular.module('ilegong.categories')
-  .controller('CategoryDetailCtrl', CategoryDetailCtrl)
+  angular.module('ilegong.home')
+  .controller('HomeCategoryCtrl', HomeCategoryCtrl)
 
-  function CategoryDetailCtrl($rootScope, $scope, $stateParams, $state, $log, Categories){
+  function HomeCategoryCtrl($rootScope, $scope, $stateParams, $state, $log, Categories){
     var vm = this;
     vm.doRefresh = doRefresh;
     vm.getBrandById = getBrandById;

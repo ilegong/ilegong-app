@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(window, angular){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.categories', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
   .run(initApp)
   .config(configStates)
   .config(configApp)
@@ -26,8 +26,7 @@
     $stateProvider
       .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeMainCtrl as vm'}}})
-
-      .state('app.category-detail', {url: '/categories/:slug/:name',views: {'app-home': {templateUrl: 'category-detail.html',controller: 'CategoryDetailCtrl as vm'}}})
+      .state('app.home-category', {url: '/categories/:slug/:name',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})
       
       .state('app.tryings', {url: '/tryings',views: {'app-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl as vm'}}})
       .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl as vm'}}})
