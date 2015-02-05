@@ -26,7 +26,7 @@
     }
     function doRefresh(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('app.account-login');
       }
       reloadAddresses($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
@@ -49,7 +49,7 @@
 
     function setDefaultAddress(defaultAddress){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('app.account-login');
       }
       Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id, $rootScope.user.token.access_token).then(function(result){
         $rootScope.reloadAddresses($rootScope.user.token.access_token).then(function(){

@@ -102,7 +102,7 @@
     };
     function confirmComment(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       Products.makeComment(vm.product.Product.id,vm.commentT.rating,vm.commentT.text,null, $rootScope.user.token.access_token).then(function(data){
         activate();
@@ -119,7 +119,7 @@
     }
     function addToCart(toCart){
       if(!$rootScope.user.loggedIn){
-        return $state.go('product-detail-account-login');
+        return $state.go('account-login');
       }
 
       Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){

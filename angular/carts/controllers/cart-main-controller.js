@@ -77,7 +77,7 @@
     }
     function reduceCartItemNum(cart) {
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       var originalNum = cart.num;
       cart.num = Math.max(cart.num - 1, 0);
@@ -87,7 +87,7 @@
     };
     function addCartItemNum(cart){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       var original = cart.num;
       cart.num = Math.min(Number(cart.num) +1, 9999);
@@ -100,7 +100,7 @@
     }
     function deleteCartItem(cartItem){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       Carts.deleteCartItem(cartItem.Cart.id, $rootScope.user.token.access_token).then(function(result){
         $rootScope.user.cartItems = _.filter($rootScope.user.cartItems, function(cartItemm){return cartItemm.Cart.id != cartItem.Cart.id});
@@ -110,12 +110,11 @@
       return _.filter($rootScope.user.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
     }
     function confirmCart(){
-      if(vm.isLoggedIn){
-        $state.go('app.cart-confirmation');
+      if(!$rootScope.user.loggedIn){
+        return $state.go('account-login');
       }
-      else{
-        $state.go('app.cart-account-login');
-      }
+
+      $state.go('app.cart-confirmation');
     }
   }
 })(window, window.angular);

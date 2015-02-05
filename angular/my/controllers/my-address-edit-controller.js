@@ -71,7 +71,7 @@
     }
     function editAddress(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       var t = vm.address.OrderConsignees;
       Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
@@ -80,7 +80,7 @@
     }
     function addAddress(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       var t = vm.address.OrderConsignees;
       Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
@@ -89,7 +89,7 @@
     }
     function deleteAddress(addressId){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       Addresses.deleteAddress(addressId, $rootScope.user.token.access_token).then(function(data){
         $rootScope.alertMessage("已删除该收货地址");

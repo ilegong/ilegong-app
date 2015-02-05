@@ -35,7 +35,7 @@
     }
     vm.remove = function(id){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       Orders.remove(id, $rootScope.user.token.access_token).then(function(result){
@@ -44,7 +44,7 @@
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       if(order.Order.status != 2){
         $log.log("cannot confirm receiving goods for order " +  order.Order.id + " with state " + order.Order.status);

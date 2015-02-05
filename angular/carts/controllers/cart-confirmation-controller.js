@@ -148,7 +148,7 @@
     }
     function submitOrder(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       var usedCoupons = _.filter(vm.validCoupons,function(coupon){

@@ -23,7 +23,7 @@
 
     function saveProfile(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       Profile.editProfile(_.extend($rootScope.user.profile.User, {sex: vm.sex}), $rootScope.user.token.access_token).then(function(){
         $rootScope.user.profile.User.sex = vm.sex;

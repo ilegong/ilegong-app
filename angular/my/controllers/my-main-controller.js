@@ -32,14 +32,14 @@
 
     function toOrders(p_state){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
       $state.go('app.my-orders',{state: p_state});
     }
 
     function toCoupons(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       $state.go('app.my-coupons');
@@ -47,7 +47,7 @@
 
     function toOffer(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       $state.go('app.my-offers');
@@ -55,7 +55,7 @@
 
     function toAddresses(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       $state.go('app.my-addresses',{state:0,addrId:0});
@@ -69,7 +69,7 @@
     }
     function profileClick(){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.my-account-login');
+        return $state.go('account-login');
       }
 
       $state.go("app.my-profile");
