@@ -18,12 +18,16 @@
     function activate() {
       vm.loggedIn = $rootScope.user.loggedIn;
       vm.user = $rootScope.user.profile.User;
+      vm.showLog = $rootScope.config.showLog;
       vm.pendingStates = vm.getPendingStates([]);
       $scope.$watch('user.loggedIn', function(newToken, oldToken) {
         vm.loggedIn = $rootScope.user.loggedIn;
       });
       $scope.$watch('user.orders', function(newOrders, oldOrders) {
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
+      });
+      $scope.$watch('config.showLog', function() {
+        vm.showLog = $rootScope.config.showLog;
       });
       $rootScope.$on("orderStateChanged", function(event, order){
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
