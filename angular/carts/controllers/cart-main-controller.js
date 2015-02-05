@@ -22,7 +22,7 @@
     vm.toggleBrand = toggleBrand;
     vm.getBrandsOfCartItems = getBrandsOfCartItems;
     vm.toBrandPage = function(brand){$state.go("store.home", {storeId: brand.Brand.id})};
-    vm.toProductPage = function(cartItem){if(cartItem.editMode){return;}; $state.go("app.product-detail-cm.intro", {id: cartItem.Cart.product_id, from:-3})};
+    vm.toProductPage = function(cartItem){if(cartItem.editMode){return;}; $state.go("product-detail.intro", {id: cartItem.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
 

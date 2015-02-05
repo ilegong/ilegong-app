@@ -51,22 +51,10 @@
       .state('app.my-orders',{url:'/my-orders/:state',views:{'app-my':{templateUrl:'my-orders.html',controller:'MyOrdersCtrl as vm'}}})
       .state('app.my-order-detail',{url:'/my-order-detail/:id',views:{'app-my':{templateUrl:'my-order-detail.html',controller:'MyOrderDetailCtrl as vm'}}})
 
-      .state('app.product-detail', {url: '/products/:id/:from', views: {'app-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
-      .state('app.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
-      .state('app.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
-      .state('app.product-detail-comments',{url:'/products/:id/:from/comments/:type',views:{'app-home':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
-      .state('app.product-detail-account-login', {url: '/account-login', views: {'app-home': {templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'}}})
-      
-
-      .state('app.product-detail-o', {url: '/products-o/:id/:from', views: {'app-my': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
-      .state('app.product-detail-o.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
-      .state('app.product-detail-o.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
-      .state('app.product-detail-comments-o',{url:'/products/:id/:from/comments/:type',views:{'app-my':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
-
-      .state('app.product-detail-cm', {url: '/products-cm/:id/:from', views: {'app-cart': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
-      .state('app.product-detail-cm.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
-      .state('app.product-detail-cm.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
-      .state('app.product-detail-comments-cm',{url:'/products/:id/:from/comments/:type',views:{'app-my':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
+      .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
+      .state('product-detail.intro', {url:'/intro', views:{'app-home':{templateUrl:'product-detail-intro.html'}}})
+      .state('product-detail.evaluate', {url:'/evaluate', views:{'app-home':{templateUrl:'product-detail-evaluate.html'}}})
+      .state('product-detail-comments', {url:'/products/:id/:from/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
       .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
@@ -81,10 +69,6 @@
       .state('store', {url: '/stores/:storeId', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
-      .state('store.product-detail', {url: '/products/:id/:from', views: {'store-home': {templateUrl: 'product-detail.html',controller: 'ProductDetailCtrl as vm'}}})
-      .state('store.product-detail.intro',{url:'/intro',templateUrl:'product-detail-intro.html'})
-      .state('store.product-detail.evaluate',{url:'/evaluate',templateUrl:'product-detail-evaluate.html'})
-      .state('store.product-detail-comments',{url:'/products/:id/:from/comments/:type',views:{'store-home':{templateUrl: 'product-detail-comments.html',controller:'ProductDetailCommentsCtrl as vm'}}})
 
     $urlRouterProvider.otherwise('/app/home');
   }

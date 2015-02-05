@@ -67,30 +67,30 @@
 
     function toTryingCommentsPage(){
       if(vm.from == -1){//from main
-        $state.go("app.product-detail-comments",{id: vm.id, from: vm.from, type: 1});
+        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1});
       }
       else if(vm.from == -2){//from order-detail
-        $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 1})
+        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
       }
       else if(vm.from == -3){//from cart-main
-        $state.go("app.product-detail-comments-cm",{id: vm.id, from: vm.from, type: 1})
+        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
       }
       else if(vm.from >=0){//from store-main
-        $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 1})
+        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
       }
     }
     function toReputationCommentsPage(){
       if(vm.from == -1){//from main
-        $state.go("app.product-detail-comments",{id: vm.id, from: vm.from, type: 0});
+        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0});
       }
       else if(vm.from == -2){//from order-detail
-        $state.go("app.product-detail-comments-o",{id: vm.id, from: vm.from, type: 0})
+        $state.go("product-detail-comments-o",{id: vm.id, from: vm.from, type: 0})
       }
       else if(vm.from == -3){//from cart-main
-        $state.go("app.product-detail-comments-cm",{id: vm.id, from: vm.from, type: 0})
+        $state.go("product-detail-comments-cm",{id: vm.id, from: vm.from, type: 0})
       }
       else if(vm.from >=0){//from store-main
-        $state.go("store.product-detail-comments",{id: vm.id, from: vm.from, type: 0})
+        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
       }
     }
 
@@ -119,7 +119,7 @@
     }
     function addToCart(toCart){
       if(!$rootScope.user.loggedIn){
-        return $state.go('app.product-detail-account-login');
+        return $state.go('product-detail-account-login');
       }
 
       Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){

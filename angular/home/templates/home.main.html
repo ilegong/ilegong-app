@@ -2,7 +2,7 @@
   <ion-content class="home">
     <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
-        <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"  ui-sref="app.product-detail({id:bannerItem.id,from:-1})"/>
+        <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"  ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
       </ion-slide>
     </ion-slide-box>
 
@@ -40,7 +40,7 @@
       朋友说的爆款
     </h4>
     <div class="hot-items padding" style="padding-top: 0;">
-      <img class="full" src="{{hotItem.img}}" ui-sref="app.product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems"/>
+      <img class="full" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems"/>
     </div>
     <ul ng-show='config.showLog'>
       <li ng-repeat='message in messages track by $index'>{{message}}</li>

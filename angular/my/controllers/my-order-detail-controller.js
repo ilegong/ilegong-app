@@ -56,7 +56,7 @@
       $state.go("store.home", {storeId: storeId});
     }
     function toProductDetailPage(item){
-      $state.go("app.product-detail-o",{id:item.Cart.product_id,from:-2});
+      $state.go("product-detail",{id:item.Cart.product_id,from:-2});
     }
     function cancelOrder(order){
       if(!$rootScope.user.loggedIn){

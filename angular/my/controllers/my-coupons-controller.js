@@ -40,7 +40,7 @@
         $state.go('store.home',{storeId: brand.Brand.id});
       }
       else if(!isNumberInvalid(coupon.Coupon.product_list)){
-        $state.go('app.product-detail-o',{id:coupon.Coupon.product_list[0],from:-2});
+        $state.go('product-detail',{id:coupon.Coupon.product_list[0],from:-2});
       }
       else if(!isNumberInvalid(coupon.Coupon.category_id) && false){ //  去专场，咱不实现
 

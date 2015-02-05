@@ -8,7 +8,7 @@
     var vm = this;
     vm.doRefresh = doRefresh;
     vm.getBrandById = getBrandById;
-    vm.toProductDetailPage = function(product){$state.go("app.product-detail.intro", {id: product.id,from:-1})};
+    vm.toProductDetailPage = function(product){$log.log('to product detail page');$state.go("product-detail.intro", {id: product.id,from:-1})};
     active();
 
     function active(){

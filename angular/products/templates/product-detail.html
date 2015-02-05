@@ -1,4 +1,10 @@
-<ion-view class="product-detail" title="商品详情" hide-tabs>
+<ion-view class="product-detail" title="商品详情">
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>
+    </button>
+  </ion-nav-buttons>
+
   <ion-content class="ion-content">
     <img src="{{vm.product.Product.coverimg}}" class="full"/>
     <div class="item">
@@ -135,7 +141,7 @@
       <h3>相关商品推荐</h3>
       <div class="element-container" ng-repeat="recommend in vm.recommends">
         <div class='element'>
-          <a ui-sref="app.product-detail({from: vm.from, id: recommend[1].id})">
+          <a ui-sref="product-detail({from: vm.from, id: recommend[1].id})">
             <img title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
             <div class="text" style="padding: 0 0.5em;">{{recommend[1].name}}</div>
           </a>
