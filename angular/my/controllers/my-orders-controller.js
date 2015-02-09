@@ -35,6 +35,7 @@
         order.Order.brand = _.find(brands, function(brand){return brand.Brand.id == order.Order.brand_id});
         order.Order.products =$rootScope.user.order_carts[order.Order.id];
         order.Order.orderState = Orders.getOrderState(order.Order.status);
+        
         return order;
       });
     }

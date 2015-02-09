@@ -7,11 +7,11 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="order" ng-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
-      <a class="item item-avatar brand" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
+    <div class="order full" ng-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
+      <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}"/>
-        <h2 class="fl" style="line-height: 2em; max-width: 80%;">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
-        <span class="text-energized fr" style="line-height: 2em;">
+        <h2 class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
+        <span class="text-energized col-20" style="line-height: 2em;">
           {{order.Order.orderState.status}}
         </span>
       </a>
@@ -19,26 +19,27 @@
         <img src='{{product.Cart.coverimg}}'/>
         <div class="text">{{product.Cart.name}}</div>
         <div class="text-muted">
-          {{product.Cart.price | currency:'￥'}} × {{product.Cart.num}}
+          价格：{{product.Cart.price | currency:'￥'}} 
         </div>
         <div class="text-muted">
-         {{9999 | currency:'￥'}}
+          数量：{{product.Cart.num}}
         </div>
       </a>  
-      <div class="item">
-        <span class="total-price" style="line-height: 3em;">
-          实付:<span class="text-energized">{{order.Order.total_price | currency:'￥'}}</span>
+      <div class="row item">
+        <span class="col">
+          <span class="text-sub-muted">邮费：{{order.Order.ship_fee | currency:'￥'}}</span>
+          <br/>
+          实付：<span class="text-energized">{{order.Order.total_price | currency:'￥'}}</span>
         </span>
-        <span class="buttons pys-buttons fr">
-          <a class="button" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
-          <a class="button button-balanced button-outline" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
-          <a class="button" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
+        <a class="button col-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
+        <a class="button button-balanced button-outline col-25 ml" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
-          <a class="button" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
+        <a class="button col-25" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
 
-          <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
-        </span>
+        <a class="button col-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
+
+        <a class="button button-balanced button-outline col-25" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
       </div>
       <div class="item-divider"></div>
     </div>
