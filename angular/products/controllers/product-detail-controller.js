@@ -21,6 +21,7 @@
     vm.toReputationCommentsPage = toReputationCommentsPage;
     vm.addToCart = addToCart;
     vm.readyToBuy = readyToBuy;
+    vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
     activate();
     
     function activate(){
