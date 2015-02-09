@@ -11,10 +11,10 @@
       restrict: 'A',
       link: function($scope, $el) {
         $rootScope.hideStoreTabs.push(true);
-        $log.log('hideStoreTabs in: ' + $rootScope.hideStoreTabs);
+        // $log.log('hideStoreTabs in: ' + $rootScope.hideStoreTabs);
         $scope.$on('$destroy', function() {
           $rootScope.hideStoreTabs.pop();
-          $log.log('hideStoreTabs out: ' + $rootScope.hideStoreTabs);
+          // $log.log('hideStoreTabs out: ' + $rootScope.hideStoreTabs);
         });
       }
     };
@@ -24,10 +24,10 @@
       restrict: 'A',
       link: function($scope, $el) {
         $rootScope.hideStoreTabs.push(false);
-        $log.log('showStoreTabs in: ' + $rootScope.hideStoreTabs);
+        // $log.log('showStoreTabs in: ' + $rootScope.hideStoreTabs);
         $scope.$on('$destroy', function() {
           $rootScope.hideStoreTabs.pop();
-          $log.log('showStoreTabs out: ' + $rootScope.hideStoreTabs);
+          // $log.log('showStoreTabs out: ' + $rootScope.hideStoreTabs);
         });
       }
     };
