@@ -60,8 +60,8 @@
       合计：<span class="text-energized">￥<span class="text-large">{{vm.totalPrice | currency:''}}</span></span>
     </span>
 
-    <a class="button pys-button button-energized col-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
     <a class="button pys-button col-25" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
+    <a class="button pys-button button-energized col-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
 
     <a class="button pys-button col-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
 
