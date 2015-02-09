@@ -6,32 +6,42 @@
 
   function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
-    vm.getOrderState = function(order){return Orders.getOrderState(order.Order.status)};
     vm.getBrand = function(brandId){return _.find(vm.brands, function(brand){return brand.Brand.id == brandId})};
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
     vm.remindSendingGoods = remindSendingGoods;
     vm.addRemark = addRemark;
     vm.doRefresh = doRefresh;
+    vm.filterOrders = filterOrders;
+    vm.getOrderHeight = getOrderHeight;
     activate();
     
     function activate() {
       vm.state =$stateParams.state;
       vm.orderStateName = Orders.getOrderState(vm.state).name;
-      vm.orders = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, vm.state)});
+      vm.orders = vm.filterOrders($rootScope.user.orders, vm.state);
       vm.brands = $rootScope.brands;
-      $log.log('all brands:').log(vm.brands);
-      vm.order_carts = $rootScope.user.order_carts;
       vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){
-        $log.log("order " + order.Order.id + " state changed to " + order.Order.status);
-        vm.orders = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, vm.state)});
+        vm.orders = vm.filterOrders($rootScope.user.orders, vm.state);
       });
     }
     function doRefresh(){
       $rootScope.reloadOrders($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
+    }
+    function filterOrders(orders, state){
+      var orderOfStates = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, state)});
+      return _.map(orderOfStates, function(order){
+        order.Order.brand = vm.getBrand(order.Order.brand_id);
+        order.Order.products =$rootScope.user.order_carts[order.Order.id];
+        order.Order.orderState = Orders.getOrderState(order.Order.status);
+        return order;
+      });
+    }
+    function getOrderHeight(order){
+      return ((141 + order.Order.products.length * 90 ) / 14 + 1.57143) + "em";
     }
     vm.remove = function(id){
       if(!$rootScope.user.loggedIn){

@@ -7,15 +7,15 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="list order" ng-repeat="order in vm.orders" ng-show="vm.orders.length > 0" ng-init="brand=vm.getBrand(order.Order.brand_id); products=vm.order_carts[order.Order.id];">
-      <a class="item item-avatar brand" ui-sref="store.home({storeId: brand.Brand.id, name: brand.Brand.name})">
-        <img src="{{brand.Brand.coverimg}}"/>
-        <h2 class="fl" style="line-height: 2em; max-width: 80%;">{{brand.Brand.name}}({{products.length}})</h2>
+    <div class="order" ng-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
+      <a class="item item-avatar brand" ui-sref="store.home({storeId: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})" ng-init="">
+        <img src="{{order.Order.brand.Brand.coverimg}}"/>
+        <h2 class="fl" style="line-height: 2em; max-width: 80%;">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
         <span class="text-energized fr" style="line-height: 2em;">
-          {{vm.getOrderState(order).status}}
+          {{order.Order.orderState.status}}
         </span>
       </a>
-      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in products" ui-sref="order-detail({id: order.Order.id})">
+      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
         <img src='{{product.Cart.coverimg}}'/>
         <div class="text">{{product.Cart.name}}</div>
         <div class="text-muted">
@@ -40,7 +40,7 @@
           <a class="button button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
         </span>
       </div>
-      </div>
+      <div class="item-divider"></div>
     </div>
 
     <div class="centered-container" ng-show="vm.orders.length == 0">
