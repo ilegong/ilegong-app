@@ -1,6 +1,6 @@
-<ion-view title="{{vm.storeName}}" show-tabs>
+<ion-view title="{{app.storeName}}" show-store-tabs>
   <ion-nav-buttons side="left">
-    <button class="button button-clear back-button" ng-click="vm.goBack()">
+    <button class="button button-clear back-button" ng-click="vm.goBack();">
       <i class="icon ion-ios7-arrow-left"></i>
     </button>
   </ion-nav-buttons>
@@ -9,7 +9,7 @@
     <div class='list'>
       <div class="row" ng-repeat="p in vm.products" ng-if="$index % 2 == 0">
         <div class='product card col col-50' ng-repeat="p in vm.products.slice($index, $index+2)" ng-init="product=p.Product">
-          <a ui-sref="product-detail({from: vm.storeId, id: product.id,type:-3})">
+          <a ui-sref="product-detail({from: app.storeId, id: product.id,type:-3})">
             <div class="item item-image">
               <img title="{{product.title}}" src="{{product.coverimg}}">
             </div>

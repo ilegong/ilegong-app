@@ -17,7 +17,7 @@
         {{vm.order.Order.consignee_mobilephone}}
       </span>
     </div>
-    <a class="item item-avatar item-icon-right" ng-click="vm.toStoreHomePage(vm.store)">
+    <a class="item item-avatar item-icon-right" ng-click="store.home({id: vm.store.id, name: vm.store.name})">
       <img src="{{vm.store.coverimg}}" style="top: 1em;"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="text fl" style="height: 3em; line-height: 3em; max-width: 50%;">{{vm.store.name}}</div>

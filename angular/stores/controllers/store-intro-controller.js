@@ -9,7 +9,7 @@
     var vm = this; 
     activate();
     function activate(){
-      Stores.getStoreIntro($stateParams.storeId).then(function(data){
+      Stores.getStoreIntro($stateParams.id).then(function(data){
         vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
       });
     }

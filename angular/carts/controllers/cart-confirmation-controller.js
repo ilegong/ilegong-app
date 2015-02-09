@@ -21,35 +21,20 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
-    vm.toBrandPage = function(brand){$state.go("store.home", {storeId: brand.Brand.id, name: brand.Brand.name})};
     vm.toProductPage = function(item){$state.go("product-detail.intro", {id: item.pid, from:-3})};
     activate();
 
     function activate(){
-      vm.confirmErrors = {
-        'invalid_address': '请设置默认收货地址'
-      };
-      vm.confirmedBrandItems = {};
-      vm.couponCode = '';
+      vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
       vm.defaultAddress = $rootScope.getDefaultAddress();
-      vm.showProductCoupon = showProductCoupon;
 
-      var pidList = _.map(_.filter($rootScope.user.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
-      Carts.getCartInfo(pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(result){
-        vm.confirmedBrandItems = result.cart.brandItems;
-        $log.log('get cart info successfully:').log(result.cart);
-        vm.shipFees = result.shipFees; 
-        vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
-        vm.reduced = result.reduced;
-        vm.totalPrice = result.total_price;
-        $rootScope.reloadCart($rootScope.user.token.access_token);
-      }, function(e){
-        $log.log("get cart info error: ").log(e);
-        $ionicHistory.goBack();
-        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
-      });
+      vm.shipFees = $rootScope.user.cartInfo.shipFees; 
+      vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
+      vm.reduced = $rootScope.user.cartInfo.reduced;
+      vm.totalPrice = $rootScope.user.cartInfo.total_price;
+
       $rootScope.$on("addressChanged", function(event, addresses){
         vm.defaultAddress = $rootScope.getDefaultAddress();
       });

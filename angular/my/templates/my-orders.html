@@ -8,7 +8,7 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="order" ng-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
-      <a class="item item-avatar brand" ui-sref="store.home({storeId: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})" ng-init="">
+      <a class="item item-avatar brand" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}"/>
         <h2 class="fl" style="line-height: 2em; max-width: 80%;">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
         <span class="text-energized fr" style="line-height: 2em;">

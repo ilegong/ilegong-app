@@ -22,7 +22,6 @@
     vm.allBrandsChecked = function(id) {return _.all(vm.brands,function(brand){return vm.brandChecked(brand.Brand.id)})};
     vm.toggleBrand = toggleBrand;
     vm.getBrandsOfCartItems = getBrandsOfCartItems;
-    vm.toBrandPage = function(brand){$state.go("store.home", {storeId: brand.Brand.id, name: brand.Brand.name})};
     vm.toProductPage = function(cartItem){if(cartItem.editMode){return;}; $state.go("product-detail.intro", {id: cartItem.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
@@ -31,6 +30,9 @@
       vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       vm.cartItems = _.map($rootScope.user.cartItems, function(cartItem){cartItem.editMode = false; return cartItem});
       vm.brands = vm.getBrandsOfCartItems(vm.cartItems);
+      vm.confirmErrors = {
+        'invalid_address': '请设置默认收货地址'
+      };
       $scope.$watch('user.cartItems', function(newCartItems, oldCartItems) {
         vm.cartItems = _.map(newCartItems, function(cartItem){cartItem.editMode = false; return cartItem});
         vm.brands = vm.getBrandsOfCartItems(vm.cartItems);
@@ -62,8 +64,8 @@
       product['checked'] = !product['checked'];
     }
     function getCheckedNumber(){
-      return _.reduce(vm.brands,function(memo, brand){
-        return memo + _.filter(vm.getCartItemsOfBrand(brand.Brand.id), function(ci){ci.checked}).length;
+      return _.reduce(vm.brands, function(memo, brand){
+        return memo + _.filter(vm.getCartItemsOfBrand(brand.Brand.id), function(ci){return ci.checked}).length;
       }, 0);
     }
     function getPriceOfBrand(brandId){
@@ -120,7 +122,14 @@
         return $state.go('account-login');
       }
 
-      $state.go('app.cart-confirmation');
+      var couponCode = '';
+      var pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      $rootScope.getCartInfo(pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(){
+        $state.go('app.cart-confirmation');
+      }, function(e){
+        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
+        $ionicHistory.goBack();
+      });
     }
   }
 })(window, window.angular);

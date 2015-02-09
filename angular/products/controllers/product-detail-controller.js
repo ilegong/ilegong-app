@@ -34,11 +34,9 @@
       vm.cartItems = $rootScope.user.cartItems;
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
-        $log.log('old product specs: ').log(vm.product.Product.specs);
         if(typeof(vm.product.Product.specs) === "string"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
         }
-        $log.log('new product specs: ').log(vm.product.Product.specs);
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
       }, function(e){$log.log(e)});

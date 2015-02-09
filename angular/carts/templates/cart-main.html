@@ -10,7 +10,7 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div ng-repeat="brand in vm.brands" ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
-      <span class="item item-icon-left item-avatar" ng-click="vm.toBrandPage(brand);">
+      <span class="item item-icon-left item-avatar" ng-click="toStoreHomePage(brand);">
         <img src="{{brand.Brand.coverimg}}"></img>
         <i class="icon pys-350 {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand.Brand.id); $event.stopPropagation()" ng-show="!vm.editMode">
         </i>          

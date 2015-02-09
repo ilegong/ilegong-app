@@ -62,7 +62,7 @@
       .state('orders',{url:'/orders/:state', templateUrl:'my-orders.html', controller:'MyOrdersCtrl as vm'})
       .state('order-detail',{url:'/order/:id', templateUrl:'my-order-detail.html', controller:'MyOrderDetailCtrl as vm'})
 
-      .state('store', {url: '/stores/:storeId/:name', templateUrl: 'store-tabs.html', controller: 'StoreDetailCtrl as app', abstract: true})
+      .state('store', {url: '/stores/:id/:name', templateUrl: 'store-tabs.html', controller: 'StoreCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
 
@@ -205,6 +205,11 @@
         $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
       });
     }
+    $rootScope.getCartInfo = function(pidList, couponCode, accessToken){
+      return Carts.getCartInfo(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
+        $rootScope.user.cartInfo = result;
+      });
+    }
     $rootScope.reloadAddresses = function(accessToken){
       return Addresses.list(accessToken).then(function(addresses){
         $rootScope.user.addresses = addresses;
@@ -258,6 +263,9 @@
     function toMyPage(){
       $rootScope.hideTabs = [];
       $state.go('app.my');
+    }
+    $rootScope.toStoreHomePage = function(brand){
+      return $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});
     }
   }
 })(window, window.angular, window.cordova);

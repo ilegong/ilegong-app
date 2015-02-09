@@ -35,15 +35,14 @@
         return false;
       }
     }
-    function useCoupons(coupon,brand){
+    function useCoupons(coupon, brand){
       if(!isNumberInvalid(coupon.Coupon.brand_id)){
-        $state.go('store.home',{storeId: brand.Brand.id, name: brand.Brand.name});
+        $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});
       }
       else if(!isNumberInvalid(coupon.Coupon.product_list)){
         $state.go('product-detail',{id:coupon.Coupon.product_list[0],from:-2});
       }
       else if(!isNumberInvalid(coupon.Coupon.category_id) && false){ //  去专场，咱不实现
-
       }
       else{
         $state.go('app.home');

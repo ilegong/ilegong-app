@@ -38,7 +38,7 @@
     </div>
 
     <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons">
-      <a class="coupon-info col col-67" ui-sref="store.home({storeId: brand.Brand.id, name: brand.Brand.name})">
+      <a class="coupon-info col col-67" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
         <p class="coupon-name">
           {{item.Coupon.name}}
         </p>

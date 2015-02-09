@@ -17,7 +17,7 @@
     </div>
     <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
-      <div class="item item-avatar" ng-click="vm.toBrandPage(brand);">
+      <div class="item item-avatar" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
         <img src="{{brand.Brand.coverimg}}"/>
         <div class="text">{{brand.Brand.name}}</div>
       </div>
