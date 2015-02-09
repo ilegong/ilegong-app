@@ -13,10 +13,21 @@ var homeJson = {
   {
     "id":13,
     "slug":"chao-zhi-gou",
-    "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p1.jpg"
+    "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p1.jpg", 
+    "name": "超值购"  
   },
-  {"id":14,"slug":"xia-wu-cha","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p2.jpg"},
-  {"id":15,"slug":"hui-jia-chi-fang","img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p3.jpg"}
+  {
+    "id":14,
+    "slug":"xia-wu-cha",
+    "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p2.jpg", 
+    "name": "下午茶"
+  },
+  {
+    "id":15,
+    "slug":"hui-jia-chi-fang",
+    "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/p3.jpg", 
+    "name": "回家吃饭"
+  }
   ],
   "mainTagItems":[
   {"id":3,"slug":"shuiguoganguo", name: '水果干果', "img":"http:\/\/www.tongshijia.com\/img\/mobile\/index\/c1.jpg"},

@@ -15,12 +15,12 @@
       </div>
       <div class="row">
         <div class="col">
-          <img src="{{vm.specTagItems[0].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[0].slug})"/>
+          <img src="{{vm.specTagItems[0].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[0].slug, name: vm.specTagItems[0].name})"/>
         </div>
         <div class="col">
-          <img src="{{vm.specTagItems[1].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug})" />
+          <img src="{{vm.specTagItems[1].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[0].name})" />
           <br />
-          <img src="{{vm.specTagItems[2].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug})"/>
+          <img src="{{vm.specTagItems[2].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[1].name})"/>
         </div>
       </div>
     </div>
