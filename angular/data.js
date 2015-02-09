@@ -2135,7 +2135,7 @@ var orderDetail = {
   },
   "store":{
     "id":"92",
-    "name":"\u670b\u53cb\u8bf4",
+    "name":"朋友说自己的小店",
     "slug":"peng_you_shuo",
     "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/0e1309c1731_1119.jpg"
   }
