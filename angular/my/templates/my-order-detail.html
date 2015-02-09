@@ -55,20 +55,18 @@
       <a class="button fr" ng-show="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
     </div>
   </ion-content>
-  <ion-footer-bar>
-    <div class="footer-bar-container">
-      <span class="bar-row fl">
-        合计：<span class="text-energized">￥<span class="text-large">{{vm.totalPrice | currency:''}}</span></span>
-      </span>
+  <ion-footer-bar class="row">
+    <span class="col">
+      合计：<span class="text-energized">￥<span class="text-large">{{vm.totalPrice | currency:''}}</span></span>
+    </span>
 
-      <a class="button pys-button button-energized fr" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
-      <a class="button pys-button fr" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
+    <a class="button pys-button button-energized col-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
+    <a class="button pys-button col-25" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
 
-      <a class="button pys-button fr" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
+    <a class="button pys-button col-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
 
-      <a class="button pys-button button-energized fr" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
+    <a class="button pys-button button-energized col-25" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
 
-      <a class="button pys-button fr" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
-    </div>
+    <a class="button pys-button col-25" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
   </ion-footer-bar>
 </ion-view>

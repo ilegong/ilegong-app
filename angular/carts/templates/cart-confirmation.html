@@ -75,19 +75,15 @@
     </div>
   </ion-content>
 
-  <ion-footer-bar>
-    <div class="footer-bar-container">
-      <span class="bar-row fl" style="width: 60%;">
-        共{{vm.getPidList().length}}件，实付款
-        <span class="text-energized">
-          ￥<span class="text-large">{{vm.totalPrice | currency:''}}</span>
-        </span>
+  <ion-footer-bar class="row">
+    <span class="col">
+      共{{vm.getPidList().length}}件，实付款
+      <span class="text-energized">
+        ￥<span class="text-large">{{vm.totalPrice | currency:''}}</span>
       </span>
-      <div class="buttons pys-buttons fr">
-        <button class="button button-energized" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
-          <strong>提交订单</strong>
-        </button>
-      </div>
-    </div>
+    </span>
+    <button class="button button-energized col-25" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
+      <strong>提交订单</strong>
+    </button>
   </ion-footer-bar>
 </ion-view>

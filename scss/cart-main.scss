@@ -1,22 +1,16 @@
 @import "variables";
 
 .cart{
+  .bar-footer{
+    .pys-350{
+      position: absolute;
+      top: 1em;
+      left: 0.5em;
+    }
+  }
   .nav-bar-button{
     color:white;
     font-weight:bold;
-  }
-  .footer-bar{
-    bottom: 49px;
-    .footer-bar-container{
-      .price-total{
-        padding: 0 0 0 4em;
-        .icon{
-          position: absolute;
-          left: 11px;
-          top: 1em;
-        }
-      }
-    }
   }
   .product-content{
     display:inline-block;

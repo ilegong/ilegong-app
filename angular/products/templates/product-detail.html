@@ -147,22 +147,20 @@
       </div>
     </div>
   </ion-content>
-  <ion-footer-bar class="footer footer-bar">
-    <div class="footer-bar-container">
-      <span ng-click="vm.addToCart(true);" class="button pys-button button-energized fl" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
-        <strong>立即购买</strong>
-      </span>
-      <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive fl" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
-        <strong>加入购物车</strong>
-      </span>
-      <div ng-click="vm.toCartPage()" class="centered-container fr">
+  <ion-footer-bar class="row">
+    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-25" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
+      <strong>立即购买</strong>
+    </span>
+    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-30" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
+      <strong>加入购物车</strong>
+    </span>
+    <div ng-click="vm.toCartPage()" class="centered-container col-15 col-offset-30">
         <span ng-show="vm.cartItems.length > 0" class="badge badge-right-top badge-balanced">{{vm.cartItems.length}}</span>
-        <span class="pys-350 icon-footer-cart">
-        </span>
-        <div class="footer-cart-text">
-          购物车
-        </span>
-      </div>
+      <span class="pys-350 icon-footer-cart">
+      </span>
+      <div class="footer-cart-text">
+        购物车
+      </span>
     </div>
   </ion-footer-bar>
 </ion-view>
