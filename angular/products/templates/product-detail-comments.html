@@ -17,8 +17,8 @@
   </div>
   <ion-content class="content has-tabs-top">
     <div class="item" ng-repeat="comment in vm.getComments(vm.type)">
-      <p class="item-image-small-left"> 
-        <img ng-show="comment.userPhoto != null" class="item-image user-image"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
+      <p class="item-image-mini-left"> 
+        <img ng-show="comment.userPhoto != null" class="item-image user-image radius-5"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
         <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
         <span >{{comment.username}}</span>
         <span class="text-muted fr">{{comment.created}}</span>

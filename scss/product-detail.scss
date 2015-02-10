@@ -34,7 +34,7 @@
     display:inline-block;
     margin-bottom:0.9em;
     margin-right:0.4em;
-    border:1px #cccccc solid;
+    border:1px $border_color solid;
     color:#cccccc;
   }
   .specs.checked{
@@ -79,13 +79,6 @@
     }
   }
   .evaluate{
-    .user-image{
-      width: 1.667em;
-      height: 1.667em;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: -0.5em;
-    }
     .icon-user{
       background-position:0 0;
       width:1.667em;

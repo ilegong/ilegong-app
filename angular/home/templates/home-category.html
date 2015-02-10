@@ -12,7 +12,7 @@
           <img class="radius-10" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
           <div class='text-sub-muted brand-name'>{{product.brand.Brand.name}}</div>
           <span class='text-sub-energized'>¥{{product.price}}</span>
-          <s class="text-tiny text-muted" ng-show="product.original_price">¥{{product.original_price}}</s>
+          <s class="text-mini-muted" ng-show="product.original_price">¥{{product.original_price}}</s>
         </div>
       </div>
     </div>

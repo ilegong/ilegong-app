@@ -27,27 +27,27 @@
         您有0个好友推荐了该产品
       </p>
     </div>
-    <div class="item" ng-reason="api不支持" ng-show="false">
-      <span class="item-label">
+    <div class="item row" ng-reason="api不支持" ng-show="false">
+      <span class="col col-15">
         促销：
       </span>
-      <span class="item-value">
+      <span class="col">
         暂无红包
       </span>
     </div>
-    <div class="item" ng-show="vm.hasSpecs()">
-      <span class="item-label">规格:</span>
-      <span class="item-value" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
+    <div class="item row" ng-show="vm.hasSpecs()">
+      <span class="col col-center col-15">规格:</span>
+      <span class="col wrapped-container" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
         <span class="specs" ng-class="{checked: vm.specsChecks[ite_name][ite].value}" ng-repeat="ite in ite_content" ng-init="vm.specsChecks[ite_name][ite] = {value:false}" ng-click="vm.specsClick(ite_name,ite);">
           {{ite}}
         </span>
       </span>
     </div>
-    <div class="item">
-      <span class="item-label">
+    <div class="item row">
+      <span class="col col-center col-15">
         数量：
       </span>
-      <span class="number-span" style="width:75%;">
+      <span class="col number-span">
         <span class="pys-350 icon-reduce" ng-click="vm.reduceCartItemNum()"></span>
         <input class="count" disabled="disabled" ng-model="vm.count" style="background-color: #fff">
         <span class="pys-350 icon-add" ng-click="vm.addCartItemNum()"></span>
@@ -63,19 +63,19 @@
         进入{{vm.brand.Brand.name}}的店铺
       </div>
     </a>
-    <div class="item">
-      <span class="item-label">
+    <div class="item row">
+      <span class="col col-15">
         快递：
       </span>
-      <span class="item-value">
+      <span class="col">
         {{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
       </span>
     </div>
-    <div class="item">
-      <div class="item-label">
+    <div class="item row">
+      <div class="col col-center col-15">
         服务：
       </div>
-      <span class="item-value">
+      <span class="col wrapped-container">
         本商品由{{vm.brand.Brand.name}}提供，朋友说提供售后服务，服务热线：{{config.app.hotline}}
       </span>
     </div>
@@ -106,8 +106,8 @@
     </div>
 
     <div ng-show="$index<3" class="item evaluate" ng-repeat="c in vm.getReputationComments()" ng-init="comment = c.Comment">
-      <p class="item-image-small-left">
-        <img ng-show="comment.userPhoto != null" class="item-image user-image"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
+      <p class="item-image-mini-left">
+        <img ng-show="comment.userPhoto != null" class="item-image user-image radius-5"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
         <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
         <span >{{comment.username}}</span>
         <span class="fr text-muted">{{comment.created}}</span>
@@ -138,20 +138,18 @@
       <h3>相关商品推荐</h3>
       <div class="element-container" ng-repeat="recommend in vm.recommends">
         <div class='element'>
-          <a ui-sref="product-detail({from: vm.from, id: recommend[1].id})">
-            <img title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
-            <div class="text" style="padding: 0 0.5em;">{{recommend[1].name}}</div>
-          </a>
-          <div class="text-muted" style="padding-left: 0.5em;"><strong>¥{{recommend[1].price | currency:''}}</strong></div>
+          <img ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
+          <div class="text pl">{{recommend[1].name}}</div>
+          <div class="text-muted pl"><strong>¥{{recommend[1].price | currency:''}}</strong></div>
         </div>
       </div>
     </div>
   </ion-content>
   <ion-footer-bar class="row">
-    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-25" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-25 mr" ng-disabled="!vm.readyToBuy()">
       <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-30" style="margin-right: 0.5em;" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-30 mr" ng-disabled="!vm.readyToBuy()">
       <strong>加入购物车</strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-15 col-offset-30">
