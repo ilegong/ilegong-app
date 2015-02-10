@@ -1,5 +1,5 @@
 <ion-view title="{{vm.name}}" hide-tabs>
-  <ion-content class='category elements'>
+  <ion-content class='home-category elements'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="element-container" collection-repeat="product in vm.products" collection-item-height="'224px'" collection-item-width="'50%'" ng-click="vm.toProductDetailPage(product)">

@@ -182,7 +182,7 @@ a{
   top: 45%;
   left: 0;
   width: 100%;
-  z-index: 9;
+  z-index: -9;
   .alert {
     padding: 1rem;
     font-size: 1.5rem;
@@ -193,6 +193,9 @@ a{
     color: #fff;
     background-color: #505050;
   }
+}
+.alert-container.active{
+  z-index: 9;
 }
 
 .padding .row{

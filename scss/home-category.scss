@@ -1,0 +1,23 @@
+@import "variables";
+
+.home-category{
+  .element-container{
+    .element{
+      .product-image{
+        max-height: 10.7142857143rem;
+      }
+      .image-left{
+        position: relative;
+        padding-left: 3.5rem;
+        height: 2.85714285714rem;
+        img{
+          position: absolute;
+          left: 0.5rem;
+          top: 0.3rem;
+          width: 2.25rem;
+          height: 2.3rem;
+        }
+      }
+    }
+  }
+}

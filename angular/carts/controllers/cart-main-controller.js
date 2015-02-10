@@ -43,7 +43,7 @@
     }
 
     function doRefresh(){
-      $rootScope.reloadCart();
+      $rootScope.reloadCart($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }
@@ -81,6 +81,7 @@
     }
     function getBrandsOfCartItems(cartItems){
       var brandIds = _.map(cartItems, function(cartItem){return cartItem.Cart.brand_id});
+      $log.log('cart item brand ids :').log(brandIds);
       return _.filter($rootScope.brands, function(brand){return _.contains(brandIds, brand.Brand.id)});
     }
     function reduceCartItemNum(cart) {

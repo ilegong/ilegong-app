@@ -86,7 +86,6 @@
       });
     }
     function aliPay(){
-      $log.log('pay begin');
       Users.aliPay(vm.orderId).then(function(inAppBrowser){
         vm.inAppBrowser = inAppBrowser;
         _.each(vm.inAppBrowserEvents, function(callback, event){

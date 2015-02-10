@@ -203,6 +203,7 @@
     $rootScope.reloadCart = function(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
         $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+        $rootScope.user.brands = _.extend($rootScope.brands, result.brands);
       });
     }
     $rootScope.getCartInfo = function(pidList, couponCode, accessToken){
