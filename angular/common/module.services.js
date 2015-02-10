@@ -6,7 +6,7 @@
   .value('config', {fakeData: false, developmentMode: false, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', version: '0.3.0', hotline: '(010)5624 5991', bizline: '189-1191-1240'}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, $window, config, FakeData){
+  function Base($http, $q, $log, $localForage, $window, $timeout, config, FakeData){
     var self = this;
     self.getUrl = getUrl;
     $window.device = $window.device || {};
@@ -22,11 +22,14 @@
     }
 
     function get(url){
+      // var defer = $q.defer();
+      // $timeout(function(){
+      //   defer.reject('');
+      // }, 50000);
       if(config.fakeData){
         $log.log(url).log(FakeData.get(url));
         return deferred(FakeData.get(url));
       }
-
       var defer = $q.defer();
       $http.get(self.getUrl(url))
         .success(function(data, status, headers, config) {

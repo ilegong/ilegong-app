@@ -21,7 +21,7 @@
     </ion-nav-bar>
     <ion-nav-view>
     </ion-nav-view>
-    <div class="alert-container" ng-class="{active: alert.message != ''}" ng-show="alert.message != ''">
+    <div class="alert-container" ng-class="{active: showAlertMessage()}" ng-show="showAlertMessage()">
       <span class="alert text-large br">
         {{alert.message}}
       </span>

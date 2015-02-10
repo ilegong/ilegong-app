@@ -1,12 +1,18 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
   <ion-content class="home">
-    <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;">
+    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()" ng-if="vm.loadingFailed">
+    </ion-refresher>
+    <div class="icon-refreshing" style="text-align:center; font-size: 30px; padding-top: 1rem;" ng-if="vm.loading">
+      <i class="icon ion-loading-d"></i>
+    </div>
+
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.loaded">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
         <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"  ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
       </ion-slide>
     </ion-slide-box>
 
-    <div class="promotion">
+    <div class="promotion" ng-if="vm.loaded">
       <div class="price">
         <span class="text-assertive text-sub">
           ¥<strong>12.00</strong>
@@ -25,10 +31,10 @@
       </div>
     </div>
     
-    <h4 style="padding-left: 10px; margin-bottom: 0">
+    <h4 style="padding-left: 10px; margin-bottom: 0" ng-if="vm.loaded">
       朋友的推荐
     </h4>
-    <div class="elements padding-left">
+    <div class="elements padding-left" ng-if="vm.loaded">
       <div class="element-container" ng-repeat="mainItem in vm.mainTagItems">
         <div class="element">
           <img class="full" src="{{mainItem.img}}" ui-sref="app.home-category({slug:mainItem.slug, name: mainItem.name})"/>
@@ -36,11 +42,15 @@
       </div>
     </div>
 
-    <h4 style="padding-left: 10px; margin-bottom: 0">
+    <h4 style="padding-left: 10px; margin-bottom: 0" ng-if="vm.loaded">
       朋友说的爆款
     </h4>
-    <div class="hot-items padding" style="padding-top: 0;">
+    <div class="hot-items padding" style="padding-top: 0;" ng-if="vm.loaded">
       <img class="full" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems"/>
+    </div>
+
+    <div ng-if="vm.loading">
+      
     </div>
   </ion-content>
 </ion-view>

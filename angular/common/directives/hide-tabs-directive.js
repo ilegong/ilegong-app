@@ -10,6 +10,7 @@
     return {
       restrict: 'A',
       link: function($scope, $el) {
+        $rootScope.hideTabs = $rootScope.hideTabs || [];
         $rootScope.hideTabs.push(true);
         // $log.log('hideTabs in: ' + $rootScope.hideTabs);
         $scope.$on('$destroy', function() {
@@ -23,6 +24,7 @@
     return {
       restrict: 'A',
       link: function($scope, $el) {
+        $rootScope.hideTabs = $rootScope.hideTabs || [];
         $rootScope.hideTabs.push(false);
         // $log.log('showTabs in: ' + $rootScope.hideTabs);
         $scope.$on('$destroy', function() {

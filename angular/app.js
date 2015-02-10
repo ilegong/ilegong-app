@@ -142,7 +142,9 @@
     app.toTryingsPage = toTryingsPage;
     app.toCartPage = toCartPage;
     app.toMyPage = toMyPage;
-    activate();
+
+    $rootScope.activate = activate;
+    $rootScope.activate();
 
     function activate(){
       $rootScope.config = config;
@@ -240,10 +242,14 @@
       $rootScope.$broadcast('orderStateChanged', order);
     }
     $rootScope.alertMessage = function(message){
+      $rootScope.alert = $rootScope.alert || {message: ''};
       $rootScope.alert.message = message;
       $timeout(function(){
         $rootScope.alert.message = "";
       }, config.timeout);
+    }
+    $rootScope.showAlertMessage = function(){
+      return !_.isEmpty($rootScope.alert) && !_.isEmpty($rootScope.alert.message);
     }
     function toHomePage(){
       $rootScope.hideTabs = [];
