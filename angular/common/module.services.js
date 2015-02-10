@@ -25,7 +25,8 @@
       // var defer = $q.defer();
       // $timeout(function(){
       //   defer.reject('');
-      // }, 5000);
+      // }, 1000);
+      // return defer.promise;
       if(config.fakeData){
         $log.log(url).log(FakeData.get(url));
         return deferred(FakeData.get(url));
@@ -96,14 +97,6 @@
       var defer = $q.defer();
       defer.resolve(data);
       return defer.promise;
-    }
-    function getLocalSync(key){
-      if(config.fakeData){
-        return FakeData.getLocal(key);
-      }
-      else{
-        return $localForage.getItem(key);
-      }
     }
   }
 })(window, window.angular);

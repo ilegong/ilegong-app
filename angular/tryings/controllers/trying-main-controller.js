@@ -15,7 +15,7 @@
     }
 
     function doRefresh(){
-      $rootScope.reloadTryings().then(function(e){
+      $rootScope.reloadTryings().then(function(data){
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
       }, function(e){

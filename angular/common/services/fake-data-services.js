@@ -48,8 +48,16 @@
       "/api_orders/comment_add.json":commentAddJson
     };
     var getLocalData = {
-       'token': tokenJson,
-       "user": myProfileJson
+       'brands': storeListJson.brands,
+       'tryings': tryingsJson.cates,
+       'provinces': allProvince,
+       'user.token': tokenJson,
+       "user.profile": myProfileJson, 
+       "user.cartItems": Carts, 
+       "user.addresses": Addresses, 
+       "user.orders": ordersJson.orders, 
+       "user.order_carts": ordersJson.order_carts, 
+       "user.ship_type": ordersJson.ship_type
     }
     return {
       get: function(url){return getFrom(getData, url)},

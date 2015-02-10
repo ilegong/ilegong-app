@@ -45,15 +45,9 @@
       </div>
     </div>
 
-    <h4 style="padding-left: 10px; margin-bottom: 0" ng-if="vm.loaded">
+    <h4 style="padding-left: 10px;" ng-if="vm.loaded">
       朋友说的爆款
     </h4>
-    <div class="hot-items padding" style="padding-top: 0;" ng-if="vm.loaded">
-      <img class="full" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems"/>
-    </div>
-
-    <div ng-if="vm.loading">
-      
-    </div>
+    <img class="full padding-left padding-right" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems" ng-if="vm.loaded"/>
   </ion-content>
 </ion-view>

@@ -135,7 +135,7 @@
     $ionicConfigProvider.backButton.text('').icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
@@ -225,16 +225,26 @@
       });
     }
     function reloadStores(){
+      if(!_.isEmpty($rootScope.brands)){
+        return;
+      }
+
       return Stores.list().then(function(data){
+        $log.log("get brands successfuly ").log(data.brands);
         $rootScope.brands = data.brands;
         Base.setLocal('brands', data.brands);
       }, function(e){
+        $log.log("get brands failed: ").log(e);
         Base.getLocal('brands').then(function(brands){
+          $log.log("get brands locally ").log(brands);
           $rootScope.brands = brands;
         });
       });
     }
     function reloadTryings(){
+      if(!_.isEmpty($rootScope.tryings)){
+        return;
+      }
       return Tryings.list().then(function(data){
         $rootScope.tryings = data.cates;
         Base.setLocal('tryings', data.cates);
@@ -245,6 +255,9 @@
       })
     }
     function reloadProvinces(){
+      if(!_.isEmpty($rootScope.provinces)){
+        return;
+      }
       return Addresses.getProvinces().then(function(provinces){
         $rootScope.provinces = provinces;
         Base.setLocal('provinces', provinces);
