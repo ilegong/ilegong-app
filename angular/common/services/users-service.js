@@ -27,7 +27,7 @@
       return Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
         $rootScope.onUserLoggedIn(token, true);
         return $rootScope.user.token;
-      })
+      });
     }
     function getCaptchaImageUrl(){
       return Base.getUrl("/check/captcha?type=app&device_uuid=" + Base.getDevice().uuid);

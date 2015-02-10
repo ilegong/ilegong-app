@@ -158,33 +158,65 @@
       $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
 
-      Base.getLocal('token').then(function(token){
+      Base.getLocal('brands').then(function(brands){
+        $rootScope.brands = brands;
+      });
+      Base.getLocal('provinces').then(function(provinces){
+        $rootScope.provinces = provinces;
+      });
+
+      Base.getLocal('user.token').then(function(token){
         if(_.isEmpty(token)){
           return;
         }
-
         var isExpired = token.expires_at <= (((new Date()).valueOf())/1000);
         if(isExpired){
-          return Users.refreshToken(token.refresh_token);
+          Users.refreshToken(token.refresh_token).then(function(token){
+          }, function(e){
+            $log.log('refresh token failed: ').log(e);
+            $rootScope.loadLocally();
+          });
         }
-
-        $rootScope.user.token = token;
-        Base.getLocal('profile').then(function(profile){
-          $rootScope.user.profile = profile;
-        });
-        $rootScope.onUserLoggedIn(token, false);
+        else{
+          $rootScope.user.token = token;
+          $rootScope.loadLocally();
+          $rootScope.onUserLoggedIn(token, false);
+        }
       }, function(e){});
+
       Stores.list().then(function(data){
         $rootScope.brands = data.brands;
+        Base.setLocal('brands', data.brands);
       });
       Addresses.getProvinces().then(function(provinces){
         $rootScope.provinces = provinces;
+        Base.setLocal('provinces', provinces);
+      });
+    }
+    $rootScope.loadLocally = function(){
+      Base.getLocal('user.profile').then(function(profile){
+        $rootScope.user.profile = profile;
+      });
+      Base.getLocal('user.cartItems').then(function(cartItems){
+        $rootScope.user.cartItems = cartItems;
+      });
+      Base.getLocal('user.addresses').then(function(addresses){
+        $rootScope.user.addresses = addresses;
+      });
+      Base.getLocal('user.order_carts').then(function(order_carts){
+        $rootScope.user.order_carts = order_carts;
+      });
+      Base.getLocal('user.orders').then(function(orders){
+        $rootScope.user.orders = orders;
+      });
+      Base.getLocal('user.ship_type').then(function(ship_type){
+        $rootScope.user.ship_type = ship_type;
       });
     }
     $rootScope.onUserLoggedIn = function(token, shouldRefreshToken){
       if(shouldRefreshToken){
         token = _.extend(token, {expires_at: token.expires_in + ((new Date()).valueOf())/1000});
-        Base.setLocal('token', token);
+        Base.setLocal('user.token', token);
       }
       $rootScope.user.token = token;
       $rootScope.user.loggedIn = true;
@@ -200,12 +232,15 @@
     $rootScope.reloadProfile = function(accessToken){
       Profile.getProfile(accessToken).then(function(profile){
         $rootScope.user.profile = profile;
+        Base.setLocal('user.profile', profile);
       });
     }
     $rootScope.reloadCart = function(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
         $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        $rootScope.user.brands = _.extend($rootScope.brands, result.brands);
+        $rootScope.brands = _.extend($rootScope.brands, result.brands);
+        Base.setLocal('user.cartItems', $rootScope.user.cartItems);
+        Base.setLocal('brands', $rootScope.brands);
       });
     }
     $rootScope.getCartInfo = function(pidList, couponCode, accessToken){
@@ -216,6 +251,7 @@
     $rootScope.reloadAddresses = function(accessToken){
       return Addresses.list(accessToken).then(function(addresses){
         $rootScope.user.addresses = addresses;
+        Base.setLocal('user.addresses', addresses);
         $rootScope.$broadcast('addressChanged', addresses);
       });
     }
@@ -224,6 +260,9 @@
         $rootScope.user.orders = data.orders;
         $rootScope.user.order_carts = data.order_carts;
         $rootScope.user.ship_type = data.ship_type;
+        Base.setLocal('user.orders', $rootScope.user.orders);
+        Base.setLocal('user.order_carts', $rootScope.user.order_carts);
+        Base.setLocal('user.ship_type', $rootScope.user.ship_type);
       });
     }
     $rootScope.getDefaultAddress = function(){

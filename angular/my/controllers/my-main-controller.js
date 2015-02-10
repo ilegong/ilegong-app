@@ -20,6 +20,9 @@
       vm.user = $rootScope.user.profile.User;
       vm.developmentMode = $rootScope.config.developmentMode;
       vm.pendingStates = vm.getPendingStates([]);
+      $scope.$watch('user.profile', function(newToken, oldToken) {
+        vm.user = $rootScope.user.profile.User;
+      });
       $scope.$watch('user.loggedIn', function(newToken, oldToken) {
         vm.loggedIn = $rootScope.user.loggedIn;
       });

@@ -1,14 +1,17 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
-  <ion-content class="home">
+  <ion-content class="home" ng-click="vm.doRefresh()">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()" ng-if="vm.loadingFailed">
     </ion-refresher>
-    <div class="icon-refreshing" style="text-align:center; font-size: 30px; padding-top: 1rem;" ng-if="vm.loading">
-      <i class="icon ion-loading-d"></i>
+    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;">
+      <i class="icon ion-loading-d" style="font-size: 30px; " ng-if="vm.loading"></i>
+      <div class="element-container text-muted" ng-if="vm.loadingFailed">
+        网络连接不可用，轻触重试
+      </div>
     </div>
 
     <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.loaded">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
-        <img ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"  ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
+        <img class="full" ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"  ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
       </ion-slide>
     </ion-slide-box>
 

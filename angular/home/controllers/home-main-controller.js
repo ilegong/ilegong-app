@@ -18,7 +18,12 @@
       vm.doRefresh();
     }
     function doRefresh(){
-     Base.get('/api_orders/home.json').then(function(data){
+      if(vm.loaded){
+        return;
+      }
+      vm.loading = true;
+      vm.loadingFailed = false;
+      Base.get('/api_orders/home.json').then(function(data){
         vm.bannerItems = _.filter(data.bannerItems, function(item){return item.id != null});
         vm.tryingItems = data.tryingItems;
         vm.specTagItems = data.specTagItems;
@@ -35,8 +40,7 @@
         $scope.$apply();
       }, function(e){
         $log.log('get home.json failed: ').log(e);
-        $rootScope.alertMessage('网络连接不可用');
-        vm.loaded = vm.loaded || false;
+        vm.loaded = false;
         vm.loading = false;
         vm.loadingFailed = true;
         $scope.$broadcast('scroll.refreshComplete');
