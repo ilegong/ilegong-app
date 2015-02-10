@@ -18,8 +18,7 @@
     }
 
     function doRefresh(){
-      Stores.list().then(function(data){
-        $rootScope.brands = data.brands;
+      $rootScope.reloadStores(function(data){
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
       });

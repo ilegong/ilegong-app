@@ -34,8 +34,7 @@
         vm.loading = false;
         vm.loaded = true;
         vm.loadingFailed = false;
-        $rootScope.activate();
-        $log.log('get home.json succeeded: ').log(data);
+        $rootScope.refreshData();
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
       }, function(e){

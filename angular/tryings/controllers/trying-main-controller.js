@@ -7,12 +7,21 @@
   /* @ngInject */
   function TryingsCtrl($rootScope, $scope, Tryings){
     var vm = this;
+    vm.doRefresh = doRefresh;
     activate();
 
     function activate(){
-      Tryings.list().then(function(data){
-        vm.tryings = data.cates;
-      })
+      vm.tryings = $rootScope.tryings;
+    }
+
+    function doRefresh(){
+      $rootScope.reloadTryings().then(function(e){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(e){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      });
     }
   }
 })(window, window.angular);
