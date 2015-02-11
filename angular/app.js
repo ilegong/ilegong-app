@@ -300,6 +300,7 @@
         $rootScope.user.orders = data.orders;
         $rootScope.user.order_carts = data.order_carts;
         $rootScope.user.ship_type = data.ship_type;
+        $rootScope.$broadcast('orderStateChanged', $rootScope.user.orders);
         Base.setLocal('user.orders', $rootScope.user.orders);
         Base.setLocal('user.order_carts', $rootScope.user.order_carts);
         Base.setLocal('user.ship_type', $rootScope.user.ship_type);

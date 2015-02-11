@@ -42,15 +42,6 @@
     function getOrderHeight(order){
       return ((141 + order.Order.products.length * 90 ) / 14 + 1.57143) + "em";
     }
-    vm.remove = function(id){
-      if(!$rootScope.user.loggedIn){
-        return $state.go('account-login');
-      }
-
-      Orders.remove(id, $rootScope.user.token.access_token).then(function(result){
-        activate();
-      });
-    }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
