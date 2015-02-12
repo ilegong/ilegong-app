@@ -270,7 +270,12 @@
     function reloadCart(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
         $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        $rootScope.brands = _.extend($rootScope.brands, result.brands);
+        var brandIds -= _.map($rootScope.brands, function(brand){return brand.Brand.id});
+        _.each(result.brands, function(brand){
+          if(!_.contains(brandIds, brand.Brand.id)){
+            $rootScope.brands.push(brand);
+          }
+        });
         Base.setLocal('user.cartItems', $rootScope.user.cartItems);
         Base.setLocal('brands', $rootScope.brands);
       }, function(e){
