@@ -7,7 +7,7 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="order full" ng-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
+    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}"/>
         <h2 class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>

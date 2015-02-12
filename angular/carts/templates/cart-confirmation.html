@@ -26,13 +26,13 @@
         <div class="text">
           {{product.name}}
         </div>
-        <div class="text-sub-muted">
+        <div class="nowrap text-sub-muted">
           价格：{{product.price | currency:'￥'}}&nbsp;数量：{{product.num}}
         </div>
-        <div class="text-sub-muted" ng-show="!_.isEmpty(product.spec)">
+        <div class="nowrap text-sub-muted" ng-show="!_.isEmpty(product.spec)">
           规格：{{product.spec}}
         </div>
-        <div class="text-sub-muted">
+        <div class="nowrap text-sub-muted">
           小计：<span class="text-energized">{{vm.getPriceOfProduct(product) | currency:'￥'}}</span>
         </div>
       </div>
@@ -55,8 +55,8 @@
       <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if=" vm.showProductCoupon(item.items,coupon);" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setBrandOrProductCoupon(coupon,brand,item.items)" >asdasdad{{coupon.isChecked}}</ion-checkbox>
       <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="coupon.Coupon.brand_id == brand.Brand.id" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setBrandOrProductCoupon(coupon,brand,item.items)" >asdasdad{{coupon.isChecked}}</ion-checkbox>
 
-      <div class="item">
-        <span class="text-muted fr">共{{vm.countOfProducts(item)}}件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
+      <div class="item tr">
+        <span class="nowrap text-muted">共{{vm.countOfProducts(item)}}件商品，合计：{{vm.getPriceOfBrand(item) | currency:'￥'}}</span>
       </div>
     </div>
 

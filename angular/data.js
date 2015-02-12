@@ -2280,7 +2280,7 @@ var productDetail = {
          "photo":"",
          "cate_id":"114",
          "end_time":"2015-11-24 11:24:00",
-         "promote_name":"promote",
+         "promote_name":"蛋糕为空运蛋糕，页面显示日期就为蛋糕到货日，如果有其他需求，请联系我们",
          "comment_nums":"2",
          "recommend":"288",
          "ship_fee":"5",
@@ -2383,7 +2383,7 @@ var productComment = [
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
       "images": [
-        "http://51daifan-images.stor.sinaapp.com/f20eeae3f9f_0106.jpg", 
+        "http://51daifan-images.stor.sinaapp.com/2d4906054b7_0128.jpg", 
         "http://51daifan-images.stor.sinaapp.com/13f100d315d_0106.jpg", 
         "http://51daifan-images.stor.sinaapp.com/48fc39dd437_0106.jpg", 
         "http://51daifan-images.stor.sinaapp.com/886ba0c0149_0106.jpg"
@@ -2410,7 +2410,7 @@ var productComment = [
       "is_shichi_tuan_comment": "0", 
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
-      "userPhoto": "http://wx.qlogo.cn/mmopen/v6XbW38nFORka8CbQfeEOdfvQ1tITW74gaExJg39pCGzFD6uR2jL7oUbHzlX6iacFldSsKanGow152VnvkfErpzpZbdE9gBj0/0"
+      "userPhoto": null
     }
   }, 
   {

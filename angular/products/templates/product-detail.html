@@ -11,7 +11,7 @@
       <p class="text-large">
         {{vm.product.Product.name}}
       </p>
-      <p class="text-sub">
+      <p class="text-sub" style="white-space:normal;">
         {{vm.product.Product.promote_name}}
       </p>
       <p>
@@ -105,10 +105,10 @@
       </span>
     </div>
 
-    <div ng-show="$index<3" class="item evaluate" ng-repeat="c in vm.getReputationComments()" ng-init="comment = c.Comment">
+    <div class="item comment" ng-repeat="c in vm.getReputationComments().slice(0, 3)" ng-init="comment = c.Comment">
       <p class="item-image-mini-left">
-        <img ng-show="comment.userPhoto != null" class="item-image user-image radius-5"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
-        <span ng-show="comment.userPhoto == null" class="app-icon icon-user user-image"></span>
+        <img ng-show="comment.userPhoto != null" class="item-image radius-5" style="background: url('{{comment.userPhoto}}');background-size:contain;">
+        <span ng-show="comment.userPhoto == null" class="item-image pys-350 icon-user"></span>
         <span >{{comment.username}}</span>
         <span class="fr text-muted">{{comment.created}}</span>
       </p>
@@ -122,14 +122,12 @@
       <p style="white-space: normal;">
         {{comment.body || '这家伙很懒，什么都没写'}}
       </p>
-      <div>
-        <img ng-repeat="img in comment.images" src="{{img}}" class="evaluate-image"/>
+      <div class="row">
+        <img ng-repeat="img in comment.images.slice(0, 3)" src="{{img}}" class="comment-image col"/>
       </div>
     </div>
-    <a ng-show="vm.getReputationComments().length > 3" class="item evaluate" ng-click="vm.toReputationCommentsPage()">
-      <div class="tc">
-        <strong>查看全部评价</strong>
-      </div>
+    <a ng-show="vm.getReputationComments().length > 3" class="item tc" ng-click="vm.toReputationCommentsPage()">
+      <strong>查看全部评价</strong>
     </a>
 
     <div class="item-divider"></div>

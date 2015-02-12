@@ -111,34 +111,34 @@ a{
   margin-left: 30%; 
 }
 
+.padding-left-right-5{
+  padding: 0 0.5rem;
+}
+.nowrap{
+  text-overflow:ellipsis !important;
+  overflow:hidden !important;
+  white-space:nowrap !important;
+}
+
 // text
 .text{
   text-overflow:ellipsis !important;
   overflow:hidden !important;
   white-space:nowrap !important;
 }
-.text-padding{
-  @extend .text;
-  padding: 0 0.5rem;
-}
 .text-muted {
-  @extend .text;
   color: $muted !important;
 }
 .text-energized{
-  @extend .text;
   color: $energized;
 }
 .text-balanced{
-  @extend .text;
   color: $balanced;
 }
 .text-assertive{
-  @extend .text;
   color: $assertive;
 }
 .text-sub {
-  @extend .text;
   font-size: 0.9rem !important;
 }
 .text-sub-muted {
@@ -147,6 +147,10 @@ a{
 }
 .text-sub-energized {
   @extend .text-energized;
+  @extend .text-sub;
+}
+.text-sub-assertive {
+  @extend .text-assertive;
   @extend .text-sub;
 }
 .text-mini {
@@ -159,7 +163,7 @@ a{
 }
 .text-large{
   @extend .text;
-  font-size: 1.5rem;
+  font-size: 1.5rem !important;
 }
 .text-large-balanced{
   @extend .text-balanced;
@@ -231,6 +235,9 @@ a{
   padding: 1rem;
   a{
     color: #444;
+  }
+  .row{
+    padding: 0;
   }
 }
 .item.row{
@@ -365,6 +372,9 @@ a{
 }
 .pys-350.icon-pyshuo{
   background-position: -5.83333333333em -10em;
+}
+.pys-350.icon-user{
+  background-position: 0 0;
 }
 
 .icon.pys-400.icon-my-order{
