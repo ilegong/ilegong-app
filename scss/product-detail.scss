@@ -1,9 +1,6 @@
  @import "variables";
 
 .product-detail{
-  .ion-content{
-    margin-bottom:1.6em;
-  }
   .centered-container{
     padding-right: 0.5em;
     .pys-350.icon-footer-cart {
@@ -13,9 +10,11 @@
     }
 
     .footer-cart-text{
-      font-size:0.5em;
       display: block;
-      margin-top: -0.5em;
+      margin-top: -0.5rem;
+      color: #999;
+      font-size: 0.9rem;
+      line-height: 1rem;
     }
   }
 
@@ -81,6 +80,7 @@
   .comment{
     .comment-image{
       max-height: 6rem;
+      padding-bottom: 0;
     }
   }
   .elements{

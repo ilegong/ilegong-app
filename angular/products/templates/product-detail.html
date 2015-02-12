@@ -36,7 +36,7 @@
       </span>
     </div>
     <div class="item row" ng-show="vm.hasSpecs()">
-      <span class="col col-center col-15">规格:</span>
+      <span class="col col-15">规格:</span>
       <span class="col wrapped-container" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
         <span class="specs" ng-class="{checked: vm.specsChecks[ite_name][ite].value}" ng-repeat="ite in ite_content" ng-init="vm.specsChecks[ite_name][ite] = {value:false}" ng-click="vm.specsClick(ite_name,ite);">
           {{ite}}
@@ -72,7 +72,7 @@
       </span>
     </div>
     <div class="item row">
-      <div class="col col-center col-15">
+      <div class="col col-15">
         服务：
       </div>
       <span class="col wrapped-container">
@@ -119,9 +119,9 @@
         <span class="pys-350 {{comment.rating > 3 ?'icon-star':'icon-star-gray'}}"></span>
         <span class="pys-350 {{comment.rating > 4 ?'icon-star':'icon-star-gray'}}"></span>
       </p>
-      <p style="white-space: normal;">
+      <div style="white-space: normal;">
         {{comment.body || '这家伙很懒，什么都没写'}}
-      </p>
+      </div>
       <div class="row">
         <img ng-repeat="img in comment.images.slice(0, 3)" src="{{img}}" class="comment-image col"/>
       </div>
@@ -130,10 +130,8 @@
       <strong>查看全部评价</strong>
     </a>
 
-    <div class="item-divider"></div>
-
     <div class='elements'>
-      <h3>相关商品推荐</h3>
+      <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
       <div class="element-container" ng-repeat="recommend in vm.recommends">
         <div class='element'>
           <img ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
@@ -144,13 +142,13 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row">
-    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-25 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-30 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>加入购物车</strong>
     </span>
-    <div ng-click="vm.toCartPage()" class="centered-container col-15 col-offset-30">
+    <div ng-click="vm.toCartPage()" class="centered-container col-20">
         <span ng-show="countOfCheckedCartItems() > 0" class="badge badge-right-top badge-balanced">{{countOfCheckedCartItems()}}</span>
       <span class="pys-350 icon-footer-cart">
       </span>
