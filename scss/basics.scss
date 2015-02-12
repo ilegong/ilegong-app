@@ -8,6 +8,9 @@
 html{
   font-size: 87.5%;
 }
+body, .pane, .view{
+  background-color: $background_color;
+}
 a{
   text-decoration: none;
   color: #2fa4e7;
@@ -216,6 +219,12 @@ a{
 }
 
 // bar
+.bar{
+  .title{
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
+}
 .bar.bar-light, .bar.bar-stable, .bar.bar-positive, .bar.bar-calm, .bar.bar-balanced, .bar.bar-energized, .bar.bar-assertive, .bar.bar-royal ,bar,bar-dark {
   border-color: #dddddd;
 }
@@ -404,8 +413,15 @@ a{
   height: 2.35714285714rem;
 }
 
-.tab-item{
+// tabs
+.tabs{
+  background-color: $tab_bg_color;
+}
+.tabs-icon-top > .tabs .tab-item, .tabs-icon-top.tabs .tab-item, .tabs-icon-bottom > .tabs .tab-item, .tabs-icon-bottom.tabs .tab-item {
   font-size: 1rem;
+  line-height: 14px;
+}
+.tab-item{
   line-height: 1rem;
   padding-top: 0.2143rem;
   .icon{

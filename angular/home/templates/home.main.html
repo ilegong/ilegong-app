@@ -2,7 +2,7 @@
   <ion-content class="home" ng-click="vm.doRefresh()">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()" ng-if="vm.loadingFailed">
     </ion-refresher>
-    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;">
+    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;" ng-if="vm.loading || vm.loadingFailed">
       <i class="icon ion-loading-d" style="font-size: 30px; " ng-if="vm.loading"></i>
       <div class="element-container text-muted" ng-if="vm.loadingFailed">
         网络连接不可用，轻触重试

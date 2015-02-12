@@ -8,7 +8,6 @@
   }
   .promotion{ 
     position:relative; 
-    margin-top:0.5em; 
     border-top:1px #dddddd solid; 
     border-bottom:1px #dddddd solid; 
     background-color:#ffffff; 
@@ -17,6 +16,13 @@
       position:absolute; 
       top:5em; 
       left:0.8em;
+    }
+  }
+  .elements{
+    .element-container{
+      .element{
+        border: 0;
+      }
     }
   }
   .recommends{ 
