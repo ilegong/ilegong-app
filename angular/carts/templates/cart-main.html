@@ -13,7 +13,7 @@
       <span class="item item-icon-left item-avatar" ng-click="toStoreHomePage(brand);">
         <img src="{{brand.Brand.coverimg}}"></img>
         <i class="icon pys-350 {{vm.isBrandChecked(brand)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand); $event.stopPropagation()" ng-show="!vm.editMode">
-        </i>          
+        </i>
         <span>
           {{brand.Brand.name}}
         </span>
