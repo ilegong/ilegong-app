@@ -32,7 +32,6 @@
       vm.showProductIntro = false;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
-      vm.cartItems = $rootScope.user.cartItems;
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
@@ -47,10 +46,6 @@
       Products.getProductComment(vm.id).then(function(data){
         vm.comment = data;
       }, function(e){$log.log(e)});
-
-      $scope.$watch('user.cartItems', function(newCartItems, oldCartItems){
-        vm.cartItems = $rootScope.user.cartItems;
-      })
     }
 
     function specsClick(group,name){

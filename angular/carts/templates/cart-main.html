@@ -9,17 +9,17 @@
   <ion-content style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div ng-repeat="brand in vm.brands" ng-show="vm.getCartItemsOfBrand(brand.Brand.id).length > 0">
+    <div ng-repeat="brand in vm.cartBrands">
       <span class="item item-icon-left item-avatar" ng-click="toStoreHomePage(brand);">
         <img src="{{brand.Brand.coverimg}}"></img>
-        <i class="icon pys-350 {{vm.brandChecked(brand.Brand.id)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand.Brand.id); $event.stopPropagation()" ng-show="!vm.editMode">
+        <i class="icon pys-350 {{vm.isBrandChecked(brand)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand); $event.stopPropagation()" ng-show="!vm.editMode">
         </i>          
         <span>
           {{brand.Brand.name}}
         </span>
       </span>
       <ion-list can-swipe="true">
-        <ion-item ng-repeat="cartItem in vm.getCartItemsOfBrand(brand.Brand.id)" ng-click="vm.toProductPage(cartItem);">
+        <ion-item ng-repeat="cartItem in brand.cartItems" ng-click="vm.toProductPage(cartItem);">
           <ion-option-button class="button-balanced" ng-click="vm.deleteCartItem(cartItem);">
             删除
           </ion-option-button>
@@ -59,7 +59,7 @@
       </ion-list>
     </div>
 
-    <div class="centered-container" ng-show="vm.brands.length == 0">
+    <div class="centered-container" ng-show="vm.cartBrands.length == 0">
       <span class="no-content no-cart-items">
       </span>
       <span class="message">
@@ -69,8 +69,8 @@
     </div>
   </ion-content>
   
-  <ion-footer-bar ng-show="vm.brands.length > 0" class="item item-icon-left row">
-    <span class="icon pys-350 {{vm.allBrandsChecked()?'icon-circle-checked':'icon-circle'}}" ng-click="vm.allBrandsChecked() ? vm.uncheckAllCartItems():vm.checkAllCartItems();"></span>
+  <ion-footer-bar ng-show="vm.cartBrands.length > 0" class="item item-icon-left row">
+    <span class="icon pys-350 {{vm.allBrandsChecked()?'icon-circle-checked':'icon-circle'}}" ng-click="vm.allBrandsChecked() ? vm.uncheckAllBrands():vm.checkAllBrands();"></span>
     <div class="col-20">
       <div>合计</div>
       <div class="text-sub-muted">不含运费</div>

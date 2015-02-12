@@ -169,7 +169,7 @@
       }
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
-      $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
+      $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
       $rootScope.brands = [];
       $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
@@ -212,7 +212,7 @@
       $rootScope.reloadOrders(token.access_token);
     }
     function onUserLoggedOut(){
-      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
+      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}};
     }
     function reloadProfile(accessToken){
       return Profile.getProfile(accessToken).then(function(profile){
@@ -269,18 +269,20 @@
     }
     function reloadCart(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
-        $rootScope.user.cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
-        var brandIds -= _.map($rootScope.brands, function(brand){return brand.Brand.id});
-        _.each(result.brands, function(brand){
-          if(!_.contains(brandIds, brand.Brand.id)){
-            $rootScope.brands.push(brand);
+        var cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+        var brandIds = _.unique(_.map(cartItems, function(cartItem){return cartItem.Cart.brand_id}));
+        $rootScope.user.cartBrands = _.map(brandIds, function(brandId){
+          var brand = _.find($rootScope.brands, function(brand){return brand.Brand.id == brandId});
+          if(_.isEmpty(brand)){
+            brand = _.find(result.brands, function(brand){return brand.Brand.id == brandId});
           }
+          brand.cartItems = _.filter(cartItems, function(ci){return ci.Cart.brand_id == brandId});
+          return brand;
         });
-        Base.setLocal('user.cartItems', $rootScope.user.cartItems);
-        Base.setLocal('brands', $rootScope.brands);
+        Base.setLocal('user.cartBrands', $rootScope.user.cartBrands);
       }, function(e){
-        Base.getLocal('user.cartItems').then(function(cartItems){
-          $rootScope.user.cartItems = cartItems;
+        Base.getLocal('user.cartBrands').then(function(cartBrands){
+          $rootScope.user.cartBrands = cartBrands;
         });
       });
     }

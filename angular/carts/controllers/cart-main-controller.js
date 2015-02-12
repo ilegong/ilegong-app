@@ -9,33 +9,29 @@
     vm.addCartItemNum = addCartItemNum;
     vm.clickSaveOrEditBtn = clickSaveOrEditBtn;
     vm.deleteCartItem = deleteCartItem;
-    vm.readyToConfirm = function(){return _.any(vm.brands, function(brand){return _.any(vm.getCartItemsOfBrand(brand.Brand.id), function(ci){return ci.checked})})};
+    vm.readyToConfirm = function(){return _.any(vm.cartBrands, function(brand){return _.any(brand.cartItems, function(ci){return ci.checked})})};
     vm.confirmCart = confirmCart;
-    vm.getCartItemsOfBrand = getCartItemsOfBrand;
-    vm.toggleCartItem = toggleCartItem;
+    vm.toggleCartItem = function(cartItem){cartItem['checked'] = !cartItem['checked'];};
     vm.getPriceOfBrand = getPriceOfBrand;
     vm.getTotalPrice = getTotalPrice;
-    vm.checkAllCartItems = function(){_.each($rootScope.user.cartItems,function(cartItem){cartItem.checked = true;})};
-    vm.uncheckAllCartItems = function(){_.each($rootScope.user.cartItems,function(cartItem){cartItem.checked = false;})};;
+    vm.checkAllBrands = function(){_.each(vm.cartBrands,function(brand){_.each(brand.cartItems, function(ci){ci.checked = true})})};
+    vm.uncheckAllBrands = function(){_.each(vm.cartBrands,function(brand){_.each(brand.cartItems, function(ci){ci.checked = false})})};
     vm.getCheckedNumber = getCheckedNumber;
-    vm.brandChecked = function(id) {return _.all(vm.getCartItemsOfBrand(id),function(cartItem){return cartItem.checked;});};
-    vm.allBrandsChecked = function(id) {return _.all(vm.brands,function(brand){return vm.brandChecked(brand.Brand.id)})};
+    vm.isBrandChecked = function(brand) {return _.all(brand.cartItems, function(cartItem){return cartItem.checked;});};
+    vm.allBrandsChecked = function() {return _.all(vm.cartBrands,function(brand){return vm.isBrandChecked(brand)})};
     vm.toggleBrand = toggleBrand;
-    vm.getBrandsOfCartItems = getBrandsOfCartItems;
     vm.toProductPage = function(cartItem){if(cartItem.editMode){return;}; $state.go("product-detail.intro", {id: cartItem.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
 
     function activate(){
       vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
-      vm.cartItems = _.map($rootScope.user.cartItems, function(cartItem){cartItem.editMode = false; return cartItem});
-      vm.brands = vm.getBrandsOfCartItems(vm.cartItems);
+      vm.cartBrands = $rootScope.user.cartBrands;
       vm.confirmErrors = {
         'invalid_address': '请设置默认收货地址'
       };
-      $scope.$watch('user.cartItems', function(newCartItems, oldCartItems) {
-        vm.cartItems = _.map(newCartItems, function(cartItem){cartItem.editMode = false; return cartItem});
-        vm.brands = vm.getBrandsOfCartItems(vm.cartItems);
+      $scope.$watch('user.cartBrands', function(newCartBrands, oldCartBrands) {
+        vm.cartBrands = $rootScope.user.cartBrands;
       });
       $scope.$watch('user.token',function(newToken,oldToken){
         vm.isLoggedIn = !_.isEmpty(newToken);
@@ -47,41 +43,27 @@
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
     }
-    
-    function toggleBrand(brandId){
-      if(!vm.brandChecked(brandId)){
-        _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-          cartItem['checked'] = true;
-        });
-      }
-      else{
-        _.each(vm.getCartItemsOfBrand(brandId),function(cartItem){
-          cartItem['checked'] = false;
-        });
-      }
-    }
-    function toggleCartItem(product){
-      product['checked'] = !product['checked'];
-    }
     function getCheckedNumber(){
-      return _.reduce(vm.brands, function(memo, brand){
-        return memo + _.filter(vm.getCartItemsOfBrand(brand.Brand.id), function(ci){return ci.checked}).length;
-      }, 0);
+      return _.reduce(vm.cartBrands, function(memo, brand){
+          return memo + _.filter(brand.cartItems, function(ci){return ci.checked}).length;
+        }, 0);
     }
-    function getPriceOfBrand(brandId){
-      var checkedCartItems = _.filter(vm.getCartItemsOfBrand(brandId), function(cartItem){return cartItem.checked});
+    function toggleBrand(brand){
+      var isBrandChecked = vm.isBrandChecked(brand);
+      _.each(brand.cartItems, function(cartItem){
+        cartItem['checked'] = !isBrandChecked;
+      });
+    }
+    function getPriceOfBrand(brand){
+      var checkedCartItems = _.filter(brand.cartItems, function(cartItem){return cartItem.checked});
       return _.reduce(checkedCartItems, function(memo, cartItem){
         return memo + cartItem.Cart.price * cartItem.Cart.num;
       }, 0);
     }
     function getTotalPrice(){
-      return _.reduce(vm.brands, function(memo, brand){
-          return memo + vm.getPriceOfBrand(brand.Brand.id);
+      return _.reduce(vm.cartBrands, function(memo, brand){
+          return memo + vm.getPriceOfBrand(brand);
       }, 0);
-    }
-    function getBrandsOfCartItems(cartItems){
-      var brandIds = _.map(cartItems, function(cartItem){return cartItem.Cart.brand_id});
-      return _.filter($rootScope.brands, function(brand){return _.contains(brandIds, brand.Brand.id)});
     }
     function reduceCartItemNum(cart) {
       if(!$rootScope.user.loggedIn){
@@ -111,11 +93,8 @@
         return $state.go('account-login');
       }
       Carts.deleteCartItem(cartItem.Cart.id, $rootScope.user.token.access_token).then(function(result){
-        $rootScope.user.cartItems = _.filter($rootScope.user.cartItems, function(cartItemm){return cartItemm.Cart.id != cartItem.Cart.id});
+        $rootScope.reloadCart($rootScope.user.token.access_token);
       }, function(e){$log.log("delete cart item failed: ").log(e)});
-    }
-    function getCartItemsOfBrand(id){
-      return _.filter($rootScope.user.cartItems,function(cartItem){return cartItem.Cart.brand_id == id})
     }
     function confirmCart(){
       if(!$rootScope.user.loggedIn){
@@ -123,7 +102,7 @@
       }
 
       var couponCode = '';
-      var pidList = _.map(_.filter(vm.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id});
+      var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(brand.cartItems, function(ci){return ci.Cart.product_id})}));
       $rootScope.getCartInfo(pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(){
         $state.go('app.cart-confirmation');
       }, function(e){
