@@ -78,6 +78,6 @@
     <span class="text-energized col">
       ￥<span class="text-large">{{vm.getTotalPrice() | currency:""}}</span>
     </span>
-    <div class="button button-energized col-25" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{vm.getCheckedNumber()}})</strong></div>
+    <div class="button button-energized col-25" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{countOfCheckedCartItems()}})</strong></div>
   </ion-footer-bar>
 </ion-view>

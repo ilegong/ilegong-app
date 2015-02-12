@@ -159,6 +159,7 @@
     $rootScope.alertMessage = alertMessage;
     $rootScope.showAlertMessage = showAlertMessage;
     $rootScope.toStoreHomePage = toStoreHomePage;
+    $rootScope.countOfCheckedCartItems = countOfCheckedCartItems;
 
     activate();
 
@@ -370,6 +371,11 @@
     }
     function toStoreHomePage(brand){
       return $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});
+    }
+    function countOfCheckedCartItems(){
+      return _.reduce($rootScope.user.cartBrands, function(memo, brand){
+        return memo + _.filter(brand.cartItems, function(ci){return ci.checked}).length;
+      }, 0);
     }
   }
 })(window, window.angular, window.cordova);

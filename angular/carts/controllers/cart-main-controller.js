@@ -16,7 +16,6 @@
     vm.getTotalPrice = getTotalPrice;
     vm.checkAllBrands = function(){_.each(vm.cartBrands,function(brand){_.each(brand.cartItems, function(ci){ci.checked = true})})};
     vm.uncheckAllBrands = function(){_.each(vm.cartBrands,function(brand){_.each(brand.cartItems, function(ci){ci.checked = false})})};
-    vm.getCheckedNumber = getCheckedNumber;
     vm.isBrandChecked = function(brand) {return _.all(brand.cartItems, function(cartItem){return cartItem.checked;});};
     vm.allBrandsChecked = function() {return _.all(vm.cartBrands,function(brand){return vm.isBrandChecked(brand)})};
     vm.toggleBrand = toggleBrand;
@@ -42,11 +41,6 @@
       $rootScope.reloadCart($rootScope.user.token.access_token);
       $scope.$broadcast('scroll.refreshComplete');
       $scope.$apply();
-    }
-    function getCheckedNumber(){
-      return _.reduce(vm.cartBrands, function(memo, brand){
-          return memo + _.filter(brand.cartItems, function(ci){return ci.checked}).length;
-        }, 0);
     }
     function toggleBrand(brand){
       var isBrandChecked = vm.isBrandChecked(brand);
