@@ -132,7 +132,9 @@ a{
   overflow:hidden !important;
   white-space:nowrap !important;
 }
-
+.wrapped{
+  white-space: normal !important;
+}
 // text
 .text{
   text-overflow:ellipsis !important;
@@ -173,6 +175,12 @@ a{
 .text-mini-muted {
   @extend .text-mini;
   @extend .text-muted;
+}
+.text-title{
+  font-size: 1.3rem !important;
+}
+.text-tab{
+  font-size: 1.2rem !important;
 }
 .text-large{
   @extend .text;
@@ -241,6 +249,9 @@ a{
 }
 .bar.bar-light, .bar.bar-stable, .bar.bar-positive, .bar.bar-calm, .bar.bar-balanced, .bar.bar-energized, .bar.bar-assertive, .bar.bar-royal ,bar,bar-dark {
   border-color: #dddddd;
+}
+.tabs-stable > .tabs, .tabs.tabs-stable{
+  background-color: #fff;
 }
 .bar-footer{
   height: 3.5rem;
@@ -607,10 +618,10 @@ a{
   position: absolute;
   top: 0rem;
   left: 0rem;
-  max-width: 1.667rem;
-  max-height: 1.667rem;
-  height: 1.667rem;
-  width: 1.667rem;
+  max-width: 1.42857142857rem;
+  max-height: 1.42857142857rem;
+  height: 1.42857142857rem;
+  width: 1.42857142857rem;
 }
 
 // ion-item

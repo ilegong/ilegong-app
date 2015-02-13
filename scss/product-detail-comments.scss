@@ -1,9 +1,6 @@
 .product-detail-comments{
   .tabs{
     border-bottom:1px $border_color solid;
-    .tab-item{
-      line-height: 3em;
-    }
     .tab-item:first-child{
       border-right:1px #bbbbbb solid;
     }
@@ -14,8 +11,21 @@
       }
     }
   }
+  .tabs-top{
+    .tabs{
+      height: 40px;
+      .tab-item{
+        padding-top: 0;
+        max-width: 100%;
+        line-height: 40px;
+      }
+    }
+  } 
+  .has-tabs-top{
+    top: 84px;
+  }
   .comment-image {
-    width: 33%;
-    padding-right: 0.5em;
+    max-height: 6rem;
+    padding-bottom: 0;
   }
 }

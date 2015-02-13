@@ -64,32 +64,13 @@
     }
 
     function toTryingCommentsPage(){
-      if(vm.from == -1){//from main
-        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1});
-      }
-      else if(vm.from == -2){//from order-detail
-        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
-      }
-      else if(vm.from == -3){//from cart-main
-        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
-      }
-      else if(vm.from >=0){//from store-main
-        $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1})
-      }
+      $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1});
     }
     function toReputationCommentsPage(){
-      if(vm.from == -1){//from main
-        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0});
+      if(vm.getReputationComments().length == 0){
+        return;
       }
-      else if(vm.from == -2){//from order-detail
-        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
-      }
-      else if(vm.from == -3){//from cart-main
-        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
-      }
-      else if(vm.from >=0){//from store-main
-        $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0})
-      }
+      $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0});
     }
 
     function reduceCartItemNum(){

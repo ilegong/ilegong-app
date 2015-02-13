@@ -90,7 +90,7 @@
     </div>
     <div ng-show="vm.showProductIntro" class="item product-intro" ng-bind-html="vm.content.Product.content">
     </div>
-    <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();">
+    <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();" ng-show="vm.getTryingComments().length > 0">
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         试吃评价

@@ -4,7 +4,9 @@
     </ion-refresher>
     <div class="element-container" collection-repeat="product in vm.products" collection-item-height="'234px'" collection-item-width="'50%'" ng-click="vm.toProductDetailPage(product)">
       <div class='element'>
-        <img class="product-image full" title="{{product.title}}" src="{{product.coverimg}}">
+        <div>
+          <img class="product-image full" title="{{product.title}}" src="{{product.coverimg}}">
+        </div>
         <div class='nowrap padding-left-right-5'>
           {{product.name}}
         </div>
