@@ -96,7 +96,12 @@
       }
 
       var couponCode = '';
-      var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(brand.cartItems, function(ci){return ci.Cart.product_id})}));
+      var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(_.filter(brand.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id})}));
+      if(_.isEmpty(pidList)){
+        $rootScope.alertMessage('结算失败，请重试');
+        $rootScope.reloadCart($rootScope.user.token.access_token);
+        return;
+      }
       $rootScope.getCartInfo(pidList, vm.couponCode, $rootScope.user.token.access_token).then(function(){
         $state.go('app.cart-confirmation');
       }, function(e){

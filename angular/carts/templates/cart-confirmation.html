@@ -1,13 +1,13 @@
 <ion-view title="结算" class="cart-confirmation" hide-tabs>
-  <ion-content class="list">
+  <ion-content>
     <div class="item item-icon-right row" ng-click="vm.changeAddress()">
-      <span class="text-large-balanced col col-center col-20">送至</span>
+      <span class="text-tab-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
-        <div class="text">
+        <div class="nowrap">
           {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
         </div>  
-        <div class="text">
+        <div class="nowrap">
           {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
         </div>
       </div>
@@ -17,13 +17,15 @@
     </div>
     <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
-      <div class="item item-avatar" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
-        <img src="{{brand.Brand.coverimg}}"/>
-        <div class="text">{{brand.Brand.name}}</div>
+      <div class="item" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
+        <div class="item-image-mini-left">
+          <img class="item-image" src="{{brand.Brand.coverimg}}"/>
+          <div class="nowrap">{{brand.Brand.name}}</div>
+        </div>
       </div>
       <div class="item item-thumbnail-left" ng-repeat="product in item.items" ng-click="vm.toProductPage(product);">
         <img src="{{product.coverimg}}"/>
-        <div class="text">
+        <div class="nowrap">
           {{product.name}}
         </div>
         <div class="nowrap text-sub-muted">
@@ -42,7 +44,7 @@
         <span class="col">请选择要使用的优惠券</span>
       </div>
       <div class="item item-icon-right row">
-        <span class="col col-25">运费</span>
+        <span class="col col-25">运费小计</span>
         <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'}}</span>
       </div>
       <div class="item">
@@ -76,13 +78,13 @@
   </ion-content>
 
   <ion-footer-bar class="row">
-    <span class="col">
+    <span class="col text-tab" style="line-height: 29px;">
       共{{vm.getPidList().length}}件，实付款
       <span class="text-energized">
-        ￥<span class="text-large">{{vm.totalPrice | currency:''}}</span>
+        ￥<strong>{{vm.totalPrice | currency:''}}</strong>
       </span>
     </span>
-    <button class="button button-energized col-25" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
+    <button class="button button-energized pys-button col-33" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
       <strong>提交订单</strong>
     </button>
   </ion-footer-bar>

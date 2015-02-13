@@ -182,6 +182,10 @@ a{
 .text-tab{
   font-size: 1.2rem !important;
 }
+.text-tab-balanced{
+  @extend .text-tab;
+  @extend .text-balanced;
+}
 .text-large{
   @extend .text;
   font-size: 1.5rem !important;
