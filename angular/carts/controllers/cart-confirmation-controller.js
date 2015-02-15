@@ -151,10 +151,12 @@
           $state.go("orders", {state: 0});
         }
         else{
+          $ionicHistory.currentView($ionicHistory.backView());
           $state.go("order-detail", {id: orderIds[0]});
         }
       }, function(e){
         $log.log("submit order failed: ").log(e);
+        $rootScope.alertMessage('提交订单失败，请重试');
       });
     }
   }

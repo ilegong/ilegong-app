@@ -53,6 +53,7 @@
         $rootScope.updateOrderState(orderId, 10);
         $rootScope.alertMessage("订单已取消");
         $ionicHistory.goBack();
+        $ionicHistory.goBack();
       });
     }
     function remindSendingGoods(order){
