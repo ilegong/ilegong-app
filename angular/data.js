@@ -92,7 +92,67 @@ var categoriesJson = {
        "price":"66",
        "original_price":null,
        "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
-    }
+    },
+    {  
+       "id":"319",
+       "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price":"66",
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    },
+    {  
+       "id":"320",
+       "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price":"66",
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    },
+    {  
+       "id":"321",
+       "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price":"66",
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    },
+    {  
+       "id":"318",
+       "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price":"66",
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    },
+    {  
+       "id":"318",
+       "name":"\u6500\u679d\u82b1\u7ea2\u683c\u7ebd\u8377\u5c14\u8110\u6a59",
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price":"66",
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    }  
   ],
   "sub_title":"\u65b0\u9c9c\u6c34\u679c"
 }

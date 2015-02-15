@@ -34,7 +34,6 @@
       .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl as vm'}}})
 
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
-      .state('app.cart-confirmation',{url:'/cart-confirmation',views:{'app-cart':{templateUrl:'cart-confirmation.html',controller:'CartConfirmationCtrl as vm'}}})
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
       .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
@@ -56,11 +55,13 @@
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
       .state('account-register', {url: '/account-register', templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'})
 
-      .state('addresses',{url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
-      .state('address-edit',{url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
+      .state('addresses', {url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
+      .state('address-edit', {url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
 
-      .state('orders',{url:'/orders/:state', templateUrl:'my-orders.html', controller:'MyOrdersCtrl as vm'})
-      .state('order-detail',{url:'/order/:id', templateUrl:'my-order-detail.html', controller:'MyOrderDetailCtrl as vm'})
+      .state('orders', {url:'/orders/:state', templateUrl:'my-orders.html', controller:'MyOrdersCtrl as vm'})
+      .state('order-detail', {url:'/order/:id', templateUrl:'my-order-detail.html', controller:'MyOrderDetailCtrl as vm'})
+
+      .state('cart-confirmation', {url:'/cart-confirmation', templateUrl:'cart-confirmation.html', controller:'CartConfirmationCtrl as vm'})
 
       .state('store', {url: '/stores/:id/:name', templateUrl: 'store-tabs.html', controller: 'StoreCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})

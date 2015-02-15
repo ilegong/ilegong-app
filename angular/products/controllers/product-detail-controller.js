@@ -20,6 +20,7 @@
     vm.toTryingCommentsPage = toTryingCommentsPage;
     vm.toReputationCommentsPage = toReputationCommentsPage;
     vm.addToCart = addToCart;
+    vm.buyImmediately = buyImmediately;
     vm.readyToBuy = readyToBuy;
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
     activate();
@@ -96,25 +97,31 @@
       }
       return true;
     }
-    function addToCart(toCart){
+    function addToCart(){
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
 
       Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
         $rootScope.reloadCart($rootScope.user.token.access_token);
-        if(toCart){
-          $state.go('app.cart');
-        }
-        else{
-          $rootScope.alertMessage('商品添加成功。');
-        }
-      }, function(e){$log.log("add to cart failed: ").log(e)});
+        $rootScope.alertMessage('商品添加成功。');
+      }, function(e){
+        $log.log('add to cart failed: ').log(e);
+        $rootScope.alertMessage('添加到购物车失败，请重试');
+      });
+    }
+    function buyImmediately(){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('account-login');
+      }
+
+      var couponCode = '';
+      $rootScope.getCartInfo($stateParams.id, couponCode, $rootScope.user.token.access_token).then(function(){
+        $state.go('cart-confirmation');
+      }, function(e){
+        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
+        $ionicHistory.goBack();
+      });
     } 
   }
 })(window, window.angular);
-
-
-
-
-

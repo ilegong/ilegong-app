@@ -142,10 +142,10 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row">
-    <span ng-click="vm.addToCart(true);" class="button pys-button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.buyImmediately();" class="button pys-button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart(false);" class="button pys-button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart();" class="button pys-button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>加入购物车</strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">
