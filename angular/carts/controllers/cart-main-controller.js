@@ -11,6 +11,7 @@
     vm.deleteCartItem = deleteCartItem;
     vm.readyToConfirm = function(){return _.any(vm.cartBrands, function(brand){return _.any(brand.cartItems, function(ci){return ci.checked})})};
     vm.confirmCart = confirmCart;
+    vm.onConfirmCartFailed = onConfirmCartFailed;
     vm.toggleCartItem = function(cartItem){cartItem['checked'] = !cartItem['checked'];};
     vm.getPriceOfBrand = getPriceOfBrand;
     vm.getTotalPrice = getTotalPrice;
@@ -98,16 +99,19 @@
       var couponCode = '';
       var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(_.filter(brand.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id})}));
       if(_.isEmpty(pidList)) {
-        $rootScope.alertMessage('结算失败，请重试');
-        $rootScope.reloadCart($rootScope.user.token.access_token);
-        return;
+        return vm.onConfirmCartFailed('', 'pid list is empty');
       }
-      $rootScope.getCartInfo(pidList, couponCode, $rootScope.user.token.access_token).then(function(){
+
+      $rootScope.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $state.go('cart-confirmation');
       }, function(e){
-        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
-        $ionicHistory.goBack();
+        vm.onConfirmCartFailed(vm.confirmErrors[e.reason], e);
       });
+    }
+    function onConfirmCartFailed(message, e){
+      $log.log('confirm cart failed:').log(e);
+      $rootScope.alertMessage(message || '结算失败，请重试');
+      $rootScope.reloadCart($rootScope.user.token.access_token);
     }
   }
 })(window, window.angular);

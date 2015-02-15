@@ -11,9 +11,9 @@
       deleteCartItem: deleteCartItem,
       addCartItem: addCartItem,
       editNum:editNum, 
-      getCartInfo: getCartInfo
+      confirmCart: confirmCart
     }
-    function getCartInfo(pid_list, coupon_code, accessToken){
+    function confirmCart(pid_list, coupon_code, accessToken){
       var json = {"pid_list":pid_list, "coupon_code":coupon_code};
       var defer = $q.defer();
       Base.post('/api_orders/cart_info.json?access_token=' + accessToken, json).then(function(result) {

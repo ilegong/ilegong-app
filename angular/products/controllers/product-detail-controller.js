@@ -21,6 +21,7 @@
     vm.toReputationCommentsPage = toReputationCommentsPage;
     vm.addToCart = addToCart;
     vm.buyImmediately = buyImmediately;
+    vm.onActionFailed = onActionFailed;
     vm.readyToBuy = readyToBuy;
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
     activate();
@@ -33,6 +34,7 @@
       vm.showProductIntro = false;
       vm.specsChecks = {};
       vm.currentSpecs = 0;
+      vm.inprogress = false;
       Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
@@ -95,6 +97,9 @@
       if(vm.hasSpecs() && vm.currentSpecs == 0){
         return false;
       }
+      if(vm.inprogress){
+        return false;
+      }
       return true;
     }
     function addToCart(){
@@ -102,12 +107,13 @@
         return $state.go('account-login');
       }
 
-      Carts.addCartItem($stateParams.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+      vm.inprogress = true;
+      Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+        vm.inprogress = false;
         $rootScope.reloadCart($rootScope.user.token.access_token);
         $rootScope.alertMessage('商品添加成功。');
       }, function(e){
-        $log.log('add to cart failed: ').log(e);
-        $rootScope.alertMessage('添加到购物车失败，请重试');
+        vm.onActionFailed('添加到购物车失败，请重试', e);
       });
     }
     function buyImmediately(){
@@ -115,13 +121,24 @@
         return $state.go('account-login');
       }
 
+      vm.inprogress = true;
       var couponCode = '';
-      $rootScope.getCartInfo($stateParams.id, couponCode, $rootScope.user.token.access_token).then(function(){
-        $state.go('cart-confirmation');
+      Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+        $rootScope.confirmCart([vm.id], couponCode, $rootScope.user.token.access_token).then(function(){
+          vm.inprogress = false;
+          $state.go('cart-confirmation');
+        }, function(e){
+          $log.log('confirm cart failed:').log(e);
+          vm.onActionFailed('购买失败，请重试', e);
+        });
       }, function(e){
-        $rootScope.alertMessage(vm.confirmErrors[e.reason] || '结算失败，请重试');
-        $ionicHistory.goBack();
+        $log.log('add to cart failed:').log(e);
+        vm.onActionFailed('购买失败，请重试', e);
       });
-    } 
+    }
+    function onActionFailed(message){
+      vm.inprogress = false;
+      $rootScope.alertMessage(message);
+    }
   }
 })(window, window.angular);

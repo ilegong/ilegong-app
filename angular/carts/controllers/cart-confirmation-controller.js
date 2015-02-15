@@ -25,40 +25,37 @@
     activate();
 
     function activate(){
-      vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
       vm.defaultAddress = $rootScope.getDefaultAddress();
 
+      vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
       vm.shipFees = $rootScope.user.cartInfo.shipFees; 
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
       vm.reduced = $rootScope.user.cartInfo.reduced;
       vm.totalPrice = $rootScope.user.cartInfo.total_price;
 
+      vm.validCoupons = $rootScope.user.validCoupons;
+      vm.invalidCoupons = $rootScope.user.invalidCoupons;
+
       $rootScope.$on("addressChanged", function(event, addresses){
         vm.defaultAddress = $rootScope.getDefaultAddress();
       });
-
-      vm.validCoupons = [];
-      vm.invalidCoupons = [];
-      vm.showInvalidCoupons = false;
-      vm.currentDate = new Date();
-      Coupons.getCoupons($rootScope.user.token.access_token).then(function(data){
-        _.each(data.coupons, function(coupon){
-          coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
-          coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
-        });
-        vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
-        vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
-      })
+      $scope.$watch("user.cartInfo", function(){
+        vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
+        vm.shipFees = $rootScope.user.cartInfo.shipFees; 
+        vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
+        vm.reduced = $rootScope.user.cartInfo.reduced;
+        vm.totalPrice = $rootScope.user.cartInfo.total_price;
+      });
     }
     function setBrandOrProductCoupon(coupon,brand,products){
       if(coupon.isChecked){//checked
-      if(brand.coupons.length >= _.pairs(products).length){
-        coupon.isChecked = false;
-        return;
-      }
-      brand.coupons.push(coupon);
+        if(brand.coupons.length >= _.pairs(products).length){
+          coupon.isChecked = false;
+          return;
+        }
+        brand.coupons.push(coupon);
       }
       else{//unchecked
         brand.coupons = _.filter(brand.coupons,function(coupon_t){

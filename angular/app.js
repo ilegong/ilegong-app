@@ -136,7 +136,7 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
@@ -151,10 +151,11 @@
     $rootScope.reloadProvinces = reloadProvinces;
     $rootScope.reloadStores = reloadStores;
     $rootScope.reloadCart = reloadCart;
+    $rootScope.reloadCoupons = reloadCoupons;
     $rootScope.reloadOrders = reloadOrders;
     $rootScope.reloadAddresses = reloadAddresses;
     $rootScope.reloadTryings = reloadTryings;
-    $rootScope.getCartInfo = getCartInfo;
+    $rootScope.confirmCart = confirmCart;
     $rootScope.getDefaultAddress = getDefaultAddress;
     $rootScope.updateOrderState = updateOrderState;
     $rootScope.alertMessage = alertMessage;
@@ -171,7 +172,7 @@
       }
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
-      $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}};
+      $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
       $rootScope.brands = [];
       $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
@@ -212,9 +213,10 @@
       $rootScope.reloadCart(token.access_token);
       $rootScope.reloadAddresses(token.access_token);
       $rootScope.reloadOrders(token.access_token);
+      $rootScope.reloadCoupons(token.access_token);
     }
     function onUserLoggedOut(){
-      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}};
+      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
     }
     function reloadProfile(accessToken){
       return Profile.getProfile(accessToken).then(function(profile){
@@ -288,9 +290,10 @@
         });
       });
     }
-    function getCartInfo(pidList, couponCode, accessToken){
-      return Carts.getCartInfo(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
+    function confirmCart(pidList, couponCode, accessToken){
+      return Carts.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $rootScope.user.cartInfo = result;
+        return result;
       });
     }
     function reloadAddresses(accessToken){
@@ -322,6 +325,27 @@
         });
         Base.getLocal('user.ship_type').then(function(ship_type){
           $rootScope.user.ship_type = ship_type;
+        });
+      });
+    }
+    function reloadCoupons(accessToken){
+      Coupons.getCoupons(accessToken).then(function(data){
+        _.each(data.coupons, function(coupon){
+          coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
+          coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);
+        });
+
+        var currentDate = new Date();
+        $rootScope.user.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= currentDate});
+        $rootScope.user.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < currentDate});
+        Base.setLocal('user.validCoupons', $rootScope.user.validCoupons);
+        Base.setLocal('user.invalidCoupons', $rootScope.user.invalidCoupons);
+      }, function(e){
+        Base.getLocal('user.validCoupons').then(function(validCoupons){
+          $rootScope.user.validCoupons = validCoupons;
+        });
+        Base.getLocal('user.invalidCoupons').then(function(invalidCoupons){
+          $rootScope.user.invalidCoupons = invalidCoupons;
         });
       });
     }
