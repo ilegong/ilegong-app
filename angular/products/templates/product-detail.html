@@ -56,8 +56,8 @@
     
     <div class="item-divider"></div>
 
-    <a class="item item-avatar item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" ng-if="vm.from < 0">
-      <img src="{{vm.brand.Brand.coverimg}}"/>
+    <a class="item item-avatar-left item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" ng-if="vm.from < 0">
+      <img src="{{vm.brand.Brand.coverimg}}" class="r5"/>
       <i class=" icon ion-ios7-arrow-right"></i>
       <div class="text" style="line-height: 2em;">
         进入{{vm.brand.Brand.name}}的店铺
@@ -142,10 +142,10 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row">
-    <span ng-click="vm.buyImmediately();" class="button pys-button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.buyImmediately();" class="button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart();" class="button pys-button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>加入购物车</strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">

@@ -309,8 +309,8 @@
     }
     function reloadOrders(accessToken){
       return Orders.list(accessToken).then(function(data){
-        $rootScope.user.orders = data.orders;
         $rootScope.user.order_carts = data.order_carts;
+        $rootScope.user.orders = data.orders;
         $rootScope.user.ship_type = data.ship_type;
         $rootScope.$broadcast('orderStateChanged', $rootScope.user.orders);
         Base.setLocal('user.orders', $rootScope.user.orders);

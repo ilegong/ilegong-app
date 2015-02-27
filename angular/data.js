@@ -190,7 +190,7 @@ var ordersJson = {
   "orders": [
     {
       "Order": {
-        "id": "5285", 
+        "id": "5286", 
         "name": "", 
         "cate_id": "0", 
         "creator": "146", 
@@ -215,6 +215,41 @@ var ordersJson = {
         "ship_fee": "0.00", 
         "remark": "", 
         "brand_id": "121", 
+        "ship_code": null, 
+        "total_all_price": "150", 
+        "pay_time": null, 
+        "applied_coupons": "", 
+        "coupon_total": "0", 
+        "applied_code": ""
+      }
+    }, 
+    {
+      "Order": {
+        "id": "5285", 
+        "name": "", 
+        "cate_id": "0", 
+        "creator": "146", 
+        "lastupdator": "0", 
+        "remoteurl": "", 
+        "status": "0", 
+        "published": "1", 
+        "deleted": false, 
+        "created": "2014-11-27 01:09:33", 
+        "updated": "2014-11-27 01:09:33", 
+        "consignee_id": null, 
+        "consignee_name": "刘召仁", 
+        "consignee_area": null, 
+        "consignee_address": "跑腿儿专递（限五环内，运送费到付：每个15元）h h j h", 
+        "consignee_mobilephone": "18910275329", 
+        "consignee_telephone": null, 
+        "consignee_email": null, 
+        "consignee_postcode": null, 
+        "invoice_id": null, 
+        "total_price": "150.00", 
+        "ship_type": null, 
+        "ship_fee": "0.00", 
+        "remark": "", 
+        "brand_id": "31", 
         "ship_code": null, 
         "total_all_price": "150", 
         "pay_time": null, 
@@ -2063,6 +2098,54 @@ var ordersJson = {
         }
       }
     ], 
+    "5286": [
+      {
+        "Cart": {
+          "id": "9258", 
+          "name": "薇薇安水果千层蛋糕 (草莓)", 
+          "order_id": "5285", 
+          "creator": "146", 
+          "lastupdator": "0", 
+          "remoteurl": "", 
+          "status": "1", 
+          "published": false, 
+          "deleted": false, 
+          "created": "2014-11-27 01:09:06", 
+          "updated": "2014-11-27 01:09:06", 
+          "product_id": "230", 
+          "num": "1", 
+          "price": "150", 
+          "session_id": "0b6e38722ec29f3aa894f21f498c703b", 
+          "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/6f8d1a8698c_1124.jpg", 
+          "used_coupons": "", 
+          "specId": "6", 
+          "modified": "2014-11-27 01:09:06"
+        }
+      }, 
+      {
+        "Cart": {
+          "id": "9258", 
+          "name": "测试 (草莓)", 
+          "order_id": "5285", 
+          "creator": "146", 
+          "lastupdator": "0", 
+          "remoteurl": "", 
+          "status": "1", 
+          "published": false, 
+          "deleted": false, 
+          "created": "2014-11-27 01:09:06", 
+          "updated": "2014-11-27 01:09:06", 
+          "product_id": "230", 
+          "num": "1", 
+          "price": "150", 
+          "session_id": "0b6e38722ec29f3aa894f21f498c703b", 
+          "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201411/thumb_m/6f8d1a8698c_1124.jpg", 
+          "used_coupons": "", 
+          "specId": "6", 
+          "modified": "2014-11-27 01:09:06"
+        }
+      }
+    ], 
     "5484": [
       {
         "Cart": {
@@ -2208,7 +2291,7 @@ var orderDetail = {
     "id":"92",
     "name":"朋友说自己的小店",
     "slug":"peng_you_shuo",
-    "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/0e1309c1731_1119.jpg"
+    "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201412/thumb_m/83255d8fc4e_1206.jpg"
   }
 }
 
@@ -2851,7 +2934,7 @@ var CartInfo = {
         "notice":""
       }
     }],
-    "shipFees":{"121":15},
+    "shipFees":{"121": 15},
     "reduced":5
   }
 }

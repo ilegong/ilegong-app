@@ -22,13 +22,13 @@
     </div>
     <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
-      <div class="item" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
+      <div class="item">
         <div class="item-image-mini-left">
           <img class="item-image r5" src="{{brand.Brand.coverimg}}"/>
           <div class="nowrap">{{brand.Brand.name}}</div>
         </div>
       </div>
-      <div class="item item-thumbnail-left" ng-repeat="product in item.items" ng-click="vm.toProductPage(product);">
+      <div class="item item-thumbnail-left" ng-repeat="product in item.items">
         <img src="{{product.coverimg}}"/>
         <div class="nowrap">
           {{product.name}}
@@ -50,7 +50,7 @@
       </div>
       <div class="item item-icon-right row">
         <span class="col col-25">运费小计</span>
-        <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'}}</span>
+        <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) > 0 ? (vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥') : '包邮'}}</span>
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee;">
@@ -89,7 +89,7 @@
         ￥<strong>{{vm.totalPrice | currency:''}}</strong>
       </span>
     </span>
-    <button class="button button-energized pys-button col-33" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
+    <button class="button button-energized button-30" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">
       <strong>提交订单</strong>
     </button>
   </ion-footer-bar>

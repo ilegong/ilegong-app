@@ -14,7 +14,8 @@
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;
     vm.onAliPayFinished = onAliPayFinished;
-    vm.toProductDetailPage = toProductDetailPage;
+    vm.toProductDetailPage = function(item){$state.go("product-detail",{id:item.Cart.product_id,from:-2})};
+    vm.toStoreHomePage = function(store){$state.go('store.home', {id: store.id, name: store.name})};
     vm.callHotline = callHotline;
     vm.reloadOrder = reloadOrder;
     activate();
@@ -40,9 +41,6 @@
      $timeout(function() {
        hideSheet();
      }, 5000);
-    }
-    function toProductDetailPage(item){
-      $state.go("product-detail",{id:item.Cart.product_id,from:-2});
     }
     function cancelOrder(order){
       if(!$rootScope.user.loggedIn){

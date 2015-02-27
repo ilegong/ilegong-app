@@ -21,7 +21,6 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
-    vm.toProductPage = function(item){$state.go("product-detail.intro", {id: item.pid, from:-3})};
     activate();
 
     function activate(){

@@ -7,16 +7,16 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="'250px'">
+    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)">
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
-        <img src="{{order.Order.brand.Brand.coverimg}}"/>
+        <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
         <h2 class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
-        <span class="text-energized col-20" style="line-height: 2em;">
+        <span class="text-energized col col-20 tr" style="padding-right: 0;">
           {{order.Order.orderState.status}}
         </span>
       </a>
-      <a class="item item-avatar item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
-        <img src='{{product.Cart.coverimg}}'/>
+      <a class="item item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
+        <img src='{{product.Cart.coverimg}}' class="r5"/>
         <div class="text">{{product.Cart.name}}</div>
         <div class="text-muted">
           价格：{{product.Cart.price | currency:'￥'}} 
@@ -25,21 +25,21 @@
           数量：{{product.Cart.num}}
         </div>
       </a>  
-      <div class="row item">
-        <span class="col">
-          <span class="text-sub-muted">邮费：{{order.Order.ship_fee | currency:'￥'}}</span>
-          <br/>
-          实付：<span class="text-energized">{{order.Order.total_price | currency:'￥'}}</span>
-        </span>
+      <div class="item tr">
+        <span class="text-muted">运费：</span>
+        {{order.Order.ship_fee > 0 ? (order.Order.ship_fee | currency:'￥') : '包邮'}}
+        <span class="text-muted">实付(含运费)：</span>
+        <strong class="text-energized">{{order.Order.total_price | currency:'￥'}}</strong>
+      </div>
+      <div class="item tr">
+        <a class="button button-short button-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
+        <a class="button button-short button-balanced button-outline button-25 ml" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
-        <a class="button col-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
-        <a class="button button-balanced button-outline col-25 ml" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
+        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
 
-        <a class="button col-25" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
+        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
 
-        <a class="button col-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
-
-        <a class="button button-balanced button-outline col-25" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
+        <a class="button button-short button-25 button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
       </div>
       <div class="item-divider"></div>
     </div>
