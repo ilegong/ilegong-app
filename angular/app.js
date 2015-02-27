@@ -273,7 +273,7 @@
     }
     function reloadCart(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
-        var cartItems = _.map(result.carts, function(cartItem){cartItem.checked = true; return cartItem;});
+        var cartItems = result.carts;
         var brandIds = _.unique(_.map(cartItems, function(cartItem){return cartItem.Cart.brand_id}));
         $rootScope.user.cartBrands = _.map(brandIds, function(brandId){
           var brand = _.find($rootScope.brands, function(brand){return brand.Brand.id == brandId});

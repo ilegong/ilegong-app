@@ -2,13 +2,13 @@
   <div class="tabs-top" ng-show="vm.getComments(1).length > 0">
     <div class="tabs tabs-stable" style="height: 40px;">
       <a class="tab-item {{vm.type == 0 ? 'tab-item-active':''}}" ng-click="vm.type = 0">
-        <span class="text-tab">口碑评价</span>
+        <span class="text-16">口碑评价</span>
         <span class="text-sub">
           ({{vm.getComments(0).length}})
         </span>
       </a>
       <a class="tab-item {{vm.type == 1 ?'tab-item-active':''}}" ng-click="vm.type = 1">
-        <span class="text-tab">试吃评价</span>
+        <span class="text-16">试吃评价</span>
         <span class="text-sub">
           ({{vm.getComments(1).length}})
         </span>

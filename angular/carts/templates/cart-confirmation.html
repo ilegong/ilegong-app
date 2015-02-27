@@ -6,7 +6,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="item item-icon-right row" ng-click="vm.changeAddress()">
-      <span class="text-tab-balanced col col-15">送至</span>
+      <span class="text-16 text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
         <div class="nowrap">
@@ -24,7 +24,7 @@
       <div class="item-divider"></div>
       <div class="item" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
         <div class="item-image-mini-left">
-          <img class="item-image" src="{{brand.Brand.coverimg}}"/>
+          <img class="item-image r5" src="{{brand.Brand.coverimg}}"/>
           <div class="nowrap">{{brand.Brand.name}}</div>
         </div>
       </div>
@@ -53,7 +53,7 @@
         <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'}}</span>
       </div>
       <div class="item">
-        <label class="item-input" style="padding: 0; background-color: #eee; height: 3em;">
+        <label class="item-input" style="padding: 0; background-color: #eee;">
           <input type="text" style="padding-left: 1em;" placeholder="给卖家留言：" ng-model="item.remark">
         </label>
       </div>
@@ -83,7 +83,7 @@
   </ion-content>
 
   <ion-footer-bar class="row">
-    <span class="col text-tab" style="line-height: 29px;">
+    <span class="col text-16" style="line-height: 29px;">
       共{{vm.getPidList().length}}件，实付款
       <span class="text-energized">
         ￥<strong>{{vm.totalPrice | currency:''}}</strong>

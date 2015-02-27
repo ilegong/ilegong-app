@@ -12,7 +12,7 @@
     </ion-refresher>
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
       <span ng-click="vm.setDefaultAddress(address)">
-        <i class="icon pys-400" ng-class="{'icon-checked': vm.isChecked(address), 'icon-unchecked': !vm.isChecked(address)}"></i>
+        <i class="icon pys-350" ng-class="{'icon-circle-checked': vm.isChecked(address), 'icon-circle': !vm.isChecked(address)}"></i>
         <div class="name">
           {{address.OrderConsignees.name}}({{address.OrderConsignees.mobilephone}})
         </div>
@@ -20,7 +20,7 @@
           {{address.OrderConsignees.area}}{{address.OrderConsignees.address}}
         </div>  
       </span>
-      <i class="icon pys-400 ion-edit" ui-sref="address-edit({editId: address.OrderConsignees.id})"></i>
+      <i class="icon pys-350 icon-edit" ui-sref="address-edit({editId: address.OrderConsignees.id})"></i>
     </div>
     <div class="centered-container" ng-show="vm.addresses.length == 0">
       <span class="no-content no-address">

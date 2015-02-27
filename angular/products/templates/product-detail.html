@@ -8,7 +8,7 @@
   <ion-content class="ion-content">
     <img src="{{vm.product.Product.coverimg}}" class="full"/>
     <div class="item">
-      <p class="text-large">
+      <p class="text-21">
         {{vm.product.Product.name}}
       </p>
       <p class="text-sub" style="white-space:normal;">
@@ -16,7 +16,7 @@
       </p>
       <p>
         <span class="text-energized">
-          ￥<span class="text-large">{{vm.product.Product.price | currency:''}}</span>
+          ￥<span class="text-21">{{vm.product.Product.price | currency:''}}</span>
         </span>
         <s class="text-sub" ng-show="{{vm.product.Product.original_price != 0}}">{{vm.product.Product.original_price | currency:"￥"}}</s>
         <a class="fr" ng-click="vm.toReputationCommentsPage();">

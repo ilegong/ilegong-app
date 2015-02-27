@@ -2439,7 +2439,7 @@ var productComment = [
       "comment_type": null, 
       "updated": "2015-01-06 20:14:20", 
       "created": "2015-01-06 20:14:19", 
-      "is_shichi_tuan_comment": "0", 
+      "is_shichi_tuan_comment": "1", 
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
       "images": [

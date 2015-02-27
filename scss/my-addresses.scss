@@ -1,8 +1,15 @@
 @import "variables";
 
 .my-addresses{
-  .item-icon-left .icon.pys-icon, .item-icon-right .icon.pys-icon{
-    top: 1.42857142857em;
+  .item-icon-left{
+    .icon.pys-350 {
+      top: 1.42857142857rem;
+    }    
+  }
+  .item-icon-right{
+    .icon{
+      top: 1.42857142857rem;
+    }
   }
   .address{
     .name, .detail{

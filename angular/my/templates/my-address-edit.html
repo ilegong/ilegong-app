@@ -1,4 +1,4 @@
-<ion-view title="编辑收货信息" hide-back-button='true'>
+<ion-view title="{{vm.addressId < 0 ? '新建收货信息' : '编辑收货信息'}}" hide-back-button='true'>
    <ion-nav-buttons side="left">
     <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
       <i class="icon ion-ios7-arrow-left"></i>返回
@@ -41,8 +41,8 @@
       <span class="button button-block" ng-class="{'button-energized': vm.readyToSave()}" ng-click="vm.addressId > 0 ? vm.editAddress() : vm.addAddress()" ng-disabled="!vm.readyToSave()">
         保存
       </span>
-      <span class="button button-clear button-dark icon-left" ng-really-click="vm.deleteAddress(vm.addressId)" ng-really-message="确定要删除此收货地址吗？" ng-show="vm.addressId > 0">
-        <i class="icon pys-400 icon-delete"></i>
+      <span class="button button-clear button-dark icon-350-left" ng-really-click="vm.deleteAddress(vm.addressId)" ng-really-message="确定要删除此收货地址吗？" ng-show="vm.addressId > 0">
+        <i class="icon pys-350 icon-trash"></i>
         删除收货地址
       </span>
     </div>

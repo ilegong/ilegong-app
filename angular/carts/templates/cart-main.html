@@ -34,8 +34,10 @@
               <div class="text">
                 {{cartItem.Cart.name}}
               </div>
-              <span class="nowrap text-sub-muted" ng-show="!cartItem.editMode && !_.isEmpty(cartItem.Cart.spec)">
-                {{cartItem.Cart.spec}}
+              <span class="nowrap text-sub-muted">
+                <span ng-show="!cartItem.editMode && !_.isEmpty(cartItem.Cart.spec)">
+                  {{cartItem.Cart.spec}}
+                </span>
               </span>
               <span class="number-span" ng-show="cartItem.editMode">
                 <span class="pys-350 icon-reduce count-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
@@ -52,7 +54,7 @@
               <span class="product-num">
                 ×{{cartItem.Cart.num}}
               </span>
-              <span class="pys-350 {{cartItem.editMode ? 'icon-save save-icon':'icon-edit edit-icon'}}" ng-click="vm.clickSaveOrEditBtn(cartItem); $event.stopPropagation()">
+              <span class="pys-350 {{cartItem.editMode ? 'icon-save':'icon-edit-mini'}}" ng-click="vm.clickSaveOrEditBtn(cartItem); $event.stopPropagation()">
               </span>
             </span>
           </div>
@@ -77,7 +79,7 @@
       <div>合计</div>
       <div class="text-sub-muted">不含运费</div>
     </div>
-    <span class="text-title text-energized col" style="line-height: 29px;">
+    <span class="text-18 text-energized col" style="line-height: 29px;">
       <strong>￥{{vm.getTotalPrice() | currency:""}}</strong>
     </span>
     <div class="button button-energized pys-button col-33" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{countOfCheckedCartItems()}})</strong></div>
