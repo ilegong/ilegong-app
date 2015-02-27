@@ -107,7 +107,7 @@
 
     <div class="item comment" ng-repeat="c in vm.getReputationComments().slice(0, 3)" ng-init="comment = c.Comment">
       <p class="item-image-mini-left">
-        <img ng-show="comment.userPhoto != null" class="item-image radius-5" style="background: url('{{comment.userPhoto}}');background-size:contain;">
+        <img ng-show="comment.userPhoto != null" class="item-image r5" style="background: url('{{comment.userPhoto}}');background-size:contain;">
         <span ng-show="comment.userPhoto == null" class="item-image pys-350 icon-user"></span>
         <span >{{comment.username}}</span>
         <span class="fr text-muted">{{comment.created}}</span>

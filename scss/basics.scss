@@ -51,15 +51,20 @@ a{
 .input-label{
   font-size: 1rem;
   padding: 0.5rem 0.71428571428rem 0.5rem 0;
+  width: 25%;
 }
 // button related
 .button{
+  @extend .r5;
   padding: 0 0.5rem;
+  height: 3.35714285714rem;
+  max-height: 3.35714285714rem;
+  min-height: 3.35714285714rem;
+  line-height: 3.35714285714rem;
 }
 .buttons.pys-buttons .button, .button.pys-button{
   font-size: 1rem;
   border: 0;
-  border-radius: 0.35714285714rem;
   width: 6.9rem;
   height: 2.78571428571rem;
   line-height: 2.78571428571rem;
@@ -182,6 +187,9 @@ a{
 .text-tab{
   font-size: 1.2rem !important;
 }
+.text-16{
+  font-size: 16px !important;
+}
 .text-tab-balanced{
   @extend .text-tab;
   @extend .text-balanced;
@@ -196,11 +204,8 @@ a{
 }
 
 // radius
-.radius-5{
+.r5, .radius-5{
   border-radius: 0.35714285714rem;
-}
-.radius-10{
-  border-radius: 0.5rem;
 }
 
 // show alert message
@@ -304,6 +309,7 @@ a{
 }
 .item-select select {
   width: 100%;
+  max-width: 75%;
   direction: inherit;
   padding: 1.5rem 3rem 1.5rem 0;
 }

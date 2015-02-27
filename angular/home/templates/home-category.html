@@ -11,7 +11,7 @@
           {{product.name}}
         </div>
         <div class='image-left' style="padding-top: 0.3rem;">
-          <img class="radius-10" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
+          <img class="r5" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
           <div class='nowrap text-sub-muted' style="line-height: 1rem">{{product.brand.Brand.name}}</div>
           <span class='text-energized'>¥{{product.price}}</span>
           <s class="text-mini-muted" ng-show="product.original_price">¥{{product.original_price}}</s>
