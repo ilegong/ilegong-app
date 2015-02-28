@@ -11,6 +11,9 @@ html{
 body, .pane, .view{
   background-color: $background_color;
 }
+body, .ionic-body{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 a{
   text-decoration: none;
   color: #2fa4e7;
@@ -338,15 +341,10 @@ a{
   width:2.09rem;
   height:1.55rem;
 }
-.pys-350.icon-edit-mini{
-  width:1.2rem;
-  height:1.2rem;
-  background-position: -15.625rem 0;
-}
 .pys-350.icon-edit{
-  width:1.2rem;
-  height:1.2rem;
-  background-position: -15.625rem 0;
+  width: 1.58333333333rem;
+  height: 1.58333333333rem;
+  background-position: -9.16666666667rem -10rem;
 }
 .pys-350.icon-save{
   width:1.167rem;
@@ -374,14 +372,14 @@ a{
   background-position: -20rem -7.5rem;
 }
 .pys-350.icon-add{
-  width:2.126rem;
-  height:2.126rem;
-  background-position: -13rem -3.34rem;
+  width: 1.66666666667rem;
+  height: 1.66666666667rem;
+  background-position: -12.9166666667rem -3.33333333333rem;
 }
 .pys-350.icon-reduce{
-  width:2.126rem;
-  height:2.126rem;
-  background-position: -10rem -3.34rem;
+  width: 1.66666666667rem;
+  height: 1.66666666667rem;
+  background-position: -10rem -3.33333333333rem;
 }
 .pys-350.icon-star{
   background-position:-2.084rem 0;

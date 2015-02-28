@@ -2784,10 +2784,10 @@ var Carts = {
   "carts":[
     {"Cart":{
       "id":"23243",
-      "name":"\u5bc6\u4e91\u9ec4\u5fc3\u9c9c\u756a\u85af",
+      "name":"北京地标密云黄心鲜番薯15KG装",
       "product_id":"308",
       "num":"1",
-      "price":"12",
+      "price":"292",
       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/3b79c6a704a_1128.jpg",
       "used_coupons":"",
       "spec": '榴莲', 

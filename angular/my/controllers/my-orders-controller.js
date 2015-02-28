@@ -39,11 +39,17 @@
       });
     }
     function getOrderHeight(order){
-      var productLength = 0;
+      var productsHeight = 0;
       if(!_.isEmpty(order.Order) && !_.isEmpty(order.Order.products)){
-        productLength = order.Order.products.length;
+        productsHeight = order.Order.products.length * 90;
       }
-      return ((152 + productLength * 90 ) + 10) + "px";
+      var brandHeight = 60;
+      var postFeeHeight = 42;
+      var operationsHeight = 0;
+      if(order.Order.status <= 3){
+        operationsHeight = 50;
+      }
+      return ((brandHeight + postFeeHeight + operationsHeight + productsHeight) + 10) + "px";
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){

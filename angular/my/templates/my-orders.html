@@ -31,7 +31,7 @@
         <span class="text-muted">实付(含运费)：</span>
         <strong class="text-energized">{{order.Order.total_price | currency:'￥'}}</strong>
       </div>
-      <div class="item tr">
+      <div class="item tr" ng-show="order.Order.status <= 3">
         <a class="button button-short button-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
         <a class="button button-short button-balanced button-outline button-25 ml" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 

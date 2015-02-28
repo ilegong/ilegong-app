@@ -12,16 +12,8 @@
     color:white;
     font-weight:bold;
   }
-  .product-content{
-    display:inline-block;
-    width:70%;
-  }
   .product-rest{
     display:inline-block;
-  }
-  .product-price{
-    display:block;
-    font-size:1.25em;
   }
 
   .product-num{
@@ -83,41 +75,15 @@
     margin-bottom:0.8em;
   }
   .number-span{
-      border-collapse: separate;
-      span{
-        display: inline-block;
-        font-size: 14px;
-        font-weight: normal;
-        line-height: 1;
+    margin-top: 5px;
+    .count{
+      display: inline-block;
+      width: 34%;
+      input{
+        background-color: #fff;
         text-align: center;
-        background-color: #eee;
-        border: 1px solid #ccc;
-        border-radius: 4px;
       }
-      span.count-reduce{
-        border-right: 0;
-        border-bottom-right-radius: 0;
-        border-top-right-radius: 0;
-        margin-bottom:-12px;
-        padding-bottom:31px;
-      }
-      span.count-add{
-        border-left: 0;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        margin-left:-4px;
-        margin-bottom:-12px;
-        padding-bottom:31px;
-      }
-      .count{
-        padding: 4px 1px;
-        width: 34%;
-        border-radius:0px;
-        border-left:none;
-        border-right:none;
-        margin-left:-4px;
-        height:33px;
-      }
+    }
   }
   .item{
     .img{
@@ -157,6 +123,15 @@
     }
     .item-price-total{
       padding: 8px 0;
+    }
+    .item-thumbnail-left > img:first-child{
+      top: 1.33928571429rem;
+    }
+    .item-icon-right{
+      padding-right: 4.5rem;
+      .icon{
+        right: 0.5rem;
+      }
     }
   }
   .cart-price-total{

@@ -7,7 +7,6 @@
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
-    vm.clickSaveOrEditBtn = clickSaveOrEditBtn;
     vm.deleteCartItem = deleteCartItem;
     vm.readyToConfirm = function(){return _.any(vm.cartBrands, function(brand){return _.any(brand.cartItems, function(ci){return ci.checked})})};
     vm.confirmCart = confirmCart;
@@ -80,9 +79,6 @@
         cart.num = original;
       });
     };
-    function clickSaveOrEditBtn(cartItem){
-      cartItem.editMode = !cartItem.editMode;
-    }
     function deleteCartItem(cartItem){
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
