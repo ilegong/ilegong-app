@@ -162,6 +162,7 @@
     $rootScope.showAlertMessage = showAlertMessage;
     $rootScope.toStoreHomePage = toStoreHomePage;
     $rootScope.countOfCheckedCartItems = countOfCheckedCartItems;
+    $rootScope.countOfCartItems = countOfCartItems;
 
     activate();
 
@@ -400,6 +401,11 @@
     function countOfCheckedCartItems(){
       return _.reduce($rootScope.user.cartBrands, function(memo, brand){
         return memo + _.filter(brand.cartItems, function(ci){return ci.checked}).length;
+      }, 0);
+    }
+    function countOfCartItems(){
+      return _.reduce($rootScope.user.cartBrands, function(memo, brand){
+        return memo + brand.cartItems.length;
       }, 0);
     }
   }

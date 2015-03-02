@@ -41,19 +41,19 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+            "PACKAGE_NAME": "com.ilegong.pys"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+            "PACKAGE_NAME": "com.ilegong.pys"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+            "PACKAGE_NAME": "com.ilegong.pys"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+            "PACKAGE_NAME": "com.ilegong.pys"
         },
         "org.binarypark.cordova.plugins.version": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+            "PACKAGE_NAME": "com.ilegong.pys"
         }
     },
     "dependent_plugins": {}

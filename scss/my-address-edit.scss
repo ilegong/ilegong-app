@@ -1,6 +1,14 @@
 @import "variables";
 
 .my-address-edit{
+  .item{
+    .input-label{
+      text-align: right;
+    }
+    select{
+      padding: 17px 0.5rem 17px 0.5rem;
+    }
+  }
   .address-operations{
     text-align: center;
   }
