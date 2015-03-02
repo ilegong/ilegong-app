@@ -2,7 +2,7 @@
   <ion-content class='stores padding-left'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'213px'">
+    <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'213px'" ng-cloak>
       <div class="store" ui-sref="store.home({id: store.Brand.id, name: store.Brand.name})">
         <img class="full" src="{{store.Brand.coverimg}}" alt="">
         <div class="text tc" style="line-height: 2em;">

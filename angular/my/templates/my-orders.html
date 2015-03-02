@@ -7,10 +7,10 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)">
+    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)" ng-cloak>
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
-        <h2 class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</h2>
+        <span class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</span>
         <span class="text-energized col col-20 tr" style="padding-right: 0;">
           {{order.Order.orderState.status}}
         </span>
@@ -44,7 +44,7 @@
       <div class="item-divider"></div>
     </div>
 
-    <div class="centered-container" ng-show="vm.orders.length == 0">
+    <div class="centered-container" ng-show="vm.orders.length == 0" ng-cloak>
       <span class="no-content no-orders">
       </span>
       <span class="message">

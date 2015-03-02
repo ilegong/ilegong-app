@@ -2,7 +2,7 @@
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)">
+    <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-cloak>
       <a class="coupon-info col col-67" ng-click="vm.useCoupons(item,brand);" >
         <p class="coupon-name">
           {{item.Coupon.name}}
@@ -23,7 +23,7 @@
       </div>
     </div>
     
-    <div class="centered-container" ng-show="vm.validCoupons.length == 0 && !vm.showInvalidCoupons">
+    <div class="centered-container" ng-show="vm.validCoupons.length == 0 && !vm.showInvalidCoupons" ng-cloak>
       <span class="no-content no-coupons">
       </span>
       <span class="message">
@@ -31,13 +31,13 @@
       </span>
     </div>
 
-    <div class="padding" style="text-align:center">
+    <div class="padding" style="text-align:center" ng-cloak>
       <p ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">
         {{vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'}}
       </p>
     </div>
 
-    <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons">
+    <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons" ng-cloak>
       <a class="coupon-info col col-67" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
         <p class="coupon-name">
           {{item.Coupon.name}}

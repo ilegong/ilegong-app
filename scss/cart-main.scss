@@ -1,17 +1,6 @@
 @import "variables";
 
 .cart{
-  .login-text{
-    margin-top:-1em;
-  }
-  .login-button{
-    background:lightcoral;
-    color:white;
-    border:none;
-    border-radiux:7px;
-    margin-top:-6px;
-    margin-bottom:0.8em;
-  }
   .item{
     .item-thumbnail-left > img:first-child{
       top: 1.33928571429rem;
@@ -35,6 +24,14 @@
           border: 0;
         }
       }
+    }
+  }
+  .centered-container{
+    .no-cart-items{
+      margin-left: 1rem;
+    } 
+    .button{
+      padding: 0 1rem;
     }
   }
   .bar-footer{

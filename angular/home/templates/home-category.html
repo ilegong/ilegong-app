@@ -2,7 +2,7 @@
   <ion-content class='home-category elements'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="'234px'" collection-item-width="'50%'" ng-click="vm.toProductDetailPage(product)">
+    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="'234px'" collection-item-width="'50%'" ng-click="vm.toProductDetailPage(product)" ng-cloak>
       <div class='element'>
         <div>
           <img class="product-image full" title="{{product.title}}" src="{{product.coverimg}}">

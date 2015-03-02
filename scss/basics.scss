@@ -303,6 +303,7 @@ a{
 .item-divider{
   min-height: 0.71428571428rem;
   height: 0.71428571428rem;
+  padding: 0;
 }
 .item-select select {
   width: 100%;
@@ -335,6 +336,10 @@ a{
 .pys-350{
   @extend .pys-bg;
   background-size: 25rem 25rem;
+}
+.pys-280{
+  @extend .pys-bg;
+  background-size: 20rem 20rem;
 }
 .pys-350.bg-cart {
   background-position:-10.84rem 0;
@@ -417,25 +422,25 @@ a{
 .pys-350.icon-user{
   background-position: 0 0;
 }
-.pys-350.icon-my-order{
-  background-position: -5.83333333333rem -7.5rem;
-  width: 2rem;
-  height: 2rem;
+.pys-280.icon-my-order{
+  background-position: -4.66666666667rem -6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
-.pys-350.icon-my-coupon{
-  background-position: -10.8333333333rem -7.5rem;
-  width: 2rem;
-  height: 2rem;
+.pys-280.icon-my-coupon{
+  background-position: -8.66666666667rem -6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
-.pys-350.icon-my-offer{
-  background-position: -13.3333333333rem -7.5rem;
-  width: 2rem;
-  height: 2rem;
+.pys-280.icon-my-offer{
+  background-position: -10.6666666667rem -6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
-.pys-350.icon-my-address{
-  background-position: -15.83333333333rem -7.5rem;
-  width: 2rem;
-  height: 2rem;
+.pys-280.icon-my-address{
+  background-position: -12.6666666667rem -6rem;
+  width: 1.6rem;
+  height: 1.6rem;
 }
 
 // tabs
@@ -544,9 +549,7 @@ a{
 // item-avatar general
 .item-avatar-left {
   padding-left: 3.42857142857em;
-  padding-top: 1em;
-  padding-bottom: 1em;
-  min-height: 4em;
+  min-height: 50px;
   .button{
     max-height: 2rem;
     min-height: 2rem;
@@ -559,7 +562,7 @@ a{
   }
 }
 .item-avatar-left > img:first-child, .item-avatar-left .item-image {
-  top: 1rem;
+  top: 11px;
   left: 10px;
   max-width: 2rem;
   max-height: 2rem;
@@ -659,3 +662,6 @@ ion-item.item {
     }
   }
 }
+
+// fix ng-cloak, see http://www.cnblogs.com/whitewolf/p/3495822.html
+@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-start{clip:rect(0,auto,auto,0);-ms-zoom:1.0001;}.ng-animate-active{clip:rect(-1px,auto,auto,0);-ms-zoom:1;}

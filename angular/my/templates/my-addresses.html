@@ -10,7 +10,7 @@
 	<ion-content class="my-addresses list">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0">
+    <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0" ng-cloak>
       <span ng-click="vm.setDefaultAddress(address)">
         <i class="icon pys-350" ng-class="{'icon-circle-checked': vm.isChecked(address), 'icon-circle': !vm.isChecked(address)}"></i>
         <div class="name">
@@ -22,7 +22,7 @@
       </span>
       <i class="icon pys-350 icon-edit" ui-sref="address-edit({editId: address.OrderConsignees.id})"></i>
     </div>
-    <div class="centered-container" ng-show="vm.addresses.length == 0">
+    <div class="centered-container" ng-show="vm.addresses.length == 0" ng-cloak>
       <span class="no-content no-address">
       </span>
       <span class="message">

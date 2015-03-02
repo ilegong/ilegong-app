@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="my-address-edit">
-    <div class="list">
+    <div class="list" ng-cloak>
       <label class="item item-input">
         <span class="input-label text-16">收货人</span>
         <input type="text" class="text-16" ng-model="vm.address.OrderConsignees.name" placeholder="请输入姓名">
@@ -39,7 +39,7 @@
         <input type="text" class="text-16" ng-model="vm.address.OrderConsignees.address" placeholder="请输入详细地址"/>
       </label>
     </div>
-    <div class="padding address-operations">
+    <div class="padding address-operations" ng-cloak>
       <span class="button button-block" ng-class="{'button-energized': vm.readyToSave()}" ng-click="vm.addressId > 0 ? vm.editAddress() : vm.addAddress()" ng-disabled="!vm.readyToSave()">
         保存
       </span>

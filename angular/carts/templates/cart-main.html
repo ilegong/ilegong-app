@@ -1,15 +1,9 @@
 <ion-view title="朋友说" hide-back-button='true' class="cart" show-tabs>
-  <ion-header-bar align-title="left" class="bar-subheader padding" ng-show="!vm.isLoggedIn" > 
-    <div class="row">
-      <div class="col col-75 login-text">温馨提示：登陆后您可以同步电脑，微信与APP购物车中的商品。</div>
-      <button class="button login-button" ui-sref="account-login">马上登陆</button>
-    </div>
-  </ion-header-bar>
-
-  <ion-content style="{{vm.isLoggedIn?'padding-top:75px;':''}}">
+  <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div ng-repeat="brand in vm.cartBrands">
+
+    <div ng-repeat="brand in vm.cartBrands" ng-show="vm.isLoggedIn" ng-cloak>
       <span class="item item-icon-left" ng-click="toStoreHomePage(brand);">
         <i class="icon pys-350 {{vm.isBrandChecked(brand)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand); $event.stopPropagation()">
         </i>
@@ -54,13 +48,22 @@
       </ion-list>
     </div>
 
-    <div class="centered-container" ng-show="vm.cartBrands.length == 0">
+    <div class="centered-container" ng-show="vm.isLoggedIn && vm.cartBrands.length == 0" ng-cloak>
       <span class="no-content no-cart-items">
       </span>
       <span class="message">
         购物车还是空的，去选点好吃的吧！
       </span>
       <a class="button button-energized" ng-click="toHomePage()">去逛逛</a>
+    </div>
+
+    <div class="centered-container" ng-show="!vm.isLoggedIn" ng-cloak>
+      <span class="no-content">
+      </span>
+      <span class="message">
+        您还没有登录，请先登录
+      </span>
+      <button class="button button-energized" ui-sref="account-login">马上登陆</button>
     </div>
   </ion-content>
   

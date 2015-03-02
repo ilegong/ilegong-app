@@ -2,7 +2,7 @@
   <ion-content class='padding'>  
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div ng-repeat="trying in vm.tryings">
+    <div ng-repeat="trying in vm.tryings" ng-cloak>
       <h2>{{trying.Category.name}}</h2>
       <div class="row" ng-repeat="a in trying.articles" ng-init="article = a.Article">
         <div class="col col-33">

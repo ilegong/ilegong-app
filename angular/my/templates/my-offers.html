@@ -2,7 +2,7 @@
   <ion-content >
     <div class="list">
 
-      <div class="item" ng-repeat="item in vm.sharedOffers">
+      <div class="item" ng-repeat="item in vm.sharedOffers" ng-cloak>
           <div class="row">
             <div class="col col-25">
               {{(item.SharedOffer.total_number / 100) | currency:'￥'}}

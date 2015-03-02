@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="item item-icon-right row" ng-click="vm.changeAddress()">
+    <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-cloak>
       <span class="text-16 text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
@@ -20,7 +20,7 @@
         <div>请选择地址</div>
       </div>
     </div>
-    <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
+    <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);" ng-cloak>
       <div class="item-divider"></div>
       <div class="item">
         <div class="item-image-mini-left">
@@ -67,10 +67,10 @@
       </div>
     </div>
 
-    <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="vm.isSiteCoupons(coupon)" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setSiteCoupon(coupon);">asdasdad{{coupon.isChecked}}</ion-checkbox>
+    <ion-checkbox ng-show="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="vm.isSiteCoupons(coupon)" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setSiteCoupon(coupon);" ng-cloak>asdasdad{{coupon.isChecked}}</ion-checkbox>
 
     <div class="item-divider" ng-show="false"></div>
-    <div class="item item-checkbox item-checkbox-right" ng-show="false">
+    <div class="item item-checkbox item-checkbox-right" ng-show="false" ng-cloak>
       <label class="checkbox">
         <input type="checkbox">
       </label>
@@ -83,7 +83,7 @@
   </ion-content>
 
   <ion-footer-bar class="row">
-    <span class="col text-16" style="line-height: 29px;">
+    <span class="col text-16" style="line-height: 29px;" ng-cloak>
       共{{vm.getPidList().length}}件，实付款
       <span class="text-energized">
         ￥<strong>{{vm.totalPrice | currency:''}}</strong>

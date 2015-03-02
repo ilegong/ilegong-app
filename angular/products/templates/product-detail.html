@@ -6,8 +6,8 @@
   </ion-nav-buttons>
 
   <ion-content class="ion-content">
-    <img src="{{vm.product.Product.coverimg}}" class="full"/>
-    <div class="item">
+    <img src="{{vm.product.Product.coverimg}}" class="full" ng-cloak/>
+    <div class="item" ng-cloak>
       <p class="text-21">
         {{vm.product.Product.name}}
       </p>
@@ -27,7 +27,7 @@
         您有0个好友推荐了该产品
       </p>
     </div>
-    <div class="item row" ng-reason="api不支持" ng-show="false">
+    <div class="item row" ng-reason="api不支持" ng-show="false" ng-cloak>
       <span class="col col-15">
         促销：
       </span>
@@ -35,7 +35,7 @@
         暂无红包
       </span>
     </div>
-    <div class="item row" ng-show="vm.hasSpecs()">
+    <div class="item row" ng-show="vm.hasSpecs()" ng-cloak>
       <span class="col col-15">规格:</span>
       <span class="col wrapped-container" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
         <span class="specs" ng-class="{checked: vm.specsChecks[ite_name][ite].value}" ng-repeat="ite in ite_content" ng-init="vm.specsChecks[ite_name][ite] = {value:false}" ng-click="vm.specsClick(ite_name,ite);">
@@ -43,7 +43,7 @@
         </span>
       </span>
     </div>
-    <div class="item row">
+    <div class="item row" ng-cloak>
       <span class="col col-center col-15">
         数量：
       </span>
@@ -56,14 +56,14 @@
     
     <div class="item-divider"></div>
 
-    <a class="item item-avatar-left item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" ng-if="vm.from < 0">
+    <a class="item item-avatar-left item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" ng-if="vm.from < 0" ng-cloak>
       <img src="{{vm.brand.Brand.coverimg}}" class="r5"/>
       <i class=" icon ion-ios7-arrow-right"></i>
       <div class="text" style="line-height: 2em;">
         进入{{vm.brand.Brand.name}}的店铺
       </div>
     </a>
-    <div class="item row">
+    <div class="item row" ng-cloak>
       <span class="col col-15">
         快递：
       </span>
@@ -71,7 +71,7 @@
         {{vm.product.Product.ship_fee==0?'包邮':(vm.product.Product.ship_fee | currency:'￥')}}
       </span>
     </div>
-    <div class="item row">
+    <div class="item row" ng-cloak>
       <div class="col col-15">
         服务：
       </div>
@@ -82,22 +82,22 @@
     
     <div class="item-divider"></div>
     
-    <div class="item item-icon-right" ng-click="vm.showProductIntro = !vm.showProductIntro">
+    <div class="item item-icon-right" ng-click="vm.showProductIntro = !vm.showProductIntro" ng-cloak>
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         商品详情
       </span>
     </div>
-    <div ng-show="vm.showProductIntro" class="item product-intro" ng-bind-html="vm.content.Product.content">
+    <div ng-show="vm.showProductIntro" class="item product-intro" ng-bind-html="vm.content.Product.content" ng-cloak>
     </div>
-    <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();" ng-show="vm.getTryingComments().length > 0">
+    <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();" ng-show="vm.getTryingComments().length > 0" ng-cloak>
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         试吃评价
         <span class="text-sub">({{vm.getTryingComments().length}})</span>
       </span>
     </div>
-    <div class="item item-icon-right" ng-click="vm.toReputationCommentsPage();">
+    <div class="item item-icon-right" ng-click="vm.toReputationCommentsPage();" ng-cloak>
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
         口碑评价
@@ -105,7 +105,7 @@
       </span>
     </div>
 
-    <div class="item comment" ng-repeat="c in vm.getReputationComments().slice(0, 3)" ng-init="comment = c.Comment">
+    <div class="item comment" ng-repeat="c in vm.getReputationComments().slice(0, 3)" ng-init="comment = c.Comment" ng-cloak>
       <p class="item-image-mini-left">
         <img ng-show="comment.userPhoto != null" class="item-image r5" style="background: url('{{comment.userPhoto}}');background-size:contain;">
         <span ng-show="comment.userPhoto == null" class="item-image pys-350 icon-user"></span>
@@ -126,11 +126,11 @@
         <img ng-repeat="img in comment.images.slice(0, 3)" src="{{img}}" class="comment-image col"/>
       </div>
     </div>
-    <a ng-show="vm.getReputationComments().length > 3" class="item tc" ng-click="vm.toReputationCommentsPage()">
+    <a ng-show="vm.getReputationComments().length > 3" class="item tc" ng-click="vm.toReputationCommentsPage()" ng-cloak>
       <strong>查看全部评价</strong>
     </a>
 
-    <div class='elements'>
+    <div class='elements' ng-cloak>
       <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
       <div class="element-container" ng-repeat="recommend in vm.recommends">
         <div class='element'>
@@ -141,7 +141,7 @@
       </div>
     </div>
   </ion-content>
-  <ion-footer-bar class="row">
+  <ion-footer-bar class="row" ng-cloak>
     <span ng-click="vm.buyImmediately();" class="button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
       <strong>立即购买</strong>
     </span>

@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="list">
-    <div class="item">
+    <div class="item" ng-cloak>
       <div>收货地址</div> 
       <div class="nowrap text-sub-muted">
         {{vm.order.Order.consignee_area}}{{vm.order.Order.consignee_address}}
@@ -14,7 +14,7 @@
       {{vm.order.Order.consignee_name}}&nbsp;{{vm.order.Order.consignee_mobilephone}}
       </span>
     </div>
-    <a class="item item-avatar-left item-icon-right row" ng-click="vm.toStoreHomePage(vm.store)">
+    <a class="item item-avatar-left item-icon-right row" ng-click="vm.toStoreHomePage(vm.store)" ng-cloak>
       <img src="{{vm.store.coverimg}}" class="r5"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="text col col-center">{{vm.store.name}}</div>
@@ -22,10 +22,10 @@
         服务电话
       </div>
     </a>
-    <div class="item">
+    <div class="item" ng-cloak>
       订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
     </div>
-    <a class="item item-thumbnail-left item-icon-right"  ng-repeat="item in vm.cartItems" ng-click="vm.toProductDetailPage(item);">
+    <a class="item item-thumbnail-left item-icon-right"  ng-repeat="item in vm.cartItems" ng-click="vm.toProductDetailPage(item);" ng-cloak>
       <img src="{{item.Cart.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
       <div class="nowrap">{{item.Cart.name}}</div>
@@ -36,10 +36,10 @@
         规格：{{item.Cart.spec}}
       </div>
     </a>
-    <div class="item">
+    <div class="item" ng-cloak>
       运费：{{vm.order.Order.ship_fee | currency:'￥'}}
     </div>
-    <div class="item">
+    <div class="item" ng-cloak>
       <div class="fl">
         订单号：{{vm.order.Order.id}}
         <div class="nowrap text-sub-muted">
@@ -52,18 +52,18 @@
       <a class="button fr" ng-show="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
     </div>
   </ion-content>
-  <ion-footer-bar class="row">
+  <ion-footer-bar class="row" ng-cloak>
     <span class="col">
       合计：<strong class="text-21 text-energized">{{vm.totalPrice | currency:'￥'}}</strong>
     </span>
 
-    <a class="button col-25" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
-    <a class="button button-energized col-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
+    <a class="button button-25" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
+    <a class="button button-energized button-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
 
-    <a class="button col-25" ng-class="{'button-balanced button-outline': !vm.order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(vm.order)" ng-disabled="vm.order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
+    <a class="button button-25" ng-class="{'button-balanced button-outline': !vm.order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(vm.order)" ng-disabled="vm.order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
 
-    <a class="button button-energized col-25" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
+    <a class="button button-energized button-25" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
 
-    <a class="button col-25" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
+    <a class="button button-25" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
   </ion-footer-bar>
 </ion-view>
