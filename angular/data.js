@@ -2901,8 +2901,8 @@ var myProfileJson = {
 var CartInfo = {
   "data":{
     "success":true,
-    "total_price":53,
-    "shipFee":0,
+    "total_price":58,
+    "shipFee": 15,
     "coupons_of_products":[],
     "cart":{
       "order_id":null,"user_id":"146","is_try":false,

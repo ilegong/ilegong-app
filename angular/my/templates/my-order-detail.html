@@ -54,7 +54,7 @@
   </ion-content>
   <ion-footer-bar class="row" ng-cloak>
     <span class="col">
-      合计：<strong class="text-21 text-energized">{{vm.totalPrice | currency:'￥'}}</strong>
+      合计：<strong class="text-21 text-energized">{{vm.order.Order.total_all_price | currency:'￥'}}</strong>
     </span>
 
     <a class="button button-25" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>

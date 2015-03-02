@@ -108,7 +108,6 @@
         vm.orderState = Orders.getOrderState(vm.order.Order.status);
         vm.cartItems = data.carts;
         vm.hasPaid = !_.isEmpty(vm.order.Order.pay_time);
-        vm.totalPrice = _.reduce(vm.cartItems, function(sum, cartItem){return sum + cartItem.Cart.price}, 0);
         vm.ship_type = data.ship_type;
         vm.expired_pids = data.expired_pids;
         vm.no_more_money = data.no_more_money;

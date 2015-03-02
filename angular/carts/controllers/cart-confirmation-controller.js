@@ -45,7 +45,7 @@
         vm.shipFees = $rootScope.user.cartInfo.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = $rootScope.user.cartInfo.reduced;
-        vm.totalPrice = $rootScope.user.cartInfo.total_price;
+        vm.totalPrice = $rootScope.user.cartInfo.total_price + $rootScope.user.cartInfo.shipFee;
       });
     }
     function setBrandOrProductCoupon(coupon,brand,products){

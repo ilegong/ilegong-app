@@ -29,7 +29,7 @@
         <span class="text-muted">运费：</span>
         {{order.Order.ship_fee > 0 ? (order.Order.ship_fee | currency:'￥') : '包邮'}}
         <span class="text-muted">实付(含运费)：</span>
-        <strong class="text-energized">{{order.Order.total_price | currency:'￥'}}</strong>
+        <strong class="text-energized">{{order.Order.total_all_price | currency:'￥'}}</strong>
       </div>
       <div class="item tr" ng-show="order.Order.status <= 3">
         <a class="button button-short button-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
