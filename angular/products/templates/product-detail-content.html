@@ -1,0 +1,12 @@
+<ion-view class="product-detail-content" title="图文详情" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios7-arrow-left"></i>返回
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="ion-content">
+    <div class="item product-intro" ng-bind-html="vm.content.Product.content" ng-cloak>
+    </div>
+  </ion-content>
+</ion-view>

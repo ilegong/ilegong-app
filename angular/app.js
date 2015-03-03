@@ -48,8 +48,7 @@
       .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
 
       .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
-      .state('product-detail.intro', {url:'/intro', views:{'app-home':{templateUrl:'product-detail-intro.html'}}})
-      .state('product-detail.evaluate', {url:'/evaluate', views:{'app-home':{templateUrl:'product-detail-evaluate.html'}}})
+      .state('product-detail-content', {url:'/products/:id/:from/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
       .state('product-detail-comments', {url:'/products/:id/:from/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
 
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
@@ -169,7 +168,11 @@
     function activate(){
       $rootScope.config = config;
       if(cordova && cordova.plugins.version) {
+        $log.log('app version is ' + cordova.plugins.version.getAppVersion());
         $rootScope.config.app = _.extend($rootScope.config.app, {version: cordova.plugins.version.getAppVersion()});
+      }
+      else{
+        $log.log('app version is not available');
       }
       $rootScope._ = window._;
       $rootScope.hideTabs = [];

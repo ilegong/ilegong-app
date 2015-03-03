@@ -1,0 +1,14 @@
+ @import "variables";
+
+.product-detail-content{
+  .product-intro{
+    p{
+      white-space: normal;
+      text-overflow: inherit;
+      overflow: auto;
+    }
+    img{
+      width:100%;
+    }
+  }
+}

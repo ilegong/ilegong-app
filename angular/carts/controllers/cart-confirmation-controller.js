@@ -142,12 +142,13 @@
       });
       Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $log.log("submit order successfully: ").log(orderIds);
+        $rootScope.reloadOrders($rootScope.user.token.access_token);
         $rootScope.reloadCart($rootScope.user.token.access_token);
+        $ionicHistory.currentView($ionicHistory.backView());
         if(orderIds.length > 1){
           $state.go("orders", {state: 0});
         }
         else{
-          $ionicHistory.currentView($ionicHistory.backView());
           $state.go("order-detail", {id: orderIds[0]});
         }
       }, function(e){

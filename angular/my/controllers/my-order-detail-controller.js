@@ -34,7 +34,7 @@
        cancelText: '取消',
        cancel: function() {},
        buttonClicked: function(index) {
-          window.open('tel:' + config.app.hotline);
+          window.open('tel:' + config.app.hotline, '_system');
          return true;
        }
      });
@@ -86,11 +86,11 @@
     function onAliPayLoadStart(e){
     }
     function onAliPayLoadStop(e){
-      if(e.url.match("/ali_pay/wap_return_back")){
+      if(e.url.match("www.tongshijia.com")){
         $log.log("onAliPayLoadStop, will close in app browser...");
         vm.inAppBrowser.close();
       }else{
-        // $log.log("onAliPayLoadStop for url: " + e.url);
+        $log.log("onAliPayLoadStop for url: " + e.url);
       }
     }
     function onAliPayFinished(e){

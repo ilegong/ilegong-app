@@ -82,13 +82,11 @@
     
     <div class="item-divider"></div>
     
-    <div class="item item-icon-right" ng-click="vm.showProductIntro = !vm.showProductIntro" ng-cloak>
+    <div class="item item-icon-right" ui-sref="product-detail-content({id: vm.id, from: vm.from})" ng-cloak>
       <i class=" icon ion-ios7-arrow-right"></i>
       <span>
-        商品详情
+        图文详情
       </span>
-    </div>
-    <div ng-show="vm.showProductIntro" class="item product-intro" ng-bind-html="vm.content.Product.content" ng-cloak>
     </div>
     <div class="item item-icon-right" ng-click="vm.toTryingCommentsPage();" ng-show="vm.getTryingComments().length > 0" ng-cloak>
       <i class=" icon ion-ios7-arrow-right"></i>

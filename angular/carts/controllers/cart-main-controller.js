@@ -19,7 +19,7 @@
     vm.isBrandChecked = function(brand) {return _.all(brand.cartItems, function(cartItem){return cartItem.checked;});};
     vm.allBrandsChecked = function() {return _.all(vm.cartBrands,function(brand){return vm.isBrandChecked(brand)})};
     vm.toggleBrand = toggleBrand;
-    vm.toProductPage = function(cartItem){$state.go("product-detail.intro", {id: cartItem.Cart.product_id, from:-3})};
+    vm.toProductPage = function(cartItem){$state.go("product-detail", {id: cartItem.Cart.product_id, from:-3})};
     vm.doRefresh = doRefresh;
     activate();
 
