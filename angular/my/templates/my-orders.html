@@ -10,14 +10,14 @@
     <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)" ng-cloak>
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
-        <span class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</span>
-        <span class="text-energized col col-20 tr" style="padding-right: 0;">
+        <div class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</div>
+        <div class="text-energized col col-20 tr" style="padding-right: 0;">
           {{order.Order.orderState.status}}
-        </span>
+        </div>
       </a>
       <a class="item item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
         <img src='{{product.Cart.coverimg}}' class="r5"/>
-        <div class="text">{{product.Cart.name}}</div>
+        <div class="nowrap">{{product.Cart.name}}</div>
         <div class="text-muted">
           价格：{{product.Cart.price | currency:'￥'}} 
         </div>

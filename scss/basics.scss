@@ -176,6 +176,7 @@ a{
 }
 .text-sub {
   font-size: 12px !important;
+  line-height: 1.429 !important;
 }
 .text-sub-muted {
   @extend .text-muted;
@@ -183,13 +184,15 @@ a{
 }
 .text-16{
   font-size: 16px !important;
+  line-height: 1.429 !important;
 }
 .text-18{
   font-size: 18px !important;
+  line-height: 1.429 !important;
 }
 .text-21{
-  @extend .text;
   font-size: 21px !important;
+  line-height: 1.429 !important;
 }
 
 // radius
@@ -556,9 +559,9 @@ a{
     height: 2rem;
     line-height: 26px;
   }
-  .col{
+  div{
     height: 2rem;
-    line-height: 26px;
+    line-height: 2rem;
   }
 }
 .item-avatar-left > img:first-child, .item-avatar-left .item-image {

@@ -5,7 +5,7 @@
     <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="'50%'" collection-item-height="'213px'" ng-cloak>
       <div class="store" ui-sref="store.home({id: store.Brand.id, name: store.Brand.name})">
         <img class="full" src="{{store.Brand.coverimg}}" alt="">
-        <div class="text tc" style="line-height: 2em;">
+        <div class="nowrap tc" style="line-height: 2em;">
           {{store.Brand.name}}
         </div>
       </div>

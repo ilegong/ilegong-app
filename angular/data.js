@@ -2396,11 +2396,11 @@ var orderDetail2 = {
 
 var myDetail = {userId:1,userName:'lilei',nickName:'昵称',imgUrl:'none',sex:'男',company:'单位',content:'个性签名',mobilephone:'手机号',mail:'邮箱',password:'***'}
 var productDetail = {  
-   "product":{  
-      "Product":{  
+   "product":{
+      "Product":{
          "id":"293",
          "user_id":"0",
-         "name":"\u65b0\u9c9c\u73b0\u7838\u6838\u6843\u4ec1",
+         "name":"密云特产限量供应新鲜现砸核桃仁补脑300g装",
          "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/b624fb29dea_1124.jpg",
          "slug":"xin_xian_xian_za_he_tao_ren",
          "color":null,
