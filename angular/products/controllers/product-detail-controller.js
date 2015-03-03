@@ -39,6 +39,7 @@
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
+          $log.log("specs of product " + vm.id).log(vm.product.Product.specs.choices);
         }
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
@@ -51,11 +52,11 @@
       }, function(e){$log.log(e)});
     }
 
-    function specsClick(group,name){
-      _.each(vm.specsChecks[group],function(item){item.value = false});
-      vm.specsChecks[group][name].value = true;
-      vm.currentSpecs = _.find(_.pairs(vm.product.Product.specs.map),function(item){return item[1].name == name})[0];
-    } 
+    function specsClick(specType, specChoice){
+      _.each(vm.specsChecks[specType], function(specChoice){specChoice.value = false});
+      vm.specsChecks[specType][specChoice].value = true;
+      vm.currentSpecs = _.findKey(vm.product.Product.specs.map, function(value, key){return value.name == specChoice});
+    }
     function hasSpecs(){
       if(_.isEmpty(vm.product)){
         return false;

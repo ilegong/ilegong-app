@@ -2432,7 +2432,7 @@ var productDetail = {
       }
    },
    "recommends":{  
-      "274":{  
+      "274":{
          "id":"274",
          "name":"\u65b0\u7586\u7279\u4ea7\u575a\u679c\u624b\u7ed8\u793c\u76d26\u888b\u88c5",
          "created":"2014-11-18 14:18:00",

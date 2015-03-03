@@ -37,8 +37,8 @@
     </div>
     <div class="item row" ng-show="vm.hasSpecs()" ng-cloak>
       <span class="col col-15">规格:</span>
-      <span class="col wrapped-container" ng-repeat="(ite_name, ite_content) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[ite_name] = {}">
-        <span class="specs" ng-class="{checked: vm.specsChecks[ite_name][ite].value}" ng-repeat="ite in ite_content" ng-init="vm.specsChecks[ite_name][ite] = {value:false}" ng-click="vm.specsClick(ite_name,ite);">
+      <span class="col wrapped-container" ng-repeat="(specType, specChoices) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
+        <span class="specs" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);">
           {{ite}}
         </span>
       </span>

@@ -86,11 +86,9 @@
     function onAliPayLoadStart(e){
     }
     function onAliPayLoadStop(e){
-      if(e.url.match("www.tongshijia.com")){
+      if(e.url.match("/ali_pay/wap_return_back") || e.url.match("/users/login")){
         $log.log("onAliPayLoadStop, will close in app browser...");
         vm.inAppBrowser.close();
-      }else{
-        $log.log("onAliPayLoadStop for url: " + e.url);
       }
     }
     function onAliPayFinished(e){

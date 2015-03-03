@@ -666,6 +666,18 @@ ion-item.item {
   }
 }
 
+// article
+.article{
+  p{
+    white-space: normal;
+    text-overflow: inherit;
+    overflow: auto;
+  }
+  img{
+    width:100%;
+  }
+}
+
 // fix ng-cloak, see http://www.cnblogs.com/whitewolf/p/3495822.html
 [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{
   display:none !important;
