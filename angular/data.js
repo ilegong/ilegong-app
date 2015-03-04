@@ -2863,7 +2863,7 @@ var brandJson = {
         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/043e321f3a8_1018.jpg",
         "slug":"ri_qing_nissinniu_nai_qiao_ke_li_yu_mi_cui_pian",
         "price":"9.8",
-        "original_price":null
+        "original_price":'12.8'
       }},
       {"Product":{  
         "id":"198",
@@ -2875,7 +2875,7 @@ var brandJson = {
       }},
       {"Product":{  
         "id":"214",
-        "name":"\u60a0\u54c8UHA\u5473\u89c9\u7cd6e-ma\u795e\u5947\u6362\u5473\u6da6\u5589\u7cd6",
+        "name":"悠哈UHA味觉糖e-ma神奇换味润喉糖100g装",
         "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201410\/thumb_m\/aa0cc3ed544_1018.jpg",
         "slug":"you_ha_uhawei_jue_tang_e_mashen_qi_huan_wei_run_hou_tang",
         "price":"14",

@@ -132,9 +132,11 @@
       <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
       <div class="element-container" ng-repeat="recommend in vm.recommends">
         <div class='element'>
-          <img ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
-          <div class="nowrap pl">{{recommend[1].name}}</div>
-          <div class="text-muted pl"><strong>¥{{recommend[1].price | currency:''}}</strong></div>
+          <img class="full blocked" ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{recommend[1].name}}" src="{{recommend[1].coverimg}}">
+          <div class="padding-5">
+            <div class="nowrap">{{recommend[1].name}}</div>
+            <strong class="text-muted">{{recommend[1].price | currency:'¥'}}</strong>
+          </div>
         </div>
       </div>
     </div>

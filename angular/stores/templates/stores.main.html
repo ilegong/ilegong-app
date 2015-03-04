@@ -1,11 +1,11 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
-  <ion-content class='stores padding-left'>
+  <ion-content class='stores elements'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class='store-container' collection-repeat="store in vm.stores" collection-item-width="vm.getItemWidth()" collection-item-height="vm.getItemHeight()" ng-cloak>
-      <div class="store" ui-sref="store.home({id: store.Brand.id, name: store.Brand.name})">
-        <img class="full" src="{{store.Brand.coverimg}}" alt="" style="height: {{vm.imageHeight}}px">
-        <div class="nowrap tc" style="line-height: 2em;">
+    <div class='element-container' collection-repeat="store in vm.stores" collection-item-width="vm.getItemWidth()" collection-item-height="vm.getItemHeight()" ng-cloak>
+      <div class="element" ui-sref="store.home({id: store.Brand.id, name: store.Brand.name})" style="padding-bottom: 0">
+        <img class="blocked full" src="{{store.Brand.coverimg}}" alt="" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px">
+        <div class="padding-5 nowrap tc">
           {{store.Brand.name}}
         </div>
       </div>

@@ -16,9 +16,11 @@
       vm.stores = $rootScope.brands;
       var deviceWidth = window.innerWidth;
       vm.itemWidth = Math.max((window.innerWidth - 10) / 2, 10);
-      vm.imageHeight = vm.itemWidth - 10;
-      vm.itemHeight = vm.imageHeight + 10 + 28;
-      $log.log('item width is ' + vm.itemWidth);
+      vm.imageWidth = vm.itemWidth - 10 - 2; // 2px border
+      vm.imageHeight = vm.imageWidth;
+      var brandNameHeight = 20;
+      vm.itemHeight = vm.imageHeight + brandNameHeight + 22; // 10px padding + 10px divider + 2px border
+
       $scope.$watch('brands', function(newBrands, oldBrands){
         $log.log("brands has from ").log(oldBrands).log(" to: ").log(newBrands);
         vm.stores = newBrands;

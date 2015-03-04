@@ -20,13 +20,13 @@
       vm.name = $stateParams.name;
 
       var deviceWidth = window.innerWidth;
-      vm.itemWidth = (window.innerWidth - 10) / 2;
-      vm.imageHeight = Math.max((vm.itemWidth - 10) * 3 / 4, 10);
+      vm.itemWidth = Math.round((window.innerWidth - 10) / 2);
+      vm.imageWidth = vm.itemWidth - 10 - 2; // 2px border
+      vm.imageHeight = Math.round(vm.imageWidth * 3 / 4); 
+      var productNameHeight = 20;
       var brandHeight = 40;
-      var productNameHeight = 30;
-      vm.itemHeight = Math.ceil(vm.imageHeight + brandHeight + productNameHeight + 17);
-      $log.log("vm.imageHeight: " + vm.imageHeight +", itemHeight:" + vm.itemHeight);
-
+      vm.itemHeight = Math.ceil(vm.imageHeight + brandHeight + productNameHeight + 22); // 10px padding + 10px divider + 2px border
+      $log.log('image height: ' + vm.imageHeight +", item height: " + vm.itemHeight);
       Categories.get(vm.slug).then(function(data){
         vm.products = _.map(data.data_list, function(product){product.brand = vm.getBrandById(product.brand_id); return product});
       });

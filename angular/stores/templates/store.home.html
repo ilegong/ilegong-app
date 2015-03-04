@@ -5,21 +5,14 @@
     </button>
   </ion-nav-buttons>
 
-  <ion-content class='store'>
-    <div class='list'>
-      <div class="row" ng-repeat="p in vm.products" ng-if="$index % 2 == 0" ng-cloak>
-        <div class='product card col col-50' ng-repeat="p in vm.products.slice($index, $index+2)" ng-init="product=p.Product">
-          <a ui-sref="product-detail({from: storeId, id: product.id,type:-3})">
-            <div class="item item-image">
-              <img title="{{product.title}}" src="{{product.coverimg}}">
-            </div>
-            <div class='item item-text'>
-              <strong>{{product.name}}</strong>
-            </div>
-          </a>
-          <div class='item item-text'>
-            <span class='price-current'><strong>¥{{product.price}}</strong></span>
-          </div>
+  <ion-content class='store elements'>
+    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="vm.getItemHeight()" collection-item-width="vm.getItemWidth()" ng-cloak>
+      <div class='element'>
+        <img class="blocked full" ui-sref="product-detail({from: storeId, id: product.Product.id,type:-3})" title="{{product.Product.title}}" src="{{product.Product.coverimg}}" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px">
+        <div class='padding-5'>
+          <div class="nowrap">{{product.Product.name}}</div>
+          <span class='text-energized'><strong>{{product.Product.price | currency:'￥'}}</strong></span>
+          <s class="text-sub-muted">{{product.Product.original_price | currency:'￥'}}</s>
         </div>
       </div>
     </div>

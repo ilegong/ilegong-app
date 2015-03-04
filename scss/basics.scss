@@ -60,9 +60,12 @@ a{
 .padding-right-5{
   padding-right: 5px !important; 
 }
-.padding-5{
+.padding-left-right-5{
   @extend .padding-left-5;
   @extend .padding-right-5;
+}
+.padding-5{
+  @extend .padding-left-right-5;
   @extend .padding-top-5;
   @extend .padding-bottom-5;
 }
@@ -700,7 +703,6 @@ ion-item.item {
     .element{
       background-color: #fff;
       margin-right: 0.71428571428rem;
-      padding-bottom: 0.5em;
       border: 1px solid $border_color;
       a{
         color: $grey;
