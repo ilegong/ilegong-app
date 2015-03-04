@@ -31,15 +31,15 @@
         <span class="text-muted">实付(含运费)：</span>
         <strong class="text-energized">{{order.Order.total_all_price | currency:'￥'}}</strong>
       </div>
-      <div class="item tr" ng-show="order.Order.status <= 3">
-        <a class="button button-short button-25" ng-show="order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
-        <a class="button button-short button-balanced button-outline button-25 ml" ng-show="order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
+      <div class="item tr" ng-show="order.Order.status <= 3" ng-switch="order.Order.status">
+        <a class="button button-short button-25" ng-switch-when="2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
+        <a class="button button-short button-balanced button-outline button-25 ml" ng-switch-when="2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
-        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': false}" ng-show="order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
+        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': false}" ng-switch-when="3" ng-disabled='true' ng-click="vm.addRemark(order)">评价</a>
 
-        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-show="order.Order.status == 1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
+        <a class="button button-short button-25" ng-class="{'button-balanced button-outline': !order.reminded}" ng-switch-when="1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
 
-        <a class="button button-short button-25 button-balanced button-outline" ng-show="order.Order.status == 0" ui-sref="order-detail({id: order.Order.id})">支付</a>
+        <a class="button button-short button-25 button-balanced button-outline" ng-switch-when="0" ui-sref="order-detail({id: order.Order.id})">支付</a>
       </div>
       <div class="item-divider"></div>
     </div>
