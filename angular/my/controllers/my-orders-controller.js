@@ -39,17 +39,18 @@
       });
     }
     function getOrderHeight(order){
+      var marginOffset = 1;
       var productsHeight = 0;
       if(!_.isEmpty(order.Order) && !_.isEmpty(order.Order.products)){
-        productsHeight = order.Order.products.length * 90;
+        productsHeight = order.Order.products.length * (90 - marginOffset);
       }
-      var brandHeight = 60;
+      var brandHeight = 50;
       var postFeeHeight = 42;
       var operationsHeight = 0;
       if(order.Order.status <= 3){
         operationsHeight = 50;
       }
-      return ((brandHeight + postFeeHeight + operationsHeight + productsHeight) + 10) + "px";
+      return ((brandHeight + postFeeHeight + operationsHeight + productsHeight) + 10 - 3 * marginOffset) + "px";
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
