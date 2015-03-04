@@ -3,12 +3,12 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="element-container" collection-repeat="product in vm.products" collection-item-height="vm.getItemHeight()" collection-item-width="vm.getItemWidth()" ng-click="vm.toProductDetailPage(product)" ng-cloak>
-      <div class='element'>
-        <img class="product-image full" title="{{product.title}}" src="{{product.coverimg}}" style="height: {{vm.imageHeight}}px">
-        <div class='nowrap pl pr'>
+      <div class='element padding-bottom-5'>
+        <img class="blocked full" title="{{product.title}}" src="{{product.coverimg}}" style="height: {{vm.imageHeight}}px">
+        <div class='nowrap padding-5'>
           {{product.name}}
         </div>
-        <div class='image-left' style="padding-top: 0.3rem;">
+        <div class='image-left'>
           <img class="r5" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
           <div class='nowrap text-sub-muted' style="line-height: 1rem">{{product.brand.Brand.name}}</div>
           <span class='text-energized'>¥{{product.price}}</span>

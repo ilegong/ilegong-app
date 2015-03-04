@@ -23,8 +23,8 @@
       vm.itemWidth = (window.innerWidth - 10) / 2;
       vm.imageHeight = Math.max((vm.itemWidth - 10) * 3 / 4, 10);
       var brandHeight = 40;
-      var productNameHeight = 20;
-      vm.itemHeight = Math.ceil(vm.imageHeight + brandHeight + productNameHeight + 10 + 7 + 6);
+      var productNameHeight = 30;
+      vm.itemHeight = Math.ceil(vm.imageHeight + brandHeight + productNameHeight + 17);
       $log.log("vm.imageHeight: " + vm.imageHeight +", itemHeight:" + vm.itemHeight);
 
       Categories.get(vm.slug).then(function(data){
