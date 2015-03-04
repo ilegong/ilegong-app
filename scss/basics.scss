@@ -251,6 +251,12 @@ a{
     font-weight: bold;
     font-size: 1.3rem;
   }
+  .button + .button:last-child{
+    position: relative;
+    top: inherit;
+    right: inherit;
+    bottom: inherit;
+  }
 }
 .bar.bar-light, .bar.bar-stable, .bar.bar-positive, .bar.bar-calm, .bar.bar-balanced, .bar.bar-energized, .bar.bar-assertive, .bar.bar-royal ,bar,bar-dark {
   border-color: #dddddd;
@@ -263,6 +269,7 @@ a{
   padding: 5px;
   background-color: $tab_bg_color;
 }
+
 .bar-footer.item{
   position: absolute;
   padding-top: 0.5rem;

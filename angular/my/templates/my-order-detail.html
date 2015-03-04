@@ -52,18 +52,18 @@
       <a class="button fr" ng-show="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
     </div>
   </ion-content>
-  <ion-footer-bar class="row" ng-cloak>
-    <span class="col">
+  <ion-footer-bar class="row" ng-switch="vm.order.Order.status" ng-cloak>
+    <span class="col" style="line-height: 29px;">
       合计：<strong class="text-18 text-energized">{{vm.order.Order.total_all_price | currency:'￥'}}</strong>
     </span>
 
-    <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
-    <a class="button button-energized button-25" ng-click="vm.aliPay()" ng-show="vm.order.Order.status == 0" style="margin-left: 0.5em;"><strong>支付</strong></a>
+    <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-switch-when="0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
+    <a class="button button-energized button-20" ng-click="vm.aliPay()" ng-switch-when="0" style="margin-left: 0.5em;"><strong>支付</strong></a>
 
-    <a class="button" ng-class="{'button-balanced button-outline': !vm.order.reminded}" ng-show="vm.order.Order.status == 1" ng-click="vm.remindSendingGoods(vm.order)" ng-disabled="vm.order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
+    <a class="button" ng-class="{'button-balanced button-outline': !vm.order.reminded}" ng-switch-when="1" ng-click="vm.remindSendingGoods(vm.order)" ng-disabled="vm.order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
 
-    <a class="button button-energized" ng-show="vm.order.Order.status == 2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
+    <a class="button button-energized" ng-switch-when="2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
 
-    <a class="button button-25" ng-class="{'button-energized': false}" ng-show="vm.order.Order.status == 3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
+    <a class="button button-25" ng-class="{'button-energized': false}" ng-switch-when="3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
   </ion-footer-bar>
 </ion-view>
