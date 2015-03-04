@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(window, angular, cordova){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products','module.cart','module.services', 'module.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart','module.services', 'module.directives'])
   .run(initApp)
   .config(configStates)
   .config(configApp)
@@ -57,8 +57,8 @@
       .state('addresses', {url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
       .state('address-edit', {url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
 
-      .state('orders', {url:'/orders/:state', templateUrl:'my-orders.html', controller:'MyOrdersCtrl as vm'})
-      .state('order-detail', {url:'/order/:id', templateUrl:'my-order-detail.html', controller:'MyOrderDetailCtrl as vm'})
+      .state('orders', {url:'/orders/:state', templateUrl:'orders.html', controller:'OrdersCtrl as vm'})
+      .state('order-detail', {url:'/order/:id', templateUrl:'order-detail.html', controller:'OrderDetailCtrl as vm'})
 
       .state('cart-confirmation', {url:'/cart-confirmation', templateUrl:'cart-confirmation.html', controller:'CartConfirmationCtrl as vm'})
 

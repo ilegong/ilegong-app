@@ -9,8 +9,8 @@
     var vm = this; 
     activate();
     function activate(){
-      vm.storeId = $stateParams.id;
-      vm.storeName = $stateParams.name;
+      $rootScope.storeId = $stateParams.id;
+      $rootScope.storeName = $stateParams.name;
       Stores.getStoreIntro($stateParams.id).then(function(data){
         vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
       });

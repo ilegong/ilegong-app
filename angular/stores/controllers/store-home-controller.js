@@ -11,9 +11,9 @@
     activate();
 
     function activate(){
-      vm.storeId = $stateParams.id;
-      vm.storeName = $stateParams.name;
-      Stores.getStore(vm.storeId).then(function(store){
+      $rootScope.storeId = $stateParams.id;
+      $rootScope.storeName = $stateParams.name;
+      Stores.getStore($rootScope.storeId).then(function(store){
         vm.store = store.content.info;
         vm.products = store.content.products;
       });

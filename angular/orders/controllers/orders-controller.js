@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyOrdersCtrl',MyOrdersCtrl)
+  .controller('OrdersCtrl', OrdersCtrl)
 
-  function MyOrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
+  function OrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
     var vm = this;
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;

@@ -5,24 +5,24 @@
   .controller('StoreCtrl', StoreCtrl)
 
   /* @ngInject */
-  function StoreCtrl($rootScope, $scope, $state, $stateParams, Stores){
+  function StoreCtrl($rootScope, $scope, $state, $stateParams, $log, Stores){
     var app = this;
     app.toStoreHomePage = toStoreHomePage;
     app.toStoreIntroPage = toStoreIntroPage;
     activate();
     
     function activate(){
-      app.storeId = $stateParams.id;
-      app.storeName = $stateParams.name;
+      $rootScope.storeId = $stateParams.id;
+      $rootScope.storeName = $stateParams.name;
       $rootScope.hideStoreTabs = [];
     }
     function toStoreHomePage(){
       $rootScope.hideStoreTabs = [];
-      $state.go('store.home', {id: app.storeId, name: app.storeName});
+      $state.go('store.home', {id: $rootScope.storeId, name: $rootScope.storeName});
     }
     function toStoreIntroPage(brand){
       $rootScope.hideStoreTabs = [];
-      $state.go('store.intro', {id: app.storeId, name: app.storeName});
+      $state.go('store.intro', {id: $rootScope.storeId, name: $rootScope.storeName});
     }
   }
 })(window, window.angular);

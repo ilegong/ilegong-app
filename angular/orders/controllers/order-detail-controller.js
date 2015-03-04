@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.my')
-  .controller('MyOrderDetailCtrl',MyOrderDetailCtrl)
+  .controller('OrderDetailCtrl', OrderDetailCtrl)
 
-  function MyOrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, config, Orders, Users) {
+  function OrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, config, Orders, Users) {
     var vm = this;
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.cancelOrder = cancelOrder;
