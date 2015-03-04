@@ -264,7 +264,11 @@ a{
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
-
+.bar-header{
+  .button.back-button{
+    line-height: 32px !important;
+  }
+}
 // item
 .item {
   font-size: 1rem;
