@@ -24,7 +24,7 @@
       getPendingOrderStates: function(){return _.filter(self.ORDER_STATES, function(orderState){return orderState.pending})}, 
       submitOrder: submitOrder,
       cancelOrder: cancelOrder,
-      remove: remove,
+      removeOrder: removeOrder,
       confirmReceivingGoods: confirmReceivingGoods,
       getOrderDetail: getOrderDetail 
     }
@@ -58,7 +58,7 @@
     function cancelOrder(id, accessToken){
       return Base.get('/api_orders/confirm_undo/'+id+'.json?access_token=' + accessToken);
     }
-    function remove(id, accessToken){
+    function removeOrder(id, accessToken){
       return Base.get('/api_orders/confirm_remove/'+id+'.json?access_token=' + accessToken);
     }
     function confirmReceivingGoods(id, accessToken){

@@ -2,7 +2,7 @@ var homeJson = {
   "bannerItems":[
   {
     "img":"http:\/\/www.tongshijia.com\/img\/banner\/spring-weixin.jpg",
-    "id":null
+    "id":308
   },
   {
     "img":"http:\/\/www.tongshijia.com\/img\/banner\/banner_cao_mei_cai_zhai.jpg",
@@ -2224,7 +2224,7 @@ var orderDetail = {
       "creator":"401180",
       "lastupdator":"0",
       "remoteurl":"",
-      "status":"0",
+      "status":"4",
       "published":"1",
       "deleted":false,
       "created":"2015-01-22 15:20:52",

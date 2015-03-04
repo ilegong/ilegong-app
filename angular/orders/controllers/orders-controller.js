@@ -13,6 +13,8 @@
     vm.doRefresh = doRefresh;
     vm.filterOrders = filterOrders;
     vm.getOrderHeight = getOrderHeight;
+    vm.showOrderOperations = showOrderOperations;
+    vm.removeOrder = removeOrder;
     activate();
     
     function activate() {
@@ -47,10 +49,13 @@
       var brandHeight = 50;
       var postFeeHeight = 42;
       var operationsHeight = 0;
-      if(order.Order.status <= 3){
+      if(vm.showOrderOperations(order)){
         operationsHeight = 50;
       }
       return ((brandHeight + postFeeHeight + operationsHeight + productsHeight) + 10 - 3 * marginOffset) + "px";
+    }
+    function showOrderOperations(order){
+      return order.Order.status <= 4 || order.Order.status == 10;
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
@@ -64,6 +69,9 @@
       Orders.confirmReceivingGoods(orderId, $rootScope.user.token.access_token).then(function(result){
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
+      }, function(e){
+        $log.log("failed to confirm receiving goods:").log(e);
+        $rootScope.alertMessage("确认收货失败，请重试");
       });
     }
     function viewLogistics(id){
@@ -75,6 +83,20 @@
       $timeout(function(){
         $rootScope.alertMessage('已经提醒卖家发货');
       }, 500);
+    }
+    function removeOrder(order){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('account-login');
+      }
+      var orderId = order.Order.id;
+      Orders.removeOrder(orderId, $rootScope.user.token.access_token).then(function(){
+        $rootScope.removeOrder(orderId);
+        _.reject(vm.orders, function(order){return order.Order.id == orderId});
+        $rootScope.alertMessage("已删除订单");
+      }, function(e){
+        $log.log("failed to remove order " + orderId + ": ").log(e);
+        $rootScope.alertMessage("删除订单失败，请重试");
+      });
     }
   }
 })(window, window.angular);

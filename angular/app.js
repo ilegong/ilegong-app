@@ -157,6 +157,7 @@
     $rootScope.confirmCart = confirmCart;
     $rootScope.getDefaultAddress = getDefaultAddress;
     $rootScope.updateOrderState = updateOrderState;
+    $rootScope.removeOrder = removeOrder;
     $rootScope.alertMessage = alertMessage;
     $rootScope.showAlertMessage = showAlertMessage;
     $rootScope.toStoreHomePage = toStoreHomePage;
@@ -368,6 +369,9 @@
       }
       order.Order.status = state;
       $rootScope.$broadcast('orderStateChanged', order);
+    }
+    function removeOrder(orderId){
+      _.reject($rootScope.user.orders, function(order){return order.Order.id == orderId});
     }
     function alertMessage(message){
       $rootScope.alert = $rootScope.alert || {message: ''};

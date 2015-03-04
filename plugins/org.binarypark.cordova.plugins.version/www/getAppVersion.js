@@ -1,1 +1,1 @@
-module.exports.getAppVersion = function() { return "0.7.0";};
+module.exports.getAppVersion = function() { return "0.8.0";};

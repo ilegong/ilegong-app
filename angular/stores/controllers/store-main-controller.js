@@ -15,7 +15,7 @@
     function activate(){
       vm.stores = $rootScope.brands;
       var deviceWidth = window.innerWidth;
-      vm.itemWidth = (window.innerWidth - 10) / 2;
+      vm.itemWidth = Math.max((window.innerWidth - 10) / 2, 10);
       vm.imageHeight = vm.itemWidth - 10;
       vm.itemHeight = vm.imageHeight + 10 + 28;
       $log.log('item width is ' + vm.itemWidth);

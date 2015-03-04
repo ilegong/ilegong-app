@@ -10,6 +10,7 @@
     vm.cancelOrder = cancelOrder;
     vm.remindSendingGoods = remindSendingGoods;
     vm.confirmReceivingGoods = confirmReceivingGoods;
+    vm.removeOrder = removeOrder;
     vm.aliPay = aliPay;
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;
@@ -51,7 +52,9 @@
         $rootScope.updateOrderState(orderId, 10);
         $rootScope.alertMessage("订单已取消");
         $ionicHistory.goBack();
-        $ionicHistory.goBack();
+      }, function(e){
+        $log.log("failed to cancel order " + orderId + ": ").log(e);
+        $rootScope.alertMessage("取消订单失败，请重试");
       });
     }
     function remindSendingGoods(order){
@@ -72,6 +75,23 @@
       Orders.confirmReceivingGoods(orderId, $rootScope.user.token.access_token).then(function(result){
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
+      }, function(e){
+        $log.log("failed to confirm receiving goods:").log(e);
+        $rootScope.alertMessage("确认收货失败，请重试");
+      });
+    }
+    function removeOrder(order){
+      if(!$rootScope.user.loggedIn){
+        return $state.go('account-login');
+      }
+      var orderId = order.Order.id;
+      Orders.removeOrder(orderId, $rootScope.user.token.access_token).then(function(){
+        $rootScope.removeOrder(orderId);
+        $rootScope.alertMessage("已删除订单");
+        $ionicHistory.goBack();
+      }, function(e){
+        $log.log("failed to remove order " + orderId + ": ").log(e);
+        $rootScope.alertMessage("删除订单失败，请重试");
       });
     }
     function aliPay(){

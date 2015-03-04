@@ -31,7 +31,7 @@
         <span class="text-muted">实付(含运费)：</span>
         <strong class="text-energized">{{order.Order.total_all_price | currency:'￥'}}</strong>
       </div>
-      <div class="item tr" ng-show="order.Order.status <= 3" ng-switch="order.Order.status">
+      <div class="item tr" ng-show="vm.showOrderOperations(order)" ng-switch="order.Order.status">
         <a class="button button-short" ng-switch-when="2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
         <a class="button button-short button-balanced button-outline ml" ng-switch-when="2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>
 
@@ -40,6 +40,9 @@
         <a class="button button-short" ng-class="{'button-balanced button-outline': !order.reminded}" ng-switch-when="1" ng-click="vm.remindSendingGoods(order)" ng-disabled="order.reminded">提醒发货</a>
 
         <a class="button button-short button-20 button-balanced button-outline" ng-switch-when="0" ui-sref="order-detail({id: order.Order.id})">支付</a>
+
+        <a class="button button-short button-assertive" ng-switch-when="4" ng-click="vm.removeOrder(order)">删除订单</a>
+        <a class="button button-short button-assertive" ng-switch-when="10" ng-click="vm.removeOrder(order)">删除订单</a>
       </div>
     </div>
 
