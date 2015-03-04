@@ -668,7 +668,7 @@ ion-item.item {
 
 // article
 .article{
-  p{
+  p, table tr td{
     white-space: normal;
     text-overflow: inherit;
     overflow: auto;

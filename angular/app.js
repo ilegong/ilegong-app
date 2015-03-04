@@ -174,6 +174,7 @@
       else{
         $log.log('app version is not available');
       }
+
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
