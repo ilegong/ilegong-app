@@ -20,15 +20,18 @@
       vm.addressId = $stateParams.editId;  
       vm.address = {OrderConsignees: {}};
       vm.cities = vm.counties = [];
-      vm.province = vm.city = vm.county = {};
+      vm.city = vm.county = {};
       vm.provinces = $rootScope.provinces;
-      vm.province = _.find(vm.provinces, function(province){return province.id == vm.address.OrderConsignees.province_id});
       if(vm.addressId < 0){
         return;
       }      
 
       vm.address = _.find($rootScope.user.addresses, function(address){return address.OrderConsignees.id == vm.addressId});
+      $log.log('address ' + vm.addressId + ": ").log(vm.address);
       var orderConsignees = vm.address.OrderConsignees;        
+      vm.province = _.find(vm.provinces, function(province){return province.id == orderConsignees.province_id}) || {};
+      $log.log('province is ').log(vm.province);
+
       Addresses.getAddress(orderConsignees.province_id, orderConsignees.city_id, orderConsignees.county_id, $rootScope.user.token.access_token).then(function(data){
         vm.cities = data.city_list;
         vm.city = _.find(vm.cities, function(city){return city.id == vm.address.OrderConsignees.city_id});

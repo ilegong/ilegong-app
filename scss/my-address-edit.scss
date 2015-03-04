@@ -1,12 +1,24 @@
 @import "variables";
 
 .my-address-edit{
-  .item{
-    .input-label{
-      text-align: right;
+  .list{
+    .item{
+      .input-label{
+        text-align: right;
+      }
+      select{
+        padding: 17px 0.5rem 17px 0.5rem;
+      }
     }
-    select{
-      padding: 17px 0.5rem 17px 0.5rem;
+    .item.province{
+      border-bottom: 0;
+    }
+    .item.city{
+      border-top: 0;
+      border-bottom: 0;
+    }
+    .item.county{
+      border-top: 0;
     }
   }
   .address-operations{
