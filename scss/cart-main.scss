@@ -11,20 +11,6 @@
         right: 0.5rem;
       }
     }
-    .number-span{
-      margin-top: 5px;
-      .count{
-        display: inline-block;
-        border-top: 1px solid $border_color;
-        border-bottom: 1px solid $border_color;
-        width: 34%;
-        input{
-          background-color: #fff;
-          text-align: center;
-          border: 0;
-        }
-      }
-    }
   }
   .centered-container{
     .no-cart-items{

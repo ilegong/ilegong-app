@@ -1,18 +1,15 @@
 @import "variables";
 
-* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Microsoft Yahei', 'Simsun';
-}
 html{
   font-size: 87.5%;
+  font-family: $font_family;
 }
 body, .pane, .view{
   background-color: $background_color;
 }
 body, .ionic-body{
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: $font_family;
+  line-height: 18px;
 }
 a{
   text-decoration: none;
@@ -68,6 +65,10 @@ a{
   @extend .padding-left-right-5;
   @extend .padding-top-5;
   @extend .padding-bottom-5;
+}
+.padding-top-bottom-10{
+  padding-top: 10px !important; 
+  padding-bottom: 10px !important; 
 }
 .full{
   width: 100% !important;
@@ -207,7 +208,7 @@ a{
 }
 .text-sub {
   font-size: 12px !important;
-  line-height: 16px !important;
+  line-height: 15px !important;
 }
 .text-sub-muted {
   @extend .text-muted;
@@ -215,7 +216,7 @@ a{
 }
 .text-16{
   font-size: 16px !important;
-  line-height: 21 !important;
+  line-height: 20px !important;
 }
 .text-18{
   font-size: 18px !important;
@@ -293,14 +294,11 @@ a{
 }
 .bar-footer{
   height: 3.5rem;
-  padding: 5px;
+  padding: 5px 5px 5px 10px;
   background-color: $tab_bg_color;
-}
-
-.bar-footer.item{
-  position: absolute;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  .col{
+    padding-left: 0;
+  }
 }
 .bar-header{
   .button.back-button{
@@ -312,6 +310,8 @@ a{
   font-size: 1rem;
   padding: 0.71428571428rem;
   border-color: $border_color;
+  border-left: 0;
+  border-right: 0;
   a{
     color: #444;
   }
@@ -364,6 +364,12 @@ a{
   top: 0.55357142857rem;
   left: 0.71428571428rem;
   right: 0.71428571428rem;
+}
+.item-icon-right{
+  .icon.ion-ios7-arrow-right{
+    color: #c4c4c4;
+    font-size: 2rem;
+  }
 }
 .item-text{
   padding-top: 1rem;
@@ -467,6 +473,10 @@ a{
 }
 .pys-350.icon-user{
   background-position: 0 0;
+}
+.pys-350.icon-right{
+  background-position: -16.25rem -12rem;
+  width: 2.28571428571rem;
 }
 .pys-280.icon-my-order{
   background-position: -4.66666666667rem -6rem;
@@ -713,15 +723,44 @@ ion-item.item {
 
 // article
 .article{
-  p, table tr td{
-    white-space: normal;
-    text-overflow: inherit;
-    overflow: auto;
+  p{
+    @extsend .wrapped;
   }
   img{
     width:100%;
   }
+  table{
+    border: 1px solid #ccc;
+    tr{
+      td{
+        @extsend .wrapped;
+        border: 1px solid #ccc;
+      }
+    }
+  }
 }
+
+// number-span
+.number-span{
+  span.icon-reduce{
+    margin-bottom:-6px;
+  }
+  span.icon-add{
+    margin-left:-4px;
+    margin-bottom:-6px;
+  }
+  .count{
+    width: 34%;
+    margin-left:-4px;
+    text-align: center;
+    border-top: 1px solid $border_color; 
+    border-bottom: 1px solid $border_color; 
+    border-left: 0;
+    border-right: 0;
+    background-color: #fff;
+  }
+}
+
 
 // fix ng-cloak, see http://www.cnblogs.com/whitewolf/p/3495822.html
 [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{

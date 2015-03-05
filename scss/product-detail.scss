@@ -29,43 +29,6 @@
     border: 1px $balanced solid;
     color: $balanced;
   }
-  .number-span{
-    border-collapse: separate;
-    span{
-      display: inline-block;
-      font-size: 14px;
-      font-weight: normal;
-      line-height: 1;
-      text-align: center;
-      background-color: #eee;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    span.icon-reduce{
-      border-right: 0;
-      border-bottom-right-radius: 0;
-      border-top-right-radius: 0;
-      margin-bottom:-12px;
-      padding-bottom:31px;
-    }
-    span.icon-add{
-      border-left: 0;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
-      margin-left:-4px;
-      margin-bottom:-12px;
-      padding-bottom:31px;
-    }
-    .count{
-      padding: 4px 1px;
-      width: 34%;
-      border-radius:0px;
-      border-left:none;
-      border-right:none;
-      margin-left:-4px;
-      height:33px;
-    }
-  }
   .comment{
     .comment-image{
       max-height: 6rem;
