@@ -7,14 +7,14 @@
 
   <ion-content>
     <img src="{{vm.product.Product.coverimg}}" class="blocked full" ng-cloak/>
-    <div class="item" style="border-top: 0;" ng-cloak>
-      <p class="wrapped text-21 text-dark padding-bottom-5">
+    <div class="item" style="border-top: 0; padding-bottom: 0;" ng-cloak>
+      <div class="wrapped text-21 text-dark padding-bottom-5">
         {{vm.product.Product.name}}
-      </p>
-      <p class="wrapped text-sub">
+      </div>
+      <div class="wrapped text-sub padding-bottom-5">
         {{vm.product.Product.promote_name}}
-      </p>
-      <p>
+      </div>
+      <div style="line-height: 27px;">
         <span class="text-energized">
           ￥<span class="text-21">{{vm.product.Product.price | currency:''}}</span>
         </span>
@@ -22,10 +22,10 @@
         <a class="fr" ng-click="vm.toReputationCommentsPage();">
           口碑评价({{vm.getReputationComments().length}})
         </a>
-      </p>
-      <p ng-show="false" ng-reason="api不支持">
+      </div>
+      <div ng-show="false" ng-reason="api不支持">
         您有0个好友推荐了该产品
-      </p>
+      </div>
     </div>
     <div class="item row" ng-reason="api不支持" ng-show="false" ng-cloak>
       <span class="col col-15">
@@ -35,10 +35,10 @@
         暂无红包
       </span>
     </div>
-    <div class="item row" ng-show="vm.hasSpecs()" ng-cloak>
-      <span class="col col-15">规格:</span>
+    <div class="item row padding-bottom-0" ng-show="vm.hasSpecs()" ng-cloak>
+      <span class="col col-15" style="line-height: 31px;">规格:</span>
       <span class="col wrapped-container" ng-repeat="(specType, specChoices) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
-        <span class="specs" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);">
+        <span class="spec-choice" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);">
           {{specChoice}}
         </span>
       </span>
@@ -47,10 +47,12 @@
       <span class="col col-center col-15">
         数量：
       </span>
-      <span class="col number-span">
-        <span class="pys-350 icon-reduce" ng-click="vm.reduceCartItemNum()"></span>
-        <input class="count" disabled="disabled" ng-model="vm.count">
-        <span class="pys-350 icon-add" ng-click="vm.addCartItemNum()"></span>
+      <span class="col">
+        <span class="number-span">
+          <span class="pys-400 icon-reduce" ng-click="vm.reduceCartItemNum()"></span>
+          <input class="count" disabled="disabled" ng-model="vm.count">
+          <span class="pys-400 icon-add" ng-click="vm.addCartItemNum()"></span>
+        </span>
       </span>
     </div>
     
@@ -149,7 +151,7 @@
       <strong>{{vm.product.Product.limit_ship ? '不支持购物车' : '加入购物车'}}</strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">
-        <span ng-show="countOfCartItems() > 0" class="badge badge-right-top badge-balanced">{{countOfCartItems()}}</span>
+        <span ng-show="countOfCartItems() > 0" class="badge badge-right-top badge-energized">{{countOfCartItems()}}</span>
       <span class="pys-350 icon-footer-cart">
       </span>
       <div class="footer-cart-text">

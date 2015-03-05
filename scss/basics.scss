@@ -45,6 +45,9 @@ a{
 .pr{
   padding-right: 0.5rem !important;
 }
+.padding-bottom-0{
+  padding-bottom: 0px !important; 
+}
 .padding-bottom-5{
   padding-bottom: 5px !important; 
 }
@@ -92,16 +95,15 @@ a{
   min-height: 2.78571428571rem;
   line-height: 2.64285714286rem !important;
 }
-.button.icon-350-left{
-  .icon.pys-350{
-    top: 8px;
-  }
+.button.button-grey{
+  color: $grey;
 }
 .button.button-short{
   height: 2rem;
   max-height: 2rem;
   min-height: 2rem;
   line-height: 1.85714285714rem !important;
+  font-size: 14px !important;
 }
 .button.button-20{
   width: 20%;
@@ -194,6 +196,9 @@ a{
 .text-muted {
   color: $muted !important;
 }
+.text-grey{
+  color: $grey !important;
+}
 .text-energized{
   color: $energized;
 }
@@ -241,10 +246,7 @@ a{
   width: 100%;
   z-index: -9;
   .alert {
-    padding: 1rem;
-    font-size: 1.5rem;
-    border: 1px solid transparent;
-    border-color: #ddd;
+    padding: 0.5rem 1rem;
     border-radius: 5px;
     display: inline-block;
     color: #fff;
@@ -335,7 +337,7 @@ a{
     right: 4px;
   }
 }
-.item-icon-left, .icon-350-left {
+.item-icon-left {
   padding-left: 3.17857142857rem;
   .icon.pys-350{
     @extend .pys-350;
@@ -428,16 +430,6 @@ a{
   height: 1.75rem;
   background-position: -20rem -7.5rem;
 }
-.pys-350.icon-add{
-  width: 1.66666666667rem;
-  height: 1.66666666667rem;
-  background-position: -12.9166666667rem -3.33333333333rem;
-}
-.pys-350.icon-reduce{
-  width: 1.66666666667rem;
-  height: 1.66666666667rem;
-  background-position: -10rem -3.33333333333rem;
-}
 .pys-350.icon-star{
   background-position:-2.084rem 0;
   width:1rem;
@@ -477,6 +469,26 @@ a{
 .pys-350.icon-right{
   background-position: -16.25rem -12rem;
   width: 2.28571428571rem;
+}
+.pys-400.icon-add{
+  width: 2.28571428571rem;
+  height: 2.28571428571rem;
+  background-position: -14.7619047619rem -3.80952380952rem;
+}
+.pys-400.icon-reduce{
+  width: 2.28571428571rem;
+  height: 2.28571428571rem;
+  background-position: -11.4285714286rem -3.80952380952rem;
+}
+.pys-280.icon-add{
+  width: 1.71428571429rem;
+  height: 1.71428571429rem;
+  background-position: -10.3333333333rem -2.66666666667rem;
+}
+.pys-280.icon-reduce{
+  width: 1.71428571429rem;
+  height: 1.71428571429rem;
+  background-position: -8rem -2.66666666667rem;
 }
 .pys-280.icon-my-order{
   background-position: -4.66666666667rem -6rem;
@@ -683,12 +695,15 @@ ion-item.item {
 
 .popup-container {
   .popup{
+    border-radius: 5px;
     background-color: white;
     .popup-head {
       border-bottom: 1px solid $border_color;
+      padding: 20px 10px;
     }
     .popup-buttons{
       padding: 0;
+      min-height: inherit;
       .button{
         color: $balanced;
         border: 0;
@@ -742,25 +757,29 @@ ion-item.item {
 
 // number-span
 .number-span{
-  span.icon-reduce{
-    margin-bottom:-6px;
+  position: relative;
+  display: block;
+  .icon-reduce, .icon-add{
+    position: absolute;
+    top: 0;
+    border: $border;
   }
-  span.icon-add{
-    margin-left:-4px;
-    margin-bottom:-6px;
+  .icon-reduce{
+    left: 0;
+  }
+  .icon-add{
+    right: 0;
   }
   .count{
-    width: 34%;
-    margin-left:-4px;
     text-align: center;
-    border-top: 1px solid $border_color; 
-    border-bottom: 1px solid $border_color; 
+    border-top: $border; 
+    border-bottom: $border; 
     border-left: 0;
     border-right: 0;
     background-color: #fff;
+    color: $dark;
   }
 }
-
 
 // fix ng-cloak, see http://www.cnblogs.com/whitewolf/p/3495822.html
 [ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak{

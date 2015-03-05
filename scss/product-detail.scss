@@ -12,22 +12,35 @@
     .footer-cart-text{
       display: block;
       margin-top: -0.5rem;
-      color: #999;
+      color: $muted;
       font-size: 0.9rem;
       line-height: 1rem;
     }
   }
-  .specs{
+  .spec-choice{
     padding:0.4em;
     display:inline-block;
-    margin-bottom:0.9em;
-    margin-right:0.4em;
-    border:1px $border_color solid;
-    color:#cccccc;
+    margin-bottom: 0.71428571428rem;
+    margin-right: 0.5rem;
+    border: 1px $border_color solid;
+    color: $muted;
   }
-  .specs.checked{
+  .spec-choice.checked{
     border: 1px $balanced solid;
     color: $balanced;
+  }
+  .number-span{
+    padding: 0 32px;
+    width: 50%;
+    .icon-reduce{
+      left: 0;
+    }
+    .icon-add{
+      right: 0;
+    }
+    .count{
+      height: 32px;
+    }
   }
   .comment{
     .comment-image{

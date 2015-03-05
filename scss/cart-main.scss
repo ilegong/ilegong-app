@@ -12,6 +12,13 @@
       }
     }
   }
+  .number-span{
+    padding: 0 24px;
+    width: 55%;
+    .count{
+      height: 24px;
+    }
+  }
   .centered-container{
     .no-cart-items{
       margin-left: 1rem;

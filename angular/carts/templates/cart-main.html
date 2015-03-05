@@ -25,16 +25,16 @@
               </span>
             </i>
             <div class="product-content">
-              <div class="nowrap">
+              <div class="nowrap padding-bottom-5">
                 {{cartItem.Cart.name}}
               </div>
-              <div class="nowrap text-sub-muted" ng-show="!_.isEmpty(cartItem.Cart.spec)">
+              <div class="nowrap text-sub-muted padding-bottom-5" ng-show="!_.isEmpty(cartItem.Cart.spec)">
                 {{cartItem.Cart.spec}}
               </div>
               <div class="number-span">
-                <span class="pys-350 icon-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
+                <span class="pys-280 icon-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
                 <input class="count" disabled="disabled" ng-model="cartItem.Cart.num"/>
-                <span class="pys-350 icon-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
+                <span class="pys-280 icon-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
               </div>
             </div>
             <span class="icon text-16">

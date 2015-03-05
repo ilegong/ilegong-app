@@ -53,20 +53,18 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row" ng-switch="vm.order.Order.status" ng-cloak>
-    <span class="col" style="line-height: 29px;">
+    <span class="col text-16 padding-top-bottom-10">
       合计：<strong class="text-18 text-energized">{{vm.order.Order.total_all_price | currency:'￥'}}</strong>
     </span>
 
-    <a class="button" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-switch-when="0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
+    <a class="button button-outline button-grey" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-switch-when="0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>
     <a class="button button-energized button-20" ng-click="vm.aliPay()" ng-switch-when="0" style="margin-left: 0.5em;"><strong>支付</strong></a>
 
-    <a class="button" ng-class="{'button-balanced button-outline': !vm.order.reminded}" ng-switch-when="1" ng-click="vm.remindSendingGoods(vm.order)" ng-disabled="vm.order.reminded" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
+    <a class="button button-outline button-grey" ng-switch-when="1" ng-click="vm.remindSendingGoods(vm.order)" style="margin-left: 0.5em;"><strong>提醒发货</strong></a>
 
     <a class="button button-energized" ng-switch-when="2" ng-really-click="vm.confirmReceivingGoods(vm.order)" ng-really-message="您确定收到货了吗？" style="margin-left: 0.5em;"><strong>确认收货</strong></a>
 
-    <a class="button button-25" ng-class="{'button-energized': false}" ng-switch-when="3" ng-disabled='true' ng-click="vm.addRemark(vm.order)" style="margin-left: 0.5em;"><strong>评价</strong></a>
-
-    <a class="button button-assertive" ng-switch-when="4" ng-click="vm.removeOrder(vm.order)">删除订单</a>
-    <a class="button button-assertive" ng-switch-when="10" ng-click="vm.removeOrder(vm.order)">删除订单</a>
+    <a class="button button-outline button-grey" ng-switch-when="4" ng-click="vm.removeOrder(vm.order)">删除订单</a>
+    <a class="button button-outline button-grey" ng-switch-when="10" ng-click="vm.removeOrder(vm.order)">删除订单</a>
   </ion-footer-bar>
 </ion-view>

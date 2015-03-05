@@ -5,9 +5,27 @@
     .item{
       .input-label{
         text-align: right;
+        line-height: 34px !important;
+        padding: 0 1rem 0 0;
+      }
+      input{
+        line-height: 34px !important;
+        padding: 0;
+      }
+      .input-select{
+        line-height: 34px !important;
+        padding: 10px 1rem 10px 0.5rem;
       }
       select{
-        padding: 17px 0.5rem 17px 0.5rem;
+        width: 100%;
+        max-width: 70%;
+        direction: inherit;
+        margin: 10px 10px 10px 0;
+        padding: 0 0 0 0.5rem;
+        line-height: 34px !important;
+        height: 34px;
+        border: $border;
+        border-radius: 0;
       }
     }
     .item.province{
@@ -23,5 +41,12 @@
   }
   .address-operations{
     text-align: center;
+    .button{
+      .icon{
+        position: absolute;
+        top: 8px;
+        left: 1.3rem;
+      }
+    }
   }
 }

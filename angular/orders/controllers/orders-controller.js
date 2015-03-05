@@ -55,7 +55,7 @@
       return ((brandHeight + postFeeHeight + operationsHeight + productsHeight) + 10 - 3 * marginOffset) + "px";
     }
     function showOrderOperations(order){
-      return order.Order.status <= 4 || order.Order.status == 10;
+      return [0, 1, 2, 4, 10].indexOf(parseInt(order.Order.status)) >= 0;
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
