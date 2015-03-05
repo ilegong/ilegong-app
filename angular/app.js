@@ -371,7 +371,8 @@
       $rootScope.$broadcast('orderStateChanged', order);
     }
     function removeOrder(orderId){
-      _.reject($rootScope.user.orders, function(order){return order.Order.id == orderId});
+      $rootScope.user.orders = _.reject($rootScope.user.orders, function(order){return order.Order.id == orderId});
+      $rootScope.$broadcast('orderStateChanged', order);
     }
     function alertMessage(message){
       $rootScope.alert = $rootScope.alert || {message: ''};

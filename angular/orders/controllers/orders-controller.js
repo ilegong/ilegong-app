@@ -88,11 +88,18 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
+      if(order.Order.status != 4 && order.Order.status != 10){
+        $log.log("cannot remove order " +  order.Order.id + " with state " + order.Order.status);
+        return;
+      }
+
       var orderId = order.Order.id;
       Orders.removeOrder(orderId, $rootScope.user.token.access_token).then(function(){
-        $rootScope.removeOrder(orderId);
-        _.reject(vm.orders, function(order){return order.Order.id == orderId});
-        $rootScope.alertMessage("已删除订单");
+        $rootScope.reloadOrders($rootScope.user.token.access_token).then(function(){
+          $rootScope.alertMessage("已删除订单");  
+        }, function(e){
+          $rootScope.removeOrder(orderId);
+        });        
       }, function(e){
         $log.log("failed to remove order " + orderId + ": ").log(e);
         $rootScope.alertMessage("删除订单失败，请重试");
