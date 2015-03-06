@@ -12,9 +12,9 @@
     $window.device = $window.device || {};
     return {
       get: get,
-      post: post, 
-      getLocal: getLocal, 
-      setLocal: setLocal, 
+      post: post,
+      getLocal: getLocal,
+      setLocal: setLocal,
       removeLocal: removeLocal,
       deferred: deferred, 
       getUrl: getUrl, 

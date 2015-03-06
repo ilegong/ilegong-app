@@ -15,8 +15,8 @@
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.specsClick = specsClick;
     vm.hasSpecs = hasSpecs;
-    vm.getReputationComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
-    vm.getTryingComments = function(){return _.filter(vm.comment,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
+    vm.getReputationComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
+    vm.getTryingComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     vm.toTryingCommentsPage = toTryingCommentsPage;
     vm.toReputationCommentsPage = toReputationCommentsPage;
     vm.addToCart = addToCart;
@@ -24,6 +24,7 @@
     vm.onActionFailed = onActionFailed;
     vm.readyToBuy = readyToBuy;
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
+    vm.getCartName = getCartName;
     activate();
     
     function activate(){
@@ -39,17 +40,13 @@
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
-          $log.log("specs of product " + vm.id).log(vm.product.Product.specs.choices);
         }
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
-      }, function(e){$log.log(e)});
-      Products.getProductContent(vm.id).then(function(data){
-        vm.content = data.content;
-      }, function(e){$log.log(e)});
+      }, function(e){});
       Products.getProductComment(vm.id).then(function(data){
-        vm.comment = data;
-      }, function(e){$log.log(e)});
+        vm.comments = data;
+      }, function(e){vm.comments = []});
     }
 
     function specsClick(specType, specChoice){
@@ -140,6 +137,15 @@
     function onActionFailed(message){
       vm.inprogress = false;
       $rootScope.alertMessage(message);
+    }
+    function getCartName(){
+      if(!vm.product.Product.published){
+        return '该商品已下架';
+      }
+      if(vm.product.Product.limit_ship){
+        return '不支持购物车';
+      }
+      return '加入购物车';
     }
   }
 })(window, window.angular);

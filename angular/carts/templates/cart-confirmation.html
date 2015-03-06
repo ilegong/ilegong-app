@@ -50,7 +50,7 @@
       </div>
       <div class="item item-icon-right row">
         <span class="col col-25">运费小计</span>
-        <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) > 0 ? (vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥') : '包邮'}}</span>
+        <span class="col">{{vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'}}</span>
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee;">

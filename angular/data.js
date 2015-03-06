@@ -2418,7 +2418,7 @@ var productDetail = {
          "seokeywords":"",
          "created":"2014-11-24 11:24:00",
          "updated":"2014-12-05 12:36:05",
-         "published":true,
+         "published": false,
          "brand_id":"123",
          "photo":"",
          "cate_id":"114",

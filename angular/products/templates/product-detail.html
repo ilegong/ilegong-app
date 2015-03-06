@@ -144,11 +144,11 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row" ng-cloak>
-    <span ng-click="vm.buyImmediately();" class="button button-energized col-40 mr" ng-disabled="!vm.readyToBuy()">
+    <span ng-click="vm.buyImmediately();" class="button button-energized col-40 mr" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
       <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship">
-      <strong>{{vm.product.Product.limit_ship ? '不支持购物车' : '加入购物车'}}</strong>
+    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published">
+      <strong>{{vm.getCartName()}}</strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">
         <span ng-show="countOfCartItems() > 0" class="badge badge-right-top badge-energized">{{countOfCartItems()}}</span>

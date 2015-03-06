@@ -37,7 +37,7 @@
       </div>
     </a>
     <div class="item" ng-cloak>
-      运费：{{vm.order.Order.ship_fee | currency:'￥'}}
+      运费：{{vm.order.Order.ship_fee >= 0 ? vm.order.Order.ship_fee : 0 | currency:'￥'}}
     </div>
     <div class="item" ng-cloak>
       <div class="fl">

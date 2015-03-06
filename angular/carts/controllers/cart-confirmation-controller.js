@@ -104,7 +104,7 @@
        + vm.getShipFeeOfBrand(brandItem.id);
     }
     function getShipFeeOfBrand(brandId){
-      return _.find(vm.shipFees, function(fee, bid){return bid == brandId});
+      return Math.max(_.find(vm.shipFees, function(fee, bid){return bid == brandId}), 0);
     }
     function countOfProducts(brandItem){
       return _.size(brandItem.items);
