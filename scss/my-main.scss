@@ -8,6 +8,7 @@
     text-align: center;
     .account{
       height: 8.8em;
+      padding-top: 1rem;
       .avatar{
         @extend .pys-400;
         background-position: 0 -8.57142857143em;
@@ -43,6 +44,10 @@
     }
   }
   .details{
+    .item{
+      padding-top: 12px;
+      padding-bottom: 12px;
+    }
     .item.item-icon-left{
       .icon.pys-280{
         top: 10px;

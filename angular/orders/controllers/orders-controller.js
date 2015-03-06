@@ -99,7 +99,7 @@
           $rootScope.alertMessage("已删除订单");  
         }, function(e){
           $rootScope.removeOrder(orderId);
-        });        
+        });
       }, function(e){
         $log.log("failed to remove order " + orderId + ": ").log(e);
         $rootScope.alertMessage("删除订单失败，请重试");

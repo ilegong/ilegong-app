@@ -49,16 +49,16 @@
     <div class="centered-container" ng-show="vm.isLoggedIn && vm.cartBrands.length == 0" ng-cloak>
       <span class="no-content no-cart-items">
       </span>
-      <span class="message">
+      <span class="message text-grey">
         购物车还是空的，去选点好吃的吧！
       </span>
-      <a class="button button-energized" ng-click="toHomePage()">去逛逛</a>
+      <a class="button button-short button-energized" ng-click="toHomePage()">去逛逛</a>
     </div>
 
     <div class="centered-container" ng-show="!vm.isLoggedIn" ng-cloak>
       <span class="no-content">
       </span>
-      <span class="message">
+      <span class="message text-grey">
         您还没有登录，请先登录
       </span>
       <button class="button button-energized" ui-sref="account-login">马上登陆</button>
@@ -67,11 +67,11 @@
   
   <ion-footer-bar ng-show="vm.cartBrands.length > 0" class="item-icon-left row" style="background-color: white;">
     <span class="icon pys-350 {{vm.allBrandsChecked()?'icon-circle-checked':'icon-circle'}}" ng-click="vm.allBrandsChecked() ? vm.uncheckAllBrands():vm.checkAllBrands();"></span>
-    <div class="col-20">
+    <div class="col-20" style="padding-top: 3px; padding-bottom: 3px;">
       <div>合计</div>
       <div class="text-sub-muted">不含运费</div>
     </div>
-    <span class="text-18 text-energized col" style="line-height: 29px;">
+    <span class="text-18 text-energized col" style="padding-top: 8px;">
       <strong>￥{{vm.getTotalPrice() | currency:""}}</strong>
     </span>
     <div class="button button-energized button-30" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{countOfCheckedCartItems()}})</strong></div>

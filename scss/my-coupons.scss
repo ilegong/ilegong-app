@@ -2,12 +2,12 @@
 
 .coupons{
   .coupon{
-    height: 8em;
-    margin: 1em;
+    height: 6rem;
+    margin: 10px;
     padding: 0;
     width: auto;
     color: black;
-    border: 1px solid $border_color;
+    border: $border;
     .coupon-info {
       display: inline-block;
       background-color: $energized;
@@ -16,9 +16,6 @@
       height: 100%;
       .coupon-name{
         display: block;
-      }
-      .coupon-price{
-        font-size: 2em;
       }
     }
     .coupon-validity{

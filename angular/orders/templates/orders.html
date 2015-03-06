@@ -7,6 +7,15 @@
   <ion-content class="my-orders">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
+
+    <div class="centered-container" ng-show="vm.orders.length == 0" ng-cloak>
+      <span class="no-content no-orders">
+      </span>
+      <span class="message text-grey">
+        暂无{{vm.orderStateName == '全部' ? '' : vm.orderStateName}}订单
+      </span>
+    </div>
+
     <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)" ng-cloak>
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
@@ -26,8 +35,8 @@
         </div>
       </a>  
       <div class="item tr">
-        <span class="text-muted">运费：</span>
-        {{order.Order.ship_fee > 0 ? (order.Order.ship_fee | currency:'￥') : '包邮'}}
+        <span class="text-muted">运费：{{order.Order.ship_fee > 0 ? (order.Order.ship_fee | currency:'￥') : '包邮'}}</span>
+        &nbsp; &nbsp;
         <span class="text-muted">实付(含运费)：</span>
         <strong class="text-energized">{{order.Order.total_all_price | currency:'￥'}}</strong>
       </div>
@@ -42,14 +51,5 @@
         <a class="button button-short button-grey button-outline" ng-switch-when="10" ng-click="vm.removeOrder(order)">删除订单</a>
       </div>
     </div>
-
-    <div class="centered-container" ng-show="vm.orders.length == 0" ng-cloak>
-      <span class="no-content no-orders">
-      </span>
-      <span class="message">
-        暂无{{vm.orderStateName == '全部' ? '' : vm.orderStateName}}订单
-      </span>
-    </div>
-
   </ion-content>
 </ion-view>

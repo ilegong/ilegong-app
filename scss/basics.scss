@@ -69,9 +69,12 @@ a{
   @extend .padding-top-5;
   @extend .padding-bottom-5;
 }
-.padding-top-bottom-10{
-  padding-top: 10px !important; 
+.padding-bottom-10{
   padding-bottom: 10px !important; 
+}
+.padding-top-bottom-10{
+  @exstend .padding-bottom-10;
+  padding-top: 10px !important; 
 }
 .full{
   width: 100% !important;
@@ -102,7 +105,7 @@ a{
   height: 2rem;
   max-height: 2rem;
   min-height: 2rem;
-  line-height: 1.85714285714rem !important;
+  line-height: 2rem !important;
   font-size: 14px !important;
 }
 .button.button-20{
@@ -118,7 +121,7 @@ a{
   max-width: 30%;
 }
 .button.button-outline{
-  border: 1px solid;
+  border: 1px solid #ccc;
 }
 .button.button-light, .button.button-stable, .button.button-positive, .button.button-calm, .button.button-balanced, .button.button-energized, .button.button-assertive, .button.button-royal,.button.button-dark {
   color: #ffffff;
@@ -351,7 +354,7 @@ a{
 .item-divider{
   min-height: 0.71428571428rem;
   height: 0.71428571428rem;
-  padding: 0;
+  padding: 0 !important;
 }
 .item-select select {
   width: 100%;
@@ -367,11 +370,9 @@ a{
   left: 0.71428571428rem;
   right: 0.71428571428rem;
 }
-.item-icon-right{
-  .icon.ion-ios7-arrow-right{
-    color: #c4c4c4;
-    font-size: 2rem;
-  }
+.icon.ion-ios7-arrow-right, .icon.ion-ios7-arrow-down, .icon.ion-loading-d{
+  color: #c4c4c4;
+  font-size: 2rem;
 }
 .item-text{
   padding-top: 1rem;
@@ -492,22 +493,22 @@ a{
 }
 .pys-280.icon-my-order{
   background-position: -4.66666666667rem -6rem;
-  width: 1.6rem;
+  width: 1.67rem;
   height: 1.6rem;
 }
 .pys-280.icon-my-coupon{
   background-position: -8.66666666667rem -6rem;
-  width: 1.6rem;
+  width: 1.67rem;
   height: 1.6rem;
 }
 .pys-280.icon-my-offer{
   background-position: -10.6666666667rem -6rem;
-  width: 1.6rem;
+  width: 1.67rem;
   height: 1.6rem;
 }
 .pys-280.icon-my-address{
   background-position: -12.6666666667rem -6rem;
-  width: 1.6rem;
+  width: 1.67rem;
   height: 1.6rem;
 }
 
@@ -557,6 +558,7 @@ a{
 .badge{
   line-height: 1em;
   padding: 0 4px;
+  font-weight: normal;
 }
 .badge.badge-right-top{
   position: absolute;

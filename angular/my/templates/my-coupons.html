@@ -4,19 +4,19 @@
     </ion-refresher>
     <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-cloak>
       <a class="coupon-info col col-67" ng-click="vm.useCoupons(item,brand);" >
-        <p class="coupon-name">
+        <div class="nowrap padding-bottom-5">
           {{item.Coupon.name}}
-        </p>
-        <p>
-          ￥<span class="coupon-price">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
-        </p>
-        <p ng-show="item.Coupon.least_price > 0">
-          订单满{{item.Coupon.least_price}}元使用（不含邮费）
-        </p>
+        </div>
+        <div class="padding-bottom-5">
+          ￥<span class="text-21">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
+        </div>
+        <div class="nowrap text-sub" ng-show="item.Coupon.least_price > 0">
+          订单满{{item.Coupon.least_price}}元使用(不含邮费)
+        </div>
       </a>
       <div class="coupon-validity col col-33">
         <p class="text-muted">有效期</p>
-        <p>
+        <p class="text-grey">
           {{item.Coupon.valid_begin | date:'MM.dd'}}~{{item.Coupon.valid_end | date:'MM.dd'}}
         </p>
         <p class="text-muted">{{vm.getCouponStatus(item)}}</p>
@@ -26,32 +26,32 @@
     <div class="centered-container" ng-show="vm.validCoupons.length == 0 && !vm.showInvalidCoupons" ng-cloak>
       <span class="no-content no-coupons">
       </span>
-      <span class="message">
+      <span class="message text-grey">
         暂无优惠券
       </span>
     </div>
 
     <div class="padding" style="text-align:center" ng-cloak>
-      <p ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">
+      <p class="text-grey" ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">
         {{vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'}}
       </p>
     </div>
 
     <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons" ng-cloak>
       <a class="coupon-info col col-67" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
-        <p class="coupon-name">
+        <div class="nowrap padding-bottom-5">
           {{item.Coupon.name}}
-        </p>
-        <p>
-          ￥<span class="coupon-price">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
-        </p>
-        <p ng-show="item.Coupon.least_price > 0">
-          订单满{{item.Coupon.least_price}}元使用（不含邮费）
-        </p>
+        </div>
+        <div class="padding-bottom-5">
+          ￥<span class="text-21">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
+        </div>
+        <div class="nowrap text-sub" ng-show="item.Coupon.least_price > 0">
+          订单满{{item.Coupon.least_price}}元使用(不含邮费)
+        </div>
       </a>
       <div class="coupon-validity col col-33">
         <p class="text-muted">有效期</p>
-        <p>
+        <p class="text-grey">
           {{item.Coupon.valid_begin | date:'MM.dd'}}~{{item.Coupon.valid_end | date:'MM.dd'}}
         </p>
         <p class="text-muted">{{vm.getCouponStatus(item)}}</p>

@@ -112,7 +112,7 @@
       Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
         vm.inprogress = false;
         $rootScope.reloadCart($rootScope.user.token.access_token);
-        $rootScope.alertMessage('商品添加成功。');
+        $rootScope.alertMessage('商品添加成功');
       }, function(e){
         vm.onActionFailed('添加到购物车失败，请重试', e);
       });

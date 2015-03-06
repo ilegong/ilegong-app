@@ -7,7 +7,7 @@
   <ion-nav-buttons side='right'>
     <button  class='button button-clear' ng-click="vm.addAddress()">{{'新建'}}</button>
   </ion-nav-buttons>
-	<ion-content class="my-addresses list">
+	<ion-content class="my-addresses">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
     <div class="address item item-icon-left item-icon-right"  ng-repeat="address in vm.addresses" ng-show="vm.addresses.length > 0" ng-cloak>
@@ -25,7 +25,7 @@
     <div class="centered-container" ng-show="vm.addresses.length == 0" ng-cloak>
       <span class="no-content no-address">
       </span>
-      <span class="message">
+      <span class="message text-grey">
         暂无地址
       </span>
     </div>

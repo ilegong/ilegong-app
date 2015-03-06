@@ -2827,7 +2827,7 @@ var Carts = {
 
 var Coupons = {
   "coupons":[
-    {"Coupon":{"id":"17652","name":"\u9ed4\u9633\u51b0\u7cd6\u6a5958\u5143\u5238","brand_id":"121","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-26 11:20:44","valid_end":"2024-12-18 23:59:59","reduced_price":"5800","type":"2", "least_price": "0"},"CouponItem":{"id":"32704","code":"","bind_user":"146","coupon_id":"17652","cart_item_id":"0","status":"1","created":"2014-12-13 15:57:58","applied_order":"0","applied_time":null,"source":"qinyBTC1412_25738_1"}},
+    {"Coupon":{"id":"17652","name":"黔阳冰糖橙58元券黔阳冰糖橙58元券","brand_id":"121","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-11-26 11:20:44","valid_end":"2024-12-18 23:59:59","reduced_price":"5800","type":"2", "least_price": "0"},"CouponItem":{"id":"32704","code":"","bind_user":"146","coupon_id":"17652","cart_item_id":"0","status":"1","created":"2014-12-13 15:57:58","applied_order":"0","applied_time":null,"source":"qinyBTC1412_25738_1"}},
     {"Coupon":{"id":"17872","name":"\u9ed4\u9633\u4e07\u6a59-\u4e07\u5c0f\u5e73","brand_id":"122","product_list":[365],"category_id":"0","status":"1","valid_begin":"2014-12-10 20:59:32","valid_end":"2024-12-17 20:59:32","reduced_price":"890","type":"2", "least_price": "32"},"CouponItem":{"id":"31288","code":"","bind_user":"146","coupon_id":"17872","cart_item_id":"0","status":"1","created":"2014-12-10 20:59:32","applied_order":"0","applied_time":null,"source":"shared_offer12106"}},
     {"Coupon":{"id":"17854","name":"\u7709\u53bf\u7315\u7334\u6843-\u5f20\u6167\u654f","brand_id":"122","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 19:42:59","valid_end":"2024-12-17 19:42:59","reduced_price":"201","type":"2", "least_price": "58.88"},"CouponItem":{"id":"31156","code":"","bind_user":"146","coupon_id":"17854","cart_item_id":"0","status":"1","created":"2014-12-10 19:42:59","applied_order":"0","applied_time":null,"source":"shared_offer12099"}},
     {"Coupon":{"id":"17829","name":"\u751f\u6d3b\u901f\u9012\u8054\u76df-\u9093\u5f6c","brand_id":"123","product_list":"0","category_id":"0","status":"1","valid_begin":"2014-12-10 18:11:42","valid_end":"2024-12-17 18:11:42","reduced_price":"461","type":"2", "least_price": "0"},"CouponItem":{"id":"31044","code":"","bind_user":"146","coupon_id":"17829","cart_item_id":"0","status":"1","created":"2014-12-10 18:11:42","applied_order":"0","applied_time":null,"source":"shared_offer12098"}},
@@ -2910,7 +2910,7 @@ var CartInfo = {
   "data":{
     "success":true,
     "total_price":58,
-    "shipFee": 15,
+    "shipFee": 0,
     "coupons_of_products":[],
     "cart":{
       "order_id":null,"user_id":"146","is_try":false,
@@ -2942,7 +2942,7 @@ var CartInfo = {
         "notice":""
       }
     }],
-    "shipFees":{"121": 15},
+    "shipFees":{"121": -1},
     "reduced":5
   }
 }
