@@ -79,6 +79,10 @@
       var _error = $delegate.error;
       var addMessage = function(message){
         var $rootScope = $injector.get("$rootScope");
+        $rootScope.config = $rootScope.config || {developmentMode: false};
+        if(!($rootScope.config.developmentMode)){
+          return message;
+        }
         $rootScope.messages = $rootScope.messages || [];
         $rootScope.messages.push(message);
         return message;

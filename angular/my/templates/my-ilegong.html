@@ -15,9 +15,19 @@
     </div>
 
     <div class="item-divider"></div>
-    <div class="item" ng-click="vm.showDevelopmentMode()">
+    <div class="item" ng-click="vm.toggleDevelopmentMode()">
       版本号
       <span class="item-note">{{config.app.version}}</span>
     </div>
+
+    <div class="item item-divider" ng-show="vm.developmentMode"></div>
+    <a class="item item-icon-right" ui-sref="product-detail({id: 220,from:-1})" ng-show="vm.developmentMode">
+      <i class="icon ion-ios7-arrow-right"></i>
+      1分钱产品
+    </a>
+    <a class="item item-icon-right" ui-sref="app.my-messages" ng-show="vm.developmentMode">
+      <i class="icon ion-ios7-arrow-right"></i>
+      查看日志
+    </a>
  </ion-content>
 </ion-view>

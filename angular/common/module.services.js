@@ -35,14 +35,16 @@
       $http.get(self.getUrl(url))
         .success(function(data, status, headers, config) {
           if(status == 200){
+            $log.log("get " + url + " succeeded: ").log(data);
             defer.resolve(data);
           }
           else{
+            $log.log("get " + url + " failed with status " + status +": ").log(data);
             defer.reject({data: data, status: status});
           }
         })
         .error(function(data, status, headers, config) {
-          $log.log("get " + url + " failed: " + status).log(data).log(config);
+          $log.log("get " + url + " failed with status " + status + ": ").log(data).log(config);
           defer.reject({data: data, status: status});
         });
       return defer.promise;
@@ -52,19 +54,20 @@
         return deferred(FakeData.post(url));
       }
 
-      $log.log("post"+url);
       var defer = $q.defer();
       return $http.post(self.getUrl(url), data)        
         .success(function(data, status, headers, config) {
           if(status == 200){
+            $log.log("post to " + url + " succeeded: ").log(data);
             defer.resolve(data);
           }
           else{
+            $log.log("post to " + url + " failed with status " + status +": ").log(data);
             defer.reject({data: data, status: status});
           }
         })
         .error(function(data, status, headers, config) {
-          $log.log("post to " + url + " failed: " + status).log(data).log(config);
+          $log.log("post to " + url + " failed with status " + status + ": ").log(data).log(config);
           defer.reject({data: data, status: status});
         });
       return defer.promise;
@@ -90,7 +93,6 @@
       return $localForage.removeItem(key);
     }
     function getUrl(url){
-      $log.log('get ' + config.server.address + url);
       return config.server.address + url;
     }
     function deferred(data){

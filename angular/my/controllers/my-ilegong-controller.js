@@ -7,15 +7,22 @@
   /* @ngInject */
   function MyIlegongCtrl($rootScope, $scope, config){
     var vm = this;
-    vm.count = 0;
-    vm.showDevelopmentMode = showDevelopmentMode;
+    vm.toggleDevelopmentMode = toggleDevelopmentMode;
+    activate();
 
-    function showDevelopmentMode(){
+    function activate(){
+      vm.count = 0;
+      vm.developmentMode = $rootScope.config.developmentMode;
+      $scope.$watch('config.developmentMode', function() {
+        vm.developmentMode = $rootScope.config.developmentMode;
+      });
+    }
+    function toggleDevelopmentMode(){
       vm.count = vm.count + 1;
       if(vm.count > 4){
         config.developmentMode = !config.developmentMode;
         vm.count = 0;
-        $rootScope.alertMessage('显示开发者选项');
+        $rootScope.alertMessage(config.developmentMode ? '显示开发者选项' : '隐藏开发者选项');
       }
     }
   } 
