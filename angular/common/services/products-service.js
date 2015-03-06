@@ -17,7 +17,6 @@
     function getProduct(id){
       var defer = $q.defer();
       Base.get('/api_orders/product_detail/'+id+'.json').then(function(product){
-        $log.log('get product detail:').log(product);
         defer.resolve(product);
       }, function(e){defer.reject(e)});
       return defer.promise;

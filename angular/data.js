@@ -2561,6 +2561,9 @@ var productComment = [
       "is_shichi_tuan_comment": "0", 
       "shichi_rating": null, 
       "is_shichi_vote": "0", 
+      "images": [
+        "http://51daifan-images.stor.sinaapp.com/1263ac92b46_0112.jpg"
+      ], 
       "userPhoto": null
     }
   }, 

@@ -139,6 +139,9 @@
       $rootScope.alertMessage(message);
     }
     function getCartName(){
+      if(_.isEmpty(vm.product.Product)){
+        return '加入购物车';
+      }
       if(!vm.product.Product.published){
         return '该商品已下架';
       }

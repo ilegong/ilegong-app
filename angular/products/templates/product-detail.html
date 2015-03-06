@@ -38,7 +38,7 @@
     <div class="item row padding-bottom-0" ng-show="vm.hasSpecs()" ng-cloak>
       <span class="col col-15" style="line-height: 31px;">规格:</span>
       <span class="col wrapped-container" ng-repeat="(specType, specChoices) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
-        <span class="spec-choice" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);">
+        <span class="spec-choice" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);" ng-disabled="!vm.product.Product.published">
           {{specChoice}}
         </span>
       </span>
@@ -49,9 +49,9 @@
       </span>
       <span class="col">
         <span class="number-span">
-          <span class="pys-400 icon-reduce" ng-click="vm.reduceCartItemNum()"></span>
+          <span class="pys-400 icon-reduce" ng-click="vm.reduceCartItemNum()" ng-disabled="!vm.product.Product.published"></span>
           <input class="count" disabled="disabled" ng-model="vm.count">
-          <span class="pys-400 icon-add" ng-click="vm.addCartItemNum()"></span>
+          <span class="pys-400 icon-add" ng-click="vm.addCartItemNum()" ng-disabled="!vm.product.Product.published"></span>
         </span>
       </span>
     </div>
@@ -123,7 +123,7 @@
         {{comment.body || '这家伙很懒，什么都没写'}}
       </div>
       <div class="row">
-        <img ng-repeat="img in comment.images.slice(0, 3)" src="{{img}}" class="comment-image col"/>
+        <img ng-repeat="img in comment.images.slice(0, 3)" src="{{img}}" class="comment-image col col-33"/>
       </div>
     </div>
     <a ng-show="vm.getReputationComments().length > 3" class="item tc" ng-click="vm.toReputationCommentsPage()" ng-cloak>
