@@ -1,13 +1,13 @@
 <ion-view class="product-detail-comments" title="商品评价">
   <div class="tabs-top" ng-show="vm.getComments(1).length > 0" ng-cloak>
-    <div class="tabs tabs-stable" style="height: 40px;">
-      <a class="tab-item {{vm.type == 0 ? 'tab-item-active':''}}" ng-click="vm.type = 0">
+    <div class="tabs">
+      <a class="tab-item" ng-class="{'text-balanced': vm.type == 0}" ng-click="vm.type = 0">
         <span class="text-16">口碑评价</span>
         <span class="text-sub">
           ({{vm.getComments(0).length}})
         </span>
       </a>
-      <a class="tab-item {{vm.type == 1 ?'tab-item-active':''}}" ng-click="vm.type = 1">
+      <a class="tab-item" ng-class="{'text-balanced': vm.type == 1}" ng-click="vm.type = 1">
         <span class="text-16">试吃评价</span>
         <span class="text-sub">
           ({{vm.getComments(1).length}})

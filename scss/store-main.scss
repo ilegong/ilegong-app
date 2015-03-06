@@ -9,7 +9,7 @@
     }
     .store{
       display: block;
-      border: 1px solid $border_color;
+      border: $border_default;
       margin-right: 10px;
     }
   }

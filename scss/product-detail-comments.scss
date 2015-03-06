@@ -1,20 +1,14 @@
 .product-detail-comments{
   .tabs{
-    border-bottom:1px $border_color solid;
+    border-bottom: $border_ccc;
     .tab-item:first-child{
-      border-right:1px #bbbbbb solid;
-    }
-    .tab-item-active{
-      color: $balanced !important;
-      span{
-        color: $balanced !important;
-      }
+      border-right: $border_ccc;
     }
   }
   .tabs-top{
     .tabs{
       height: 40px;
-      .tab-item{
+      .tab-item {
         padding-top: 0;
         max-width: 100%;
         line-height: 40px;

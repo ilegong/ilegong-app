@@ -22,11 +22,11 @@
     display:inline-block;
     margin-bottom: 0.71428571428rem;
     margin-right: 0.5rem;
-    border: 1px $border_color solid;
+    border: $border_default;
     color: $muted;
   }
   .spec-choice.checked{
-    border: 1px $balanced solid;
+    border: $border_balanced;
     color: $balanced;
   }
   .number-span{

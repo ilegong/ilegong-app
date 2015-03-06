@@ -8,9 +8,9 @@
   }
   .promotion{ 
     position:relative; 
-    border-top:1px #dddddd solid; 
-    border-bottom:1px #dddddd solid; 
-    background-color:#ffffff; 
+    border-top: $border_default; 
+    border-bottom: $border_default; 
+    background-color: #ffffff; 
     text-align:center;
     .price{ 
       position:absolute; 

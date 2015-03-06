@@ -7,7 +7,7 @@
     padding: 0;
     width: auto;
     color: black;
-    border: $border;
+    border: $border_default;
     .coupon-info {
       display: inline-block;
       background-color: $energized;
@@ -31,7 +31,7 @@
   }
   .coupon-invalid{
     .coupon-info{
-      background-color: $invalid;
+      background-color: $invalid_coupon_bg_color;
       color: #999999;
     }
   }
