@@ -1,4 +1,4 @@
-<ion-view title="{{vm.orderStateName}}订单" hide-back-button='true'>
+<ion-view title="{{::vm.orderStateName}}订单" hide-back-button='true'>
    <ion-nav-buttons side="left">
     <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
       <i class="icon ion-ios7-arrow-left"></i>返回
@@ -8,37 +8,38 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
 
-    <div class="centered-container" ng-show="vm.orders.length == 0" ng-cloak>
+    <div class="centered-container" ng-if="vm.orders.length == 0">
       <span class="no-content no-orders">
       </span>
       <span class="message text-grey">
-        暂无{{vm.orderStateName == '全部' ? '' : vm.orderStateName}}订单
+        暂无<span ng-bind="::vm.orderStateName == '全部' ? '' : vm.orderStateName"></span>订单
       </span>
     </div>
 
-    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="vm.getOrderHeight(order)" data-height="vm.getOrderHeight(order)" ng-cloak>
+    <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="::vm.getOrderHeight(order)" data-height="::vm.getOrderHeight(order)">
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
-        <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
-        <div class="col">{{order.Order.brand.Brand.name}}({{order.Order.products.length}})</div>
-        <div class="text-energized col col-20 tr" style="padding-right: 0;">
-          {{order.Order.orderState.status}}
-        </div>
+        <img src="{{::order.Order.brand.Brand.coverimg}}" class="r5"/>
+        <div class="col"><span ng-bind="::order.Order.brand.Brand.name">(<span ng-bind="::order.Order.products.length"></span>)</span></div>
+        <div class="text-energized col col-20 tr" style="padding-right: 0;" ng-bind="order.Order.orderState.status"></div>
       </a>
-      <a class="item item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
-        <img src='{{product.Cart.coverimg}}' class="r5"/>
-        <div class="nowrap">{{product.Cart.name}}</div>
+      <a class="item item-thumbnail-left" ng-repeat="product in ::order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
+        <img src='{{::product.Cart.coverimg}}' class="r5"/>
+        <div class="nowrap" ng-bind="::product.Cart.name"></div>
         <div class="text-muted">
-          价格：{{product.Cart.price | currency:'￥'}} 
+          价格：<span ng-bind="::product.Cart.price | currency:'￥'"> 
         </div>
         <div class="text-muted">
-          数量：{{product.Cart.num}}
+          数量：<span ng-bind="::product.Cart.num"></span>
         </div>
       </a>  
       <div class="item tr">
-        <span class="text-muted">运费：{{order.Order.ship_fee > 0 ? (order.Order.ship_fee | currency:'￥') : '包邮'}}</span>
+        <span class="text-muted">
+          运费：<span ng-bind="::order.Order.ship_fee | currency:'￥'"></span>
+        </span>
         &nbsp; &nbsp;
-        <span class="text-muted">实付(含运费)：</span>
-        <strong class="text-energized">{{order.Order.total_all_price | currency:'￥'}}</strong>
+        <span class="text-muted">
+          实付(含运费)：<strong class="text-energized" ng-bind="::order.Order.total_all_price | currency:'￥'"></strong>
+        </span>
       </div>
       <div class="item tr" ng-show="vm.showOrderOperations(order)" ng-switch="order.Order.status">
         <a class="button button-short button-energized ml" ng-switch-when="2" ng-really-click="vm.confirmReceivingGoods(order)" ng-really-message="您确定收到货了吗？">确认收货</a>

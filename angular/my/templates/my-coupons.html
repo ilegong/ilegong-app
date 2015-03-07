@@ -2,24 +2,24 @@
   <ion-content>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-cloak>
+    <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)">
       <a class="coupon-info col col-67" ng-click="vm.useCoupons(item,brand);" >
-        <div class="nowrap padding-bottom-5">
-          {{item.Coupon.name}}
-        </div>
+        <div class="nowrap padding-bottom-5" ng-bind="item.Coupon.name"></div>
         <div class="padding-bottom-5">
-          ￥<span class="text-21">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
+          ￥<span class="text-21" ng-bind="::item.Coupon.reduced_price /100 | currency : ''"></span>
         </div>
         <div class="nowrap text-sub" ng-show="item.Coupon.least_price > 0">
-          订单满{{item.Coupon.least_price}}元使用(不含邮费)
+          订单满<span ng-bind="::item.Coupon.least_price"></span>元使用(不含邮费)
         </div>
       </a>
       <div class="coupon-validity col col-33">
-        <p class="text-muted">有效期</p>
-        <p class="text-grey">
-          {{item.Coupon.valid_begin | date:'MM.dd'}}~{{item.Coupon.valid_end | date:'MM.dd'}}
-        </p>
-        <p class="text-muted">{{vm.getCouponStatus(item)}}</p>
+        <div class="text-muted padding-bottom-5">有效期</div>
+        <div class="text-grey padding-bottom-5">
+          <span ng-bind="::item.Coupon.valid_begin | date:'MM.dd'"></span>
+          ~
+          <span ng-bind="::item.Coupon.valid_end | date:'MM.dd'"></span>
+        </div>
+        <div class="text-muted padding-bottom-5" ng-bind="::vm.getCouponStatus(item)"></div>
       </div>
     </div>
     
@@ -31,30 +31,29 @@
       </span>
     </div>
 
-    <div class="padding" style="text-align:center" ng-cloak>
-      <p class="text-grey" ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0">
-        {{vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'}}
+    <div class="padding" style="text-align:center">
+      <p class="text-grey" ng-click="vm.showInvalidCoupons = !vm.showInvalidCoupons" ng-show="vm.invalidCoupons.length > 0" ng-bind="vm.showInvalidCoupons ? '隐藏过期优惠券' : '查看过期优惠券'">
       </p>
     </div>
 
-    <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons" ng-cloak>
+    <div class="coupon coupon-invalid row" ng-repeat="item in vm.invalidCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)" ng-show="vm.showInvalidCoupons">
       <a class="coupon-info col col-67" ui-sref="store.home({id: brand.Brand.id, name: brand.Brand.name})">
-        <div class="nowrap padding-bottom-5">
-          {{item.Coupon.name}}
-        </div>
+        <div class="nowrap padding-bottom-5" ng-bind="item.Coupon.name"></div>
         <div class="padding-bottom-5">
-          ￥<span class="text-21">{{item.Coupon.reduced_price /100 | currency : ''}}</span>
+          ￥<span class="text-21" ng-bind="::item.Coupon.reduced_price /100 | currency : ''"></span>
         </div>
         <div class="nowrap text-sub" ng-show="item.Coupon.least_price > 0">
-          订单满{{item.Coupon.least_price}}元使用(不含邮费)
+          订单满<span ng-bind="::item.Coupon.least_price"></span>元使用(不含邮费)
         </div>
       </a>
       <div class="coupon-validity col col-33">
-        <p class="text-muted">有效期</p>
-        <p class="text-grey">
-          {{item.Coupon.valid_begin | date:'MM.dd'}}~{{item.Coupon.valid_end | date:'MM.dd'}}
-        </p>
-        <p class="text-muted">{{vm.getCouponStatus(item)}}</p>
+        <div class="text-muted padding-bottom-5">有效期</div>
+        <div class="text-grey padding-bottom-5">
+          <span ng-bind="::item.Coupon.valid_begin | date:'MM.dd'"></span>
+          ~
+          <span ng-bind="::item.Coupon.valid_end | date:'MM.dd'"></span>
+        </div>
+        <div class="text-muted padding-bottom-5" ng-bind="::vm.getCouponStatus(item)"></div>
       </div>
     </div>
   </ion-content>

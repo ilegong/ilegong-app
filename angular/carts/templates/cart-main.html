@@ -3,15 +3,13 @@
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
 
-    <div ng-repeat="brand in vm.cartBrands" ng-show="vm.isLoggedIn" ng-cloak>
+    <div ng-repeat="brand in vm.cartBrands" ng-show="vm.isLoggedIn">
       <span class="item item-icon-left" ng-click="toStoreHomePage(brand);">
-        <i class="icon pys-350 {{vm.isBrandChecked(brand)?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleBrand(brand); $event.stopPropagation()">
+        <i class="icon pys-350 {{vm.isBrandChecked(brand)?'icon-circle-checked':'icon-circle'}}" ng-click="vm.toggleBrand(brand); $event.stopPropagation()">
         </i>
         <div class="item-image-mini-left">
-          <img class="item-image r5" src="{{brand.Brand.coverimg}}"></img>
-          <span>
-            {{brand.Brand.name}}
-          </span>
+          <img class="item-image r5" src="{{::brand.Brand.coverimg}}"></img>
+          <span ng-bind="brand.Brand.name"></span>
         </div>
       </span>
       <ion-list can-swipe="true">
@@ -20,26 +18,20 @@
             删除
           </ion-option-button>
           <div class="item-icon-left item-thumbnail-left item-icon-right">
-            <img src="{{cartItem.Cart.coverimg}}" ng-click="vm.toProductPage(cartItem);"></img>
-            <i class="icon pys-350 {{cartItem['checked']?'icon-circle-checked circle-checked-icon':'icon-circle circle-icon'}}" ng-click="vm.toggleCartItem(cartItem); $event.stopPropagation()">
+            <img src="{{::cartItem.Cart.coverimg}}" ng-click="vm.toProductPage(cartItem);"></img>
+            <i class="icon pys-350 {{cartItem['checked']?'icon-circle-checked':'icon-circle'}}" ng-click="vm.toggleCartItem(cartItem); $event.stopPropagation()">
               </span>
             </i>
             <div class="product-content">
-              <div class="nowrap padding-bottom-5">
-                {{cartItem.Cart.name}}
-              </div>
-              <div class="nowrap text-sub-muted padding-bottom-5" ng-show="!_.isEmpty(cartItem.Cart.spec)">
-                {{cartItem.Cart.spec}}
-              </div>
+              <div class="nowrap padding-bottom-5" ng-bind="::cartItem.Cart.name"></div>
+              <div class="nowrap text-sub-muted padding-bottom-5" ng-show="::!_.isEmpty(cartItem.Cart.spec)" ng-bind="::cartItem.Cart.spec"></div>
               <div class="number-span">
                 <span class="pys-280 icon-reduce" ng-click="vm.reduceCartItemNum(cartItem.Cart)"></span>
                 <input class="count" disabled="disabled" ng-model="cartItem.Cart.num"/>
                 <span class="pys-280 icon-add" ng-click="vm.addCartItemNum(cartItem.Cart)"></span>
               </div>
             </div>
-            <span class="icon text-16">
-              {{cartItem.Cart.price | currency:"￥"}}
-            </span>
+            <span class="icon text-16" ng-bind="::cartItem.Cart.price | currency:'￥'"></span>
           </div>
         </ion-item>
         <div class="item-divider"></div>
@@ -72,8 +64,8 @@
       <div class="text-sub-muted">不含运费</div>
     </div>
     <span class="text-18 text-energized col" style="padding-top: 8px;">
-      <strong>￥{{vm.getTotalPrice() | currency:""}}</strong>
+      <strong ng-bind="vm.getTotalPrice() | currency:'￥'"></strong>
     </span>
-    <div class="button button-energized button-30" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算({{countOfCheckedCartItems()}})</strong></div>
+    <div class="button button-energized button-30" ng-click="vm.confirmCart()" ng-disabled="!vm.readyToConfirm()"><strong>结算(<span ng-bind="countOfCheckedCartItems()"></span>)</strong></div>
   </ion-footer-bar>
 </ion-view>

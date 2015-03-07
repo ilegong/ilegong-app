@@ -1,11 +1,11 @@
 <ion-view title="朋友说" hide-back-button='true' hide-nav-bar="true" show-tabs>
   <ion-content class="my">
-    <div class="profile" ng-cloak>
+    <div class="profile">
       <div class="account row">
         <span class="col"></span>
         <a class="col" ng-click="vm.profileClick()" ng-show="vm.loggedIn">
           <span class="avatar"></span>
-          <span class="mobile">{{vm.user.nickname}}</span>
+          <span class="mobile" ng-bind="vm.user.nickname"></span>
         </a>
         <span class="col" ng-show="!vm.loggedIn">
           <button class="button-login button button-outline" ui-sref="account-login">
@@ -17,12 +17,12 @@
       <div class="orders row" style="padding: 0">
         <div class="bg"></div>
         <div class="order col" ng-click="vm.toOrders(pendingState.orderState.state);" ng-repeat="pendingState in vm.pendingStates">
-          <span ng-class="{'badge badge-assertive': pendingState.orders.length > 0}">{{pendingState.orders.length}}</span> <br/>
-          {{pendingState.orderState.name}}
+          <span ng-class="{'badge badge-assertive': pendingState.orders.length > 0}" ng-bind="pendingState.orders.length"></span> <br/>
+          <span ng-bind="::pendingState.orderState.name"></span>
         </div>
       </div>
     </div>
-    <div class="details" ng-cloak>
+    <div class="details">
       <div class="item item-divider"></div>
       <a class="item item-icon-left item-icon-right" ng-click="vm.toOrders(-1);">
         <span class="icon pys-280 icon-my-order"></span>

@@ -2,22 +2,22 @@
   <ion-content class="padding">
     <img src="http://www.tongshijia.com/img/logo_footer.jpg" border="0">
     <br><br>
-    [朋友说]是朋友同事间互相分享自家特产的平台。<br>我们创业团队来自于腾讯、搜狐和去哪儿。
+    [朋友说] 朋友间分享健康美食的平台
     <br><br>
     <div class="item">
       商务电话: 
-      <a href="tel:{{config.app.bizline}}" class="item-note">{{config.app.bizline}}</a>  
+      <a href="tel:{{::config.app.bizline}}" class="item-note" ng-bind="::config.app.bizline"></a>
     </div>
     
     <div class="item">
       客服电话
-      <a href="tel:{{config.app.hotline}}" class="item-note">{{config.app.hotline}}</a>  
+      <a href="tel:{{::config.app.hotline}}" class="item-note" ng-bind="::config.app.hotline"></a>  
     </div>
 
     <div class="item-divider"></div>
     <div class="item" ng-click="vm.toggleDevelopmentMode()">
       版本号
-      <span class="item-note">{{config.app.version}}</span>
+      <span class="item-note" ng-bind="::config.app.version"></span>
     </div>
 
     <div class="item item-divider" ng-show="vm.developmentMode"></div>

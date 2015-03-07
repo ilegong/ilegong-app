@@ -5,56 +5,56 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="list">
-    <div class="item" ng-cloak>
+    <div class="item">
       <div>收货地址</div> 
       <div class="nowrap text-sub-muted">
-        {{vm.order.Order.consignee_area}}{{vm.order.Order.consignee_address}}
+        <span ng-bind="::vm.order.Order.consignee_area"></span><span ng-bind="::vm.order.Order.consignee_address"></span>
       </div>
       <span class="nowrap text-sub-muted">
-      {{vm.order.Order.consignee_name}}&nbsp;{{vm.order.Order.consignee_mobilephone}}
+      <span class="padding-right-10" ng-bind="::vm.order.Order.consignee_name"></span><span ng-bind="::vm.order.Order.consignee_mobilephone"></span>
       </span>
     </div>
-    <a class="item item-avatar-left item-icon-right row" ng-click="vm.toStoreHomePage(vm.store)" ng-cloak>
-      <img src="{{vm.store.coverimg}}" class="r5"/>
+    <a class="item item-avatar-left item-icon-right row" ng-click="vm.toStoreHomePage(vm.store)">
+      <img src="{{::vm.store.coverimg}}" class="r5"/>
       <i class="icon ion-ios7-arrow-right"></i>
-      <div class="nowrap col col-center">{{vm.store.name}}</div>
+      <div class="nowrap col col-center" ng-bind="::vm.store.name"></div>
       <div class="button button-outline button-balanced button-short" ng-click="vm.callHotline(); $event.stopPropagation();" >
         服务电话
       </div>
     </a>
-    <div class="item" ng-cloak>
-      订单状态：<span class="text-energized">{{vm.orderState.name}}</span>
+    <div class="item">
+      订单状态：<span class="text-energized" ng-bind="vm.orderState.name"></span>
     </div>
-    <a class="item item-thumbnail-left item-icon-right"  ng-repeat="item in vm.cartItems" ng-click="vm.toProductDetailPage(item);" ng-cloak>
-      <img src="{{item.Cart.coverimg}}"/>
+    <a class="item item-thumbnail-left item-icon-right"  ng-repeat="item in ::vm.cartItems" ng-click="vm.toProductDetailPage(item);">
+      <img src="{{::item.Cart.coverimg}}"/>
       <i class="icon ion-ios7-arrow-right"></i>
-      <div class="nowrap">{{item.Cart.name}}</div>
+      <div class="nowrap padding-bottom-5" ng-bind="::item.Cart.name"></div>
       <div class="nowrap text-sub-muted">
-        价格：{{item.Cart.price | currency:'￥'}}&nbsp;数量：{{item.Cart.num}}
+        价格：<span class="padding-right-10" ng-bind="::item.Cart.price | currency:'￥'"></span>数量：<span ng-bind="::item.Cart.num"></span>
       </div>
-      <div class="nowrap text-sub-muted" ng-show="!_.isEmpty(item.Cart.spec)">
-        规格：{{item.Cart.spec}}
+      <div class="nowrap text-sub-muted" ng-show="::!_.isEmpty(item.Cart.spec)">
+        规格：<span ng-bind="::item.Cart.spec"></span>
       </div>
     </a>
-    <div class="item" ng-cloak>
-      运费：{{vm.order.Order.ship_fee >= 0 ? vm.order.Order.ship_fee : 0 | currency:'￥'}}
+    <div class="item">
+      运费：<span ng-bind="::vm.order.Order.ship_fee >= 0 ? vm.order.Order.ship_fee : 0 | currency:'￥'"></span>
     </div>
-    <div class="item" ng-cloak>
+    <div class="item">
       <div class="fl">
-        订单号：{{vm.order.Order.id}}
+        订单号：<span ng-bind="::vm.order.Order.id"></span>
         <div class="nowrap text-sub-muted">
-          下单时间：{{vm.order.Order.created}}
+          下单时间：<span ng-bind="::vm.order.Order.created"></span>
         </div>
         <div class="nowrap text-sub-muted" ng-show="vm.hasPaid">
-          支付时间：{{vm.order.Order.pay_time}}
+          支付时间：<span ng-bind="vm.order.Order.pay_time"></span>
         </div>
       </div>
-      <a class="button fr" ng-show="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a>
+<!--       <a class="button fr" ng-if="vm.order.Order.status == 2" ng-disabled="true" ng-click="vm.viewLogistics()">查看物流</a> -->
     </div>
   </ion-content>
-  <ion-footer-bar class="row" ng-switch="vm.order.Order.status" ng-cloak>
+  <ion-footer-bar class="row" ng-switch="vm.order.Order.status">
     <span class="col text-16 padding-top-bottom-10">
-      合计：<strong class="text-18 text-energized">{{vm.order.Order.total_all_price | currency:'￥'}}</strong>
+      合计：<strong class="text-18 text-energized" ng-bind="::vm.order.Order.total_all_price | currency:'￥'"></strong>
     </span>
 
     <a class="button button-outline button-grey" ng-really-click="vm.cancelOrder(vm.order)" ng-really-message="您确定要取消订单吗？" ng-switch-when="0" style="margin-left: 0.5em;"><strong>取消订单</strong></a>

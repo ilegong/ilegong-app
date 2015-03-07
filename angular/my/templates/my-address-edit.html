@@ -38,7 +38,7 @@
       </label>
     </div>
     <div class="padding address-operations" ng-cloak>
-      <span class="button button-block" ng-class="{'button-energized': vm.readyToSave()}" ng-click="vm.addressId > 0 ? vm.editAddress() : vm.addAddress()" ng-disabled="!vm.readyToSave()">
+      <span class="button button-block button-energized" ng-click="vm.addressId > 0 ? vm.editAddress() : vm.addAddress()" ng-disabled="!vm.readyToSave()">
         保存
       </span>
       <span class="button button-clear button-dark icon-left" ng-really-click="vm.deleteAddress(vm.addressId)" ng-really-message="确定要删除此收货地址吗？" ng-show="vm.addressId > 0">

@@ -73,6 +73,9 @@ input{
   @extend .padding-top-5;
   @extend .padding-bottom-5;
 }
+.padding-right-10{
+  padding-right: 10px !important; 
+}
 .padding-bottom-10{
   padding-bottom: 10px !important; 
 }
@@ -101,6 +104,10 @@ input{
   max-height: 2.78571428571rem;
   min-height: 2.78571428571rem;
   line-height: 2.64285714286rem !important;
+}
+ion-option-button.button{
+  max-height: 100%;
+  height: 100%;
 }
 .button.button-grey{
   color: $grey;
