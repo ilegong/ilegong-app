@@ -1,4 +1,4 @@
-<ion-view title="{{storeName}}" show-store-tabs>
+<ion-view title="{{::storeName}}" show-store-tabs>
   <ion-nav-buttons side="left">
     <button class="button button-clear back-button" ng-click="vm.goBack();">
       <i class="icon ion-ios7-arrow-left"></i>返回
@@ -6,13 +6,13 @@
   </ion-nav-buttons>
 
   <ion-content class='store elements'>
-    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="vm.getItemHeight()" collection-item-width="vm.getItemWidth()">
+    <div class="element-container" collection-repeat="product in ::vm.products" collection-item-height="::vm.getItemHeight()" collection-item-width="::vm.getItemWidth()">
       <div class='element'>
-        <img class="blocked full" ui-sref="product-detail({from: storeId, id: product.Product.id,type:-3})" title="{{product.Product.title}}" src="{{product.Product.coverimg}}" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px" ng-cloak>
-        <div class='padding-5' ng-cloak>
-          <div class="nowrap">{{product.Product.name}}</div>
-          <span class='text-energized'><strong>{{product.Product.price | currency:'￥'}}</strong></span>
-          <s class="text-sub-muted">{{product.Product.original_price | currency:'￥'}}</s>
+        <img class="blocked full" ui-sref="product-detail({from: storeId, id: product.Product.id,type:-3})" title="{{::product.Product.title}}" src="{{::product.Product.coverimg}}" style="height: {{::vm.imageHeight}}px; width: {{::vm.imageWidth}}px">
+        <div class='padding-5'>
+          <div class="nowrap" ng-bind="::product.Product.name"></div>
+          <span class='text-energized'><strong ng-bind="::product.Product.price | currency:'￥'"></strong></span>
+          <s class="text-sub-muted" ng-bind="::product.Product.original_price | currency:'￥'"></s>
         </div>
       </div>
     </div>
