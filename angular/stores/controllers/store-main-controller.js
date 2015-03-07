@@ -22,13 +22,15 @@
       vm.itemHeight = vm.imageHeight + brandNameHeight + 22; // 10px padding + 10px divider + 2px border
 
       $scope.$watch('brands', function(newBrands, oldBrands){
-        $log.log("brands has from ").log(oldBrands).log(" to: ").log(newBrands);
-        vm.stores = newBrands;
+        vm.stores = $rootScope.brands;
       });
     }
 
     function doRefresh(){
-      $rootScope.reloadStores(function(data){
+      $rootScope.reloadStores().then(function(data){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(){
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
       });

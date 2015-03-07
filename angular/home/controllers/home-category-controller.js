@@ -34,9 +34,12 @@
     function doRefresh(){
       Categories.get(vm.slug).then(function(data){
         vm.products = data.data_list;
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(e){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
       });
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$apply();
     }
     function getBrandById(id){
       return _.find(vm.brands, function(brand){return brand.Brand.id == id});

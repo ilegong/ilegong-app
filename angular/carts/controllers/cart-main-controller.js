@@ -38,9 +38,13 @@
     }
 
     function doRefresh(){
-      $rootScope.reloadCart($rootScope.user.token.access_token);
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$apply();
+      $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      })
     }
     function toggleBrand(brand){
       var isBrandChecked = vm.isBrandChecked(brand);

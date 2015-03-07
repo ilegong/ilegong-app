@@ -27,9 +27,13 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('app.account-login');
       }
-      reloadAddresses($rootScope.user.token.access_token);
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$apply();
+      $rootScope.reloadAddresses($rootScope.user.token.access_token).then(function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      })
     } 
     function isChecked(address){
       if(_.isEmpty(vm.defaultAddress)){

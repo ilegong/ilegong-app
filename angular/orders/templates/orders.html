@@ -18,8 +18,8 @@
 
     <div class="order full" collection-repeat="order in vm.orders" collection-item-width="'100%'" collection-item-height="::vm.getOrderHeight(order)" data-height="::vm.getOrderHeight(order)">
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
-        <img src="{{::order.Order.brand.Brand.coverimg}}" class="r5"/>
-        <div class="col"><span ng-bind="::order.Order.brand.Brand.name">(<span ng-bind="::order.Order.products.length"></span>)</span></div>
+        <img src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
+        <div class="col"><span ng-bind="order.Order.brand.Brand.name">(<span ng-bind="order.Order.products.length"></span>)</span></div>
         <div class="text-energized col col-20 tr" style="padding-right: 0;" ng-bind="order.Order.orderState.status"></div>
       </a>
       <a class="item item-thumbnail-left" ng-repeat="product in ::order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
@@ -34,11 +34,11 @@
       </a>  
       <div class="item tr">
         <span class="text-muted">
-          运费：<span ng-bind="::order.Order.ship_fee | currency:'￥'"></span>
+          运费：<span ng-bind="order.Order.ship_fee | currency:'￥'"></span>
         </span>
         &nbsp; &nbsp;
         <span class="text-muted">
-          实付(含运费)：<strong class="text-energized" ng-bind="::order.Order.total_all_price | currency:'￥'"></strong>
+          实付(含运费)：<strong class="text-energized" ng-bind="order.Order.total_all_price | currency:'￥'"></strong>
         </span>
       </div>
       <div class="item tr" ng-show="vm.showOrderOperations(order)" ng-switch="order.Order.status">

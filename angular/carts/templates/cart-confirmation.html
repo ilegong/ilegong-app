@@ -9,11 +9,11 @@
       <span class="text-16 text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
-        <div class="nowrap" ng-cloak>
-          {{vm.defaultAddress.OrderConsignees.area}}{{vm.defaultAddress.OrderConsignees.address}}
+        <div class="nowrap">
+          <span ng-bind="vm.defaultAddress.OrderConsignees.area"></span><span ng-bind="vm.defaultAddress.OrderConsignees.address"></span>
         </div>  
-        <div class="nowrap" ng-cloak>
-          {{vm.defaultAddress.OrderConsignees.name}}({{vm.defaultAddress.OrderConsignees.mobilephone}})
+        <div class="nowrap">
+          <span ng-bind="vm.defaultAddress.OrderConsignees.name"></span>(<span ng-bind="vm.defaultAddress.OrderConsignees.mobilephone"></span>)
         </div>
       </div>
       <div ng-if="_.isEmpty(vm.defaultAddress)" style="line-height: 2em;">
@@ -63,7 +63,7 @@
   </ion-content>
 
   <ion-footer-bar class="row">
-    <span class="col text-16 padding-top-bottom-10" ng-cloak>
+    <span class="col text-16 padding-top-bottom-10">
       共<span ng-bind="::vm.getPidList().length">0</span>件，实付款
       <span class="text-energized">
         <strong ng-bind="::vm.totalPrice | currency:'￥'">￥0.00</strong>

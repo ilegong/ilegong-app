@@ -1,6 +1,6 @@
 <ion-view title="个人信息" hide-tabs>
   <ion-content >
-  	<div class="list my-profile" ng-cloak>
+  	<div class="list my-profile">
   		<a class="item" style="line-height: 4.375em">
         头像
         <span class="icon pys-350 icon-avatar fr"></span>
@@ -11,23 +11,17 @@
       <a class="item item-icon-right" ui-sref="app.my-profile-nickname">
         <i class="icon ion-ios7-arrow-right"></i>
         昵称
-        <span class="item-note">
-          {{vm.user.nickname}}
-        </span>
+        <span class="item-note" ng-bind="vm.user.nickname"></span>
       </a>
       <a class="item item-icon-right" ui-sref="app.my-profile-sex" >
         <i class="icon ion-ios7-arrow-right"></i>
         性别
-        <span class="item-note">
-          {{vm.user.sex==0 ? '女':'男'}}
-        </span>
+        <span class="item-note" ng-bind="vm.user.sex==0 ? '女':'男'"></span>
       </a>
        <a class="item item-icon-right" ui-sref="app.my-profile-mobilephone">
         <i class="icon ion-ios7-arrow-right"></i>
         手机
-        <span class="item-note">
-          {{vm.user.mobilephone}}
-        </span>
+        <span class="item-note" ng-bind="vm.user.mobilephone"></span>
       </a>
       <a class="item item-icon-right" ui-sref="app.my-profile-email">
         <i class="icon ion-ios7-arrow-right"></i>

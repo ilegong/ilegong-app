@@ -27,9 +27,13 @@
       });
     }
     function doRefresh(){
-      $rootScope.reloadOrders($rootScope.user.token.access_token);
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$apply();
+      $rootScope.reloadOrders($rootScope.user.token.access_token).then(function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      });
     }
     function filterOrders(orders, brands, state){
       var orderOfStates = _.filter($rootScope.user.orders, function(order){return Orders.isOfStates(order, state)});

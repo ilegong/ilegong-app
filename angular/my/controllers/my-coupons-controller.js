@@ -61,9 +61,12 @@
         vm.validCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status == 1 && coupon.Coupon.valid_end >= vm.currentDate});
         vm.invalidCoupons = _.filter(data.coupons, function(coupon){return coupon.Coupon.status != 1 || coupon.Coupon.valid_end < vm.currentDate});
         vm.brands = _.map(data.brands, function(brand){return brand});
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
+      }, function(){
+        $scope.$broadcast('scroll.refreshComplete');
+        $scope.$apply();
       });
-      $scope.$broadcast('scroll.refreshComplete');
-      $scope.$apply();
     }
     function getCouponStatus(coupon){
       if(_.isEmpty(coupon)){

@@ -173,11 +173,7 @@
     function activate(){
       $rootScope.config = config;
       if(cordova && cordova.plugins.version) {
-        $log.log('app version is ' + cordova.plugins.version.getAppVersion());
         $rootScope.config.app = _.extend($rootScope.config.app, {version: cordova.plugins.version.getAppVersion()});
-      }
-      else{
-        $log.log('app version is not available');
       }
 
       $rootScope._ = window._;
@@ -239,26 +235,16 @@
       });
     }
     function reloadStores(){
-      if(!_.isEmpty($rootScope.brands)){
-        return;
-      }
-
       return Stores.list().then(function(data){
-        $log.log("get brands successfuly ").log(data.brands);
         $rootScope.brands = data.brands;
         Base.setLocal('brands', data.brands);
       }, function(e){
-        $log.log("get brands failed: ").log(e);
         Base.getLocal('brands').then(function(brands){
-          $log.log("get brands locally ").log(brands);
           $rootScope.brands = brands;
         });
       });
     }
     function reloadTryings(){
-      if(!_.isEmpty($rootScope.tryings)){
-        return;
-      }
       return Tryings.list().then(function(data){
         $rootScope.tryings = data.cates;
         Base.setLocal('tryings', data.cates);
@@ -269,9 +255,6 @@
       })
     }
     function reloadProvinces(){
-      if(!_.isEmpty($rootScope.provinces)){
-        return;
-      }
       return Addresses.getProvinces().then(function(provinces){
         $rootScope.provinces = provinces;
         Base.setLocal('provinces', provinces);
