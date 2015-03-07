@@ -2426,7 +2426,7 @@ var productDetail = {
          "promote_name":"蛋糕为空运蛋糕，页面显示日期就为蛋糕到货日，如果有其他需求，请联系我们",
          "comment_nums":"2",
          "recommend":"288",
-         "ship_fee":"5",
+         "ship_fee":"-2",
          "original_price":1000,
          "limit_ship": true,
          "specs": "{\"map\":{\"1\":{\"name\":\"电科院\"},\"2\":{\"name\":\"1/22东升科技园\"},\"3\":{\"name\":\"1月22日电力科学院\"},\"4\":{\"name\":\"1月22日东盛科技园\"},\"5\":{\"name\":\"1月22日银科大厦附近\"},\"6\":{\"name\":\"1月22日东升科技园\"}},\"choices\":{\"送货日期地址\":[\"1月22日电力科学院\",\"1月22日银科大厦附近\",\"1月22日东升科技园\"]}}",
@@ -2443,7 +2443,7 @@ var productDetail = {
          "comment_nums":"0",
          "price":"114.99",
          "original_price":"198",
-         "slug":"xin_jiang_te_chan_jian_guo_shou_hui_li_he_6dai_zhuang"
+         "slug": "xin_jiang_te_chan_jian_guo_shou_hui_li_he_6dai_zhuang"
       },
       "144":{  
          "id":"144",

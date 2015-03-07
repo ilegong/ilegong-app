@@ -1,17 +1,17 @@
-<ion-view title="{{vm.name}}" hide-tabs>
+<ion-view title="{{::vm.name}}" hide-tabs>
   <ion-content class='home-category elements'>
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
     </ion-refresher>
-    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="vm.getItemHeight()" collection-item-width="vm.getItemWidth()" ng-click="vm.toProductDetailPage(product)" ng-cloak>
+    <div class="element-container" collection-repeat="product in vm.products" collection-item-height="::vm.getItemHeight()" collection-item-width="::vm.getItemWidth()" ng-click="vm.toProductDetailPage(product)">
       <div class='element'>
-        <img class="blocked full" title="{{product.title}}" src="{{product.coverimg}}" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px">
+        <img class="blocked full" title="{{::product.title}}" src="{{::product.coverimg}}" style="height: {{::vm.imageHeight}}px; width: {{::vm.imageWidth}}px">
         <div class='padding-5'>
-          <div class="nowrap">{{product.name}}</div>
+          <div class="nowrap" ng-bind="product.name"></div>
           <div class='image-left padding-top-5'>
-            <img class="r5" src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
-            <div class='nowrap text-sub-muted' style="line-height: 1rem">{{product.brand.Brand.name}}</div>
-            <span class='text-energized'>¥{{product.price}}</span>
-            <s class="text-sub-muted" ng-show="product.original_price">¥{{product.original_price}}</s>
+            <img class="r5" src="{{::product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
+            <div class='nowrap text-sub-muted' style="line-height: 1rem" ng-bind="::product.brand.Brand.name"></div>
+            <span class='text-energized' ng-bind="::product.price | currency: '￥'"></span>
+            <s class="text-sub-muted" ng-show="::product.original_price" ng-bind="::product.original_price | currency: '￥'"></s>
           </div>
         </div>
       </div>

@@ -2,20 +2,20 @@
   <ion-content class="home" ng-click="vm.doRefresh()">
     <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()" ng-if="vm.loadingFailed" ng-cloak>
     </ion-refresher>
-    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;" ng-if="vm.loading || vm.loadingFailed" ng-cloak>
+    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;" ng-if="vm.loading || vm.loadingFailed">
       <i class="icon ion-loading-d" style="font-size: 30px; " ng-if="vm.loading"></i>
       <div class="element-container text-muted" ng-if="vm.loadingFailed">
         网络连接不可用，轻触重试
       </div>
     </div>
 
-    <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.loaded" ng-cloak>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.loaded">
       <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
-        <img class="full" ng-src="{{bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg" ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
+        <img class="full" ng-src="{{::bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg" ui-sref="product-detail({id:bannerItem.id,from:-1})"/>
       </ion-slide>
     </ion-slide-box>
 
-    <div class="promotion" ng-if="vm.loaded" ng-cloak>
+    <div class="promotion" ng-if="vm.loaded">
       <div class="price">
         <span class="text-sub text-assertive">
           ¥<strong>12.00</strong>
@@ -24,12 +24,12 @@
       </div>
       <div class="row">
         <div class="col">
-          <img src="{{vm.specTagItems[0].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[0].slug, name: vm.specTagItems[0].name})"/>
+          <img src="{{::vm.specTagItems[0].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[0].slug, name: vm.specTagItems[0].name})"/>
         </div>
         <div class="col">
-          <img src="{{vm.specTagItems[1].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[0].name})" />
+          <img src="{{::vm.specTagItems[1].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[0].name})" />
           <br />
-          <img src="{{vm.specTagItems[2].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[1].name})"/>
+          <img src="{{::vm.specTagItems[2].img}}" class="full" ui-sref="app.home-category({slug:vm.specTagItems[1].slug, name: vm.specTagItems[1].name})"/>
         </div>
       </div>
     </div>
@@ -37,15 +37,15 @@
     <h4 style="padding-left: 10px;" ng-if="vm.loaded">
       朋友说的爆款
     </h4>
-    <img class="full padding-left padding-right" src="{{hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in vm.hotItems" ng-if="vm.loaded" ng-cloak/>
+    <img class="full padding-left padding-right" src="{{::hotItem.img}}" ui-sref="product-detail({id:hotItem.id,from:-1})" ng-repeat="hotItem in ::vm.hotItems" ng-if="vm.loaded"/>
 
     <h4 style="padding-left: 10px; margin-bottom: 0" ng-if="vm.loaded">
       朋友的推荐
     </h4>
-    <div class="elements padding-left" ng-if="vm.loaded" ng-cloak>
-      <div class="element-container" ng-repeat="mainItem in vm.mainTagItems">
+    <div class="elements padding-left" ng-if="vm.loaded">
+      <div class="element-container" ng-repeat="mainItem in ::vm.mainTagItems">
         <div class="element">
-          <img class="full" src="{{mainItem.img}}" ui-sref="app.home-category({slug:mainItem.slug, name: mainItem.name})"/>
+          <img class="full" src="{{::mainItem.img}}" ui-sref="app.home-category({slug:mainItem.slug, name: mainItem.name})"/>
         </div>
       </div>
     </div>

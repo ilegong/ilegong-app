@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
+  function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,$filter,Products,Carts,Addresses,Orders){
     var vm = this;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
@@ -24,7 +24,8 @@
     vm.onActionFailed = onActionFailed;
     vm.readyToBuy = readyToBuy;
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
-    vm.getCartName = getCartName;
+    vm.getCartTitle = getCartTitle;
+    vm.getShipFee = getShipFee;
     activate();
     
     function activate(){
@@ -138,7 +139,7 @@
       vm.inprogress = false;
       $rootScope.alertMessage(message);
     }
-    function getCartName(){
+    function getCartTitle(){
       if(_.isEmpty(vm.product.Product)){
         return '加入购物车';
       }
@@ -149,6 +150,18 @@
         return '不支持购物车';
       }
       return '加入购物车';
+    }
+    function getShipFee(){
+      if(vm.product.Product.ship_fee == -1){
+        return '货到付款';
+      }
+      else if(vm.product.Product.ship_fee == -2){
+        return '自提';
+      }
+      else if(vm.product.Product.ship_fee == 0){
+        return '包邮';
+      }
+      return $filter('currency')(vm.product.Product.ship_fee, '￥');
     }
   }
 })(window, window.angular);

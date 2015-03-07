@@ -16,25 +16,25 @@
     </div>
   </div>
   <ion-content class="content" ng-class="{'has-tabs-top': vm.getComments(1).length > 0}">
-    <div class="item" ng-repeat="comment in vm.getComments(vm.type)" ng-cloak>
+    <div class="item" ng-repeat="comment in vm.getComments(vm.type)">
       <p class="item-image-mini-left"> 
-        <img ng-show="comment.userPhoto != null" class="item-image r5"   style="background: url('{{comment.userPhoto}}');background-size:contain;">
-        <span ng-show="comment.userPhoto == null" class="item-image pys-350 icon-user"></span>
-        <span >{{comment.username}}</span>
-        <span class="text-muted fr">{{comment.created}}</span>
+        <img ng-show="::comment.userPhoto != null" class="item-image r5"   style="background: url('{{::comment.userPhoto}}');background-size:contain;">
+        <span ng-show="::comment.userPhoto == null" class="item-image pys-350 icon-user"></span>
+        <span >{{::comment.username}}</span>
+        <span class="text-muted fr">{{::comment.created}}</span>
       </p>
       <p>
-        <span class="icon pys-350 {{comment.rating > 0 ? 'icon-star':'icon-star-gray'}}"></span>
-        <span class="icon pys-350 {{comment.rating > 1 ? 'icon-star':'icon-star-gray'}}"></span>
-        <span class="icon pys-350 {{comment.rating > 2 ? 'icon-star':'icon-star-gray'}}"></span>
-        <span class="icon pys-350 {{comment.rating > 3 ? 'icon-star':'icon-star-gray'}}"></span>
-        <span class="icon pys-350 {{comment.rating > 4 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{::comment.rating > 0 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{::comment.rating > 1 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{::comment.rating > 2 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{::comment.rating > 3 ? 'icon-star':'icon-star-gray'}}"></span>
+        <span class="icon pys-350 {{::comment.rating > 4 ? 'icon-star':'icon-star-gray'}}"></span>
       </p>
       <p class="wrapped">
-        {{comment.body || '这家伙很懒，什么都没写'}}
+        {{::comment.body || '这家伙很懒，什么都没写'}}
       </p>
       <div class="row" ng-repeat="i in comment.images" ng-if="$index % 3 == 0">
-        <img src="{{image}}" class="col col-33 comment-image" ng-repeat="image in comment.images.slice($index, $index + 3)"/>
+        <img src="{{image}}" class="col col-33 comment-image" ng-repeat="image in ::comment.images.slice($index, $index + 3)"/>
       </div>
     </div>
 
