@@ -4,7 +4,7 @@
   angular.module('module.my')
   .controller('OrderDetailCtrl', OrderDetailCtrl)
 
-  function OrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, config, Orders, Users) {
+  function OrderDetailCtrl($ionicActionSheet, $timeout,$scope, $rootScope, $http, $stateParams, $log, $state, $ionicHistory, $filter, config, Orders, Users) {
     var vm = this;
     vm.isOfStates = vm.isOfState = function(order, states){return Orders.isOfStates(order, states)};
     vm.cancelOrder = cancelOrder;
@@ -19,6 +19,7 @@
     vm.toStoreHomePage = function(store){$state.go('store.home', {id: store.id, name: store.name})};
     vm.callHotline = callHotline;
     vm.reloadOrder = reloadOrder;
+    vm.getShipFee = getShipFee;
     activate();
     
     function activate() {
@@ -144,6 +145,15 @@
         vm.store = data.store;
         $rootScope.updateOrderState(orderId, vm.order.Order.status);
       });
+    }
+    function getShipFee(order){
+      if(order.Order.ship_fee == -2){
+        return '自提';
+      }
+      else if(order.Order.ship_fee == -1){
+        return '货到付款';
+      }
+      return $filter('currency')(order.Order.ship_fee, '￥')
     }
   } 
 })(window, window.angular);

@@ -4,7 +4,7 @@
   angular.module('module.my')
   .controller('OrdersCtrl', OrdersCtrl)
 
-  function OrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, Orders){
+  function OrdersCtrl($log, $scope, $rootScope, $http, $stateParams, $timeout, $filter, Orders){
     var vm = this;
     vm.confirmReceivingGoods = confirmReceivingGoods;
     vm.viewLogistics = viewLogistics;
@@ -15,6 +15,7 @@
     vm.getOrderHeight = getOrderHeight;
     vm.showOrderOperations = showOrderOperations;
     vm.removeOrder = removeOrder;
+    vm.getShipFee = getShipFee;
     activate();
     
     function activate() {
@@ -105,9 +106,17 @@
           $rootScope.removeOrder(orderId);
         });
       }, function(e){
-        $log.log("failed to remove order " + orderId + ": ").log(e);
         $rootScope.alertMessage("删除订单失败，请重试");
       });
+    }
+    function getShipFee(order){
+      if(order.Order.ship_fee == -2){
+        return '自提';
+      }
+      else if(order.Order.ship_fee == -1){
+        return '货到付款';
+      }
+      return $filter('currency')(order.Order.ship_fee, '￥')
     }
   }
 })(window, window.angular);
