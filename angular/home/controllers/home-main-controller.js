@@ -23,7 +23,6 @@
         return;
       }
       vm.loading = true;
-      vm.loadingFailed = false;
 
       vm.loadData().then(function(){
         $rootScope.refreshData();

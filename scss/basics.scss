@@ -595,33 +595,39 @@ ion-option-button.button{
   text-align: center;
   .message{
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
   }
   .no-content{
     @extend .pys-400;
     margin-top: 50%;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
   }
   .no-content.no-address{
-    background-position: -25em -8.57142857143em;
-    height: 5.04761904762em;
-    width: 3.38095238095em;
+    background-position: -25rem -8.57142857143rem;
+    height: 5.04761904762rem;
+    width: 3.38095238095rem;
   }
   .no-content.no-orders{
-    background-position: 0 -14.2857142857em;
-    height: 5.80952380952em;
-    width: 4.85714285714em;
+    background-position: 0 -14.2857142857rem;
+    height: 5.80952380952rem;
+    width: 4.85714285714rem;
   }
   .no-content.no-coupons{
-    background-position: -6.19047619048em -14.2857142857em;
-    height: 3.71428571429em;
-    width: 5.42857142857em;
+    background-position: -6.19047619048rem -14.2857142857rem;
+    height: 3.71428571429rem;
+    width: 5.42857142857rem;
   }
   .no-content.no-cart-items{
-    background-position:-20em -3.80952380952em;
-    width: 5.7619047619em;
-    height: 4.38095238095em;
+    background-position:-20em -3.80952380952rem;
+    width: 5.7619047619rem;
+    height: 4.38095238095rem;
   }
+  .no-content.no-network{
+    margin-top: 40%;
+    background-position: 0.5rem -20.5rem;
+    width: 6.5rem;
+    height: 6.5em;
+  }  
 }
 
 // item-avatar general

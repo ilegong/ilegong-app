@@ -21,9 +21,9 @@
     <icon src="www/res/icons/android/icon-40@2x.png" density="mdpi" />
     <icon src="www/res/icons/android/icon-40@2x.png" density="hdpi" />
     <icon src="www/res/icons/android/icon-60@3x.png" density="xhdpi" />
-    <splash src="www/res/splash/android/splash.png" density="port-hdpi"/>
     <splash src="www/res/splash/android/splash.png" density="port-ldpi"/>
     <splash src="www/res/splash/android/splash.png" density="port-mdpi"/>
+    <splash src="www/res/splash/android/splash.png" density="port-hdpi"/>
     <splash src="www/res/splash/android/splash.png" density="port-xhdpi"/>
   </platform>
   <platform name="ios">

@@ -1,15 +1,15 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
-  <img class="bg-image" ng-show="vm.loadingFailed || vm.loading" src="res/splash/ios/splash.png">
+  <img class="bg-image" ng-show="!vm.loadingFailed && vm.loading" src="res/splash/ios/splash.png">
   <ion-content class="home" ng-click="vm.doRefresh()">
-    <div class="icon-refreshing" style="text-align:center; padding-top: 1rem;" ng-if="vm.loading || vm.loadingFailed">
-      <div class="element-container text-muted" ng-if="vm.loading">
-        <i class="icon ion-loading-d" style="font-size: 30px; "></i>
-        <br/>
+    <div class="centered-container" ng-show="vm.loadingFailed" ng-cloak>
+      <span class="no-content no-network">
+      </span>
+      <span class="message text-grey" ng-show="vm.loading">
         正在连接，请稍后...
-      </div>
-      <div class="element-container text-muted" ng-if="vm.loadingFailed && !vm.loading">
-        网络连接不可用，轻触重试
-      </div>
+      </span>
+      <span class="message text-grey" ng-show="!vm.loading">
+       网络连接不可用，请点击重试
+      </span>
     </div>
 
     <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.loaded">
