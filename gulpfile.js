@@ -48,7 +48,7 @@ var libJsPath = {
       'angular-localforage/dist/angular-localForage.js', 
       'collide/collide.js',
       'restangular/dist/restangular.js',
-      'lodash/dist/lodash.js'      
+      'lodash/dist/lodash.js'
     ], function (sPath) {
       return path.join(libPath, sPath);
     }),

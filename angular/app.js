@@ -11,14 +11,16 @@
   .config(configLocalForage)
   .config(configHttpProvider)
 
-  function initApp($ionicPlatform, $log, Users) {
+  function initApp($ionicPlatform, $log, $timeout, Users) {
     $ionicPlatform.ready(function() {
-      if(cordova && cordova.plugins.Keyboard) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      }
-      if(window.StatusBar) {
-        StatusBar.styleDefault();
-      }
+      $timeout(function(){
+        if(cordova && cordova.plugins.Keyboard) {
+          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if(window.StatusBar) {
+          StatusBar.styleDefault();
+        }
+      }, 1000);
     });
   };
 
@@ -77,22 +79,21 @@
       var _info = $delegate.info;
       var _debug = $delegate.debug;
       var _error = $delegate.error;
-      var addMessage = function(message){
+      var addMessage = function(message, forceLog){
         var $rootScope = $injector.get("$rootScope");
         $rootScope.config = $rootScope.config || {developmentMode: false};
-        if(!($rootScope.config.developmentMode)){
-          return message;
+        if($rootScope.config.developmentMode || forceLog){
+          $rootScope.messages = $rootScope.messages || [];
+          $rootScope.messages.push(message);
         }
-        $rootScope.messages = $rootScope.messages || [];
-        $rootScope.messages.push(message);
         return message;
       }
 
-      $delegate.log = function(msg){_log(addMessage(msg)); return this;};
-      $delegate.warn = function(msg){_warn(addMessage(msg)); return this;};
-      $delegate.info = function(msg){_info(addMessage(msg)); return this;};
-      $delegate.debug = function(msg){_debug(addMessage(msg)); return this;};
-      $delegate.error = function(msg){_error(addMessage(msg)); return this;};
+      $delegate.log = function(msg, forceLog){_log(addMessage(msg, forceLog || false)); return this;};
+      $delegate.warn = function(msg, forceLog){_warn(addMessage(msg, forceLog || false)); return this;};
+      $delegate.info = function(msg, forceLog){_info(addMessage(msg, forceLog || false)); return this;};
+      $delegate.debug = function(msg, forceLog){_debug(addMessage(msg, forceLog || false)); return this;};
+      $delegate.error = function(msg, forceLog){_error(addMessage(msg, forceLog || false)); return this;};
 
       return $delegate;
     });
@@ -139,7 +140,7 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $timeout, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
@@ -172,9 +173,14 @@
 
     function activate(){
       $rootScope.config = config;
-      // cordova.getAppVersion(function(version) {
-      //   $rootScope.config.app = _.extend($rootScope.config.app, {version: version});
-      // });
+      // see: http://stackoverflow.com/questions/5180918/phonegap-on-android-window-device-is-undefined
+      $timeout(function(){        
+        if(cordova && cordova.getAppVersion){
+          cordova.getAppVersion.getVersionNumber(function (version) {
+            $rootScope.config.app.version = version;
+          });
+        }
+      }, 1000);
 
       $rootScope._ = window._;
       $rootScope.hideTabs = [];

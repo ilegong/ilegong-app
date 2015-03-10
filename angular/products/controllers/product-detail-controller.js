@@ -140,7 +140,7 @@
       $rootScope.alertMessage(message);
     }
     function getCartTitle(){
-      if(_.isEmpty(vm.product.Product)){
+      if(_.isEmpty(vm.product) || _.isEmpty(vm.product.Product)){
         return '加入购物车';
       }
       if(!vm.product.Product.published){
@@ -152,6 +152,9 @@
       return '加入购物车';
     }
     function getShipFee(){
+      if(_.isEmpty(vm.product)){
+        return '';
+      }
       if(vm.product.Product.ship_fee == -1){
         return '货到付款';
       }
