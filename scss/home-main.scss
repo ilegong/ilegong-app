@@ -35,6 +35,12 @@
       padding-top: 0;
     }
   }
+  .no-network{
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 .pane .bg-image{
   position: absolute;

@@ -3,9 +3,10 @@
   <ion-content class="home" ng-click="vm.doRefresh()">
     <div class="centered-container" ng-show="vm.loadingFailed" ng-cloak>
       <span class="no-content no-network">
+        <img src="img/no-network.png">
       </span>
       <span class="message text-grey" ng-show="vm.loading">
-        正在连接，请稍后...
+        正在连接，请稍候...
       </span>
       <span class="message text-grey" ng-show="!vm.loading">
        网络连接不可用，请点击重试
