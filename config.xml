@@ -13,6 +13,7 @@
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="Orientation" value="portrait" />
   <icon src="www/img/logo.png"/>
   <platform name="android">
     <splash src="www/img/logo.png" density="land-hdpi"/>

@@ -172,9 +172,9 @@
 
     function activate(){
       $rootScope.config = config;
-      if(cordova && cordova.plugins.version) {
-        $rootScope.config.app = _.extend($rootScope.config.app, {version: cordova.plugins.version.getAppVersion()});
-      }
+      // cordova.getAppVersion(function(version) {
+      //   $rootScope.config.app = _.extend($rootScope.config.app, {version: version});
+      // });
 
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
