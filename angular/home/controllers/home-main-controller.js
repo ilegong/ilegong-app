@@ -46,11 +46,14 @@
         vm.loading = false;
         vm.loaded = true;
         vm.loadingFailed = false;
+
+        $rootScope.hideTabs = [false];
       }, function(e){
-        $log.log('get home.json failed: ').log(e);
         vm.loaded = false;
         vm.loading = false;
         vm.loadingFailed = true;
+
+        $rootScope.hideTabs = [true];
       });
     }
   }

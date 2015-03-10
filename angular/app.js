@@ -117,7 +117,7 @@
 
   /* @ngInject */
   function configCompileProvider($compileProvider){
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension):|data:image\//);
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https|file|blob|cdvfile|http|chrome-extension|blob:chrome-extension):|data:image\//);
   }
 
   /* @ngInject */
