@@ -20,9 +20,9 @@
         </a>
       </div>
     </div>
-    <div class="item row padding-bottom-0" ng-show="::vm.hasSpecs()">
+    <div class="item row padding-bottom-0" ng-show="vm.hasSpecs()">
       <span class="col col-15" style="line-height: 31px;">规格:</span>
-      <span class="col wrapped-container" ng-repeat="(specType, specChoices) in ::vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
+      <span class="col wrapped-container" ng-repeat="(specType, specChoices) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
         <span class="spec-choice" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);" ng-disabled="!vm.product.Product.published" ng-bind="specChoice"> 
         </span>
       </span>

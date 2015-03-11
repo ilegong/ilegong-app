@@ -77,7 +77,7 @@ var categoriesJson = {
        "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/03ca7900316_1104.jpg",
        "promote_name":"",
        "comment_nums":"34",
-       "price":"55",
+       "price":"595",
        "original_price":"105",
        "slug":"he_nan_xing_yang_he_yin_ruan_zi_shi_liu_5jin_6_7liang"
     },
