@@ -368,9 +368,12 @@
       $rootScope.$broadcast('orderStateChanged', order);
     }
     function alertMessage(message){
-      $rootScope.alert = $rootScope.alert || {message: ''};
+      if(!_.isEmpty($rootScope.alert.timer)){
+        $timeout.cancel($rootScope.alert.timer);
+      }
       $rootScope.alert.message = message;
-      $timeout(function(){
+      $rootScope.alert.timer = $timeout(function(){
+        $rootScope.alert.timer = null;
         $rootScope.alert.message = "";
       }, config.timeout);
     }
