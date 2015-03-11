@@ -147,6 +147,9 @@
       });
     }
     function getShipFee(order){
+      if(_.isEmpty(order) || _.isEmpty(order.Order)){
+        return $filter('currency')(0, '￥');
+      }
       if(order.Order.ship_fee == -2){
         return '自提';
       }

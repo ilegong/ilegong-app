@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, Addresses, Orders, Carts,Coupons){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, Addresses, Orders, Carts,Coupons){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -32,7 +32,7 @@
       vm.shipFees = $rootScope.user.cartInfo.shipFees; 
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
       vm.reduced = $rootScope.user.cartInfo.reduced;
-      vm.totalPrice = $rootScope.user.cartInfo.total_price;
+      vm.totalPrice = $rootScope.user.cartInfo.total_price + Math.max($rootScope.user.cartInfo.shipFee, 0);
 
       vm.validCoupons = $rootScope.user.validCoupons;
       vm.invalidCoupons = $rootScope.user.invalidCoupons;
@@ -45,7 +45,7 @@
         vm.shipFees = $rootScope.user.cartInfo.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = $rootScope.user.cartInfo.reduced;
-        vm.totalPrice = $rootScope.user.cartInfo.total_price + $rootScope.user.cartInfo.shipFee;
+        vm.totalPrice = $rootScope.user.cartInfo.total_price + Math.max($rootScope.user.cartInfo.shipFee, 0);
       });
     }
     function setBrandOrProductCoupon(coupon,brand,products){
@@ -101,10 +101,20 @@
     }
     function getPriceOfBrand(brandItem){
       return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0)
-       + vm.getShipFeeOfBrand(brandItem.id);
+       + Math.max(_.find(vm.shipFees, function(fee, bid){return bid == brandId}), 0);
     }
     function getShipFeeOfBrand(brandId){
-      return Math.max(_.find(vm.shipFees, function(fee, bid){return bid == brandId}), 0);
+      var shipFee = _.find(vm.shipFees, function(fee, bid){return bid == brandId});
+      if(_.isEmpty(shipFee)){
+        return $filter('currency')(0, '￥');
+      }
+      if(shipFee == -2){
+        return '自提';
+      }
+      if(shipFee == -1){
+        return '货到付款';
+      }
+      return $filter('currency')(shipFee, '￥')
     }
     function countOfProducts(brandItem){
       return _.size(brandItem.items);
