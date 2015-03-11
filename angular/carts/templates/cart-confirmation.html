@@ -20,31 +20,31 @@
         <div>请选择地址</div>
       </div>
     </div>
-    <div ng-repeat="item in ::vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
+    <div ng-repeat="item in vm.confirmedBrandItems" ng-init="brand=vm.getBrandById(item.id);">
       <div class="item-divider"></div>
       <div class="item">
         <div class="item-image-mini-left">
-          <img class="item-image r5" src="{{::brand.Brand.coverimg}}"/>
-          <div class="nowrap" ng-bind="::brand.Brand.name"></div>
+          <img class="item-image r5" src="{{brand.Brand.coverimg}}"/>
+          <div class="nowrap" ng-bind="brand.Brand.name"></div>
         </div>
       </div>
-      <div class="item item-thumbnail-left" ng-repeat="product in ::item.items">
-        <img src="{{::product.coverimg}}"/>
-        <div class="nowrap" ng-bind="::product.name">
+      <div class="item item-thumbnail-left" ng-repeat="product in item.items">
+        <img src="{{product.coverimg}}"/>
+        <div class="nowrap" ng-bind="product.name">
         </div>
         <div class="nowrap text-sub-muted">
-          价格：<span ng-bind="product.price | currency:'￥'"></span>&nbsp;数量：<span ng-bind="::product.num"></span>
+          价格：<span ng-bind="product.price | currency:'￥'"></span>&nbsp;数量：<span ng-bind="product.num"></span>
         </div>
-        <div class="nowrap text-sub-muted" ng-show="::!_.isEmpty(product.spec)">
+        <div class="nowrap text-sub-muted" ng-show="!_.isEmpty(product.spec)">
           规格：<span ng-bind="product.spec"></span>
         </div>
         <div class="nowrap text-sub-muted">
-          小计：<span class="text-energized" ng-bind="::vm.getPriceOfProduct(product) | currency:'￥'"></span>
+          小计：<span class="text-energized" ng-bind="vm.getPriceOfProduct(product) | currency:'￥'"></span>
         </div>
       </div>
       <div class="item item-icon-right row">
         <span class="col col-25">运费小计</span>
-        <span class="col" ng-bind="::vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'"></span>
+        <span class="col" ng-bind="vm.getShipFeeOfBrand(brand.Brand.id) | currency: '￥'"></span>
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee;">
@@ -57,16 +57,16 @@
       <ion-checkbox ng-if="false" reason="没有API" ng-repeat="coupon in vm.validCoupons"  ng-if="coupon.Coupon.brand_id == brand.Brand.id" ng-model="coupon.isChecked" ng-init="coupon.isChecked = false;" ng-click="vm.setBrandOrProductCoupon(coupon,brand,item.items)" ng-bind="coupon.isChecked"></ion-checkbox>
 
       <div class="item tr">
-        <span class="nowrap text-muted">共<span ng-bind="::vm.countOfProducts(item)"></span>件商品，合计：<span ng-bind="::vm.getPriceOfBrand(item) | currency:'￥'"></span></span>
+        <span class="nowrap text-muted">共<span ng-bind="vm.countOfProducts(item)"></span>件商品，合计：<span ng-bind="vm.getPriceOfBrand(item) | currency:'￥'"></span></span>
       </div>
     </div>
   </ion-content>
 
   <ion-footer-bar class="row">
     <span class="col text-16 padding-top-bottom-10">
-      共<span ng-bind="::vm.getPidList().length">0</span>件，实付款
+      共<span ng-bind="vm.getPidList().length">0</span>件，实付款
       <span class="text-energized">
-        <strong ng-bind="::vm.totalPrice | currency:'￥'">￥0.00</strong>
+        <strong ng-bind="vm.totalPrice | currency:'￥'">￥0.00</strong>
       </span>
     </span>
     <button class="button button-energized button-30" ng-click="vm.submitOrder()" ng-disabled="!vm.readyToSubmitOrder()">

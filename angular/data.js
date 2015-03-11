@@ -2250,7 +2250,7 @@ var orderDetail = {
       "applied_global_coupon":"",
       "global_coupon_total":"0",
       "member_id":"0",
-      "type":"1"
+      "type":"5"
     }
   },
   "carts":[

@@ -15,7 +15,7 @@
     vm.onAliPayLoadStart = onAliPayLoadStart;
     vm.onAliPayLoadStop = onAliPayLoadStop;
     vm.onAliPayFinished = onAliPayFinished;
-    vm.toProductDetailPage = function(item){$state.go("product-detail",{id:item.Cart.product_id,from:-2})};
+    vm.toProductDetailPage = toProductDetailPage;
     vm.toStoreHomePage = function(store){$state.go('store.home', {id: store.id, name: store.name})};
     vm.callHotline = callHotline;
     vm.reloadOrder = reloadOrder;
@@ -154,6 +154,13 @@
         return '货到付款';
       }
       return $filter('currency')(order.Order.ship_fee, '￥')
+    }
+    function toProductDetailPage(item){
+      if(vm.order.Order.type == 5){
+        $rootScope.alertMessage('团购商品，暂时不能查看详情');
+        return;
+      }
+      $state.go("product-detail",{id: item.Cart.product_id, from:-2})
     }
   } 
 })(window, window.angular);
