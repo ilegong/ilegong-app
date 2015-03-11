@@ -44,6 +44,7 @@
         }
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
+        vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
       }, function(e){});
       Products.getProductComment(vm.id).then(function(data){
         vm.comments = data;

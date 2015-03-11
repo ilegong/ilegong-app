@@ -51,14 +51,15 @@
       <span class="col col-15">
         快递：
       </span>
-      <span class="col" ng-bind="::vm.getShipFee()"></span>
+      <span class="col" ng-bind="vm.getShipFee()"></span>
     </div>
     <div class="item row" ng-cloak>
       <div class="col col-15">
         服务：
       </div>
       <span class="col wrapped-container">
-        本商品由 <span ng-bind="::vm.brand.Brand.name"></span> 发货并提供售后服务
+        本商品由 <span ng-bind="::vm.brand.Brand.name"></span> 发货并提供售后服务。
+        <span ng-show="vm.hasWeixinId">联系商家：微信号 {{::vm.brand.Brand.weixin_id}}</span>
       </span>
     </div>
     
@@ -126,7 +127,7 @@
       <strong>立即购买</strong>
     </span>
     <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published">
-      <strong ng-bind="::vm.getCartTitle()"></strong>
+      <strong ng-bind="vm.getCartTitle()"></strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">
         <span ng-show="countOfCartItems() > 0" class="badge badge-right-top badge-energized" ng-bind="countOfCartItems()"></span>
