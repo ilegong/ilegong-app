@@ -14,6 +14,9 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="Orientation" value="portrait" />
+  <preference name="SplashScreen" value="screen"/>
+  <!-- <preference name="LoadingDialog" value=",正在加载中，请稍后..."/> -->
+  <preference name="KeepRunning" value="false"/>
 
   <icon src="www/res/icons/ios/icon-60@3x.png" />
   <platform name="android">
@@ -21,10 +24,10 @@
     <icon src="www/res/icons/android/icon-60@3x.png" density="mdpi" />
     <icon src="www/res/icons/android/icon-60@3x.png" density="hdpi" />
     <icon src="www/res/icons/android/icon-60@3x.png" density="xhdpi" />
-    <splash src="www/res/splash/android/splash.png" density="port-ldpi"/>
-    <splash src="www/res/splash/android/splash.png" density="port-mdpi"/>
-    <splash src="www/res/splash/android/splash.png" density="port-hdpi"/>
-    <splash src="www/res/splash/android/splash.png" density="port-xhdpi"/>
+    <splash src="www/res/splash/android/splash-640X960.png" density="port-ldpi"/>
+    <splash src="www/res/splash/android/splash-640X960.png" density="port-mdpi"/>
+    <splash src="www/res/splash/android/splash-750X1334.png" density="port-hdpi"/>
+    <splash src="www/res/splash/android/splash-1080X1920.png" density="port-xhdpi"/>
   </platform>
   <platform name="ios">
     <!-- https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/IconMatrix.html -->
@@ -50,7 +53,7 @@
     <!-- iphone 5 -->
     <splash src="www/res/splash/ios/splash-640X960.png" width="640" height="1136"/>
     <!-- iphone 6 -->
-    <splash src="www/res/splash/ios/splash-750X1134.png" width="750" height="1334"/>
+    <splash src="www/res/splash/ios/splash-750X1334.png" width="750" height="1334"/>
     <!-- iphone 6 plus -->
     <splash src="www/res/splash/ios/splash-1080X1920.png" width="1080" height="1920"/>
   </platform>

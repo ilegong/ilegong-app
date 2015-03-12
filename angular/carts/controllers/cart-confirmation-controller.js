@@ -100,8 +100,9 @@
       return product.price * product.num;
     }
     function getPriceOfBrand(brandItem){
+      var shipFee = _.find(vm.shipFees, function(fee, bid){return bid == brandItem.id});
       return _.reduce(brandItem.items, function(memo, product){return memo + vm.getPriceOfProduct(product)}, 0)
-       + Math.max(_.find(vm.shipFees, function(fee, bid){return bid == brandId}), 0);
+       + Math.max(shipFee, 0);
     }
     function getShipFeeOfBrand(brandId){
       var shipFee = _.find(vm.shipFees, function(fee, bid){return bid == brandId});
