@@ -15,7 +15,7 @@
     function activate(){
       vm.loading = true;
       vm.loaded = false;
-      vm.loadingFailed = false;
+      vm.loadFailed = false;
       vm.loadData();
     }
     function doRefresh(){
@@ -44,13 +44,13 @@
         $ionicSlideBoxDelegate.update();
         vm.loading = false;
         vm.loaded = true;
-        vm.loadingFailed = false;
+        vm.loadFailed = false;
 
         $rootScope.hideTabs = [false];
       }, function(e){
         vm.loaded = false;
         vm.loading = false;
-        vm.loadingFailed = true;
+        vm.loadFailed = true;
 
         $rootScope.hideTabs = [true];
       });

@@ -25,7 +25,7 @@
       // var defer = $q.defer();
       // $timeout(function(){
       //   defer.reject('');
-      // }, 1000);
+      // }, 3000);
       // return defer.promise;
       if(config.fakeData){
         $log.log(url).log(FakeData.get(url));

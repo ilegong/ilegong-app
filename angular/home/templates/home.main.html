@@ -1,15 +1,11 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
-  <img class="bg-image" ng-show="!vm.loadingFailed && vm.loading" src="res/splash/ios/splash.png">
   <ion-content class="home" ng-click="vm.doRefresh()">
-    <div class="centered-container" ng-show="vm.loadingFailed" ng-cloak>
-      <span class="no-content no-network">
-        <img src="img/no-network.png">
+    <div class="centered-container" ng-if="vm.loading || vm.loadFailed" ng-cloak>
+      <span class="no-content load-status">
+        <img ng-src="{{vm.loading ? 'img/loading.gif' : 'img/load-failed.png'}}"/>
       </span>
-      <span class="message text-grey" ng-show="vm.loading">
-        正在连接，请稍候...
-      </span>
-      <span class="message text-grey" ng-show="!vm.loading">
-       网络连接不可用，请点击重试
+      <span class="message text-muted">
+        {{vm.loading ? '加载中，请稍候...' : '加载失败，请点击重试'}}
       </span>
     </div>
 

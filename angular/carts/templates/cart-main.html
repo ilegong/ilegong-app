@@ -41,7 +41,7 @@
     <div class="centered-container" ng-show="vm.isLoggedIn && vm.cartBrands.length == 0" ng-cloak>
       <span class="no-content no-cart-items">
       </span>
-      <span class="message text-grey">
+      <span class="message text-muted">
         购物车还是空的，去选点好吃的吧！
       </span>
       <a class="button button-short button-energized" ng-click="toHomePage()">去逛逛</a>
@@ -50,7 +50,7 @@
     <div class="centered-container" ng-show="!vm.isLoggedIn" ng-cloak>
       <span class="no-content">
       </span>
-      <span class="message text-grey">
+      <span class="message text-muted">
         您还没有登录，请先登录
       </span>
       <button class="button button-energized" ui-sref="account-login">马上登陆</button>

@@ -600,7 +600,7 @@ ion-option-button.button{
   .no-content{
     @extend .pys-400;
     margin-top: 50%;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
   }
   .no-content.no-address{
     background-position: -25rem -8.57142857143rem;
@@ -622,11 +622,14 @@ ion-option-button.button{
     width: 5.7619047619rem;
     height: 4.38095238095rem;
   }
-  .no-content.no-network{
+  .no-content.load-status{
     background-position: 0rem -20.9523809524rem;
-    width: 5.52380952381rem;
-    height: 5.52380952381em;
-    margin-top: 40%;
+    width: 4rem;
+    height: 4rem;
+    img{
+      height: 100%;
+      width: 100%;
+    }
   }  
 }
 
