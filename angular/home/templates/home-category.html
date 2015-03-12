@@ -1,5 +1,5 @@
 <ion-view title="{{::vm.name}}" hide-tabs>
-  <ion-content class='home-category elements' ng-click="vm.doRefresh()">
+  <ion-content class='home-category elements' ng-click="vm.loadData()">
     <div class="centered-container" ng-if="vm.loading || vm.loadFailed" ng-cloak>
       <span class="no-content load-status">
         <img ng-src="{{vm.loading ? 'img/loading.gif' : 'img/load-failed.png'}}"/>

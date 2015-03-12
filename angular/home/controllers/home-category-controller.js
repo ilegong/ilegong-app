@@ -6,7 +6,6 @@
 
   function HomeCategoryCtrl($rootScope, $scope, $stateParams, $state, $log, Categories){
     var vm = this;
-    vm.doRefresh = doRefresh;
     vm.loadData = loadData;
     vm.getBrandById = getBrandById;
     vm.getItemHeight = getItemHeight;
@@ -34,21 +33,11 @@
       
       vm.loadData();
     }
-    function doRefresh(){
+    function loadData(){
       if(vm.loaded){
         return;
       }
       vm.loading = true;
-
-      vm.loadData().then(function(){
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      }, function(e){
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      });
-    }
-    function loadData(){
       return Categories.get(vm.slug).then(function(data){
         vm.products = _.map(data.data_list, function(product){product.brand = vm.getBrandById(product.brand_id); return product});
         vm.loading = false;

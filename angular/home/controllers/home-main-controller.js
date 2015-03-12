@@ -8,7 +8,6 @@
   /* @ngInject */
   function HomeMainCtrl(Users,$rootScope, $scope, $http, $log, $timeout, $ionicSlideBoxDelegate, Base){
     var vm = this;
-    vm.doRefresh = doRefresh;
     vm.loadData = loadData;
     activate();
 
@@ -18,22 +17,11 @@
       vm.loadFailed = false;
       vm.loadData();
     }
-    function doRefresh(){
+    function loadData(){
       if(vm.loaded){
         return;
       }
       vm.loading = true;
-
-      vm.loadData().then(function(){
-        $rootScope.refreshData();
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      }, function(e){
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      });
-    }
-    function loadData(){
       return Base.get('/api_orders/home.json').then(function(data){
         vm.bannerItems = _.filter(data.bannerItems, function(item){return item.id != null});
         vm.tryingItems = data.tryingItems;
@@ -47,6 +35,7 @@
         vm.loadFailed = false;
 
         $rootScope.hideTabs = [false];
+        $rootScope.refreshData();
       }, function(e){
         vm.loaded = false;
         vm.loading = false;

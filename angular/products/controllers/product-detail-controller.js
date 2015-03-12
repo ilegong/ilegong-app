@@ -7,6 +7,7 @@
   /* @ngInject */
   function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,$filter,Products,Carts,Addresses,Orders){
     var vm = this;
+    vm.loadData = loadData;
     vm.reduceCartItemNum = reduceCartItemNum;
     vm.addCartItemNum = addCartItemNum;
     vm.confirmComment = confirmComment;
@@ -29,6 +30,10 @@
     activate();
     
     function activate(){
+      vm.loading = true;
+      vm.loaded = false;
+      vm.loadFailed = false;
+
       vm.count=1;
       vm.id = $stateParams.id;
       vm.from = $stateParams.from;
@@ -37,7 +42,16 @@
       vm.specsChecks = {};
       vm.currentSpecs = 0;
       vm.inprogress = false;
-      Products.getProduct(vm.id).then(function(data){
+
+      vm.loadData();
+    }
+
+    function loadData(){
+      if(vm.loaded){
+        return;
+      }
+      vm.loading = true;
+      return Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
           vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
@@ -45,12 +59,21 @@
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
-      }, function(e){});
-      Products.getProductComment(vm.id).then(function(data){
-        vm.comments = data;
-      }, function(e){vm.comments = []});
-    }
+        vm.comments = [];
 
+        Products.getProductComment(vm.id).then(function(comments){
+          vm.comments = comments;
+        });
+
+        vm.loading = false;
+        vm.loaded = true;
+        vm.loadFailed = false;
+      }, function(e){
+        vm.loaded = false;
+        vm.loading = false;
+        vm.loadFailed = true;
+      });
+    }
     function specsClick(specType, specChoice){
       _.each(vm.specsChecks[specType], function(specChoice){specChoice.value = false});
       vm.specsChecks[specType][specChoice].value = true;
