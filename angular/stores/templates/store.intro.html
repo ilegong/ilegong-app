@@ -1,5 +1,14 @@
 <ion-view title="{{::storeName}}" show-store-tabs>
-  <ion-content>
+  <ion-content ng-click="vm.loadData()">
+    <div class="centered-container" ng-if="!vm.loaded">
+      <span class="no-content load-status">
+        <img ng-src="{{vm.loading ? 'img/loading.gif' : 'img/load-failed.png'}}"/>
+      </span>
+      <span class="message text-muted" ng-cloak>
+        {{vm.loading ? '加载中，请稍候...' : '加载失败，请点击重试'}}
+      </span>
+    </div>
+
     <div class="article padding" ng-bind-html="::vm.storeIntro"></div>
   </ion-content>
 </ion-view>

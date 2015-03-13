@@ -10,11 +10,15 @@
     vm.goBack = goBack;
     vm.getItemHeight = getItemHeight;
     vm.getItemWidth = getItemWidth;
+    vm.loadData = loadData;
     activate();
 
     function activate(){
       $rootScope.storeId = $stateParams.id;
       $rootScope.storeName = $stateParams.name;
+      vm.loading = true;
+      vm.loaded = false;
+      vm.loadFailed = false;
 
       var deviceWidth = window.innerWidth;
       vm.itemWidth = Math.round((window.innerWidth - 10) / 2);
@@ -24,9 +28,26 @@
       var priceHeight = 20;
       vm.itemHeight = Math.ceil(vm.imageHeight + productNameHeight + priceHeight + 22); // 10px padding + 10px divider + 2px border
 
-      Stores.getStore($rootScope.storeId).then(function(store){
+      vm.loadData();
+    }
+
+    function loadData(){
+      if(vm.loaded){
+        return;
+      }
+      vm.loading = true;
+
+      return Stores.getStore($rootScope.storeId).then(function(store){
         vm.store = store.content.info;
         vm.products = store.content.products;
+
+        vm.loading = false;
+        vm.loaded = true;
+        vm.loadFailed = false;
+      }, function(){
+        vm.loaded = false;
+        vm.loading = false;
+        vm.loadFailed = true;
       });
     }
 

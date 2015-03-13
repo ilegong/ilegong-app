@@ -152,7 +152,6 @@
         remarks[brandItem.id] = brandItem.remark;
       });
       Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
-        $log.log("submit order successfully: ").log(orderIds);
         $rootScope.reloadOrders($rootScope.user.token.access_token);
         $rootScope.reloadCart($rootScope.user.token.access_token);
         $ionicHistory.currentView($ionicHistory.backView());
@@ -163,8 +162,12 @@
           $state.go("order-detail", {id: orderIds[0]});
         }
       }, function(e){
-        $log.log("submit order failed: ").log(e);
-        $rootScope.alertMessage('提交订单失败，请重试');
+        if(e.status == 0){
+          $rootScope.alertMessage('网络异常，稍后请重试');
+        }
+        else{
+          $rootScope.alertMessage('提交订单失败，稍后请重试');
+        }
       });
     }
   }

@@ -44,7 +44,7 @@
           }
         })
         .error(function(data, status, headers, config) {
-          $log.log("get " + url + " failed with status " + status + ": ").log(data).log(config);
+          $log.log("get " + url + " failed with status: " + status + ", data: ").log(data).log(", and config: ").log(config);
           defer.reject({data: data, status: status});
         });
       return defer.promise;
@@ -62,12 +62,12 @@
             defer.resolve(data);
           }
           else{
-            $log.log("post to " + url + " failed with status " + status +": ").log(data);
+            $log.log("post to " + url + " failed with status: " + status +", data: ").log(data);
             defer.reject({data: data, status: status});
           }
         })
         .error(function(data, status, headers, config) {
-          $log.log("post to " + url + " failed with status " + status + ": ").log(data).log(config);
+          $log.log("post to " + url + " failed with status :" + status + ", data: ").log(data).log(', and config').log(config);
           defer.reject({data: data, status: status});
         });
       return defer.promise;

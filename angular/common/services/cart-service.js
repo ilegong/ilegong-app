@@ -21,7 +21,7 @@
           defer.resolve(result.data);  
         }
         else{
-          defer.reject(result.data);
+          defer.reject(result);
         }
       }, function(e){defer.reject(e)});
       return defer.promise;

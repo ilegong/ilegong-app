@@ -99,18 +99,22 @@
       var couponCode = '';
       var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(_.filter(brand.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id})}));
       if(_.isEmpty(pidList)) {
-        return vm.onConfirmCartFailed('', 'pid list is empty');
+        return vm.onConfirmCartFailed('结算失败，请检查后重试', 'pid list is empty');
       }
 
       $rootScope.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $state.go('cart-confirmation');
       }, function(e){
-        vm.onConfirmCartFailed(vm.confirmErrors[e.reason], e);
+        if(e.status == 0){
+          vm.onConfirmCartFailed('网络异常，稍后请重试', e);
+        }
+        else{
+          vm.onConfirmCartFailed(vm.confirmErrors[e.reason], e);
+        }
       });
     }
     function onConfirmCartFailed(message, e){
-      $log.log('confirm cart failed:').log(e);
-      $rootScope.alertMessage(message || '结算失败，请重试');
+      $rootScope.alertMessage(message || '结算失败，稍后请重试');
       $rootScope.reloadCart($rootScope.user.token.access_token);
     }
   }
