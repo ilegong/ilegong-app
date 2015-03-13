@@ -18,14 +18,38 @@
     vm.toProductDetailPage = toProductDetailPage;
     vm.toStoreHomePage = function(store){$state.go('store.home', {id: store.id, name: store.name})};
     vm.callHotline = callHotline;
-    vm.reloadOrder = reloadOrder;
     vm.getShipFee = getShipFee;
+    vm.loadData = loadData;
     activate();
     
     function activate() {
       vm.orderId = $stateParams.id;
       vm.inAppBrowserEvents = {'loadstart': vm.onAliPayLoadStart, 'loadstop': vm.onAliPayLoadStop, 'exit': vm.onAliPayFinished}
-      vm.reloadOrder(vm.orderId, $rootScope.user.token.access_token);
+
+      vm.loadStatus = new LoadStatus();
+      vm.loadData();
+    }
+    function loadData(){
+      if(vm.loadStatus.isLoadFinished()){
+        return;
+      }
+      vm.loadStatus.startLoading();
+      Orders.getOrderDetail(vm.orderId, $rootScope.user.token.access_token).then(function(data) {
+        vm.order = data.order;
+        vm.orderState = Orders.getOrderState(vm.order.Order.status);
+        vm.cartItems = data.carts;
+        vm.hasPaid = !_.isEmpty(vm.order.Order.pay_time);
+        vm.ship_type = data.ship_type;
+        vm.expired_pids = data.expired_pids;
+        vm.no_more_money = data.no_more_money;
+        vm.products = data.products;
+        vm.store = data.store;
+        $rootScope.updateOrderState(vm.orderId, vm.order.Order.status);
+
+        vm.loadStatus.succeeded();
+      }, function(e){
+        vm.loadStatus.failed(e.status);
+      });
     }
     function callHotline(){
      var hideSheet = $ionicActionSheet.show({
@@ -130,21 +154,7 @@
         }catch(e){$log.log("failed to remove event listener " + event).log(e)}
       });
       $log.log("ali pay finished, reload order detail for order " + vm.orderId);
-      vm.reloadOrder(vm.orderId, $rootScope.user.token.access_token);
-    }
-    function reloadOrder(orderId, access_token){
-      Orders.getOrderDetail(orderId, access_token).then(function(data) {
-        vm.order = data.order;
-        vm.orderState = Orders.getOrderState(vm.order.Order.status);
-        vm.cartItems = data.carts;
-        vm.hasPaid = !_.isEmpty(vm.order.Order.pay_time);
-        vm.ship_type = data.ship_type;
-        vm.expired_pids = data.expired_pids;
-        vm.no_more_money = data.no_more_money;
-        vm.products = data.products;
-        vm.store = data.store;
-        $rootScope.updateOrderState(orderId, vm.order.Order.status);
-      });
+      vm.loadData();
     }
     function getShipFee(order){
       if(_.isEmpty(order) || _.isEmpty(order.Order)){
