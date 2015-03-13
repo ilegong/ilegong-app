@@ -23,13 +23,13 @@
         <div class="text-energized col col-20 tr" style="padding-right: 0;" ng-bind="order.Order.orderState.status"></div>
       </a>
       <a class="item item-thumbnail-left" ng-repeat="product in order.Order.products" ui-sref="order-detail({id: order.Order.id})" ng-init="">
-        <img src='{{::product.Cart.coverimg}}' class="r5"/>
-        <div class="nowrap" ng-bind="::product.Cart.name"></div>
+        <img src='{{product.Cart.coverimg}}' class="r5"/>
+        <div class="nowrap" ng-bind="product.Cart.name"></div>
         <div class="text-muted">
-          价格：<span ng-bind="::product.Cart.price | currency:'￥'"> 
+          价格：<span ng-bind="product.Cart.price | currency:'￥'"> 
         </div>
         <div class="text-muted">
-          数量：<span ng-bind="::product.Cart.num"></span>
+          数量：<span ng-bind="product.Cart.num"></span>
         </div>
       </a>  
       <div class="item tr">

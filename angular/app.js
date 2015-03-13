@@ -288,6 +288,7 @@
         Base.getLocal('user.cartBrands').then(function(cartBrands){
           $rootScope.user.cartBrands = cartBrands;
         });
+        return e;
       });
     }
     function confirmCart(pidList, couponCode, accessToken){
@@ -329,7 +330,7 @@
       });
     }
     function reloadCoupons(accessToken){
-      Coupons.getCoupons(accessToken).then(function(data){
+      return Coupons.getCoupons(accessToken).then(function(data){
         _.each(data.coupons, function(coupon){
           coupon.Coupon.valid_begin = new Date(coupon.Coupon.valid_begin);
           coupon.Coupon.valid_end = new Date(coupon.Coupon.valid_end);

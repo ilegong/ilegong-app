@@ -26,9 +26,6 @@
     function activate(){
       vm.isLoggedIn = !_.isEmpty($rootScope.user.token);
       vm.cartBrands = $rootScope.user.cartBrands;
-      vm.confirmErrors = {
-        'invalid_address': '请设置默认收货地址'
-      };
       $scope.$watch('user.cartBrands', function(newCartBrands, oldCartBrands) {
         vm.cartBrands = $rootScope.user.cartBrands;
       });
@@ -97,24 +94,36 @@
       }
 
       var couponCode = '';
-      var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(_.filter(brand.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.product_id})}));
+      var pidList = _.flatten(_.map(vm.cartBrands, function(brand){return _.map(_.filter(brand.cartItems, function(ci){return ci.checked}), function(ci){return ci.Cart.id})}));
       if(_.isEmpty(pidList)) {
-        return vm.onConfirmCartFailed('结算失败，请检查后重试', 'pid list is empty');
+        return $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
+          if(_.isEmpty($rootScope.user.cartBrands)){
+            $rootScope.alertMessage('购物车为空');            
+          }
+          else{
+            $rootScope.alertMessage('抱歉，操作失败，请重新结算');
+          }
+        }, function(){
+          $rootScope.alertMessage('结算失败，请稍后重试');
+        });
       }
 
       $rootScope.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $state.go('cart-confirmation');
       }, function(e){
+        var message = '结算失败，请稍后重试';
         if(e.status == 0){
-          vm.onConfirmCartFailed('网络异常，稍后请重试', e);
+          message = '网络连接不可用，请稍后重试';
         }
-        else{
-          vm.onConfirmCartFailed(vm.confirmErrors[e.reason], e);
+        else if(e.reason == 'invalid_address'){
+          message = '请设置默认收货地址'
         }
+
+        vm.onConfirmCartFailed(message, e);
       });
     }
-    function onConfirmCartFailed(message, e){
-      $rootScope.alertMessage(message || '结算失败，稍后请重试');
+    function onConfirmCartFailed(message){
+      $rootScope.alertMessage(message);
       $rootScope.reloadCart($rootScope.user.token.access_token);
     }
   }

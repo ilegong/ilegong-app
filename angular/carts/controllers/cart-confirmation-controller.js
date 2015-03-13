@@ -152,22 +152,19 @@
         remarks[brandItem.id] = brandItem.remark;
       });
       Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
-        $rootScope.reloadOrders($rootScope.user.token.access_token);
-        $rootScope.reloadCart($rootScope.user.token.access_token);
-        $ionicHistory.currentView($ionicHistory.backView());
-        if(orderIds.length > 1){
-          $state.go("orders", {state: 0});
-        }
-        else{
-          $state.go("order-detail", {id: orderIds[0]});
-        }
+        $rootScope.reloadOrders($rootScope.user.token.access_token).finally(function(){
+          $rootScope.reloadCart($rootScope.user.token.access_token).finally(function(){
+            $ionicHistory.currentView($ionicHistory.backView());
+            if(orderIds.length > 1){
+              $state.go("orders", {state: 0});
+            }
+            else{
+              $state.go("order-detail", {id: orderIds[0]});
+            }
+          });
+        })
       }, function(e){
-        if(e.status == 0){
-          $rootScope.alertMessage('网络异常，稍后请重试');
-        }
-        else{
-          $rootScope.alertMessage('提交订单失败，稍后请重试');
-        }
+        $rootScope.alertMessage(e.status == 0 ? '网络连接不可用，请稍后重试': '提交订单失败，请稍后重试');
       });
     }
   }
