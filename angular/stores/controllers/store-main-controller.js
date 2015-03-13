@@ -14,6 +14,7 @@
     activate();
     
     function activate(){
+      vm.loadStatus = new LoadStatus();
       vm.updateStore($rootScope.brands);
       var deviceWidth = window.innerWidth;
       vm.itemWidth = Math.max((window.innerWidth - 10) / 2, 10);
@@ -28,23 +29,20 @@
     }
 
     function loadData(){
-      if(vm.loaded){
+      if(vm.loadStatus.isLoadFinished()){
         return;
       }
-      vm.loading = true;
+      vm.loadStatus.startLoading();
 
       return $rootScope.reloadStores();
     }
     function updateStore(stores){
+      vm.loadStatus.startLoading();
       if(!_.isEmpty(stores)){
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
+        vm.loadStatus.succeeded();
       }
       else{
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
+        vm.loadStatus.failed(0);
       }
       vm.stores = stores;
     }

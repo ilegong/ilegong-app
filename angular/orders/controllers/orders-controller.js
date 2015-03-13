@@ -72,7 +72,7 @@
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "确认收货失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "确认收货失败，请重试");
       });
     }
     function viewLogistics(id){
@@ -83,7 +83,7 @@
       Base.ping().then(function(){
         $rootScope.alertMessage('已经提醒卖家发货');
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "提醒卖家发货失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "提醒卖家发货失败，请重试");
       })
     }
     function removeOrder(order){
@@ -103,7 +103,7 @@
           $rootScope.alertMessage("已删除订单");
         });        
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "删除订单失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "删除订单失败，请重试");
       });
     }
     function getShipFee(order){

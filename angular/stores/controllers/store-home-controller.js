@@ -16,9 +16,6 @@
     function activate(){
       $rootScope.storeId = $stateParams.id;
       $rootScope.storeName = $stateParams.name;
-      vm.loading = true;
-      vm.loaded = false;
-      vm.loadFailed = false;
 
       var deviceWidth = window.innerWidth;
       vm.itemWidth = Math.round((window.innerWidth - 10) / 2);
@@ -28,26 +25,22 @@
       var priceHeight = 20;
       vm.itemHeight = Math.ceil(vm.imageHeight + productNameHeight + priceHeight + 22); // 10px padding + 10px divider + 2px border
 
+      vm.loadStatus = new LoadStatus();
       vm.loadData();
     }
 
     function loadData(){
-      if(vm.loaded){
+      if(vm.loadStatus.isLoadFinished()){
         return;
       }
-      vm.loading = true;
-
+      vm.loadStatus.startLoading();
       return Stores.getStore($rootScope.storeId).then(function(store){
         vm.store = store.content.info;
         vm.products = store.content.products;
 
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
+        vm.loadStatus.succeeded();
       }, function(){
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
+        vm.loadStatus.failed(e.status);
       });
     }
 

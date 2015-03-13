@@ -29,9 +29,9 @@ var LoadStatus = function(){
       return '正在加载，请稍候...';
     }
     if(this.status == 0){
-      return '网络不佳，请稍后再试';
+      return '网络链接不可用，请稍后重试';
     }
-    return '加载失败，请稍后尝试';
+    return '加载失败，请稍后重试';
   }
   this.getLoadingImage = function(){
     if(this.loading){

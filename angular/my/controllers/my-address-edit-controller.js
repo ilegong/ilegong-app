@@ -78,7 +78,7 @@
       Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated($rootScope.user.token.access_token);
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "修改地址失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "修改地址失败，请重试");
       });
     }
     function addAddress(){
@@ -89,7 +89,7 @@
       Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated($rootScope.user.token.access_token);
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "添加地址失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "添加地址失败，请重试");
       });
     }
     function deleteAddress(addressId){
@@ -100,7 +100,7 @@
         $rootScope.alertMessage("已删除该收货地址");
         vm.onAddressUpdated($rootScope.user.token.access_token);
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "删除地址失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络连接不可用，请稍后重试" : "删除地址失败，请重试");
       });
     }
     function onAddressUpdated(accessToken){

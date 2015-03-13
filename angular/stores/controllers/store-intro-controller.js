@@ -12,23 +12,21 @@
     function activate(){
       $rootScope.storeId = $stateParams.id;
       $rootScope.storeName = $stateParams.name;
-      vm.loading = true;
-      vm.loaded = false;
-      vm.loadFailed = false;
 
+      vm.loadStatus = new LoadStatus();
       vm.loadData();
     }
 
     function loadData(){
+      if(vm.loadStatus.isLoadFinished()){
+        return;
+      }
+      vm.loadStatus.startLoading();
       return Stores.getStoreIntro($stateParams.id).then(function(data){
         vm.storeIntro = $sce.trustAsHtml(data.Brand.content);
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
+        vm.loadStatus.succeeded();
       }, function(e){
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
+        vm.loadStatus.failed(e.status);
       });
     }
   }

@@ -6,16 +6,14 @@
   </ion-nav-buttons>
 
   <ion-content ng-click="vm.loadData()">
-    <div class="centered-container" ng-if="vm.loading || vm.loadFailed" ng-cloak>
+    <div class="centered-container" ng-if="!vm.loadStatus.isLoadFinished()">
       <span class="no-content load-status">
-        <img ng-src="{{vm.loading ? 'img/loading.gif' : 'img/load-failed.png'}}"/>
+        <img ng-src="{{vm.loadStatus.getLoadingImage()}}"/>
       </span>
-      <span class="message text-muted">
-        {{vm.loading ? '加载中，请稍候...' : '加载失败，请点击重试'}}
-      </span>
+      <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div ng-show="vm.loaded">
+    <div ng-show="vm.loadStatus.isLoadFinished()">
       <img src="{{::vm.product.Product.coverimg}}" class="blocked full"/>
       <div class="item" style="border-top: 0; padding-bottom: 0;">
         <div class="wrapped text-21 text-dark padding-bottom-5" ng-bind="::vm.product.Product.name"></div>

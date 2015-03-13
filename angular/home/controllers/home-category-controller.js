@@ -14,10 +14,6 @@
     active();
 
     function active(){
-      vm.loading = true;
-      vm.loaded = false;
-      vm.loadFailed = false;
-
       vm.slug = $stateParams.slug;
       vm.brands = $rootScope.brands;
       // ionic bug: http://stackoverflow.com/questions/21257786/angularjs-using-ionic-framework-data-binding-on-header-title-not-working
@@ -31,22 +27,19 @@
       var brandHeight = 40;
       vm.itemHeight = Math.ceil(vm.imageHeight + brandHeight + productNameHeight + 22); // 10px padding + 10px divider + 2px border
       
+      vm.loadStatus = new LoadStatus();
       vm.loadData();
     }
     function loadData(){
-      if(vm.loaded){
+      if(vm.loadStatus.isLoadFinished()){
         return;
       }
-      vm.loading = true;
+      vm.loadStatus.startLoading();
       return Categories.get(vm.slug).then(function(data){
         vm.products = _.map(data.data_list, function(product){product.brand = vm.getBrandById(product.brand_id); return product});
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
+        vm.loadStatus.succeeded();
       }, function(e){
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
+        vm.loadStatus.failed(e.status);
       });
     }
     function getBrandById(id){

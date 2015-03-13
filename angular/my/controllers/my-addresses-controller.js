@@ -53,7 +53,7 @@
           }
         });
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "修改默认收货地址失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络链接不可用，请稍后重试" : "修改默认收货地址失败，请重试");
       });
     }
   }  

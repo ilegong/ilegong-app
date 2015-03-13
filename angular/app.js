@@ -248,6 +248,7 @@
         Base.getLocal('brands').then(function(brands){
           $rootScope.brands = brands;
         });
+        return e;
       });
     }
     function reloadTryings(){

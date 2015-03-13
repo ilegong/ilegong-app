@@ -30,10 +30,6 @@
     activate();
     
     function activate(){
-      vm.loading = true;
-      vm.loaded = false;
-      vm.loadFailed = false;
-
       vm.count=1;
       vm.id = $stateParams.id;
       vm.from = $stateParams.from;
@@ -43,14 +39,15 @@
       vm.currentSpecs = 0;
       vm.inprogress = false;
 
+      vm.loadStatus = new LoadStatus();
       vm.loadData();
     }
 
     function loadData(){
-      if(vm.loaded){
+      if(vm.loadStatus.isLoadFinished()){
         return;
       }
-      vm.loading = true;
+      vm.loadStatus.startLoading();
       return Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
         if(typeof(vm.product.Product.specs) === "string"){
@@ -65,13 +62,9 @@
           vm.comments = comments;
         });
 
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
+        vm.loadStatus.succeeded();
       }, function(e){
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
+        vm.loadStatus.failed(e.status);
       });
     }
     function specsClick(specType, specChoice){

@@ -12,16 +12,14 @@
     activate();
 
     function activate(){
-      vm.loading = true;
-      vm.loaded = false;
-      vm.loadFailed = false;
+      vm.loadStatus = new LoadStatus();
       vm.loadData();
     }
     function loadData(){
-      if(vm.loaded){
+      if(vm.loadStatus.isLoadFinished()){
         return;
       }
-      vm.loading = true;
+      vm.loadStatus.startLoading();
       return Base.get('/api_orders/home.json').then(function(data){
         vm.bannerItems = _.filter(data.bannerItems, function(item){return item.id != null});
         vm.tryingItems = data.tryingItems;
@@ -30,17 +28,12 @@
         vm.hotItems = data.hotItems;
         // see http://forum.ionicframework.com/t/slides-generated-with-ng-repeat-causing-issues-slide-box/394/7
         $ionicSlideBoxDelegate.update();
-        vm.loading = false;
-        vm.loaded = true;
-        vm.loadFailed = false;
 
+        vm.loadStatus.succeeded();
         $rootScope.hideTabs = [false];
         $rootScope.refreshData();
       }, function(e){
-        vm.loaded = false;
-        vm.loading = false;
-        vm.loadFailed = true;
-
+        vm.loadStatus.failed(e.status);
         $rootScope.hideTabs = [true];
       });
     }
