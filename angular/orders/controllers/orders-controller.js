@@ -28,10 +28,7 @@
       });
     }
     function doRefresh(){
-      $rootScope.reloadOrders($rootScope.user.token.access_token).then(function(){
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      }, function(){
+      $rootScope.reloadOrders($rootScope.user.token.access_token).finally(function(){
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
       });
@@ -75,8 +72,7 @@
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
       }, function(e){
-        $log.log("failed to confirm receiving goods:").log(e);
-        $rootScope.alertMessage("确认收货失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "确认收货失败，请重试");
       });
     }
     function viewLogistics(id){
@@ -84,10 +80,11 @@
     function addRemark(order){
     }
     function remindSendingGoods(order){
-      order.reminded = true;
-      $timeout(function(){
+      Base.ping().then(function(){
         $rootScope.alertMessage('已经提醒卖家发货');
-      }, 500);
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "提醒卖家发货失败，请重试");
+      })
     }
     function removeOrder(order){
       if(!$rootScope.user.loggedIn){
@@ -100,16 +97,19 @@
 
       var orderId = order.Order.id;
       Orders.removeOrder(orderId, $rootScope.user.token.access_token).then(function(){
-        $rootScope.reloadOrders($rootScope.user.token.access_token).then(function(){
-          $rootScope.alertMessage("已删除订单");  
-        }, function(e){
+        $rootScope.reloadOrders($rootScope.user.token.access_token).catch(function(e){
           $rootScope.removeOrder(orderId);
-        });
+        }).finally(function(){
+          $rootScope.alertMessage("已删除订单");
+        });        
       }, function(e){
-        $rootScope.alertMessage("删除订单失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "删除订单失败，请重试");
       });
     }
     function getShipFee(order){
+      if(_.isEmpty(order) || _.isEmpty(order.Order)){
+        return $filter('currency')(0, '￥');
+      }
       if(order.Order.ship_fee == -2){
         return '自提';
       }

@@ -78,15 +78,15 @@
         $rootScope.alertMessage("订单已取消");
         $ionicHistory.goBack();
       }, function(e){
-        $log.log("failed to cancel order " + orderId + ": ").log(e);
-        $rootScope.alertMessage("取消订单失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "取消订单失败，请重试");
       });
     }
     function remindSendingGoods(order){
-      order.reminded = true;
-      $timeout(function(){
+      Base.ping().then(function(){
         $rootScope.alertMessage('已经提醒卖家发货');
-      }, 500);
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "提醒卖家发货失败，请重试");
+      })
     }
     function confirmReceivingGoods(order){
       if(!$rootScope.user.loggedIn){
@@ -101,8 +101,7 @@
         $rootScope.updateOrderState(orderId, 3);
         $rootScope.alertMessage("已确认收货");
       }, function(e){
-        $log.log("failed to confirm receiving goods:").log(e);
-        $rootScope.alertMessage("确认收货失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "确认收货失败，请重试");
       });
     }
     function removeOrder(order){
@@ -116,18 +115,14 @@
 
       var orderId = order.Order.id;
       Orders.removeOrder(orderId, $rootScope.user.token.access_token).then(function(){
-        $rootScope.reloadOrders($rootScope.user.token.access_token).then(function(){
-          $rootScope.alertMessage("已删除订单");
-          $ionicHistory.goBack();
-        }, function(e){
+        $rootScope.reloadOrders($rootScope.user.token.access_token).catch(function(e){
           $rootScope.removeOrder(orderId);
+        }).finally(function(){
           $rootScope.alertMessage("已删除订单");
           $ionicHistory.goBack();
         });        
-
       }, function(e){
-        $log.log("failed to remove order " + orderId + ": ").log(e);
-        $rootScope.alertMessage("删除订单失败，请重试");
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "删除订单失败，请重试");
       });
     }
     function aliPay(){
@@ -153,7 +148,7 @@
           vm.inAppBrowser.removeEventListener(event, callback);  
         }catch(e){$log.log("failed to remove event listener " + event).log(e)}
       });
-      $log.log("ali pay finished, reload order detail for order " + vm.orderId);
+      $rootScope.alertMessage("支付结束，正在更新订单");
       vm.loadData();
     }
     function getShipFee(order){

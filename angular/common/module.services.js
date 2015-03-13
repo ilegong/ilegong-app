@@ -9,10 +9,12 @@
   function Base($http, $q, $log, $localForage, $window, $timeout, config, FakeData){
     var self = this;
     self.getUrl = getUrl;
+    self.get = get;
     $window.device = $window.device || {};
     return {
       get: get,
       post: post,
+      ping: ping, 
       getLocal: getLocal,
       setLocal: setLocal,
       removeLocal: removeLocal,
@@ -72,7 +74,9 @@
         });
       return defer.promise;
     }
-
+    function ping(){
+      return self.get('/api_orders/ping');
+    }
     function getLocal(key){
       if(config.fakeData){
         return deferred(FakeData.getLocal(key));
