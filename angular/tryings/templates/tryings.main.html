@@ -1,7 +1,5 @@
 <ion-view title="朋友说" hide-back-button='true' show-tabs>
   <ion-content class='padding'>  
-    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
-    </ion-refresher>
     <div ng-repeat="trying in ::vm.tryings">
       <h2 ng-bind="::trying.Category.name"></h2>
       <div class="row" ng-repeat="a in ::trying.articles" ng-init="article = a.Article">
