@@ -1,7 +1,11 @@
 <ion-view title="我的优惠券" class="coupons" hide-tabs>
-  <ion-content>
-    <ion-refresher pulling-text="下拉刷新" on-refresh="vm.doRefresh()">
-    </ion-refresher>
+  <ion-content ng-click="vm.loadData()">
+    <div class="centered-container" ng-if="!vm.loadStatus.isLoadFinished()">
+      <span class="no-content load-status">
+        <img ng-src="{{vm.loadStatus.getLoadingImage()}}"/>
+      </span>
+      <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
+    </div>
     <div class="coupon coupon-valid row" ng-repeat="item in vm.validCoupons" ng-init="brand=vm.getBrand(item.Coupon.brand_id)">
       <a class="coupon-info col col-67" ng-click="vm.useCoupons(item,brand);" >
         <div class="nowrap padding-bottom-5" ng-bind="item.Coupon.name"></div>

@@ -27,13 +27,10 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('app.account-login');
       }
-      $rootScope.reloadAddresses($rootScope.user.token.access_token).then(function(){
+      $rootScope.reloadAddresses($rootScope.user.token.access_token).finally(function(){
         $scope.$broadcast('scroll.refreshComplete');
         $scope.$apply();
-      }, function(){
-        $scope.$broadcast('scroll.refreshComplete');
-        $scope.$apply();
-      })
+      });
     } 
     function isChecked(address){
       if(_.isEmpty(vm.defaultAddress)){
@@ -47,7 +44,7 @@
         return $state.go('app.account-login');
       }
       Addresses.setDefaultAddress(defaultAddress.OrderConsignees.id, $rootScope.user.token.access_token).then(function(result){
-        $rootScope.reloadAddresses($rootScope.user.token.access_token).then(function(){
+        $rootScope.reloadAddresses($rootScope.user.token.access_token).finally(function(){
           if(vm.isFromOrder()){
             $ionicHistory.goBack();
           }
@@ -55,6 +52,8 @@
             $rootScope.alertMessage("已修改默认收货地址");
           }
         });
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "修改默认收货地址失败，请重试");
       });
     }
   }  

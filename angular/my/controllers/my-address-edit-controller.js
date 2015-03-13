@@ -27,10 +27,8 @@
       }      
 
       vm.address = _.find($rootScope.user.addresses, function(address){return address.OrderConsignees.id == vm.addressId});
-      $log.log('address ' + vm.addressId + ": ").log(vm.address);
       var orderConsignees = vm.address.OrderConsignees;        
       vm.province = _.find(vm.provinces, function(province){return province.id == orderConsignees.province_id}) || {};
-      $log.log('province is ').log(vm.province);
 
       Addresses.getAddress(orderConsignees.province_id, orderConsignees.city_id, orderConsignees.county_id, $rootScope.user.token.access_token).then(function(data){
         vm.cities = data.city_list;
@@ -79,6 +77,8 @@
       var t = vm.address.OrderConsignees;
       Addresses.editAddress(t.id,t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated($rootScope.user.token.access_token);
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "修改地址失败，请重试");
       });
     }
     function addAddress(){
@@ -88,6 +88,8 @@
       var t = vm.address.OrderConsignees;
       Addresses.addAddress(t.name,t.address,vm.province.id,vm.city.id,vm.county.id,t.mobilephone, $rootScope.user.token.access_token).then(function(result){
         vm.onAddressUpdated($rootScope.user.token.access_token);
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "添加地址失败，请重试");
       });
     }
     function deleteAddress(addressId){
@@ -97,6 +99,8 @@
       Addresses.deleteAddress(addressId, $rootScope.user.token.access_token).then(function(data){
         $rootScope.alertMessage("已删除该收货地址");
         vm.onAddressUpdated($rootScope.user.token.access_token);
+      }, function(e){
+        $rootScope.alertMessage(e.status == 0 ? "网络不佳，请稍后重试" : "删除地址失败，请重试");
       });
     }
     function onAddressUpdated(accessToken){
