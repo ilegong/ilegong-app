@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,$filter,Products,Carts,Addresses,Orders){
+  function ProductDetailCtrl($state, $ionicPopup, $q, $log, $rootScope, $scope, $stateParams,$http,$filter, $sce, Products,Carts,Addresses,Orders){
     var vm = this;
     vm.loadData = loadData;
     vm.reduceCartItemNum = reduceCartItemNum;
@@ -27,6 +27,7 @@
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
     vm.getCartTitle = getCartTitle;
     vm.getShipFee = getShipFee;
+    vm.trustAsHtml = trustAsHtml;
     activate();
     
     function activate(){
@@ -50,8 +51,12 @@
       vm.loadStatus.startLoading();
       return Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
-        if(typeof(vm.product.Product.specs) === "string"){
-          vm.product.Product.specs = JSON.parse(vm.product.Product.specs);
+        if(!_.isEmpty(vm.product.Product.specs)){
+          try{
+            vm.product.Product.specs = JSON.parse(vm.product.Product.specs);            
+          }catch(e){
+            $log.log('product ' + vm.id + ' specs is invalid: ' + vm.product.Product.specs, true);
+          }
         }
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
@@ -182,6 +187,9 @@
         return '包邮';
       }
       return $filter('currency')(vm.product.Product.ship_fee, '￥');
+    }
+    function trustAsHtml(string){
+      return $sce.trustAsHtml(string);
     }
   }
 })(window, window.angular);

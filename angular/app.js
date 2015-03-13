@@ -140,7 +140,7 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $timeout, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $timeout, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;

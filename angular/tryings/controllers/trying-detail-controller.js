@@ -5,7 +5,7 @@
   .controller('TryingDetailCtrl', TryingDetailCtrl)
 
   /* @ngInject */
-  function TryingDetailCtrl($rootScope, $scope, $stateParams, $ionicNavBarDelegate, Tryings){
+  function TryingDetailCtrl($rootScope, $scope, $stateParams, $sce, Tryings){
     var vm = this;
     activate();
 
@@ -13,6 +13,7 @@
       vm.articleId = $stateParams.id;
       Tryings.getArticle(vm.articleId).then(function(article){
         vm.article = article.Article;
+        vm.article.content = $sce.trustAsHtml(vm.article.content);
       });
     }
   }

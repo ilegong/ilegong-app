@@ -5,7 +5,7 @@
   .controller('ProductDetailContentCtrl', ProductDetailContentCtrl)
 
   /* @ngInject */
-  function ProductDetailContentCtrl($state,$ionicPopup,$q,$log,$rootScope, $scope, $stateParams,$http,Products,Carts,Addresses,Orders){
+  function ProductDetailContentCtrl($state, $stateParams, $rootScope, $scope,$http, $sce, Products){
     var vm = this;
     activate();
     
@@ -13,6 +13,7 @@
       vm.id = $stateParams.id;
       Products.getProductContent(vm.id).then(function(data){
         vm.content = data.content;
+        vm.content.Product.content = $sce.trustAsHtml(vm.content.Product.content);
       }, function(e){$log.log(e)});
     }
   }

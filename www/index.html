@@ -21,10 +21,8 @@
     </ion-nav-bar>
     <ion-nav-view>
     </ion-nav-view>
-    <div class="alert-container" ng-class="{active: showAlertMessage()}" ng-show="showAlertMessage()" ng-cloak>
-      <span class="alert text-18 br">
-        {{alert.message}}
-      </span>
+    <div class="alert-container" ng-class="{active: showAlertMessage()}" ng-show="showAlertMessage()">
+      <span class="alert text-18 br" ng-bind="alert.message"></span>
     </div>
   </body>
 </html>
