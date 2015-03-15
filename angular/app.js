@@ -1,8 +1,7 @@
 // Ionic Starter App
 
-(function(window, angular, cordova){
+(function(window, angular, cordova, navigator){
   angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart','module.services', 'module.directives'])
-  .run(initApp)
   .config(configStates)
   .config(configApp)
   .config(extendLog)
@@ -10,6 +9,7 @@
   .config(configCompileProvider)
   .config(configLocalForage)
   .config(configHttpProvider)
+  .run(initApp)
 
   function initApp($ionicPlatform, $log, $timeout, Users) {
     $ionicPlatform.ready(function() {
@@ -108,7 +108,7 @@
           $rootScope.error({message:"Exception", reason:exception});
         }
         if(!_.isEmpty($log.error)){
-          $log.error(exception).error(cause);
+          $log.error(exception, true).error(cause, true);
         }
         $delegate(exception, cause);
       };
@@ -140,7 +140,7 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios7-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $timeout, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
@@ -416,5 +416,5 @@
       }, 0);
     }
   }
-})(window, window.angular, window.cordova);
+})(window, window.angular, window.cordova, window.navigator);
 

@@ -1,11 +1,11 @@
-(function ($window, angular) {
+(function ($window, angular, navigator) {
   "use strict";
 
   angular.module('module.my')
   .controller('MyIlegongCtrl', MyIlegongCtrl)
 
   /* @ngInject */
-  function MyIlegongCtrl($rootScope, $scope, config){
+  function MyIlegongCtrl($rootScope, $scope, $log, $timeout, config){
     var vm = this;
     vm.toggleDevelopmentMode = toggleDevelopmentMode;
     activate();
@@ -26,4 +26,4 @@
       }
     }
   } 
-})(window, window.angular);
+})(window, window.angular, window.navigator);

@@ -1,4 +1,4 @@
-(function (window, angular) {
+(function (window, angular, navigator) {
   "use strict";
 
   angular
@@ -35,7 +35,14 @@
       }, function(e){
         vm.loadStatus.failed(e.status);
         $rootScope.hideTabs = [true];
+      }).finally(function(){
+        // see: http://forum.ionicframework.com/t/white-page-showing-after-splash-screen-before-app-load/2908/16
+        $timeout(function(){
+          if(navigator && navigator.splashscreen && navigator.splashscreen.hide){
+            navigator.splashscreen.hide();            
+          }
+        }, 1000);
       });
     }
   }
-})(window, window.angular);
+})(window, window.angular, window.navigator);

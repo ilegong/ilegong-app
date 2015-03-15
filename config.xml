@@ -15,7 +15,8 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="Orientation" value="portrait" />
   <preference name="SplashScreen" value="screen"/>
-  <!-- <preference name="LoadingDialog" value=",正在加载中，请稍后..."/> -->
+  <preference name="SplashScreenDelay" value="3000" />
+  <!-- fix performance issue on android -->
   <preference name="KeepRunning" value="false"/>
 
   <icon src="www/res/icons/ios/icon-60@3x.png" />
