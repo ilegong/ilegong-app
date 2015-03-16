@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ilegong.pys" version="0.9.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ilegong.pyshuo" version="0.9.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>朋友说</name>
   <description>
         Ilegong app
@@ -35,24 +35,22 @@
     <!-- iPhone 6 Plus -->
     <icon src="www/res/icons/ios/icon-60@3x.png" width="180" height="180" />
     <!-- iPhone 6, 5, 4s -->
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="60" height="60" />
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="120" height="120" />
+    <icon src="www/res/icons/ios/icon-60@2x.png" width="60" height="60" />
+    <icon src="www/res/icons/ios/icon-60@2x.png" width="120" height="120" />
     <!-- Spotlight Icon -->
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="40" height="40" />
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="80" height="80" />
-    <!-- Settings Icon -->
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="29" height="29" />
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="58" height="58" />
+    <icon src="www/res/icons/ios/icon-40@2x.png" width="40" height="40" />
+    <icon src="www/res/icons/ios/icon-40@2x.png" width="80" height="80" />
     <!-- iPhone / iPod Touch -->
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="57" height="57" />
-    <icon src="www/res/icons/ios/icon-60@3x.png" width="114" height="114" />
+    <icon src="www/res/icons/ios/icon-57@2x.png" width="57" height="57" />
+    <icon src="www/res/icons/ios/icon-57@2x.png" width="114" height="114" />
 
     <!-- iphone 1, 3G, 3GS -->
     <splash src="www/res/splash/ios/splash-640X960.png" width="320" height="480"/>
     <!-- iphone 4, 4s -->
     <splash src="www/res/splash/ios/splash-640X960.png" width="640" height="960"/>
     <!-- iphone 5 -->
-    <splash src="www/res/splash/ios/splash-640X960.png" width="640" height="1136"/>
+    <splash src="www/res/splash/ios/splash-640X1136.png" width="320" height="528"/>
+    <splash src="www/res/splash/ios/splash-640X1136.png" width="640" height="1136"/>
     <!-- iphone 6 -->
     <splash src="www/res/splash/ios/splash-750X1334.png" width="750" height="1334"/>
     <!-- iphone 6 plus -->
