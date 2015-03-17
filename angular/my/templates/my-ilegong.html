@@ -1,4 +1,9 @@
-<ion-view title="关于朋友说" hide-tabs>
+<ion-view title="关于朋友说" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios-arrow-left"></i>返回
+    </button>
+  </ion-nav-buttons>
   <ion-content class="padding">
     <img src="http://www.tongshijia.com/img/logo_footer.jpg" border="0">
     <br><br>
@@ -25,7 +30,7 @@
       <i class="icon ion-ios7-arrow-right"></i>
       1分钱产品
     </a>
-    <a class="item item-icon-right" ui-sref="app.my-messages" ng-show="vm.developmentMode">
+    <a class="item item-icon-right" ui-sref="my-messages" ng-show="vm.developmentMode">
       <i class="icon ion-ios7-arrow-right"></i>
       查看日志
     </a>

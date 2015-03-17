@@ -38,9 +38,6 @@
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
-      .state('app.my-ilegong', {url: '/my/ilegong', views: {'app-my': {templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'}}})
-      .state('app.my-messages', {url: '/my/messages', views: {'app-my': {templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'}}})
-      .state('app.my-message', {url: '/my/messages/:id', views: {'app-my': {templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'}}})
       .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
       .state('app.my-profile-mobilephone',{url:'/my-profile-mobilephone',views:{'app-my':{templateUrl:'my-profile-mobilephone.html',controller:'MyProfileMobilePhoneCtrl as vm'}}})
       .state('app.my-profile-email',{url:'/my-profile-email',views:{'app-my':{templateUrl:'my-profile-email.html',controller:'MyProfileEmailCtrl as vm'}}})
@@ -67,6 +64,10 @@
       .state('store', {url: '/stores/:id/:name', templateUrl: 'store-tabs.html', controller: 'StoreCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
+
+      .state('my-ilegong', {url: '/my/ilegong', templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'})
+      .state('my-messages', {url: '/my/messages', templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'})
+      .state('my-message', {url: '/my/messages/:id', templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'})
 
     $urlRouterProvider.otherwise('/app/home');
   }
@@ -137,7 +138,7 @@
   function configApp($ionicConfigProvider){
     $ionicConfigProvider.tabs.position('bottom');
     $ionicConfigProvider.navBar.alignTitle('center')
-    $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios7-arrow-left');
+    $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios-arrow-left');
   }
 
   function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
