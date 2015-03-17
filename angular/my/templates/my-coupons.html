@@ -13,7 +13,7 @@
           ￥<span class="text-21" ng-bind="::item.Coupon.reduced_price /100 | currency : ''"></span>
         </div>
         <div class="nowrap text-sub" ng-show="item.Coupon.least_price > 0">
-          订单满<span ng-bind="::item.Coupon.least_price"></span>元使用(不含邮费)
+          订单满<span ng-bind="::((item.Coupon.least_price / 100) | currency:'')"></span>元使用(不含邮费)
         </div>
       </a>
       <div class="coupon-validity col col-33">
