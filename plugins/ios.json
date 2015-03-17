@@ -49,22 +49,22 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "uk.co.whiteoctober.cordova.appversion": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         }
     },
     "dependent_plugins": {}

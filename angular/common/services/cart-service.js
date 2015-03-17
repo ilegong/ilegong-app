@@ -48,7 +48,7 @@
 
       Base.post('/api_orders/cart_add.json?access_token=' + accessToken,json).then(function(result){
         if(result.data.success){
-          defer.resolve(result.data);
+          defer.resolve(result);
         }
         else{
           defer.reject(result);

@@ -145,15 +145,14 @@
       vm.inprogress = true;
       var couponCode = '';
       Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
-        $rootScope.confirmCart([vm.id], couponCode, $rootScope.user.token.access_token).then(function(){
+        var cartId = result.data.id;
+        $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
           vm.inprogress = false;
           $state.go('cart-confirmation');
         }, function(e){
-          $log.log('confirm cart failed:').log(e);
           vm.onActionFailed('购买失败，请重试', e);
         });
       }, function(e){
-        $log.log('add to cart failed:').log(e);
         vm.onActionFailed('购买失败，请重试', e);
       });
     }
@@ -180,7 +179,7 @@
       if(vm.product.Product.ship_fee == -1){
         return '货到付款';
       }
-      else if(vm.product.Product.ship_fee == -2){
+      else if(vm.product.Product.ship_fee == -2 || vm.product.Product.limit_ship){
         return '自提';
       }
       else if(vm.product.Product.ship_fee == 0){

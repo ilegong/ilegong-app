@@ -3,7 +3,7 @@
 
   angular
   .module('module.services', ['LocalForageModule'])
-  .value('config', {fakeData: true, developmentMode: false, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', hotline: '010-56245991', bizline: '159-1050-2109'}, server: {address: 'http://www.tongshijia.com'}})
+  .value('config', {fakeData: false, developmentMode: false, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', hotline: '010-56245991', bizline: '159-1050-2109'}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, $timeout, config, FakeData){
@@ -57,19 +57,20 @@
       }
 
       var defer = $q.defer();
+      $log.log("post to " + url + ": ").log(data);
       return $http.post(self.getUrl(url), data)        
         .success(function(data, status, headers, config) {
           if(status == 200){
-            $log.log("post to " + url + " succeeded: ").log(data);
+            $log.log('succeeded, data: ').log(data);
             defer.resolve(data);
           }
           else{
-            $log.log("post to " + url + " failed with status: " + status +", data: ").log(data);
+            $log.log("failed with status: " + status +", data: ").log(data);
             defer.reject({data: data, status: status});
           }
         })
         .error(function(data, status, headers, config) {
-          $log.log("post to " + url + " failed with status :" + status + ", data: ").log(data).log(', and config').log(config);
+          $log.log("failed with status :" + status + ", data: ").log(data).log(', and config').log(config);
           defer.reject({data: data, status: status});
         });
       return defer.promise;
