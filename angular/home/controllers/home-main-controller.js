@@ -9,6 +9,7 @@
   function HomeMainCtrl(Users,$rootScope, $scope, $http, $log, $timeout, $ionicSlideBoxDelegate, Base){
     var vm = this;
     vm.loadData = loadData;
+    vm.hideSplashScreen = hideSplashScreen;
     activate();
 
     function activate(){
@@ -38,11 +39,14 @@
       }).finally(function(){
         // see: http://forum.ionicframework.com/t/white-page-showing-after-splash-screen-before-app-load/2908/16
         $timeout(function(){
-          if(navigator && navigator.splashscreen && navigator.splashscreen.hide){
-            navigator.splashscreen.hide();            
-          }
+          vm.hideSplashScreen();
         }, 1000);
       });
+    }
+    function hideSplashScreen(){
+      if(navigator && navigator.splashscreen && navigator.splashscreen.hide){
+        navigator.splashscreen.hide();            
+      }
     }
   }
 })(window, window.angular, window.navigator);
