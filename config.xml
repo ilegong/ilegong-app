@@ -15,7 +15,11 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="Orientation" value="portrait" />
   <preference name="SplashScreen" value="screen"/>
-  <preference name="SplashScreenDelay" value="3000" />
+  <!-- http://stackoverflow.com/questions/20339647/phonegap-build-ios-app-has-blank-white-screen-after-splash-screen -->
+  <!-- Do not auto hide splash on iOS -->
+  <preference name="AutoHideSplashScreen" value="false" />
+  <!-- Do not auto hide splash on Android -->
+  <preference name="SplashScreenDelay" value="10000"/>  
   <!-- fix performance issue on android -->
   <preference name="KeepRunning" value="false"/>
 
