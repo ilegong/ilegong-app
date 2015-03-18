@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, Addresses, Orders, Carts,Coupons){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, Base, Addresses, Orders, Carts,Coupons){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -12,6 +12,7 @@
     vm.getShipFeeOfBrand = getShipFeeOfBrand;
     vm.countOfProducts = countOfProducts;
     vm.changeAddress = changeAddress;
+    vm.changePickup = changePickup;
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
@@ -21,14 +22,17 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
+    vm.getShippment = getShippment;
     activate();
 
-    function activate(){
+    function activate(){      
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
       vm.defaultAddress = $rootScope.getDefaultAddress();
 
       vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
+      vm.shippment = vm.getShippment();
+
       vm.shipFees = $rootScope.user.cartInfo.shipFees; 
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
       vm.reduced = $rootScope.user.cartInfo.reduced;
@@ -120,14 +124,40 @@
     function changeAddress(){
       $state.go('addresses',{state:1});
     }
+    function changePickup(){
+      $state.go('pickups');
+    }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;
     }
     function getPidList(){
       return _.flatten(_.map(vm.confirmedBrandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
     }
+    function getShippment(){
+      var brandItem = _.find(vm.confirmedBrandItems, function(bi){return true});
+      var item = _.find(brandItem.items, function(i){return true});
+      var limitShip = false;
+      var needAddressRemark = false;
+      var pickup = {};
+      if(!_.isEmpty(item.specialPromotions)){
+        var limitShip =  item.specialPromotions.limit_ship;
+        pickup = _.find(item.specialPromotions.items, function(i){return i.checked});
+        if(!_.isEmpty(pickup)){
+          needAddressRemark = vm.pickup.need_address_remark;
+        }
+      }
+      return {limitShip: limitShip, pickup: pickup, needAddressRemark: needAddressRemark, username: '', mobile: '', detailedAddress: ''};
+    }
     function readyToSubmitOrder(){
-      if(_.isEmpty(vm.defaultAddress)){
+      if(vm.shippment.limitShip){
+        if(_.isEmpty(vm.shippment.pickup) || Base.isBlank(vm.shippment.username) || !Base.isMobileValid(vm.shippment.mobile)){
+          return false;
+        }
+        if(vm.shippment.needAddressRemark && Base.isBlank(vm.shippment.detailedAddress)){
+          return false;
+        }
+      }
+      else if(_.isEmpty(vm.defaultAddress)){
         return false;
       }
       if(_.isEmpty(vm.confirmedBrandItems)){
@@ -148,7 +178,11 @@
       _.each(vm.confirmedBrandItems, function(brandItem){
         remarks[brandItem.id] = brandItem.remark;
       });
-      Orders.submitOrder(vm.getPidList(), vm.defaultAddress.OrderConsignees.id, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
+      var addressId = -1;
+      if(!vm.shippment.limitShip){
+        addressId = vm.defaultAddress.OrderConsignees.id;
+      }
+      Orders.submitOrder(vm.getPidList(), addressId, vm.shippment.username, vm.shippment.mobile, vm.shippment.detailedAddress, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $rootScope.reloadOrders($rootScope.user.token.access_token).finally(function(){
           $rootScope.reloadCart($rootScope.user.token.access_token).finally(function(){
             $ionicHistory.currentView($ionicHistory.backView());

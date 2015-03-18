@@ -2923,12 +2923,15 @@ var CartInfo = {
           "id":"121",
           "items":{
             "365":{
+              "cartId": 35925, 
               "pid":365,
               "num":"1",
               "price":"58",
               "name":"\u9ed4\u9633\u4e07\u6a59\uff08\u51b0\u7cd6\u6a59\uff095\u65a4\u88c5",
               "used_coupons":"", 
+              "specId": 0, 
               "spec": "Hiya", 
+              "specialPromotions": {'limit_ship': true, "items": [{'id': 25, 'price': 150, 'time': '', 'least_num': 10, 'address': '五环内单次满10个送到指定地点', 'need_address_remark': true}, {'id': 26, 'price': 150, 'time': '', 'least_num': 20, 'address': '西三旗自提'}]},
               "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201412/thumb_s/49c3c73c713_1209.jpg"
             }
           },

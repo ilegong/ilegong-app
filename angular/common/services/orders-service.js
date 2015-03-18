@@ -42,8 +42,8 @@
       }
       return state == states;
     }
-    function submitOrder(pid_list,addressId,coupon_code,remarks, accessToken){
-      var json = {"pid_list":pid_list,"addressId":addressId,"coupon_code":coupon_code,"remarks":remarks};
+    function submitOrder(pid_list, addressId, username, mobile, detailedAddress, coupon_code, remarks, accessToken){
+      var json = {"pid_list":pid_list, "addressId":addressId, "username": username, "mobile": mobile, "detailedAddress": detailedAddress,  "coupon_code":coupon_code, "remarks":remarks};
       var defer =  $q.defer();
       Base.post('/api_orders/balance.json?access_token=' + accessToken,json).then(function(result){
         if(result.data.success){

@@ -5,16 +5,14 @@
   .controller('MyAccountRegisterCtrl', MyAccountRegisterCtrl)
 
   /* @ngInject */
-  function MyAccountRegisterCtrl($rootScope, $scope, $log, $state, $interval, $timeout, Users){
+  function MyAccountRegisterCtrl($rootScope, $scope, $log, $state, $interval, $timeout, Base, Users){
     var vm = this;
-    vm.isMobileValid = isMobileValid;
     vm.showCaptchaCode = showCaptchaCode;
     vm.verifyCaptchaCode = verifyCaptchaCode;
     vm.shouldDisableSmsCodeButton = shouldDisableSmsCodeButton;
     vm.shouldEnableRegisterButton = shouldEnableRegisterButton;
     vm.getSmsCode = getSmsCode;
     vm.register = register;
-    vm.isBlank = isBlank;
 
     activate();
 
@@ -31,10 +29,6 @@
       vm.showCaptchaCode();
     }
 
-    function isMobileValid(){
-      return /^1\d{10}$/.test(vm.user.mobile);
-    }
-    
     function isBlank(str){
       return (!str || /^\s*$/.test(str));
     }
@@ -53,7 +47,7 @@
     }
     
     function shouldDisableSmsCodeButton(){
-      return !vm.isMobileValid() || !vm.user.isCaptchaCodeValid || vm.user.smsSent;
+      return !Base.isMobileValid(vm.user.mobile) || !vm.user.isCaptchaCodeValid || vm.user.smsSent;
     }
 
     function getSmsCode(){
@@ -79,7 +73,7 @@
     }
 
     function shouldEnableRegisterButton(){
-      return vm.isMobileValid() && vm.user.isCaptchaCodeValid && !vm.isBlank(vm.user.smsCode) && !vm.isBlank(vm.user.password);
+      return Base.isMobileValid(vm.user.mobile) && vm.user.isCaptchaCodeValid && !Base.isBlank(vm.user.smsCode) && !Base.isBlank(vm.user.password);
     }
 
     function register(){
