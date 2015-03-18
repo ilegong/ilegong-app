@@ -23,6 +23,10 @@
   <!-- fix performance issue on android -->
   <preference name="KeepRunning" value="false"/>
 
+  <!-- iOS only -->
+  <preference name="deployment-target" value="7.0" />
+  <preference name="target-device" value="handset" />
+
   <icon src="config/ios/Resources/icons/icon-60@3x.png" />
   <platform name="android">
     <icon src="config/ios/Resources/icons/icon-60@3x.png" density="ldpi" />
