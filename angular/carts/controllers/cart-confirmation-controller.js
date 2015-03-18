@@ -106,9 +106,6 @@
     }
     function getShipFeeOfBrand(brandId){
       var shipFee = _.find(vm.shipFees, function(fee, bid){return bid == brandId});
-      if(_.isEmpty(shipFee)){
-        return $filter('currency')(0, '￥');
-      }
       if(shipFee == -2){
         return '自提';
       }
