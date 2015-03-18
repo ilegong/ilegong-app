@@ -20,7 +20,7 @@
         <div class="wrapped text-sub-muted padding-bottom-5" ng-bind="::vm.product.Product.promote_name"></div>
         <div style="line-height: 27px;">
           <span class="text-energized">
-            <span class="text-21" ng-bind="::vm.product.Product.price | currency:'￥'"></span>
+            <span class="text-21" ng-bind="vm.productPrice | currency:'￥'"></span>
           </span>
           <s class="text-sub-muted" ng-show="{{::vm.product.Product.original_price != 0}}" ng-bind="::vm.product.Product.original_price | currency:'￥'"></s>
           <a class="text-muted fr" ng-click="vm.toReputationCommentsPage();" ng-cloak>
@@ -28,11 +28,10 @@
           </a>
         </div>
       </div>
-      <div class="item row padding-bottom-0" ng-show="vm.hasSpecs()">
-        <span class="col col-15" style="line-height: 31px;">规格:</span>
-        <span class="col wrapped-container" ng-repeat="(specType, specChoices) in vm.product.Product.specs.choices" ng-init="vm.specsChecks[specType] = {}">
-          <span class="spec-choice" ng-class="{checked: vm.specsChecks[specType][specChoice].value}" ng-repeat="specChoice in specChoices" ng-init="vm.specsChecks[specType][specChoice] = {value:false}" ng-click="vm.specsClick(specType, specChoice);" ng-disabled="!vm.product.Product.published" ng-bind="specChoice"> 
-          </span>
+      <div class="item row padding-bottom-0" ng-repeat="spec in vm.specs">
+        <span class="col col-15 wrapped padding-top-7" ng-bind="spec.type"></span>
+        <span class="col wrapped-container">
+          <span class="spec-choice" ng-class="{checked: choice.checked}" ng-repeat="choice in spec.choices" ng-click="vm.checkSpec(spec.id, choice.id);" ng-disabled="!vm.product.Product.published" ng-bind="choice.name"></span>
         </span>
       </div>
       <div class="item row" ng-cloak>

@@ -14,8 +14,9 @@
     vm.isShowStar = function(comment,starIndex){return comment.Comment.rating > starIndex}  
     vm.commentT = {rating:5,text:'',images:[]};
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
-    vm.specsClick = specsClick;
-    vm.hasSpecs = hasSpecs;
+    vm.formatSpecs = formatSpecs;
+    vm.checkSpec = checkSpec;
+    vm.formatSpecsGroup = formatSpecsGroup;
     vm.getReputationComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
     vm.getTryingComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
     vm.toTryingCommentsPage = toTryingCommentsPage;
@@ -36,8 +37,7 @@
       vm.from = $stateParams.from;
       vm.rating = 5;
       vm.showProductIntro = false;
-      vm.specsChecks = {};
-      vm.currentSpecs = 0;
+      vm.specs = [];
       vm.inprogress = false;
 
       vm.loadStatus = new LoadStatus();
@@ -51,13 +51,9 @@
       vm.loadStatus.startLoading();
       return Products.getProduct(vm.id).then(function(data){
         vm.product = data.product;
-        if(!_.isEmpty(vm.product.Product.specs)){
-          try{
-            vm.product.Product.specs = JSON.parse(vm.product.Product.specs);            
-          }catch(e){
-            $log.log('product ' + vm.id + ' specs is invalid: ' + vm.product.Product.specs, true);
-          }
-        }
+        vm.specs = vm.formatSpecs(vm.product.Product.specs);
+        vm.specsGroup = vm.formatSpecsGroup(vm.product.Product.specs_group);
+        vm.productPrice = vm.product.Product.price;
         vm.recommends = _.pairs(data.recommends);
         vm.brand = data.brand;
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
@@ -72,21 +68,62 @@
         vm.loadStatus.failed(e.status);
       });
     }
-    function specsClick(specType, specChoice){
-      _.each(vm.specsChecks[specType], function(specChoice){specChoice.value = false});
-      vm.specsChecks[specType][specChoice].value = true;
-      vm.currentSpecs = _.findKey(vm.product.Product.specs.map, function(value, key){return value.name == specChoice});
-    }
-    function hasSpecs(){
-      if(_.isEmpty(vm.product)){
-        return false;
+    function formatSpecs(specs){
+      if(_.isEmpty(specs)){
+        return [];
       }
-      if(_.isEmpty(vm.product.Product.specs) || _.isEmpty(vm.product.Product.specs.choices)){
-        return false;
-      }
-      return _.any(vm.product.Product.specs.choices, function(value, key){return value.length > 1});
-    }
 
+      try{
+        var specs = JSON.parse(specs); 
+        var index = 0;
+        return _.map(specs.choices, function(choices, type){
+          var c = _.map(choices, function(choice){
+            var id = _.findKey(specs.map, function(name, id){
+              return name == choice;
+            });
+            return {id: id, name: choice, checked: false};
+          });
+          return {id: index++, type: type, choices: c};
+        });
+      }catch(e){
+        $log.log('product ' + vm.id + ' specs is invalid: ' + specs, true).log(e, true);
+        return [];
+      }
+    }
+    function formatSpecsGroup(specsGroup){
+      if(_.isEmpty(specsGroup)){
+        return [];
+      }
+      return JSON.parse(specsGroup);
+    }
+    function checkSpec(typeId, choiceId){
+      var type = _.find(vm.specs, function(spec){return spec.id == typeId});
+      _.each(vm.specs, function(spec){
+        if(spec.id != typeId){
+          return;
+        }
+        _.each(spec.choices, function(choice){
+          choice.checked = (choice.id == choiceId);
+        });
+      });
+
+      var checkedSpecs = _.map(_.filter(vm.specs, function(spec){return _.any(spec.choices, function(c){return c.checked})}), function(spec){
+        var choice = _.find(spec.choices, function(choice){
+          return choice.checked;
+        });
+        if(_.isEmpty(choice)){
+          return '';
+        }
+        return choice.id;
+      }).join(',');
+      
+      vm.specGroup = _.find(vm.specsGroup, function(group, specs){
+        return specs == checkedSpecs;
+      });
+      if(!_.isEmpty(vm.specGroup)){
+        vm.productPrice = vm.specGroup.price;
+      }
+    }
     function toTryingCommentsPage(){
       $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1});
     }
@@ -115,7 +152,10 @@
       if(Number(vm.count) !== vm.count && vm.count %1 !==0){
         return false;
       }
-      if(vm.hasSpecs() && vm.currentSpecs == 0){
+      var allSpecsChecked = _.all(vm.specs, function(spec){
+        return _.any(spec.choices, function(choice){return choice.checked});
+      })
+      if(!allSpecsChecked){
         return false;
       }
       if(vm.inprogress){
@@ -127,9 +167,12 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
+      if(_.isEmpty(vm.specGroup)){
+        return $rootScope.alertMessage('请选择规则');
+      }
 
       vm.inprogress = true;
-      Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, $rootScope.user.token.access_token).then(function(result){
         vm.inprogress = false;
         $rootScope.reloadCart($rootScope.user.token.access_token);
         $rootScope.alertMessage('商品添加成功');
@@ -141,10 +184,12 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
-
+      if(_.isEmpty(vm.specGroup)){
+        return $rootScope.alertMessage('请选择规则');
+      }
       vm.inprogress = true;
       var couponCode = '';
-      Carts.addCartItem(vm.id, vm.count, vm.currentSpecs, 1, 0, $rootScope.user.token.access_token).then(function(result){
+      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.id;
         $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
           vm.inprogress = false;
