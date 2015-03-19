@@ -15,10 +15,10 @@
     <div ng-show="vm.loadStatus.isLoadFinished()">
       <div class="item">
         <div>收货地址</div> 
-        <div class="nowrap text-sub-muted">
+        <div class="wrapped text-sub-muted">
           <span ng-bind="::vm.order.Order.consignee_area"></span><span ng-bind="::vm.order.Order.consignee_address"></span>
         </div>
-        <span class="nowrap text-sub-muted">
+        <span class="wrapped text-sub-muted">
         <span class="padding-right-10" ng-bind="::vm.order.Order.consignee_name"></span><span ng-bind="::vm.order.Order.consignee_mobilephone"></span>
         </span>
       </div>
@@ -36,7 +36,7 @@
       <a class="item item-thumbnail-left item-icon-right"  ng-repeat="item in ::vm.cartItems" ng-click="vm.toProductDetailPage(item);">
         <img src="{{::item.Cart.coverimg}}"/>
         <i class="icon ion-ios7-arrow-right"></i>
-        <div class="nowrap padding-bottom-5" ng-bind="::item.Cart.name"></div>
+        <div class="wrapped padding-bottom-5" ng-bind="::item.Cart.name"></div>
         <div class="nowrap text-sub-muted">
           价格：<span class="padding-right-10" ng-bind="::item.Cart.price | currency:'￥'"></span>数量：<span ng-bind="::item.Cart.num"></span>
         </div>

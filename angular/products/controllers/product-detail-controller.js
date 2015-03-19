@@ -189,7 +189,7 @@
       }
 
       vm.inprogress = true;
-      var consignDate = _.any(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
+      var consignDate = _.find(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
       Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, consignDate.id, consignDate.send_date, $rootScope.user.token.access_token).then(function(result){
         vm.inprogress = false;
         $rootScope.reloadCart($rootScope.user.token.access_token);
@@ -207,7 +207,7 @@
       }
       vm.inprogress = true;
       var couponCode = '';
-      var consignDate = _.any(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
+      var consignDate = _.find(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
       Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, consignDate.id, consignDate.send_date, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.id;
         $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){

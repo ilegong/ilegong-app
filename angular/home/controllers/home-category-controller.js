@@ -10,7 +10,7 @@
     vm.getBrandById = getBrandById;
     vm.getItemHeight = getItemHeight;
     vm.getItemWidth = getItemWidth;
-    vm.toProductDetailPage = function(product){$log.log('to product detail page');$state.go("product-detail", {id: product.id,from:-1})};
+    vm.toProductDetailPage = function(product){$state.go("product-detail", {id: product.id,from:-1})};
     active();
 
     function active(){

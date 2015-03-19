@@ -2232,7 +2232,7 @@ var orderDetail = {
       "consignee_id":null,
       "consignee_name":"\u6881\u680b\u4e91\u6d4b\u8bd5",
       "consignee_area":null,
-      "consignee_address":"\u6309\u5df2\u9009\u65e5\u671f\u3001\u533a\u57df\u914d\u9001, \u8bf7\u586b\u5199\u6536\u4ef6\u4eba\u548c\u624b\u673a\u53f7",
+      "consignee_address":"按已选日期、区域配送, 这是寄送的地址，非常长的地址。请填写收件人和手机号",
       "consignee_mobilephone":"18810542383",
       "consignee_telephone":null,
       "consignee_email":null,"consignee_postcode":null,
@@ -2269,7 +2269,6 @@ var orderDetail = {
         "modified":"2015-01-22 15:20:23",
         "type":"1",
         "try_id":"0",
-        "applied_special":"0",
         "spec":"1\u670822\u65e5\u7535\u529b\u79d1\u5b66\u9662"
       }
     }
