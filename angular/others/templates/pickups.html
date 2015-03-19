@@ -1,0 +1,19 @@
+<ion-view title="收货地址" hide-back-button='true'>
+   <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios-arrow-left"></i>返回
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="pickups">
+    <div class="item item-icon-left item-icon-right"  ng-repeat="pickup in vm.shippment.pickups" ng-click="vm.checkPickup(pickup)">
+      <i class="icon pys-350" ng-class="{'icon-circle-checked': pickup.checked, 'icon-circle': !pickup.checked}"></i>
+      <span ng-bind="pickup.address" class="wrapped"></span>
+    </div>
+    <div class="centered-container" ng-if="vm.shippment.pickups.length == 0">
+      <span class="no-content no-address"></span>
+      <span class="message text-muted">
+        暂无自提点
+      </span>
+    </div>
+  </ion-content>
+</ion-view>

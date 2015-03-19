@@ -42,9 +42,9 @@
       },function(error){defer.reject(error)});
       return defer.promise;
     }
-    function addCartItem(id,num,spec,type,try_id, accessToken){
+    function addCartItem(id, num, spec, type, try_id, consignDateId, consignDate, accessToken){
       var defer = $q.defer();
-      var json = {"product_id":id,"num":num,"spec":spec,"type":type,"try_id":try_id};
+      var json = {"product_id":id,"num":num,"spec":spec,"type":type,"try_id":try_id, "consign_date_id": consignDateId, "consign_date": consignDate};
 
       Base.post('/api_orders/cart_add.json?access_token=' + accessToken,json).then(function(result){
         if(result.data.success){

@@ -2428,6 +2428,7 @@ var productDetail = {
          "recommend":"288",
          "ship_fee":"-1",
          "original_price":1000,
+         "consign_dates": [{"id": 1, "send_date": "04-12"}, {"id": 2, "send_date": "04-13"}],
          "limit_ship": true,
          "specs": "{\"map\":{\"88\":\"莲雾\",\"89\":\"红灯笼芒果\",\"90\":\"大青芒\",\"101\":\"金煌芒\",\"104\":\"台湾释迦\",\"115\":\"3月24日\"},\"choices\":{\"蛋糕口味\":[\"莲雾\",\"红灯笼芒果\",\"大青芒\",\"金煌芒\",\"台湾释迦\"],\"到货\":[\"3月24日\"]}}",
          "specs_group": "{\"88,115\":{\"id\":\"129\",\"spec_ids\":\"88,115\",\"price\":\"168\",\"stock\":\"0\",\"deleted\":\"0\",\"spec_names\":\"\u83b2\u96fe,3\u670824\u65e5\",\"product_id\":\"823\"},\"89,115\":{\"id\":\"130\",\"spec_ids\":\"89,115\",\"price\":\"158\",\"stock\":\"0\",\"deleted\":\"0\",\"spec_names\":\"\u7ea2\u706f\u7b3c\u8292\u679c,3\u670824\u65e5\",\"product_id\":\"823\"},\"90,115\":{\"id\":\"131\",\"spec_ids\":\"90,115\",\"price\":\"128\",\"stock\":\"0\",\"deleted\":\"0\",\"spec_names\":\"\u5927\u9752\u8292,3\u670824\u65e5\",\"product_id\":\"823\"},\"101,115\":{\"id\":\"132\",\"spec_ids\":\"101,115\",\"price\":\"138\",\"stock\":\"0\",\"deleted\":\"0\",\"spec_names\":\"\u91d1\u714c\u8292,3\u670824\u65e5\",\"product_id\":\"823\"},\"104,115\":{\"id\":\"133\",\"spec_ids\":\"104,115\",\"price\":\"148\",\"stock\":\"0\",\"deleted\":\"0\",\"spec_names\":\"\u53f0\u6e7e\u91ca\u8fe6,3\u670824\u65e5\",\"product_id\":\"823\"}}"
@@ -2931,7 +2932,7 @@ var CartInfo = {
               "used_coupons":"", 
               "specId": 0, 
               "spec": "Hiya", 
-              "specialPromotions": {'limit_ship': true, "items": [{'id': 25, 'price': 150, 'time': '', 'least_num': 10, 'address': '五环内单次满10个送到指定地点', 'need_address_remark': true}, {'id': 26, 'price': 150, 'time': '', 'least_num': 20, 'address': '西三旗自提'}]},
+              "specialPromotions": {'limit_ship': true, "items": [{'id': 25, 'price': 150, 'time': '', 'least_num': 10, 'address': '五环内单次满10个送到各区任何指定的地点', 'need_address_remark': true}, {'id': 26, 'price': 150, 'time': '', 'least_num': 20, 'address': '西三旗自提'}]},
               "coverimg": "http://51daifan-images.stor.sinaapp.com/files/201412/thumb_s/49c3c73c713_1209.jpg"
             }
           },

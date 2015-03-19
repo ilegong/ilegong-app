@@ -6,7 +6,7 @@
   </ion-nav-buttons>
   <ion-content>
     <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-if="!vm.shippment.limitShip">
-      <span class="text-16 text-balanced col col-15">送至</span>
+      <span class="text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
         <div class="nowrap">
@@ -16,19 +16,19 @@
           <span ng-bind="vm.defaultAddress.OrderConsignees.name"></span>(<span ng-bind="vm.defaultAddress.OrderConsignees.mobilephone"></span>)
         </div>
       </div>
-      <div ng-if="_.isEmpty(vm.defaultAddress)" style="line-height: 2em;">
+      <div ng-if="_.isEmpty(vm.defaultAddress)" class="col">
         <div>请选择地址</div>
       </div>
     </div>
     <div class="item item-icon-right row" ng-click="vm.changePickup()" ng-if="vm.shippment.limitShip">
-      <span class="text-16 text-balanced col col-15 col-center">送至</span>
+      <span class="text-balanced col col-15 col-center">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.shippment.pickup)" class="col"> 
-        <div class="nowrap">
+        <div class="wrapped">
           <span ng-bind="vm.shippment.pickup.address"></span>
         </div>
       </div>
-      <div ng-if="_.isEmpty(vm.shippment.pickup)" class="col" style="padding-top: 1px">
+      <div ng-if="_.isEmpty(vm.shippment.pickup)" class="col">
         <div>请选择自提点</div>
       </div>
     </div>
@@ -60,13 +60,13 @@
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip">
-          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="item.shippment.username">
+          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="vm.shippment.username">
         </label>
         <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip">
-          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="item.shippment.mobile">
+          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="vm.shippment.mobile">
         </label>
-        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip && vm.shippment.needAddressRemark">
-          <input type="text" style="padding-left: 1em;" placeholder="详细地址：" ng-model="item.shippment.detailedAddress">
+        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip && vm.shippment.needAddressRemark()">
+          <input type="text" style="padding-left: 1em;" placeholder="详细地址：" ng-model="vm.shippment.detailedAddress">
         </label>
         <label class="item-input" style="padding: 0; background-color: #eee;">
           <input type="text" style="padding-left: 1em;" placeholder="给卖家留言：" ng-model="item.remark">

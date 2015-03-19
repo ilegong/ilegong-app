@@ -42,10 +42,14 @@
       }
       return state == states;
     }
-    function submitOrder(pid_list, addressId, username, mobile, detailedAddress, coupon_code, remarks, accessToken){
+    function submitOrder(pid_list, addressId, shipPromotionId, username, mobile, detailedAddress, coupon_code, remarks, accessToken){
       var json = {"pid_list":pid_list, "addressId":addressId, "username": username, "mobile": mobile, "detailedAddress": detailedAddress,  "coupon_code":coupon_code, "remarks":remarks};
       var defer =  $q.defer();
-      Base.post('/api_orders/balance.json?access_token=' + accessToken,json).then(function(result){
+      var url = '/api_orders/balance.json?access_token=' + accessToken,json;
+      if(shipPromotionId > 0){
+        url = url + '&ship_promotion=' + shipPromotionId;
+      }
+      Base.post(url, json).then(function(result){
         if(result.data.success){
           defer.resolve(result.data.order_ids);
         }

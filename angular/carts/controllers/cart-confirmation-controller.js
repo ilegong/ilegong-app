@@ -22,7 +22,6 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
-    vm.getShippment = getShippment;
     activate();
 
     function activate(){      
@@ -31,7 +30,7 @@
       vm.defaultAddress = $rootScope.getDefaultAddress();
 
       vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
-      vm.shippment = vm.getShippment();
+      vm.shippment = $rootScope.user.cartInfo.shippment;
 
       vm.shipFees = $rootScope.user.cartInfo.shipFees; 
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
@@ -46,6 +45,8 @@
       });
       $scope.$watch("user.cartInfo", function(){
         vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
+        vm.shippment = $rootScope.user.cartInfo.shippment;
+
         vm.shipFees = $rootScope.user.cartInfo.shipFees; 
         vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
         vm.reduced = $rootScope.user.cartInfo.reduced;
@@ -133,27 +134,12 @@
     function getPidList(){
       return _.flatten(_.map(vm.confirmedBrandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
     }
-    function getShippment(){
-      var brandItem = _.find(vm.confirmedBrandItems, function(bi){return true});
-      var item = _.find(brandItem.items, function(i){return true});
-      var limitShip = false;
-      var needAddressRemark = false;
-      var pickup = {};
-      if(!_.isEmpty(item.specialPromotions)){
-        var limitShip =  item.specialPromotions.limit_ship;
-        pickup = _.find(item.specialPromotions.items, function(i){return i.checked});
-        if(!_.isEmpty(pickup)){
-          needAddressRemark = vm.pickup.need_address_remark;
-        }
-      }
-      return {limitShip: limitShip, pickup: pickup, needAddressRemark: needAddressRemark, username: '', mobile: '', detailedAddress: ''};
-    }
     function readyToSubmitOrder(){
       if(vm.shippment.limitShip){
         if(_.isEmpty(vm.shippment.pickup) || Base.isBlank(vm.shippment.username) || !Base.isMobileValid(vm.shippment.mobile)){
           return false;
         }
-        if(vm.shippment.needAddressRemark && Base.isBlank(vm.shippment.detailedAddress)){
+        if(vm.shippment.needAddressRemark() && Base.isBlank(vm.shippment.detailedAddress)){
           return false;
         }
       }
@@ -178,11 +164,18 @@
       _.each(vm.confirmedBrandItems, function(brandItem){
         remarks[brandItem.id] = brandItem.remark;
       });
-      var addressId = -1;
+      
       if(!vm.shippment.limitShip){
-        addressId = vm.defaultAddress.OrderConsignees.id;
+        var addressId = vm.defaultAddress.OrderConsignees.id;
+        var shipPromotionId = -1;
+        var detailedAddress = "";
       }
-      Orders.submitOrder(vm.getPidList(), addressId, vm.shippment.username, vm.shippment.mobile, vm.shippment.detailedAddress, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
+      else{
+        var addressId = -1;  
+        var shipPromotionId = vm.shippment.pickup.id;
+        var detailedAddress = vm.shippment.pickup.address + ' ' + vm.shippment.detailedAddress;
+      }
+      Orders.submitOrder(vm.getPidList(), addressId, shipPromotionId, vm.shippment.username, vm.shippment.mobile, detailedAddress, vm.couponCode, remarks, $rootScope.user.token.access_token).then(function(orderIds){
         $rootScope.reloadOrders($rootScope.user.token.access_token).finally(function(){
           $rootScope.reloadCart($rootScope.user.token.access_token).finally(function(){
             $ionicHistory.currentView($ionicHistory.backView());

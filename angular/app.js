@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(window, angular, cordova, navigator){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart','module.services', 'module.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart', 'module.others', 'module.services', 'module.directives'])
   .config(configStates)
   .config(configApp)
   .config(extendLog)
@@ -55,6 +55,7 @@
 
       .state('addresses', {url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
       .state('address-edit', {url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
+      .state('pickups', {url:'/pickups', templateUrl:'pickups.html',controller:'PickupsCtrl as vm'})
 
       .state('orders', {url:'/orders/:state', templateUrl:'orders.html', controller:'OrdersCtrl as vm'})
       .state('order-detail', {url:'/order/:id', templateUrl:'order-detail.html', controller:'OrderDetailCtrl as vm'})
@@ -295,6 +296,16 @@
     function confirmCart(pidList, couponCode, accessToken){
       return Carts.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $rootScope.user.cartInfo = result;
+
+        var brandItem = _.find($rootScope.user.cartInfo.cart.brandItems, function(bi){return true});
+        var item = _.find(brandItem.items, function(i){return true});
+        if(!_.isEmpty(item.specialPromotions)){
+          $rootScope.user.cartInfo.shippment = new Shippment(item.specialPromotions.limit_ship, item.specialPromotions.items);
+        }
+        else{
+          $rootScope.user.cartInfo.shippment = new Shippment(false, []);
+        }
+
         return result;
       });
     }

@@ -40,3 +40,31 @@ var LoadStatus = function(){
     return 'img/load-failed.png';
   }
 };
+
+var Shippment = function(limitShip, pickups){
+  this.limitShip = limitShip;
+  this.pickups = _.map(pickups, function(p){
+    p.checked = false;
+    return p;
+  });
+  this.pickup = {};
+  this.username = '';
+  this.mobile = '';
+  this.detailedAddress = '';
+
+  this.checkPickup = function(pickup){
+    _.each(this.pickups, function(p){
+      p.checked = (p.id == pickup.id);
+    });
+    this.pickup = pickup;
+  }
+  this.anyPickupChecked = function(){
+    return _.any(this.pickups, function(p){return p.checked}); 
+  }
+  this.needAddressRemark = function(){
+    if(_.isEmpty(this.pickup)){
+      return false;
+    }
+    return this.pickup.need_address_remark || false;
+  }
+};

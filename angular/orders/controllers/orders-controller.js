@@ -45,7 +45,7 @@
     function getOrderHeight(order){
       var marginOffset = 1;
       var productsHeight = 0;
-      if(!_.isEmpty(order.Order) && !_.isEmpty(order.Order.products)){
+      if(!_.isEmpty(order) && !_.isEmpty(order.Order) && !_.isEmpty(order.Order.products)){
         productsHeight = order.Order.products.length * (90 - marginOffset);
       }
       var brandHeight = 50;

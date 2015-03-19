@@ -5,7 +5,7 @@
   .controller('ProductDetailCtrl', ProductDetailCtrl)
 
   /* @ngInject */
-  function ProductDetailCtrl($state, $ionicPopup, $q, $log, $rootScope, $scope, $stateParams,$http,$filter, $sce, Products,Carts,Addresses,Orders){
+  function ProductDetailCtrl($state, $ionicPopup, $q, $log, $rootScope, $scope, $stateParams,$http,$filter, $sce, Base, Products,Carts,Addresses,Orders){
     var vm = this;
     vm.loadData = loadData;
     vm.reduceCartItemNum = reduceCartItemNum;
@@ -29,6 +29,9 @@
     vm.getCartTitle = getCartTitle;
     vm.getShipFee = getShipFee;
     vm.trustAsHtml = trustAsHtml;
+    vm.hasConsignDates = hasConsignDates;
+    vm.checkConsignDate = checkConsignDate;
+    vm.isConsignDateChecked = isConsignDateChecked;
     activate();
     
     function activate(){
@@ -148,14 +151,28 @@
         activate();
       });
     }
+    function hasConsignDates(){
+      return !_.isEmpty(vm.product) && !_.isEmpty(vm.product.Product.consign_dates);
+    }
+    function checkConsignDate(consignDate){
+      _.each(vm.product.Product.consign_dates, function(date){
+        date.checked = (date.id == consignDate.id);
+      });
+    }
+    function isConsignDateChecked(){
+      return _.any(vm.product.Product.consign_dates, function(date){return date.checked});
+    }
     function readyToBuy(){
-      if(Number(vm.count) !== vm.count && vm.count %1 !==0){
+      if(!Base.isNumber(vm.count)){
         return false;
       }
       var allSpecsChecked = _.all(vm.specs, function(spec){
         return _.any(spec.choices, function(choice){return choice.checked});
       })
       if(!allSpecsChecked){
+        return false;
+      }
+      if(vm.hasConsignDates() && !vm.isConsignDateChecked()){
         return false;
       }
       if(vm.inprogress){
@@ -172,7 +189,8 @@
       }
 
       vm.inprogress = true;
-      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, $rootScope.user.token.access_token).then(function(result){
+      var consignDate = _.any(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
+      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, consignDate.id, consignDate.send_date, $rootScope.user.token.access_token).then(function(result){
         vm.inprogress = false;
         $rootScope.reloadCart($rootScope.user.token.access_token);
         $rootScope.alertMessage('商品添加成功');
@@ -189,7 +207,8 @@
       }
       vm.inprogress = true;
       var couponCode = '';
-      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, $rootScope.user.token.access_token).then(function(result){
+      var consignDate = _.any(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
+      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, consignDate.id, consignDate.send_date, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.id;
         $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
           vm.inprogress = false;
