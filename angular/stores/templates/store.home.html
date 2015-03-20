@@ -13,9 +13,9 @@
       <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div class="element-container" collection-repeat="product in ::vm.products" item-height="::vm.getItemHeight()" item-width="::vm.getItemWidth()">
+    <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" collection-repeat="product in ::vm.products" item-height="::vm.getItemHeight()" item-width="50%">
       <div class='element'>
-        <img class="blocked full" ui-sref="product-detail({from: storeId, id: product.Product.id,type:-3})" src="{{product.Product.coverimg}}" style="height: {{::vm.imageHeight}}px; width: {{::vm.imageWidth}}px">
+        <img class="blocked full" ui-sref="product-detail({from: storeId, id: product.Product.id,type:-3})" src="{{product.Product.coverimg}}" style="height: {{::vm.imageHeight}}px;">
         <div class='padding-5'>
           <div class="nowrap" ng-bind="product.Product.name"></div>
           <span class='text-energized'><strong ng-bind="product.Product.price | currency:'￥'"></strong></span>

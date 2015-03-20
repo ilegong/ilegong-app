@@ -1,4 +1,4 @@
-(function ($window, angular, navigator) {
+(function ($window, angular, cordova, navigator) {
   "use strict";
 
   angular.module('module.my')
@@ -13,8 +13,13 @@
     function activate(){
       vm.count = 0;
       vm.developmentMode = $rootScope.config.developmentMode;
+      vm.version = $rootScope.config.app.version;
+
       $scope.$watch('config.developmentMode', function() {
         vm.developmentMode = $rootScope.config.developmentMode;
+      });
+      $scope.$watch('config.app.version', function() {
+        vm.version = $rootScope.config.app.version;
       });
     }
     function toggleDevelopmentMode(){
@@ -26,4 +31,4 @@
       }
     }
   } 
-})(window, window.angular, window.navigator);
+})(window, window.angular, window.cordova, window.navigator);

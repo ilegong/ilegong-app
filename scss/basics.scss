@@ -84,12 +84,18 @@ input{
 .padding-right-10{
   padding-right: 10px !important; 
 }
+.padding-left-10{
+  padding-left: 10px !important; 
+}
 .padding-bottom-10{
   padding-bottom: 10px !important; 
 }
-.padding-top-bottom-10{
-  @exstend .padding-bottom-10;
+.padding-top-10{
   padding-top: 10px !important; 
+}
+.padding-top-bottom-10{
+  @extend .padding-bottom-10;
+  @extend .padding-top-10;
 }
 .full{
   width: 100% !important;
@@ -747,16 +753,21 @@ ion-item.item {
   display: block;
   overflow: hidden;
   white-space: normal;
-  padding-left: 0.71428571428rem;
   .element-container{
+    @extend .padding-top-10;
     display: inline-block;
-    width: 50%;
-    margin-top: 0.71428571428rem;
     .element{
       background-color: #fff;
-      margin-right: 0.71428571428rem;
       border: $border_default;
     }
+  }
+  .element-container.even{
+    @extend .padding-left-10;
+    @extend .padding-right-5;
+  }
+  .element-container.odd{
+    @extend .padding-left-5;
+    @extend .padding-right-10;
   }
 }
 

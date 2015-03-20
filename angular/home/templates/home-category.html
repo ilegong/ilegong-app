@@ -7,8 +7,8 @@
       <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div class="element-container" collection-repeat="product in ::vm.products" item-height="vm.getItemHeight()" item-width="vm.getItemWidth()" ng-click="vm.toProductDetailPage(product)">
-      <div class='element'>
+    <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" collection-repeat="product in ::vm.products" item-height="::vm.getItemHeight()" item-width="50%" ng-click="vm.toProductDetailPage(product)">
+      <div class='element' data-a="{{$index}}">
         <img class="blocked full" ng-src="{{product.coverimg}}" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px">
         <div class='padding-5'>
           <div class="nowrap text-grey" ng-bind="product.name"></div>

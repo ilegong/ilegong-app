@@ -22,7 +22,7 @@
     <div class="item-divider"></div>
     <div class="item" ng-click="vm.toggleDevelopmentMode()">
       版本号
-      <span class="item-note" ng-bind="::config.app.version"></span>
+      <span class="item-note" ng-bind="vm.version"></span>
     </div>
 
     <div class="item item-divider" ng-show="vm.developmentMode"></div>

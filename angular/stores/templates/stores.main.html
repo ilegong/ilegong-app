@@ -7,9 +7,9 @@
       <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div class='element-container' collection-repeat="store in ::vm.stores track by store.Brand.id" item-width="::vm.getItemWidth()" item-height="::vm.getItemHeight()">
+    <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" collection-repeat="store in ::vm.stores track by store.Brand.id" item-width='50%' item-height="::vm.getItemHeight()">
       <div class="element" ui-sref="store.home({id: store.Brand.id, name: store.Brand.name})">
-        <img class="blocked full" src="{{store.Brand.coverimg}}" style="height: {{::vm.imageHeight}}px; width: {{::vm.imageWidth}}px">
+        <img class="blocked full" src="{{store.Brand.coverimg}}" style="height: {{::vm.imageHeight}}px;">
         <div class="padding-5 nowrap tc" ng-bind="store.Brand.name"></div>
       </div>
     </div>

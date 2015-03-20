@@ -8,7 +8,6 @@
   function StoreMainCtrl($rootScope, $scope, $log, Stores){
     var vm = this;
     vm.loadData = loadData;
-    vm.getItemWidth = getItemWidth;
     vm.getItemHeight = getItemHeight;
     vm.updateStore = updateStore;
     activate();
@@ -16,10 +15,7 @@
     function activate(){
       vm.loadStatus = new LoadStatus();
       vm.updateStore($rootScope.brands);
-      var deviceWidth = window.innerWidth;
-      vm.itemWidth = Math.max((window.innerWidth - 10) / 2, 10);
-      vm.imageWidth = vm.itemWidth - 10 - 2; // 2px border
-      vm.imageHeight = vm.imageWidth;
+      vm.imageHeight = window.innerWidth / 2 - 15 - 2; // 15px padding, 2px border
       var brandNameHeight = 20;
       vm.itemHeight = vm.imageHeight + brandNameHeight + 22; // 10px padding + 10px divider + 2px border
 
@@ -45,9 +41,6 @@
         vm.loadStatus.failed(0);
       }
       vm.stores = stores;
-    }
-    function getItemWidth(){
-      return vm.itemWidth + 'px';
     }
     function getItemHeight(){
       return vm.itemHeight + 'px';

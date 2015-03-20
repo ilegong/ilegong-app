@@ -175,15 +175,6 @@
 
     function activate(){
       $rootScope.config = config;
-      // see: http://stackoverflow.com/questions/5180918/phonegap-on-android-window-device-is-undefined
-      $timeout(function(){        
-        if(cordova && cordova.getAppVersion){
-          cordova.getAppVersion.getVersionNumber(function (version) {
-            $rootScope.config.app.version = version;
-          });
-        }
-      }, 1000);
-
       $rootScope._ = window._;
       $rootScope.hideTabs = [];
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
@@ -191,6 +182,16 @@
       $rootScope.provinces = [];
       $rootScope.alert = {message: ''};
 
+      // see: http://stackoverflow.com/questions/5180918/phonegap-on-android-window-device-is-undefined
+      $timeout(function(){
+        if(cordova && cordova.getAppVersion){
+          cordova.getAppVersion().then(function (version) {
+            $rootScope.config.app.version = version;
+          }, function(e){
+            $log.log('get version number failed: ', true).log(e, true);
+          });
+        }
+      }, 1000);
       $rootScope.refreshData();
     }
     function refreshData(){

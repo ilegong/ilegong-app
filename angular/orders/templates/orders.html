@@ -16,7 +16,7 @@
       </span>
     </div>
 
-    <div class="order full" collection-repeat="order in vm.orders" item-height="vm.getOrderHeight(order)">
+    <div collection-repeat="order in vm.orders" item-height="vm.getOrderHeight(order)">
       <a class="item item-avatar-left row" ui-sref="store.home({id: order.Order.brand.Brand.id, name: order.Order.brand.Brand.name})">
         <img ng-src="{{order.Order.brand.Brand.coverimg}}" class="r5"/>
         <div class="col"><span ng-bind="order.Order.brand.Brand.name">(<span ng-bind="order.Order.products.length"></span>)</span></div>
@@ -31,7 +31,7 @@
         <div class="text-muted">
           数量：<span ng-bind="product.Cart.num"></span>
         </div>
-      </a>  
+      </a>
       <div class="item tr">
         <span class="text-muted">
           运费：<span ng-bind="vm.getShipFee(order)"></span>

@@ -41,8 +41,8 @@
       <h4 style="padding-left: 10px; margin-bottom: 0">
         朋友的推荐
       </h4>
-      <div class="elements padding-left">
-        <div class="element-container" ng-repeat="mainItem in ::vm.mainTagItems">
+      <div class="elements">
+        <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" ng-repeat="mainItem in ::vm.mainTagItems" style='width: 50%'>
           <div class="element">
             <img class="full" src="{{::mainItem.img}}" ui-sref="app.home-category({slug:mainItem.slug, name: mainItem.name})"/>
           </div>

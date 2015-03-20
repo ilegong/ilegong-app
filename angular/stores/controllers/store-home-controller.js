@@ -9,7 +9,6 @@
     var vm = this;
     vm.goBack = goBack;
     vm.getItemHeight = getItemHeight;
-    vm.getItemWidth = getItemWidth;
     vm.loadData = loadData;
     activate();
 
@@ -17,12 +16,10 @@
       $rootScope.storeId = $stateParams.id;
       $rootScope.storeName = $stateParams.name;
 
-      var deviceWidth = window.innerWidth;
-      vm.itemWidth = Math.round((window.innerWidth - 10) / 2);
-      vm.imageWidth = vm.itemWidth - 10 - 2; // 2px border
-      vm.imageHeight = Math.round(vm.imageWidth * 3 / 4);
-      var productNameHeight = 20;
-      var priceHeight = 20;
+      var imageWidth = window.innerWidth / 2 - 15 - 2; // 15px padding, 2px border
+      vm.imageHeight = Math.round(imageWidth * 3 / 4);
+      var productNameHeight = 18;
+      var priceHeight = 18;
       vm.itemHeight = Math.ceil(vm.imageHeight + productNameHeight + priceHeight + 22); // 10px padding + 10px divider + 2px border
 
       vm.loadStatus = new LoadStatus();
@@ -46,9 +43,6 @@
 
     function getItemHeight(){
       return vm.itemHeight + 'px';
-    }
-    function getItemWidth(){
-      return vm.itemWidth + 'px';
     }
 
     function goBack(){
