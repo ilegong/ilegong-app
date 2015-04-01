@@ -2,9 +2,9 @@
   "use strict";
 
   angular.module('module.services')
-  .service("FakeData", FakeData)
+  .service("InjectData", InjectData)
 
-  function FakeData(){
+  function InjectData(){
     var getData = {
       '/api_orders/home.json': homeJson,
       '/categories/tag/': categoriesJson,

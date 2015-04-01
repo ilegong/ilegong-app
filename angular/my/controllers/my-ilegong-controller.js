@@ -7,27 +7,27 @@
   /* @ngInject */
   function MyIlegongCtrl($rootScope, $scope, $log, $timeout, config){
     var vm = this;
-    vm.toggleDevelopmentMode = toggleDevelopmentMode;
+    vm.toggleLogMode = toggleLogMode;
     activate();
 
     function activate(){
       vm.count = 0;
-      vm.developmentMode = $rootScope.config.developmentMode;
+      vm.logMode = $rootScope.config.logMode;
       vm.version = $rootScope.config.app.version;
 
-      $scope.$watch('config.developmentMode', function() {
-        vm.developmentMode = $rootScope.config.developmentMode;
+      $scope.$watch('config.logMode', function() {
+        vm.logMode = $rootScope.config.logMode;
       });
       $scope.$watch('config.app.version', function() {
         vm.version = $rootScope.config.app.version;
       });
     }
-    function toggleDevelopmentMode(){
+    function toggleLogMode(){
       vm.count = vm.count + 1;
       if(vm.count > 4){
-        config.developmentMode = !config.developmentMode;
+        config.logMode = !config.logMode;
         vm.count = 0;
-        $rootScope.alertMessage(config.developmentMode ? '显示开发者选项' : '隐藏开发者选项');
+        $rootScope.alertMessage(config.logMode ? '显示开发者选项' : '隐藏开发者选项');
       }
     }
   } 

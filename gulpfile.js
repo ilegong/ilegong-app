@@ -73,7 +73,7 @@ gulp.task('dev:clean', function () {
 gulp.task('sass', function(done) {
   gulp.src(cssPath.src)
     .pipe(sass())
-    // .pipe(minifyCss())
+    .pipe(minifyCss())
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest(cssPath.dist))
     .on('end', done);
@@ -86,7 +86,7 @@ gulp.task('sass', function(done) {
 gulp.task('dev:libjs', function () {
   return gulp.src(libJsPath.src)
     .pipe(concat('lib.js'))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(appJsPath.dist));
 });
@@ -111,7 +111,7 @@ gulp.task('dev:templates', function () {
 gulp.task('dev:appjs', ['dev:templates'], function () {
   return gulp.src(appJsPath.src)
     .pipe(concat('app.js'))
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(appJsPath.dist))
 });

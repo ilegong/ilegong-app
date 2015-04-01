@@ -156,6 +156,20 @@ var categoriesJson = {
   ],
   "sub_title":"\u65b0\u9c9c\u6c34\u679c"
 }
+for(var i = 0; i < 100; i++){
+  categoriesJson.data_list.push({  
+       "id": 400 + i,
+       "name":"name " + i,
+       "created":"2014-12-02 16:22:00",
+       "brand_id":"122",
+       "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201412\/thumb_m\/8124f7fb16a_1202.jpg",
+       "promote_name":"\u9664\u65b0\u7586\u3001\u897f\u85cf\u3001\u5185\u8499\u53e4\u3001\u4e1c\u4e09\u7701\u4e0d\u5305\u90ae\uff0c\u5168\u56fd\u5176\u4ed6\u5730\u65b9\u5747\u5305\u90ae~",
+       "comment_nums":"1",
+       "price": i,
+       "original_price":null,
+       "slug":"pan_zhi_hua_hong_ge_niu_he_er_qi_cheng"
+    }  );
+}
 
 var ordersJson = {
   "brands": {
@@ -2215,6 +2229,44 @@ var ordersJson = {
   }
 }
 
+for(var i = 0; i < 500; i++){
+  ordersJson.orders.push({
+      "Order": {
+        "id": i, 
+        "name": "order" + i, 
+        "cate_id": "0", 
+        "creator": "146", 
+        "lastupdator": "0", 
+        "remoteurl": "", 
+        "status": "0", 
+        "published": "1", 
+        "deleted": false, 
+        "created": "2014-11-27 01:09:33", 
+        "updated": "2014-11-27 01:09:33", 
+        "consignee_id": null, 
+        "consignee_name": "刘召仁", 
+        "consignee_area": null, 
+        "consignee_address": "跑腿儿专递（限五环内，运送费到付：每个15元）h h j h", 
+        "consignee_mobilephone": "18910275329", 
+        "consignee_telephone": null, 
+        "consignee_email": null, 
+        "consignee_postcode": null, 
+        "invoice_id": null, 
+        "total_price": "150.00", 
+        "ship_type": null, 
+        "ship_fee": "0.00", 
+        "remark": "", 
+        "brand_id": "121", 
+        "ship_code": null, 
+        "total_all_price": "150", 
+        "pay_time": null, 
+        "applied_coupons": "", 
+        "coupon_total": "0", 
+        "applied_code": ""
+      }
+    });
+}
+
 var orderDetail = {
   "order":{
     "Order":{
@@ -2671,7 +2723,7 @@ var storeListJson = {"brands":[
   {  
     "Brand":{  
       "creator":"562305",
-      "name":"test1",
+      "name":"brand1",
       "slug":"nan_feng_mi_ju_wu_qing_yun",
       "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201501/thumb_m/cbf120b697a_0122.jpg",
       "id":"127"
@@ -2680,7 +2732,7 @@ var storeListJson = {"brands":[
   {  
     "Brand":{  
       "creator":"562306",
-      "name":"test2",
+      "name":"brand2",
       "slug":"nan_feng_mi_ju_wu_qing_yun",
       "coverimg":"http://51daifan-images.stor.sinaapp.com/files/201412/thumb_m/d720fde7f72_1211.png",
       "id":"128"

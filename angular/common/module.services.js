@@ -3,10 +3,10 @@
 
   angular
   .module('module.services', ['LocalForageModule'])
-  .value('config', {fakeData: false, developmentMode: false, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', hotline: '010-56245991', bizline: '159-1050-2109'}, server: {address: 'http://www.tongshijia.com'}})
+  .value('config', {injectData: false, logMode: false, timeout: 2500, app: {client_id: 'NTQ5NTE5MGViMTgzMDUw', name: 'ailegong', hotline: '010-56245991', bizline: '159-1050-2109'}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
-  function Base($http, $q, $log, $localForage, $window, $timeout, config, FakeData){
+  function Base($http, $q, $log, $localForage, $window, $timeout, config, InjectData){
     var self = this;
     self.getUrl = getUrl;
     self.get = get;
@@ -32,9 +32,9 @@
       //   defer.reject('');
       // }, 3000);
       // return defer.promise;
-      if(config.fakeData){
-        $log.log(url).log(FakeData.get(url));
-        return deferred(FakeData.get(url));
+      if(config.injectData){
+        $log.log(url).log(InjectData.get(url));
+        return deferred(InjectData.get(url));
       }
       var defer = $q.defer();
       $http.get(self.getUrl(url))
@@ -55,8 +55,8 @@
       return defer.promise;
     }
     function post(url, data){
-      if(config.fakeData){
-        return deferred(FakeData.post(url));
+      if(config.injectData){
+        return deferred(InjectData.post(url));
       }
 
       var defer = $q.defer();
@@ -82,20 +82,20 @@
       return self.get('/api_orders/ping');
     }
     function getLocal(key){
-      if(config.fakeData){
-        return deferred(FakeData.getLocal(key));
+      if(config.injectData){
+        return deferred(InjectData.getLocal(key));
       }
       return $localForage.getItem(key);
     }
 
     function setLocal(key, value){
-      if(config.fakeData){
+      if(config.injectData){
         return deferred(value);
       }
       return $localForage.setItem(key, value);
     }
     function removeLocal(key){
-      if(config.fakeData){
+      if(config.injectData){
         return deferred(key);
       }
       return $localForage.removeItem(key);
