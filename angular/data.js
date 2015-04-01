@@ -2139,7 +2139,7 @@ var ordersJson = {
       {
         "Cart": {
           "id": "9258", 
-          "name": "测试 (草莓)", 
+          "name": "昌平(草莓)", 
           "order_id": "5285", 
           "creator": "146", 
           "lastupdator": "0", 
@@ -2282,7 +2282,7 @@ var orderDetail = {
       "created":"2015-01-22 15:20:52",
       "updated":"2015-01-22 15:20:52",
       "consignee_id":null,
-      "consignee_name":"\u6881\u680b\u4e91\u6d4b\u8bd5",
+      "consignee_name":"梁栋云",
       "consignee_area":null,
       "consignee_address":"按已选日期、区域配送, 这是寄送的地址，非常长的地址。请填写收件人和手机号",
       "consignee_mobilephone":"18810542383",
