@@ -111,7 +111,7 @@ gulp.task('dev:templates', function () {
 gulp.task('dev:appjs', ['dev:templates'], function () {
   return gulp.src(appJsPath.src)
     .pipe(concat('app.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(appJsPath.dist))
 });
