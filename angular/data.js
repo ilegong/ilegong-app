@@ -2740,35 +2740,6 @@ var storeListJson = {"brands":[
   }
 ]};
 
-var tryingsJson = {  
-  "cates":[  
-    {  
-      "Category":{  
-        "id":"130",
-        "name":"\u8bd5\u5403\u56e2\u4e09\u671f"
-      },
-      "articles":[
-        {"Article":{  
-            "id":"389",
-            "name":"\u4e09\u671f\u8bd5\u5403\u56e2\u64ad\u62a5",
-            "summary":"\u7b2c\u4e09\u671f\u8bd5\u5403\u56e2\u6210\u7acb\u4e86\uff01\u56e2\u5458\u4eec\u9686\u91cd\u767b\u573a~",
-            "slug":"san_qi_shi_chi_tuan",
-            "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_s\/9aa6c4bcce1_1110.jpg"
-          }
-        },
-        {"Article":{  
-            "id":"391",
-            "name":"\u4e09\u671f\u8bd5\u5403\u56e2\u4ea7\u54c1\u70b9\u8bc4",
-            "summary":"[\u6b63\u5b97\u8fc1\u5f99\u677f\u6817]\u3001[\u539f\u751f\u6001\u6210\u719f\u6934\u6811\u8702\u871c]\u3001[\u6cb3\u5357\u7126\u4f5c\u5c71\u836f]\u3001[\u5761\u5761\u4e0a\u7af9\u7f16\u793c\u7bee\u88c5]\u3001[\u4e94\u5e38\u7a3b\u82b1\u9999\u5927\u7c73]\u3001[\u4f60\u597d\u5403\u8d27\u7684\u96f6\u98df]\u63a5\u53d7\u4e09\u671f\u8bd5\u5403\u56e2\u7ec4\u7ec7\u7684\u68c0\u9a8c\uff0c\u770b\u770b\u5927\u5bb6\u90fd\u600e\u4e48\u54c1\u8bc4\u8fd9\u4e9b\u5546\u54c1\u7684\u54e6~",
-            "slug":"san_qi_shi_chi_tuan_chan_pin_dian_ping",
-            "coverimg":"http:\/\/51daifan-images.stor.sinaapp.com\/files\/201411\/thumb_m\/06c7c8c5851_1119.jpg"
-          }
-        }
-      ]
-    }
-  ]
-};
-
 var articleJson = {
   "Article":{
     "name":"\u56db\u671f\u8bd5\u5403\u56e2\u62a5\u9053",

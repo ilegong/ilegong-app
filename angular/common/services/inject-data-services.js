@@ -12,7 +12,6 @@
       '/apiOrders/order_detail/\\d+.json': orderDetail,
       '/myDetail': myDetail,
       '/api_orders/store_list.json': storeListJson,
-      '/shichituan.json': tryingsJson,
       '/api_orders/articles/': articleJson, 
       '/Locations/get_province.json':allProvince,
       "/api_orders/product_detail/\\d+.json": productDetail,
@@ -49,7 +48,6 @@
     };
     var getLocalData = {
        'brands': storeListJson.brands,
-       'tryings': tryingsJson.cates,
        'provinces': allProvince,
        'user.token': tokenJson,
        "user.profile": myProfileJson, 

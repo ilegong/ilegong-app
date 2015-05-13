@@ -1,7 +1,7 @@
 // Ionic Starter App
 
 (function(window, angular, cordova, navigator){
-  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.tryings', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart', 'module.others', 'module.services', 'module.directives'])
+  angular.module('ilegong', ['ionic', 'ilegong.home', 'module.my', 'module.stores', 'ilegong.templates','module.products', 'module.orders', 'module.cart', 'module.others', 'module.services', 'module.directives'])
   .config(configStates)
   .config(configApp)
   .config(extendLog)
@@ -32,9 +32,6 @@
    
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
    
-      .state('app.tryings', {url: '/tryings',views: {'app-tryings': {templateUrl: 'tryings.main.html',controller: 'TryingsCtrl as vm'}}})
-      .state('app.trying-detail', {url: '/tryings/:id',views: {'app-tryings': {templateUrl: 'trying-detail.html',controller: 'TryingDetailCtrl as vm'}}})
-
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
@@ -142,13 +139,13 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Tryings, Coupons) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Coupons) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
-    app.toTryingsPage = toTryingsPage;
     app.toCartPage = toCartPage;
     app.toMyPage = toMyPage;
+    app.toOrdersPage = toOrdersPage;
 
     $rootScope.refreshData = refreshData;
     $rootScope.onUserLoggedIn = onUserLoggedIn;
@@ -160,7 +157,6 @@
     $rootScope.reloadCoupons = reloadCoupons;
     $rootScope.reloadOrders = reloadOrders;
     $rootScope.reloadAddresses = reloadAddresses;
-    $rootScope.reloadTryings = reloadTryings;
     $rootScope.confirmCart = confirmCart;
     $rootScope.getDefaultAddress = getDefaultAddress;
     $rootScope.updateOrderState = updateOrderState;
@@ -214,7 +210,6 @@
 
       $rootScope.reloadStores();
       $rootScope.reloadProvinces();
-      $rootScope.reloadTryings();
     }
     function onUserLoggedIn(token, shouldRefreshToken){
       if(shouldRefreshToken){
@@ -253,16 +248,6 @@
         });
         return e;
       });
-    }
-    function reloadTryings(){
-      return Tryings.list().then(function(data){
-        $rootScope.tryings = data.cates;
-        Base.setLocal('tryings', data.cates);
-      }, function(e){
-        Base.getLocal('tryings').then(function(tryings){
-          $rootScope.tryings = tryings;
-        });
-      })
     }
     function reloadProvinces(){
       return Addresses.getProvinces().then(function(provinces){
@@ -403,10 +388,6 @@
       $rootScope.hideTabs = [];
       $state.go('app.stores');
     }
-    function toTryingsPage(){
-      $rootScope.hideTabs = [];
-      $state.go('app.tryings');
-    }
     function toCartPage(){
       $rootScope.hideTabs = [];
       $state.go('app.cart');
@@ -414,6 +395,10 @@
     function toMyPage(){
       $rootScope.hideTabs = [];
       $state.go('app.my');
+    }
+    function toOrdersPage(){
+      $rootScope.hideTabs = [];
+      $state.go('orders');
     }
     function toStoreHomePage(brand){
       return $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});
