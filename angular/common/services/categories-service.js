@@ -8,7 +8,8 @@
     var self = this;
     return {
       get: get, 
-      getProducts: getProducts
+      getProducts: getProducts,
+      getSeckills: getSeckills
     }
 
     function get(slug){
@@ -16,6 +17,9 @@
     }
     function getProducts(tagId){
       return Base.get("/categories/getTagProducts/" + tagId);
+    }
+    function getSeckills(){
+      return Base.get("/categories/getSeckills");
     }
   }
 })(window, window.angular);

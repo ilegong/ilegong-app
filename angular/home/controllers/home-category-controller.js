@@ -21,6 +21,15 @@
         return;
       }
       vm.loadStatus.startLoading();
+      Categories.getSeckills().then(function(data){
+        vm.seckills = _.map(data, function(seckill){
+          $log.log(seckill);
+          seckill.ProductTry.sold_num = Math.min(seckill.ProductTry.sold_num, seckill.ProductTry.limit_num);
+          seckill.ProductTry.sold_percent = Math.min(seckill.ProductTry.sold_num / seckill.ProductTry.limit_num * 100, 100);
+          return seckill;
+        });
+      });
+
       return Categories.getProducts(vm.tagId).then(function(data){
         vm.products = _.map(data.data_list, function(product){product.brand = vm.getBrandById(product.brand_id); return product});
         vm.loadStatus.succeeded();

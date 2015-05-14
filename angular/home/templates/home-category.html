@@ -1,4 +1,4 @@
-<ion-view title="{{::vm.name}}" class="categories" nav-transition=none>
+<ion-view title="{{::vm.name}}" class="categories" nav-transition=none hide-back-button='true'>
   <ion-content class="menue">
     <ul>
       <li ng-class="{'cur': vm.tagId == 23}" ui-sref="app.home-category({tagId: 23})"><div>朋友说<br/>爆款</div></li>
@@ -23,27 +23,31 @@
       <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div class="tuandetail_seckill clearfix" ng-if="vm.loadStatus.isLoadFinished()">
+    <div class="tuandetail_seckill clearfix" ng-if="vm.loadStatus.isLoadFinished()" ng-repeat="seckill in vm.seckills">
       <p>秒杀</p>
-      <span><img src="images/index/p1.jpg" /></span>
+      <span><img src="{{seckill.image}}" /></span>
       <span>
-        <h1>北京兴寿新摘红颜草莓-早上摘当天达 400g</h1>
-        <em>秒杀价：<strong>¥19.00</strong></em>
+        <h1 ng-bind="seckill.ProductTry.product_name"></h1>
+        <em>秒杀价：<strong ng-bind="seckill.ProductTry.price | currency:'￥'"></strong></em>
         <div class="tuan_bar clearfix">
           <div class="fl" style="width:55%;">
             <div class="bar">
-              <div class="bar_buy" id="bar_buy" style="width:20%;"></div>
+              <div class="bar_buy" id="bar_buy" style="width:{{seckill.ProductTry.sold_percent}}%;"></div>
             </div>
             <ul class="clearfix">
-              <li class="fl">已秒<span style=" display:inline;">5</span>份</li>
-              <li class="fr">共30份</li>
+              <li class="fl">已秒<span style=" display:inline;" ng-bind="seckill.ProductTry.sold_num"></span>份</li>
+              <li class="fr">共<span ng-bind="seckill.ProductTry.limit_num"></span>份</li>
             </ul>
           </div>
-          <a href="#X" class="tuandetail_seckill_btn seckill_disabled radius5 fr">已秒完</a>
+          <div ng-switch="seckill.status" data-try-id="{{seckill.ProductTry.id}}" data-tuan-id="{{seckill.ProductTry.tuan_id}}" data-pid="{{seckill.ProductTry.id}}" data-send-date="{{seckill.ProductTry.consignment_date}}">
+            <a class="tuandetail_seckill_btn radius5 fr" ng-switch-when="sec_kill">正在秒杀</a>
+            <a class="seckill_disabled radius5 fr" ng-switch-when="sec_end">已秒完</a>
+            <a class="sec_start" href="#X" ng-switch-when="sec_unstarted">开秒</a>
+          </div>
         </div>
       </span>
     </div>
-    <div class="good" ng-repeat="product in vm.products">
+    <div class="good" ng-repeat="product in vm.products" ng-if="vm.loadStatus.isLoadFinished()">
       <a href="#X" class="xq">
           <p ng-if="product.area == 1">仅限<br/>北京</p>
           <img src="{{product.listimg}}"/>
