@@ -28,7 +28,7 @@
     $stateProvider
       .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeMainCtrl as vm'}}})
-      .state('app.home-category', {url: '/categories/:slug/:name',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})
+      .state('app.home-category', {url: '/categories/:tagId',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})
    
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
    
@@ -382,7 +382,7 @@
     }
     function toHomePage(){
       $rootScope.hideTabs = [];
-      $state.go('app.home');
+      $state.go('app.home-category', {tagId: 23});
     }
     function toStoresPage(){
       $rootScope.hideTabs = [];

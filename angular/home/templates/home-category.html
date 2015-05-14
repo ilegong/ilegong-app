@@ -1,5 +1,21 @@
-<ion-view title="{{::vm.name}}" hide-tabs>
-  <ion-content class='home-category elements' ng-click="vm.loadData()">
+<ion-view title="{{::vm.name}}" class="categories" nav-transition=none>
+  <ion-content class="menue">
+    <ul>
+      <li ng-class="{'cur': vm.tagId == 23}" ui-sref="app.home-category({tagId: 23})"><div>朋友说<br/>爆款</div></li>
+      <li ng-class="{'cur': vm.tagId == 3}" ui-sref="app.home-category({tagId: 3})"><div>水果</div></li>
+      <li ng-class="{'cur': vm.tagId == 5}" ui-sref="app.home-category({tagId: 5})"><div>零食</div></li>
+      <li ng-class="{'cur': vm.tagId == 8}" ui-sref="app.home-category({tagId: 8})"><div>甜点</div></li>
+      <li ng-class="{'cur': vm.tagId == 24}" ui-sref="app.home-category({tagId: 24})"><div>蛋奶</div></li>
+      <li ng-class="{'cur': vm.tagId == 4}" ui-sref="app.home-category({tagId: 4})"><div>肉</div></li>
+      <li ng-class="{'cur': vm.tagId == 12}" ui-sref="app.home-category({tagId: 12})"><div>干货</div></li>
+      <li ng-class="{'cur': vm.tagId == 25}" ui-sref="app.home-category({tagId: 25})"><div>蜂蜜茶</div></li>
+      <li ng-class="{'cur': vm.tagId == 6}" ui-sref="app.home-category({tagId: 6})"><div>酒水</div></li>
+      <li ng-class="{'cur': vm.tagId == 9}" ui-sref="app.home-category({tagId: 9})"><div>粮油</div></li>
+      <li ng-class="{'cur': vm.tagId == 10}" ui-sref="app.home-category({tagId: 10})"><div>海鲜</div></li>
+      <li ng-class="{'cur': vm.tagId == 18}" ui-sref="app.home-category({tagId: 18})"><div>蔬菜</div></li>
+    </ul>
+  </ion-content>
+  <ion-content ng-click="vm.loadData()" class="content">
     <div class="centered-container" ng-if="!vm.loadStatus.isLoadFinished()">
       <span class="no-content load-status">
         <img ng-src="{{vm.loadStatus.getLoadingImage()}}"/>
@@ -7,19 +23,43 @@
       <span class="message text-muted" ng-bind="vm.loadStatus.getMessage()"></span>
     </div>
 
-    <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" collection-repeat="product in ::vm.products" item-height="::vm.getItemHeight()" item-width="50%" ng-click="vm.toProductDetailPage(product)">
-      <div class='element' data-a="{{$index}}">
-        <img class="blocked full" ng-src="{{product.coverimg}}" style="height: {{vm.imageHeight}}px; width: {{vm.imageWidth}}px">
-        <div class='padding-5'>
-          <div class="nowrap text-grey" ng-bind="product.name"></div>
-          <div class='image-left padding-top-5'>
-            <img class="r5" ng-src="{{product.brand.Brand.coverimg}}" ui-sref="store.home({id: product.brand.Brand.id, name: product.brand.Brand.name})" ng-click="$event.stopPropagation()">
-            <div class='nowrap text-sub-muted' style="line-height: 1rem" ng-bind="product.brand.Brand.name"></div>
-            <span class='text-sub text-energized' ng-bind="product.price | currency: '￥'"></span>
-            <s class="text-sub-muted" ng-show="product.original_price > 0" ng-bind="product.original_price | currency: '￥'"></s>
+    <div class="tuandetail_seckill clearfix" ng-if="vm.loadStatus.isLoadFinished()">
+      <p>秒杀</p>
+      <span><img src="images/index/p1.jpg" /></span>
+      <span>
+        <h1>北京兴寿新摘红颜草莓-早上摘当天达 400g</h1>
+        <em>秒杀价：<strong>¥19.00</strong></em>
+        <div class="tuan_bar clearfix">
+          <div class="fl" style="width:55%;">
+            <div class="bar">
+              <div class="bar_buy" id="bar_buy" style="width:20%;"></div>
+            </div>
+            <ul class="clearfix">
+              <li class="fl">已秒<span style=" display:inline;">5</span>份</li>
+              <li class="fr">共30份</li>
+            </ul>
           </div>
+          <a href="#X" class="tuandetail_seckill_btn seckill_disabled radius5 fr">已秒完</a>
         </div>
+      </span>
+    </div>
+    <div class="good" ng-repeat="product in vm.products">
+      <a href="#X" class="xq">
+          <p ng-if="product.area == 1">仅限<br/>北京</p>
+          <img src="{{product.listimg}}"/>
+          <div class="title" ng-bind="product.name"></div>
+      </a>
+      <div class="title clearfix" style="display: none;">
+          <a href="#X" class="phead"><img src="{{product.brand_img}}" /></a>
+          <a href="#X" class="txt"><b ng-bind="product.name"></b></a>
       </div>
+      <ul class="clearfix">
+          <li class="price fl">
+            <strong ng-bind="product.price | currency:'￥'"></strong>&nbsp;
+            <label ng-bind="product.original_price | currency:'￥'"></label>
+          </li>
+          <li class="fr"><a href="#X" class="btn radius5">立即购买</a></li>
+      </ul>
     </div>
   </ion-content>
 </ion-view>
