@@ -118,7 +118,7 @@
 
       <div class='elements' ng-cloak>
         <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
-        <div class="element-container" ng-repeat="recommend in ::vm.recommends">
+        <div class="element-container" ng-repeat="recommend in ::vm.recommends" item-width="50%">
           <div class='element'>
             <img class="full blocked" ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{::recommend[1].name}}" src="{{::recommend[1].coverimg}}">
             <div class="padding-5">

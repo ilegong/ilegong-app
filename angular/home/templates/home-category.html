@@ -53,8 +53,8 @@
           <img src="{{product.Product.listimg}}"/>
       </a>
       <div class="title clearfix">
-          <a href="#X" class="phead"><img src="{{product.brand.Brand.coverimg}}" /></a>
-          <a href="#X" class="txt"><b ng-bind="product.Product.name"></b></a>
+          <a ng-click="vm.toDetailPage(product)" class="phead"><img src="{{product.brand.Brand.coverimg}}" /></a>
+          <a ng-click="vm.toDetailPage(product)" class="txt"><b ng-bind="product.Product.name"></b></a>
       </div>
       <ul class="clearfix">
           <li class="price fl">

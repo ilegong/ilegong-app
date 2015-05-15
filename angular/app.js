@@ -46,6 +46,7 @@
       .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
       .state('product-detail-content', {url:'/products/:id/:from/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
       .state('product-detail-comments', {url:'/products/:id/:from/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
+      .state('tuanbuying-detail', {url: '/tuanbuyings/:id/:from', templateUrl: 'tuanbuying-detail.html', controller: 'TuanBuyingDetailCtrl as vm'})
 
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
       .state('account-register', {url: '/account-register', templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'})

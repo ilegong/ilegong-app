@@ -1,6 +1,9 @@
 (function (window, angular) {
   "use strict";
-  angular.module('module.products', ['module.services']);
+  angular.module('module.tuanBuyings', ['module.services']);
 })(window, window.angular);
+
+
+
 
 
