@@ -48,21 +48,20 @@
       </span>
     </div>
     <div class="good" ng-repeat="product in vm.products" ng-if="vm.loadStatus.isLoadFinished()">
-      <a href="#X" class="xq">
-          <p ng-if="product.area == 1">仅限<br/>北京</p>
-          <img src="{{product.listimg}}"/>
-          <div class="title" ng-bind="product.name"></div>
+      <a ng-click="vm.toDetailPage(product)" class="xq">
+          <p ng-if="product.Product.limit_area == 1">仅限<br/>北京</p>
+          <img src="{{product.Product.listimg}}"/>
       </a>
-      <div class="title clearfix" style="display: none;">
-          <a href="#X" class="phead"><img src="{{product.brand_img}}" /></a>
-          <a href="#X" class="txt"><b ng-bind="product.name"></b></a>
+      <div class="title clearfix">
+          <a href="#X" class="phead"><img src="{{product.brand.Brand.coverimg}}" /></a>
+          <a href="#X" class="txt"><b ng-bind="product.Product.name"></b></a>
       </div>
       <ul class="clearfix">
           <li class="price fl">
-            <strong ng-bind="product.price | currency:'￥'"></strong>&nbsp;
-            <label ng-bind="product.original_price | currency:'￥'"></label>
+            <strong ng-bind="product.Product.price | currency:'￥'"></strong>&nbsp;
+            <label ng-bind="product.Product.original_price | currency:'￥'"></label>
           </li>
-          <li class="fr"><a href="#X" class="btn radius5">立即购买</a></li>
+          <li class="fr"><a ng-click="vm.toDetailPage(product)" class="btn radius5">立即购买</a></li>
       </ul>
     </div>
   </ion-content>

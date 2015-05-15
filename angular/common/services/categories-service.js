@@ -16,10 +16,10 @@
       return Base.get("/categories/tag/" + slug + ".json");
     }
     function getProducts(tagId){
-      return Base.get("/categories/getTagProducts/" + tagId);
+      return Base.get("/categories/api_tag_products/" + tagId);
     }
     function getSeckills(){
-      return Base.get("/categories/getSeckills");
+      return Base.get("/categories/api_seckills");
     }
   }
 })(window, window.angular);

@@ -67,7 +67,7 @@
       .state('my-messages', {url: '/my/messages', templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'})
       .state('my-message', {url: '/my/messages/:id', templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'})
 
-    $urlRouterProvider.otherwise('/app/home');
+    $urlRouterProvider.otherwise('/app/categories');
   }
 
   /* @ngInject */
