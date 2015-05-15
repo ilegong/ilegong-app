@@ -6,6 +6,41 @@
       padding: 0;
     }
   }
+  .promotion{ 
+    position:relative; 
+    border-top: $border_default; 
+    border-bottom: $border_default; 
+    background-color: #ffffff; 
+    text-align:center;
+    .price{ 
+      position:absolute; 
+      top:5em; 
+      left:0.8em;
+    }
+  }
+  .elements{
+    .element-container{
+      .element{
+        border: 0;
+      }
+    }
+  }
+  .recommends{ 
+    .row{
+      .col:first-child{
+        margin-right: 0.5em;
+      }
+    }
+    .row:first-child{
+      padding-top: 0;
+    }
+  }
+  .no-network{
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
 }
 .pane .bg-image{
   position: absolute;
