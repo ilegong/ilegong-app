@@ -49,12 +49,7 @@
       return _.find(vm.brands, function(brand){return brand.Brand.id == id});
     }
     function toDetailPage(product){
-      if(_.isEmpty(product.TuanBuying)){
-        $state.go("product-detail", {id: product.Product.id,from:-1})
-      }
-      else{
-        $state.go("tuanbuying-detail", {id: product.TuanBuying.id});
-      }
-    };
+      $state.go("product-detail", {id: product.Product.id,from:-1})
+    }
   }
 })(window, window.angular);

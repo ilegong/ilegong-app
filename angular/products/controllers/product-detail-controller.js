@@ -27,6 +27,7 @@
     vm.readyToBuy = readyToBuy;
     vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
     vm.getCartTitle = getCartTitle;
+    vm.getBuyTitle = getBuyTitle;
     vm.getShipFee = getShipFee;
     vm.trustAsHtml = trustAsHtml;
     vm.hasConsignDates = hasConsignDates;
@@ -42,6 +43,8 @@
       vm.showProductIntro = false;
       vm.specs = [];
       vm.inprogress = false;
+      vm.cartTitle = '加入购物车';
+      vm.buyTitle = '立即购买';
 
       vm.loadStatus = new LoadStatus();
       vm.loadData();
@@ -61,6 +64,20 @@
         vm.brand = data.brand;
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
         vm.comments = [];
+
+        vm.tuanProduct = _.isEmpty(data.tuan_product) ? {} : data.tuan_product.TuanProduct;
+        vm.tuanBuying = _.isEmpty(data.tuan_buying) ? {} : data.tuan_buying.TuanBuying;
+        vm.tuanTeam = _.isEmpty(data.tuan_team) ? {} : data.tuan_team.TuanTeam;
+        vm.offlineStore = _.isEmpty(data.offline_store) ? {} : data.offline_store.offlineStore;
+        vm.isTuanBuying = !_.isEmpty(vm.tuanBuying);
+        if(vm.isTuanBuying){
+          if(vm.tuanProduct.tuan_price != -1){
+            vm.productPrice = vm.tuanProduct.tuan_price;
+          }
+          if(vm.tuanBuying.tuan_price != -1){
+            vm.productPrice = vm.tuanBuying.tuan_price;
+          }
+        }
 
         Products.getProductComment(vm.id).then(function(comments){
           vm.comments = comments;
@@ -178,6 +195,9 @@
       if(vm.inprogress){
         return false;
       }
+      if(vm.isTuanBuying && (vm.tuanBuying.status == 'finished' || vm.tuanBuying.status == 'canceled')){
+        return false;
+      }
       return true;
     }
     function addToCart(){
@@ -223,6 +243,22 @@
     function onActionFailed(message){
       vm.inprogress = false;
       $rootScope.alertMessage(message);
+    }
+    function getBuyTitle(product){
+      if(_.isEmpty(vm.product) || _.isEmpty(vm.product.Product)){
+        return '立即购买';
+      }
+      if(!vm.isTuanBuying){
+        return '立即购买';
+      }
+
+      if(vm.tuanBuying.status == 'finished'){
+        return '团购已结束';
+      }
+      if(vm.tuanBuying.status == 'canceled'){
+        return '团购已结束';
+      }
+      return '立即购买';
     }
     function getCartTitle(){
       if(_.isEmpty(vm.product) || _.isEmpty(vm.product.Product)){

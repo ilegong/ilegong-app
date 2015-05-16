@@ -1,4 +1,4 @@
-<ion-view class="product-detail" title="商品详情" hide-back-button='true'>
+<ion-view class="product-detail" title="团购详情" hide-back-button='true'>
    <ion-nav-buttons side="left">
     <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
       <i class="icon ion-ios-arrow-left"></i>返回
@@ -131,10 +131,10 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row" ng-cloak>
-    <span ng-click="vm.buyImmediately();" class="button button-energized mr" ng-class="{' col-40': !vm.isTuanBuying, 'col-80': vm.isTuanBuying}" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
-      <strong ng-bind="vm.getBuyTitle()"></strong>
+    <span ng-click="vm.buyImmediately();" class="button button-energized col-40 mr" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
+      <strong>立即购买</strong>
     </span>
-    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published" ng-if="!vm.isTuanBuying">
+    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published">
       <strong ng-bind="vm.getCartTitle()"></strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">

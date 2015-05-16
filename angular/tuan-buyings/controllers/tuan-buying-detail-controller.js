@@ -21,8 +21,8 @@
         return;
       }
       vm.loadStatus.startLoading();
-      return Products.getProduct(vm.id).then(function(data){
-
+      return TuanBuyings.getTuanBuying(vm.id).then(function(data){
+        
         vm.loadStatus.succeeded();
       }, function(e){
         vm.loadStatus.failed(e.status);
