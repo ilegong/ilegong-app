@@ -14,7 +14,13 @@
     </div>
 
     <div ng-show="vm.loadStatus.isLoadFinished()">
-      <img src="{{::vm.product.Product.coverimg}}" class="blocked full"/>
+      <img src="{{::vm.product.Product.coverimg}}" class="blocked full" ng-if="!vm.isTuanBuying"/>
+      <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.isTuanBuying">
+        <ion-slide ng-repeat="uploadFile in vm.tuan.upload_files" >
+          <img class="full" src="{{::uploadFile.Uploadfile.mid_thumb}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"/>
+        </ion-slide>
+      </ion-slide-box>
+
       <div class="item" style="border-top: 0; padding-bottom: 0;">
         <div class="wrapped text-21 text-dark padding-bottom-5" ng-bind="::vm.product.Product.name"></div>
         <div class="wrapped text-sub-muted padding-bottom-5" ng-bind="::vm.product.Product.promote_name"></div>
