@@ -33,6 +33,9 @@
     vm.hasConsignDates = hasConsignDates;
     vm.checkConsignDate = checkConsignDate;
     vm.isConsignDateChecked = isConsignDateChecked;
+    vm.checkShipSetting = checkShipSetting;
+    vm.isShipSettingChecked = isShipSettingChecked;
+    vm.getShipSettingName = getShipSettingName;
     activate();
     
     function activate(){
@@ -65,19 +68,8 @@
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
         vm.comments = [];
 
-        vm.tuanProduct = _.isEmpty(data.tuan_product) ? {} : data.tuan_product.TuanProduct;
-        vm.tuanBuying = _.isEmpty(data.tuan_buying) ? {} : data.tuan_buying.TuanBuying;
-        vm.tuanTeam = _.isEmpty(data.tuan_team) ? {} : data.tuan_team.TuanTeam;
-        vm.offlineStore = _.isEmpty(data.offline_store) ? {} : data.offline_store.offlineStore;
-        vm.isTuanBuying = !_.isEmpty(vm.tuanBuying);
-        if(vm.isTuanBuying){
-          if(vm.tuanProduct.tuan_price != -1){
-            vm.productPrice = vm.tuanProduct.tuan_price;
-          }
-          if(vm.tuanBuying.tuan_price != -1){
-            vm.productPrice = vm.tuanBuying.tuan_price;
-          }
-        }
+        vm.tuan = data.tuan;
+        vm.isTuanBuying = !_.isEmpty(vm.tuan);
 
         Products.getProductComment(vm.id).then(function(comments){
           vm.comments = comments;
@@ -192,10 +184,15 @@
       if(vm.hasConsignDates() && !vm.isConsignDateChecked()){
         return false;
       }
-      if(vm.inprogress){
-        return false;
+      if(vm.isTuanBuying){
+        if(vm.tuan.tuan_buying.TuanBuying.status == 'finished' || vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
+          return false;
+        }
+        if(!vm.isShipSettingChecked()){
+          return false;
+        }
       }
-      if(vm.isTuanBuying && (vm.tuanBuying.status == 'finished' || vm.tuanBuying.status == 'canceled')){
+      if(vm.inprogress){
         return false;
       }
       return true;
@@ -252,10 +249,10 @@
         return '立即购买';
       }
 
-      if(vm.tuanBuying.status == 'finished'){
+      if(vm.tuan.tuan_buying.TuanBuying.status == 'finished'){
         return '团购已结束';
       }
-      if(vm.tuanBuying.status == 'canceled'){
+      if(vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
         return '团购已结束';
       }
       return '立即购买';
@@ -276,19 +273,36 @@
       if(_.isEmpty(vm.product)){
         return '';
       }
-      if(vm.product.Product.ship_fee == -1){
-        return '货到付款';
+      if(!vm.isTuanBuying){
+        if(vm.product.Product.ship_fee == -1){
+          return '货到付款';
+        }
+        else if(vm.product.Product.ship_fee == -2 || vm.product.Product.limit_ship){
+          return '自提';
+        }
+        else if(vm.product.Product.ship_fee == 0){
+          return '包邮';
+        }
+        return $filter('currency')(vm.product.Product.ship_fee, '￥');
       }
-      else if(vm.product.Product.ship_fee == -2 || vm.product.Product.limit_ship){
-        return '自提';
-      }
-      else if(vm.product.Product.ship_fee == 0){
-        return '包邮';
-      }
-      return $filter('currency')(vm.product.Product.ship_fee, '￥');
+      return '自提';
     }
     function trustAsHtml(string){
       return $sce.trustAsHtml(string);
+    }
+    function getShipSettingName(shipSetting){
+      if(shipSetting.ProductShipSetting.ship_type != 6){
+        return shipSetting.ProductShipSetting.name;
+      }
+      return shipSetting.ProductShipSetting.name + '(' + shipSetting.ProductShipSetting.ship_fee + '元邮费)';
+    }
+    function checkShipSetting(shipSetting){
+      _.each(vm.tuan.ship_settings, function(setting){
+        setting.checked = (setting.ProductShipSetting.id == shipSetting.ProductShipSetting.id);
+      });
+    }
+    function isShipSettingChecked(){
+      return _.isEmpty(vm.tuan.ship_settings) || _.any(vm.tuan.ship_settings, function(shipSetting){return shipSetting.checked});
     }
   }
 })(window, window.angular);
