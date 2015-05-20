@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, $stateParams, Base, Addresses, Orders, Carts,Coupons){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, $stateParams, Base, Addresses, Orders, Carts,Coupons, offlineStores){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -12,7 +12,7 @@
     vm.getShipFeeOfBrand = getShipFeeOfBrand;
     vm.countOfProducts = countOfProducts;
     vm.changeAddress = changeAddress;
-    vm.changePickup = changePickup;
+    vm.changeOfflineStore = changeOfflineStore;
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
@@ -22,14 +22,33 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
+    vm.init = init;
     activate();
 
     function activate(){
       vm.type = $stateParams.type;
+      vm.isTuanBuying = vm.type == 5;
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
+      vm.offlineStores = $rootScope.offlineStores;
       vm.defaultAddress = $rootScope.getDefaultAddress();
+      vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore();
+      vm.validCoupons = $rootScope.user.validCoupons;
+      vm.invalidCoupons = $rootScope.user.invalidCoupons;
 
+      vm.init();
+
+      $rootScope.$on("addressChanged", function(event, addresses){
+        vm.defaultAddress = $rootScope.getDefaultAddress();
+      });
+      $rootScope.$on("offlineStoreChanged", function(event, addresses){
+        vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore();
+      });
+      $scope.$watch("user.cartInfo", function(){
+        vm.init();
+      });
+    }
+    function init(){
       vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
       vm.shippment = $rootScope.user.cartInfo.shippment;
 
@@ -37,22 +56,6 @@
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
       vm.reduced = $rootScope.user.cartInfo.reduced;
       vm.totalPrice = $rootScope.user.cartInfo.total_price + Math.max($rootScope.user.cartInfo.shipFee, 0);
-
-      vm.validCoupons = $rootScope.user.validCoupons;
-      vm.invalidCoupons = $rootScope.user.invalidCoupons;
-
-      $rootScope.$on("addressChanged", function(event, addresses){
-        vm.defaultAddress = $rootScope.getDefaultAddress();
-      });
-      $scope.$watch("user.cartInfo", function(){
-        vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
-        vm.shippment = $rootScope.user.cartInfo.shippment;
-
-        vm.shipFees = $rootScope.user.cartInfo.shipFees; 
-        vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
-        vm.reduced = $rootScope.user.cartInfo.reduced;
-        vm.totalPrice = $rootScope.user.cartInfo.total_price + Math.max($rootScope.user.cartInfo.shipFee, 0);
-      });
     }
     function setBrandOrProductCoupon(coupon,brand,products){
       if(coupon.isChecked){//checked
@@ -126,8 +129,8 @@
     function changeAddress(){
       $state.go('addresses',{state:1});
     }
-    function changePickup(){
-      $state.go('pickups');
+    function changeOfflineStore(){
+      $state.go('offlineStores');
     }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;
@@ -136,8 +139,8 @@
       return _.flatten(_.map(vm.confirmedBrandItems, function(br){return _.map(br.items, function(i){return i.pid})}));
     }
     function readyToSubmitOrder(){
-      if(vm.shippment.limitShip){
-        if(_.isEmpty(vm.shippment.pickup) || Base.isBlank(vm.shippment.username) || !Base.isMobileValid(vm.shippment.mobile)){
+      if(vm.type == 5){
+        if(_.isEmpty(vm.offlineStore) || Base.isBlank(vm.username) || !Base.isMobileValid(vm.shippment.mobile)){
           return false;
         }
         if(vm.shippment.needAddressRemark() && Base.isBlank(vm.shippment.detailedAddress)){

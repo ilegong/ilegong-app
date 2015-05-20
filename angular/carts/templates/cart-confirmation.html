@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-if="!vm.shippment.limitShip">
+    <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-if="!vm.isTuanBuying">
       <span class="text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
@@ -20,15 +20,15 @@
         <div>请选择地址</div>
       </div>
     </div>
-    <div class="item item-icon-right row" ng-click="vm.changePickup()" ng-if="vm.shippment.limitShip">
-      <span class="text-balanced col col-15 col-center">送至</span>
+    <div class="item item-icon-right row" ng-click="vm.changeOfflineStore()" ng-if="vm.isTuanBuying">
+      <span class="text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
-      <div ng-if="!_.isEmpty(vm.shippment.pickup)" class="col"> 
+      <div ng-if="!_.isEmpty(vm.defaultOfflineStore)" class="col"> 
         <div class="wrapped">
-          <span ng-bind="vm.shippment.pickup.address"></span>
+          <span ng-bind="vm.defaultOfflineStore.name"></span>
         </div>
       </div>
-      <div ng-if="_.isEmpty(vm.shippment.pickup)" class="col">
+      <div ng-if="_.isEmpty(vm.defaultOfflineStore)" class="col">
         <div>请选择自提点</div>
       </div>
     </div>

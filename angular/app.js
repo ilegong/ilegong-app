@@ -55,7 +55,7 @@
 
       .state('addresses', {url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
       .state('address-edit', {url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
-      .state('pickups', {url:'/pickups', templateUrl:'pickups.html',controller:'PickupsCtrl as vm'})
+      .state('offline-stores', {url:'/offline-stores', templateUrl:'offline-stores.html',controller:'OfflineStoresCtrl as vm'})
 
       .state('orders', {url:'/orders/:state', templateUrl:'orders.html', controller:'OrdersCtrl as vm'})
       .state('order-detail', {url:'/order/:id', templateUrl:'order-detail.html', controller:'OrderDetailCtrl as vm'})
@@ -142,7 +142,7 @@
     $ionicConfigProvider.backButton.text('返回').previousTitleText(false).icon('ion-ios-arrow-left');
   }
 
-  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Coupons) {
+  function AppCtrl($q,$scope,$rootScope, $timeout, $ionicPopup, $log, $state, $sce, config, Base, Orders, Carts, Users, Addresses, Profile, Stores, Coupons, OfflineStores) {
     var app = $scope;
     app.toHomePage = toHomePage;
     app.toStoresPage = toStoresPage;
@@ -160,8 +160,10 @@
     $rootScope.reloadCoupons = reloadCoupons;
     $rootScope.reloadOrders = reloadOrders;
     $rootScope.reloadAddresses = reloadAddresses;
+    $rootScope.reloadOfflineStores = reloadOfflineStores;
     $rootScope.confirmCart = confirmCart;
     $rootScope.getDefaultAddress = getDefaultAddress;
+    $rootScope.getDefaultOfflineStore = getDefaultOfflineStore;
     $rootScope.updateOrderState = updateOrderState;
     $rootScope.removeOrder = removeOrder;
     $rootScope.alertMessage = alertMessage;
@@ -179,6 +181,7 @@
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
       $rootScope.brands = [];
       $rootScope.provinces = [];
+      $rootScope.offlineStores = [];
       $rootScope.alert = {message: ''};
 
       // see: http://stackoverflow.com/questions/5180918/phonegap-on-android-window-device-is-undefined
@@ -213,6 +216,7 @@
 
       $rootScope.reloadStores();
       $rootScope.reloadProvinces();
+      $rootScope.reloadOfflineStores();
     }
     function onUserLoggedIn(token, shouldRefreshToken){
       if(shouldRefreshToken){
@@ -262,6 +266,16 @@
         });
       });
     }
+    function reloadOfflineStores(){
+      return OfflineStores.getOfflineStores().then(function(offlineStores){
+        $rootScope.offlineStores = offlineStores;
+        Base.setLocal('offlineStores', offlineStores);
+      }, function(e){
+        Base.getLocal('offlineStores').then(function(offlineStores){
+          $rootScope.offlineStores = offlineStores;
+        });
+      });
+    }
     function reloadCart(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
         var cartItems = result.carts;
@@ -285,16 +299,6 @@
     function confirmCart(pidList, couponCode, accessToken){
       return Carts.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
         $rootScope.user.cartInfo = result;
-
-        var brandItem = _.find($rootScope.user.cartInfo.cart.brandItems, function(bi){return true});
-        var item = _.find(brandItem.items, function(i){return true});
-        if(!_.isEmpty(item.specialPromotions)){
-          $rootScope.user.cartInfo.shippment = new Shippment(item.specialPromotions.limit_ship, item.specialPromotions.items);
-        }
-        else{
-          $rootScope.user.cartInfo.shippment = new Shippment(false, []);
-        }
-
         return result;
       });
     }
@@ -357,6 +361,10 @@
         defaultAddress = $rootScope.user.addresses[0];
       }
       return defaultAddress || {};
+    }
+    function getDefaultOfflineStore(){
+      var defaultOfflineStore =  _.find($rootScope.user.offlineStores, function(offlineStore){return offlineStore.checked});
+      return defaultOfflineStore || {};
     }
     function updateOrderState(orderId, state){
       var order = _.find($rootScope.user.orders, function(order){return order.Order.id == orderId});
