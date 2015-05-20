@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, Base, Addresses, Orders, Carts,Coupons){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, $stateParams, Base, Addresses, Orders, Carts,Coupons){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -24,7 +24,8 @@
     vm.readyToSubmitOrder = readyToSubmitOrder;
     activate();
 
-    function activate(){      
+    function activate(){
+      vm.type = $stateParams.type;
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
       vm.defaultAddress = $rootScope.getDefaultAddress();

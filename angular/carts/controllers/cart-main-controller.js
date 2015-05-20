@@ -109,7 +109,7 @@
       }
 
       $rootScope.confirmCart(pidList, couponCode, $rootScope.user.token.access_token).then(function(result){
-        $state.go('cart-confirmation');
+        $state.go('cart-confirmation', 1);
       }, function(e){
         var message = '结算失败，请稍后重试';
         if(e.status == 0){

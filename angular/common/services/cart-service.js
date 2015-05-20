@@ -42,18 +42,17 @@
       },function(error){defer.reject(error)});
       return defer.promise;
     }
-    function addCartItem(id, num, spec, type, try_id, consignDateId, consignDate, accessToken){
+    function addCartItem(isTuanBuying, json, accessToken){
       var defer = $q.defer();
-      var json = {"product_id":id,"num":num,"spec":spec,"type":type,"try_id":try_id, "consign_date_id": consignDateId, "consign_date": consignDate};
-
-      Base.post('/api_orders/cart_add.json?access_token=' + accessToken,json).then(function(result){
+      var url = isTuanBuying ? '/api_tuan/cart_add.json' : '/api_orders/cart_add.json'
+      Base.post(url + '?access_token=' + accessToken, json).then(function(result){
         if(result.data.success){
           defer.resolve(result);
         }
         else{
           defer.reject(result);
         }
-      },function(e){defer.reject(e);});
+      }, function(e){defer.reject(e);});
       return defer.promise;
     }
     function editNum(id,num, accessToken){

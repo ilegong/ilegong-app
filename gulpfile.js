@@ -86,7 +86,7 @@ gulp.task('sass', function(done) {
 gulp.task('dev:libjs', function () {
   return gulp.src(libJsPath.src)
     .pipe(concat('lib.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(rename({ extname: '.min.js' }))
     .pipe(gulp.dest(appJsPath.dist));
 });

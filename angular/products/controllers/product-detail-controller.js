@@ -70,6 +70,9 @@
 
         vm.tuan = data.tuan;
         vm.isTuanBuying = !_.isEmpty(vm.tuan);
+        if(vm.isTuanBuying && !_.isEmpty(vm.tuan.tuan_buying.TuanBuying.consign_time)){
+          vm.sendDate = vm.tuan.tuan_buying.TuanBuying.consign_time;
+        }
 
         Products.getProductComment(vm.id).then(function(comments){
           vm.comments = comments;
@@ -224,12 +227,28 @@
       }
       vm.inprogress = true;
       var couponCode = '';
-      var consignDate = _.find(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
-      Carts.addCartItem(vm.id, vm.count, vm.specGroup.id, 1, 0, consignDate.id, consignDate.send_date, $rootScope.user.token.access_token).then(function(result){
-        var cartId = result.data.id;
-        $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
-          vm.inprogress = false;
-          $state.go('cart-confirmation');
+      var consignmentDateId = null;
+      var sendDate = vm.sendDate;
+      if(vm.hasConsignDates()){
+        var consignmentDate = _.find(vm.product.Product.consign_dates, function(date){return date.checked}) || {};
+        consignmentDateId = consignmentDate.id;
+        sendDate = consignmentDate.send_date;
+      }
+
+      var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
+      if(vm.isTuanBuying){
+        json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
+      }
+      $log.log('add cart item: ').log(json);
+      Carts.addCartItem(vm.isTuanBuying, json, $rootScope.user.token.access_token).then(function(result){
+        var cartId = result.data.cart_id;
+        $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
+          $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
+            vm.inprogress = false;
+            $state.go('cart-confirmation', {'type': vm.isTuanBuying ? 5 : 1});
+          }, function(e){
+            vm.onActionFailed('购买失败，请重试', e);
+          });
         }, function(e){
           vm.onActionFailed('购买失败，请重试', e);
         });

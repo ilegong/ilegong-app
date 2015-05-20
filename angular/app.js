@@ -58,7 +58,7 @@
       .state('orders', {url:'/orders/:state', templateUrl:'orders.html', controller:'OrdersCtrl as vm'})
       .state('order-detail', {url:'/order/:id', templateUrl:'order-detail.html', controller:'OrderDetailCtrl as vm'})
 
-      .state('cart-confirmation', {url:'/cart-confirmation', templateUrl:'cart-confirmation.html', controller:'CartConfirmationCtrl as vm'})
+      .state('cart-confirmation', {url:'/cart-confirmation/:type', templateUrl:'cart-confirmation.html', controller:'CartConfirmationCtrl as vm'})
 
       .state('store', {url: '/stores/:id/:name', templateUrl: 'store-tabs.html', controller: 'StoreCtrl as app', abstract: true})
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
@@ -263,7 +263,7 @@
     function reloadCart(accessToken){
       return Carts.getCartItems(accessToken).then(function(result){
         var cartItems = result.carts;
-        var brandIds = _.unique(_.map(cartItems, function(cartItem){return cartItem.Cart.brand_id}));
+        var brandIds = _.filter(_.unique(_.map(cartItems, function(cartItem){return cartItem.Cart.brand_id})), function(brandId){return !_.isNull(brandId)});
         $rootScope.user.cartBrands = _.map(brandIds, function(brandId){
           var brand = _.find($rootScope.brands, function(brand){return brand.Brand.id == brandId});
           if(_.isEmpty(brand)){
@@ -351,7 +351,7 @@
     }
     function getDefaultAddress(){
       var defaultAddress =  _.find($rootScope.user.addresses, function(address){return address.OrderConsignees.status == 1});
-      if(_.isEmpty(defaultAddress) && $rootScope.user.addresses.length > 0){
+      if(_.isEmpty(defaultAddress) && !_.isEmpty($rootScope.user.addresses) && $rootScope.user.addresses.length > 0){
         defaultAddress = $rootScope.user.addresses[0];
       }
       return defaultAddress || {};
