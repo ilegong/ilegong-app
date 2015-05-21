@@ -27,6 +27,20 @@
                         {
                             "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wechat\"><param name=\"android-package\" value=\"xu.li.cordova.wechat.Wechat\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:exported=\"true\" android:label=\"@string/launcher_name\" android:name=\".wxapi.WXEntryActivity\"><intent-filter><action android:name=\"android.intent.action.VIEW\" /><category android:name=\"android.intent.category.DEFAULT\" /><data android:scheme=\"Anything\" /></intent-filter></activity>",
+                            "count": 1
                         }
                     ]
                 }
@@ -51,6 +65,9 @@
         },
         "org.apache.cordova.splashscreen": {
             "PACKAGE_NAME": "com.ilegong.pys"
+        },
+        "xu.li.cordova.wechat": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         }
     },
     "dependent_plugins": {}
