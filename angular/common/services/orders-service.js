@@ -45,7 +45,7 @@
     function submitOrder(pid_list, addressId, shipPromotionId, username, mobile, detailedAddress, coupon_code, remarks, accessToken){
       var json = {"pid_list":pid_list, "addressId":addressId, "username": username, "mobile": mobile, "detailedAddress": detailedAddress,  "coupon_code":coupon_code, "remarks":remarks};
       var defer =  $q.defer();
-      var url = '/api_orders/balance.json?access_token=' + accessToken,json;
+      var url = '/api_orders/submit_order.json?access_token=' + accessToken,json;
       if(shipPromotionId > 0){
         url = url + '&ship_promotion=' + shipPromotionId;
       }

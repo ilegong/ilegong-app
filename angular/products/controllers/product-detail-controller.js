@@ -239,7 +239,6 @@
       if(vm.isTuanBuying){
         json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
       }
-      $log.log('add cart item: ').log(json);
       Carts.addCartItem(vm.isTuanBuying, json, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.cart_id;
         $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
