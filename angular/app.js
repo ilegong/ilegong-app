@@ -31,8 +31,10 @@
       .state('app.home-category', {url: '/categories/:tagId',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})
    
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
-   
+
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
+
+      .state('app.orders',{url:'/orders/:state',views:{'app-orders':{templateUrl:'orders.html',controller:'OrdersCtrl as vm'}}})
 
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
       .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
@@ -399,7 +401,7 @@
     }
     function toOrdersPage(){
       $rootScope.hideTabs = [];
-      $state.go('orders');
+      $state.go('app.orders', {state:-2});
     }
     function toStoreHomePage(brand){
       return $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});

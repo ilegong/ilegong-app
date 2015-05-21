@@ -16,11 +16,20 @@
     vm.showOrderOperations = showOrderOperations;
     vm.removeOrder = removeOrder;
     vm.getShipFee = getShipFee;
+    vm.orderTypeFilter = showOrderType;
+    vm.hideBackBtn = false;
+    vm.selectBtn = 0;
     activate();
     
     function activate() {
       vm.state =$stateParams.state;
-      vm.orderStateName = Orders.getOrderState(vm.state).name;
+      if(vm.state == -2){
+        vm.state = 0;
+        vm.hideBackBtn = true;
+        vm.orderStateName = Orders.getOrderState(-1).name;
+      }else{
+        vm.orderStateName = Orders.getOrderState(vm.state).name;
+      }
       vm.orders = vm.filterOrders($rootScope.user.orders, $rootScope.brands, vm.state);
       vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){
@@ -117,6 +126,11 @@
         return '货到付款';
       }
       return $filter('currency')(order.Order.ship_fee, '￥')
+    }
+    function showOrderType(state){
+      vm.state = state;
+      vm.selectBtn = vm.state;
+      vm.orders = vm.filterOrders($rootScope.user.orders, $rootScope.brands, vm.state);
     }
   }
 })(window, window.angular);
