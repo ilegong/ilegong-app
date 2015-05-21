@@ -44,7 +44,6 @@
     "org.apache.cordova.inappbrowser",
     "com.ionic.keyboard",
     "org.apache.cordova.device",
-    "uk.co.whiteoctober.cordova.appversion",
     {
       "id": "xu.li.cordova.wechat",
       "locator": "/Users/aqingsao/Projects/3rdParty/cordova-plugin-wechat-master/"

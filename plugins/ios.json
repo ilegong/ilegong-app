@@ -29,10 +29,6 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"AppVersion\"><param name=\"ios-package\" value=\"AppVersion\" /></feature>",
-                            "count": 1
-                        },
-                        {
                             "xml": "<feature name=\"Wechat\"><param name=\"ios-package\" value=\"CDVWechat\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
@@ -105,9 +101,6 @@
             "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.ilegong.pyshuo"
-        },
-        "uk.co.whiteoctober.cordova.appversion": {
             "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "xu.li.cordova.wechat": {
