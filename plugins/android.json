@@ -9,11 +9,11 @@
                 "parents": {
                     "/*": [
                         {
-                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"AppVersion\"><param name=\"android-package\" value=\"uk.co.whiteoctober.cordova.AppVersion\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -21,7 +21,11 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"android-package\" value=\"org.apache.cordova.splashscreen.SplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Keyboard\"><param name=\"android-package\" value=\"com.ionic.keyboard.IonicKeyboard\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         },
                         {
@@ -44,20 +48,23 @@
         }
     },
     "installed_plugins": {
-        "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
-        },
-        "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
-        },
-        "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
-        },
-        "org.apache.cordova.inappbrowser": {
-            "PACKAGE_NAME": "com.ionicframework.ilegongapp346848"
+        "uk.co.whiteoctober.cordova.appversion": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "org.apache.cordova.splashscreen": {
-            "PACKAGE_NAME": "com.ilegong.pys"
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
+        },
+        "org.apache.cordova.inappbrowser": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
+        },
+        "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
+        },
+        "org.apache.cordova.console": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
+        },
+        "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.ilegong.pyshuo"
         },
         "xu.li.cordova.wechat": {
             "PACKAGE_NAME": "com.ilegong.pyshuo"

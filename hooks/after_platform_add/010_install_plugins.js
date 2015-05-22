@@ -11,7 +11,8 @@ var pluginlist = [
     "org.apache.cordova.console", 
     "org.apache.cordova.device",
     "org.apache.cordova.inappbrowser",
-    "uk.co.whiteoctober.cordova.appversion"
+    "uk.co.whiteoctober.cordova.appversion", 
+    "xu.li.cordova.wechat"
 ];
  
 // no need to configure below

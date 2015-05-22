@@ -23,6 +23,7 @@
   <!-- fix performance issue on android -->
   <preference name="KeepRunning" value="false"/>
 
+  <preference name="wechatappid" value="wx58be6f835c7afb62" />
   <!-- iOS only -->
   <preference name="deployment-target" value="7.0" />
   <preference name="target-device" value="handset" />

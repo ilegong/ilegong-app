@@ -70,7 +70,7 @@
       .state('my-messages', {url: '/my/messages', templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'})
       .state('my-message', {url: '/my/messages/:id', templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'})
 
-    $urlRouterProvider.otherwise('/app/categories');
+    $urlRouterProvider.otherwise('/app/categories/23');
   }
 
   /* @ngInject */
@@ -186,14 +186,34 @@
 
       // see: http://stackoverflow.com/questions/5180918/phonegap-on-android-window-device-is-undefined
       $timeout(function(){
-        if(cordova && cordova.getAppVersion){
+        if(cordova){
+          $log.log('cordova: ', true).log(cordova, true);
+
+          try{
           cordova.getAppVersion().then(function (version) {
             $rootScope.config.app.version = version;
+            $log.log('get app version succeeded: ' + version, true);
           }, function(e){
             $log.log('get version number failed: ', true).log(e, true);
           });
+          }catch(e){
+            $log.log('get version number failed2: ', true).log(e, true);  
+          }
+
+          try{
+          cordova.Wechat.isInstalled(function (installed) {
+            $log.log('check wechat: ' + installed, true);
+          }, function (reason) {
+            $log.log("check wechat failed: " + reason, true);
+          });
+          }catch(e){
+            $log.log('check wechat failed2: ', true).log(e, true);  
+          }
         }
-      }, 1000);
+        else{
+          $log.log('cordova is not available', true);
+        }
+      }, 2000);
       $rootScope.refreshData();
     }
     function refreshData(){
