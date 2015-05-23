@@ -36,11 +36,9 @@
       vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){
         vm.orders = vm.filterOrders($rootScope.user.orders, $rootScope.brands, vm.state);
-      });
-      $scope.$watch('user.orders', function(newOrders, oldOrders) {
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
-      $rootScope.$on("orderStateChanged", function(event, order){
+      $scope.$watch('user.orders', function(newOrders, oldOrders) {
         vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
     }
