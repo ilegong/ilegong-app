@@ -9,7 +9,7 @@
     </ion-refresher>
 
     <div class="button-bar" ng-if="vm.hideBackBtn">
-      <div class="button" ng-repeat="pendingState in vm.pendingStates" ng-class="{active:vm.selectBtn==pendingState.orderState.state}" ng-click="vm.orderTypeFilter(pendingState.orderState.state)">
+      <div class="button" style="font-size:15px !important;overflow: visible;padding: 0" ng-repeat="pendingState in vm.pendingStates" ng-class="{active:vm.selectBtn==pendingState.orderState.state}" ng-click="vm.orderTypeFilter(pendingState.orderState.state)">
           <div ng-if="pendingState.orders.length > 0" class="badge badge badge-assertive" ng-bind="pendingState.orders.length" style="position:absolute; top:0; right:0"></div>
           <span ng-bind="::pendingState.orderState.name"></span>
       </div>
