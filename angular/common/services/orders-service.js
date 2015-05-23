@@ -16,7 +16,7 @@
       {state:9, value: 'SUCCESSED', name:'已完成', pending: false, status: '交易成功'},
       {state:10, value: 'CANCELED', name:'已取消', pending: false, status: '交易关闭'},
       {state:12, value: 'COMPLAINED', name:'已投诉', pending: false}
-    ]
+    ];
     return {
       list: list,
       isOfStates: isOfStates, 
@@ -26,7 +26,8 @@
       cancelOrder: cancelOrder,
       removeOrder: removeOrder,
       confirmReceivingGoods: confirmReceivingGoods,
-      getOrderDetail: getOrderDetail 
+      getOrderDetail: getOrderDetail,
+      getTabOrderStatus:[ {state:0,name:'待支付'}, {state:1,name:'待发货'}, {state:["2","3"],name:'待收货/评价'}, {state:-1,name:'全部'} ]
     }
 
     function list(accessToken){

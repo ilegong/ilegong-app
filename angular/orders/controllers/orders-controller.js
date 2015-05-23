@@ -17,11 +17,13 @@
     vm.removeOrder = removeOrder;
     vm.getShipFee = getShipFee;
     vm.orderTypeFilter = showOrderType;
+    vm.getPendingStates = getPendingStates;
     vm.hideBackBtn = false;
     vm.selectBtn = 0;
     activate();
     
     function activate() {
+      vm.pendingStates = vm.getPendingStates([]);
       vm.state =$stateParams.state;
       if(vm.state == -2){
         vm.state = 0;
@@ -34,6 +36,12 @@
       vm.ship_type = $rootScope.user.ship_type;
       $rootScope.$on("orderStateChanged", function(event, order){
         vm.orders = vm.filterOrders($rootScope.user.orders, $rootScope.brands, vm.state);
+      });
+      $scope.$watch('user.orders', function(newOrders, oldOrders) {
+        vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
+      });
+      $rootScope.$on("orderStateChanged", function(event, order){
+        vm.pendingStates = vm.getPendingStates($rootScope.user.orders);
       });
     }
     function doRefresh(){
@@ -131,6 +139,19 @@
       vm.state = state;
       vm.selectBtn = vm.state;
       vm.orders = vm.filterOrders($rootScope.user.orders, $rootScope.brands, vm.state);
+    }
+    function getPendingStates(orders){
+      return _.map(Orders.getTabOrderStatus, function(pendingOrderState){
+        return {
+          orders: _.filter(orders, function(order){
+              if(pendingOrderState.state == -1){ return true;}
+              if(_.isArray(pendingOrderState.state)){
+                return _.contains(pendingOrderState.state,order.Order.status);
+              }
+              return order.Order.status == pendingOrderState.state
+          }),
+          orderState: pendingOrderState}
+      });
     }
   }
 })(window, window.angular);

@@ -9,10 +9,10 @@
     </ion-refresher>
 
     <div class="button-bar" ng-if="vm.hideBackBtn">
-      <a class="button" ng-class="{active:vm.selectBtn==0}" ng-click="vm.orderTypeFilter(0)">待支付</a>
-      <a class="button" ng-class="{active:vm.selectBtn==1}" ng-click="vm.orderTypeFilter(1)">待发货</a>
-      <a class="button" ng-class="{active:vm.selectBtn==2}" ng-click="vm.orderTypeFilter(2)">待收货</a>
-      <a class="button" ng-class="{active:vm.selectBtn==-1}" ng-click="vm.orderTypeFilter(-1)">全部</a>
+      <div class="button" ng-repeat="pendingState in vm.pendingStates" ng-class="{active:vm.selectBtn==pendingState.orderState.state}" ng-click="vm.orderTypeFilter(pendingState.orderState.state)">
+          <div ng-if="pendingState.orders.length > 0" class="badge badge badge-assertive" ng-bind="pendingState.orders.length" style="position:absolute; top:0; right:0"></div>
+          <span ng-bind="::pendingState.orderState.name"></span>
+      </div>
     </div>
     <div class="centered-container" ng-if="vm.orders.length == 0">
       <span class="no-content no-orders">
