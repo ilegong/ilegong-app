@@ -5,12 +5,12 @@
   .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
 
   /* @ngInject */
-  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, Base, config, Users){
+  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, $q, Base, config, Users, Wechats){
     var vm = this;
     vm.login = login;
     vm.wechatLogin = wechatLogin;
     vm.tryToLoginByWechat = tryToLoginByWechat;
-    vm.onAuthSucceeded = onAuthSucceeded;
+    vm.onWechatLoginFailed = onWechatLoginFailed;
     vm.resetPassword = resetPassword;
     vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
 
@@ -42,7 +42,7 @@
     function tryToLoginByWechat(){
       var defer = $q.defer();
       var wechatToken = $rootScope.user.wechatToken;
-      if(!_.isEmpty(wechatToken){
+      if(!_.isEmpty(wechatToken)){
         var isExpired = wechatToken.expires_at <= (((new Date()).valueOf())/1000);
         if(isExpired){
           Wechats.refreshAccessToken(wechatToken.refresh_token).then(function(wechatToken){
@@ -62,7 +62,7 @@
           });
         }, function(error){
           vm.onWechatLoginFailed(error);
-        })
+        });
       }
     }
     function wechatLogin(wechatToken){

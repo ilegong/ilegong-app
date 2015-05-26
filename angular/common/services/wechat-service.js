@@ -22,6 +22,7 @@
         $log.log('wechat auth failed: ').log(error);
         defer.reject(error);
       });
+      return defer.promise;
     }
     function getAccessToken(code){
       var url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + config.app.appId + "&secret=" + config.app.appSecret + "&code=" + code + "&grant_type=authorization_code";

@@ -25,7 +25,7 @@
       });
     }
     function wechatLogin(wechatToken){
-      return Base.get('/oauth/wechat_token?client_id=' + config.app.clientId + '&open_id=' + openId).then(function(token) {
+      return Base.post('/oauth/wechat_token?client_id=' + config.app.clientId, wechatToken).then(function(token) {
         $rootScope.onUserLoggedIn(token, true);
         return $rootScope.user.token;
       });

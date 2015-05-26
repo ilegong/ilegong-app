@@ -48,7 +48,6 @@
       .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
       .state('product-detail-content', {url:'/products/:id/:from/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
       .state('product-detail-comments', {url:'/products/:id/:from/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
-      .state('tuan-buying-detail', {url: '/tuanBuyings/:id/:from', templateUrl: 'tuan-buying-detail.html', controller: 'TuanBuyingDetailCtrl as vm'})
 
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
       .state('account-register', {url: '/account-register', templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'})
@@ -153,7 +152,7 @@
     $rootScope.refreshData = refreshData;
     $rootScope.onUserLoggedIn = onUserLoggedIn;
     $rootScope.onUserLoggedOut = onUserLoggedOut;
-    $rootScope.onWechatAuthed = onWechatAuthed;
+    $rootScope.onWechatTokenRefreshed = onWechatTokenRefreshed;
     $rootScope.reloadProfile = reloadProfile;
     $rootScope.reloadProvinces = reloadProvinces;
     $rootScope.reloadStores = reloadStores;
@@ -246,29 +245,6 @@
     }
     function onUserLoggedOut(){
       $rootScope.user = {token:{}, wechatToken: {}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
-    }
-    function onWechatAuthed(wechatToken){
-      $rootScope.user.wechatToken = wechatToken;
-      Base.setLocal('user.wechatToken', wechatToken);
-    }
-    function getWechatTokenLocally(){
-      var defer = $q.defer();
-      Base.getLocal('user.wechatToken').then(function(wechatToken){
-        var isExpired = wechatToken.expires_at <= (((new Date()).valueOf())/1000);
-        if(isExpired){
-          var url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN";
-          Base.get(url).then(function(token){
-            // token is refreshed in Users.refreshToken;
-          }, function(e){
-            $rootScope.onUserLoggedIn(token, false);
-          });
-        }
-        else{
-          defer.resolve(wechatToken);
-        }
-      }, function(e){
-        
-      });
     }
     function onWechatTokenRefreshed(wechatToken){
       wechatToken = _.extend(wechatToken, {expires_at: wechatToken.expires_in + ((new Date()).valueOf())/1000});
