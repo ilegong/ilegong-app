@@ -22,7 +22,7 @@
       <button class="button button-block button-energized" ng-click="vm.login()" ng-disabled="!vm.readyToLogin()">登录</button>
     </div>
     <div class="padding">
-      <button class="button button-block button-energized" ng-click="vm.weixinLogin()" ng-if="vm.isWeixinInstalled">微信快捷登录</button>
+      <button class="button button-block button-energized" ng-click="vm.tryToLoginByWechat()" ng-if="vm.showWXLoginBtn">微信快捷登录</button>
     </div>
   </ion-content>
 </ion-view>

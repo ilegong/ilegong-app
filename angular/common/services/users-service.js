@@ -13,18 +13,25 @@
       getSmsCode: getSmsCode, 
       register: register, 
       login: login, 
+      wechatLogin: wechatLogin, 
       aliPay: aliPay,
       refreshToken:refreshToken
     }
 
     function login(username, password){
-      return Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + config.app.client_id).then(function(token) {
+      return Base.get('/oauth/token?grant_type=password&username=' + username + '&password=' + password + '&client_id=' + config.app.clientId).then(function(token) {
+        $rootScope.onUserLoggedIn(token, true);
+        return $rootScope.user.token;
+      });
+    }
+    function wechatLogin(wechatToken){
+      return Base.get('/oauth/wechat_token?client_id=' + config.app.clientId + '&open_id=' + openId).then(function(token) {
         $rootScope.onUserLoggedIn(token, true);
         return $rootScope.user.token;
       });
     }
     function refreshToken(refreshToken){
-      return Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.client_id).then(function(token){
+      return Base.get('/oauth/token?grant_type=refresh_token&refresh_token='+refreshToken+'&client_id='+config.app.clientId).then(function(token){
         $rootScope.onUserLoggedIn(token, true);
         return $rootScope.user.token;
       });
@@ -65,14 +72,14 @@
 
     function register(mobile, password, smsCode){
       var data = {
-        client_id: config.app.client_id, 
+        client_id: config.app.clientId, 
         mobile: mobile, 
         password: password, 
         code: smsCode, 
         device_uuid: Base.getDevice().uuid
       }
       var nickname = "用户" + mobile.substring(7)
-      return Base.get('/oauth/register?client_id=' + config.app.client_id + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
+      return Base.get('/oauth/register?client_id=' + config.app.clientId + "&mobile=" + mobile + "&password=" + password + "&code=" + smsCode + "&device_uuid=" + Base.getDevice().uuid + "&nickname=" + nickname).then(function(token){
         $rootScope.onUserLoggedIn(token, true);
       });
     }

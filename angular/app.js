@@ -153,6 +153,7 @@
     $rootScope.refreshData = refreshData;
     $rootScope.onUserLoggedIn = onUserLoggedIn;
     $rootScope.onUserLoggedOut = onUserLoggedOut;
+    $rootScope.onWechatAuthed = onWechatAuthed;
     $rootScope.reloadProfile = reloadProfile;
     $rootScope.reloadProvinces = reloadProvinces;
     $rootScope.reloadStores = reloadStores;
@@ -189,26 +190,12 @@
         if(cordova){
           $log.log('cordova: ', true).log(cordova, true);
 
-          try{
           cordova.getAppVersion().then(function (version) {
             $rootScope.config.app.version = version;
             $log.log('get app version succeeded: ' + version, true);
           }, function(e){
-            $log.log('get version number failed: ', true).log(e, true);
+            $log.log('get app version failed: ', true).log(e, true);
           });
-          }catch(e){
-            $log.log('get version number failed2: ', true).log(e, true);  
-          }
-
-          try{
-          cordova.Wechat.isInstalled(function (installed) {
-            $log.log('check wechat: ' + installed, true);
-          }, function (reason) {
-            $log.log("check wechat failed: " + reason, true);
-          });
-          }catch(e){
-            $log.log('check wechat failed2: ', true).log(e, true);  
-          }
         }
         else{
           $log.log('cordova is not available', true);
@@ -224,7 +211,9 @@
         var isExpired = token.expires_at <= (((new Date()).valueOf())/1000);
         if(isExpired){
           Users.refreshToken(token.refresh_token).then(function(token){
+            // token is refreshed in Users.refreshToken;
           }, function(e){
+            // aqingsao: why set loggedIn to true? 
             $rootScope.onUserLoggedIn(token, false);
           });
         }
@@ -233,6 +222,9 @@
           $rootScope.onUserLoggedIn(token, false);
         }
       }, function(e){});
+      Base.getLocal('user.wechatToken').then(function(wechatToken){
+        $rootScope.user.wechatToken = wechatToken;
+      });
 
       $rootScope.reloadStores();
       $rootScope.reloadProvinces();
@@ -253,7 +245,34 @@
       $rootScope.reloadCoupons(token.access_token);
     }
     function onUserLoggedOut(){
-      $rootScope.user = {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
+      $rootScope.user = {token:{}, wechatToken: {}, loggedIn: false, profile:{}, cartItems: [], cartBrands:[], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
+    }
+    function onWechatAuthed(wechatToken){
+      $rootScope.user.wechatToken = wechatToken;
+      Base.setLocal('user.wechatToken', wechatToken);
+    }
+    function getWechatTokenLocally(){
+      var defer = $q.defer();
+      Base.getLocal('user.wechatToken').then(function(wechatToken){
+        var isExpired = wechatToken.expires_at <= (((new Date()).valueOf())/1000);
+        if(isExpired){
+          var url = "https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=APPID&grant_type=refresh_token&refresh_token=REFRESH_TOKEN";
+          Base.get(url).then(function(token){
+            // token is refreshed in Users.refreshToken;
+          }, function(e){
+            $rootScope.onUserLoggedIn(token, false);
+          });
+        }
+        else{
+          defer.resolve(wechatToken);
+        }
+      }, function(e){
+        
+      });
+    }
+    function onWechatTokenRefreshed(wechatToken){
+      wechatToken = _.extend(wechatToken, {expires_at: wechatToken.expires_in + ((new Date()).valueOf())/1000});
+      Base.setLocal('user.wechatToken', wechatToken);
     }
     function reloadProfile(accessToken){
       return Profile.getProfile(accessToken).then(function(profile){

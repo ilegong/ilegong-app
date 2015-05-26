@@ -5,10 +5,12 @@
   .controller('MyAccountLoginCtrl', MyAccountLoginCtrl)
 
   /* @ngInject */
-  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, config, Users){
+  function MyAccountLoginCtrl($ionicHistory,$rootScope, $scope, $state, $log, $timeout, Base, config, Users){
     var vm = this;
     vm.login = login;
-    vm.weixinLogin = weixinLogin;
+    vm.wechatLogin = wechatLogin;
+    vm.tryToLoginByWechat = tryToLoginByWechat;
+    vm.onAuthSucceeded = onAuthSucceeded;
     vm.resetPassword = resetPassword;
     vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
 
@@ -17,13 +19,15 @@
     function activate(){
       vm.username = "";
       vm.password = "";
-      vm.isWeixinInstalled = false;
-      cordova.Wechat.isInstalled(function (installed) {
-          vm.isWeixinInstalled = installed;
-          $log.log('weixin installed: ' + installed);
-      }, function (reason) {
-          $log.log("Failed to call Wechat.isIntalled: " + reason);
-      });
+      vm.showWXLoginBtn = false;
+      if(window.Wechat){
+        window.Wechat.isInstalled(function (installed) {
+            vm.showWXLoginBtn = installed;
+            $log.log('weixin installed: ' + installed);
+        }, function (reason) {
+            $log.log("Failed to call Wechat.isIntalled: " + reason);
+        });
+      }
     }
     
     function login(){
@@ -34,13 +38,58 @@
         $rootScope.alertMessage("账户或密码错误，请重试");
       })
     }
-    function weixinLogin(){
-      var scope = "snsapi_userinfo";
-      cordova.Wechat.auth(scope, function (response) {
-        $log.log("weixin auth: ").log(JSON.stringify(response));
-      }, function (reason) {
-        $log.log("Failed to call weixin auth: " + reason);
+
+    function tryToLoginByWechat(){
+      var defer = $q.defer();
+      var wechatToken = $rootScope.user.wechatToken;
+      if(!_.isEmpty(wechatToken){
+        var isExpired = wechatToken.expires_at <= (((new Date()).valueOf())/1000);
+        if(isExpired){
+          Wechats.refreshAccessToken(wechatToken.refresh_token).then(function(wechatToken){
+            vm.wechatLogin(wechatToken);
+          }, function(error){
+            vm.onWechatLoginFailed('ERR_REFRESH_ACCESS_TOKEN');
+          });
+        } else{
+          vm.loginByWechat(wechatToken);
+        }
+      } else{
+        Wechats.auth().then(function(authResult){
+          Wechats.getAccessToken(authResult.code).then(function(wechatToken){
+            vm.wechatLogin(wechatToken);
+          }, function(){
+            vm.onWechatLoginFailed('ERR_GET_ACCESS_TOKEN');
+          });
+        }, function(error){
+          vm.onWechatLoginFailed(error);
+        })
+      }
+    }
+    function wechatLogin(wechatToken){
+      Users.wechatLogin(wechatToken).then(function(){
+        
+      }, function(error){
+        $log.log('wechats failed to get user info: ').log(error);;
+        Users.wechatLogin();
       });
+    }
+    function onWechatLoginFailed(error){
+      if(error == 'ERR_AUTH_DENIED'){
+        $rootScope.alertMessage("微信快捷登录: 用户没有授权");
+      }
+      else if(error == 'ERR_USER_CANCEL'){
+        $rootScope.alertMessage("微信快捷登录: 用户取消了授权");
+      }
+      else if(error == 'ERR_GET_ACCESS_TOKEN'){
+        $rootScope.alertMessage("微信快捷登录: 获取令牌失败");
+      }
+      else if(error == 'ERR_REFRESH_ACCESS_TOKEN'){
+        $rootScope.alertMessage("微信快捷登录: 刷新令牌失败");
+      }
+      else{
+        $rootScope.alertMessage("微信快捷登录异常: " + reason);
+        $log.log("wechat.auth failed: " + reason);
+      }
     }
     function resetPassword(){
       vm.password = "";
