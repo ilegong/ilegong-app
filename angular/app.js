@@ -28,22 +28,19 @@
     $stateProvider
       .state('app', {url: "/app", templateUrl: "tabs.html", controller: AppCtrl, abstract: true})
       .state('app.home', {url: '/home', views: {'app-home': {templateUrl: 'home.main.html',controller: 'HomeMainCtrl as vm'}}})
-      .state('app.home-category', {url: '/categories/:tagId',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})
-   
+      .state('app.home-category', {url: '/categories/:tagId',views: {'app-home': {templateUrl: 'home-category.html',controller: 'HomeCategoryCtrl as vm'}}})   
       .state('app.stores', {url: '/stores', views: {'app-stores': {templateUrl: 'stores.main.html', controller: 'StoreMainCtrl as vm'}}})
-
       .state('app.cart', {url: '/cart', views: {'app-cart': {templateUrl: 'cart-main.html',controller: 'CartMainCtrl as vm'}}})
-
       .state('app.orders',{url:'/orders/:state',views:{'app-orders':{templateUrl:'orders.html',controller:'OrdersCtrl as vm'}}})
-
       .state('app.my', {url: '/my', views: {'app-my': {templateUrl: 'my.main.html',controller: 'MyMainCtrl as vm'}}})
-      .state('app.my-profile',{url:'/my-profile',views:{'app-my':{templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'}}})
-      .state('app.my-profile-mobilephone',{url:'/my-profile-mobilephone',views:{'app-my':{templateUrl:'my-profile-mobilephone.html',controller:'MyProfileMobilePhoneCtrl as vm'}}})
-      .state('app.my-profile-email',{url:'/my-profile-email',views:{'app-my':{templateUrl:'my-profile-email.html',controller:'MyProfileEmailCtrl as vm'}}})
-      .state('app.my-profile-sex',{url:'/my-profile-sex',views:{'app-my':{templateUrl:'my-profile-sex.html',controller:'MyProfileSexCtrl as vm'}}})
-      .state('app.my-profile-nickname',{url:'/my-profile-nickname',views:{'app-my':{templateUrl:'my-profile-nickname.html',controller:'MyProfileNickNameCtrl as vm'}}})
-      .state('app.my-coupons',{url:'/my-coupons',views:{'app-my':{templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'}}})
-      .state('app.my-offers',{url:'/my-offers',views:{'app-my':{templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'}}})
+
+      .state('my-profile',{url:'/my-profile', templateUrl:'my-profile.html',controller:'MyProfileCtrl as vm'})
+      .state('my-profile-mobilephone',{url:'/my-profile-mobilephone', templateUrl:'my-profile-mobilephone.html',controller:'MyProfileMobilePhoneCtrl as vm'})
+      .state('my-profile-email',{url:'/my-profile-email', templateUrl:'my-profile-email.html',controller:'MyProfileEmailCtrl as vm'})
+      .state('my-profile-sex',{url:'/my-profile-sex', templateUrl:'my-profile-sex.html',controller:'MyProfileSexCtrl as vm'})
+      .state('my-profile-nickname',{url:'/my-profile-nickname', templateUrl:'my-profile-nickname.html',controller:'MyProfileNickNameCtrl as vm'})
+      .state('my-coupons',{url:'/my-coupons', templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'})
+      .state('my-offers',{url:'/my-offers', templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'})
 
       .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
       .state('product-detail-content', {url:'/products/:id/:from/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
@@ -65,9 +62,9 @@
       .state('store.home', {url: '/home', views: {'store-home': {templateUrl: 'store.home.html', controller: 'StoreHomeCtrl as vm'}}})
       .state('store.intro', {url: '/intro', views: {'store-intro': {templateUrl: 'store.intro.html', controller: 'StoreIntroCtrl as vm'}}})
 
-      .state('my-ilegong', {url: '/my/ilegong', templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'})
-      .state('my-messages', {url: '/my/messages', templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'})
-      .state('my-message', {url: '/my/messages/:id', templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'})
+      .state('my-ilegong', {url: '/my-ilegong', templateUrl: 'my-ilegong.html',controller: 'MyIlegongCtrl as vm'})
+      .state('my-messages', {url: '/my-messages', templateUrl: 'my-messages.html',controller: 'MyMessagesCtrl as vm'})
+      .state('my-message', {url: '/my-messages/:id', templateUrl: 'my-message.html',controller: 'MyMessageCtrl as vm'})
 
     $urlRouterProvider.otherwise('/app/categories/23');
   }
@@ -177,7 +174,6 @@
     function activate(){
       $rootScope.config = config;
       $rootScope._ = window._;
-      $rootScope.hideTabs = [];
       $rootScope.user = $rootScope.user || {token:{}, loggedIn: false, profile:{}, cartItems: [], cartBrands: [], addresses: [], orders: [], order_carts: [], ship_type: {}, validCoupons: [], invalidCoupons: []};
       $rootScope.brands = [];
       $rootScope.provinces = [];
@@ -407,23 +403,18 @@
       return !_.isEmpty($rootScope.alert) && !_.isEmpty($rootScope.alert.message);
     }
     function toHomePage(){
-      $rootScope.hideTabs = [];
       $state.go('app.home-category', {tagId: 23});
     }
     function toStoresPage(){
-      $rootScope.hideTabs = [];
       $state.go('app.stores');
     }
     function toCartPage(){
-      $rootScope.hideTabs = [];
       $state.go('app.cart');
     }
     function toMyPage(){
-      $rootScope.hideTabs = [];
       $state.go('app.my');
     }
     function toOrdersPage(){
-      $rootScope.hideTabs = [];
       $state.go('app.orders', {state:-2});
     }
     function toStoreHomePage(brand){

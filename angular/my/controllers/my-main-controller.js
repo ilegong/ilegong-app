@@ -45,7 +45,7 @@
         return $state.go('account-login');
       }
 
-      $state.go('app.my-coupons');
+      $state.go('my-coupons');
     }
 
     function toOffer(){
@@ -53,7 +53,7 @@
         return $state.go('account-login');
       }
 
-      $state.go('app.my-offers');
+      $state.go('my-offers');
     }
 
     function toAddresses(){
@@ -75,7 +75,7 @@
         return $state.go('account-login');
       }
 
-      $state.go("app.my-profile");
+      $state.go("my-profile");
     }
   } 
 })(window, window.angular);

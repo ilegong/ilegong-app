@@ -21,7 +21,7 @@
 
       Profile.editProfile(_.extend($rootScope.user.profile.User, {nickname: vm.nickname}), $rootScope.user.token.access_token).then(function(){
         $rootScope.user.profile.User.nickname = vm.nickname;
-        $state.go("app.my-profile");
+        $state.go("my-profile");
       }, function(e){
       }); 
     }

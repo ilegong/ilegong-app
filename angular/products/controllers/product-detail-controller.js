@@ -25,7 +25,7 @@
     vm.buyImmediately = buyImmediately;
     vm.onActionFailed = onActionFailed;
     vm.readyToBuy = readyToBuy;
-    vm.toCartPage = function(){$rootScope.hideTabs = []; $state.go('app.cart');};
+    vm.toCartPage = function(){$state.go('app.cart');};
     vm.getCartTitle = getCartTitle;
     vm.getBuyTitle = getBuyTitle;
     vm.getShipFee = getShipFee;

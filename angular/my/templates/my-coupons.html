@@ -1,4 +1,9 @@
-<ion-view title="我的优惠券" class="coupons" hide-tabs>
+<ion-view title="我的优惠券" class="coupons">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios-arrow-left"></i>返回
+    </button>
+  </ion-nav-buttons>
   <ion-content ng-click="vm.loadData()">
     <div class="centered-container" ng-if="!vm.loadStatus.isLoadFinished()">
       <span class="no-content load-status">

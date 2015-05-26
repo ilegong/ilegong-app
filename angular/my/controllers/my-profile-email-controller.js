@@ -22,7 +22,7 @@
 
       Profile.editProfile(_.extend($rootScope.user.profile.User, {email: vm.email}), $rootScope.user.token.access_token).then(function(){
         $rootScope.user.profile.User.email = vm.email;
-        $state.go("app.my-profile");
+        $state.go("my-profile");
       }, function(e){
       }); 
     }

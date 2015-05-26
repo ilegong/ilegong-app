@@ -1,7 +1,11 @@
-<ion-view title="红包" hide-tabs>
+<ion-view title="红包">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear back-button" ng-click="$ionicGoBack($event)">
+      <i class="icon ion-ios-arrow-left"></i>返回
+    </button>
+  </ion-nav-buttons>
   <ion-content >
     <div class="list">
-
       <div class="item" ng-repeat="item in vm.sharedOffers" ng-cloak>
           <div class="row">
             <div class="col col-25">
@@ -23,8 +27,6 @@
             </div>
           </div>
       </div>
-
     </div>
-
   </ion-content>
 </ion-view>

@@ -32,11 +32,9 @@
         $ionicSlideBoxDelegate.update();
 
         vm.loadStatus.succeeded();
-        $rootScope.hideTabs = [false];
         $rootScope.refreshData();
       }, function(e){
         vm.loadStatus.failed(e.status);
-        $rootScope.hideTabs = [true];
       }).finally(function(){
         // see: http://forum.ionicframework.com/t/white-page-showing-after-splash-screen-before-app-load/2908/16
         $timeout(function(){
