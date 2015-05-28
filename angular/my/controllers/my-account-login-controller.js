@@ -11,6 +11,7 @@
     vm.wechatLogin = wechatLogin;
     vm.tryToLoginByWechat = tryToLoginByWechat;
     vm.onWechatLoginFailed = onWechatLoginFailed;
+    vm.share = share;
     vm.resetPassword = resetPassword;
     vm.readyToLogin = function(){return !_.isEmpty(vm.username) && !_.isEmpty(vm.password)};
 
@@ -66,11 +67,10 @@
       }
     }
     function wechatLogin(wechatToken){
-      Users.wechatLogin(wechatToken).then(function(){
-        
+      Users.wechatLogin(wechatToken).then(function(token){
+        $ionicHistory.goBack();
       }, function(error){
-        $log.log('wechats failed to get user info: ').log(error);;
-        Users.wechatLogin();
+        vm.onWechatLoginFailed('ERR_LOGIN');
       });
     }
     function onWechatLoginFailed(error){
@@ -87,9 +87,11 @@
         $rootScope.alertMessage("微信快捷登录: 刷新令牌失败");
       }
       else{
-        $rootScope.alertMessage("微信快捷登录异常: " + reason);
-        $log.log("wechat.auth failed: " + reason);
+        $rootScope.alertMessage("微信快捷登录失败，请重试");
       }
+    }
+    function share(){
+      Wechats.share();
     }
     function resetPassword(){
       vm.password = "";

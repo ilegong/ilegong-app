@@ -3,7 +3,7 @@
 
   angular
   .module('module.services', ['LocalForageModule'])
-  .value('config', {logMode: false, timeout: 2500, app: {clientId: 'NTQ5NTE5MGViMTgzMDUw', name: 'ilegong', hotline: '010-56245991', bizline: '159-1050-2109', appId: 'wx58be6f835c7afb62', appSecret: '73bdc4ecad69cb8e3ac006dd6676f35d'}, server: {address: 'dev://www.tongshijia.com'}})
+  .value('config', {logMode: false, timeout: 2500, app: {clientId: 'NTQ5NTE5MGViMTgzMDUw', name: 'ilegong', hotline: '010-56245991', bizline: '159-1050-2109', appId: 'wx58be6f835c7afb62', appSecret: '73bdc4ecad69cb8e3ac006dd6676f35d'}, server: {address: 'http://www.tongshijia.com'}})
   .service('Base', Base)
   /* @ngInject */
   function Base($http, $q, $log, $localForage, $window, $timeout, config){

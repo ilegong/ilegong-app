@@ -10,7 +10,8 @@
     return {
       auth: auth,
       getAccessToken: getAccessToken,
-      refreshAccessToken: refreshAccessToken
+      refreshAccessToken: refreshAccessToken, 
+      share: share
     }
 
     function auth(){
@@ -52,6 +53,16 @@
         $log.log('wechat get userinfo succeeded: ').log(userInfo);
       }, function(error){
         $log.log('wechat get userinfo failed: ').log(error);
+      });
+    }
+    function share(){
+      window.Wechat.share({
+        text: "This is just a plain string",
+        scene: Wechat.Scene.TIMELINE
+      }, function (result) {
+          $log.log('wechat share succeeded: ').log(result);
+      }, function (error) {
+          $log.log("wechat share failed: ").log(error);
       });
     }
   }

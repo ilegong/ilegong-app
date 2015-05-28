@@ -25,9 +25,14 @@
       });
     }
     function wechatLogin(wechatToken){
-      return Base.post('/oauth/wechat_token?client_id=' + config.app.clientId, wechatToken).then(function(token) {
+      var url = "/oauth/token?grant_type=token&wx_access_token=" + wechatToken.access_token + "&wx_expires_in=" + wechatToken.expires_in + "&wx_refresh_token=" + wechatToken.refresh_token + "&wx_openid=" + wechatToken.openid + "&wx_scope=" + wechatToken.scope + "&client_id=" + config.app.clientId;
+      return Base.get(url).then(function(token) {
+        $log.log('wechat login succeeded: ').log(token);
         $rootScope.onUserLoggedIn(token, true);
-        return $rootScope.user.token;
+        return token;
+      }, function(error){
+        $log.log('wechat login failed: ').log(error);;
+        return error;
       });
     }
     function refreshToken(refreshToken){

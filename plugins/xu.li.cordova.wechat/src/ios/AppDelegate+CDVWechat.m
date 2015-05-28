@@ -61,7 +61,7 @@ void swizzleMethod(Class c, SEL originalSelector)
     
     if (ret)
     {
-        NSString *appId = [self.viewController.settings objectForKey:@"wechatappid"];
+        NSString *appId = [self.viewController.settings objectForKey:@"wx58be6f835c7afb62"];
         if (appId)
         {
             CDVWechat *wechatPlugin = [self.viewController getCommandInstance:@"Wechat"];
