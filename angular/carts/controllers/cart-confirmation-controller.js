@@ -4,7 +4,7 @@
   angular.module('module.cart')
   .controller('CartConfirmationCtrl', CartConfirmationCtrl)
 
-  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, $stateParams, Base, Addresses, Orders, Carts,Coupons, offlineStores){
+  function CartConfirmationCtrl($q,$ionicHistory, $log, $scope, $rootScope, $state, $filter, $stateParams, Base, Addresses, Orders, Carts,Coupons, OfflineStores){
     var vm = this;
     vm.goBack = function(){$ionicHistory.goBack();}
     vm.getPriceOfProduct = getPriceOfProduct;
@@ -130,7 +130,7 @@
       $state.go('addresses',{state:1});
     }
     function changeOfflineStore(){
-      $state.go('offlineStores');
+      $state.go('offline-stores');
     }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;

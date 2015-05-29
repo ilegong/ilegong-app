@@ -5,6 +5,9 @@
     </button>
   </ion-nav-buttons>
   <ion-content class="pickups">
+    <div class="store-area">
+        <ul ng-repeat="(key,area) in vm.validArea"> <li><a ng-bind="area" ng-class="{'cur':key == vm.activeArea}" ng-click="vm.chosePickups(key)"></a></li> </ul>
+    </div>
     <div class="item item-icon-left item-icon-right"  ng-repeat="pickup in vm.shippment.pickups" ng-click="vm.checkPickup(pickup)">
       <i class="icon pys-350" ng-class="{'icon-circle-checked': pickup.checked, 'icon-circle': !pickup.checked}"></i>
       <span ng-bind="pickup.address" class="wrapped"></span>

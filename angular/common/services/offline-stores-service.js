@@ -7,8 +7,9 @@
   function OfflineStores($log,$q,Base,config,Users){
     var self = this;
     return{
-      getOfflineStores:getOfflineStores
-    }
+      getOfflineStores:getOfflineStores,
+      getBeijingArea:getBeijingArea
+    };
     function getBeijingArea(){
       return {
         110101:"东城区",

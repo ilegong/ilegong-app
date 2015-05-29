@@ -1,0 +1,27 @@
+@import "variables";
+
+.pickups{
+  .store-area{
+    padding:10px 5px 0 5px;
+    ul{
+      float: left;
+      width: 25%;
+      margin-bottom: 0;
+      li a {
+        display: block;
+        border: 1px #dddddd solid;
+        line-height: 35px; text-align: center;
+        text-decoration: none;
+        color:#333333;
+        font-size: 1em;
+        background-color: #ffffff;
+        margin-top: -1px;
+        margin-left: -1px;
+      }
+      a.cur{
+        background-color: #29ac0e;
+        color: #ffffff;
+      }
+    }
+  }
+}
