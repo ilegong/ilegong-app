@@ -168,7 +168,7 @@
         $rootScope.alertMessage('团购商品，暂时不能查看详情');
         return;
       }
-      $state.go("product-detail",{id: item.Cart.product_id, from:-2})
+      $state.go("product-detail",{id: item.Cart.product_id, type:'c2c'})
     }
   } 
 })(window, window.angular);

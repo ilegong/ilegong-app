@@ -91,7 +91,7 @@
       
       <div class="item-divider"></div>
       
-      <div class="item item-icon-right item-main" ui-sref="product-detail-content({id: vm.id, from: vm.from})">
+      <div class="item item-icon-right item-main" ui-sref="product-detail-content({id: vm.id})">
         <i class=" icon ion-ios7-arrow-right"></i>
         <strong>图文详情</strong>
       </div>
@@ -133,7 +133,7 @@
         <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
         <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" ng-repeat="recommend in ::vm.recommends" style='width: 50%'>
           <div class='element'>
-            <img class="full blocked" ui-sref="product-detail({from: vm.from, id: recommend[1].id})" title="{{::recommend[1].name}}" src="{{::recommend[1].coverimg}}">
+            <img class="full blocked" ui-sref="product-detail({id: recommend[1].id, type: 'c2c'})" title="{{::recommend[1].name}}" src="{{::recommend[1].coverimg}}">
             <div class="padding-5">
               <div class="nowrap" ng-bind="::recommend[1].name"></div>
               <span class="text-energized" ng-bind="::recommend[1].price | currency:'¥'"></span>

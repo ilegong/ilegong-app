@@ -25,7 +25,7 @@
 
     <div class="tuandetail_seckill clearfix" ng-if="vm.loadStatus.isLoadFinished()" ng-repeat="seckill in vm.seckills">
       <p>秒杀</p>
-      <span><img src="{{seckill.image}}" /></span>
+      <span ng-click="vm.toDetailPage(seckill)"><img src="{{seckill.Product.listimg}}" /></span>
       <span>
         <h1 ng-bind="seckill.ProductTry.product_name"></h1>
         <em>秒杀价：<strong ng-bind="seckill.ProductTry.price | currency:'￥'"></strong></em>
@@ -61,7 +61,7 @@
             <strong ng-bind="product.Product.price | currency:'￥'"></strong>&nbsp;
             <label ng-bind="product.Product.original_price | currency:'￥'"></label>
           </li>
-          <li class="fr"><a ng-click="vm.toDetailPage(product)" class="btn radius5">立即购买</a></li>
+          <li class="fr"><a ng-click="vm.toDetailPage(product)" class="btn radius5" ng-bind="vm.getBuyTitle(product)"></a></li>
       </ul>
     </div>
   </ion-content>

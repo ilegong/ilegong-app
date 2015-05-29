@@ -41,13 +41,12 @@
     function activate(){
       vm.count=1;
       vm.id = $stateParams.id;
-      vm.from = $stateParams.from;
+      vm.type = $stateParams.type;
+      vm.value = $stateParams.value;
       vm.rating = 5;
       vm.showProductIntro = false;
       vm.specs = [];
       vm.inprogress = false;
-      vm.cartTitle = '加入购物车';
-      vm.buyTitle = '立即购买';
 
       vm.loadStatus = new LoadStatus();
       vm.loadData();
@@ -68,6 +67,12 @@
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
         vm.comments = [];
 
+        if(vm.type == 'tuan'){
+
+        }
+        else if(vm.type == 'seckill'){
+          
+        }
         vm.tuan = data.tuan;
         vm.isTuanBuying = !_.isEmpty(vm.tuan);
         if(vm.isTuanBuying && !_.isEmpty(vm.tuan.tuan_buying.TuanBuying.consign_time)){
@@ -140,13 +145,13 @@
       }
     }
     function toTryingCommentsPage(){
-      $state.go("product-detail-comments", {id: vm.id, from: vm.from, type: 1});
+      $state.go("product-detail-comments", {id: vm.id, type: 1});
     }
     function toReputationCommentsPage(){
       if(vm.getReputationComments().length == 0){
         return;
       }
-      $state.go("product-detail-comments",{id: vm.id, from: vm.from, type: 0});
+      $state.go("product-detail-comments",{id: vm.id, type: 0});
     }
 
     function reduceCartItemNum(){

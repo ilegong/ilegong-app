@@ -42,9 +42,9 @@
       .state('my-coupons',{url:'/my-coupons', templateUrl:'my-coupons.html',controller:'MyCouponsCtrl as vm'})
       .state('my-offers',{url:'/my-offers', templateUrl:'my-offers.html',controller:'MyOffersCtrl as vm'})
 
-      .state('product-detail', {url: '/products/:id/:from', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
-      .state('product-detail-content', {url:'/products/:id/:from/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
-      .state('product-detail-comments', {url:'/products/:id/:from/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
+      .state('product-detail', {url: '/products/:id/:type/:value', templateUrl: 'product-detail.html', controller: 'ProductDetailCtrl as vm'})
+      .state('product-detail-content', {url:'/products/:id/content', templateUrl: 'product-detail-content.html', controller:'ProductDetailContentCtrl as vm'})
+      .state('product-detail-comments', {url:'/products/:id/comments/:type', templateUrl: 'product-detail-comments.html', controller:'ProductDetailCommentsCtrl as vm'})
 
       .state('account-login', {url: '/account-login', templateUrl: 'my-account-login.html',controller: 'MyAccountLoginCtrl as vm'})
       .state('account-register', {url: '/account-register', templateUrl: 'my-account-register.html',controller: 'MyAccountRegisterCtrl as vm'})
