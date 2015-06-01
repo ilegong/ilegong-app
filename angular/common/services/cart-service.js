@@ -42,9 +42,9 @@
       },function(error){defer.reject(error)});
       return defer.promise;
     }
-    function addCartItem(isTuanBuying, json, accessToken){
+    function addCartItem(type, json, accessToken){
       var defer = $q.defer();
-      var url = isTuanBuying ? '/api_tuan/cart_add.json' : '/api_orders/cart_add.json'
+      var url = type == 5 ? '/api_tuan/cart_add.json' : '/api_orders/cart_add.json'
       Base.post(url + '?access_token=' + accessToken, json).then(function(result){
         if(result.data.success){
           defer.resolve(result);

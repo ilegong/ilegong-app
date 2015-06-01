@@ -54,7 +54,7 @@
         $state.go('store.home', {id: brand.Brand.id, name: brand.Brand.name});
       }
       else if(!isNumberInvalid(coupon.Coupon.product_list)){
-        $state.go('product-detail',{id:coupon.Coupon.product_list[0],type:'c2c'});
+        $state.go('product-detail',{id:coupon.Coupon.product_list[0],type:1});
       }
       else if(!isNumberInvalid(coupon.Coupon.category_id) && false){ //  去专场，咱不实现
       }

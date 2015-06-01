@@ -41,13 +41,13 @@
     }
     function toDetailPage(product){
       if(!_.isEmpty(product.TuanBuying)){
-        $state.go("product-detail", {id: product.Product.id, type: 'tuan', value: product.TuanBuying.id});
+        $state.go("product-detail", {id: product.Product.id, type: 5, value: product.TuanBuying.id});
       }
       else if(!_.isEmpty(product.ProductTry)){
-        $state.go("product-detail", {id: product.Product.id, type: 'seckill', value: product.ProductTry.id});
+        $state.go("product-detail", {id: product.Product.id, type: 6, value: product.ProductTry.id});
       }
       else{
-        $state.go("product-detail", {id: product.Product.id, type: 'c2c', value: product.Product.id});
+        $state.go("product-detail", {id: product.Product.id, type: 1, value: product.Product.id});
       }
     }
     function loadSeckills(){
@@ -59,6 +59,7 @@
         return _.map(data, function(seckill){
           seckill.ProductTry.sold_num = Math.min(seckill.ProductTry.sold_num, seckill.ProductTry.limit_num);
           seckill.ProductTry.sold_percent = Math.min(seckill.ProductTry.sold_num / seckill.ProductTry.limit_num * 100, 100);
+          $rootScope.$broadcast('seckillChanged', seckill);
           return seckill;
         });
       }).then(function(seckills){

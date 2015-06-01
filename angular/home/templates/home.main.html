@@ -10,7 +10,7 @@
     <div ng-if="vm.loadStatus.isLoadFinished()">
       <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;">
         <ion-slide ng-repeat="bannerItem in vm.bannerItems" >
-          <img class="full" ng-src="{{::bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg" ui-sref="product-detail({id:bannerItem.id, type: 'c2c'})"/>
+          <img class="full" ng-src="{{::bannerItem.img}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg" ui-sref="product-detail({id:bannerItem.id, type: 1})"/>
         </ion-slide>
       </ion-slide-box>
 
@@ -36,7 +36,7 @@
       <h4 style="padding-left: 10px;">
         朋友说的爆款
       </h4>
-      <img class="full padding-left padding-right" ng-src="{{::hotItem.img}}" ui-sref="product-detail({id:hotItem.id,type:'c2c'})" ng-repeat="hotItem in ::vm.hotItems"/>
+      <img class="full padding-left padding-right" ng-src="{{::hotItem.img}}" ui-sref="product-detail({id:hotItem.id,type:1})" ng-repeat="hotItem in ::vm.hotItems"/>
 
       <h4 style="padding-left: 10px; margin-bottom: 0">
         朋友的推荐

@@ -14,8 +14,8 @@
     </div>
 
     <div ng-show="vm.loadStatus.isLoadFinished()">
-      <img src="{{::vm.product.Product.coverimg}}" class="blocked full" ng-if="!vm.isTuanBuying"/>
-      <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.isTuanBuying">
+      <img src="{{::vm.product.Product.coverimg}}" class="blocked full" ng-if="vm.type == 1"/>
+      <ion-slide-box on-slide-changed="slideHasChanged($index)" style="width: 100%;" ng-if="vm.type == 5">
         <ion-slide ng-repeat="uploadFile in vm.tuan.upload_files" >
           <img class="full" src="{{::uploadFile.Uploadfile.mid_thumb}}" err-src="http://s.tongshijia.com/img/u/banners/shenghao.jpg"/>
         </ion-slide>
@@ -133,7 +133,7 @@
         <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
         <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" ng-repeat="recommend in ::vm.recommends" style='width: 50%'>
           <div class='element'>
-            <img class="full blocked" ui-sref="product-detail({id: recommend[1].id, type: 'c2c'})" title="{{::recommend[1].name}}" src="{{::recommend[1].coverimg}}">
+            <img class="full blocked" ui-sref="product-detail({id: recommend[1].id, type: 1, value: recommend[1].id})" title="{{::recommend[1].name}}" src="{{::recommend[1].coverimg}}">
             <div class="padding-5">
               <div class="nowrap" ng-bind="::recommend[1].name"></div>
               <span class="text-energized" ng-bind="::recommend[1].price | currency:'¥'"></span>
@@ -144,10 +144,10 @@
     </div>
   </ion-content>
   <ion-footer-bar class="row" ng-cloak>
-    <span ng-click="vm.buyImmediately();" class="button button-energized mr" ng-class="{' col-40': !vm.isTuanBuying, 'col-80': vm.isTuanBuying}" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
+    <span ng-click="vm.buyImmediately();" class="button button-energized mr" ng-class="{' col-40': vm.type == 1, 'col-80': vm.type != 1}" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
       <strong ng-bind="vm.getBuyTitle()"></strong>
     </span>
-    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published" ng-if="!vm.isTuanBuying">
+    <span ng-click="vm.addToCart();" class="button button-assertive col-40 mr" ng-disabled="!vm.readyToBuy() || vm.product.Product.limit_ship || !vm.product.Product.published" ng-if="vm.type == 1">
       <strong ng-bind="vm.getCartTitle()"></strong>
     </span>
     <div ng-click="vm.toCartPage()" class="centered-container col-20">

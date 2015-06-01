@@ -14,9 +14,9 @@
       makeComment:makeComment
     }
 
-    function getProduct(id){
+    function getProduct(id, type, extraId){
       var defer = $q.defer();
-      Base.get('/api_orders/product_detail/'+id+'.json').then(function(product){
+      Base.get('/api_orders/product_detail/'+id + '/' + type + '/' + extraId + '.json').then(function(product){
         defer.resolve(product);
       }, function(e){defer.reject(e)});
       return defer.promise;

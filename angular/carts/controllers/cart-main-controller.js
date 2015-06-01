@@ -19,7 +19,7 @@
     vm.isBrandChecked = function(brand) {return _.all(brand.cartItems, function(cartItem){return cartItem.checked;});};
     vm.allBrandsChecked = function() {return _.all(vm.cartBrands,function(brand){return vm.isBrandChecked(brand)})};
     vm.toggleBrand = toggleBrand;
-    vm.toProductPage = function(cartItem){$state.go("product-detail", {id: cartItem.Cart.product_id, type:'c2c', value: cartItem.Cart.product_id})};
+    vm.toProductPage = function(cartItem){$state.go("product-detail", {id: cartItem.Cart.product_id, type:1, value: cartItem.Cart.product_id})};
     vm.doRefresh = doRefresh;
     activate();
 

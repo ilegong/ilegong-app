@@ -165,10 +165,11 @@
     }
     function toProductDetailPage(item){
       if(vm.order.Order.type == 5){
-        $rootScope.alertMessage('团购商品，暂时不能查看详情');
-        return;
+        $state.go("product-detail",{id: item.Cart.product_id, type:5, value: vm.order.Order.member_id})
       }
-      $state.go("product-detail",{id: item.Cart.product_id, type:'c2c'})
+      else{
+        $state.go("product-detail",{id: item.Cart.product_id, type:1, value: item.Cart.product_id})
+      }
     }
   } 
 })(window, window.angular);

@@ -42,7 +42,7 @@
       vm.count=1;
       vm.id = $stateParams.id;
       vm.type = $stateParams.type;
-      vm.value = $stateParams.value;
+      vm.extraId = $stateParams.value;
       vm.rating = 5;
       vm.showProductIntro = false;
       vm.specs = [];
@@ -57,7 +57,7 @@
         return;
       }
       vm.loadStatus.startLoading();
-      return Products.getProduct(vm.id).then(function(data){
+      return Products.getProduct(vm.id, vm.type, vm.extraId).then(function(data){
         vm.product = data.product;
         vm.specs = vm.formatSpecs(vm.product.Product.specs);
         vm.specsGroup = vm.formatSpecsGroup(vm.product.Product.specs_group);
@@ -67,16 +67,17 @@
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
         vm.comments = [];
 
-        if(vm.type == 'tuan'){
-
-        }
-        else if(vm.type == 'seckill'){
-          
-        }
         vm.tuan = data.tuan;
-        vm.isTuanBuying = !_.isEmpty(vm.tuan);
-        if(vm.isTuanBuying && !_.isEmpty(vm.tuan.tuan_buying.TuanBuying.consign_time)){
+        if(vm.type == 5 && !_.isEmpty(vm.tuan.tuan_buying.TuanBuying.consign_time)){
           vm.sendDate = vm.tuan.tuan_buying.TuanBuying.consign_time;
+        }
+        if(vm.type == 6){
+          vm.productTry = data.product_try;
+          $rootScope.$on("seckillChanged", function(event, productTry){
+            if(vm.productTry.ProductTry.id == productTry.ProductTry.id){
+              vm.productTry = productTry;
+            }
+          });
         }
 
         Products.getProductComment(vm.id).then(function(comments){
@@ -192,7 +193,7 @@
       if(vm.hasConsignDates() && !vm.isConsignDateChecked()){
         return false;
       }
-      if(vm.isTuanBuying){
+      if(vm.type == 5){
         if(vm.tuan.tuan_buying.TuanBuying.status == 'finished' || vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
           return false;
         }
@@ -241,15 +242,15 @@
       }
 
       var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
-      if(vm.isTuanBuying){
+      if(vm.type == 5){
         json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
       }
-      Carts.addCartItem(vm.isTuanBuying, json, $rootScope.user.token.access_token).then(function(result){
+      Carts.addCartItem(vm.type, json, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.cart_id;
         $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
           $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
             vm.inprogress = false;
-            $state.go('cart-confirmation', {'type': vm.isTuanBuying ? 5 : 1});
+            $state.go('cart-confirmation', {'type': vm.type});
           }, function(e){
             vm.onActionFailed('购买失败，请重试', e);
           });
@@ -265,19 +266,22 @@
       $rootScope.alertMessage(message);
     }
     function getBuyTitle(product){
-      if(_.isEmpty(vm.product) || _.isEmpty(vm.product.Product)){
+      if(vm.type == 5){
+        if(vm.tuan.tuan_buying.TuanBuying.status == 'finished' || vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
+          return '团购已结束';
+        }
         return '立即购买';
       }
-      if(!vm.isTuanBuying){
-        return '立即购买';
+      if(vm.type == 6){
+        if(vm.productTry.ProductTry.status == 'sec_end'){
+          return '秒杀已结束';
+        }
+        else if(vm.productTry.ProductTry.status == 'sec_unstarted'){
+          return '秒杀未开始';
+        }
+        return '立即秒杀';
       }
 
-      if(vm.tuan.tuan_buying.TuanBuying.status == 'finished'){
-        return '团购已结束';
-      }
-      if(vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
-        return '团购已结束';
-      }
       return '立即购买';
     }
     function getCartTitle(){
@@ -296,7 +300,7 @@
       if(_.isEmpty(vm.product)){
         return '';
       }
-      if(!vm.isTuanBuying){
+      if(vm.type == 1){
         if(vm.product.Product.ship_fee == -1){
           return '货到付款';
         }
