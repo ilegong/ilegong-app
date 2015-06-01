@@ -33,7 +33,7 @@
             秒杀价<span class="text-21" ng-bind="vm.productPrice | currency:'￥'"></span>
           </span>
 
-          <a class="text-muted fr" ng-click="vm.toReputationCommentsPage();" ng-cloak>
+          <a class="text-muted fr" ng-click="vm.toReputationCommentsPage();">
             口碑评价(<span ng-bind="vm.getReputationComments().length">0</span>)
           </a>
         </div>
@@ -71,7 +71,7 @@
           <span class="spec-choice" ng-class="{checked: shipSetting.checked}" ng-repeat="shipSetting in vm.ship_settings" ng-click="vm.checkShipSetting(shipSetting);" ng-bind="vm.getShipSettingName(shipSetting)"></span>
         </span>
       </div>
-      <div class="item row" ng-cloak>
+      <div class="item row">
         <span class="col col-center col-15">
           数量：
         </span>
@@ -86,21 +86,12 @@
       
       <div class="item-divider"></div>
 
-      <a class="item item-avatar-left item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" ng-if="vm.from < 0">
+      <a class="item item-avatar-left item-icon-right" ui-sref="store.home({id: vm.brand.Brand.id, name: vm.brand.Brand.name})" style="border-bottom: 0">
         <img src="{{::vm.brand.Brand.coverimg}}" class="r5"/>
         <i class="icon ion-ios7-arrow-right"></i>
-        <div class="nowrap" ng-bind="::vm.brand.Brand.name"></div>
+        <div class="nowrap" ng-bind="::vm.brand.Brand.name" style="font-size: 16px"></div>
       </a>
-      <div class="item row">
-        <span class="col col-15">
-          快递：
-        </span>
-        <span class="col" ng-bind="vm.getShipFee()"></span>
-      </div>
-      <div class="item row" ng-cloak>
-        <div class="col col-15">
-          服务：
-        </div>
+      <div class="item row padding-top-0">
         <span class="col wrapped-container">
           本商品由 <span ng-bind="::vm.brand.Brand.name"></span> 发货并提供售后服务。
           <span ng-show="vm.hasWeixinId">联系商家：微信号 {{::vm.brand.Brand.weixin_id}}</span>
@@ -116,12 +107,12 @@
       <div class="item item-icon-right item-main" ng-click="vm.toTryingCommentsPage();" ng-show="vm.getTryingComments().length > 0">
         <i class=" icon ion-ios7-arrow-right"></i>
         <strong>试吃评价</strong>
-        <span class="text-muted" ng-cloak>({{vm.getTryingComments().length}})</span>
+        <span class="text-muted" ng-bind="'(' + vm.getTryingComments().length + ')'"></span>
       </div>
-      <div class="item item-icon-right item-main" ng-click="vm.toReputationCommentsPage();" ng-cloak>
+      <div class="item item-icon-right item-main" ng-click="vm.toReputationCommentsPage();">
         <i class=" icon ion-ios7-arrow-right"></i>
         <strong>口碑评价</strong>
-        <span class="text-muted" ng-cloak>({{vm.getReputationComments().length}})</span>
+        <span class="text-muted" ng-bind="'(' + vm.getReputationComments().length + ')'"></span>
       </div>
 
       <div class="item comment" ng-repeat="c in vm.getReputationComments().slice(0, 3)" ng-init="comment = c.Comment">
@@ -147,7 +138,7 @@
         <strong>查看全部评价</strong>
       </a>
 
-      <div class='elements' ng-cloak>
+      <div class='elements'>
         <h4 style="margin: 1rem 0 0">相关商品推荐</h4>
         <div class="element-container {{$index % 2 == 0 ? 'even' : 'odd'}}" ng-repeat="recommend in ::vm.recommends" style='width: 50%'>
           <div class='element'>
@@ -161,7 +152,7 @@
       </div>
     </div>
   </ion-content>
-  <ion-footer-bar class="row" ng-cloak>
+  <ion-footer-bar class="row">
     <span ng-click="vm.buyImmediately();" class="button button-energized mr" ng-class="{' col-40': vm.type == 1, 'col-80': vm.type != 1}" ng-disabled="!vm.readyToBuy() || !vm.product.Product.published">
       <strong ng-bind="vm.getBuyTitle()"></strong>
     </span>

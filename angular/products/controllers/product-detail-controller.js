@@ -336,7 +336,16 @@
         }
         return $filter('currency')(vm.product.Product.ship_fee, '￥');
       }
-      return '自提';
+      else{
+        var shipSetting = _.find(vm.ship_settings, function(setting){ return setting.checked});
+        if(_.isEmpty(shipSetting)){
+          return '请选择物流方式';
+        }
+        if(shipSetting.ProductShipSetting.code == 'kuaidi'){
+          return '快递(' + (shipSetting.ProductShipSetting.ship_val / 100) + ')';
+        }
+        return shipSetting.ProductShipSetting.name;
+      }
     }
     function trustAsHtml(string){
       return $sce.trustAsHtml(string);
