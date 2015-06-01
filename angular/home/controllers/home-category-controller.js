@@ -61,7 +61,6 @@
         return _.map(data, function(seckill){
           seckill.ProductTry.sold_num = Math.min(seckill.ProductTry.sold_num, seckill.ProductTry.limit_num);
           seckill.ProductTry.sold_percent = Math.min(seckill.ProductTry.sold_num / seckill.ProductTry.limit_num * 100, 100);
-          $rootScope.$broadcast('seckillChanged', seckill);
           return seckill;
         });
       }).then(function(seckills){

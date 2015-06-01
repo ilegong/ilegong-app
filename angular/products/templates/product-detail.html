@@ -25,17 +25,36 @@
         <div class="wrapped text-21 text-dark padding-bottom-5" ng-bind="::vm.product.Product.name"></div>
         <div class="wrapped text-sub-muted padding-bottom-5" ng-bind="::vm.product.Product.promote_name"></div>
         <div style="line-height: 27px;">
-          <span class="text-energized">
+          <span class="text-energized" ng-if="vm.type != 6">
             <span class="text-21" ng-bind="vm.productPrice | currency:'￥'"></span>
           </span>
-          <s class="text-sub-muted" ng-show="{{::vm.product.Product.original_price != 0}}" ng-bind="::vm.product.Product.original_price | currency:'￥'"></s>
+          <s class="text-sub-muted" ng-show="{{::vm.product.Product.original_price != 0}}" ng-bind="::vm.product.Product.original_price | currency:'￥'"  ng-if="vm.type != 6"></s>
+          <span class="text-energized" ng-if="vm.type == 6">
+            秒杀价<span class="text-21" ng-bind="vm.productPrice | currency:'￥'"></span>
+          </span>
+
           <a class="text-muted fr" ng-click="vm.toReputationCommentsPage();" ng-cloak>
             口碑评价(<span ng-bind="vm.getReputationComments().length">0</span>)
           </a>
         </div>
       </div>
+      <div class="item tuan-bar" ng-if="vm.type == 6">
+        <div>已秒杀<span class="text-energized" ng-bind="vm.productTry.ProductTry.sold_num"></span>份</div>
+        <div class="bar">
+            <div class="bar-buy" style="width:{{vm.productTry.ProductTry.sold_percent}}%;"></div>
+        </div>
+        <ul class="clearfix">
+            <li class="fl"><span class="text-energized" ng-bind="vm.productTry.ProductTry.sold_percent+'%'"></span></li>
+            <li class="fr" ng-bind="'仅限' + vm.productTry.ProductTry.limit_num + '份'"></li>
+        </ul>
+      </div>
+      <div class="item-divider"></div>
+
+      <div class="item" ng-if="vm.type == 6">
+        <strong class="text-assertive text-16" ng-bind="'规格: ' + vm.productTry.ProductTry.spec + '，送货: ' + vm.getSendDate(vm.productTry.ProductTry.consignment_date)"></strong>
+      </div>
       <div class="item row padding-bottom-0" ng-repeat="spec in vm.specs">
-        <span class="col col-15 wrapped padding-top-7" ng-bind="spec.type"></span>
+        <span class="col col-15 wrapped padding-top-7" ng-bind="spec.type + ': '"></span>
         <span class="col wrapped-container">
           <span class="spec-choice" ng-class="{checked: choice.checked}" ng-repeat="choice in spec.choices" ng-click="vm.checkSpec(spec.id, choice.id);" ng-disabled="!vm.product.Product.published" ng-bind="choice.name"></span>
         </span>
@@ -46,13 +65,12 @@
           <span class="spec-choice" ng-class="{checked: consignDate.checked}" ng-repeat="consignDate in vm.product.Product.consign_dates" ng-click="vm.checkConsignDate(consignDate);" ng-disabled="!vm.product.Product.published" ng-bind="consignDate.send_date"></span>
         </span>
       </div>
-      <div class="item row padding-bottom-0" ng-if="!_.isEmpty(vm.ship_settings)">
-        <span class="col col-15 wrapped padding-top-7">方式</span>
+      <div class="item row padding-bottom-0" ng-if="vm.ship_settings.length > 0">
+        <span class="col col-15 wrapped padding-top-7">物流: </span>
         <span class="col wrapped-container">
           <span class="spec-choice" ng-class="{checked: shipSetting.checked}" ng-repeat="shipSetting in vm.ship_settings" ng-click="vm.checkShipSetting(shipSetting);" ng-bind="vm.getShipSettingName(shipSetting)"></span>
         </span>
       </div>
-
       <div class="item row" ng-cloak>
         <span class="col col-center col-15">
           数量：

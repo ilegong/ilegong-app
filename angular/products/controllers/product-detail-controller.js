@@ -36,6 +36,7 @@
     vm.checkShipSetting = checkShipSetting;
     vm.isShipSettingChecked = isShipSettingChecked;
     vm.getShipSettingName = getShipSettingName;
+    vm.getSendDate = getSendDate;
     activate();
     
     function activate(){
@@ -75,6 +76,8 @@
         }
         if(vm.type == 6){
           vm.productTry = data.product_try;
+          vm.productTry.ProductTry.sold_num = Math.min(vm.productTry.ProductTry.sold_num, vm.productTry.ProductTry.limit_num);
+          vm.productTry.ProductTry.sold_percent = Math.min(vm.productTry.ProductTry.sold_num / vm.productTry.ProductTry.limit_num * 100, 100);
           $rootScope.$on("seckillStateChanged", function(event, productTry){
             if(vm.productTry.ProductTry.id == productTry.ProductTry.id){
               vm.productTry.ProductTry.status = productTry.ProductTry.status;
@@ -351,6 +354,10 @@
     }
     function isShipSettingChecked(){
       return _.isEmpty(vm.ship_settings) || _.any(vm.ship_settings, function(shipSetting){return shipSetting.checked});
+    }
+    function getSendDate(date){
+      var date = new Date(date)
+      return (date.getMonth() + 1) + '月' + date.getDate() + '日';
     }
   }
 })(window, window.angular);
