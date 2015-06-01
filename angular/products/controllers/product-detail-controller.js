@@ -66,6 +66,8 @@
         vm.brand = data.brand;
         vm.hasWeixinId = !_.isEmpty(vm.brand.Brand.weixin_id);
         vm.comments = [];
+        vm.upload_files = data.upload_files;
+        vm.ship_settings = data.ship_settings;
 
         vm.tuan = data.tuan;
         if(vm.type == 5 && !_.isEmpty(vm.tuan.tuan_buying.TuanBuying.consign_time)){
@@ -256,12 +258,14 @@
       if(vm.type == 5){
         json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
       }
+      var shipSetting = _.find(vm.ship_settings, function(setting){ return setting.checked});
+      
       Carts.addCartItem(vm.type, json, $rootScope.user.token.access_token).then(function(result){
         var cartId = result.data.cart_id;
         $rootScope.reloadCart($rootScope.user.token.access_token).then(function(){
           $rootScope.confirmCart([cartId], couponCode, $rootScope.user.token.access_token).then(function(){
             vm.inprogress = false;
-            $state.go('cart-confirmation', {'type': vm.type});
+            $state.go('cart-confirmation', {'type': vm.type, 'shipSettingId': shipSetting.ProductShipSetting.id});
           }, function(e){
             vm.onActionFailed('购买失败，请重试', e);
           });
@@ -341,12 +345,12 @@
       return shipSetting.ProductShipSetting.name + '(' + shipSetting.ProductShipSetting.ship_fee + '元邮费)';
     }
     function checkShipSetting(shipSetting){
-      _.each(vm.tuan.ship_settings, function(setting){
+      _.each(vm.ship_settings, function(setting){
         setting.checked = (setting.ProductShipSetting.id == shipSetting.ProductShipSetting.id);
       });
     }
     function isShipSettingChecked(){
-      return _.isEmpty(vm.tuan.ship_settings) || _.any(vm.tuan.ship_settings, function(shipSetting){return shipSetting.checked});
+      return _.isEmpty(vm.ship_settings) || _.any(vm.ship_settings, function(shipSetting){return shipSetting.checked});
     }
   }
 })(window, window.angular);

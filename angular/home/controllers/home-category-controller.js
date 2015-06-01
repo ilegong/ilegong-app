@@ -83,6 +83,7 @@
             seckill.ProductTry.status = 'sec_kill';
             $interval.cancel(seckill.timer);
             seckill.timer = {};
+            $rootScope.$broadcast('seckillStateChanged', seckill);
           }
         }, 1000);
       }
