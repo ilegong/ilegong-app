@@ -27,7 +27,7 @@
       <p>秒杀</p>
       <span ng-click="vm.toDetailPage(seckill)"><img src="{{seckill.Product.listimg}}" /></span>
       <span>
-        <h1 ng-bind="seckill.ProductTry.product_name"></h1>
+        <h1 ng-click="vm.toDetailPage(seckill)" ng-bind="seckill.ProductTry.product_name"></h1>
         <em>秒杀价：<strong ng-bind="seckill.ProductTry.price | currency:'￥'"></strong></em>
         <div class="tuan_bar clearfix">
           <div class="fl" style="width:55%;">
@@ -36,13 +36,13 @@
             </div>
             <ul class="clearfix">
               <li class="fl">已秒<span style=" display:inline;" ng-bind="seckill.ProductTry.sold_num"></span>份</li>
-              <li class="fr">共<span ng-bind="seckill.ProductTry.limit_num"></span>份</li>
+              <li class="fr" ng-bind="'共'+seckill.ProductTry.limit_num+'份'"></li>
             </ul>
           </div>
-          <div ng-switch="seckill.status" data-try-id="{{seckill.ProductTry.id}}" data-tuan-id="{{seckill.ProductTry.tuan_id}}" data-pid="{{seckill.ProductTry.id}}" data-send-date="{{seckill.ProductTry.consignment_date}}">
-            <a class="tuandetail_seckill_btn radius5 fr" ng-switch-when="sec_kill">正在秒杀</a>
-            <a class="seckill_disabled radius5 fr" ng-switch-when="sec_end">已秒完</a>
-            <a class="sec_start" href="#X" ng-switch-when="sec_unstarted">开秒</a>
+          <div class="fr" ng-switch="seckill.status" data-try-id="{{seckill.ProductTry.id}}" data-tuan-id="{{seckill.ProductTry.tuan_id}}" data-pid="{{seckill.ProductTry.id}}" data-send-date="{{seckill.ProductTry.consignment_date}}" ng-click="vm.toDetailPage(seckill)">
+            <a class="tuandetail_seckill_btn radius5" ng-switch-when="sec_kill">正在秒杀</a>
+            <a class="tuandetail_seckill_btn seckill_disabled radius5" ng-switch-when="sec_end">已秒完</a>
+            <a class="tuandetail_seckill_btn seckill_disabled radius5" ng-switch-when="sec_unstarted"><span ng-bind="vm.formatDate(seckill.ProductTry.remaining_time) + '开秒'"></span></a>
           </div>
         </div>
       </span>

@@ -73,9 +73,9 @@
         }
         if(vm.type == 6){
           vm.productTry = data.product_try;
-          $rootScope.$on("seckillChanged", function(event, productTry){
+          $rootScope.$on("seckillStateChanged", function(event, productTry){
             if(vm.productTry.ProductTry.id == productTry.ProductTry.id){
-              vm.productTry = productTry;
+              vm.productTry.ProductTry.status = productTry.ProductTry.status;
             }
           });
         }
@@ -194,10 +194,21 @@
         return false;
       }
       if(vm.type == 5){
+        if(_.isEmpty(vm.tuan)){
+          return false;
+        }
         if(vm.tuan.tuan_buying.TuanBuying.status == 'finished' || vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
           return false;
         }
         if(!vm.isShipSettingChecked()){
+          return false;
+        }
+      }
+      if(vm.type == 6){
+        if(_.isEmpty(vm.productTry)){
+          return false;
+        }
+        if(vm.productTry.ProductTry.status != 'sec_kill'){
           return false;
         }
       }
@@ -267,12 +278,18 @@
     }
     function getBuyTitle(product){
       if(vm.type == 5){
+        if(_.isEmpty(vm.tuan)){
+          return '立即购买';
+        }
         if(vm.tuan.tuan_buying.TuanBuying.status == 'finished' || vm.tuan.tuan_buying.TuanBuying.status == 'canceled'){
           return '团购已结束';
         }
         return '立即购买';
       }
       if(vm.type == 6){
+        if(_.isEmpty(vm.productTry)){
+          return '立即秒杀';
+        }
         if(vm.productTry.ProductTry.status == 'sec_end'){
           return '秒杀已结束';
         }

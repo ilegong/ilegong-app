@@ -9,6 +9,8 @@
     vm.loadData = loadData;
     vm.getBrandById = getBrandById;
     vm.loadSeckills = loadSeckills;
+    vm.setupCountDown = setupCountDown;
+    vm.formatDate = formatDate;
     vm.toDetailPage = toDetailPage;
     vm.getBuyTitle = getBuyTitle;
     active();
@@ -64,22 +66,35 @@
         });
       }).then(function(seckills){
         vm.seckills = seckills;
-        var allSeckillsFinished = _.all(vm.seckills, function(seckill){return seckill.status == 'sec_end'});
-        if(allSeckillsFinished){
-          if(!_.isEmpty(vm.timer)){
-            $log.log('cancel seckill timer: ').log(seckills);
-            $interval.cancel(vm.timer);
-          }
-        }
-        else{
-          if(_.isEmpty(vm.timer)){
-            $log.log('setup seckill timer: ').log(seckills);
-            vm.timer = $interval(function() {
-              vm.loadSeckills();
-            }, 10000);
-          }
-        }
+        _.each(vm.seckills, function(seckill){
+          vm.setupCountDown(seckill);
+        });
       });
+    }
+    function setupCountDown(seckill){
+      if(seckill.ProductTry.status != 'sec_unstarted'){
+        return;
+      }
+
+      if(_.isEmpty(seckill.timer)){
+        seckill.timer = $interval(function() {
+          seckill.ProductTry.remaining_time = seckill.ProductTry.remaining_time - 1;
+          if(seckill.ProductTry.remaining_time <= 0){
+            seckill.ProductTry.status = 'sec_kill';
+            $interval.cancel(seckill.timer);
+            seckill.timer = {};
+          }
+        }, 1000);
+      }
+    }
+    function formatDate(total){
+      if(total < 0 || isNaN(total)){
+        total = 0;
+      }
+      var hours = parseInt(total / 3600);
+      var minutes = parseInt((total % 3600) / 60);
+      var seconds = (total % 3600) - minutes * 60;
+      return hours + ":" + (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds < 10 ? "0" + seconds : seconds);
     }
     function getBuyTitle(product){
       if(!_.isEmpty(product.TuanBuying) && (product.TuanBuying.status == 'finished' || product.TuanBuying.status == 'canceled')){
