@@ -22,6 +22,7 @@
     vm.setBrandOrProductCoupon = setBrandOrProductCoupon;
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
+    vm.pickupChange = function(){ $rootScope.user.offlineStores.changed = true;};
     vm.init = init;
     activate();
 
@@ -142,12 +143,12 @@
     }
     function readyToSubmitOrder(){
       if(vm.type == 5){
-        if(_.isEmpty(vm.offlineStore) || Base.isBlank(vm.username) || !Base.isMobileValid(vm.shippment.mobile)){
+        if(_.isEmpty(vm.defaultOfflineStore) || Base.isBlank(vm.defaultOfflineStore.name) || !Base.isMobileValid(vm.defaultOfflineStore.mobilephone)){
           return false;
         }
-        if(vm.shippment.needAddressRemark() && Base.isBlank(vm.shippment.detailedAddress)){
-          return false;
-        }
+        //if(vm.shippment.needAddressRemark() && Base.isBlank(vm.shippment.detailedAddress)){
+        //  return false;
+        //}
       }
       else if(_.isEmpty(vm.defaultAddress)){
         return false;
@@ -162,6 +163,10 @@
         return $state.go('account-login');
       }
 
+      if(vm.defaultOfflineStore.changed){
+        vm.defaultOfflineStore.changed = false;
+        OfflineStores.setDefaultPickup(vm.defaultOfflineStore,$rootScope.user.token.access_token);
+      }
       var usedCoupons = _.filter(vm.validCoupons,function(coupon){
         return coupon.isChecked == true;
       })

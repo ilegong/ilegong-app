@@ -9,7 +9,7 @@
     return{
       getOfflineStores:getOfflineStores,
       getBeijingArea:getBeijingArea,
-      setDefaultPickups:setDefaultPickups
+      setDefaultPickup:setDefaultPickup
     };
     function getBeijingArea(){
       return {
@@ -31,7 +31,7 @@
       }, function(e){defer.reject(e)});
       return defer.promise;
     }
-    function setDefaultPickups(json, accessToken){
+    function setDefaultPickup(json, accessToken){
       Base.post('/api_tuan/set_default_pickup.json?access_token=' + accessToken, json);
     }
   }

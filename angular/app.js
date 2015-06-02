@@ -315,8 +315,7 @@
     }
     function reloadAddresses(accessToken){
       return Addresses.list(accessToken).then(function(addresses){
-        var pickups =_.result(_.find(addresses, function(obj){return obj.OrderConsignees.status == 3}),'OrderConsignees');
-        $rootScope.user.offlineStores = pickups;
+        $rootScope.user.offlineStores = _.result(_.find(addresses, function(obj){return obj.OrderConsignees.status == 3}),'OrderConsignees');
         $rootScope.user.addresses = _.filter(addresses, function(obj){return obj.OrderConsignees.status < 2});
         Base.setLocal('user.addresses', addresses);
         $rootScope.$broadcast('addressChanged', addresses);

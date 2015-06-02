@@ -60,10 +60,10 @@
       </div>
       <div class="item">
         <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec">
-          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="vm.defaultOfflineStore.name">
+          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="vm.defaultOfflineStore.name" ng-change="vm.pickupChange()">
         </label>
         <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec">
-          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="vm.defaultOfflineStore.mobilephone">
+          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="vm.defaultOfflineStore.mobilephone" ng-change="vm.pickupChange()">
         </label>
         <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec && vm.shippment.needAddressRemark()">
           <input type="text" style="padding-left: 1em;" placeholder="详细地址：" ng-model="vm.shippment.detailedAddress">
