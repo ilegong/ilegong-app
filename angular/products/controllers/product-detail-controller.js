@@ -16,6 +16,7 @@
     vm.isShowMakeCommentStar = function(index){return vm.commentT.rating > index}
     vm.formatSpecs = formatSpecs;
     vm.checkSpec = checkSpec;
+    vm.checkDefaultSpecs = checkDefaultSpecs;
     vm.formatSpecsGroup = formatSpecsGroup;
     vm.getReputationComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment != '1'})}
     vm.getTryingComments = function(){return _.filter(vm.comments,function(comment){return comment.Comment.is_shichi_tuan_comment == '1'})}
@@ -60,6 +61,10 @@
       vm.loadStatus.startLoading();
       return Products.getProduct(vm.id, vm.type, vm.extraId).then(function(data){
         vm.product = data.product;
+        if(_.isEmpty(vm.product)){
+          vm.loadStatus.failed(e.status);
+          return;
+        }
         vm.specs = vm.formatSpecs(vm.product.Product.specs);
         vm.specsGroup = vm.formatSpecsGroup(vm.product.Product.specs_group);
         vm.productPrice = vm.product.Product.price;
@@ -84,6 +89,8 @@
             }
           });
         }
+
+        vm.checkDefaultSpecs();
 
         Products.getProductComment(vm.id).then(function(comments){
           vm.comments = comments;
@@ -148,6 +155,18 @@
       });
       if(!_.isEmpty(vm.specGroup)){
         vm.productPrice = vm.specGroup.price;
+      }
+    }
+    function checkDefaultSpecs(){
+      _.each(vm.specs, function(spec){
+        _.each(spec.choices, function(choice, index){
+          if(index == 0){
+            vm.checkSpec(spec.id, choice.id);
+          }
+        });
+      });
+      if(!_.isEmpty(vm.ship_settings)){
+        vm.checkShipSetting(vm.ship_settings[0]);
       }
     }
     function toTryingCommentsPage(){
