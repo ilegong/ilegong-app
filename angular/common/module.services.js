@@ -23,6 +23,7 @@
       isBlank: isBlank,
       isMobileValid: isMobileValid,
       isNumber: isNumber, 
+      toPercent: toPercent, 
       getDevice: function(){return $window.device}
     }
 
@@ -99,6 +100,9 @@
     }
     function isNumber(n){
       return Number(n) === n && (n %1 === 0);
+    }
+    function toPercent(value){
+      return Math.min(Math.round(value * 10000) / 100, 100);
     }
   }
 })(window, window.angular);

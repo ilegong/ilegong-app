@@ -62,7 +62,7 @@
       return Products.getProduct(vm.id, vm.type, vm.extraId).then(function(data){
         vm.product = data.product;
         if(_.isEmpty(vm.product)){
-          vm.loadStatus.failed(e.status);
+          vm.loadStatus.failed(500);
           return;
         }
         vm.specs = vm.formatSpecs(vm.product.Product.specs);
@@ -82,7 +82,7 @@
         if(vm.type == 6){
           vm.productTry = data.product_try;
           vm.productTry.ProductTry.sold_num = Math.min(vm.productTry.ProductTry.sold_num, vm.productTry.ProductTry.limit_num);
-          vm.productTry.ProductTry.sold_percent = Math.min(vm.productTry.ProductTry.sold_num / vm.productTry.ProductTry.limit_num * 100, 100);
+          vm.productTry.ProductTry.sold_percent = Base.toPercent(vm.productTry.ProductTry.sold_num / vm.productTry.ProductTry.limit_num);
           $rootScope.$on("seckillStateChanged", function(event, productTry){
             if(vm.productTry.ProductTry.id == productTry.ProductTry.id){
               vm.productTry.ProductTry.status = productTry.ProductTry.status;
@@ -168,6 +168,9 @@
       if(!_.isEmpty(vm.ship_settings)){
         vm.checkShipSetting(vm.ship_settings[0]);
       }
+      if(!_.isEmpty(vm.product.Product.consign_dates)){
+        vm.checkConsignDate(vm.product.Product.consign_dates[0]);
+      }
     }
     function toTryingCommentsPage(){
       $state.go("product-detail-comments", {id: vm.id, type: 1});
@@ -180,10 +183,10 @@
     }
 
     function reduceCartItemNum(){
-      vm.count= Math.max(vm.count - 1, 1);
+      vm.count= vm.type == 6 ? 1 : Math.max(vm.count - 1, 1);
     };
     function addCartItemNum() {
-      vm.count = Math.min(vm.count + 1, 9999);
+      vm.count= vm.type == 6 ? 1 : Math.min(vm.count + 1, 9999);
     };
     function confirmComment(){
       if(!$rootScope.user.loggedIn){
@@ -263,7 +266,7 @@
       if(!$rootScope.user.loggedIn){
         return $state.go('account-login');
       }
-      if(_.isEmpty(vm.specGroup)){
+      if(vm.specsGroup.length > 0 && _.isEmpty(vm.specGroup)){
         return $rootScope.alertMessage('请选择规则');
       }
       vm.inprogress = true;
@@ -276,9 +279,12 @@
         sendDate = consignmentDate.send_date;
       }
 
-      var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
+      var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":_.isEmpty(vm.specGroup) ? '' : vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
       if(vm.type == 5){
         json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
+      }
+      else if(vm.type == 6){
+        json = _.extend(json, {"product_try_id": vm.product_try.ProductTry.id});
       }
       var shipSetting = _.find(vm.ship_settings, function(setting){ return setting.checked});
       
@@ -298,8 +304,9 @@
         vm.onActionFailed('购买失败，请重试', e);
       });
     }
-    function onActionFailed(message){
+    function onActionFailed(message, e){
       vm.inprogress = false;
+      $log.log('buy failed: ').log(e);
       $rootScope.alertMessage(message);
     }
     function getBuyTitle(product){
