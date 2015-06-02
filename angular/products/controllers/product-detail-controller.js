@@ -279,12 +279,12 @@
         sendDate = consignmentDate.send_date;
       }
 
-      var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":_.isEmpty(vm.specGroup) ? '' : vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
+      var json = {"product_id":vm.product.Product.id, "num":vm.count, "spec_id":_.isEmpty(vm.specGroup) ? 0 : vm.specGroup.id, "consignment_date_id": consignmentDateId, "send_date": sendDate};
       if(vm.type == 5){
         json = _.extend(json, {"tuan_buying_id": vm.tuan.tuan_buying.TuanBuying.id});
       }
       else if(vm.type == 6){
-        json = _.extend(json, {"product_try_id": vm.product_try.ProductTry.id});
+        json = _.extend(json, {"product_try_id": vm.productTry.ProductTry.id});
       }
       var shipSetting = _.find(vm.ship_settings, function(setting){ return setting.checked});
       

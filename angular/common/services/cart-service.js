@@ -27,20 +27,10 @@
       return defer.promise;
     }
     function getCartItems(accessToken){
-      var defer = $q.defer();
-      Base.get('/ApiOrders/list_cart.json?access_token=' + accessToken).then(function(list){
-        $log.log('get cart items:').log(list);
-        defer.resolve(list);
-      }, function(e){defer.reject(e)})
-      return defer.promise;
+      return Base.get('/ApiOrders/list_cart.json?access_token=' + accessToken);
     }
     function deleteCartItem(id, accessToken){
-      var defer = $q.defer();
-      Base.get('/ApiOrders/cart_del/'+id+'.json?access_token=' + accessToken).then(function(result){
-        $log.log("delete cart item successfully: ").log(result)
-        defer.resolve(result);
-      },function(error){defer.reject(error)});
-      return defer.promise;
+      return Base.get('/ApiOrders/cart_del/'+id+'.json?access_token=' + accessToken);
     }
     function addCartItem(type, json, accessToken){
       var defer = $q.defer();

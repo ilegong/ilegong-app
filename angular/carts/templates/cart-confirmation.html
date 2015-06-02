@@ -5,7 +5,7 @@
     </button>
   </ion-nav-buttons>
   <ion-content>
-    <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-if="!vm.isTuanBuying">
+    <div class="item item-icon-right row" ng-click="vm.changeAddress()" ng-if="vm.type == 1">
       <span class="text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultAddress)" class="col"> 
@@ -20,7 +20,7 @@
         <div>请选择地址</div>
       </div>
     </div>
-    <div class="item item-icon-right row" ng-click="vm.changeOfflineStore()" ng-if="vm.isTuanBuying">
+    <div class="item item-icon-right row" ng-click="vm.changeOfflineStore()" ng-if="vm.type == 5 || vm.type == 6">
       <span class="text-balanced col col-15">送至</span>
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultOfflineStore)" class="col"> 
