@@ -41,7 +41,7 @@ var LoadStatus = function(){
   }
 };
 
-var Shippment = function(limitShip, pickups){
+var Shippment = function(limitShip, pickups, ship_val){
   this.limitShip = limitShip;
   this.pickups = _.map(pickups, function(p){
     p.checked = false;
@@ -65,6 +65,6 @@ var Shippment = function(limitShip, pickups){
     if(_.isEmpty(this.pickup)){
       return false;
     }
-    return this.pickup.need_address_remark || false;
+    return this.pickup.can_remark_address == 1;
   }
 };
