@@ -4,7 +4,7 @@
   angular.module('module.others')
   .controller('OfflineStoresCtrl', OfflineStoresCtrl)
 
-  function OfflineStoresCtrl($q, $state, $ionicHistory, $log, $scope, $rootScope, OfflineStores){
+  function OfflineStoresCtrl($q, $state, $ionicHistory, $log, $scope, $rootScope,$stateParams, OfflineStores){
     var vm = this;
     vm.choseAreas = choseAreas;
     vm.checkPickup = checkPickup;
@@ -12,7 +12,9 @@
     activate();
 
     function activate() {
-      vm.offlineStores = _.groupBy($rootScope.offlineStores, function(pickup) {
+      vm.state= $stateParams.state;
+      vm.shippment = new Shippment( true , $rootScope.offlineStores, vm.state);
+      vm.offlineStores = _.groupBy(vm.shippment.pickups, function(pickup) {
         return pickup.area_id;
       });
       var offlineStoresArr = _.map(vm.offlineStores, function(value,key){
@@ -36,9 +38,7 @@
       return beijingArea;
     }
     function checkPickup(value) {
-      _.each(vm.pickups, function (pickups) {
-        pickups.checked = (pickups.id == value.id);
-      });
+      vm.shippment.checkPickup(value);
       if(vm.defaultPickup.ziti_id != value.id){
         vm.defaultPickup.address = value.name;
         vm.defaultPickup.area = value.area_id;

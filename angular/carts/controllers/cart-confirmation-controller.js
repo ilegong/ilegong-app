@@ -23,6 +23,7 @@
     vm.getPidList = getPidList;
     vm.readyToSubmitOrder = readyToSubmitOrder;
     vm.pickupChange = function(){ $rootScope.user.offlineStores.changed = true;};
+    vm.pickupType = -1; // TODO:judge if the product support all pickups
     vm.init = init;
     activate();
 
@@ -36,7 +37,7 @@
       vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore(vm.ziti_ship_type);
       vm.validCoupons = $rootScope.user.validCoupons;
       vm.invalidCoupons = $rootScope.user.invalidCoupons;
-      vm.shippment = new Shippment( _.constant([5,6], vm.type) , $rootScope.offlineStores, -1);
+      vm.shippment = new Shippment( _.constant([5,6], vm.type) , $rootScope.offlineStores, vm.pickupType);
       vm.shippment.pickup = _.find(vm.shippment.pickups,function(pickup){ return pickup.id == vm.defaultOfflineStore.ziti_id});
       vm.init();
 
@@ -132,7 +133,7 @@
       $state.go('addresses',{state:1});
     }
     function changeOfflineStore(){
-      $state.go('offline-stores');
+      $state.go('offline-stores',{state:vm.pickupType});
     }
     function confirmCouponCode(){
       vm.couponCode = vm.couponCodeTemp;

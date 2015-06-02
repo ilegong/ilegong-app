@@ -47,6 +47,9 @@ var Shippment = function(limitShip, pickups, ship_val){
     p.checked = false;
     return p;
   });
+  if(ship_val != -1){
+    this.pickups = _.filter(this.pickups, function(pickup){ return pickup.type == ship_val})
+  }
   this.pickup = {};
   this.username = '';
   this.mobile = '';

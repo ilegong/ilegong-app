@@ -51,7 +51,7 @@
 
       .state('addresses', {url:'/addresses/:state', templateUrl:'my-addresses.html',controller:'MyAddressesCtrl as vm'})
       .state('address-edit', {url:'/address-edit/:editId', templateUrl:'my-address-edit.html',controller:'MyAddressEditCtrl as vm'})
-      .state('offline-stores', {url:'/offline-stores', templateUrl:'offline-stores.html',controller:'OfflineStoresCtrl as vm'})
+      .state('offline-stores', {url:'/offline-stores/:state', templateUrl:'offline-stores.html',controller:'OfflineStoresCtrl as vm'})
 
       .state('orders', {url:'/orders/:state', templateUrl:'orders.html', controller:'OrdersCtrl as vm'})
       .state('order-detail', {url:'/order/:id', templateUrl:'order-detail.html', controller:'OrderDetailCtrl as vm'})
