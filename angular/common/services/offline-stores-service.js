@@ -8,7 +8,8 @@
     var self = this;
     return{
       getOfflineStores:getOfflineStores,
-      getBeijingArea:getBeijingArea
+      getBeijingArea:getBeijingArea,
+      setDefaultPickups:setDefaultPickups
     };
     function getBeijingArea(){
       return {
@@ -25,10 +26,13 @@
     }
     function getOfflineStores(){
       var defer = $q.defer();
-      Base.get('/tuan_buyings/get_offline_address?type=-1').then(function(result){
+      Base.get('/api_tuan/get_offline_stores.json?type=-1').then(function(result){
         defer.resolve(result);
       }, function(e){defer.reject(e)});
       return defer.promise;
+    }
+    function setDefaultPickups(json, accessToken){
+      Base.post('/api_tuan/set_default_pickup.json?access_token=' + accessToken, json);
     }
   }
 })(window, window.angular);

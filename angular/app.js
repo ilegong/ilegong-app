@@ -315,7 +315,9 @@
     }
     function reloadAddresses(accessToken){
       return Addresses.list(accessToken).then(function(addresses){
-        $rootScope.user.addresses = addresses;
+        var pickups =_.result(_.find(addresses, function(obj){return obj.OrderConsignees.status == 3}),'OrderConsignees');
+        $rootScope.user.offlineStores = pickups;
+        $rootScope.user.addresses = _.filter(addresses, function(obj){return obj.OrderConsignees.status < 2});
         Base.setLocal('user.addresses', addresses);
         $rootScope.$broadcast('addressChanged', addresses);
       }, function(e){
@@ -373,8 +375,13 @@
       }
       return defaultAddress || {};
     }
-    function getDefaultOfflineStore(){
-      var defaultOfflineStore =  _.find($rootScope.user.offlineStores, function(offlineStore){return offlineStore.checked});
+    function getDefaultOfflineStore(type){
+      var defaultOfflineStore = null;
+      if(type =-1){
+        defaultOfflineStore = $rootScope.user.offlineStores;
+      }else{
+        defaultOfflineStore = $rootScope.user.offlineStores.ziti_type == type ? $rootScope.user.offlineStores:null;
+      }
       return defaultOfflineStore || {};
     }
     function updateOrderState(orderId, state){

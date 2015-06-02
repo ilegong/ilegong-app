@@ -28,11 +28,13 @@
     function activate(){
       vm.type = $stateParams.type;
       vm.isTuanBuying = vm.type == 5;
+      vm.isTuanAndSec = _.constant([5,6], vm.type);
+      vm.ziti_ship_type = -1;
       vm.provinces = $rootScope.provinces;
       vm.brands = $rootScope.brands;
       vm.offlineStores = $rootScope.offlineStores;
       vm.defaultAddress = $rootScope.getDefaultAddress();
-      vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore();
+      vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore(vm.ziti_ship_type);
       vm.validCoupons = $rootScope.user.validCoupons;
       vm.invalidCoupons = $rootScope.user.invalidCoupons;
 
@@ -42,7 +44,7 @@
         vm.defaultAddress = $rootScope.getDefaultAddress();
       });
       $rootScope.$on("offlineStoreChanged", function(event, addresses){
-        vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore();
+        vm.defaultOfflineStore = $rootScope.getDefaultOfflineStore(vm.ziti_ship_type);
       });
       $scope.$watch("user.cartInfo", function(){
         vm.init();
@@ -52,7 +54,7 @@
       vm.confirmedBrandItems = $rootScope.user.cartInfo.cart.brandItems;
       vm.shippment = $rootScope.user.cartInfo.shippment;
 
-      vm.shipFees = $rootScope.user.cartInfo.shipFees; 
+      vm.shipFees = $rootScope.user.cartInfo.shipFees;
       vm.totalShipFees = _.reduce(vm.shipFees, function(memo, shipFee){return memo + shipFee}, 0);
       vm.reduced = $rootScope.user.cartInfo.reduced;
       vm.totalPrice = $rootScope.user.cartInfo.total_price + Math.max($rootScope.user.cartInfo.shipFee, 0);

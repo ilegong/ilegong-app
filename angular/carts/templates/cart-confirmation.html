@@ -25,7 +25,7 @@
       <i class="icon ion-ios7-arrow-right"></i>
       <div ng-if="!_.isEmpty(vm.defaultOfflineStore)" class="col"> 
         <div class="wrapped">
-          <span ng-bind="vm.defaultOfflineStore.name"></span>
+          <span ng-bind="vm.defaultOfflineStore.address"></span>
         </div>
       </div>
       <div ng-if="_.isEmpty(vm.defaultOfflineStore)" class="col">
@@ -59,13 +59,13 @@
         <span class="col" ng-bind="vm.getShipFeeOfBrand(brand.Brand.id)"></span>
       </div>
       <div class="item">
-        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip">
-          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="vm.shippment.username">
+        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec">
+          <input type="text" style="padding-left: 1em;" placeholder="收货人姓名：" ng-model="vm.defaultOfflineStore.name">
         </label>
-        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip">
-          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="vm.shippment.mobile">
+        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec">
+          <input type="text" style="padding-left: 1em;" placeholder="手机号：" ng-model="vm.defaultOfflineStore.mobilephone">
         </label>
-        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.shippment.limitShip && vm.shippment.needAddressRemark()">
+        <label class="item-input" style="padding: 0; background-color: #eee;" ng-if="vm.isTuanAndSec && vm.shippment.needAddressRemark()">
           <input type="text" style="padding-left: 1em;" placeholder="详细地址：" ng-model="vm.shippment.detailedAddress">
         </label>
         <label class="item-input" style="padding: 0; background-color: #eee;">
