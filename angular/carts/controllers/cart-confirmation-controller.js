@@ -16,6 +16,7 @@
     vm.getBrandById = getBrandById;
     vm.confirmCouponCode = confirmCouponCode;
     vm.submitOrder = submitOrder;
+    vm.onSubmitOrderFailed = onSubmitOrderFailed;
     vm.isSiteCoupons = isSiteCoupons;
     vm.setSiteCoupon = setSiteCoupon;
     vm.showProductCoupon = showProductCoupon;
@@ -199,8 +200,16 @@
           });
         })
       }, function(e){
-        $rootScope.alertMessage(e.status == 0 ? '网络连接不可用，请稍后重试': '提交订单失败，请稍后重试');
+        vm.onSubmitOrderFailed(e);
       });
+    }
+    function onSubmitOrderFailed(e){
+      if(e.status == 0){
+        $rootScope.alertMessage('网络连接不可用，请稍后重试');
+        return;
+      }
+      $log.log("submit order failed: ").log(e);
+      $rootScope.alertMessage('提交订单失败，请稍后重试');
     }
   }
 })(window, window.angular);
