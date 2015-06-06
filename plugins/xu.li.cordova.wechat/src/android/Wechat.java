@@ -92,43 +92,52 @@ public class Wechat extends CordovaPlugin {
 		if (wxAPI == null) {
 			String appId = preferences.getString(WXAPPID_PROPERTY_KEY, "");
 			wxAPI = WXAPIFactory.createWXAPI(webView.getContext(), appId, true);
+      wxAPI.registerApp(appId);
 		}
 
 		return wxAPI;
 	}
 	
-	protected boolean sendAuthRequest(JSONArray args, CallbackContext callbackContext)
-	{
-		final IWXAPI api = getWXAPI();
-		api.registerApp(preferences.getString(WXAPPID_PROPERTY_KEY, ""));
-		final SendAuth.Req req = new SendAuth.Req();
-		req.state = "wechat_auth";
+	// protected boolean sendAuthRequest(JSONArray args, CallbackContext callbackContext)
+	// {
+	// 	final IWXAPI api = getWXAPI();
+	// 	final SendAuth.Req req = new SendAuth.Req();
+	// 	req.state = "wechat_auth";
 		
-		// check if # of arguments is correct
-		if (args.length() > 0) {
-			try {
-				req.scope = args.getString(0);
-			} catch (Exception e) {
-				Log.e(Wechat.class.getName()
-						, "sendAuthRequest parameter parsing failure"
-						, e);
-			}
-		}
-		else
-		{
-			req.scope = "snsapi_userinfo";
-		}
-		api.sendReq(req);
-		currentCallbackContext = callbackContext;
+	// 	// check if # of arguments is correct
+	// 	if (args.length() > 0) {
+	// 		try {
+	// 			req.scope = args.getString(0);
+	// 		} catch (Exception e) {
+	// 			Log.e(Wechat.class.getName()
+	// 					, "sendAuthRequest parameter parsing failure"
+	// 					, e);
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		req.scope = "snsapi_userinfo";
+	// 	}
+	// 	api.sendReq(req);
+	// 	currentCallbackContext = callbackContext;
 		
-		return true;
-	}
+	// 	return true;
+	// }
 
+  protected boolean sendAuthRequest(JSONArray args, CallbackContext callbackContext)
+  {
+    final IWXAPI api = getWXAPI();
+    final SendAuth.Req req = new SendAuth.Req();
+    req.state = "wechat_auth";
+    req.scope = "snsapi_userinfo";
+    api.sendReq(req);
+    currentCallbackContext = callbackContext;
+    
+    return true;
+  }
 	protected boolean share(JSONArray args, CallbackContext callbackContext)
 			throws JSONException {
 		final IWXAPI api = getWXAPI();
-
-		api.registerApp(preferences.getString(WXAPPID_PROPERTY_KEY, ""));
 
 		// check if installed
 		if (!api.isWXAppInstalled()) {
@@ -184,7 +193,6 @@ public class Wechat extends CordovaPlugin {
 
 	protected boolean isInstalled(CallbackContext callbackContext){
 		final IWXAPI api = getWXAPI();
-		api.registerApp(preferences.getString(WXAPPID_PROPERTY_KEY, ""));
 
 		if (!api.isWXAppInstalled()) {
 			callbackContext.error(ERROR_WX_NOT_INSTALLED);

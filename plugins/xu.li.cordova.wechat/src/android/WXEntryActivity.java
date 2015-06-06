@@ -56,7 +56,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler{
                 Wechat.currentCallbackContext.error(Wechat.ERR_USER_CANCEL);
                 break;
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
-                Wechat.currentCallbackContext.error(Wechat.ERR_AUTH_DENIED);
+                Log.e("WEChat", "AuthResp ERROR_AUTH_DENIED");
+                Wechat.currentCallbackContext.error(Wechat.ERR_UNKNOWN);
                 break;
             case BaseResp.ErrCode.ERR_SENT_FAILED:
                 Wechat.currentCallbackContext.error(Wechat.ERR_SENT_FAILED);
